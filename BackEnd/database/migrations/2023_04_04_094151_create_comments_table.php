@@ -18,7 +18,6 @@ return new class extends Migration
             $table->integer('post_id');
             $table->date('comment_date');
             $table->integer('comment_like_count');
-            $table->string('replied_to')->nullable(); ??what is this?
             $table->string('field1')->nullable();
             $table->string('field2')->nullable();
             $table->timestamps();

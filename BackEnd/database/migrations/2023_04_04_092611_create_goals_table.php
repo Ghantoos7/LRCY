@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('goals', function (Blueprint $table) {
             $table->id();
             $table->string('goal_description');
-            $table->string('goal_name')->unique();
+            $table->string('goal_name');
             $table->integer('program_id');
-            $table->string('goal_status'); string?
-            $table->integer('number_completed'); number of what? goals?
-            $table->integer('goal_year'); ????why
-            $table->string('event_type'); ????why
+            $table->boolean('goal_status');
+            $table->integer('number_completed');
+            $table->integer('goal_year');
+            $table->integer('event_type_id');
             $table->date('goal_deadline');
             $table->string('field1')->nullable();
             $table->string('field2')->nullable();
