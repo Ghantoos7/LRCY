@@ -1,0 +1,14 @@
+ion-toolbar, ion-tab-bar {
+    --background: #b11433;
+  }
+  
+  
+  ion-tab-button ion-icon {
+    color: #ffffff; 
+   
+  }
+  
+  ion-tab-button.tab-selected ion-icon{
+    color: darkred;
+  }
+  
