@@ -30,49 +30,16 @@ ion-toolbar, ion-tab-bar {
   --background: #b11433;
 }
 
-ion-fab-button{
-  --background: #b11433;
-  --color: white;
-  --background-activated: #348137;
- 
-}
-
-ion-title{
-  --color: white;
-}
-
-ion-card-header{
-  --background: #b11433;
-}
-
-ion-menu-button {
-  --color: #f0f0f0; 
-
-}
 
 ion-tab-button ion-icon {
   color: #ffffff; 
+ 
 }
 
-
-
-
-.custom-image {
-  height: 100%; 
-  object-fit: cover; 
+ion-tab-button.tab-selected ion-icon{
+  color: darkred;
 }
 
-.custom-subtitle {
-  margin-bottom: 0; 
-  text-align: center;
-  color: white;
-  font-size: 12px;
-  font-family: 'Cairo', sans-serif;
-}
-
-.custom-fab {
-  bottom: 10%
-}
 
 
 

@@ -1,13 +1,62 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>other_gallery</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">other_gallery</ion-title>
-    </ion-toolbar>
-  </ion-header>
+
+  <ion-menu contentId="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Menu Content</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">This is the menu content.</ion-content>
+  </ion-menu>
+  <div class="ion-page" id="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Others</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content class="ion-padding">
+      <ion-row>
+        <ion-col>
+          <ion-card>
+            <ion-img src="assets\imgs\gallery-default1.jpg" class="custom-image"></ion-img>
+            <ion-card-header >
+              <ion-card-subtitle class="custom-subtitle">Beach Cleanup</ion-card-subtitle>
+            </ion-card-header>
+          </ion-card>
+        </ion-col>
+        <ion-col>
+          <ion-card>
+            <ion-img src="\assets\imgs\gallery-default2.jpeg" class="custom-image"></ion-img>
+            <ion-card-header>
+              <ion-card-subtitle class="custom-subtitle">Training</ion-card-subtitle>
+            </ion-card-header>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+   
+      <ion-fab class="custom-fab" vertical="bottom" horizontal="end">
+        <ion-fab-button class="custom-fab-button">
+          <ion-icon name="options-outline"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-list side="top">
+          <ion-fab-button>
+            <ion-icon name="today-outline"></ion-icon>
+          </ion-fab-button>
+          <ion-fab-button>
+            <ion-icon name="barbell-outline"></ion-icon>
+          </ion-fab-button>
+          <ion-fab-button>
+            <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
+          </ion-fab-button>
+        </ion-fab-list>
+      </ion-fab>
+      
+
+    </ion-content>
+  </div>
+
 </ion-content>
