@@ -54,8 +54,7 @@
   }
   
   
-  
-  
+
   .custom-image {
     height: 100%; 
     object-fit: cover; 
@@ -73,6 +72,25 @@
     bottom: 10%
   }
   
+  ion-card{
+    width: 100% !important;
+    margin: 0 !important;
+  }
+
+  .badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #b11433;
+    color: white;
+    width: 50px;
+    height:50px;
+    border-radius: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+  }
   
   
   
