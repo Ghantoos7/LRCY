@@ -6,3 +6,14 @@ ion-toolbar {
     --color: #f0f0f0; 
   
   }
+
+  ion-card.custom-card {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  ion-card-title{
+    font-size:large;
+    font-family: 'Cairo', sans-serif;
+  }
