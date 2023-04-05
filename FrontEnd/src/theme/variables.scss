@@ -76,6 +76,13 @@
   --ion-color-light-tint: #f5f6f9;
 }
 
+@font-face {
+  font-family: 'Cairo';
+  src: url('../assets/fonts/static/Cairo-Regular.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
 @media (prefers-color-scheme: dark) {
   /*
    * Dark Colors
