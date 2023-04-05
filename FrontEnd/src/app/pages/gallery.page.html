@@ -15,6 +15,7 @@
         <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button>
         </ion-buttons>
+        <ion-title>Youth & Health</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content class="ion-padding">
@@ -22,17 +23,17 @@
       <ion-row>
         <ion-col>
           <ion-card>
-            <ion-img src="https://ionicframework.com/docs/img/demos/card-media.png" class="custom-image"></ion-img>
+            <ion-img src="assets\imgs\gallery-default1.jpg" class="custom-image"></ion-img>
             <ion-card-header >
-              <ion-card-subtitle class="custom-subtitle">Reforestation</ion-card-subtitle>
+              <ion-card-subtitle class="custom-subtitle">Beach Cleanup</ion-card-subtitle>
             </ion-card-header>
           </ion-card>
         </ion-col>
         <ion-col>
           <ion-card>
-            <ion-img src="https://ionicframework.com/docs/img/demos/card-media.png" class="custom-image"></ion-img>
+            <ion-img src="\assets\imgs\gallery-default2.jpeg" class="custom-image"></ion-img>
             <ion-card-header>
-              <ion-card-subtitle class="custom-subtitle">Reforestation</ion-card-subtitle>
+              <ion-card-subtitle class="custom-subtitle">Training</ion-card-subtitle>
             </ion-card-header>
           </ion-card>
         </ion-col>
@@ -44,10 +45,13 @@
         </ion-fab-button>
         <ion-fab-list side="top">
           <ion-fab-button>
-            <ion-icon name="color-palette"></ion-icon>
+            <ion-icon name="today-outline"></ion-icon>
           </ion-fab-button>
           <ion-fab-button>
-            <ion-icon name="globe"></ion-icon>
+            <ion-icon name="barbell-outline"></ion-icon>
+          </ion-fab-button>
+          <ion-fab-button>
+            <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
           </ion-fab-button>
         </ion-fab-list>
       </ion-fab>
@@ -58,16 +62,16 @@
         <ion-router-outlet></ion-router-outlet>
       
         <ion-tab-bar slot="bottom">
-          <ion-tab-button tab="home">
+          <ion-tab-button tab="youth-gallery">
             <ion-icon name="heart-half-outline"></ion-icon>
           </ion-tab-button>
-          <ion-tab-button tab="radio">
+          <ion-tab-button tab="hvp-gallery">
             <ion-icon name="male-female-outline"></ion-icon>
           </ion-tab-button>
-          <ion-tab-button tab="library">
+          <ion-tab-button tab="env-gallery">
             <ion-icon name="leaf-outline"></ion-icon>
           </ion-tab-button>
-          <ion-tab-button tab="search">
+          <ion-tab-button tab="other-gallery">
             <ion-icon name="calendar-outline"></ion-icon>
           </ion-tab-button>
         </ion-tab-bar>
