@@ -33,7 +33,8 @@ ion-toolbar, ion-tab-bar {
 ion-fab-button{
   --background: #b11433;
   --color: white;
-  --background-hover:#348137;
+  --background-activated: #348137;
+ 
 }
 
 ion-card-header{
@@ -48,6 +49,8 @@ ion-menu-button {
 ion-tab-button ion-icon {
   color: #ffffff; 
 }
+
+
 
 
 .custom-image {
