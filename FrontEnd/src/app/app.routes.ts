@@ -8,7 +8,11 @@ export const routes: Routes = [
   {
     path: 'event-details',
     loadChildren: () => import('../app/pages/event-details/event-details.routes').then((m) => m.routes),
+  },  {
+    path: 'sign-in',
+    loadComponent: () => import('./pages/sign-in/sign-in.page').then( m => m.SignInPage)
   },
+
  
 ];
 
