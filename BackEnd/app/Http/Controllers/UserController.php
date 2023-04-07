@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\volunteer_user;
-
+use App\Models\recover_request;
 
 class UserController extends Controller
 {
@@ -116,19 +116,38 @@ class UserController extends Controller
     function login(Request $credentials) {
 
         // Find user by organization ID
-        $check_user = volunteer_user::where("organization_id", "=", $credentials->organization_id)->first();
+        $existing_volunteer_user = volunteer_user::where("organization_id", "=", $credentials->organization_id)->first();
     
         // Determine the status message based on the existence and registration status of the volunteer user
-        $status = (!$check_user) ? "Organization ID not found" : (!$check_user->is_registered ? "Organization ID found, user not registered" : (!Hash::check($credentials->password, $check_user->password) ? "Wrong Password" : $check_user));
+        $status = (!$existing_volunteer_user) ? "Organization ID not found" : (!$existing_volunteer_user->is_registered ? "Organization ID found, user not registered" : (!Hash::check($credentials->password, $existing_volunteer_user->password) ? "Wrong Password" : $existing_volunteer_user));
     
         // Return response with status of login attempt
         return response()->json(['status' => $status]);
     
     }
-    
 
-    
-    
-    
+    function recover_request(Request $request) {
 
+        // Get organization ID from request input
+        $organization_id = $request->input('organization_id');
+
+        // Retrieve a volunteer user record from the database based on the `organization_id` input parameter
+        $existing_volunteer_user = volunteer_user::where('organization_id', '=', $organization_id)->first();
+
+        // Check if user has already submitted a request
+        $existing_request = $existing_volunteer_user ? recover_request::where('user_id', '=', $existing_volunteer_user->id)->first() : null;
+
+        // Get current date
+        $request_date = date('Y-m-d');
+        
+        return $existing_volunteer_user ? (!$existing_request ? ((new recover_request(['user_id' => $existing_volunteer_user->id, 'request_status' => false, 'request_date' => $request_date]))->save() ? response()->json(['status' => 'Password recovery request sent successfully']) : response()->json(['status' => 'Failed to create password recovery request'])) : response()->json(['status' => 'User has already submitted a request.'])) : response()->json(['status' => 'Organization ID not found']);
+   
+    }
+    
+     
+    
+    
+    
+    
+    
 }
