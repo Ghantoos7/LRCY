@@ -1,7 +1,42 @@
 <ion-content class = "background">
+
   <ion-img src="assets/imgs/signin-circles.png" style="width: 385px;"></ion-img>
-  <ion-text color="white" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-    <h1>WELCOME BACK!</h1>
+  <ion-text color="white" style="font-size: 40px; position: absolute; top: 25%; left: 15%; transform: translate(-20%, -50%);">
+    WELCOME <br>
+      BACK!
     <h6>GOOD TO SEE YOU AGAIN</h6>
+    <br><br>
+    <b>Sign In</b>
+  </ion-text>  
+
+  <ion-text color = white style="font-size: 10px; position: absolute; top: 42%; left: 6%;">
+
+    <div class="input-field">  
+        <img src="assets/icon/ID.png" style="width: 50px; height: 50px; margin-top: 20px;" alt="ID icon">
+        <ion-item>
+          <ion-label position="floating" >Volunteer ID </ion-label>
+          <ion-input type="email" name="email" required style="border-bottom: 1px solid #ccc;"></ion-input>
+        </ion-item> 
+    </div>
+
+    <div class="input-field">
+      <img src="assets/icon/Password.png" style="width: 50px; height: 50px; margin-top: 20px" alt="ID icon">
+      <ion-item>
+        <ion-label position="floating">Password</ion-label>
+        <ion-input type="password" name="password" required style="border-bottom: 1px solid #ccc;"></ion-input>
+      </ion-item>
+    </div>
+
   </ion-text>
+
+  <br>
+  <ion-button style="width: 80%; margin: 0 auto;" color="danger" shape="round" expand="block" size="large">Sign me in</ion-button>
+
+  <br>
+  <ion-label style="color: #B11433; padding-left: 50px;">New here?</ion-label>
+  <ion-label style="color: #B11433; padding-left: 80px;">Forgot Password?</ion-label>
+
 </ion-content>
+
+
+
