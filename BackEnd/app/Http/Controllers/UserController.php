@@ -110,8 +110,21 @@ class UserController extends Controller
         return response()->json([
             'status' => 'Organization ID found, user registered successfully',
         ], 200);
+
     }
     
+    function login(Request $credentials) {
+
+        // Find user by organization ID
+        $check_user = volunteer_user::where("organization_id", "=", $credentials->organization_id)->first();
+    
+        // Determine the status message based on the existence and registration status of the volunteer user
+        $status = (!$check_user) ? "Organization ID not found" : (!$check_user->is_registered ? "Organization ID found, user not registered" : (!Hash::check($credentials->password, $check_user->password) ? "Wrong Password" : $check_user));
+    
+        // Return response with status of login attempt
+        return response()->json(['status' => $status]);
+    
+    }
     
 
     
