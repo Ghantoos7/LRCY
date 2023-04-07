@@ -1,41 +1,41 @@
 import { Routes } from '@angular/router';
-import { HomePage } from './gallery.page';
+import { ProfilePage } from './profile.page';
 
 export const routes: Routes = [
   {
     path: '',
-    component: HomePage,
+    component: ProfilePage,
     children: [
         {
-            path: 'youth-gallery',
+            path: 'Statistics',
             loadComponent: () =>
               import('../youth-gallery/youth-gallery.page').then((m) => m.YouthGalleryPage),
           },
       {
-        path: 'env-gallery',
+        path: 'Achievements',
         loadComponent: () =>
           import('../env-gallery/env-gallery.page').then((m) => m.EnvGalleryPage),
       },
       {
-        path: 'hvp-gallery',
+        path: 'Trainings',
         loadComponent: () =>
           import('../hvp-gallery/hvp-gallery.page').then((m) => m.HvpGalleryPage),
       },
       {
-        path: 'other-gallery',
+        path: 'My-Posts',
         loadComponent: () =>
           import('../other-gallery/other-gallery.page').then((m) => m.OtherGalleryPage),
       },
       {
         path: '',
-        redirectTo: 'youth-gallery',
+        redirectTo: 'profile/Statistics',
         pathMatch: 'full',
       },
     ],
   },
   {
     path: '',
-    redirectTo: 'youth-gallery',
+    redirectTo: 'profile/Statistics',
     pathMatch: 'full',
   },
 ];

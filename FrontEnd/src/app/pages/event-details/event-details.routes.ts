@@ -3,7 +3,7 @@ import { EventDetailsPage } from './event-details.page';
 
 export const routes: Routes = [
   {
-    path: 'event-details',
+    path: '',
     component: EventDetailsPage,
     children: [
         {
@@ -16,11 +16,16 @@ export const routes: Routes = [
         loadComponent: () =>
           import('../event-pictures/event-pictures.page').then((m) => m.EventPicturesPage),
       },
+      {
+        path: '',
+        redirectTo: 'information',
+        pathMatch: 'full',
+      },
     ],
   },
   {
     path: '',
-    redirectTo: 'event-details/information',
+    redirectTo: 'information',
     pathMatch: 'full',
   },
 ];

@@ -9,6 +9,10 @@ export const routes: Routes = [
     path: 'event-details',
     loadChildren: () => import('../app/pages/event-details/event-details.routes').then((m) => m.routes),
   },
+  {
+    path: 'profile',
+    loadChildren: () => import('../app/pages/profile/profile.routes').then((m) => m.routes)
+  },
  
 ];
 
