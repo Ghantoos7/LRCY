@@ -93,7 +93,8 @@ ion-tab-button.tab-selected ion-icon{
     margin: 0;
     padding: 0;
     margin-top: 15% !important;
-    border-radius: 10%;
+    border-top-left-radius: 10%;
+    border-top-right-radius: 10%;
     box-shadow: none;
 
   
@@ -101,6 +102,7 @@ ion-tab-button.tab-selected ion-icon{
 
 ion-header{
     background-color: #45579A;
+    height: 20%;
 }
 
 ion-content{
@@ -154,6 +156,8 @@ ion-card-content {
   ion-tab-button.tab-selected::after {
     transform: translateX(0);
   }
+
+ 
   
   
   
