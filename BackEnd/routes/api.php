@@ -32,7 +32,7 @@ Route::group(["prefix" => "v0.1"], function(){
         Route::post("change_password", [UserController::class, "change_password"]);
         Route::post("edit_profile", [UserController::class, "edit_profile"]);
         Route::get("get_user_info/{user_id?}", [UserController::class, "get_user_info"]);
-        Route::get("get_total_trainings/{user_id}", [UserController::class, "get_trainings_count"]);
+        Route::get("get_total_trainings/{user_id}", [UserController::class, "get_total_trainings"]); //count all trainings
         Route::get("get_total_volunteering_time/{user_id}", [UserController::class, "get_total_volunteering_time"]);
         Route::get("get_total_posts/{user_id?}", [UserController::class, "get_total_posts"]);
         Route::get("get_total_comments/{user_id}", [UserController::class, "get_total_comments"]);
