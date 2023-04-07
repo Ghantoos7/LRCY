@@ -8,9 +8,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\volunteer_user;
 use App\Models\recover_request;
+use App\Models\login_attempt;
 
 class UserController extends Controller
 {
+
 
     function signup(Request $request) {
 
@@ -31,6 +33,7 @@ class UserController extends Controller
         ], $existing_volunteer_user ? 200 : 404);
 
     }
+
 
     private function validatePassword($password) {
         $errors = array();
@@ -53,6 +56,7 @@ class UserController extends Controller
         
         return $errors;
     }
+
 
     function register(Request $request) {
 
@@ -113,6 +117,7 @@ class UserController extends Controller
 
     }
     
+
     function login(Request $credentials) {
 
         // Find user by organization ID
@@ -125,6 +130,7 @@ class UserController extends Controller
         return response()->json(['status' => $status]);
     
     }
+
 
     function recover_request(Request $request) {
 
@@ -144,6 +150,7 @@ class UserController extends Controller
    
     }
     
+
     function change_password(Request $request) {
 
         // Validate the request
@@ -172,12 +179,17 @@ class UserController extends Controller
         $existing_volunteer_user = volunteer_user::where('organization_id', '=', $request->input('organization_id'))->first();
 
         // If the user does not exist, return an error response. Otherwise, update the password and return a success response
-        return $existing_volunteer_user ? ($existing_volunteer_user->password = Hash::make($request->input('password')) && $existing_volunteer_user->save() ? response()->json(['status' => 'success', 'message' => 'Password changed successfully']) : response()->json(['status' => 'error', 'message' => 'Failed to update password'])) : response()->json(['status' => 'error', 'message' => 'Organization ID not found']);
-    
+        if ($existing_volunteer_user) {
+            $existing_volunteer_user->password = Hash::make($request->input('password'));
+            $saveResult = $existing_volunteer_user->save();
+            return response()->json($saveResult ? ['status' => 'success', 'message' => 'Password changed successfully'] : ['status' => 'error', 'message' => 'Failed to update password']);
+        } 
+        else {
+            return response()->json(['status' => 'error', 'message' => 'Organization ID not found']);
+        }
+        
+        
     }
-    
-    
-    
-    
-    
+
+
 }
