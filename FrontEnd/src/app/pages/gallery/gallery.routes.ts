@@ -3,7 +3,7 @@ import { HomePage } from './gallery.page';
 
 export const routes: Routes = [
   {
-    path: 'gallery',
+    path: '',
     component: HomePage,
     children: [
         {
@@ -28,14 +28,14 @@ export const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: 'gallery/youth-gallery',
+        redirectTo: 'youth-gallery',
         pathMatch: 'full',
       },
     ],
   },
   {
     path: '',
-    redirectTo: 'gallery/youth-gallery',
+    redirectTo: 'youth-gallery',
     pathMatch: 'full',
   },
 ];

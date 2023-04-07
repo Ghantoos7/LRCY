@@ -8,11 +8,27 @@ export const routes: Routes = [
   {
     path: 'event-details',
     loadChildren: () => import('../app/pages/event-details/event-details.routes').then((m) => m.routes),
-  },  {
-    path: 'sign-in',
-    loadComponent: () => import('./pages/sign-in/sign-in.page').then( m => m.SignInPage)
   },
-
+  {
+    path: 'profile',
+    loadChildren: () => import('../app/pages/profile/profile.routes').then((m) => m.routes)
+  },
+  {
+    path: 'statistics',
+    loadComponent: () => import('./pages/statistics/statistics.page').then( m => m.StatisticsPage)
+  },
+  {
+    path: 'achievements',
+    loadComponent: () => import('./pages/achievements/achievements.page').then( m => m.AchievementsPage)
+  },
+  {
+    path: 'trainings',
+    loadComponent: () => import('./pages/trainings/trainings.page').then( m => m.TrainingsPage)
+  },
+  {
+    path: 'my-posts',
+    loadComponent: () => import('./pages/my-posts/my-posts.page').then( m => m.MyPostsPage)
+  },
  
 ];
 
