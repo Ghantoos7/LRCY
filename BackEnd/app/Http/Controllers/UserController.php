@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\volunteer_user;
 use App\Models\recover_request;
-use App\Models\login_attempt;
+use App\Models\take;
+use App\Models\training;
 
 class UserController extends Controller
 {
@@ -211,11 +212,47 @@ class UserController extends Controller
     
         // Return the user(s) information
         return response()->json($user_id ? ['user' => $usersArray[0]] : ['users' => $usersArray]);
-        
+
     }
     
     
+    function get_total_trainings(Request $request, $user_id) {
+
+        // Get the user's takes
+        $user_takes = Take::where('user_id', $user_id)->get();
     
+        // Get the training IDs of the user's takes
+        $training_ids = $user_takes->pluck('training_id')->toArray();
+    
+        // Get the trainings with the matching IDs
+        $trainings = Training::whereIn('id', $training_ids)->select('id', 'training_name', 'training_description', 'program_id')->get();
+    
+        // If no trainings are found for the user, return a 404 response
+        if ($trainings->isEmpty()) {
+            return response()->json([
+                'message' => 'No trainings found for this user'
+            ], 404);
+        }
+    
+        // Remove any fields that are not needed
+        $trainingsArray = $trainings->map(function ($training) {
+            return [
+                'id' => $training->id,
+                'training_name' => $training->training_name,
+                'training_description' => $training->training_description,
+                'program_id' => $training->program_id
+            ];
+        });
+    
+        // Return the total count of trainings and the trainings themselves
+        return response()->json([
+            'total_trainings' => count($trainingsArray),
+            'trainings' => $trainingsArray,
+        ]);
+        
+    }
+    
+
     
     
     
