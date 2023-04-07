@@ -1,13 +1,75 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>profile</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-router-outlet>
+</ion-router-outlet>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">profile</ion-title>
+<ion-menu contentId="main-content">
+  <ion-header>
+    <ion-toolbar class="custom-bar">
+      <ion-title>Menu Content</ion-title>
     </ion-toolbar>
   </ion-header>
-</ion-content>
+  <ion-content class="ion-padding">This is the menu content.</ion-content>
+</ion-menu>
+<div class="ion-page" id="main-content">
+  
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-button fill="outline" size="small" slot="end">
+       Edit My Profile
+      </ion-button>
+    </ion-toolbar>
+    <ion-row class="ion-align-items-center ion-justify-content-center custom-row">
+      <ion-col size="2">
+        <ion-avatar class="custom-avatar">
+          <div class="badge">
+            <ion-icon name="camera" ></ion-icon>
+          </div>
+          <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+        </ion-avatar>
+      </ion-col>
+    </ion-row>
+      <ion-card class="custom-card ion-padding">
+
+        <ion-card-header>
+         
+          <ion-row class="details">
+            <ion-col class="special-col">
+              <ion-label>Georgio Ghnatios</ion-label>
+        </ion-col>
+       
+        <ion-col class="special-col">
+          <ion-label>General Assembly</ion-label>
+        </ion-col>
+        </ion-row>
+      
+        </ion-card-header>
+        <ion-card-content>
+          <p>Ghantoos7</p>
+          <p class="p1">If i was a bird I would drown</p>
+        </ion-card-content>
+
+        
+    
+      </ion-card>
+
+  </ion-header>
+
+
+<ion-tabs>
+ <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="Statistics">
+      <ion-icon name="analytics-outline"></ion-icon>
+    </ion-tab-button>
+    <ion-tab-button tab="Achievements">
+      <ion-icon name="trophy-outline"></ion-icon>
+    </ion-tab-button>
+    <ion-tab-button tab="Trainings">
+      <ion-icon name="bicycle-outline"></ion-icon>
+    </ion-tab-button>
+    <ion-tab-button tab="My-Posts">
+      <ion-icon name="id-card-outline"></ion-icon>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

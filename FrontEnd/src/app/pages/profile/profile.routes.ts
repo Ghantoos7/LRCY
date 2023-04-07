@@ -9,33 +9,33 @@ export const routes: Routes = [
         {
             path: 'Statistics',
             loadComponent: () =>
-              import('../youth-gallery/youth-gallery.page').then((m) => m.YouthGalleryPage),
+              import('../statistics/statistics.page').then((m) => m.StatisticsPage),
           },
       {
         path: 'Achievements',
         loadComponent: () =>
-          import('../env-gallery/env-gallery.page').then((m) => m.EnvGalleryPage),
+          import('../achievements/achievements.page').then((m) => m.AchievementsPage),
       },
       {
         path: 'Trainings',
         loadComponent: () =>
-          import('../hvp-gallery/hvp-gallery.page').then((m) => m.HvpGalleryPage),
+          import('../trainings/trainings.page').then((m) => m.TrainingsPage),
       },
       {
         path: 'My-Posts',
         loadComponent: () =>
-          import('../other-gallery/other-gallery.page').then((m) => m.OtherGalleryPage),
+          import('../my-posts/my-posts.page').then((m) => m.MyPostsPage),
       },
       {
         path: '',
-        redirectTo: 'profile/Statistics',
+        redirectTo: 'Statistics',
         pathMatch: 'full',
       },
     ],
   },
   {
     path: '',
-    redirectTo: 'profile/Statistics',
+    redirectTo: 'Statistics',
     pathMatch: 'full',
   },
 ];

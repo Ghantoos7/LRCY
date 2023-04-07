@@ -13,6 +13,22 @@ export const routes: Routes = [
     path: 'profile',
     loadChildren: () => import('../app/pages/profile/profile.routes').then((m) => m.routes)
   },
+  {
+    path: 'statistics',
+    loadComponent: () => import('./pages/statistics/statistics.page').then( m => m.StatisticsPage)
+  },
+  {
+    path: 'achievements',
+    loadComponent: () => import('./pages/achievements/achievements.page').then( m => m.AchievementsPage)
+  },
+  {
+    path: 'trainings',
+    loadComponent: () => import('./pages/trainings/trainings.page').then( m => m.TrainingsPage)
+  },
+  {
+    path: 'my-posts',
+    loadComponent: () => import('./pages/my-posts/my-posts.page').then( m => m.MyPostsPage)
+  },
  
 ];
 
