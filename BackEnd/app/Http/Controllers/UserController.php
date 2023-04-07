@@ -32,35 +32,54 @@ class UserController extends Controller
 
     }
 
+    private function validatePassword($password) {
+        $errors = array();
+        
+        if (strlen($password) < 8) {
+            $errors[] = 'Password must be at least 8 characters long.';
+        }
+        
+        if (!preg_match('/[a-z]/', $password)) {
+            $errors[] = 'Password must contain at least one lowercase letter.';
+        }
+        
+        if (!preg_match('/[A-Z]/', $password)) {
+            $errors[] = 'Password must contain at least one uppercase letter.';
+        }
+    
+        if (!preg_match('/\d/', $password)) {
+            $errors[] = 'Password must contain at least one digit.';
+        }
+        
+        return $errors;
+    }
+
     function register(Request $request) {
 
         // Validate the request input
         $validator = Validator::make($request->all(), [
             'organization_id' => 'required',
             'username' => 'required',
-            'password' => 'required|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])/',
+            'password' => 'required',
         ]);
     
         if ($validator->fails()) {
             $errors = $validator->errors();
     
-            $status = 'Invalid input';
-            if ($errors->has('password')) {
-                $status = 'Invalid password';
-                if (strlen($request->input('password')) < 8) {
-                    $status .= ': Password must be at least 8 characters long.';
-                }
-                if (!preg_match('/[a-z]/', $request->input('password'))) {
-                    $status .= ': Password must contain at least one lowercase letter.';
-                }
-                if (!preg_match('/[A-Z]/', $request->input('password'))) {
-                    $status .= ': Password must contain at least one uppercase letter.';
-                }
-            }
+            return response()->json([
+                'status' => 'Invalid input',
+                'errors' => $errors,
+            ], 400);
+        }
+    
+        // Validate the password using the validatePassword() function
+        $password_errors = $this->validatePassword($request->input('password'));
+    
+        if (!empty($password_errors)) {
+            $status = 'Invalid password: ' . implode(', ', $password_errors);
     
             return response()->json([
                 'status' => $status,
-                'errors' => $errors,
             ], 400);
         }
     
@@ -92,6 +111,7 @@ class UserController extends Controller
             'status' => 'Organization ID found, user registered successfully',
         ], 200);
     }
+    
     
 
     
