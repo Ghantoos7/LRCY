@@ -187,9 +187,37 @@ class UserController extends Controller
         else {
             return response()->json(['status' => 'error', 'message' => 'Organization ID not found']);
         }
-        
-        
+         
     }
 
+
+    function get_user_info(Request $request, $user_id = null) {
+
+        // Retrieve the user information from the database
+        $users = $user_id ? [volunteer_user::find($user_id)] : volunteer_user::all();
+    
+        // If no user(s) found, return a 404 response
+        if (count($users) === 0 || $users[0] === null) {
+            return response()->json([
+                'message' => 'User not found'
+            ], 404);
+        }
+    
+        // Remove password field from user(s) information
+        $usersArray = array_map(function($user) {
+            unset($user['password']);
+            return $user;
+        }, collect($users)->toArray());
+    
+        // Return the user(s) information
+        return response()->json($user_id ? ['user' => $usersArray[0]] : ['users' => $usersArray]);
+        
+    }
+    
+    
+    
+    
+    
+    
 
 }
