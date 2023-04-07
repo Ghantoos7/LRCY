@@ -144,7 +144,37 @@ class UserController extends Controller
    
     }
     
-     
+    function change_password(Request $request) {
+
+        // Validate the request
+        $validator = Validator::make($request->all(), [
+            'organization_id' => 'required',
+            'password' => 'required',
+            'confirm_password' => 'required|same:password'
+        ]);
+
+        // Validate password
+        $password_errors = $this->validatePassword($request->input('password'));
+
+        // Check if validation failed or there are password errors
+        if ($validator->fails() || !empty($password_errors)) {
+            $errors = $validator->errors();
+            foreach ($password_errors as $error) {
+                $errors->add('password', $error);
+            }
+            return response()->json([
+                'status' => 'error',
+                'message' => $errors
+            ]);
+        }
+
+        // Retrieve a volunteer user record from the database based on the `organization_id` input parameter
+        $existing_volunteer_user = volunteer_user::where('organization_id', '=', $request->input('organization_id'))->first();
+
+        // If the user does not exist, return an error response. Otherwise, update the password and return a success response
+        return $existing_volunteer_user ? ($existing_volunteer_user->password = Hash::make($request->input('password')) && $existing_volunteer_user->save() ? response()->json(['status' => 'success', 'message' => 'Password changed successfully']) : response()->json(['status' => 'error', 'message' => 'Failed to update password'])) : response()->json(['status' => 'error', 'message' => 'Organization ID not found']);
+    
+    }
     
     
     
