@@ -512,5 +512,35 @@ class UserController extends Controller
 
     }
 
-    
+    function get_total_trainings_env($user_id) {
+
+        // Find the user
+        $existing_volunteer_user = volunteer_user::find($user_id);
+
+        if (!$existing_volunteer_user) {
+            return response()->json(
+                ['status' => 'error', 
+                'message' => 'User not found'
+            ]);
+        }
+
+        // get the IDs of all environment trainings
+        $env_training_ids = Training::where('program_id', 3)->pluck('id')->toArray();
+
+        // get the IDs of all trainings the user has taken
+        $user_training_ids = take::where('user_id', $user_id)->pluck('training_id')->toArray();
+
+        // get the IDs of all trainings the user has taken that are environment trainings
+        $env_training_ids = array_intersect($env_training_ids, $user_training_ids);
+
+        // get the total count of environment trainings the user has taken
+        $total_trainings_env = count($env_training_ids);
+
+        return response()->json([
+            'total_trainings_env' => $total_trainings_env
+        ]);
+        
+    }
+
+
 }
