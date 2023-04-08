@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -246,5 +247,31 @@ class UserController extends Controller
 
     }
     
+
+    function get_total_volunteering_time($user_id) {
+
+        // Find the user
+        $existing_volunteer_user = volunteer_user::find($user_id);
+
+        if (!$existing_volunteer_user) {
+            return response()->json(['status' => 'error', 'message' => 'User not found']);
+        }
+
+        // Calculate the start and end dates
+        $start_date = Carbon::parse($existing_volunteer_user->user_start_date);
+        $end_date = $existing_volunteer_user->user_end_date ? Carbon::parse($existing_volunteer_user->user_end_date) : Carbon::now();
+
+        // Calculate the total volunteering time
+        $diffInMonths = $start_date->diffInMonths($end_date);
+        $diffInYears = floor($diffInMonths / 12);
+        $diffInMonths = $diffInMonths % 12;
+
+        $total_time = ($diffInYears > 0 ? $diffInYears . " year" . ($diffInYears > 1 ? "s " : " ") : "") . ($diffInMonths > 0 ? $diffInMonths . " month" . ($diffInMonths > 1 ? "s" : "") : "");
+
+        // Return the response
+        return response()->json(['status' => 'success', 'total_time' => $total_time]);
+
+    }
+
 
 }
