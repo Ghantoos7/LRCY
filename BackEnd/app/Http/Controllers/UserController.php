@@ -180,16 +180,9 @@ class UserController extends Controller
         // Retrieve a volunteer user record from the database based on the `organization_id` input parameter
         $existing_volunteer_user = volunteer_user::where('organization_id', '=', $request->input('organization_id'))->first();
 
-        // If the user does not exist, return an error response. Otherwise, update the password and return a success response
-        if ($existing_volunteer_user) {
-            $existing_volunteer_user->password = Hash::make($request->input('password'));
-            $saveResult = $existing_volunteer_user->save();
-            return response()->json($saveResult ? ['status' => 'success', 'message' => 'Password changed successfully'] : ['status' => 'error', 'message' => 'Failed to update password']);
-        } 
-        else {
-            return response()->json(['status' => 'error', 'message' => 'Organization ID not found']);
-        }
-         
+        // Check if the user exists and is registered. If yes, update the password and return a success response. If no, return an error response.
+        return $existing_volunteer_user && $existing_volunteer_user->is_registered ? response()->json(['status' => $existing_volunteer_user->password = Hash::make($request->input('password')) ? 'success' : 'error', 'message' => $existing_volunteer_user->password = Hash::make($request->input('password')) ? 'Password changed successfully' : 'Failed to update password']) : response()->json(['status' => 'error', 'message' => $existing_volunteer_user ? 'User is not registered' : 'Organization ID not found']);
+            
     }
 
 
