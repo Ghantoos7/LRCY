@@ -131,7 +131,7 @@ class UserController extends Controller
         return response()->json(['status' => $status]);
     
     }
-
+    
 
     function recover_request(Request $request) {
 
@@ -143,12 +143,13 @@ class UserController extends Controller
 
         // Check if user has already submitted a request
         $existing_request = $existing_volunteer_user ? recover_request::where('user_id', '=', $existing_volunteer_user->id)->first() : null;
-
+        
         // Get current date
         $request_date = date('Y-m-d');
         
-        return $existing_volunteer_user ? (!$existing_request ? ((new recover_request(['user_id' => $existing_volunteer_user->id, 'request_status' => false, 'request_date' => $request_date]))->save() ? response()->json(['status' => 'Password recovery request sent successfully']) : response()->json(['status' => 'Failed to create password recovery request'])) : response()->json(['status' => 'User has already submitted a request.'])) : response()->json(['status' => 'Organization ID not found']);
-   
+        // Return a JSON response based on whether the user exists and is registered, and whether they have already submitted a recovery request or not. If the user exists and is registered, and has not already submitted a request, create a new recovery request and return a success message. If the user has already submitted a request, return an error message. If the user does not exist or is not registered, return a relevant error message.
+        return $existing_volunteer_user && $existing_volunteer_user->is_registered ? (!$existing_request ? ((new recover_request(['user_id' => $existing_volunteer_user->id, 'request_status' => false, 'request_date' => $request_date]))->save() ? response()->json(['status' => 'Password recovery request sent successfully']) : response()->json(['status' => 'Failed to create password recovery request'])) : response()->json(['status' => 'User has already submitted a request.'])) : response()->json(['status' => ($existing_volunteer_user ? 'User is not registered' : 'Organization ID not found')]);
+
     }
     
 
@@ -249,12 +250,8 @@ class UserController extends Controller
             'total_trainings' => count($trainingsArray),
             'trainings' => $trainingsArray,
         ]);
-        
-    }
-    
 
-    
-    
+    }
     
 
 }
