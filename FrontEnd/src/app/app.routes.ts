@@ -18,6 +18,14 @@ export const routes: Routes = [
     path: 'signin',
     loadComponent: () => import('../app/pages/sign-in/sign-in.page').then(m => m.SignInPage)
   },
+  {
+    path: 'yearly-goals',
+    loadComponent: () => import('./pages/yearly-goals/yearly-goals.page').then( m => m.YearlyGoalsPage)
+  },
+  {
+    path: 'announcements',
+    loadComponent: () => import('./pages/announcements/announcements.page').then( m => m.AnnouncementsPage)
+  },
   
  
 ];
