@@ -212,6 +212,13 @@ class UserController extends Controller
     
     
     function get_total_trainings(Request $request, $user_id) {
+        
+        // Find the user
+        $existing_volunteer_user = volunteer_user::find($user_id);
+
+        if (!$existing_volunteer_user) {
+            return response()->json(['status' => 'error', 'message' => 'User not found']);
+        }
 
         // Get the user's takes
         $user_takes = Take::where('user_id', $user_id)->get();
@@ -224,26 +231,14 @@ class UserController extends Controller
     
         // If no trainings are found for the user, return a 404 response
         if ($trainings->isEmpty()) {
-            return response()->json([
-                'message' => 'No trainings found for this user'
-            ], 404);
+            return response()->json(['message' => 'No trainings found for this user'], 404);
         }
     
         // Remove any fields that are not needed
-        $trainingsArray = $trainings->map(function ($training) {
-            return [
-                'id' => $training->id,
-                'training_name' => $training->training_name,
-                'training_description' => $training->training_description,
-                'program_id' => $training->program_id
-            ];
-        });
+        $trainingsArray = $trainings->map(function ($training) { return ['id' => $training->id, 'training_name' => $training->training_name, 'training_description' => $training->training_description, 'program_id' => $training->program_id];});
     
         // Return the total count of trainings and the trainings themselves
-        return response()->json([
-            'total_trainings' => count($trainingsArray),
-            'trainings' => $trainingsArray,
-        ]);
+        return response()->json(['total_trainings' => count($trainingsArray), 'trainings' => $trainingsArray]);
 
     }
     
