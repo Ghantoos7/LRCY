@@ -1,0 +1,62 @@
+ion-menu-button{
+    color: white;
+}
+
+ion-title{
+    color: white;
+    font-family: 'Cairo', sans-serif;
+}
+
+ion-toolbar{
+    --background: #b11433;
+}
+
+ion-card{
+    background-color: #b11433;
+}
+
+.icon, ion-icon, ion-card-title{
+    color: white;
+}
+
+ion-card-title{
+    font-size: medium;
+    display: flex;
+    justify-content: space-between;
+}
+
+ion-footer{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.date{ 
+    font-size: small;
+    font-weight: lighter;
+    color:lightgray;
+    font-family: 'Cairo', sans-serif;
+
+}
+
+ion-card-subtitle{
+    font-size: small;
+    font-weight: bold;
+    color:white;
+    font-family: 'Cairo', sans-serif;
+}
+
+ion-progress-bar{
+    --background: darkgray;
+    --progress-background: #45579A;
+    
+}
+
+ 
+
+  
+  
+  
+  
+  
+  
+  
