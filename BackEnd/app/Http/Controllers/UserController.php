@@ -330,5 +330,34 @@ class UserController extends Controller
 
     }
 
+    function get_total_posts($user_id) {
+
+        // Find the user
+        $existing_volunteer_user = volunteer_user::find($user_id);
+
+        if (!$existing_volunteer_user) {
+            return response()->json(
+                ['status' => 'error', 
+                'message' => 'User not found'
+            ]);
+        }
+
+        // Get the user's posts
+        $posts = Post::where('user_id', $user_id)->get();
+
+        // If no posts are found for the user
+        if ($posts->isEmpty()) {
+            return response()->json([
+                'message' => 'No posts found for this user'
+            ]);
+        }
+
+        // Return the total count of posts
+        return response()->json([
+            'total_posts' => count($posts)
+        ]);
+
+
+    }
 
 }
