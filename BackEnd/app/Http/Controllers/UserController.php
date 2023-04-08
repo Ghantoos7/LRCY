@@ -14,7 +14,7 @@ use App\Models\training;
 use App\Models\login_attempt;
 use App\Models\registration_attempt;
 use App\Models\post;
-
+use App\Models\comment;
 
 class UserController extends Controller
 {
@@ -357,6 +357,35 @@ class UserController extends Controller
             'total_posts' => count($posts)
         ]);
 
+
+    }
+
+    function get_total_comments($user_id) {
+
+        // Find the user
+        $existing_volunteer_user = volunteer_user::find($user_id);
+
+        if (!$existing_volunteer_user) {
+            return response()->json(
+                ['status' => 'error', 
+                'message' => 'User not found'
+            ]);
+        }
+
+        // Get the user's comments
+        $comments = Comment::where('user_id', $user_id)->get();
+
+        // If no comments are found for the user
+        if ($comments->isEmpty()) {
+            return response()->json([
+                'message' => 'No comments found for this user'
+            ]);
+        }
+
+        // Return the total count of comments
+        return response()->json([
+            'total_comments' => count($comments)
+        ]);
 
     }
 
