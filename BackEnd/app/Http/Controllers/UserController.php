@@ -450,4 +450,34 @@ class UserController extends Controller
 
     }
 
+    function get_total_trainings_yah($user_id) {
+
+        // Find the user
+        $existing_volunteer_user = volunteer_user::find($user_id);
+
+        if (!$existing_volunteer_user) {
+            return response()->json(
+                ['status' => 'error', 
+                'message' => 'User not found'
+            ]);
+        }
+
+        // get the IDs of all youth and health trainings
+        $yah_training_ids = Training::where('program_id', 1)->pluck('id')->toArray();
+
+        // get the IDs of all trainings the user has taken
+        $user_training_ids = take::where('user_id', $user_id)->pluck('training_id')->toArray();
+
+        // get the IDs of all trainings the user has taken that are youth and health trainings
+        $yah_training_ids = array_intersect($yah_training_ids, $user_training_ids);
+
+        // get the total count of youth and health trainings the user has taken
+        $total_trainings_yah = count($yah_training_ids);
+
+        return response()->json([
+            'total_trainings_yah' => $total_trainings_yah
+        ]);
+
+
+    }
 }
