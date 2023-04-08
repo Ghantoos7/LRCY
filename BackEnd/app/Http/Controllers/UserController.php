@@ -15,6 +15,8 @@ use App\Models\login_attempt;
 use App\Models\registration_attempt;
 use App\Models\post;
 use App\Models\comment;
+use App\Models\is_responsible;
+
 
 class UserController extends Controller
 {
@@ -40,7 +42,7 @@ class UserController extends Controller
 
     }
 
-    # Validate the password
+    // Validate the password
     private function validatePassword($password) {
         $errors = array();
         
@@ -171,7 +173,7 @@ class UserController extends Controller
         }
     }
 
-    # Adds a failed login attempt to the database if the user has inputted the wrong password
+    // Adds a failed login attempt to the database if the user has inputted the wrong password
     private function addFailedLoginAttempt($organization_id) {
 
         login_attempt::create([
@@ -181,14 +183,14 @@ class UserController extends Controller
     ]);
     }
 
-    # Checks if the user has exceeded the maximum number of login attempts
+    // Checks if the user has exceeded the maximum number of login attempts
     private function hasExceededLoginAttempts($organization_id) {
         
         $total_attempts = login_attempt::where('user_id', '=', $organization_id)->count();
         return ($total_attempts >= 5);
     }
 
-    # Resets the number of login attempts to 0
+    // Resets the number of login attempts to 0
     private function resetLoginAttempts($organization_id) {
         login_attempt::where('user_id', '=', $organization_id)->delete();
     }
@@ -386,6 +388,65 @@ class UserController extends Controller
         return response()->json([
             'total_comments' => count($comments)
         ]);
+
+    }
+
+
+    function get_total_likes_received($user_id) {
+            
+            // Find the user
+            $existing_volunteer_user = volunteer_user::find($user_id);
+    
+            if (!$existing_volunteer_user) {
+                return response()->json(
+                    ['status' => 'error', 
+                    'message' => 'User not found'
+                ]);
+            }
+    
+            // Get the user's posts
+            $posts = Post::where('user_id', $user_id)->get();
+
+            // Get the user's comments
+            $comments = Comment::where('user_id', $user_id)->get();
+    
+            // Total likes received = sum of likes on posts + sum of likes on comments
+            $total_likes_received = $posts->sum('like_count') + $comments->sum('comment_like_count');
+
+            return response()->json([
+                'total_likes_received' => $total_likes_received
+            ]);
+    
+
+    }
+
+    function get_total_events_organized($user_id) {
+            
+            // Find the user
+            $existing_volunteer_user = volunteer_user::find($user_id);
+    
+            if (!$existing_volunteer_user) {
+                return response()->json(
+                    ['status' => 'error', 
+                    'message' => 'User not found'
+                ]);
+            }
+    
+            // Get the user's events
+            $events = is_responsible::where('user_id', $user_id)->get();
+    
+            // If the user did not organize any events
+            if ($events->isEmpty()) {
+                return response()->json([
+                    'message' => 'No events found for this user'
+                ]);
+            }
+    
+            // Return the total count of events
+            return response()->json([
+                'total_events_organized' => count($events)
+            ]);
+    
 
     }
 

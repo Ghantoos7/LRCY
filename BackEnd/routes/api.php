@@ -37,7 +37,7 @@ Route::group(["prefix" => "v0.1"], function(){
         Route::get("get_total_posts/{user_id?}", [UserController::class, "get_total_posts"]);
         Route::get("get_total_comments/{user_id}", [UserController::class, "get_total_comments"]);
         Route::get("get_total_likes_received/{user_id}", [UserController::class, "get_total_likes_received"]);
-        Route::get("get_events_organized/{user_id}", [UserController::class, "get_events_organized"]);
+        Route::get("get_total_events_organized/{user_id}", [UserController::class, "get_total_events_organized"]);
         Route::get("get_total_trainings_y&h/{user_id}", [UserController::class, "get_total_trainings_y&h"]);
         Route::get("get_total_trainings_hvp/{user_id}", [UserController::class, "get_total_trainings_hvp"]);
         Route::get("get_total_trainings_env/{user_id}", [UserController::class, "get_total_trainings_env"]);

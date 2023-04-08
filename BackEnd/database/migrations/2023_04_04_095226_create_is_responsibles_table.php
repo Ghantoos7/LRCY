@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('is_responsible', function (Blueprint $table) {
+        Schema::create('is_responsibles', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
             $table->integer('event_id');
