@@ -13,16 +13,17 @@ use App\Models\take;
 use App\Models\training;
 use App\Models\login_attempt;
 use App\Models\registration_attempt;
+use App\Models\post;
 
 
 class UserController extends Controller
 {
 
 
-    function signup(Request $request) {
-
+    function signup(Request $credentials) {
+    
         // Get the organization ID from the request
-        $organization_id = $request->input('organization_id');
+        $organization_id = $credentials->input('organization_id');
 
         // Retrieve a volunteer user record from the database based on the `organization_id` input parameter
         $existing_volunteer_user = volunteer_user::where('organization_id', '=', $organization_id)->first();
@@ -39,7 +40,7 @@ class UserController extends Controller
 
     }
 
-
+    # Validate the password
     private function validatePassword($password) {
         $errors = array();
         
@@ -78,7 +79,7 @@ class UserController extends Controller
             return response()->json([
                 'status' => 'Invalid input',
                 'errors' => $errors,
-            ], 400);
+            ]);
         }
     
         // Validate the password using the validatePassword() function
@@ -89,7 +90,7 @@ class UserController extends Controller
     
             return response()->json([
                 'status' => $status,
-            ], 400);
+            ]);
         }
     
         // Retrieve a volunteer user record from the database based on the `organization_id` input parameter
@@ -99,14 +100,14 @@ class UserController extends Controller
         if (!$existing_volunteer_user) {
             return response()->json([
                 'status' => 'Organization ID not found',
-            ], 404);
+            ]);
         }
     
         // Check if the volunteer user is already registered
         if ($existing_volunteer_user->is_registered) {
             return response()->json([
                 'status' => 'Organization ID found, user already registered',
-            ], 200);
+            ]);
         }
     
         // Set the is_registered, username and password attributes of the user object and save it to the database
@@ -118,16 +119,15 @@ class UserController extends Controller
         // Return a JSON response with the appropriate status message and HTTP status code
         return response()->json([
             'status' => 'Organization ID found, user registered successfully',
-        ], 200);
+        ]);
 
     }
     
-  
 
     function login(Request $credentials) {
         
         // Checks if the user has exceeded the maximum number of login attempts
-        if ($this->exceeded_login_attempts($credentials)) {
+        if ($this->hasExceededLoginAttempts($credentials->organization_id)) {
             return response()->json([
                 "status" => "Too many failed login attempts",
             ]);
@@ -138,14 +138,14 @@ class UserController extends Controller
         // Checks if the user exists in the database
         if(!$check_user) {
             return response()->json([
-                "status" => "User not found",
+                "status" => "Invalid credentials",
             ]);
         }
     
         // Checks if the user is registered
         if(!$check_user->is_registered){
             return response()->json([
-                "status" => "User not registered",
+                "status" => "Invalid credentials",
             ]);
         }
     
@@ -157,71 +157,41 @@ class UserController extends Controller
     
         // Checks if the password is correct
         if(Hash::check($credentials->password, $check_user->password)){
-            $this->reset_login_attempts($credentials);
+            $this->resetLoginAttempts($credentials->organization_id);
             return response()->json([
                 "status" => $check_user,
             ]);
         }
         else{
             // Adds a failed login attempt to the database if the user has inputted the wrong password
-            $this->add_failed_login_attempt($credentials);
+            $this->addFailedLoginAttempt($credentials->organization_id);
             return response()->json([
-                "status" => "Incorrect password",
+                "status" => "Invalid credentials",
             ]);
         }
     }
 
     # Adds a failed login attempt to the database if the user has inputted the wrong password
-    private function add_failed_login_attempt(Request $credentials) {
+    private function addFailedLoginAttempt($organization_id) {
 
         login_attempt::create([
         'login_attempt_time' => date('H:i:s'),
         'login_attempt_date' => date('Y-m-d'),
-        'user_id' => $credentials->organization_id,
+        'user_id' => $organization_id,
     ]);
     }
 
     # Checks if the user has exceeded the maximum number of login attempts
-    private function exceeded_login_attempts(Request $credentials) {
+    private function hasExceededLoginAttempts($organization_id) {
         
-        $total_attempts = login_attempt::where('user_id', '=', $credentials->organization_id)->count();
+        $total_attempts = login_attempt::where('user_id', '=', $organization_id)->count();
         return ($total_attempts >= 5);
     }
 
     # Resets the number of login attempts to 0
-    private function reset_login_attempts(Request $credentials) {
-        login_attempt::where('user_id', '=', $credentials->organization_id)->delete();
+    private function resetLoginAttempts($organization_id) {
+        login_attempt::where('user_id', '=', $organization_id)->delete();
     }
-
-    # Adds a failed registration attempt to the database if the user has inputted the wrong Organization ID
-    private function add_failed_registration_attempt(Request $credentials) {
-
-        registration_attempt::create([
-        'registration_attempt_time' => date('H:i:s'),
-        'registration_attempt_date' => date('Y-m-d'),
-        'user_id' => $credentials->organization_id,
-    ]);
-    }
-    
-    # Checks if the user has exceeded the maximum number of registration attempts
-    private function exceeded_registration_attempts(Request $credentials) {
-        
-        $total_attempts = registration_attempt::where('user_id', '=', $credentials->organization_id)->count();
-        return ($total_attempts >= 5);
-    }
-
-    # Resets the number of registration attempts to 0
-    private function reset_registration_attempts(Request $credentials) {
-        registration_attempt::where('user_id', '=', $credentials->organization_id)->delete();
-    }
-
-  
-
-
-  
-  
-
-
     
 
     function recover_request(Request $request) {
@@ -319,9 +289,9 @@ class UserController extends Controller
         // Get the trainings with the matching IDs
         $trainings = Training::whereIn('id', $training_ids)->select('id', 'training_name', 'training_description', 'program_id')->get();
     
-        // If no trainings are found for the user, return a 404 response
+        // If no trainings are found for the user
         if ($trainings->isEmpty()) {
-            return response()->json(['message' => 'No trainings found for this user'], 404);
+            return response()->json(['message' => 'No trainings found for this user']);
         }
     
         // Remove any fields that are not needed
@@ -339,7 +309,9 @@ class UserController extends Controller
         $existing_volunteer_user = volunteer_user::find($user_id);
 
         if (!$existing_volunteer_user) {
-            return response()->json(['status' => 'error', 'message' => 'User not found']);
+            return response()->json(['status' => 'error', 
+            'message' => 'User not found'
+        ]);
         }
 
         // Calculate the start and end dates

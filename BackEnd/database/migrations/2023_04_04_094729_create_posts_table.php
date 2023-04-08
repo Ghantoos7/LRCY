@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('like_count');
             $table->date('post_date');
             $table->integer('post_type_id');
-            $table->string('field1')->nullable();
+            $table->string('field1');
             $table->string('field2')->nullable();
             $table->timestamps();
         });
