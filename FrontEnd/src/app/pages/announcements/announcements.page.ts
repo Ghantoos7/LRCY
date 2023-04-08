@@ -11,12 +11,16 @@ import { IonicModule } from '@ionic/angular';
   imports: [IonicModule, CommonModule, FormsModule]
 })
 export class AnnouncementsPage implements OnInit {
-
+  showDescriptions: boolean[] = [];
   constructor() { 
+    this.showDescriptions = new Array(3).fill(false);
   }
 
   ngOnInit() {
 
   }
 
+  toggleDescription(index: number) {
+    this.showDescriptions[index] = !this.showDescriptions[index];
+  }
 }
