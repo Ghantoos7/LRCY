@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -233,12 +234,13 @@ class UserController extends Controller
 
         // Check if user has already submitted a request
         $existing_request = $existing_volunteer_user ? recover_request::where('user_id', '=', $existing_volunteer_user->id)->first() : null;
-
+        
         // Get current date
         $request_date = date('Y-m-d');
         
-        return $existing_volunteer_user ? (!$existing_request ? ((new recover_request(['user_id' => $existing_volunteer_user->id, 'request_status' => false, 'request_date' => $request_date]))->save() ? response()->json(['status' => 'Password recovery request sent successfully']) : response()->json(['status' => 'Failed to create password recovery request'])) : response()->json(['status' => 'User has already submitted a request.'])) : response()->json(['status' => 'Organization ID not found']);
-   
+        // Return a JSON response based on whether the user exists and is registered, and whether they have already submitted a recovery request or not. If the user exists and is registered, and has not already submitted a request, create a new recovery request and return a success message. If the user has already submitted a request, return an error message. If the user does not exist or is not registered, return a relevant error message.
+        return $existing_volunteer_user && $existing_volunteer_user->is_registered ? (!$existing_request ? ((new recover_request(['user_id' => $existing_volunteer_user->id, 'request_status' => false, 'request_date' => $request_date]))->save() ? response()->json(['status' => 'Password recovery request sent successfully']) : response()->json(['status' => 'Failed to create password recovery request'])) : response()->json(['status' => 'User has already submitted a request.'])) : response()->json(['status' => ($existing_volunteer_user ? 'User is not registered' : 'Organization ID not found')]);
+
     }
     
 
@@ -269,16 +271,9 @@ class UserController extends Controller
         // Retrieve a volunteer user record from the database based on the `organization_id` input parameter
         $existing_volunteer_user = volunteer_user::where('organization_id', '=', $request->input('organization_id'))->first();
 
-        // If the user does not exist, return an error response. Otherwise, update the password and return a success response
-        if ($existing_volunteer_user) {
-            $existing_volunteer_user->password = Hash::make($request->input('password'));
-            $saveResult = $existing_volunteer_user->save();
-            return response()->json($saveResult ? ['status' => 'success', 'message' => 'Password changed successfully'] : ['status' => 'error', 'message' => 'Failed to update password']);
-        } 
-        else {
-            return response()->json(['status' => 'error', 'message' => 'Organization ID not found']);
-        }
-         
+        // Check if the user exists and is registered. If yes, update the password and return a success response. If no, return an error response.
+        return $existing_volunteer_user && $existing_volunteer_user->is_registered ? response()->json(['status' => $existing_volunteer_user->password = Hash::make($request->input('password')) ? 'success' : 'error', 'message' => $existing_volunteer_user->password = Hash::make($request->input('password')) ? 'Password changed successfully' : 'Failed to update password']) : response()->json(['status' => 'error', 'message' => $existing_volunteer_user ? 'User is not registered' : 'Organization ID not found']);
+            
     }
 
 
@@ -307,6 +302,13 @@ class UserController extends Controller
     
     
     function get_total_trainings(Request $request, $user_id) {
+        
+        // Find the user
+        $existing_volunteer_user = volunteer_user::find($user_id);
+
+        if (!$existing_volunteer_user) {
+            return response()->json(['status' => 'error', 'message' => 'User not found']);
+        }
 
         // Get the user's takes
         $user_takes = Take::where('user_id', $user_id)->get();
@@ -319,29 +321,42 @@ class UserController extends Controller
     
         // If no trainings are found for the user, return a 404 response
         if ($trainings->isEmpty()) {
-            return response()->json([
-                'message' => 'No trainings found for this user'
-            ], 404);
+            return response()->json(['message' => 'No trainings found for this user'], 404);
         }
     
         // Remove any fields that are not needed
-        $trainingsArray = $trainings->map(function ($training) {
-            return [
-                'id' => $training->id,
-                'training_name' => $training->training_name,
-                'training_description' => $training->training_description,
-                'program_id' => $training->program_id
-            ];
-        });
+        $trainingsArray = $trainings->map(function ($training) { return ['id' => $training->id, 'training_name' => $training->training_name, 'training_description' => $training->training_description, 'program_id' => $training->program_id];});
     
         // Return the total count of trainings and the trainings themselves
-        return response()->json([
-            'total_trainings' => count($trainingsArray),
-            'trainings' => $trainingsArray,
-        ]);
-        
+        return response()->json(['total_trainings' => count($trainingsArray), 'trainings' => $trainingsArray]);
+
     }
     
 
-    
+    function get_total_volunteering_time($user_id) {
+
+        // Find the user
+        $existing_volunteer_user = volunteer_user::find($user_id);
+
+        if (!$existing_volunteer_user) {
+            return response()->json(['status' => 'error', 'message' => 'User not found']);
+        }
+
+        // Calculate the start and end dates
+        $start_date = Carbon::parse($existing_volunteer_user->user_start_date);
+        $end_date = $existing_volunteer_user->user_end_date ? Carbon::parse($existing_volunteer_user->user_end_date) : Carbon::now();
+
+        // Calculate the total volunteering time
+        $diffInMonths = $start_date->diffInMonths($end_date);
+        $diffInYears = floor($diffInMonths / 12);
+        $diffInMonths = $diffInMonths % 12;
+
+        $total_time = ($diffInYears > 0 ? $diffInYears . " year" . ($diffInYears > 1 ? "s " : " ") : "") . ($diffInMonths > 0 ? $diffInMonths . " month" . ($diffInMonths > 1 ? "s" : "") : "");
+
+        // Return the response
+        return response()->json(['status' => 'success', 'total_time' => $total_time]);
+
+    }
+
+
 }
