@@ -12,7 +12,6 @@ use App\Models\recover_request;
 use App\Models\take;
 use App\Models\training;
 use App\Models\login_attempt;
-use App\Models\registration_attempt;
 use App\Models\post;
 use App\Models\comment;
 use App\Models\is_responsible;
@@ -657,10 +656,8 @@ class UserController extends Controller{
     
         // Return a success response
         return response()->json(['message' => 'Profile updated successfully']);
+
     }
     
-
-    
-
 
  }
