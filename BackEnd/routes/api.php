@@ -33,14 +33,14 @@ Route::group(["prefix" => "v0.1"], function(){
         Route::post("edit_profile", [UserController::class, "edit_profile"]);
         Route::get("get_user_info/{user_id?}", [UserController::class, "get_user_info"]);
         Route::get("get_trainings_info/{user_id}", [UserController::class, "get_trainings_info"]); 
-        Route::get("get_volunteering_time/{user_id}", [UserController::class, "get_total_volunteering_time"]); //
+        Route::get("get_events_organized/{user_id}", [UserController::class, "get_events_organized"]);
+        Route::get("get_events_organized_count/{user_id}", [UserController::class, "get_events_organized_count"]);
+        Route::get("get_total_volunteering_time/{user_id}", [UserController::class, "get_total_volunteering_time"]); 
+        Route::get("get_completed_trainings_count/{user_id}", [UserController::class, "get_completed_trainings_count"]);
         Route::get("get_posts_count/{user_id?}", [UserController::class, "get_posts_count"]);
         Route::get("get_comments_count/{user_id}", [UserController::class, "get_comments_count"]);
-        Route::get("get_likes_received_count/{user_id}", [UserController::class, "get_total_likes_received"]);
-        Route::get("get_events_organized/{user_id}", [UserController::class, "get_events_organized"]);
-        Route::get("get_organized_events_count/{user_id}", [UserController::class, "get_organized_events_count"]);
+        Route::get("get_total_likes_received/{user_id}", [UserController::class, "get_total_likes_received"]);
         Route::get("get_own_posts/{user_id}", [UserController::class, "get_own_posts"]);
-        Route::get("get_completed_trainings_count/{user_id}", [UserController::class, "get_completed_trainings_count"]);
     });
 
     

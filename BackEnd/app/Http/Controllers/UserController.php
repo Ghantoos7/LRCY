@@ -275,7 +275,7 @@ class UserController extends Controller{
     }
         
     
-    function get_total_trainings($user_id) {
+    function get_trainings_info($user_id) {
         // Find the user
         $existing_volunteer_user = volunteer_user::find($user_id);
         if (!$existing_volunteer_user) {
@@ -399,7 +399,7 @@ class UserController extends Controller{
     }
     
 
-    function get_organized_events_count($user_id) {
+    function get_events_organized_count($user_id) {
                 
                 // Find the user
                 $existing_volunteer_user = volunteer_user::find($user_id);
@@ -552,7 +552,6 @@ class UserController extends Controller{
 
     }
 
-
     function get_total_likes_received($user_id) {
             
             // Find the user
@@ -577,42 +576,8 @@ class UserController extends Controller{
             return response()->json([
                 'total_likes_received' => $total_likes_received
             ]);
-    
 
     }
-
-
-    
-    function get_total_trainings_left($user_id) {
-
-        // Find the user
-        $existing_volunteer_user = volunteer_user::find($user_id);
-
-        if (!$existing_volunteer_user) {
-            return response()->json(
-                ['status' => 'error', 
-                'message' => 'User not found'
-            ]);
-        }
-
-        // get the IDs of all trainings the user has taken
-        $user_training_ids = take::where('user_id', $user_id)->pluck('training_id')->toArray();
-
-        // get the IDs of all trainings
-        $training_ids = training::pluck('id')->toArray();
-
-        // get the IDs of all trainings the user has not taken
-        $trainings_left_ids = array_diff($training_ids, $user_training_ids);
-
-        // get the total count of trainings the user has not taken
-        $total_trainings_left = count($trainings_left_ids);
-
-        return response()->json([
-            'total_trainings_left' => $total_trainings_left
-        ]);
-
-    }
-
 
     function get_own_posts($user_id){
 
@@ -644,5 +609,3 @@ class UserController extends Controller{
     }   
 
  }
-
-
