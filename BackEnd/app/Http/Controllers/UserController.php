@@ -325,7 +325,7 @@ class UserController extends Controller{
 
     }
 
-    function get_total_posts($user_id) {
+    function get_own_posts($user_id){
 
         // Find the user
         $existing_volunteer_user = volunteer_user::find($user_id);
@@ -338,22 +338,21 @@ class UserController extends Controller{
         }
 
         // Get the user's posts
-        $posts = Post::where('user_id', $user_id)->get();
+        $posts = Post::where('user_id', $user_id)->select('id', 'post_caption', 'post_media', 'comment_count','like_count','post_date','post_type_id')->get();
 
-        // If no posts are found for the user
+        // If the user did not post anything
         if ($posts->isEmpty()) {
             return response()->json([
                 'message' => 'No posts found for this user'
             ]);
         }
 
-        // Return the total count of posts
+        // Return the posts and post count
         return response()->json([
-            'total_posts' => count($posts)
+            'total_posts' => count($posts),
+            'posts' => $posts
         ]);
-
-
-    }
+    }   
 
     function get_total_comments($user_id) {
 
@@ -577,36 +576,6 @@ class UserController extends Controller{
         ]);
 
     }
-
-
-    function get_own_posts($user_id){
-
-        // Find the user
-        $existing_volunteer_user = volunteer_user::find($user_id);
-
-        if (!$existing_volunteer_user) {
-            return response()->json(
-                ['status' => 'error', 
-                'message' => 'User not found'
-            ]);
-        }
-
-        // Get the user's posts
-        $posts = Post::where('user_id', $user_id)->get();
-
-        // If the user did not post anything
-        if ($posts->isEmpty()) {
-            return response()->json([
-                'message' => 'No posts found for this user'
-            ]);
-        }
-
-        // Return the posts
-        return response()->json([
-            'posts' => $posts
-        ]);
-
-    }   
 
  }
 
