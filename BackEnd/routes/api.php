@@ -43,6 +43,27 @@ Route::group(["prefix" => "v0.1"], function(){
         Route::get("get_own_posts/{user_id}", [UserController::class, "get_own_posts"]);
     });
 
-    
+    Route::group(["prefix" => "post"], function(){
+        Route::post("create_post", [PostController::class, "create_post"]);
+        Route::post("edit_post", [PostController::class, "edit_post"]);
+        Route::post("delete_post", [PostController::class, "delete_post"]);
+        Route::get("get_post/{post_id?}", [PostController::class, "get_post"]);
+        Route::post("like_post/{user_id}", [PostController::class, "like_post"]);
+        Route::post("unlike_post/{user_id}", [PostController::class, "unlike_post"]);
+        Route::post("comment_post/{user_id}", [PostController::class, "comment_post"]);
+        Route::post("reply/{user_id}", [PostController::class, "reply"]);
+        Route::post("like_comment/{user_id}", [PostController::class, "like_comment"]);
+        Route::post("unlike_comment/{user_id}", [PostController::class, "unlike_comment"]);
+        Route::post("delete_comment/{user_id}", [PostController::class, "delete_comment"]);
+        Route::post("delete_reply/{user_id}", [PostController::class, "delete_reply"]);
+        Route::post("edit_comment/{user_id}", [PostController::class, "edit_comment"]);
+        Route::post("edit_reply",[PostController::class, "edit_reply"]);
+        Route::get("get_comments/{post_id}", [PostController::class, "get_comments"]);
+        Route::get("get_replies/{comment_id}", [PostController::class, "get_replies"]);
+        Route::get("get_likes/{post_id}", [PostController::class, "get_likes"]);
+        Route::get("get_comments_likes/{comment_id}", [PostController::class, "get_comments_likes"]);
+        Route::get("get_post_likes/{post_id}", [PostController::class, "get_post_likes"]);
+
+    });
 
 });
