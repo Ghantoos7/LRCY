@@ -16,6 +16,7 @@ use App\Models\registration_attempt;
 use App\Models\post;
 use App\Models\comment;
 use App\Models\is_responsible;
+use App\Models\event;
 
 
 class UserController extends Controller{
@@ -297,9 +298,6 @@ class UserController extends Controller{
         }
 
 
-    
-
-
     function get_total_volunteering_time($user_id) {
 
         // Find the user
@@ -428,7 +426,13 @@ class UserController extends Controller{
             }
     
             // Get the user's events
-            $events = is_responsible::where('user_id', $user_id)->get();
+            $events_responsible = is_responsible::where('user_id', $user_id)->get();
+
+            // Get the event IDs of the user's events
+            $event_ids = $events_responsible->pluck('event_id')->toArray();
+
+            // Get the events with the matching IDs
+            $events = Event::whereIn('id', $event_ids)->select('id', 'event_date', 'event_title', 'program_id','event_type_id')->get();
     
             // If the user did not organize any events
             if ($events->isEmpty()) {
@@ -436,12 +440,23 @@ class UserController extends Controller{
                     'message' => 'No events found for this user'
                 ]);
             }
+            
+            // Remove any fields that are not needed
+            $eventsArray = $events->map(function ($event) {
+                return [
+                    'id' => $event->id,
+                    'event_date' => $event->event_date,
+                    'event_title' => $event->event_title,
+                    'program_id' => $event->program_id,
+                    'event_type_id' => $event->event_type_id
+                ];
+            })->toArray();
     
-            // Return the total count of events
+            // Return the total count and the events
             return response()->json([
-                'total_events_organized' => count($events)
+                'total_events_organized' => count($events),
+                'events' => $eventsArray
             ]);
-    
 
     }
 
@@ -449,96 +464,90 @@ class UserController extends Controller{
 
         // Find the user
         $existing_volunteer_user = volunteer_user::find($user_id);
-
         if (!$existing_volunteer_user) {
-            return response()->json(
-                ['status' => 'error', 
-                'message' => 'User not found'
-            ]);
-        }
+         return response()->json(['status' => 'error', 'message' => 'User not found']);
+         }
+ 
+         // Get the user's takes
+         $user_takes = Take::where('user_id', $user_id)->get();
+ 
+         // Get the training IDs of the user's takes
+         $training_ids = $user_takes->pluck('training_id')->toArray();
+ 
+         // Get the trainings with the matching IDs
+         $trainings = Training::whereIn('id', $training_ids)->select('id', 'training_name', 'training_description', 'program_id')->get();
+         $yah_trainings = $trainings->where('program_id', 1);
+         // If no trainings are found for the user
+         if ($trainings->isEmpty()) {
+             return response()->json(['message' => 'No trainings found for this user']);
+         }
+         // Remove any fields that are not needed
+         $trainingsArray = $yah_trainings->map(function ($yah_trainings) { return ['id' => $yah_trainings->id, 'training_name' => $yah_trainings->training_name, 'training_description' => $yah_trainings->training_description, 'program_id' => $yah_trainings->program_id];});
+ 
+         // Return the total count of trainings and the trainings themselves
+         return response()->json(['total_yah_trainings' => count($trainingsArray), 'trainings' => $trainingsArray]);
+     }
 
-        // get the IDs of all youth and health trainings
-        $yah_training_ids = Training::where('program_id', 1)->pluck('id')->toArray();
 
-        // get the IDs of all trainings the user has taken
-        $user_training_ids = take::where('user_id', $user_id)->pluck('training_id')->toArray();
-
-        // get the IDs of all trainings the user has taken that are youth and health trainings
-        $yah_training_ids = array_intersect($yah_training_ids, $user_training_ids);
-
-        // get the total count of youth and health trainings the user has taken
-        $total_trainings_yah = count($yah_training_ids);
-
-        return response()->json([
-            'total_trainings_yah' => $total_trainings_yah
-        ]);
-
-
-    }
 
     function get_total_trainings_hvp($user_id) {
 
-        // Find the user
-        $existing_volunteer_user = volunteer_user::find($user_id);
-
-        if (!$existing_volunteer_user) {
-            return response()->json(
-                ['status' => 'error', 
-                'message' => 'User not found'
-            ]);
-        }
-
-        // get the IDs of all human values and principles trainings
-        $hvp_training_ids = training::where('program_id', 2)->pluck('id')->toArray();
-
-        // get the IDs of all trainings the user has taken
-        $user_training_ids = take::where('user_id', $user_id)->pluck('training_id')->toArray();
-
-        // get the IDs of all trainings the user has taken that are human values and principles trainings
-        $hvp_training_ids = array_intersect($hvp_training_ids, $user_training_ids);
-
-        // get the total count of human values and principles trainings the user has taken
-        $total_trainings_hvp = count($hvp_training_ids);
-
-        return response()->json([
-            'total_trainings_hvp' => $total_trainings_hvp
-        ]);
-
-
-    }
+            // Find the user
+               $existing_volunteer_user = volunteer_user::find($user_id);
+               if (!$existing_volunteer_user) {
+                return response()->json(['status' => 'error', 'message' => 'User not found']);
+                }
+        
+                // Get the user's takes
+                $user_takes = Take::where('user_id', $user_id)->get();
+        
+                // Get the training IDs of the user's takes
+                $training_ids = $user_takes->pluck('training_id')->toArray();
+        
+                // Get the trainings with the matching IDs
+                $trainings = Training::whereIn('id', $training_ids)->select('id', 'training_name', 'training_description', 'program_id')->get();
+                $hvp_trainings = $trainings->where('program_id', 2);
+                // If no trainings are found for the user
+                if ($trainings->isEmpty()) {
+                    return response()->json(['message' => 'No trainings found for this user']);
+                }
+                // Remove any fields that are not needed
+                $trainingsArray = $hvp_trainings->map(function ($hvp_trainings) { return ['id' => $hvp_trainings->id, 'training_name' => $hvp_trainings->training_name, 'training_description' => $hvp_trainings->training_description, 'program_id' => $hvp_trainings->program_id];});
+        
+                // Return the total count of trainings and the trainings themselves
+                return response()->json(['total_hvp_trainings' => count($trainingsArray), 'trainings' => $trainingsArray]);
+            }
+    
 
     function get_total_trainings_env($user_id) {
 
-        // Find the user
-        $existing_volunteer_user = volunteer_user::find($user_id);
+         // Find the user
+         $existing_volunteer_user = volunteer_user::find($user_id);
+         if (!$existing_volunteer_user) {
+          return response()->json(['status' => 'error', 'message' => 'User not found']);
+          }
+  
+          // Get the user's takes
+          $user_takes = Take::where('user_id', $user_id)->get();
+  
+          // Get the training IDs of the user's takes
+          $training_ids = $user_takes->pluck('training_id')->toArray();
+  
+          // Get the trainings with the matching IDs
+          $trainings = Training::whereIn('id', $training_ids)->select('id', 'training_name', 'training_description', 'program_id')->get();
+          $env_trainings = $trainings->where('program_id', 3);
+          // If no trainings are found for the user
+          if ($trainings->isEmpty()) {
+              return response()->json(['message' => 'No trainings found for this user']);
+          }
+          // Remove any fields that are not needed
+          $trainingsArray = $env_trainings->map(function ($env_trainings) { return ['id' => $env_trainings->id, 'training_name' => $env_trainings->training_name, 'training_description' => $env_trainings->training_description, 'program_id' => $env_trainings->program_id];});
+  
+          // Return the total count of trainings and the trainings themselves
+          return response()->json(['total_env_trainings' => count($trainingsArray), 'trainings' => $trainingsArray]);
+      }
 
-        if (!$existing_volunteer_user) {
-            return response()->json(
-                ['status' => 'error', 
-                'message' => 'User not found'
-            ]);
-        }
-
-        // get the IDs of all environment trainings
-        $env_training_ids = training::where('program_id', 3)->pluck('id')->toArray();
-
-        // get the IDs of all trainings the user has taken
-        $user_training_ids = take::where('user_id', $user_id)->pluck('training_id')->toArray();
-
-        // get the IDs of all trainings the user has taken that are environment trainings
-        $env_training_ids = array_intersect($env_training_ids, $user_training_ids);
-
-        // get the total count of environment trainings the user has taken
-        $total_trainings_env = count($env_training_ids);
-
-        return response()->json([
-            'total_trainings_env' => $total_trainings_env
-        ]);
-
-    }
-
-
-
+  
     function get_total_trainings_left($user_id) {
 
         // Find the user
