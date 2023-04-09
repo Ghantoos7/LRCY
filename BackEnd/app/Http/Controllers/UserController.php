@@ -38,7 +38,7 @@ class UserController extends Controller{
 
             'status' => $status
 
-        ], $existing_volunteer_user ? 200 : 404);
+        ]);
 
     }
 
@@ -253,25 +253,28 @@ class UserController extends Controller{
 
         // Retrieve the user information from the database
         $users = $user_id ? [volunteer_user::find($user_id)] : volunteer_user::all();
+    
         // If no user(s) found, return a 404 response
         if (count($users) === 0 || $users[0] === null) {
-            return response()->json([    
+            return response()->json([
                 'message' => 'User not found'
-        ]);
+            ]);
         }
     
         // Remove password field from user(s) information
         $usersArray = array_map(function($user) {
-        unset($user['password']);
-        return $user; 
-        }, 
+            unset($user['password']);
+            return $user;
+        }, collect($users)->toArray());
     
-        collect($users)->toArray()); // Return the user(s) information
+        // Return the user(s) information
         return response()->json($user_id ? ['user' => $usersArray[0]] : ['users' => $usersArray]);
-    }    
+
+    }   
     
     function get_total_trainings(Request $request, $user_id) {
-        // Find the user
+
+            // Find the user
            $existing_volunteer_user = volunteer_user::find($user_id);
            if (!$existing_volunteer_user) {
             return response()->json(['status' => 'error', 'message' => 'User not found']);
@@ -295,6 +298,7 @@ class UserController extends Controller{
     
             // Return the total count of trainings and the trainings themselves
             return response()->json(['total_trainings' => count($trainingsArray), 'trainings' => $trainingsArray]);
+            
         }
 
 
