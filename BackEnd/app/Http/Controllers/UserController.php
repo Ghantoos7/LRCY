@@ -579,7 +579,7 @@ class UserController extends Controller{
 
     }
 
-    function get_own_posts($user_id){
+    function get_own_posts($user_id) {
 
         // Find the user
         $existing_volunteer_user = volunteer_user::find($user_id);
@@ -607,5 +607,60 @@ class UserController extends Controller{
         ]);
 
     }   
+
+
+    function edit_profile(Request $request) {
+
+        // Get the user_id from the request
+        $user_id = $request->user_id;
+
+        // Find the authenticated user
+        $existing_volunteer_user = volunteer_user::find($user_id);
+    
+        // Check if the user exists in the database
+        if (!$existing_volunteer_user) {
+            return response()->json(['message' => 'User not found'],);
+        }
+    
+        // Validate the request data
+        $validator = Validator::make($request->all(), [
+            'user_profile_pic' => 'nullable|image|max:2048',
+            'username' => 'nullable|string|max:255|unique:volunteer_users,username,' . $existing_volunteer_user->id,
+            'user_bio' => 'nullable|string|max:500',
+        ]);
+    
+        // If validation fails, return a response with errors
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()]);
+        }
+    
+        // Update the user's profile picture if it was provided
+        if ($request->hasFile('user_profile_pic')) {
+            $image = $request->file('user_profile_pic');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $path = $image->storeAs('public/profile_pictures', $filename);
+            $existing_volunteer_user->user_profile_pic = $filename;
+        }
+    
+        // Update the user's username if it was provided
+        if ($request->has('username')) {
+            $existing_volunteer_user->username = $request->input('username');
+        }
+    
+        // Update the user's bio if it was provided
+        if ($request->has('user_bio')) {
+            $existing_volunteer_user->user_bio = $request->input('user_bio');
+        }
+    
+        // Save the user's changes to the database
+        $existing_volunteer_user->save();
+    
+        // Return a success response
+        return response()->json(['message' => 'Profile updated successfully']);
+    }
+    
+
+    
+
 
  }
