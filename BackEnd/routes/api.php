@@ -53,7 +53,7 @@ Route::group(["prefix" => "v0.1"], function(){
         Route::post("reply_comment", [PostController::class, "reply_comment"]);
         Route::post("like_comment", [PostController::class, "like_comment"]);
         Route::post("unlike_comment", [PostController::class, "unlike_comment"]);
-        Route::post("delete_comment/{user_id}", [PostController::class, "delete_comment"]);
+        Route::post("delete_comment", [PostController::class, "delete_comment"]);
         Route::post("delete_reply/{user_id}", [PostController::class, "delete_reply"]);
         Route::post("edit_comment/{user_id}", [PostController::class, "edit_comment"]);
         Route::post("edit_reply",[PostController::class, "edit_reply"]);

@@ -389,4 +389,40 @@ class PostController extends Controller
         return response()->json(['status' => $status, 'message' => $message]);
     
     }
+
+
+    function delete_comment(Request $request) {
+
+        // Validate the request inputs
+        $request->validate(['comment_id' => 'required', 'user_id' => 'required']);
+    
+        // Find the comment and user
+        $comment = Comment::find($request->input('comment_id'));
+        $user = volunteer_user::find($request->input('user_id'));
+    
+        // Return error response if comment or user not found
+        if (!$comment) return response()->json(['status' => 'error', 'message' => 'Comment not found']);
+        if (!$user) return response()->json(['status' => 'error', 'message' => 'User not found']);
+    
+        // Check if the user is the comment owner
+        if ($comment->user_id != $user->id) {
+            return response()->json(['status' => 'error', 'message' => 'You are not the owner of this comment']);
+        }
+    
+        // Get the post associated with the comment using the post_id in the comment
+        $post = Post::find($comment->post_id);
+    
+        // Delete the comment from the database
+        $comment_deleted = $comment->delete();
+    
+        // Decrement the post comment count and return a success/error response
+        $message = $comment_deleted ? ($post->decrement('comment_count') ? 'Comment deleted successfully' : 'Post comment count could not be updated') : 'Comment could not be deleted';
+        $status = $comment_deleted ? 'success' : 'error';
+    
+        return response()->json(['status' => $status, 'message' => $message]);
+    
+    }
+    
+
+
 }
