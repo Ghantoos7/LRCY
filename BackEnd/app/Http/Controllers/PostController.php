@@ -218,6 +218,7 @@ class PostController extends Controller
         
         // Return a success response with the paginated posts
         return response()->json(['status' => 'success', 'message' => 'Posts found', 'posts' => $posts]);
+
     }    
     
     
@@ -568,22 +569,22 @@ class PostController extends Controller
 
         // Find the comment
         $comment = Comment::find($comment_id);
-        
+    
         // Return error response if comment not found
         if (!$comment) return response()->json(['status' => 'error', 'message' => 'Comment not found']);
-        
+    
         // Get the replies associated with the comment
-        $replies = Reply::where('comment_id', $comment_id)->orderBy('created_at', 'desc')->get();
-        
+        $replies = Reply::where('comment_id', $comment_id)->orderBy('created_at', 'desc')->paginate(10);
+    
         // Remove the fields we don't want to return
-        foreach ($replies as $reply) {
+        $replies->transform(function ($reply) {
             unset($reply->field1, $reply->field2, $reply->created_at, $reply->updated_at);
-        }
-        
+            return $reply;
+        });
+    
         // Return the replies or an error response if no replies found
-        return (count($replies) === 0) ? response()->json(['status' => 'error', 'message' => 'No replies found for this comment']) : response()->json(['status' => 'success', 'replies' => $replies]);
-
-    }
+        return $replies->isEmpty() ? response()->json(['status' => 'error', 'message' => 'No replies found for this comment']) : response()->json(['status' => 'success', 'replies' => $replies]);
+    }    
 
 
     function get_post_likes($post_id) {
