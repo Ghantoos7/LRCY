@@ -20,7 +20,7 @@ export class SplashScreenPage implements OnInit {
 
   ionViewDidEnter() {
     setTimeout(() => {
-      this.router.navigateByUrl('/signin');
+      this.router.navigateByUrl('/sign-in');
     }, 3000); 
   }
 }
