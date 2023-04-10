@@ -357,8 +357,36 @@ class PostController extends Controller
         $status = $like_saved ? 'success' : 'error';
     
         return response()->json(['status' => $status, 'message' => $message]);
-    
 
     }
         
+
+    function unlike_comment(Request $request) {
+
+        // Validate the request inputs
+        $request->validate(['comment_id' => 'required', 'user_id' => 'required']);
+    
+        // Find the comment and user
+        $comment = Comment::find($request->input('comment_id'));
+        $user = volunteer_user::find($request->input('user_id'));
+    
+        // Return error response if comment or user not found
+        if (!$comment) return response()->json(['status' => 'error', 'message' => 'Comment not found']);
+        if (!$user) return response()->json(['status' => 'error', 'message' => 'User not found']);
+    
+        // Check if the user has already liked the comment
+        if (!Comment_like::where('comment_id', $comment->id)->where('user_id', $user->id)->first()) {
+            return response()->json(['status' => 'error', 'message' => 'You have not liked this comment']);
+        }
+    
+        // Delete the like from the database
+        $like_deleted = Comment_like::where('comment_id', $comment->id)->where('user_id', $user->id)->delete();
+    
+        // Decrement the comment like count and return a success/error response
+        $message = $like_deleted ? ($comment->decrement('comment_like_count') ? 'Comment unliked successfully' : 'Comment like count could not be updated') : 'Comment could not be unliked';
+        $status = $like_deleted ? 'success' : 'error';
+    
+        return response()->json(['status' => $status, 'message' => $message]);
+    
+    }
 }
