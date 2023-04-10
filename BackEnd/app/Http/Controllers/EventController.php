@@ -7,6 +7,7 @@ use App\Models\goal;
 use App\Models\event;
 use App\Models\announcement;
 use App\Models\volunteer_user;
+use App\Models\picture;
 
 
 class EventController extends Controller{
@@ -74,6 +75,39 @@ class EventController extends Controller{
 
         // Return the announcements
         return response()->json(['announcements' => $announcements]);
+    }
+
+
+
+    function get_event_pictures($event_id) {
+
+        // If no event id is provided, return an error message
+        $existing_event = Event::find($event_id);
+        if (!$existing_event) {
+            return response()->json([
+                'message' => 'Event not found'
+            ]);
+        }
+
+        // Retrieve the pictures of the event from the database
+        $pictures = Picture::where('event_id', $event_id)->get();
+
+        // If no pictures found, return an error message
+        if ($pictures->isEmpty()) {
+            return response()->json([
+                'message' => 'Pictures not found'
+            ]);
+        }
+
+        // Remove unnecessary fields from the pictures
+        $pictures = $pictures->map(function($picture) {
+            $pictureArray = $picture->toArray();
+            unset($pictureArray['field1'], $pictureArray['field2'], $pictureArray['created_at'], $pictureArray['updated_at']);
+            return $pictureArray;
+        });
+
+        // Return the pictures
+        return response()->json(['pictures' => $pictures]);
     }
 
 

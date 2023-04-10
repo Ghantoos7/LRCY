@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('is_responsibles', function (Blueprint $table) {
+        Schema::create('pictures', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
+            $table->string('picture');;
             $table->integer('event_id');
-            $table->string('role_name');
-            $table->string('field1')->nullable();
-            $table->string('field2')->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('is_responsibles');
+        Schema::dropIfExists('pictures');
     }
 };
