@@ -539,7 +539,30 @@ class PostController extends Controller
         $status = $reply_updated ? 'success' : 'error';
     
         return response()->json(['status' => $status, 'message' => $message]);
-        
+
     }
 
+
+    function get_comments($post_id) {
+            
+        // Find the post
+        $post = Post::find($post_id);
+        
+        // Return error response if post not found
+        if (!$post) return response()->json(['status' => 'error', 'message' => 'Post not found']);
+        
+        // Get the comments associated with the post
+        $comments = Comment::where('post_id', $post_id)->orderBy('created_at', 'desc')->get();
+        
+        // Remove the fields we don't want to return
+        foreach ($comments as $comment) {
+            unset($comment->field1, $comment->field2, $comment->created_at, $comment->updated_at);
+        }
+        
+        // Return the comments or an error response if no comments found
+        return (count($comments) === 0) ? response()->json(['status' => 'error', 'message' => 'No comments found for this post']) : response()->json(['status' => 'success', 'comments' => $comments]);
+
+    }
+
+    
 }
