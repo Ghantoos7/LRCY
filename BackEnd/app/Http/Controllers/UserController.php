@@ -260,21 +260,25 @@ class UserController extends Controller{
         if (count($users) === 0 || $users[0] === null) {
             return response()->json([    
                 'message' => 'User not found'
-        ]);
+            ]);
         }
     
         // Remove password field from user(s) information
-        $usersArray = array_map(function($user) {
-        unset($user['password'],$user['field1'],$user['field2'],$user['created_at'],$user['updated_at']);
-        return $user; 
-        }, 
+        $usersArray = collect($users)->map(function($user) {
+            unset($user['password'],$user['field1'],$user['field2'],$user['created_at'],$user['updated_at']);
+            return $user; 
+        })->toArray();
     
-        collect($users)->toArray()); // Return the user(s) information
+        // Return the user(s) information
         return response()->json($user_id ? ['user' => $usersArray[0]] : ['users' => $usersArray]);
+    
     }
+    
+    
         
     
     function get_trainings_info($user_id) {
+
         // Find the user
         $existing_volunteer_user = volunteer_user::find($user_id);
         if (!$existing_volunteer_user) {
@@ -343,11 +347,12 @@ class UserController extends Controller{
     
         // Return the total count of trainings, the trainings themselves, and the counts of trainings in each program
         return response()->json(['trainings' => $trainingsByProgram,'trainings_not_taken' => $trainingsNotTakenByProgram,'trainings not taken count' => $trainingsNotTakenCount,'program_counts' => $programCounts, ]);
+   
     }
     
 
-
     function get_events_organized($user_id) {
+
         // Find the user
         $existing_volunteer_user = volunteer_user::find($user_id);
     
@@ -400,36 +405,36 @@ class UserController extends Controller{
 
     function get_events_organized_count($user_id) {
                 
-                // Find the user
-                $existing_volunteer_user = volunteer_user::find($user_id);
+        // Find the user
+        $existing_volunteer_user = volunteer_user::find($user_id);
         
-                if (!$existing_volunteer_user) {
-                    return response()->json(
-                        ['status' => 'error', 
-                        'message' => 'User not found'
-                    ]);
-                }
-        
-                // Get the user's events
-                $events_responsible = is_responsible::where('user_id', $user_id)->get();
-    
-                // Get the event IDs of the user's events
-                $event_ids = $events_responsible->pluck('event_id')->toArray();
-    
-                // Get the events with the matching IDs
-                $events = Event::whereIn('id', $event_ids)->get();
-        
-                // If the user did not organize any events
-                if ($events->isEmpty()) {
-                    return response()->json([
-                        'message' => 'No events found for this user'
-                    ]);
-                }
-        
-                // Return the total count of events
-                return response()->json([
-                    'total_events' => count($events)
+        if (!$existing_volunteer_user) {
+            return response()->json(
+                ['status' => 'error', 
+                'message' => 'User not found'
                 ]);
+        }
+        
+        // Get the user's events
+        $events_responsible = is_responsible::where('user_id', $user_id)->get();
+    
+        // Get the event IDs of the user's events
+        $event_ids = $events_responsible->pluck('event_id')->toArray();
+    
+        // Get the events with the matching IDs
+        $events = Event::whereIn('id', $event_ids)->get();
+        
+        // If the user did not organize any events
+        if ($events->isEmpty()) {
+            return response()->json([
+                'message' => 'No events found for this user'
+            ]);
+        }
+        
+        // Return the total count of events
+        return response()->json([
+            'total_events' => count($events)
+        ]);
     
     }
 
@@ -518,7 +523,6 @@ class UserController extends Controller{
             'total_posts' => count($posts)
         ]);
 
-
     }
 
 
@@ -551,6 +555,7 @@ class UserController extends Controller{
 
     }
 
+
     function get_total_likes_received($user_id) {
             
             // Find the user
@@ -578,34 +583,41 @@ class UserController extends Controller{
 
     }
 
+
     function get_own_posts($user_id) {
 
         // Find the user
         $existing_volunteer_user = volunteer_user::find($user_id);
-
+    
         if (!$existing_volunteer_user) {
             return response()->json(
                 ['status' => 'error', 
                 'message' => 'User not found'
             ]);
         }
-
-        // Get the user's posts
-        $posts = Post::where('user_id', $user_id)->get();
-
+    
+        // Get the user's posts with pagination
+        $posts = Post::where('user_id', $user_id)->paginate(10);
+    
         // If the user did not post anything
         if ($posts->isEmpty()) {
             return response()->json([
                 'message' => 'No posts found for this user'
             ]);
         }
-
+    
+        // Remove the fields we don't want to return
+        foreach ($posts as $post) {
+            unset($post->field1, $post->field2, $post->created_at, $post->updated_at);
+        }
+    
         // Return the posts
         return response()->json([
-            'posts' => $posts
+            'posts' => $posts,
+            'total_posts' => $posts->total()
         ]);
-
-    }   
+    
+    }      
 
 
     function edit_profile(Request $request) {
