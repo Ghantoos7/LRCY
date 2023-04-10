@@ -161,5 +161,37 @@ class PostController extends Controller
     
     }
     
+
+    function get_posts($user_id = null) {
+
+        // If a user ID was provided, check if the user exists
+        if ($user_id) {
+            $user = volunteer_user::find($user_id);
+            
+            // If the user does not exist, return an error response
+            if (!$user) {
+                return response()->json(['status' => 'error', 'message' => 'User not found']);
+            }
+        }
+    
+        // Retrieve the posts for the specified user, or all posts if no user ID was provided
+        $posts = ($user_id) ? Post::where('user_id', $user_id)->get() : Post::all();
+        
+        // If no posts were found, return an error response
+        if ($posts->isEmpty()) {
+            return response()->json(['status' => 'error', 'message' => 'No posts found']);
+        }
+        
+        // Remove unwanted fields from each post
+        $posts->transform(function($post) {
+            unset($post->created_at, $post->updated_at, $post->field1, $post->field2);
+            return $post;
+        });
+        
+        // Return a success response with the posts
+        return response()->json(['status' => 'success', 'message' => 'Posts found', 'posts' => $posts]);
+
+    }
+    
     
 }
