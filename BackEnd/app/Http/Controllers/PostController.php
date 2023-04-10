@@ -190,7 +190,7 @@ class PostController extends Controller
     }
     
 
-    function get_posts($user_id = null) {
+    function get_posts($user_id = null, $page = 1, $per_page = 10) {
 
         // If a user ID was provided, check if the user exists
         if ($user_id) {
@@ -202,9 +202,18 @@ class PostController extends Controller
             }
         }
     
+        // Calculate the offset for the posts query
+        $offset = ($page - 1) * $per_page;
+    
         // Retrieve the posts for the specified user, or all posts if no user ID was provided
-        $posts = ($user_id) ? Post::where('user_id', $user_id)->get() : Post::all();
-        
+        $query = ($user_id) ? Post::where('user_id', $user_id) : Post::query();
+    
+        // Count the total number of posts for the specified user, or all posts if no user ID was provided
+        $total_count = $query->count();
+    
+        // Limit the number of posts returned based on the pagination parameters
+        $posts = $query->skip($offset)->take($per_page)->get();
+    
         // If no posts were found, return an error response
         if ($posts->isEmpty()) {
             return response()->json(['status' => 'error', 'message' => 'No posts found']);
@@ -215,9 +224,22 @@ class PostController extends Controller
             unset($post->created_at, $post->updated_at, $post->field1, $post->field2);
             return $post;
         });
-        
-        // Return a success response with the posts
-        return response()->json(['status' => 'success', 'message' => 'Posts found', 'posts' => $posts]);
+    
+        // Calculate the total number of pages based on the total number of posts and the pagination parameters
+        $total_pages = ceil($total_count / $per_page);
+    
+        // Return a success response with the posts and pagination metadata
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Posts found',
+            'posts' => $posts,
+            'pagination' => [
+                'current_page' => $page,
+                'per_page' => $per_page,
+                'total_count' => $total_count,
+                'total_pages' => $total_pages
+            ]
+        ]);
 
     }
     
