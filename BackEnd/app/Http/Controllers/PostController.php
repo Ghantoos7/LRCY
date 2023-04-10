@@ -514,4 +514,32 @@ class PostController extends Controller
     
     }
 
+
+    function edit_reply(Request $request) {
+        
+        // Validate the request inputs
+        $request->validate(['reply_id' => 'required', 'user_id' => 'required', 'reply_content' => 'required']);
+    
+        // Find the reply and user
+        $reply = Reply::find($request->input('reply_id'));
+        $user = volunteer_user::find($request->input('user_id'));
+    
+        // Return error response if reply or user not found
+        if (!$reply) return response()->json(['status' => 'error', 'message' => 'Reply not found']);
+        if (!$user) return response()->json(['status' => 'error', 'message' => 'User not found']);
+    
+        // Check if the user is the reply owner
+        if ($reply->user_id != $user->id) {
+            return response()->json(['status' => 'error', 'message' => 'You are not the owner of this reply']);
+        }
+    
+        // Update the reply and return a success/error response
+        $reply_updated = $reply->update(['reply_content' => $request->input('reply_content')]);
+        $message = $reply_updated ? 'Reply updated successfully' : 'Reply could not be updated';
+        $status = $reply_updated ? 'success' : 'error';
+    
+        return response()->json(['status' => $status, 'message' => $message]);
+        
+    }
+
 }
