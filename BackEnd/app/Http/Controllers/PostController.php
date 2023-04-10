@@ -9,6 +9,7 @@ use App\Models\Volunteer_user;
 use App\Models\Like;
 use App\Models\Comment;
 use App\Models\Reply;
+use App\Models\Comment_like;
 
 class PostController extends Controller
 {
@@ -295,36 +296,69 @@ class PostController extends Controller
     
 
     function reply_comment(Request $request) {
-            
-            // Validate the request inputs
-            $request->validate(['comment_id' => 'required', 'user_id' => 'required', 'reply_content' => 'required']);
-            
-            // Find the comment and user
-            $comment = Comment::find($request->input('comment_id'));
-            $user = volunteer_user::find($request->input('user_id'));
-            
-            // Return error response if comment or user not found
-            if (!$comment) return response()->json(['status' => 'error', 'message' => 'Comment not found']);
-            if (!$user) return response()->json(['status' => 'error', 'message' => 'User not found']);
-            
-            // Create a new reply instance with the current date
-            $reply = new Reply([
-                'comment_id' => $comment->id,
-                'user_id' => $user->id,
-                'reply_content' => $request->input('reply_content'),
-                'reply_date' => now()
-            ]);
-            
-            // Save the reply to the database
-            $reply_saved = $reply->save();
-            
-            // Increment the comment reply count and return a success/error response
-            $message = $reply_saved ? ($comment->increment('comment_reply_count') ? 'Reply posted successfully' : 'Comment reply count could not be updated') : 'Reply could not be posted';
-            $status = $reply_saved ? 'success' : 'error';
-            
-            return response()->json(['status' => $status, 'message' => $message]);
     
-        }
+        // Validate the request inputs
+        $request->validate(['comment_id' => 'required', 'user_id' => 'required', 'reply_content' => 'required']);
+        
+        // Find the comment and user
+        $comment = Comment::find($request->input('comment_id'));
+        $user = volunteer_user::find($request->input('user_id'));
+        
+        // Return error response if comment or user not found
+        if (!$comment) return response()->json(['status' => 'error', 'message' => 'Comment not found']);
+        if (!$user) return response()->json(['status' => 'error', 'message' => 'User not found']);
+        
+        // Create a new reply instance with the current date
+        $reply = new Reply([
+            'comment_id' => $comment->id,
+            'user_id' => $user->id,
+            'reply_content' => $request->input('reply_content'),
+            'reply_date' => now()
+        ]);
+        
+        // Save the reply to the database
+        $reply_saved = $reply->save();
+        
+        // Increment the comment reply count and return a success/error response
+        $message = $reply_saved ? ($comment->increment('comment_reply_count') ? 'Reply posted successfully' : 'Comment reply count could not be updated') : 'Reply could not be posted';
+        $status = $reply_saved ? 'success' : 'error';
+        
+        return response()->json(['status' => $status, 'message' => $message]);
+    
+    }
+    
+    
+    function like_comment(Request $request) {
 
+        // Validate the request inputs
+        $request->validate(['comment_id' => 'required', 'user_id' => 'required']);
+    
+        // Find the comment and user
+        $comment = Comment::find($request->input('comment_id'));
+        $user = volunteer_user::find($request->input('user_id'));
+    
+        // Return error response if comment or user not found
+        if (!$comment) return response()->json(['status' => 'error', 'message' => 'Comment not found']);
+        if (!$user) return response()->json(['status' => 'error', 'message' => 'User not found']);
+    
+        // Check if the user has already liked the comment
+        if (Comment_like::where('comment_id', $comment->id)->where('user_id', $user->id)->first()) {
+            return response()->json(['status' => 'error', 'message' => 'You have already liked this comment']);
+        }
+    
+        // Create a new comment like instance with default value for like_date
+        $like = new Comment_like(['comment_id' => $comment->id, 'user_id' => $user->id, 'like_date' => now()]);
+    
+        // Save the like to the database
+        $like_saved = $like->save();
+    
+        // Increment the comment like count and return a success/error response
+        $message = $like_saved ? ($comment->increment('comment_like_count') ? 'Comment liked successfully' : 'Comment like count could not be updated') : 'Comment could not be liked';
+        $status = $like_saved ? 'success' : 'error';
+    
+        return response()->json(['status' => $status, 'message' => $message]);
+    
+
+    }
         
 }
