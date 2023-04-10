@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Post_type;
 use App\Models\volunteer_user;
+use Illuminate\Support\Facades\Redis;
 
 class PostController extends Controller
 {
@@ -76,7 +77,50 @@ class PostController extends Controller
             'message' => 'Post created successfully',
             'post_id' => $post->id
         ]);
+
+    }
+    
+
+    function edit_post(Request $request) {
         
+        // Validate the request inputs
+        $request->validate([
+            'post_id' => 'required',
+            'post_caption' => 'required',
+        ]);
+    
+        // Get the post ID from the request
+        $post_id = $request->input('post_id');
+    
+        // Find the post with the given ID
+        $post = Post::find($post_id);
+    
+        // If the post is not found, return an error response
+        if (!$post) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Post not found'
+            ]);
+        }
+    
+        // Update the post caption
+        $post->post_caption = $request->input('post_caption');
+    
+        // Save the post to the database
+        if ($post->save()) {
+            // Return a success response
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Post updated successfully'
+            ]);
+        } else {
+            // Return an error response if post could not be saved
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Post could not be updated'
+            ]);
+        }
+
     }
     
     
