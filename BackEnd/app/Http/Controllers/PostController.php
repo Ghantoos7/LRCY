@@ -564,5 +564,25 @@ class PostController extends Controller
 
     }
 
-    
+
+    function get_replies($comment_id) {
+
+        // Find the comment
+        $comment = Comment::find($comment_id);
+        
+        // Return error response if comment not found
+        if (!$comment) return response()->json(['status' => 'error', 'message' => 'Comment not found']);
+        
+        // Get the replies associated with the comment
+        $replies = Reply::where('comment_id', $comment_id)->orderBy('created_at', 'desc')->get();
+        
+        // Remove the fields we don't want to return
+        foreach ($replies as $reply) {
+            unset($reply->field1, $reply->field2, $reply->created_at, $reply->updated_at);
+        }
+        
+        // Return the replies or an error response if no replies found
+        return (count($replies) === 0) ? response()->json(['status' => 'error', 'message' => 'No replies found for this comment']) : response()->json(['status' => 'success', 'replies' => $replies]);
+
+    }
 }

@@ -59,10 +59,9 @@ Route::group(["prefix" => "v0.1"], function(){
         Route::post("edit_reply",[PostController::class, "edit_reply"]);
         Route::get("get_comments/{post_id}", [PostController::class, "get_comments"]);
         Route::get("get_replies/{comment_id}", [PostController::class, "get_replies"]);
-        Route::get("get_likes/{post_id}", [PostController::class, "get_likes"]);
-        Route::get("get_comments_likes/{comment_id}", [PostController::class, "get_comments_likes"]);
+        
         Route::get("get_post_likes/{post_id}", [PostController::class, "get_post_likes"]);
-
+        Route::get("get_comments_likes/{comment_id}", [PostController::class, "get_comments_likes"]);
     });
 
 });
