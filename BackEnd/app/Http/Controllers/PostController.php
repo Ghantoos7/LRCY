@@ -227,6 +227,35 @@ class PostController extends Controller
     
     }
     
+
+    function unlike_post(Request $request) {
+        
+            // Validate the request inputs
+            $request->validate(['post_id' => 'required', 'user_id' => 'required']);
+        
+            // Find the post and user
+            $post = Post::find($request->input('post_id'));
+            $user = volunteer_user::find($request->input('user_id'));
+        
+            // Return error response if post or user not found
+            if (!$post) return response()->json(['status' => 'error', 'message' => 'Post not found']);
+            if (!$user) return response()->json(['status' => 'error', 'message' => 'User not found']);
+        
+            // Check if the user has already liked the post
+            if (!Like::where('post_id', $post->id)->where('user_id', $user->id)->first()) {
+                return response()->json(['status' => 'error', 'message' => 'You have not liked this post']);
+            }
+        
+            // Delete the like from the database
+            $like_deleted = Like::where('post_id', $post->id)->where('user_id', $user->id)->delete();
+        
+            // Decrement the post like count and return a success/error response
+            $message = $like_deleted ? ($post->decrement('like_count') ? 'Post unliked successfully' : 'Post like count could not be updated') : 'Post could not be unliked';
+            $status = $like_deleted ? 'success' : 'error';
+        
+            return response()->json(['status' => $status, 'message' => $message]);
+        
+    }
     
 
 
