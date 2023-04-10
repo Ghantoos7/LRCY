@@ -19,7 +19,7 @@ export const routes: Routes = [
   },
   
   {
-    path: 'signin',
+    path: 'sign-in',
     loadComponent: () => import('../app/pages/sign-in/sign-in.page').then(m => m.SignInPage)
   },
   {
@@ -38,6 +38,10 @@ export const routes: Routes = [
   {
     path: 'splashScreen',
     loadComponent: () => import('./pages/splash-screen/splash-screen.page').then( m => m.SplashScreenPage)
+  },
+  {
+    path: 'signup-details',
+    loadComponent: () => import('./pages/signup-details/signup-details.page').then( m => m.SignupDetailsPage)
   },
 
  
