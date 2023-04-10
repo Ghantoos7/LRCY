@@ -487,4 +487,31 @@ class PostController extends Controller
     }
 
 
+    function edit_comment(Request $request) {
+
+        // Validate the request inputs
+        $request->validate(['comment_id' => 'required', 'user_id' => 'required', 'comment_content' => 'required']);
+    
+        // Find the comment and user
+        $comment = Comment::find($request->input('comment_id'));
+        $user = volunteer_user::find($request->input('user_id'));
+    
+        // Return error response if comment or user not found
+        if (!$comment) return response()->json(['status' => 'error', 'message' => 'Comment not found']);
+        if (!$user) return response()->json(['status' => 'error', 'message' => 'User not found']);
+    
+        // Check if the user is the comment owner
+        if ($comment->user_id != $user->id) {
+            return response()->json(['status' => 'error', 'message' => 'You are not the owner of this comment']);
+        }
+    
+        // Update the comment and return a success/error response
+        $comment_updated = $comment->update(['comment_content' => $request->input('comment_content')]);
+        $message = $comment_updated ? 'Comment updated successfully' : 'Comment could not be updated';
+        $status = $comment_updated ? 'success' : 'error';
+    
+        return response()->json(['status' => $status, 'message' => $message]);
+    
+    }
+
 }
