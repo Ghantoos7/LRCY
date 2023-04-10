@@ -3,11 +3,29 @@
     height: 143px;
     position: relative;
     margin:0px auto;
-    top:160px;
+    top:100px;
     overflow:hidden;
+    display: flex;
         
     }
-    
+
+    ion-content {
+        --background: url('/assets/imgs/splash-bg.png') no-repeat center center fixed;
+        background-size: cover;
+      }
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+      }
+      
+
+    .logo{
+        height: 200px;
+        width: 200px;
+    }
     .fade-in {
       position: absolute;
       width: 100%;
