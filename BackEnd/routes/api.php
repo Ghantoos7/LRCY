@@ -49,7 +49,7 @@ Route::group(["prefix" => "v0.1"], function(){
         Route::get("get_posts/{post_id?}", [PostController::class, "get_posts"]);
         Route::post("like_post", [PostController::class, "like_post"]);
         Route::post("unlike_post", [PostController::class, "unlike_post"]);
-        Route::post("comment_post/{user_id}", [PostController::class, "comment_post"]);
+        Route::post("comment_post", [PostController::class, "comment_post"]);
         Route::post("reply/{user_id}", [PostController::class, "reply"]);
         Route::post("like_comment/{user_id}", [PostController::class, "like_comment"]);
         Route::post("unlike_comment/{user_id}", [PostController::class, "unlike_comment"]);

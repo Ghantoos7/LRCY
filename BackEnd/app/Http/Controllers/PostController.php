@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\Post_type;
 use App\Models\Volunteer_user;
 use App\Models\Like;
+use App\Models\Comment;
 
 class PostController extends Controller
 {
@@ -258,5 +259,37 @@ class PostController extends Controller
     }
     
 
+    function comment_post(Request $request) {
+            
+        // Validate the request inputs
+        $request->validate(['post_id' => 'required', 'user_id' => 'required', 'comment_content' => 'required']);
+        
+        // Find the post and user
+        $post = Post::find($request->input('post_id'));
+        $user = volunteer_user::find($request->input('user_id'));
+        
+        // Return error response if post or user not found
+        if (!$post) return response()->json(['status' => 'error', 'message' => 'Post not found']);
+        if (!$user) return response()->json(['status' => 'error', 'message' => 'User not found']);
+        
+        // Create a new comment instance with the current date
+        $comment = new Comment([
+            'post_id' => $post->id,
+            'user_id' => $user->id,
+            'comment_content' => $request->input('comment_content'),
+            'comment_date' => now(),
+            'comment_like_count' => 0
+        ]);
+        
+        // Save the comment to the database
+        $comment_saved = $comment->save();
+        
+        // Increment the post comment count and return a success/error response
+        $message = $comment_saved ? ($post->increment('comment_count') ? 'Comment posted successfully' : 'Post comment count could not be updated') : 'Comment could not be posted';
+        $status = $comment_saved ? 'success' : 'error';
+        
+        return response()->json(['status' => $status, 'message' => $message]);
+    }
+    
 
 }
