@@ -21,7 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
 Route::group(["prefix" => "v0.1"], function(){
 
     Route::group(["prefix" => "user"], function(){
@@ -61,7 +60,7 @@ Route::group(["prefix" => "v0.1"], function(){
         Route::get("get_comments/{post_id}", [PostController::class, "get_comments"]);
         Route::get("get_replies/{comment_id}", [PostController::class, "get_replies"]);
         Route::get("get_post_likes/{post_id}", [PostController::class, "get_post_likes"]);
-        Route::get("get_comments_likes/{comment_id}", [PostController::class, "get_comments_likes"]);
+        Route::get("get_comment_likes/{comment_id}", [PostController::class, "get_comment_likes"]);
     });
 
     Route::group(["prefix" => "event"], function(){

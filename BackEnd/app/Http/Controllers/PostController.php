@@ -202,8 +202,8 @@ class PostController extends Controller
             }
         }
     
-        // Retrieve the posts for the specified user, or all posts if no user ID was provided
-        $posts = ($user_id) ? Post::where('user_id', $user_id)->get() : Post::all();
+        // Retrieve the posts for the specified user, or all posts if no user ID was provided, paginated
+        $posts = ($user_id) ? Post::where('user_id', $user_id)->paginate(10) : Post::paginate(10);
         
         // If no posts were found, return an error response
         if ($posts->isEmpty()) {
@@ -216,10 +216,10 @@ class PostController extends Controller
             return $post;
         });
         
-        // Return a success response with the posts
+        // Return a success response with the paginated posts
         return response()->json(['status' => 'success', 'message' => 'Posts found', 'posts' => $posts]);
 
-    }
+    }    
     
     
     function like_post(Request $request) {
@@ -551,8 +551,8 @@ class PostController extends Controller
         // Return error response if post not found
         if (!$post) return response()->json(['status' => 'error', 'message' => 'Post not found']);
         
-        // Get the comments associated with the post
-        $comments = Comment::where('post_id', $post_id)->orderBy('created_at', 'desc')->get();
+        // Get the comments associated with the post, paginated
+        $comments = Comment::where('post_id', $post_id)->orderBy('created_at', 'desc')->paginate(10);
         
         // Remove the fields we don't want to return
         foreach ($comments as $comment) {
@@ -560,8 +560,8 @@ class PostController extends Controller
         }
         
         // Return the comments or an error response if no comments found
-        return (count($comments) === 0) ? response()->json(['status' => 'error', 'message' => 'No comments found for this post']) : response()->json(['status' => 'success', 'comments' => $comments]);
-
+        return $comments->isEmpty() ? response()->json(['status' => 'error', 'message' => 'No comments found for this post']) : response()->json(['status' => 'success', 'comments' => $comments]);
+    
     }
 
 
@@ -569,20 +569,66 @@ class PostController extends Controller
 
         // Find the comment
         $comment = Comment::find($comment_id);
+    
+        // Return error response if comment not found
+        if (!$comment) return response()->json(['status' => 'error', 'message' => 'Comment not found']);
+    
+        // Get the replies associated with the comment
+        $replies = Reply::where('comment_id', $comment_id)->orderBy('created_at', 'desc')->paginate(10);
+    
+        // Remove the fields we don't want to return
+        $replies->transform(function ($reply) {
+            unset($reply->field1, $reply->field2, $reply->created_at, $reply->updated_at);
+            return $reply;
+        });
+    
+        // Return the replies or an error response if no replies found
+        return $replies->isEmpty() ? response()->json(['status' => 'error', 'message' => 'No replies found for this comment']) : response()->json(['status' => 'success', 'replies' => $replies]);
+    }    
+
+
+    function get_post_likes($post_id) {
+
+        // Find the post
+        $post = Post::find($post_id);
+        
+        // Return error response if post not found
+        if (!$post) return response()->json(['status' => 'error', 'message' => 'Post not found']);
+        
+        // Get the likes associated with the post
+        $likes = Like::where('post_id', $post_id)->orderBy('created_at', 'desc')->get();
+        
+        // Remove the fields we don't want to return
+        foreach ($likes as $like) {
+            unset($like->field1, $like->field2, $like->created_at, $like->updated_at, $like->like_date);
+        }
+        
+        // Return the likes and the total like count or an error response if no likes found
+        return (count($likes) === 0) ? response()->json(['status' => 'error', 'message' => 'No likes found for this post']) : response()->json(['status' => 'success', 'likes' => $likes, 'total_likes' => count($likes)]);
+
+    }
+
+
+    function get_comment_likes($comment_id) {
+
+        // Find the comment
+        $comment = Comment::find($comment_id);
         
         // Return error response if comment not found
         if (!$comment) return response()->json(['status' => 'error', 'message' => 'Comment not found']);
         
-        // Get the replies associated with the comment
-        $replies = Reply::where('comment_id', $comment_id)->orderBy('created_at', 'desc')->get();
+        // Get the likes associated with the comment
+        $likes = Comment_like::where('comment_id', $comment_id)->orderBy('created_at', 'desc')->get();
         
         // Remove the fields we don't want to return
-        foreach ($replies as $reply) {
-            unset($reply->field1, $reply->field2, $reply->created_at, $reply->updated_at);
+        foreach ($likes as $like) {
+            unset($like->field1, $like->field2, $like->created_at, $like->updated_at, $like->like_date);
         }
         
-        // Return the replies or an error response if no replies found
-        return (count($replies) === 0) ? response()->json(['status' => 'error', 'message' => 'No replies found for this comment']) : response()->json(['status' => 'success', 'replies' => $replies]);
+        // Return the likes and the total like count or an error response if no likes found
+        return (count($likes) === 0) ? response()->json(['status' => 'error', 'message' => 'No likes found for this comment']) : response()->json(['status' => 'success', 'likes' => $likes, 'total_likes' => count($likes)]);
 
     }
+
+    
 }
