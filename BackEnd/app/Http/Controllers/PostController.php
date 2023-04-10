@@ -8,6 +8,7 @@ use App\Models\Post_type;
 use App\Models\Volunteer_user;
 use App\Models\Like;
 use App\Models\Comment;
+use App\Models\Reply;
 
 class PostController extends Controller
 {
@@ -278,7 +279,8 @@ class PostController extends Controller
             'user_id' => $user->id,
             'comment_content' => $request->input('comment_content'),
             'comment_date' => now(),
-            'comment_like_count' => 0
+            'comment_like_count' => 0,
+            'comment_reply_count' => 0
         ]);
         
         // Save the comment to the database
@@ -292,4 +294,37 @@ class PostController extends Controller
     }
     
 
+    function reply_comment(Request $request) {
+            
+            // Validate the request inputs
+            $request->validate(['comment_id' => 'required', 'user_id' => 'required', 'reply_content' => 'required']);
+            
+            // Find the comment and user
+            $comment = Comment::find($request->input('comment_id'));
+            $user = volunteer_user::find($request->input('user_id'));
+            
+            // Return error response if comment or user not found
+            if (!$comment) return response()->json(['status' => 'error', 'message' => 'Comment not found']);
+            if (!$user) return response()->json(['status' => 'error', 'message' => 'User not found']);
+            
+            // Create a new reply instance with the current date
+            $reply = new Reply([
+                'comment_id' => $comment->id,
+                'user_id' => $user->id,
+                'reply_content' => $request->input('reply_content'),
+                'reply_date' => now()
+            ]);
+            
+            // Save the reply to the database
+            $reply_saved = $reply->save();
+            
+            // Increment the comment reply count and return a success/error response
+            $message = $reply_saved ? ($comment->increment('comment_reply_count') ? 'Reply posted successfully' : 'Comment reply count could not be updated') : 'Reply could not be posted';
+            $status = $reply_saved ? 'success' : 'error';
+            
+            return response()->json(['status' => $status, 'message' => $message]);
+    
+        }
+
+        
 }
