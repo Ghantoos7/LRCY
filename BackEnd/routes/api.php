@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\EventController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +61,14 @@ Route::group(["prefix" => "v0.1"], function(){
         Route::get("get_replies/{comment_id}", [PostController::class, "get_replies"]);
         Route::get("get_post_likes/{post_id}", [PostController::class, "get_post_likes"]);
         Route::get("get_comment_likes/{comment_id}", [PostController::class, "get_comment_likes"]);
+    });
+
+    Route::group(["prefix" => "event"], function(){
+        Route::get("get_yearly_goals/{year?}", [EventController::class, "get_yearly_goals"]);
+        Route::get("get_event_info/{event_id?}", [EventController::class, "get_event_info"]);
+        Route::get("get_announcements", [EventController::class, "get_announcements"]);
+        Route::get("get_event_pictures/{event_id}", [EventController::class, "get_event_pictures"]);
+
     });
 
 });
