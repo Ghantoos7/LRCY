@@ -256,23 +256,26 @@ class UserController extends Controller{
 
         // Retrieve the user information from the database
         $users = $user_id ? [volunteer_user::find($user_id)] : volunteer_user::all();
+    
         // If no user(s) found, return a 404 response
         if (count($users) === 0 || $users[0] === null) {
             return response()->json([    
                 'message' => 'User not found'
-        ]);
+            ]);
         }
     
         // Remove password field from user(s) information
-        $usersArray = array_map(function($user) {
-        unset($user['password'],$user['field1'],$user['field2'],$user['created_at'],$user['updated_at']);
-        return $user; 
-        }, 
+        $usersArray = collect($users)->map(function($user) {
+            unset($user['password'],$user['field1'],$user['field2'],$user['created_at'],$user['updated_at']);
+            return $user; 
+        })->toArray();
     
-        collect($users)->toArray()); // Return the user(s) information
+        // Return the user(s) information
         return response()->json($user_id ? ['user' => $usersArray[0]] : ['users' => $usersArray]);
-
+    
     }
+    
+    
         
     
     function get_trainings_info($user_id) {

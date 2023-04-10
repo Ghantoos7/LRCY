@@ -30,9 +30,9 @@ Route::group(["prefix" => "v0.1"], function(){
         Route::post("recover_request", [UserController::class, "recover_request"]);
         Route::post("change_password", [UserController::class, "change_password"]);
         Route::post("edit_profile", [UserController::class, "edit_profile"]);
-        Route::get("get_user_info/{user_id?}", [UserController::class, "get_user_info"]);
-        Route::get("get_trainings_info/{user_id}", [UserController::class, "get_trainings_info"]); 
-        Route::get("get_events_organized/{user_id}", [UserController::class, "get_events_organized"]);
+        Route::get("get_user_info/{user_id?}", [UserController::class, "get_user_info"]); //
+        Route::get("get_trainings_info/{user_id}", [UserController::class, "get_trainings_info"]); //
+        Route::get("get_events_organized/{user_id}", [UserController::class, "get_events_organized"]); //
         Route::get("get_events_organized_count/{user_id}", [UserController::class, "get_events_organized_count"]);
         Route::get("get_total_volunteering_time/{user_id}", [UserController::class, "get_total_volunteering_time"]); 
         Route::get("get_completed_trainings_count/{user_id}", [UserController::class, "get_completed_trainings_count"]);
