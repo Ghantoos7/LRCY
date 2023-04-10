@@ -585,4 +585,26 @@ class PostController extends Controller
         return (count($replies) === 0) ? response()->json(['status' => 'error', 'message' => 'No replies found for this comment']) : response()->json(['status' => 'success', 'replies' => $replies]);
 
     }
+
+
+    function get_post_likes($post_id) {
+
+        // Find the post
+        $post = Post::find($post_id);
+        
+        // Return error response if post not found
+        if (!$post) return response()->json(['status' => 'error', 'message' => 'Post not found']);
+        
+        // Get the likes associated with the post
+        $likes = Like::where('post_id', $post_id)->orderBy('created_at', 'desc')->get();
+        
+        // Remove the fields we don't want to return
+        foreach ($likes as $like) {
+            unset($like->field1, $like->field2, $like->created_at, $like->updated_at, $like->like_date);
+        }
+        
+        // Return the likes and the total like count or an error response if no likes found
+        return (count($likes) === 0) ? response()->json(['status' => 'error', 'message' => 'No likes found for this post']) : response()->json(['status' => 'success', 'likes' => $likes, 'total_likes' => count($likes)]);
+
+    }
 }
