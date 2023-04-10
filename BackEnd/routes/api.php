@@ -66,7 +66,7 @@ Route::group(["prefix" => "v0.1"], function(){
 
     Route::group(["prefix" => "event"], function(){
         Route::get("get_yearly_goals/{year?}", [EventController::class, "get_yearly_goals"]);
-        Route::get("get_events/{event_id?}", [EventController::class, "get_events"]);
+        Route::get("get_event_info/{event_id?}", [EventController::class, "get_event_info"]);
         Route::get("get_announcements", [EventController::class, "get_announcements"]);
         Route::get("get_event_pictures/{event_id}", [EventController::class, "get_event_pictures"]);
 
