@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Post_type;
-use App\Models\volunteer_user;
+use App\Models\Volunteer_user;
+use App\Models\Like;
 
 class PostController extends Controller
 {
@@ -194,4 +195,39 @@ class PostController extends Controller
     }
     
     
+    function like_post(Request $request) {
+        
+        // Validate the request inputs
+        $request->validate(['post_id' => 'required', 'user_id' => 'required']);
+    
+        // Find the post and user
+        $post = Post::find($request->input('post_id'));
+        $user = volunteer_user::find($request->input('user_id'));
+    
+        // Return error response if post or user not found
+        if (!$post) return response()->json(['status' => 'error', 'message' => 'Post not found']);
+        if (!$user) return response()->json(['status' => 'error', 'message' => 'User not found']);
+    
+        // Check if the user has already liked the post
+        if (Like::where('post_id', $post->id)->where('user_id', $user->id)->first()) {
+            return response()->json(['status' => 'error', 'message' => 'You have already liked this post']);
+        }
+    
+        // Create a new like instance with default value for like_date
+        $like = new Like(['post_id' => $post->id, 'user_id' => $user->id, 'like_date' => now()]);
+    
+        // Save the like to the database
+        $like_saved = $like->save();
+    
+        // Increment the post like count and return a success/error response
+        $message = $like_saved ? ($post->increment('like_count') ? 'Post liked successfully' : 'Post like count could not be updated') : 'Post could not be liked';
+        $status = $like_saved ? 'success' : 'error';
+    
+        return response()->json(['status' => $status, 'message' => $message]);
+    
+    }
+    
+    
+
+
 }
