@@ -2,6 +2,10 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
+    path: '',
+    loadComponent: () => import('../app/pages/splash-screen/splash-screen.page').then(m => m.SplashScreenPage)
+  },
+  {
     path: 'gallery',
     loadChildren: () => import('../app/pages/gallery/gallery.routes').then((m) => m.routes),
   },
@@ -31,6 +35,11 @@ export const routes: Routes = [
     path: 'sign-up',
     loadComponent: () => import('./pages/sign-up/sign-up.page').then( m => m.SignUpPage)
   },
+  {
+    path: 'splashScreen',
+    loadComponent: () => import('./pages/splash-screen/splash-screen.page').then( m => m.SplashScreenPage)
+  },
+
  
 ];
 
