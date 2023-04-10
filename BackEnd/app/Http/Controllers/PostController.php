@@ -131,11 +131,15 @@ class PostController extends Controller
     
         // Validate the request inputs
         $request->validate([
-            'post_id' => 'required'
+            'post_id' => 'required',
+            'user_id' => 'required'
         ]);
     
         // Get the post ID from the request
         $post_id = $request->input('post_id');
+
+        // Get the user ID from the request
+        $user_id = $request->input('user_id');
     
         // Find the post with the given ID
         $post = Post::find($post_id);
@@ -148,8 +152,28 @@ class PostController extends Controller
             ]);
         }
     
+        // If the user ID from the request does not match the user ID of the post, return an error response
+        if ($post->user_id !== $user_id) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'You are not authorized to delete this post'
+            ]);
+        }
+
         // Delete the post
         if ($post->delete()) {
+            // Delete all likes for the post
+            Like::where('post_id', $post_id)->delete();
+
+            // Delete all replies on the comments for the post
+            Reply::whereIn('comment_id', Comment::where('post_id', $post_id)->pluck('id'))->delete();
+
+            // Delete all comment likes for the post
+            Comment_like::whereIn('comment_id', Comment::where('post_id', $post_id)->pluck('id'))->delete();
+
+            // Delete all comments for the post
+            Comment::where('post_id', $post_id)->delete();
+
             // Return a success response
             return response()->json([
                 'status' => 'success',
@@ -414,6 +438,12 @@ class PostController extends Controller
     
         // Delete the comment from the database
         $comment_deleted = $comment->delete();
+
+        // Delete all the likes associated with the comment
+        Comment_like::where('comment_id', $comment->id)->delete();
+
+        // Delete all the replies associated with the comment
+        Reply::where('comment_id', $comment->id)->delete();
     
         // Decrement the post comment count and return a success/error response
         $message = $comment_deleted ? ($post->decrement('comment_count') ? 'Comment deleted successfully' : 'Post comment count could not be updated') : 'Comment could not be deleted';
@@ -423,6 +453,38 @@ class PostController extends Controller
     
     }
     
+
+    function delete_reply(Request $request) {
+
+        // Validate the request inputs
+        $request->validate(['reply_id' => 'required', 'user_id' => 'required']);
+    
+        // Find the reply and user
+        $reply = Reply::find($request->input('reply_id'));
+        $user = volunteer_user::find($request->input('user_id'));
+    
+        // Return error response if reply or user not found
+        if (!$reply) return response()->json(['status' => 'error', 'message' => 'Reply not found']);
+        if (!$user) return response()->json(['status' => 'error', 'message' => 'User not found']);
+    
+        // Check if the user is the reply owner
+        if ($reply->user_id != $user->id) {
+            return response()->json(['status' => 'error', 'message' => 'You are not the owner of this reply']);
+        }
+    
+        // Get the comment associated with the reply using the comment_id in the reply
+        $comment = Comment::find($reply->comment_id);
+    
+        // Delete the reply from the database
+        $reply_deleted = $reply->delete();
+    
+        // Decrement the comment reply count and return a success/error response
+        $message = $reply_deleted ? ($comment->decrement('comment_reply_count') ? 'Reply deleted successfully' : 'Comment reply count could not be updated') : 'Reply could not be deleted';
+        $status = $reply_deleted ? 'success' : 'error';
+    
+        return response()->json(['status' => $status, 'message' => $message]);
+
+    }
 
 
 }
