@@ -20,6 +20,9 @@ return new class extends Migration
             $table->string('event_title');
             $table->integer('event_type_id');
             $table->integer('program_id');
+            $table->binary('budget_sheet');
+            $table->binary('proposal');
+            $table->binary('meeting_minute')->nullable();
             $table->string('field1')->nullable();
             $table->string('field2')->nullable();
             $table->timestamps();

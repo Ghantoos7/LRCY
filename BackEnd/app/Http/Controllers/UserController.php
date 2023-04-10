@@ -256,7 +256,7 @@ class UserController extends Controller{
 
         // Retrieve the user information from the database
         $users = $user_id ? [volunteer_user::find($user_id)] : volunteer_user::all();
-        // If no user(s) found, return a 404 response
+        // If no user(s) found, return an error message
         if (count($users) === 0 || $users[0] === null) {
             return response()->json([    
                 'message' => 'User not found'
