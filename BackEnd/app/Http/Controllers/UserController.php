@@ -393,6 +393,8 @@ class UserController extends Controller{
             $event['role_name'] = is_responsible::where('event_id', $event['id'])->where('user_id', $user_id)->first()->role_name;
             return $event;
         });
+        
+        $events = $events->sortByDesc('event_date');
     
         // If the user did not organize any events
         if ($events->isEmpty()) {
