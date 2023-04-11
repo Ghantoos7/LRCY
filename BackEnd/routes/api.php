@@ -30,9 +30,9 @@ Route::group(["prefix" => "v0.1"], function(){
         Route::post("recover_request", [UserController::class, "recover_request"]);
         Route::post("change_password", [UserController::class, "change_password"]);
         Route::post("edit_profile", [UserController::class, "edit_profile"]);
-        Route::get("get_user_info/{user_id?}", [UserController::class, "get_user_info"]); //
-        Route::get("get_trainings_info/{user_id}", [UserController::class, "get_trainings_info"]); //
-        Route::get("get_events_organized/{user_id}", [UserController::class, "get_events_organized"]); //
+        Route::get("get_user_info/{user_id?}", [UserController::class, "get_user_info"]);
+        Route::get("get_trainings_info/{user_id}", [UserController::class, "get_trainings_info"]);
+        Route::get("get_events_organized/{user_id}", [UserController::class, "get_events_organized"]);
         Route::get("get_events_organized_count/{user_id}", [UserController::class, "get_events_organized_count"]);
         Route::get("get_total_volunteering_time/{user_id}", [UserController::class, "get_total_volunteering_time"]); 
         Route::get("get_completed_trainings_count/{user_id}", [UserController::class, "get_completed_trainings_count"]);
@@ -69,6 +69,23 @@ Route::group(["prefix" => "v0.1"], function(){
         Route::get("get_announcements", [EventController::class, "get_announcements"]);
         Route::get("get_event_pictures/{event_id}", [EventController::class, "get_event_pictures"]);
 
+    });
+
+    Route::group(["prefix" => "admin"], function(){
+        Route::post("login", [AdminController::class, "admin_login"]);
+        Route::post("accept_request", [AdminController::class, "accept_request"]);
+        Route::post("decline_request", [AdminController::class, "decline_request"]);
+        Route::post("add_user", [AdminController::class, "add_user"]);
+        Route::post("delete_user", [AdminController::class, "delete_user"]);
+        Route::post("promote_user", [AdminController::class, "promote_user"]);
+        Route::post("demote_user", [AdminController::class, "demote_user"]);
+        Route::post("send_announcement", [AdminController::class, "send_announcement"]);
+        Route::post("delete_announcement", [AdminController::class, "delete_announcement"]);
+        Route::post("edit_announcement", [AdminController::class, "edit_announcement"]);
+        Route::post("add_event", [AdminController::class, "add_event"]);
+        Route::post("edit_event", [AdminController::class, "edit_event"]);
+        Route::post("delete_event", [AdminController::class, "delete_event"]); 
+        Route::post("set_yearly_goal", [AdminController::class, "set_yearly_goal"]);
     });
 
 });

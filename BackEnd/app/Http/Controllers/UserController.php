@@ -290,6 +290,7 @@ class UserController extends Controller{
                 'total' => $users->total()
             ]
         ]);
+        
     }
     
 
