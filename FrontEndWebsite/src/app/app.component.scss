@@ -15,16 +15,43 @@ ion-content{
     box-sizing: border-box;
   }
 
-  .center-y {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    text-align: center; /* Center text content within the right div */
-  }
 
   p{
     color:white;
     font-family: 'Cairo', sans-serif;
     font-weight: bolder;
+    font-size: larger;
+  }
+
+  .center-y {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+  }
+  
+  .rounded-button1 {
+    margin-bottom: 10px; 
+    padding: 10px 20px;
+    border-radius: 10px; 
+    background-color: #B11433; 
+    color: #fff; 
+    border: none;
+    font-family: 'Cairo', sans-serif;
+    font-weight: bolder;
+    font-size: large;
+  }
+
+  .rounded-button2 {
+    margin-bottom: 10px; 
+    padding: 10px 20px;
+    border-radius: 10px; 
+    background-color: #45579A; 
+    color: #fff; 
+    border: none;
+    font-family: 'Cairo', sans-serif;
+    font-weight: bolder;
+    font-size: large;
   }
