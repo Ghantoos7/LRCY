@@ -25,6 +25,8 @@
     "@capacitor/keyboard": "4.1.1",
     "@capacitor/status-bar": "4.1.1",
     "@ionic/angular": "^7.0.0",
+    "@types/cordova-plugin-splashscreen": "^4.0.2",
+    "cordova-plugin-splashscreen": "^6.0.2",
     "ionicons": "^7.0.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
