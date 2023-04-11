@@ -30,7 +30,7 @@ Route::group(["prefix" => "v0.1"], function(){
         Route::post("recover_request", [UserController::class, "recover_request"]);
         Route::post("change_password", [UserController::class, "change_password"]);
         Route::post("edit_profile", [UserController::class, "edit_profile"]);
-        Route::get("get_user_info/{user_id?}", [UserController::class, "get_user_info"]); //
+        Route::get("get_user_info/{user_id?}", [UserController::class, "get_user_info"]); // age
         Route::get("get_trainings_info/{user_id}", [UserController::class, "get_trainings_info"]); //
         Route::get("get_events_organized/{user_id}", [UserController::class, "get_events_organized"]); //
         Route::get("get_events_organized_count/{user_id}", [UserController::class, "get_events_organized_count"]);
@@ -70,8 +70,5 @@ Route::group(["prefix" => "v0.1"], function(){
         Route::get("get_event_pictures/{event_id}", [EventController::class, "get_event_pictures"]);
 
     });
-
-    
-    
 
 });
