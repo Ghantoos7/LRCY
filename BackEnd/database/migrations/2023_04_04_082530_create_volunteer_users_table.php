@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer("gender");
             $table->integer("user_type_id");
             $table->integer('user_age');
+            $table->date('user_dob');
             $table->string('user_position');
             $table->boolean('is_registered');
             $table->boolean('is_active');
@@ -27,7 +28,7 @@ return new class extends Migration
             $table->date('user_end_date')->nullable();
             $table->date('user_start_date');
             $table->string('password');
-            $table->string('username');
+            $table->string('username')-nullable();
             $table->string('user_bio')->nullable();
             $table->string('field1')->nullable();
             $table->string('field2')->nullable();
