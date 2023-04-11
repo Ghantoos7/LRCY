@@ -255,14 +255,9 @@ class UserController extends Controller{
     function get_user_info($user_id = null) {
         
         // Retrieve the user information from the database
-<<<<<<< Updated upstream
-        $users = $user_id ? [volunteer_user::find($user_id)] : volunteer_user::all();
-        // If no user(s) found, return an error message
-=======
         $users = $user_id ? [volunteer_user::find($user_id)] : volunteer_user::paginate(10);
     
         // If no user(s) found, return a 404 response
->>>>>>> Stashed changes
         if (count($users) === 0 || $users[0] === null) {
             return response()->json([    
                 'status' => 'error', 'message' => 'User not found'
