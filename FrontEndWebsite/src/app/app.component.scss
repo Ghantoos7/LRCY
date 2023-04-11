@@ -2,3 +2,29 @@ ion-content{
     --background: url('../assets/imgs/bg.png') no-repeat center center fixed;
     --background-size: cover;
 }
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .left-div,
+  .right-div {
+    flex-basis: 50%;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  .center-y {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center; /* Center text content within the right div */
+  }
+
+  p{
+    color:white;
+    font-family: 'Cairo', sans-serif;
+    font-weight: bolder;
+  }
