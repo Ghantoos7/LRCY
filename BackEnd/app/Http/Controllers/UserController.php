@@ -253,30 +253,51 @@ class UserController extends Controller{
 
     
     function get_user_info($user_id = null) {
-
+        
         // Retrieve the user information from the database
+<<<<<<< Updated upstream
         $users = $user_id ? [volunteer_user::find($user_id)] : volunteer_user::all();
         // If no user(s) found, return an error message
+=======
+        $users = $user_id ? [volunteer_user::find($user_id)] : volunteer_user::paginate(10);
+    
+        // If no user(s) found, return a 404 response
+>>>>>>> Stashed changes
         if (count($users) === 0 || $users[0] === null) {
             return response()->json([    
-                'message' => 'User not found'
+                'status' => 'error', 'message' => 'User not found'
             ]);
         }
     
-        // Remove password field from user(s) information
-        $usersArray = collect($users)->map(function($user) {
-            unset($user['password'],$user['field1'],$user['field2'],$user['created_at'],$user['updated_at']);
-            return $user; 
-        })->toArray();
+        // Remove specified fields (password, field1, field2, created_at, and updated_at) from user(s) information using unset() and handle case where user_id is specified (i.e. return a single user object instead of an array of user objects)
+        $usersArray = [];
+        foreach ($users as $user) {
+            unset($user->password);
+            unset($user->field1);
+            unset($user->field2);
+            unset($user->created_at);
+            unset($user->updated_at);
+            $usersArray[] = $user;
+        }
     
-        // Return the user(s) information
-        return response()->json($user_id ? ['user' => $usersArray[0]] : ['users' => $usersArray]);
-    
+        // Return the user(s) information and pagination links
+        return response()->json($user_id ? ['user' => $usersArray[0]] : [
+            'status' => 'success',
+            'users' => $usersArray,
+            'links' => [
+                'first_page_url' => $users->url(1),
+                'last_page_url' => $users->url($users->lastPage()),
+                'prev_page_url' => $users->previousPageUrl(),
+                'next_page_url' => $users->nextPageUrl(),
+                'current_page' => $users->currentPage(),
+                'last_page' => $users->lastPage(),
+                'per_page' => $users->perPage(),
+                'total' => $users->total()
+            ]
+        ]);
     }
     
-    
-        
-    
+
     function get_trainings_info($user_id) {
 
         // Find the user
