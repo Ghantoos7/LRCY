@@ -199,5 +199,35 @@ class AdminController extends Controller
     }
     
 
+    function edit_user(Request $request) {
+
+        try {
+            $user = Volunteer_user::where('id', $request->input('user_id'))->first();
+
+            if (!$user) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'User not found'
+                ], 404);
+            }
+
+            $fillableFields = ['first_name', 'last_name', 'is_active', 'user_start_date', 'user_end_date', 'branch_id', 'user_position', 'user_type_id'];
+
+            $user->fill($request->only($fillableFields));
+
+            $user->save();
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'User updated successfully'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'An error occurred while updating the user',
+                'error' => $e->getMessage()
+            ]);
+        }
+}
 
 }
