@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\volunteer_user;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use App\Models\login_attempt;
+use App\Models\Branch;
 
 class AdminController extends Controller
 {
@@ -36,67 +38,64 @@ class AdminController extends Controller
     }
 
 
-    function admin_login(Request $credentials) {
-        
-        $check_user = volunteer_user::where("organization_id", $credentials->organization_id)->first();
+    function admin_login(Request $request) {
 
-        // Validates the request
-        $credentials->validate([
-            "organization_id" => "required",
-            "password" => "required",
+        $request->validate([
+            'organization_id' => 'required',
+            'password' => 'required',
         ]);
-
-        // Checks if the user exists in the database
-        if(!$check_user) {
+    
+        // Finds the user in the database
+        $user = volunteer_user::where('organization_id', $request->organization_id)->first();
+    
+        if(!$user) {
             return response()->json([
-                "status" => "User not found",
+                'status' => 'User not found',
             ]);
         }
     
-        // Checks if the user is an admin (user_type_id = 1)
-        if($check_user->user_type_id != 1){
+        if($user->user_type_id !== 1){
             return response()->json([
-                "status" => "Permission denied",
+                'status' => 'Permission denied',
             ]);
         }
-
+    
         // Checks if the password is valid
-        $errors = $this->validatePassword($credentials->password);
+        $errors = $this->validatePassword($request->password);
         if (count($errors) > 0) {
             return response()->json([
-                "status" => $errors,
+                'status' => $errors,
             ]);
         }
-
+    
         // Checks if the user has exceeded the maximum number of login attempts
-        if ($this->hasExceededLoginAttempts($credentials->organization_id)) {
+        if ($this->hasExceededLoginAttempts($request->organization_id)) {
             return response()->json([
-                "status" => "Too many failed login attempts",
+                'status' => 'Too many failed login attempts',
             ]);
         }
-
+    
         // Checks if the password needs to be rehashed
-        if (Hash::needsRehash($check_user->password)) {
-            $check_user->password = Hash::make($credentials->password);
-            $check_user->save();
+        if (Hash::needsRehash($user->password)) {
+            $user->password = Hash::make($request->password);
+            $user->save();
         }
     
         // Checks if the password is correct
-        if(Hash::check($credentials->password, $check_user->password)){
-            $this->resetLoginAttempts($credentials->organization_id);
+        if(Hash::check($request->password, $user->password)){
+            $this->resetLoginAttempts($request->organization_id);
             return response()->json([
-                "status" => $check_user
+                'status' => $user
             ]);
         }
         else{
             // Adds a failed login attempt to the database if the user has inputted the wrong password
-            $this->addFailedLoginAttempt($credentials->organization_id);
+            $this->addFailedLoginAttempt($request->organization_id);
             return response()->json([
-                "status" => "Invalid credentials",
+                'status' => 'Invalid credentials',
             ]);
         }
-    
-    }
+    }    
 
 
     // Adds a failed login attempt to the database if the user has inputted the wrong password
@@ -122,6 +121,68 @@ class AdminController extends Controller
     private function resetLoginAttempts($organization_id) {
         login_attempt::where('user_id', '=', $organization_id)->delete();
     }
+
+
+    function add_user(Request $request) {
+        
+        $validator = Validator::make($request->all(), [
+            "first_name" => "required|string",
+            "last_name" => "required|string",
+            "organization_id" => "required|integer",
+            "date_of_birth" => "required|date",
+            "position" => "required|string",
+            "gender" => "required|string",
+            "branch" => "required|string",
+            "user_type_id" => "required|integer|in:0,1",
+            "status" => "required|string",
+            "start_date" => "required|date",
+        ]);
+    
+        if ($validator->fails()) {
+            return response()->json([
+                "status" => "Validation failed",
+                "errors" => $validator->errors()
+            ]);
+        }
+    
+        $branch = Branch::where('branch_name', $request->input('branch'))->first();
+    
+        if (!$branch) {
+            return response()->json([
+                "status" => "Branch not found",
+            ]);
+        }
+    
+        try {
+            $user = volunteer_user::create([
+                'first_name' => $request->input('first_name'),
+                'last_name' => $request->input('last_name'),
+                'organization_id' => $request->input('organization_id'),
+                'date_of_birth' => $request->input('date_of_birth'),
+                'position' => $request->input('position'),
+                'gender' => $request->input('gender'),
+                'branch_id' => $branch->id,
+                'user_type_id' => $request->input('user_type_id'),
+                'status' => $request->input('status'),
+                'start_date' => $request->input('start_date'),
+                'user_age' => Carbon::parse($request->input('date_of_birth'))->age,
+                'is_registered' => 0,
+                'is_active' => ($request->input('status') == 'active') ? 1 : 0,
+                'password' => Hash::make('default_password')
+            ]);
+    
+            return response()->json([
+                "status" => "User added successfully",
+                "user" => $user
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                "status" => "User could not be added",
+                "error" => $e->getMessage()
+            ]);
+        }
+    }
+    
 
 
 }

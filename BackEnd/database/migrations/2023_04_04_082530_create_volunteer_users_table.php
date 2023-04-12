@@ -28,7 +28,7 @@ return new class extends Migration
             $table->date('user_end_date')->nullable();
             $table->date('user_start_date');
             $table->string('password');
-            $table->string('username')-nullable();
+            $table->string('username')->nullable();
             $table->string('user_bio')->nullable();
             $table->string('field1')->nullable();
             $table->string('field2')->nullable();

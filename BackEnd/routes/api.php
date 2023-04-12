@@ -74,11 +74,11 @@ Route::group(["prefix" => "v0.1"], function(){
 
      Route::group(["prefix" => "admin"], function(){
         Route::post("login", [AdminController::class, "admin_login"]);
-        Route::post("accept_request", [AdminController::class, "accept_request"]);
-        Route::post("decline_request", [AdminController::class, "decline_request"]);
         Route::post("add_user", [AdminController::class, "add_user"]);
         Route::post("edit_user", [AdminController::class, "edit_user"]);
         Route::post("delete_user", [AdminController::class, "delete_user"]);
+        Route::post("accept_request", [AdminController::class, "accept_request"]);
+        Route::post("decline_request", [AdminController::class, "decline_request"]);
         Route::post("send_announcement", [AdminController::class, "send_announcement"]);
         Route::post("delete_announcement", [AdminController::class, "delete_announcement"]);
         Route::post("edit_announcement", [AdminController::class, "edit_announcement"]);
