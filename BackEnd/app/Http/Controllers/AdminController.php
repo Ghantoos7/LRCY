@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\login_attempt;
 use App\Models\Branch;
 use App\Models\Recover_request;
+use App\Models\Announcement;
 
 class AdminController extends Controller
 {
@@ -326,5 +327,51 @@ class AdminController extends Controller
             'status' => 'success',
             'message' => 'Recover request declined successfully'
         ]);
+
+    }
+
+
+    function send_announcement(Request $request) {
+
+        // Validate the request
+        $request->validate([
+            'announcement_content' => 'required|string',
+            'admin_id' => 'required|integer',
+            'importance_level' => 'required|integer'
+        ]);
+
+        // Get the admin user based on the provided admin ID
+        $admin = volunteer_user::where('id', $request->input('admin_id'))->first();
+
+        // Check if the admin user exists
+        if (!$admin) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Admin user not found'
+            ]);
+        }
+
+        // Check if the admin user is an admin
+        if ($admin->user_type_id != 1) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'User is not an admin'
+            ]);
+        }
+
+        // Create the announcement
+        $announcement = Announcement::create([
+            'announcement_content' => $request->input('announcement_content'),
+            'admin_id' => $request->input('admin_id'),
+            'importance_level' => $request->input('importance_level'),
+            'announcement_date' => Carbon::now()
+        ]);
+
+        // Return a success response
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Announcement sent successfully'
+        ]);
+
     }
 }
