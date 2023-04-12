@@ -374,4 +374,65 @@ class AdminController extends Controller
         ]);
 
     }
+
+
+    function delete_announcement(Request $request) {
+
+        // Validate the request
+        $request->validate([
+            'announcement_id' => 'required|integer',
+            'admin_id' => 'required|integer'
+        ]);
+
+        // Get the announcement based on the provided announcement ID
+        $announcement = Announcement::where('id', $request->input('announcement_id'))->first();
+
+        // Check if the announcement exists
+        if (!$announcement) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Announcement not found'
+            ]);
+        }
+
+        // Get the admin user based on the provided admin ID
+        $admin = volunteer_user::where('id', $request->input('admin_id'))->first();
+
+        // Check if the admin user exists
+        if (!$admin) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'User not found'
+            ]);
+        }
+
+        // Check if the admin user is an admin
+        if ($admin->user_type_id != 1) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'User is not an admin'
+            ]);
+        }
+
+        // Check if the admin user is the one who sent the announcement
+        if ($admin->id != $announcement->admin_id) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'User is not the one who sent the announcement'
+            ]);
+        }
+
+        // Delete the announcement
+        $announcement->delete();
+
+        // Return a success response
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Announcement deleted successfully'
+        ]);
+
+    }
+
+
+    
 }
