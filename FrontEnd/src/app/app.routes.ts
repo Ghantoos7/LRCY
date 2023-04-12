@@ -31,7 +31,6 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/announcements/announcements.page').then( m => m.AnnouncementsPage)
   },
   {
-  
     path: 'sign-up',
     loadComponent: () => import('./pages/sign-up/sign-up.page').then( m => m.SignUpPage)
   },
@@ -47,7 +46,10 @@ export const routes: Routes = [
     path: 'recover-password',
     loadComponent: () => import('./pages/recover-password/recover-password.page').then( m => m.RecoverPasswordPage)
   },
+  {
+    path: 'new-password',
+    loadComponent: () => import('./pages/new-password/new-password.page').then( m => m.NewPasswordPage)
+  },
 
- 
 ];
 
