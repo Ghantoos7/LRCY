@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Models\login_attempt;
 use App\Models\Branch;
+use App\Models\Recover_request;
 
 class AdminController extends Controller
 {
@@ -230,7 +231,7 @@ class AdminController extends Controller
         }
     }
 
-    
+
     function delete_user(Request $request) {
         try {
             $user = Volunteer_user::where('id', $request->input('user_id'))->first();
@@ -257,4 +258,41 @@ class AdminController extends Controller
         }
     }
 
+
+    public function accept_request(Request $request)
+{
+    // Validate the request
+    $request->validate([
+        'request_id' => 'required|integer'
+    ]);
+
+    // Get the recover request based on the provided request ID
+    $recoverRequest = Recover_request::where('id', $request->input('request_id'))->first();
+
+    // Check if the recover request exists
+    if (!$recoverRequest) {
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Recover request not found'
+        ]);
+    }
+
+    // Check if the request has already been accepted
+    if ($recoverRequest->request_status == 1) {
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Recover request has already been accepted'
+        ]);
+    }
+
+    // Update the request status to accepted
+    $recoverRequest->request_status = 1;
+    $recoverRequest->save();
+
+    // Return a success response
+    return response()->json([
+        'status' => 'success',
+        'message' => 'Recover request accepted successfully'
+    ]);
+}
 }
