@@ -228,6 +228,33 @@ class AdminController extends Controller
                 'error' => $e->getMessage()
             ]);
         }
-}
+    }
+
+    
+    function delete_user(Request $request) {
+        try {
+            $user = Volunteer_user::where('id', $request->input('user_id'))->first();
+
+            if (!$user) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'User not found'
+                ], 404);
+            }
+
+            $user->delete();
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'User deleted successfully'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'An error occurred while deleting the user',
+                'error' => $e->getMessage()
+            ]);
+        }
+    }
 
 }
