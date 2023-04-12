@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,8 +79,6 @@ Route::group(["prefix" => "v0.1"], function(){
         Route::post("add_user", [AdminController::class, "add_user"]);
         Route::post("edit_user", [AdminController::class, "edit_user"]);
         Route::post("delete_user", [AdminController::class, "delete_user"]);
-        Route::post("promote_user", [AdminController::class, "promote_user"]);
-        Route::post("demote_user", [AdminController::class, "demote_user"]);
         Route::post("send_announcement", [AdminController::class, "send_announcement"]);
         Route::post("delete_announcement", [AdminController::class, "delete_announcement"]);
         Route::post("edit_announcement", [AdminController::class, "edit_announcement"]);
