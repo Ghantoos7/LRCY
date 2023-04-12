@@ -222,10 +222,27 @@ class UserController extends Controller{
 
         // Validate the request
         $validator = Validator::make($request->all(), [
-            'organization_id' => 'required',
+            'user_id' => 'required',
             'password' => 'required',
             'confirm_password' => 'required|same:password'
         ]);
+
+        // Check this user's recover request,  If it is false(0) then return an error response stating that it has not yet been accepted. If it is true(1) then continue with the password change. If it is null, then return an error response stating that the user has not submitted a request.
+        $existing_request = recover_request::where('user_id', '=', $request->input('user_id'))->first();
+
+        if (!$existing_request) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'User has not submitted a password recovery request'
+            ]);
+        }
+
+        if ($existing_request->request_status === 0) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Password recovery request has not been accepted'
+            ]);
+        }
 
         // Validate password
         $password_errors = $this->validatePassword($request->input('password'));
@@ -243,10 +260,10 @@ class UserController extends Controller{
         }
 
         // Retrieve a volunteer user record from the database based on the `organization_id` input parameter
-        $existing_volunteer_user = volunteer_user::where('organization_id', '=', $request->input('organization_id'))->first();
+        $existing_volunteer_user = volunteer_user::where('id', '=', $request->input('user_id'))->first();
 
         // Check if the user exists and is registered. If yes, update the password and return a success response. If no, return an error response.
-        return $existing_volunteer_user && $existing_volunteer_user->is_registered ? response()->json(['status' => $existing_volunteer_user->password = Hash::make($request->input('password')) ? 'success' : 'error', 'message' => $existing_volunteer_user->password = Hash::make($request->input('password')) ? 'Password changed successfully' : 'Failed to update password']) : response()->json(['status' => 'error', 'message' => $existing_volunteer_user ? 'User is not registered' : 'Organization ID not found']);
+        return $existing_volunteer_user && $existing_volunteer_user->is_registered ? response()->json(['status' => $existing_volunteer_user->password = Hash::make($request->input('password')) ? 'success' : 'error', 'message' => $existing_volunteer_user->password = Hash::make($request->input('password')) ? 'Password changed successfully' : 'Failed to update password']) : response()->json(['status' => 'error', 'message' => $existing_volunteer_user ? 'User is not registered' : 'User not found']);
             
     }
 
