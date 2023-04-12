@@ -145,11 +145,25 @@ class AdminController extends Controller
             ]);
         }
     
+        // check gender input(male:0,female:1,other:2) and convert to integer
+        $genderInput = $request->input('gender');
+        if ($genderInput === 'male') {
+            $gender = 0;
+        } else if ($genderInput === 'female') {
+            $gender = 1;
+        } else if ($genderInput === 'other') {
+            $gender = 2;
+        } else {
+            return response()->json([
+                "status" => "Invalid gender input"
+            ]);
+        }
+
         $branch = Branch::where('branch_name', $request->input('branch'))->first();
     
         if (!$branch) {
             return response()->json([
-                "status" => "Branch not found",
+                "status" => "Branch not found"
             ]);
         }
     
@@ -159,16 +173,17 @@ class AdminController extends Controller
                 'last_name' => $request->input('last_name'),
                 'organization_id' => $request->input('organization_id'),
                 'date_of_birth' => $request->input('date_of_birth'),
-                'position' => $request->input('position'),
-                'gender' => $request->input('gender'),
+                'user_position' => $request->input('position'),
+                'gender' => $gender,
                 'branch_id' => $branch->id,
                 'user_type_id' => $request->input('user_type_id'),
                 'status' => $request->input('status'),
-                'start_date' => $request->input('start_date'),
+                'user_start_date' => $request->input('start_date'),
                 'user_age' => Carbon::parse($request->input('date_of_birth'))->age,
                 'is_registered' => 0,
                 'is_active' => ($request->input('status') == 'active') ? 1 : 0,
-                'password' => Hash::make('default_password')
+                'password' => Hash::make('default_password'),
+                'username' => $request->input('first_name') . $request->input('last_name')
             ]);
     
             return response()->json([
