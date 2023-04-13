@@ -11,6 +11,8 @@ use App\Models\login_attempt;
 use App\Models\Branch;
 use App\Models\Recover_request;
 use App\Models\Announcement;
+use App\Models\event;
+use App\Models\is_responsible;
 
 class AdminController extends Controller
 {
@@ -210,7 +212,7 @@ class AdminController extends Controller
                 return response()->json([
                     'status' => 'error',
                     'message' => 'User not found'
-                ], 404);
+                ]);
             }
 
             $fillableFields = ['first_name', 'last_name', 'is_active', 'user_start_date', 'user_end_date', 'branch_id', 'user_position', 'user_type_id'];
@@ -500,5 +502,140 @@ class AdminController extends Controller
         ]);
 
     }
+
+    public function addEvent(Request $request)
+    {
+        // validate the request
+
+        $validator = Validator::make($request->all(), [
+            'event_main_picture' => 'required|string',
+            'event_description' => 'required|string',
+            'event_location' => 'required|string',
+            'event_date' => 'required|date',
+            'event_title' => 'required|string',
+            'event_type_id' => 'required|integer',
+            'budget_sheet' => 'required|string',
+            'proposal' => 'required|string',
+            'meeting_minute' => 'nullable|string',
+            'responsibles' => 'required|array',
+            'responsibles.*.user_id' => 'required|integer',
+            'responsibles.*.role_name' => 'required|string',
+        ]);
+
+        // 
+        
+        // checks if validation worked
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Validation failed',
+                'errors' => $validator->errors()
+            ]);
+        }
+        
+        // try catch block to handle the exception and add the event
+
+        try {
+            // Create the event
+            $event = Event::create([
+                'event_main_picture' => $request->input('event_main_picture'),
+                'event_description' => $request->input('event_description'),
+                'event_location' => $request->input('event_location'),
+                'event_date' => $request->input('event_date'),
+                'event_title' => $request->input('event_title'),
+                'event_type_id' => $request->input('event_type_id'),
+                'program_id' => $request->input('program_id'),
+                'budget_sheet' => $request->input('budget_sheet'),
+                'proposal' => $request->input('proposal'),
+                'meeting_minute' => $request->input('meeting_minute'),
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Error creating event'
+            ]);
+        }
+
+       // adds the array of responsible people to the is responsible table
+        foreach ($request->input('responsibles') as $responsible) {
+            try {
+                // Create the responsible
+                $is_responsible = is_responsible::create([
+                    'user_id' => $responsible['user_id'],
+                    'event_id' => $event->id,
+                    'role_name' => $responsible['role_name'],
+                ]);
+            } catch (\Exception $e) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Error creating responsible'
+                ]);
+            }
+        }
+       
+
+        // Return a response indicating success
+        return response()->json(['message' => 'Event created successfully']);
+    }
+
+
+
+    public function editEvent(Request $request)
+    {
+        try {
+            // Find the event by event_id
+            $event = Event::where('id', $request->input('event_id'))->first();
+    
+            if (!$event) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Event not found'
+                ]);
+            }
+    
+            // Update event details from the request
+            $fillableFields = [
+                'event_main_picture',
+                'event_description',
+                'event_location',
+                'event_date',
+                'event_title',
+                'event_type_id',
+                'budget_sheet',
+                'proposal',
+                'meeting_minute'
+            ];
+            $event->fill($request->only($fillableFields));
+            $event->save();
+    
+            // Update responsible people for the event
+            $responsibles = $request->input('responsibles', []);
+    
+            // Delete existing responsible people from is_responsible table
+            is_responsible::where('event_id', $event->event_id)->delete();
+    
+            // Add new responsible people to is_responsible table
+            foreach ($responsibles as $responsible) {
+                Is_responsible::create([
+                    'event_id' => $event->id,
+                    'user_id' => $responsible['user_id'],
+                    'role_name' => $responsible['role_name']
+                ]);
+            }
+    
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Event updated successfully'
+            ]);
+            
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'An error occurred while updating the event',
+                'error' => $e->getMessage()
+            ]);
+        }
+    }
+    
 
 }
