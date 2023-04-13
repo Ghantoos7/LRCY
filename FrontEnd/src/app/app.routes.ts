@@ -49,7 +49,11 @@ export const routes: Routes = [
   {
     path: 'new-password',
     loadComponent: () => import('./pages/new-password/new-password.page').then( m => m.NewPasswordPage)
+  },  {
+    path: 'pending-request',
+    loadComponent: () => import('./pages/pending-request/pending-request.page').then( m => m.PendingRequestPage)
   },
+
 
 ];
 
