@@ -198,7 +198,7 @@ class UserController extends Controller{
 
     
 
-    function recover_request(Request $request) {
+    function recoverRequest(Request $request) {
 
         // Get organization ID from request input
         $organization_id = $request->input('organization_id');
@@ -218,7 +218,7 @@ class UserController extends Controller{
     }
     
 
-    function change_password(Request $request) {
+    function changePassword(Request $request) {
 
         // Validate the request
         $validator = Validator::make($request->all(), [
@@ -268,7 +268,7 @@ class UserController extends Controller{
     }
 
     
-    function get_user_info($user_id = null) {
+    function getUserInfo($user_id = null) {
         
         // Retrieve the user information from the database
         $users = $user_id ? [volunteer_user::find($user_id)] : volunteer_user::paginate(10);
@@ -310,7 +310,7 @@ class UserController extends Controller{
     }
     
 
-    function get_trainings_info($user_id) {
+    function getTrainingsInfo($user_id) {
 
         // Find the user
         $existing_volunteer_user = volunteer_user::find($user_id);
@@ -384,7 +384,7 @@ class UserController extends Controller{
     }
     
 
-    function get_events_organized($user_id) {
+    function getEventsOrganized($user_id) {
 
         // Find the user
         $existing_volunteer_user = volunteer_user::find($user_id);
@@ -438,7 +438,7 @@ class UserController extends Controller{
     }
     
 
-    function get_events_organized_count($user_id) {
+    function getEventsOrganizedCount($user_id) {
                 
         // Find the user
         $existing_volunteer_user = volunteer_user::find($user_id);
@@ -474,7 +474,7 @@ class UserController extends Controller{
     }
 
 
-    function get_total_volunteering_time($user_id) {
+    function getTotalVolunteeringTime($user_id) {
 
         // Find the user
         $existing_volunteer_user = volunteer_user::find($user_id);
@@ -502,7 +502,7 @@ class UserController extends Controller{
     }
 
 
-    function get_completed_trainings_count($user_id) {
+    function getCompletedTrainingsCount($user_id) {
                     
         // Find the user
         $existing_volunteer_user = volunteer_user::find($user_id);
@@ -531,7 +531,7 @@ class UserController extends Controller{
     }
 
 
-    function get_posts_count($user_id) {
+    function getPostsCount($user_id) {
 
         // Find the user
         $existing_volunteer_user = volunteer_user::find($user_id);
@@ -561,7 +561,7 @@ class UserController extends Controller{
     }
 
 
-    function get_comments_count($user_id) {
+    function getCommentsCount($user_id) {
 
         // Find the user
         $existing_volunteer_user = volunteer_user::find($user_id);
@@ -591,7 +591,7 @@ class UserController extends Controller{
     }
 
 
-    function get_total_likes_received($user_id) {
+    function getTotalLikesReceived($user_id) {
             
             // Find the user
             $existing_volunteer_user = volunteer_user::find($user_id);
@@ -619,7 +619,7 @@ class UserController extends Controller{
     }
 
 
-    function get_own_posts($user_id) {
+    function getOwnPosts($user_id) {
 
         // Find the user
         $existing_volunteer_user = volunteer_user::find($user_id);
@@ -655,7 +655,7 @@ class UserController extends Controller{
     }      
 
 
-    function edit_profile(Request $request) {
+    function editProfile(Request $request) {
 
         // Get the user_id from the request
         $user_id = $request->user_id;

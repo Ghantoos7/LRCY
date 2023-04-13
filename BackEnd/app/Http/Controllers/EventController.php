@@ -14,15 +14,17 @@ class EventController extends Controller{
     //
 
     // Gets yearly goals and return them grouped based on program id
-    public function get_yearly_goals(){
+    public function getYearlyGoals(){
+
         $year = date('Y');
         $goals = goal::select('goal_description', 'goal_name', 'program_id', 'goal_status', 'number_completed', 'goal_year', 'event_type_id', 'goal_deadline')->where('goal_year', $year)->get();
         $goals = $goals->groupBy('program_id');
         return response()->json($goals);
+
     }
     
 
-    function get_event_info($event_id = null) {
+    function getEventInfo($event_id = null) {
     
         // Retrieve the event information from the database
         $events = $event_id ? [Event::find($event_id)] : Event::all();
@@ -45,10 +47,12 @@ class EventController extends Controller{
 
         // Return the event(s) information grouped by program_id
         return response()->json($event_id ? ['event' => $eventsArray->first()] : ['events' => $eventsArray]);
+    
     }
 
 
-    function get_announcements() {
+    function getAnnouncements() {
+
         // Retrieve the announcements from the database and return them in descending order of creation date (newest first) and paginate them
         $announcements = Announcement::orderBy('announcement_date', 'desc')->paginate(5);
     
@@ -58,6 +62,7 @@ class EventController extends Controller{
                 'message' => 'Announcements not found'
             ]);
         }
+
         // Transform the announcements to include the announcer's name and profile picture
         $announcements = $announcements->map(function($announcement) {
             $announcementArray = $announcement->toArray();
@@ -75,11 +80,12 @@ class EventController extends Controller{
 
         // Return the announcements
         return response()->json(['announcements' => $announcements]);
+    
     }
 
 
 
-    function get_event_pictures($event_id) {
+    function getEventPictures($event_id) {
 
         // If no event id is provided, return an error message
         $existing_event = Event::find($event_id);
@@ -108,6 +114,7 @@ class EventController extends Controller{
 
         // Return the pictures
         return response()->json(['pictures' => $pictures]);
+   
     }
 
 

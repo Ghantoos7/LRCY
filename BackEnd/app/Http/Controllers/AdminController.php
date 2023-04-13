@@ -40,7 +40,7 @@ class AdminController extends Controller
     }
 
 
-    function admin_login(Request $request) {
+    function adminLogin(Request $request) {
 
         $request->validate([
             'organization_id' => 'required',
@@ -125,7 +125,7 @@ class AdminController extends Controller
     }
 
 
-    function add_user(Request $request) {
+    function addUser(Request $request) {
         
         $validator = Validator::make($request->all(), [
             "first_name" => "required|string",
@@ -201,7 +201,7 @@ class AdminController extends Controller
     }
     
 
-    function edit_user(Request $request) {
+    function editUser(Request $request) {
 
         try {
             $user = Volunteer_user::where('id', $request->input('user_id'))->first();
@@ -233,7 +233,7 @@ class AdminController extends Controller
     }
 
 
-    function delete_user(Request $request) {
+    function deleteUser(Request $request) {
 
         try {
             $user = Volunteer_user::where('id', $request->input('user_id'))->first();
@@ -262,7 +262,7 @@ class AdminController extends Controller
     }
 
 
-    function accept_request(Request $request) {
+    function acceptRequest(Request $request) {
 
         // Validate the request
         $request->validate([
@@ -301,7 +301,7 @@ class AdminController extends Controller
     }
 
 
-    function decline_request(Request $request) {
+    function declineRequest(Request $request) {
 
         // Validate the request
         $request->validate([
@@ -331,7 +331,7 @@ class AdminController extends Controller
     }
 
 
-    function send_announcement(Request $request) {
+    function sendAnnouncement(Request $request) {
 
         // Validate the request
         $request->validate([
@@ -376,7 +376,7 @@ class AdminController extends Controller
     }
 
 
-    function delete_announcement(Request $request) {
+    function deleteAnnouncement(Request $request) {
 
         // Validate the request
         $request->validate([
@@ -434,7 +434,7 @@ class AdminController extends Controller
     }
 
 
-    function edit_announcement(Request $request) {
+    function editAnnouncement(Request $request) {
 
         // Validate the request
         $request->validate([

@@ -15,7 +15,7 @@ class PostController extends Controller
 {
 
 
-    function create_post(Request $request) {
+    function createPost(Request $request) {
 
         // Validate the request inputs.
         $request->validate([
@@ -84,7 +84,7 @@ class PostController extends Controller
     }
     
 
-    function edit_post(Request $request) {
+    function editPost(Request $request) {
 
         // Validate the request inputs
         $request->validate([
@@ -127,7 +127,7 @@ class PostController extends Controller
     }
     
     
-    function delete_post(Request $request) {
+    function deletePost(Request $request) {
     
         // Validate the request inputs
         $request->validate([
@@ -190,7 +190,7 @@ class PostController extends Controller
     }
     
 
-    function get_posts($user_id = null) {
+    function getPosts($user_id = null) {
 
         // If a user ID was provided, check if the user exists
         if ($user_id) {
@@ -222,7 +222,7 @@ class PostController extends Controller
     }    
     
     
-    function like_post(Request $request) {
+    function likePost(Request $request) {
         
         // Validate the request inputs
         $request->validate(['post_id' => 'required', 'user_id' => 'required']);
@@ -255,7 +255,7 @@ class PostController extends Controller
     }
     
 
-    function unlike_post(Request $request) {
+    function unlikePost(Request $request) {
         
             // Validate the request inputs
             $request->validate(['post_id' => 'required', 'user_id' => 'required']);
@@ -285,7 +285,7 @@ class PostController extends Controller
     }
     
 
-    function comment_post(Request $request) {
+    function commentPost(Request $request) {
             
         // Validate the request inputs
         $request->validate(['post_id' => 'required', 'user_id' => 'required', 'comment_content' => 'required']);
@@ -319,7 +319,7 @@ class PostController extends Controller
     }
     
 
-    function reply_comment(Request $request) {
+    function replyComment(Request $request) {
     
         // Validate the request inputs
         $request->validate(['comment_id' => 'required', 'user_id' => 'required', 'reply_content' => 'required']);
@@ -352,7 +352,7 @@ class PostController extends Controller
     }
     
     
-    function like_comment(Request $request) {
+    function likeComment(Request $request) {
 
         // Validate the request inputs
         $request->validate(['comment_id' => 'required', 'user_id' => 'required']);
@@ -385,7 +385,7 @@ class PostController extends Controller
     }
         
 
-    function unlike_comment(Request $request) {
+    function unlikeComment(Request $request) {
 
         // Validate the request inputs
         $request->validate(['comment_id' => 'required', 'user_id' => 'required']);
@@ -415,7 +415,7 @@ class PostController extends Controller
     }
 
 
-    function delete_comment(Request $request) {
+    function deleteComment(Request $request) {
 
         // Validate the request inputs
         $request->validate(['comment_id' => 'required', 'user_id' => 'required']);
@@ -454,7 +454,7 @@ class PostController extends Controller
     }
     
 
-    function delete_reply(Request $request) {
+    function deleteReply(Request $request) {
 
         // Validate the request inputs
         $request->validate(['reply_id' => 'required', 'user_id' => 'required']);
@@ -487,7 +487,7 @@ class PostController extends Controller
     }
 
 
-    function edit_comment(Request $request) {
+    function editComment(Request $request) {
 
         // Validate the request inputs
         $request->validate(['comment_id' => 'required', 'user_id' => 'required', 'comment_content' => 'required']);
@@ -515,7 +515,7 @@ class PostController extends Controller
     }
 
 
-    function edit_reply(Request $request) {
+    function editReply(Request $request) {
         
         // Validate the request inputs
         $request->validate(['reply_id' => 'required', 'user_id' => 'required', 'reply_content' => 'required']);
@@ -543,7 +543,7 @@ class PostController extends Controller
     }
 
 
-    function get_comments($post_id) {
+    function getComments($post_id) {
             
         // Find the post
         $post = Post::find($post_id);
@@ -565,7 +565,7 @@ class PostController extends Controller
     }
 
 
-    function get_replies($comment_id) {
+    function getReplies($comment_id) {
 
         // Find the comment
         $comment = Comment::find($comment_id);
@@ -587,7 +587,7 @@ class PostController extends Controller
     }    
 
 
-    function get_post_likes($post_id) {
+    function getPostLikes($post_id) {
 
         // Find the post
         $post = Post::find($post_id);
@@ -609,7 +609,7 @@ class PostController extends Controller
     }    
 
 
-    function get_comment_likes($comment_id) {
+    function getCommentLikes($comment_id) {
 
         // Find the comment
         $comment = Comment::find($comment_id);
