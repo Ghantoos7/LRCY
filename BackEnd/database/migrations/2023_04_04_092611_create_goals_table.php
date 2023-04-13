@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('program_id');
             $table->boolean('goal_status');
             $table->integer('number_completed');
+            $table->integer('number_to_complete');
             $table->integer('goal_year');
             $table->integer('event_type_id');
             $table->date('goal_deadline');

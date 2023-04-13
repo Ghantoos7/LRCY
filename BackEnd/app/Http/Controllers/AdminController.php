@@ -504,8 +504,7 @@ class AdminController extends Controller
 
     }
 
-    public function addEvent(Request $request)
-    {
+    public function addEvent(Request $request) {
         // validate the request
 
         $validator = Validator::make($request->all(), [
@@ -522,8 +521,6 @@ class AdminController extends Controller
             'responsibles.*.user_id' => 'required|integer',
             'responsibles.*.role_name' => 'required|string',
         ]);
-
-        // 
         
         // checks if validation worked
         if ($validator->fails()) {
@@ -574,29 +571,27 @@ class AdminController extends Controller
             }
         }
 
-        // in the goals table, increment all rows that have the sa,e program id and event type id as the event that was just created
+        // in the goals table, increment all rows that have the same program id and event type id as the event that was just created
         $goals = Goal::where('program_id', $event->program_id)->where('event_type_id', $event->event_type_id)->get();
         foreach ($goals as $goal) {
-            $goal->number_completed += 1;
-            $goal->save();
+            if (!$this->isGoalComplete($goal)){
+                $goal->number_completed = $goal->number_completed + 1;
+                $goal->save();
+            }   
+            
         }
-
-        
-
-
-       
-
         // Return a response indicating success
         return response()->json(['message' => 'Event created successfully']);
     }
 
 
     
-    public function editEvent(Request $request)
-    {
+    public function editEvent(Request $request)  {
+
         try {
             // Find the event by event_id
             $event = Event::where('id', $request->input('event_id'))->first();
+            $temp_event = $event;
     
             if (!$event) {
                 return response()->json([
@@ -634,7 +629,25 @@ class AdminController extends Controller
                     'role_name' => $responsible['role_name']
                 ]);
             }
-    
+            
+            // remove a complete goal counter if the event is edited
+             $goals = Goal::where('program_id', $temp_event->program_id)->where('event_type_id', $temp_event->event_type_id)->get();
+             foreach ($goals as $goal) {
+                     $goal->number_completed -= 1;
+                     $goal->save();
+                 }   
+                 
+             
+             // adds a complete goal counter if the event is edited
+             $goals = Goal::where('program_id', $event->program_id)->where('event_type_id', $event->event_type_id)->get();
+             foreach ($goals as $goal) {
+                 if (!$this->isGoalComplete($goal)){
+                     $goal->number_completed += 1;
+                     $goal->save();
+                 }   
+                     
+            }    
+
             return response()->json([
                 'status' => 'success',
                 'message' => 'Event updated successfully'
@@ -648,6 +661,7 @@ class AdminController extends Controller
             ]);
         }
     }
+
     
 
     public function deleteEvent(Request $request)
@@ -679,5 +693,73 @@ class AdminController extends Controller
             ]);
         }
     }
+
+    private function isGoalComplete($goal) {
+ 
+    // checks if the numbers completed is now equal to the number of events_to_complete
+        if ($goal->number_completed >= $goal->number_to_complete) {
+            $goal->number_completed = $goal->number_to_complete + 1;
+            $goal->goal_status = 1;
+            $goal->save();
+            return true;
+        } else {
+            return false;
+        }
+
+
+    }
+
+
+
+    public function setYearlyGoal(Request $request)
+    {
+        
+        // Validate the request with the data type
+        $validator = Validator::make($request->all(), [
+            'goal_name' => 'required|string',
+            'goal_description' => 'required|string',
+            'program_id' => 'required|integer',
+            'number_to_complete' => 'required|integer',
+            'goal_year' => 'required|integer',
+            'event_type_id' => 'required|integer',
+            'goal_deadline' => 'required|date',
+        ]);
+
+        // Check if the validation fails
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Validation failed',
+                'errors' => $validator->errors()
+            ]);
+        }        
+
+
+        try {
+            // Create the goal
+            $goal = Goal::create([
+                'goal_name' => $request->input('goal_name'),
+                'goal_description' => $request->input('goal_description'),
+                'program_id' => $request->input('program_id'),
+                'goal_status' => 0,
+                'number_to_complete' => $request->input('number_to_complete'),
+                'number_completed' => 0,
+                'goal_year' => $request->input('goal_year'),
+                'event_type_id' => $request->input('event_type_id'),
+                'goal_deadline' => $request->input('goal_deadline'),
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Error creating goal',
+                'error' => $e->getMessage()
+            ]);
+        }
+
+        // Return a response indicating success
+        return response()->json(['message' => 'Goal created successfully']);
+    }
+
+
 
 }

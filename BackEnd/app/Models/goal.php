@@ -15,6 +15,7 @@ class goal extends Model
         'goal_description',
         'program_id',
         'goal_status',
+        'number_to_complete',
         'number_completed',
         'goal_year',
         'event_type_id',
