@@ -13,6 +13,7 @@ use App\Models\Recover_request;
 use App\Models\Announcement;
 use App\Models\event;
 use App\Models\is_responsible;
+use App\Models\goal;
 
 class AdminController extends Controller
 {
@@ -572,6 +573,17 @@ class AdminController extends Controller
                 ]);
             }
         }
+
+        // in the goals table, increment all rows that have the sa,e program id and event type id as the event that was just created
+        $goals = Goal::where('program_id', $event->program_id)->where('event_type_id', $event->event_type_id)->get();
+        foreach ($goals as $goal) {
+            $goal->number_completed += 1;
+            $goal->save();
+        }
+
+        
+
+
        
 
         // Return a response indicating success
