@@ -574,10 +574,7 @@ class AdminController extends Controller
         // in the goals table, increment all rows that have the same program id and event type id as the event that was just created
         $goals = Goal::where('program_id', $event->program_id)->where('event_type_id', $event->event_type_id)->get();
         foreach ($goals as $goal) {
-            if (!$this->isGoalComplete($goal)){
-                $goal->number_completed = $goal->number_completed + 1;
-                $goal->save();
-            }   
+            $this->goalIncrement($goal);
             
         }
         // Return a response indicating success
@@ -591,7 +588,6 @@ class AdminController extends Controller
         try {
             // Find the event by event_id
             $event = Event::where('id', $request->input('event_id'))->first();
-            $temp_event = $event;
     
             if (!$event) {
                 return response()->json([
@@ -599,7 +595,14 @@ class AdminController extends Controller
                     'message' => 'Event not found'
                 ]);
             }
-    
+
+             // in the goals table, decrement all rows that have the same program id and event type id as the event that was just edited
+             $goals = Goal::where('program_id', $event->program_id)->where('event_type_id', $event->event_type_id)->get();
+             foreach ($goals as $goal) {
+                 $this->goalDecrement($goal);
+             }
+ 
+            
             // Update event details from the request
             $fillableFields = [
                 'event_main_picture',
@@ -608,13 +611,21 @@ class AdminController extends Controller
                 'event_date',
                 'event_title',
                 'event_type_id',
+                'program_id',
                 'budget_sheet',
                 'proposal',
                 'meeting_minute'
             ];
             $event->fill($request->only($fillableFields));
             $event->save();
-    
+
+            // in the goals table, increment all rows that have the same program id and event type id as the event that was just created
+
+            $goals = Goal::where('program_id', $event->program_id)->where('event_type_id', $event->event_type_id)->get();
+            foreach ($goals as $goal) {
+                $this->goalIncrement($goal);
+                }   
+  
             // Update responsible people for the event
             $responsibles = $request->input('responsibles', []);
     
@@ -630,24 +641,9 @@ class AdminController extends Controller
                 ]);
             }
             
-            // remove a complete goal counter if the event is edited
-             $goals = Goal::where('program_id', $temp_event->program_id)->where('event_type_id', $temp_event->event_type_id)->get();
-             foreach ($goals as $goal) {
-                     $goal->number_completed -= 1;
-                     $goal->save();
-                 }   
-                 
-             
-             // adds a complete goal counter if the event is edited
-             $goals = Goal::where('program_id', $event->program_id)->where('event_type_id', $event->event_type_id)->get();
-             foreach ($goals as $goal) {
-                 if (!$this->isGoalComplete($goal)){
-                     $goal->number_completed += 1;
-                     $goal->save();
-                 }   
-                     
-            }    
+     
 
+           
             return response()->json([
                 'status' => 'success',
                 'message' => 'Event updated successfully'
@@ -677,6 +673,17 @@ class AdminController extends Controller
                     'message' => 'Event not found'
                 ]);
             }
+
+
+            // Remove the responsibles for the event
+            is_responsible::where('event_id', $event->id)->delete();
+            
+            // remove a complete goal counter if the event is deleted
+            $goals = Goal::where('program_id', $event->program_id)->where('event_type_id', $event->event_type_id)->get();
+            foreach ($goals as $goal) {    
+                $this->goalDecrement($goal);
+                    
+            }
     
             // Delete the event
             $event->delete();
@@ -694,19 +701,32 @@ class AdminController extends Controller
         }
     }
 
-    private function isGoalComplete($goal) {
+
+    private function goalIncrement($goal) {
  
-    // checks if the numbers completed is now equal to the number of events_to_complete
-        if ($goal->number_completed >= $goal->number_to_complete) {
-            $goal->number_completed = $goal->number_to_complete + 1;
+        $goal->number_completed = $goal->number_completed + 1;
+
+        // if the number completed is equal to the number of events, then the goal is completed
+        if ($goal->number_completed == $goal->number_to_complete) {
             $goal->goal_status = 1;
-            $goal->save();
-            return true;
-        } else {
-            return false;
         }
+        $goal->save();
 
 
+    } 
+
+    private function goalDecrement($goal) {
+
+        if($goal->number_completed > 0){
+            $goal->number_completed = $goal->number_completed - 1;
+        }
+    
+        // if the number completed is equal to the number of events, then the goal is completed
+        if ($goal->number_completed < $goal->number_to_complete) {
+            $goal->goal_status = 0;
+        }
+        
+        $goal->save();
     }
 
 
