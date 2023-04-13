@@ -174,7 +174,7 @@ class AdminController extends Controller
                 'first_name' => $request->input('first_name'),
                 'last_name' => $request->input('last_name'),
                 'organization_id' => $request->input('organization_id'),
-                'date_of_birth' => $request->input('date_of_birth'),
+                'user_dob' => $request->input('date_of_birth'),
                 'user_position' => $request->input('position'),
                 'gender' => $gender,
                 'branch_id' => $branch->id,
