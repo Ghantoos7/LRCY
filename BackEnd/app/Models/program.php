@@ -7,5 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class program extends Model
 {
+
     use HasFactory;
+
+    protected $fillable = [
+        'program_name'
+    ];
+
 }

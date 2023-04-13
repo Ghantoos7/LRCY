@@ -7,5 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class event_image extends Model
 {
+
     use HasFactory;
+
+    protected $fillable = [
+        'event_image_source',
+        'event_id'
+    ];
+
 }

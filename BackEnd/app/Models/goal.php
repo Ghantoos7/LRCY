@@ -7,5 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class goal extends Model
 {
+
     use HasFactory;
+
+    protected $fillable = [
+        'goal_name',
+        'goal_description',
+        'program_id',
+        'goal_status',
+        'number_completed',
+        'goal_year',
+        'event_type_id',
+        'goal_deadline'
+    ];
+
 }

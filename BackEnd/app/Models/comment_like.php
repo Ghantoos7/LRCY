@@ -7,6 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class comment_like extends Model
 {
+    
     use HasFactory;
-    protected $fillable = ['comment_id', 'user_id', 'like_date'];
+
+    protected $fillable = [
+        'comment_id', 
+        'user_id', 
+        'like_date'
+    ];
+
 }

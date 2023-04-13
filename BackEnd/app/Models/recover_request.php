@@ -7,6 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class recover_request extends Model
 {
+
     use HasFactory;
-    protected $fillable = ['user_id', 'request_status', 'request_date', 'field1', 'field2'];
+
+    protected $fillable = [
+        'user_id', 
+        'request_status', 
+        'request_date'
+    ];
+
 }

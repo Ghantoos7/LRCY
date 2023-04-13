@@ -7,5 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class branch extends Model
 {
+
     use HasFactory;
+
+    protected $fillable = [
+        'branch_name',
+        'branch_location'
+    ];
+
 }

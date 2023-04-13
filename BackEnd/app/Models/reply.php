@@ -7,6 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class reply extends Model
 {
+
     use HasFactory;
-    protected $fillable = ['comment_id', 'user_id', 'reply_content', 'reply_date'];
+
+    protected $fillable = [
+        'comment_id', 
+        'user_id', 
+        'reply_content', 
+        'reply_date'
+    ];
+
 }
