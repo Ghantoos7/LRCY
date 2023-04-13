@@ -579,7 +579,7 @@ class AdminController extends Controller
     }
 
 
-
+    
     public function editEvent(Request $request)
     {
         try {
@@ -637,5 +637,7 @@ class AdminController extends Controller
         }
     }
     
+
+
 
 }
