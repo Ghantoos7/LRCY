@@ -53,6 +53,10 @@ export const routes: Routes = [
     path: 'pending-request',
     loadComponent: () => import('./pages/pending-request/pending-request.page').then( m => m.PendingRequestPage)
   },
+  {
+    path: 'request-declined',
+    loadComponent: () => import('./pages/request-declined/request-declined.page').then( m => m.RequestDeclinedPage)
+  },
 
 
 ];
