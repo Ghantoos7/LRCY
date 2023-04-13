@@ -244,7 +244,7 @@ class AdminController extends Controller
                 return response()->json([
                     'status' => 'error',
                     'message' => 'User not found'
-                ], 404);
+                ]);
             }
 
             $user->delete();
@@ -638,6 +638,34 @@ class AdminController extends Controller
     }
     
 
+    public function deleteEvent(Request $request)
+    {
 
+        try {
+            // Find the event by event_id
+            $event = Event::where('id', $request->input('event_id'))->first();
+    
+            if (!$event) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Event not found'
+                ]);
+            }
+    
+            // Delete the event
+            $event->delete();
+    
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Event deleted successfully'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'An error occurred while deleting the event',
+                'error' => $e->getMessage()
+            ]);
+        }
+    }
 
 }
