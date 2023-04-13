@@ -57,6 +57,10 @@ export const routes: Routes = [
     path: 'request-declined',
     loadComponent: () => import('./pages/request-declined/request-declined.page').then( m => m.RequestDeclinedPage)
   },
+  {
+    path: 'feed',
+    loadComponent: () => import('./pages/feed/feed.page').then( m => m.FeedPage)
+  },
 
 
 ];
