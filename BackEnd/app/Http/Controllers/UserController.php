@@ -17,7 +17,7 @@ use App\Models\is_responsible;
 use App\Models\event;
 
 
-class UserController extends Controller{
+class UserController extends Controller {
 
 
     function signup(Request $credentials) {
@@ -40,8 +40,11 @@ class UserController extends Controller{
 
     }
 
-    // Validate the password
+    
     private function validatePassword($password) {
+
+        // Function to validate the password
+
         $errors = array();
         
         if (strlen($password) < 8) {
@@ -61,6 +64,7 @@ class UserController extends Controller{
         }
         
         return $errors;
+
     }
 
 
@@ -125,16 +129,9 @@ class UserController extends Controller{
     
 
     function login(Request $credentials) {
-        
-        // Checks if the user has exceeded the maximum number of login attempts
-        if ($this->hasExceededLoginAttempts($credentials->organization_id)) {
-            return response()->json([
-                "status" => "Too many failed login attempts",
-            ]);
-        }
-        
+
         $check_user = volunteer_user::where("organization_id", $credentials->organization_id)->first();
-        
+    
         // Checks if the user exists in the database
         if(!$check_user) {
             return response()->json([
@@ -149,10 +146,22 @@ class UserController extends Controller{
             ]);
         }
     
-        // Checks if the password needs to be rehashed
-        if (Hash::needsRehash($check_user->password)) {
-            $check_user->password = Hash::make($credentials->password);
-            $check_user->save();
+        // Check if the user has exceeded the maximum number of login attempts
+        if ($this->hasExceededLoginAttempts($credentials->organization_id)) {
+            // Check the last login attempt time
+            $last_attempt = login_attempt::where('user_id', '=', $credentials->organization_id)->orderBy('created_at', 'desc')->first();
+            $now = Carbon::now();
+            $last_attempt_time = Carbon::parse($last_attempt->created_at);
+            $diff_in_hours = $last_attempt_time->diffInHours($now);
+    
+            // If the last login attempt was more than 24 hours ago, clear the login attempts and allow the user to log in
+            if ($diff_in_hours >= 24) {
+                $this->resetLoginAttempts($credentials->organization_id);
+            } else {
+                return response()->json([
+                    "status" => "Too many failed login attempts",
+                ]);
+            }
         }
     
         // Checks if the password is correct
@@ -161,8 +170,7 @@ class UserController extends Controller{
             return response()->json([
                 "status" => $check_user,
             ]);
-        }
-        else{
+        } else {
             // Adds a failed login attempt to the database if the user has inputted the wrong password
             $this->addFailedLoginAttempt($credentials->organization_id);
             return response()->json([
@@ -170,32 +178,29 @@ class UserController extends Controller{
             ]);
         }
     }
-
+    
 
     // Adds a failed login attempt to the database if the user has inputted the wrong password
     private function addFailedLoginAttempt($organization_id) {
-
         login_attempt::create([
-        'login_attempt_time' => date('H:i:s'),
-        'login_attempt_date' => date('Y-m-d'),
-        'user_id' => $organization_id,
-    ]);
+            'login_attempt_time' => Carbon::now()->format('H:i:s'),
+            'login_attempt_date' => Carbon::now()->format('Y-m-d'),
+            'user_id' => $organization_id,
+        ]);
     }
-
+    
 
     // Checks if the user has exceeded the maximum number of login attempts
     private function hasExceededLoginAttempts($organization_id) {
-        
         $total_attempts = login_attempt::where('user_id', '=', $organization_id)->count();
         return ($total_attempts >= 5);
     }
-
+    
 
     // Resets the number of login attempts to 0
     private function resetLoginAttempts($organization_id) {
         login_attempt::where('user_id', '=', $organization_id)->delete();
     }
-
     
 
     function recoverRequest(Request $request) {

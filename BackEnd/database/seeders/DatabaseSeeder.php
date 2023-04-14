@@ -36,9 +36,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        /*
-        volunteer_user::factory(20)->create();
-        announcement::factory(20)->create();
+        
+        volunteer_user::factory(50)->create();
+        post::factory(20)->create();
+        /*announcement::factory(20)->create();
         branch::factory(20)->create();
         comment_like::factory(20)->create();
         comment::factory(20)->create();
@@ -50,14 +51,10 @@ class DatabaseSeeder extends Seeder
         like::factory(20)->create();
         login_attempt::factory(20)->create();
         picture::factory(20)->create();
-        post_type::factory(20)->create();
-        post::factory(20)->create();
-        program::factory(20)->create();
         recover_request::factory(20)->create();
         reply::factory(20)->create();
         take::factory(20)->create();
         training::factory(20)->create();
-        user_type::factory(20)->create();
         */
     }
 }
