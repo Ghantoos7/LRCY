@@ -504,6 +504,7 @@ class AdminController extends Controller
 
     }
 
+
     public function addEvent(Request $request) {
         // validate the request
 
@@ -666,7 +667,6 @@ class AdminController extends Controller
     }
 
     
-
     public function deleteEvent(Request $request)
     {
 
@@ -711,36 +711,6 @@ class AdminController extends Controller
             ]);
         }
     }
-
-
-    private function goalIncrement($goal) {
- 
-        $goal->number_completed = $goal->number_completed + 1;
-
-        // if the number completed is equal to the number of events, then the goal is completed
-        if ($goal->number_completed == $goal->number_to_complete) {
-            $goal->goal_status = 1;
-        }
-        $goal->save();
-
-
-    } 
-
-    private function goalDecrement($goal) {
-
-        if($goal->number_completed > 0){
-            $goal->number_completed = $goal->number_completed - 1;
-        }
-    
-        // if the number completed is equal to the number of events, then the goal is completed
-        if ($goal->number_completed < $goal->number_to_complete) {
-            $goal->goal_status = 0;
-        }
-        
-        $goal->save();
-    }
-
-
 
     public function setYearlyGoal(Request $request)
     {
@@ -870,4 +840,58 @@ class AdminController extends Controller
     
     }
 
+    private function goalIncrement($goal) {
+ 
+        $goal->number_completed = $goal->number_completed + 1;
+
+        // if the number completed is equal to the number of events, then the goal is completed
+        if ($goal->number_completed == $goal->number_to_complete) {
+            $goal->goal_status = 1;
+        }
+        $goal->save();
+
+
+    } 
+
+    private function goalDecrement($goal) {
+
+        if($goal->number_completed > 0){
+            $goal->number_completed = $goal->number_completed - 1;
+        }
+    
+        // if the number completed is equal to the number of events, then the goal is completed
+        if ($goal->number_completed < $goal->number_to_complete) {
+            $goal->goal_status = 0;
+        }
+        
+        $goal->save();
+    }
+
+
+    public function deleteYearlyGoal(Request $request) {
+
+        try {
+            $goal = Goal::where('id', $request->input('goal_id'))->first();
+            if (!$goal) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Goal not found'
+                ]);
+            }
+    
+            // Delete the goal
+            $goal->delete();
+    
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Goal deleted successfully'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'An error occurred while deleting the goal',
+                'error' => $e->getMessage()
+            ]);
+        }
+}
 }
