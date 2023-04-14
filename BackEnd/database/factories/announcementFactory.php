@@ -17,7 +17,10 @@ class announcementFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'announcement_content' => fake()->text(),
+            'announcement_date' => fake()->date(),
+            'importance_level' => random_int(0, 3),
+            'admin_id' => random_int(1, 70),
         ];
     }
 }
