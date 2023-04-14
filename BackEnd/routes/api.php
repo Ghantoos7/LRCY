@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\AdminController;
+use App\Http\Middleware\AdminMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,6 +80,9 @@ Route::group(["prefix" => "v0.1",], function(){
 
         });
 
+    });
+
+    Route::group(["middleware" => ["auth:sanctum",AdminMiddleware::class]], function(){
         Route::group(["prefix" => "admin"], function(){
             Route::post("logout", [AdminController::class, "logout"]);
             Route::post("add_user", [AdminController::class, "addUser"]);
@@ -97,6 +101,6 @@ Route::group(["prefix" => "v0.1",], function(){
             Route::post("delete_yearly_goal", [AdminController::class, "deleteYearlyGoal"]);
         });
 
-    });
-    
+     });
+     
 });
