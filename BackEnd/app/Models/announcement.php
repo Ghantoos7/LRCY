@@ -12,6 +12,7 @@ class announcement extends Model
 
     protected $fillable = [
         'announcement_content',
+        'announcement_title',
         'announcement_date',
         'admin_id',
         'importance_level'

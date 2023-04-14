@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('announcements', function (Blueprint $table) {
             $table->id();
             $table->string('announcement_content');
+            $table->string('announcement_title');
             $table->date('announcement_date');
             $table->integer('importance_level');
             $table->integer('admin_id');

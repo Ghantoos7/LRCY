@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('trainings', function (Blueprint $table) {
             $table->id();
             $table->string('training_description');
-            $table->string('training_name');
+            $table->string('training_name')->unique();
             $table->integer('program_id');
             $table->string('field1')->nullable();
             $table->string('field2')->nullable();
