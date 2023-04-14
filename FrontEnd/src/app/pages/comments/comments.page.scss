@@ -1,0 +1,17 @@
+.image-container{
+    position: relative;
+}
+
+.post-image{
+    position: absolute; /* Position the image absolutely */
+    top: 0;
+    left: 0;
+    z-index: 2; /* Set a lower z-index */
+}
+
+.red-box{
+    position: absolute; /* Position the image absolutely */
+    top: 200px;
+    left: 0;
+    z-index: 1; /* Set a higher z-index */
+}

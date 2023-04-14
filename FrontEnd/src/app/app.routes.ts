@@ -61,6 +61,10 @@ export const routes: Routes = [
     path: 'feed',
     loadComponent: () => import('./pages/feed/feed.page').then( m => m.FeedPage)
   },
+  {
+    path: 'comments',
+    loadComponent: () => import('./pages/comments/comments.page').then( m => m.CommentsPage)
+  },
 
 
 ];
