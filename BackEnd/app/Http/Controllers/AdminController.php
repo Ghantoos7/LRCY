@@ -840,20 +840,20 @@ class AdminController extends Controller
             $goal->fill($request->only($fillableFields));
             $goal->save();
 
-// Reset number completed 
-$goal->number_completed = 0;
-$goal->save();
+            // Reset number completed 
+            $goal->number_completed = 0;
+            $goal->save();
 
-// Get all events for the goal
-$events = Event::where('program_id', $goal->program_id)->where('event_type_id', $goal->event_type_id)->get();
+            // Get all events for the goal
+            $events = Event::where('program_id', $goal->program_id)->where('event_type_id', $goal->event_type_id)->get();
 
-// Loop through the events and increment the goal counter if the event is the same year as the goal
-foreach ($events as $event) {
-    $eventDate = date('Y-m-d', strtotime($event->event_date));
-    if ($goal->goal_year == date('Y', strtotime($eventDate))) {
-        $this->goalIncrement($goal);
-    }
-}
+            // Loop through the events and increment the goal counter if the event is the same year as the goal
+            foreach ($events as $event) {
+                $eventDate = date('Y-m-d', strtotime($event->event_date));
+                if ($goal->goal_year == date('Y', strtotime($eventDate))) {
+                    $this->goalIncrement($goal);
+                }
+            }
 
             return response()->json([
                 'status' => 'success',
@@ -869,6 +869,5 @@ foreach ($events as $event) {
         }
     
     }
-
 
 }
