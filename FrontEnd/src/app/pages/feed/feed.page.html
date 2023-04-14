@@ -3,6 +3,7 @@
   <img class="feed-top-image" src="assets/imgs/feed-top.png">
   <img class="profile-picture" src="assets/imgs/profile-picture.png">
   <ion-icon class="menu-icon" name="menu-outline"></ion-icon>
+  <ion-text class="your-feed">Your Feed</ion-text>
 
   <ion-card color="dark">
     <div class="header-container">
@@ -24,13 +25,21 @@
     </ion-card-content>
 
     <ion-footer>
-      <ion-icon class="likes" color="danger" name="heart-outline"></ion-icon>
+      <ion-icon class="likes" name="heart-outline"></ion-icon>
       <ion-text class="like-count" color="danger">0</ion-text>
       <ion-img class="comments" src="assets/icon/comments.png"></ion-img>
-      <ion-text class="comment-count" color="danger">0</ion-text>
-
+      <ion-text class="comment-count">0</ion-text>
+      <ion-input class="input"  placeholder="Comment on this post...">
+        <ion-icon class="send-icon" name="send"></ion-icon>
+      </ion-input>
     </ion-footer>  
   </ion-card>
+
+  <ion-fab class="fab">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
 </ion-content>
 

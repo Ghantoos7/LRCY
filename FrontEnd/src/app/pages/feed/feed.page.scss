@@ -19,6 +19,14 @@
     width: 60px;
 }
 
+.your-feed{
+    position: absolute;
+    top: 43px;
+    left: 70px;
+    font-size: 20px;
+    color: white;
+}
+
 .header-container{
     position: relative;
     top: 20px;
@@ -39,8 +47,9 @@
 .header-container .post-date{
     position: relative;
     bottom: 25px;
-    left: 10px;
+    left: 5px;
     font-size: 13px;
+    color: #8F8F8F;
 }
 
 .header-container .name{
@@ -72,32 +81,52 @@
 .likes{
     font-size: 2em;
     position: absolute;
-    top: 30px;
-    left: 30px;
+    top: 23px;
+    left: 25px;
     color: #F01061
 }
 
 .like-count{
     font-size: 18px;
     position: relative;
-    top: 33px;
-    left: 60px;
+    top: 28px;
+    left: 55px;
     color: #AAA7AE
 }
 
 .comments{
     position: absolute;
     width: 27px;
-    top: 30px;
-    left: 85px;
+    top: 23px;
+    left: 75px;
 }
 
 .comment-count{
     font-size: 18px;
     position: relative;
-    top: 33px;
-    left: 105px;
+    top: 28px;
+    left: 95px;
     color: #AAA7AE
+}
+
+.input {
+    position: absolute;
+    width: 210px;
+    left: 130px;
+    border-radius: 10px;
+    --background: #E9E7E7;
+    --color: #8F8F8F;
+    --padding-end: 35px;
+    --padding-start: 10px;
+    --placeholder-color: #8F8F8F;
+    --placeholder-opacity: 0.8;
+}
+
+.send-icon{
+    position: absolute;
+    left: 180px;
+    font-size: 20px;
+    color: #B11433;
 }
 
 ion-card{
@@ -106,4 +135,15 @@ ion-card{
     height: 520px;
     background-color: #FDFDFD;
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    border-radius: 10px;
 }
+
+.fab{
+    position: absolute;
+    top: 782px;
+    left: 330px;
+    --background:#B11433;
+}
+
+
+
