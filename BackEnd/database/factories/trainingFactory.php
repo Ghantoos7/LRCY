@@ -17,7 +17,9 @@ class trainingFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'training_description' => fake()->sentence(),
+            'training_name' => fake()->sentence(),
+            'program_id' => random_int(1,3)
         ];
     }
 }

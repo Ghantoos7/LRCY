@@ -11,8 +11,7 @@ use App\Models\Comment;
 use App\Models\Reply;
 use App\Models\Comment_like;
 
-class PostController extends Controller
-{
+class PostController extends Controller {
 
 
     function createPost(Request $request) {

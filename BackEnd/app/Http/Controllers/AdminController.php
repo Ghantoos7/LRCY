@@ -15,12 +15,13 @@ use App\Models\event;
 use App\Models\is_responsible;
 use App\Models\goal;
 
-class AdminController extends Controller
-{
+class AdminController extends Controller {
 
 
-    // Validate the password
     private function validatePassword($password) {
+    
+    // Validate the password
+
         $errors = array();
         
         if (strlen($password) < 8) {
@@ -40,6 +41,7 @@ class AdminController extends Controller
         }
         
         return $errors;
+
     }
 
 
@@ -65,25 +67,11 @@ class AdminController extends Controller
             ]);
         }
     
-        // Checks if the password is valid
-        $errors = $this->validatePassword($request->password);
-        if (count($errors) > 0) {
-            return response()->json([
-                'status' => $errors,
-            ]);
-        }
-    
         // Checks if the user has exceeded the maximum number of login attempts
         if ($this->hasExceededLoginAttempts($request->organization_id)) {
             return response()->json([
                 'status' => 'Too many failed login attempts',
             ]);
-        }
-    
-        // Checks if the password needs to be rehashed
-        if (Hash::needsRehash($user->password)) {
-            $user->password = Hash::make($request->password);
-            $user->save();
         }
     
         // Checks if the password is correct
@@ -103,6 +91,7 @@ class AdminController extends Controller
                 'status' => 'Invalid credentials',
             ]);
         }
+<<<<<<< HEAD
     }
 
 
@@ -112,6 +101,10 @@ class AdminController extends Controller
             "status" => "Logged out",
         ]);
     }
+=======
+
+    }    
+>>>>>>> 6b5cb174988ab035a18fb58672f7b06838635b3d
 
 
     // Adds a failed login attempt to the database if the user has inputted the wrong password
@@ -121,21 +114,42 @@ class AdminController extends Controller
         'login_attempt_time' => date('H:i:s'),
         'login_attempt_date' => date('Y-m-d'),
         'user_id' => $organization_id,
-    ]);
+        ]);
+
     }
 
 
     // Checks if the user has exceeded the maximum number of login attempts
     private function hasExceededLoginAttempts($organization_id) {
         
+        $last_attempt = login_attempt::where('user_id', '=', $organization_id)->latest()->first();
+
+        // Check if there is no previous login attempt made by the user
+        if (!$last_attempt) {
+            return false;
+        }
+
+        // Check if the last login attempt was made more than 24 hours ago
+        $last_attempt_time = strtotime($last_attempt->login_attempt_date.' '.$last_attempt->login_attempt_time);
+        $current_time = time();
+        $hours_since_last_attempt = ($current_time - $last_attempt_time) / 3600;
+        if ($hours_since_last_attempt >= 24) {
+            $this->resetLoginAttempts($organization_id);
+            return false;
+        }
+
+        // Check if the user has exceeded the maximum number of login attempts
         $total_attempts = login_attempt::where('user_id', '=', $organization_id)->count();
         return ($total_attempts >= 5);
+
     }
 
 
     // Resets the number of login attempts to 0
     private function resetLoginAttempts($organization_id) {
+
         login_attempt::where('user_id', '=', $organization_id)->delete();
+
     }
 
 
@@ -152,6 +166,7 @@ class AdminController extends Controller
             "user_type_id" => "required|integer|in:0,1",
             "status" => "required|string",
             "start_date" => "required|date",
+            "end_date" => "nullable|date",
         ]);
     
         if ($validator->fails()) {
@@ -195,6 +210,7 @@ class AdminController extends Controller
                 'user_type_id' => $request->input('user_type_id'),
                 'status' => $request->input('status'),
                 'user_start_date' => $request->input('start_date'),
+                'user_end_date' => $request->input('end_date'),
                 'user_age' => Carbon::parse($request->input('date_of_birth'))->age,
                 'is_registered' => 0,
                 'is_active' => ($request->input('status') == 'active') ? 1 : 0,
@@ -212,6 +228,7 @@ class AdminController extends Controller
                 "error" => $e->getMessage()
             ]);
         }
+
     }
     
 
@@ -244,6 +261,7 @@ class AdminController extends Controller
                 'error' => $e->getMessage()
             ]);
         }
+
     }
 
 
@@ -516,9 +534,9 @@ class AdminController extends Controller
     }
 
 
-    public function addEvent(Request $request) {
-        // validate the request
+    function addEvent(Request $request) {
 
+        // validate the request
         $validator = Validator::make($request->all(), [
             'event_main_picture' => 'required|string',
             'event_description' => 'required|string',
@@ -591,11 +609,12 @@ class AdminController extends Controller
         }
         // Return a response indicating success
         return response()->json(['message' => 'Event created successfully']);
+
     }
 
-
     
-    public function editEvent(Request $request)  {
+    function editEvent(Request $request)  {
+
         try {
             // Find the event by event_id
             $event = Event::where('id', $request->input('event_id'))->first();
@@ -675,11 +694,11 @@ class AdminController extends Controller
                 'error' => $e->getMessage()
             ]);
         }
+
     }
 
     
-    public function deleteEvent(Request $request)
-    {
+    function deleteEvent(Request $request) {
 
         try {
             // Find the event by event_id
@@ -721,10 +740,11 @@ class AdminController extends Controller
                 'error' => $e->getMessage()
             ]);
         }
+
     }
 
-    public function setYearlyGoal(Request $request)
-    {
+
+    function setYearlyGoal(Request $request) {
         
         // Validate the request with the data type
         $validator = Validator::make($request->all(), [
@@ -770,11 +790,11 @@ class AdminController extends Controller
 
         // Return a response indicating success
         return response()->json(['message' => 'Goal created successfully']);
+
     }
 
 
-
-    public function editYearlyGoal(Request $request) {
+    function editYearlyGoal(Request $request) {
 
         try{
 
@@ -851,6 +871,7 @@ class AdminController extends Controller
     
     }
 
+<<<<<<< HEAD
     public function deleteYearlyGoal(Request $request) {
 
         try {
@@ -877,6 +898,8 @@ class AdminController extends Controller
             ]);
         }
     }
+=======
+>>>>>>> 6b5cb174988ab035a18fb58672f7b06838635b3d
 
     private function goalIncrement($goal) {
  
@@ -888,8 +911,8 @@ class AdminController extends Controller
         }
         $goal->save();
 
-
     } 
+
 
     private function goalDecrement($goal) {
 
@@ -903,9 +926,41 @@ class AdminController extends Controller
         }
         
         $goal->save();
+
     }
 
 
+<<<<<<< HEAD
 
+=======
+    function deleteYearlyGoal(Request $request) {
+
+        try {
+            $goal = Goal::where('id', $request->input('goal_id'))->first();
+            if (!$goal) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Goal not found'
+                ]);
+            }
+    
+            // Delete the goal
+            $goal->delete();
+    
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Goal deleted successfully'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'An error occurred while deleting the goal',
+                'error' => $e->getMessage()
+            ]);
+        }
+    
+    }
+
+>>>>>>> 6b5cb174988ab035a18fb58672f7b06838635b3d
 
 }

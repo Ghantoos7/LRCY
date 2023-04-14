@@ -17,7 +17,12 @@ class postFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'post_caption' => fake()->sentence,
+            'comment_count' => random_int(0, 100),
+            'like_count' => random_int(0, 100),
+            'post_date' => fake()->date,
+            'post_type_id' => 3,
+            'user_id' => random_int(1, 70)
         ];
     }
 }

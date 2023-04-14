@@ -10,15 +10,19 @@ use App\Models\volunteer_user;
 use App\Models\picture;
 
 
-class EventController extends Controller{
-    //
+class EventController extends Controller {
+
+
+    public function getYearlyGoals() {
 
     // Gets yearly goals and return them grouped based on program id
-    public function getYearlyGoals(){
 
         $year = date('Y');
+
         $goals = goal::select('goal_description', 'goal_name', 'program_id', 'goal_status', 'number_completed', 'goal_year', 'event_type_id', 'goal_deadline')->where('goal_year', $year)->get();
+
         $goals = $goals->groupBy('program_id');
+
         return response()->json($goals);
 
     }
@@ -27,7 +31,7 @@ class EventController extends Controller{
     function getEventInfo($event_id = null) {
     
         // Retrieve the event information from the database
-        $events = $event_id ? [Event::find($event_id)] : Event::all();
+        $events = $event_id ? [Event::find($event_id)] : Event::paginate(10)->all();
 
         // If no event(s) found, return an error message
         if (count($events) === 0 || $events[0] === null) {
@@ -83,8 +87,7 @@ class EventController extends Controller{
     
     }
 
-
-
+    
     function getEventPictures($event_id) {
 
         // If no event id is provided, return an error message
@@ -116,7 +119,6 @@ class EventController extends Controller{
         return response()->json(['pictures' => $pictures]);
    
     }
-
 
 
 }
