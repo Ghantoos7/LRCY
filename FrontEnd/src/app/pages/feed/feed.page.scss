@@ -14,9 +14,9 @@
 
 .profile-picture{
     position: absolute;
-    top: 18px;
-    left: 285px;
-    width: 75px;
+    top: 27px;
+    left: 300px;
+    width: 60px;
 }
 
 .header-container{
@@ -40,25 +40,38 @@
     position: relative;
     bottom: 25px;
     left: 10px;
-    font-size: 15px;
+    font-size: 13px;
 }
 
 .header-container .name{
     position: relative;
-    right: 67px;
+    right: 118px;
     bottom: 10px;
     font-size: 13px;
+}
+
+.header-container .more-options{
+    position: relative;
+    font-size: 2em;
+    bottom: 10px;
+    left: 10px;
 }
 
 .caption-container{
     position: relative;
     width: 309px;
-    top: 70px;
-    left: 40px;
+    left: 15px;
+    top: 10px;
+}
+
+.post-image{
+    position:relative;
+    top: 40px;
 }
 
 ion-card{
-    position: absolute;
+    position: relative;
     top: 120px;
+    height: 500px;
     background-color: white;
 }
