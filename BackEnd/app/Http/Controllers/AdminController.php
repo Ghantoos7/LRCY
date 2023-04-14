@@ -584,7 +584,6 @@ class AdminController extends Controller
 
     
     public function editEvent(Request $request)  {
-
         try {
             // Find the event by event_id
             $event = Event::where('id', $request->input('event_id'))->first();
@@ -599,7 +598,12 @@ class AdminController extends Controller
              // in the goals table, decrement all rows that have the same program id and event type id as the event that was just edited
              $goals = Goal::where('program_id', $event->program_id)->where('event_type_id', $event->event_type_id)->get();
              foreach ($goals as $goal) {
-                 $this->goalDecrement($goal);
+                    $eventDate = date('Y-m-d', strtotime($event->event_date));
+                // Decrements if the event is the same year as the goal
+                if ($goal->goal_year == date('Y', strtotime($eventDate))) {
+                        $this->goalDecrement($goal);
+                    }
+
              }
  
             
@@ -623,7 +627,13 @@ class AdminController extends Controller
 
             $goals = Goal::where('program_id', $event->program_id)->where('event_type_id', $event->event_type_id)->get();
             foreach ($goals as $goal) {
-                $this->goalIncrement($goal);
+                
+                $eventDate = date('Y-m-d', strtotime($event->event_date));
+                // Decrements if the event is the same year as the goal
+                if ($goal->goal_year == date('Y', strtotime($eventDate))) {
+                    $this->goalIncrement($goal);
+                }
+
                 }   
   
             // Update responsible people for the event
@@ -640,10 +650,7 @@ class AdminController extends Controller
                     'role_name' => $responsible['role_name']
                 ]);
             }
-            
-     
-
-           
+ 
             return response()->json([
                 'status' => 'success',
                 'message' => 'Event updated successfully'
@@ -680,9 +687,13 @@ class AdminController extends Controller
             
             // remove a complete goal counter if the event is deleted
             $goals = Goal::where('program_id', $event->program_id)->where('event_type_id', $event->event_type_id)->get();
-            foreach ($goals as $goal) {    
-                $this->goalDecrement($goal);
-                    
+            foreach ($goals as $goal) {  
+
+                $eventDate = date('Y-m-d', strtotime($event->event_date));
+                // Decrements if the event is the same year as the goal
+                if ($goal->goal_year == date('Y', strtotime($eventDate))) {
+                    $this->goalDecrement($goal);
+                }
             }
     
             // Delete the event
@@ -780,6 +791,84 @@ class AdminController extends Controller
         return response()->json(['message' => 'Goal created successfully']);
     }
 
+
+
+    public function editYearlyGoal(Request $request) {
+
+        try{
+
+            $validate = Validator::make($request->all(), [
+                'goal_id' => 'required|integer',
+                'goal_name' => 'required|string',
+                'goal_description' => 'required|string',
+                'program_id' => 'required|integer',
+                'number_to_complete' => 'required|integer',
+                'goal_year' => 'required|integer',
+                'event_type_id' => 'required|integer',
+                'goal_deadline' => 'required|date',
+            ]);
+
+            // Check if the validation fails
+
+            if ($validate->fails()) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Validation failed',
+                    'errors' => $validate->errors()
+                ]);
+            }
+
+
+            $goal = Goal::where('id', $request->input('goal_id'))->first();
+            if (!$goal) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Goal not found'
+                ]);
+            }
+    
+            // Update goal details from the request
+            $fillableFields = [
+                'goal_name',
+                'goal_description',
+                'program_id',
+                'number_to_complete',
+                'goal_year',
+                'event_type_id',
+                'goal_deadline'
+            ];
+            $goal->fill($request->only($fillableFields));
+            $goal->save();
+
+// Reset number completed 
+$goal->number_completed = 0;
+$goal->save();
+
+// Get all events for the goal
+$events = Event::where('program_id', $goal->program_id)->where('event_type_id', $goal->event_type_id)->get();
+
+// Loop through the events and increment the goal counter if the event is the same year as the goal
+foreach ($events as $event) {
+    $eventDate = date('Y-m-d', strtotime($event->event_date));
+    if ($goal->goal_year == date('Y', strtotime($eventDate))) {
+        $this->goalIncrement($goal);
+    }
+}
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Goal updated successfully'
+            ]);
+            
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'An error occurred while updating the goal',
+                'error' => $e->getMessage()
+            ]);
+        }
+    
+    }
 
 
 }
