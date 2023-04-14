@@ -91,9 +91,9 @@ class AdminController extends Controller {
                 'status' => 'Invalid credentials',
             ]);
         }
-<<<<<<< HEAD
-    }
-
+    
+    }    
+  
 
     function logout(Request $request) {
         auth()->user()->tokens()->delete();
@@ -101,11 +101,7 @@ class AdminController extends Controller {
             "status" => "Logged out",
         ]);
     }
-=======
-
-    }    
->>>>>>> 6b5cb174988ab035a18fb58672f7b06838635b3d
-
+    
 
     // Adds a failed login attempt to the database if the user has inputted the wrong password
     private function addFailedLoginAttempt($organization_id) {
@@ -871,7 +867,6 @@ class AdminController extends Controller {
     
     }
 
-<<<<<<< HEAD
     public function deleteYearlyGoal(Request $request) {
 
         try {
@@ -898,8 +893,7 @@ class AdminController extends Controller {
             ]);
         }
     }
-=======
->>>>>>> 6b5cb174988ab035a18fb58672f7b06838635b3d
+
 
     private function goalIncrement($goal) {
  
@@ -928,39 +922,5 @@ class AdminController extends Controller {
         $goal->save();
 
     }
-
-
-<<<<<<< HEAD
-
-=======
-    function deleteYearlyGoal(Request $request) {
-
-        try {
-            $goal = Goal::where('id', $request->input('goal_id'))->first();
-            if (!$goal) {
-                return response()->json([
-                    'status' => 'error',
-                    'message' => 'Goal not found'
-                ]);
-            }
-    
-            // Delete the goal
-            $goal->delete();
-    
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Goal deleted successfully'
-            ]);
-        } catch (\Exception $e) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'An error occurred while deleting the goal',
-                'error' => $e->getMessage()
-            ]);
-        }
-    
-    }
-
->>>>>>> 6b5cb174988ab035a18fb58672f7b06838635b3d
 
 }

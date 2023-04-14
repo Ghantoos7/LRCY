@@ -80,6 +80,7 @@ Route::group(["prefix" => "v0.1",], function(){
         });
 
         Route::group(["prefix" => "admin"], function(){
+            Route::post("logout", [AdminController::class, "logout"]);
             Route::post("add_user", [AdminController::class, "addUser"]);
             Route::post("edit_user", [AdminController::class, "editUser"]);
             Route::post("delete_user", [AdminController::class, "deleteUser"]);

@@ -184,6 +184,14 @@ class UserController extends Controller {
             ]);
         }
     }
+    
+
+    function logout(Request $request) {
+        auth()->user()->tokens()->delete();
+        return response()->json([
+            "status" => "Logged out",
+        ]);
+    }
         
     
     // Adds a failed login attempt to the database if the user has inputted the wrong password
