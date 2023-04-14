@@ -18,3 +18,47 @@
     left: 285px;
     width: 75px;
 }
+
+.header-container{
+    position: relative;
+    top: 20px;
+    left: 20px;
+}
+
+.header-container img{
+    width: 45px;
+}
+
+.header-container .username{
+    position: relative;
+    bottom: 25px;
+    left: 6px;
+    font-size: 15px;
+}
+
+.header-container .post-date{
+    position: relative;
+    bottom: 25px;
+    left: 10px;
+    font-size: 15px;
+}
+
+.header-container .name{
+    position: relative;
+    right: 67px;
+    bottom: 10px;
+    font-size: 13px;
+}
+
+.caption-container{
+    position: relative;
+    width: 309px;
+    top: 70px;
+    left: 40px;
+}
+
+ion-card{
+    position: absolute;
+    top: 120px;
+    background-color: white;
+}
