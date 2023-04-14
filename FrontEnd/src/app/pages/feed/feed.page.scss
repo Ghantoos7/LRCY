@@ -65,13 +65,45 @@
 }
 
 .post-image{
-    position:relative;
-    top: 40px;
+    position: relative;
+    top: 30px;
+}
+
+.likes{
+    font-size: 2em;
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    color: #F01061
+}
+
+.like-count{
+    font-size: 18px;
+    position: relative;
+    top: 33px;
+    left: 60px;
+    color: #AAA7AE
+}
+
+.comments{
+    position: absolute;
+    width: 27px;
+    top: 30px;
+    left: 85px;
+}
+
+.comment-count{
+    font-size: 18px;
+    position: relative;
+    top: 33px;
+    left: 105px;
+    color: #AAA7AE
 }
 
 ion-card{
     position: relative;
     top: 120px;
-    height: 500px;
-    background-color: white;
+    height: 520px;
+    background-color: #FDFDFD;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
