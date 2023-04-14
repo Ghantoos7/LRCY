@@ -104,7 +104,7 @@ class UserController extends Controller{
         }
     
         // Check if the volunteer user is already registered
-        if ($existing_volunteer_user->is_registered) {
+        if ($existing_volunteer_user->is_registered == 1) {
             return response()->json([
                 'status' => 'Organization ID found, user already registered',
             ]);
@@ -115,10 +115,13 @@ class UserController extends Controller{
         $existing_volunteer_user->username = $request->input('username');
         $existing_volunteer_user->password = Hash::make($request->input('password'));
         $existing_volunteer_user->save();
-    
+
+        $token = $existing_volunteer_user->createToken('auth_token')->plainTextToken;
         // Return a JSON response with the appropriate status message and HTTP status code
+
         return response()->json([
             'status' => 'Organization ID found, user registered successfully',
+            'token' => $token,
         ]);
 
     }
@@ -158,8 +161,11 @@ class UserController extends Controller{
         // Checks if the password is correct
         if(Hash::check($credentials->password, $check_user->password)){
             $this->resetLoginAttempts($credentials->organization_id);
+            // Creates a new token for the user
+            $token = $check_user->createToken('authToken')->plainTextToken;
             return response()->json([
-                "status" => $check_user,
+                "status" => 'Login successful',
+                "token" => $token,
             ]);
         }
         else{
@@ -170,8 +176,8 @@ class UserController extends Controller{
             ]);
         }
     }
-
-
+    
+    
     // Adds a failed login attempt to the database if the user has inputted the wrong password
     private function addFailedLoginAttempt($organization_id) {
 
