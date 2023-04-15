@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('is_responsibles', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
+            $table->integer('organization_id');
             $table->integer('event_id');
             $table->string('role_name');
             $table->string('field1')->nullable();

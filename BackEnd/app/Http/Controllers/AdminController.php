@@ -540,30 +540,26 @@ class AdminController extends Controller {
                 'proposal' => $request->input('proposal'),
                 'meeting_minute' => $request->input('meeting_minute'),
             ]);
-        } catch (\Exception $e) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Error creating event'
-            ]);
-        }
 
-       // adds the array of responsible people to the is responsible table
-        foreach ($request->input('responsibles') as $responsible) {
-            try {
-                // Create the responsible
-                $is_responsible = is_responsible::create([
-                    'user_id' => $responsible['user_id'],
-                    'event_id' => $event->id,
-                    'role_name' => $responsible['role_name'],
-                ]);
-            } catch (\Exception $e) {
+        }catch (\Exception $e) {
                 return response()->json([
                     'status' => 'error',
                     'message' => 'Error creating responsible'
                 ]);
             }
-        }
 
+             // Create the responsibles
+        foreach ($request->input('responsibles') as $responsible) {
+            // Get the user based on the provided organization id
+            $user = volunteer_user::where('organization_id', $responsible['organization_id'])->first();
+            Responsible::create([
+                'user_id' => $user,
+                'role_name' => $responsible['role_name'],
+                'event_id' => $event->id
+            ]);
+
+        }
+        
         // in the goals table, increment all rows that have the same program id and event type id as the event that was just created
         $goals = Goal::where('program_id', $event->program_id)->where('event_type_id', $event->event_type_id)->get();
         foreach ($goals as $goal) {
@@ -638,7 +634,9 @@ class AdminController extends Controller {
     
             // Add new responsible people to is_responsible table
             foreach ($responsibles as $responsible) {
-                Is_responsible::create([
+                 // Get the user based on the provided organization id
+                $user = volunteer_user::where('organization_id', $responsible['organization_id'])->first();
+                Responsible::create([
                     'event_id' => $event->id,
                     'user_id' => $responsible['user_id'],
                     'role_name' => $responsible['role_name']
