@@ -285,6 +285,7 @@ class UserController extends Controller {
         if ($existing_volunteer_user && $existing_volunteer_user->is_registered) {
             $existing_volunteer_user->password = Hash::make($request->input('password'));
             $existing_volunteer_user->save();
+            $existing_request->delete();
             return response()->json([
                 'status' => 'success',
                 'message' => 'Password changed successfully'

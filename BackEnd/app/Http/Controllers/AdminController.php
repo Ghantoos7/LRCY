@@ -898,7 +898,7 @@ class AdminController extends Controller {
             'user_ids.*' => 'integer',
             'training_ids.*' => 'integer'
         ]);
-
+    
         // Check if the validation fails
         if ($validator->fails()) {
             return response()->json([
@@ -907,7 +907,7 @@ class AdminController extends Controller {
                 'errors' => $validator->errors()
             ]);
         }
-
+    
         // Get the list of trainings and check if they exist
         $trainings = Training::findMany($request->input('training_ids'));
         if ($trainings->count() != count($request->input('training_ids'))) {
@@ -916,7 +916,7 @@ class AdminController extends Controller {
                 'message' => 'One or more trainings do not exist'
             ]);
         }
-
+    
         // Get the list of users and check if they exist
         $users = Volunteer_user::findMany($request->input('user_ids'));
         if ($users->count() != count($request->input('user_ids'))) {
@@ -925,17 +925,25 @@ class AdminController extends Controller {
                 'message' => 'One or more users do not exist'
             ]);
         }
-
+    
         // Loop through the users and add the trainings to the users in a try catch block and return a success message or an error message if an error occurs
         try {
             foreach ($users as $user) {
                 foreach ($trainings as $training) {
-                    $take = new Take([
-                        'user_id' => $user->id,
-                        'training_id' => $training->id,
-                        'takes_on_date' => \Carbon\Carbon::now()
-                    ]);
-                    $take->save();
+                    // Check if the user has already taken this training
+                    $existing_take = Take::where('user_id', $user->id)
+                        ->where('training_id', $training->id)
+                        ->first();
+
+                    // If the user has not taken this training before, create a new Take record
+                    if (!$existing_take) {
+                        $take = new Take([
+                            'user_id' => $user->id,
+                            'training_id' => $training->id,
+                            'takes_on_date' => \Carbon\Carbon::now()
+                        ]);
+                        $take->save();
+                    }
                 }
             }
             return response()->json([
@@ -949,7 +957,7 @@ class AdminController extends Controller {
             ]);
         }
       
-    }
+    }    
 
 
     function editTrainingForUser(Request $request) {
