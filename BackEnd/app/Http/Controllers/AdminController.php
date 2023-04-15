@@ -501,6 +501,7 @@ class AdminController extends Controller {
 
         // validate the request
         $validator = Validator::make($request->all(), [
+            'program_id' => 'required|integer',
             'event_main_picture' => 'required|string',
             'event_description' => 'required|string',
             'event_location' => 'required|string',
@@ -544,21 +545,32 @@ class AdminController extends Controller {
         }catch (\Exception $e) {
                 return response()->json([
                     'status' => 'error',
-                    'message' => 'Error creating responsible'
+                    'message' => 'Error creating event',
+                    'message' => $e->getMessage()
+                ]);
+        }
+
+        // Create the responsibles
+        try {
+
+            foreach ($request->input('responsibles') as $responsible) {
+                // Get the user based on the provided organization id
+                $user = volunteer_user::where('id', $responsible['user_id'])->first();
+                is_responsible::create([
+                    'user_id' => $responsible['user_id'],
+                    'role_name' => $responsible['role_name'],
+                    'event_id' => $event->id
                 ]);
             }
 
-             // Create the responsibles
-        foreach ($request->input('responsibles') as $responsible) {
-            // Get the user based on the provided organization id
-            $user = volunteer_user::where('organization_id', $responsible['organization_id'])->first();
-            Responsible::create([
-                'user_id' => $user,
-                'role_name' => $responsible['role_name'],
-                'event_id' => $event->id
-            ]);
-
+        }catch (\Exception $e) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Error adding responsibilities',
+                    'message' => $e->getMessage()
+                ]);
         }
+        
         
         // in the goals table, increment all rows that have the same program id and event type id as the event that was just created
         $goals = Goal::where('program_id', $event->program_id)->where('event_type_id', $event->event_type_id)->get();
@@ -636,7 +648,7 @@ class AdminController extends Controller {
             foreach ($responsibles as $responsible) {
                  // Get the user based on the provided organization id
                 $user = volunteer_user::where('organization_id', $responsible['organization_id'])->first();
-                Responsible::create([
+                is_responsible::create([
                     'event_id' => $event->id,
                     'user_id' => $responsible['user_id'],
                     'role_name' => $responsible['role_name']
