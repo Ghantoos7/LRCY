@@ -1191,4 +1191,46 @@ class AdminController extends Controller {
     }
 
 
+    function deleteTraining(Request $request) {
+
+        // Validate the request
+        $validator = Validator::make($request->all(), [
+            'training_id' => 'required|integer'
+        ]);
+
+        // Check if the validation fails
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Validation failed',
+                'errors' => $validator->errors()
+            ]);
+        }
+
+        // Get the training and check if it exists
+        $training = Training::find($request->input('training_id'));
+        if (!$training) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Training not found'
+            ]);
+        }
+
+        // Delete the training in a try catch block and return an error message if it fails
+        try {
+            $training->delete();
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Training deleted successfully'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to delete the training'
+            ]);
+        }
+
+    }
+
+
 }

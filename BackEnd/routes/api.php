@@ -107,10 +107,10 @@ Route::group(["prefix" => "v0.1",], function(){
             Route::post("add_training_for_user", [AdminController::class, "addTrainingForUser"]);
             Route::post("edit_training_for_user", [AdminController::class, "editTrainingForUser"]);
             Route::post("delete_training_for_user", [AdminController::class, "deleteTrainingForUser"]);
-            
             Route::post("add_training", [AdminController::class, "addTraining"]);
             Route::post("edit_training", [AdminController::class, "editTraining"]);
             Route::post("delete_training", [AdminController::class, "deleteTraining"]);
+            
         });
 
      });
