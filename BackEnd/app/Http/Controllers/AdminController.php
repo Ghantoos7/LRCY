@@ -14,6 +14,8 @@ use App\Models\Announcement;
 use App\Models\event;
 use App\Models\is_responsible;
 use App\Models\goal;
+use App\Models\training;
+use App\Models\take;
 
 class AdminController extends Controller {
 
@@ -887,5 +889,63 @@ class AdminController extends Controller {
         $goal->save();
 
     }
+
+
+    function addTrainingForUser(Request $request) {
+
+        // Validate the request
+        $validator = Validator::make($request->all(), [
+            'training_ids' => 'required|array',
+            'user_ids' => 'required|array',
+            'user_ids.*' => 'integer',
+            'training_ids.*' => 'integer'
+        ]);
+
+        // Check if the validation fails
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Validation failed',
+                'errors' => $validator->errors()
+            ]);
+        }
+
+        // Get the list of trainings and check if they exist
+        $trainings = Training::findMany($request->input('training_ids'));
+        if ($trainings->count() != count($request->input('training_ids'))) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'One or more trainings do not exist'
+            ]);
+        }
+
+        // Get the list of users and check if they exist
+        $users = Volunteer_user::findMany($request->input('user_ids'));
+        if ($users->count() != count($request->input('user_ids'))) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'One or more users do not exist'
+            ]);
+        }
+
+        // Loop through the users and add the trainings to the users
+        foreach ($users as $user) {
+            foreach ($trainings as $training) {
+                Take::create([
+                    'user_id' => $user->id,
+                    'training_id' => $training->id,
+                    'takes_on_date' => \Carbon\Carbon::now()
+                ]);
+            }
+        }
+
+        // Return a success message
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Trainings added to users successfully'
+        ]);
+
+    }
+
 
 }
