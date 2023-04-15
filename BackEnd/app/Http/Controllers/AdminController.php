@@ -1126,4 +1126,69 @@ class AdminController extends Controller {
     }
 
 
+    function editTraining(Request $request) {
+
+        // Validate the request
+        $validator = Validator::make($request->all(), [
+            'training_id' => 'required|integer',
+            'program_id' => 'integer',
+            'training_name' => 'string',
+            'training_description' => 'string'
+        ]);
+
+        // Check if the validation fails
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Validation failed',
+                'errors' => $validator->errors()
+            ]);
+        }
+
+        // Get the training and check if it exists
+        $training = Training::find($request->input('training_id'));
+        if (!$training) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Training not found'
+            ]);
+        }
+
+        // Get the program if it was sent and check if it exists
+        if ($request->has('program_id')) {
+            $program = Program::find($request->input('program_id'));
+            if (!$program) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Program not found'
+                ]);
+            }
+        }
+
+        // Update the training fields that were sent in a try catch block and return a success message or an error message if it fails
+        try {
+            if ($request->has('program_id')) {
+                $training->program_id = $program->id;
+            }
+            if ($request->has('training_name')) {
+                $training->training_name = $request->input('training_name');
+            }
+            if ($request->has('training_description')) {
+                $training->training_description = $request->input('training_description');
+            }
+            $training->save();
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Training updated successfully'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to update training'
+            ]);
+        }
+
+    }
+
+
 }
