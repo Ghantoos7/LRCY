@@ -1006,4 +1006,60 @@ class AdminController extends Controller {
     }
 
 
+    function deleteTrainingForUser(Request $request) {
+
+        // Validate the request
+        $validator = Validator::make($request->all(), [
+            'training_id' => 'required|integer',
+            'user_id' => 'required|integer'
+        ]);
+
+        // Check if the validation fails
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Validation failed',
+                'errors' => $validator->errors()
+            ]);
+        }
+
+        // Get the training and check if it exists
+        $training = Training::find($request->input('training_id'));
+        if (!$training) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Training not found'
+            ]);
+        }
+
+        // Get the user and check if it exists
+        $user = Volunteer_user::find($request->input('user_id'));
+        if (!$user) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'User not found'
+            ]);
+        }
+
+        // Get the take record and check if it exists
+        $take = Take::where('user_id', $user->id)->where('training_id', $training->id)->first();
+        if (!$take) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'User did not take this training yet'
+            ]);
+        }
+
+        // Delete the take record
+        $take->delete();
+
+        // Return a success message
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Training deleted successfully'
+        ]);
+
+    }
+
+
 }
