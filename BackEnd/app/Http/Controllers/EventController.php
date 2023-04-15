@@ -13,7 +13,7 @@ use App\Models\picture;
 class EventController extends Controller {
 
 
-    public function getYearlyGoals() {
+    function getYearlyGoals() {
 
     // Gets yearly goals and return them grouped based on program id
 

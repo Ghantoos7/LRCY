@@ -584,6 +584,7 @@ class PostController extends Controller {
     
         // Return the replies or an error response if no replies found
         return $replies->isEmpty() ? response()->json(['status' => 'error', 'message' => 'No replies found for this comment']) : response()->json(['status' => 'success', 'replies' => $replies]);
+    
     }    
 
 

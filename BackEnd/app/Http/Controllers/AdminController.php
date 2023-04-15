@@ -8,7 +8,6 @@ use App\Models\volunteer_user;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Models\login_attempt;
-use App\Models\Branch;
 use App\Models\Recover_request;
 use App\Models\Announcement;
 use App\Models\event;
