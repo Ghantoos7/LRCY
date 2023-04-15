@@ -125,13 +125,13 @@ class AdminController extends Controller {
     function addUser(Request $request) {
         
         $validator = Validator::make($request->all(), [
+            "admin_branch_id" => "required|integer",
             "first_name" => "required|string",
             "last_name" => "required|string",
             "organization_id" => "required|integer",
             "date_of_birth" => "required|date",
             "position" => "required|string",
             "gender" => "required|string",
-            "branch" => "required|string",
             "user_type_id" => "required|integer|in:0,1",
             "status" => "required|string",
             "start_date" => "required|date",
@@ -158,14 +158,6 @@ class AdminController extends Controller {
                 "status" => "Invalid gender input"
             ]);
         }
-
-        $branch = Branch::where('branch_name', $request->input('branch'))->first();
-    
-        if (!$branch) {
-            return response()->json([
-                "status" => "Branch not found"
-            ]);
-        }
     
         try {
             $user = volunteer_user::create([
@@ -175,7 +167,7 @@ class AdminController extends Controller {
                 'user_dob' => $request->input('date_of_birth'),
                 'user_position' => $request->input('position'),
                 'gender' => $gender,
-                'branch_id' => $branch->id,
+                'branch_id' => $request->input('admin_branch_id'),
                 'user_type_id' => $request->input('user_type_id'),
                 'status' => $request->input('status'),
                 'user_start_date' => $request->input('start_date'),
