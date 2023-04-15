@@ -99,7 +99,7 @@
     position: absolute;
     left: 315px;
     top: 25px;
-    color: #AAA7AE
+    color: #AAA7AE;
 }
 
 .like-count{
@@ -107,5 +107,54 @@
     position: absolute;
     left: 350px;
     top: 30px;
-    color: #AAA7AE
+    color: #AAA7AE;
+}
+
+.accordition{
+    position: absolute;
+    width: 300px;
+    top: 65px;
+    left: 55px;
+    background-color: transparent;
+}
+
+.view-replies-button{
+    color: #AAA7AE;
+}
+
+.reply-profile-picture{
+    width: 40px;
+}
+
+.reply-username{
+    position:absolute;
+    left: 70px;
+    bottom: 36px;
+    font-size: 15px;
+    color:black;
+}
+
+.reply-comment{
+    position:absolute;
+    left: 70px;
+    top: 50px;
+    font-size: 18px;
+    width: 250px;
+    color:black;
+}
+
+.reply-likes{
+    font-size: 2em;
+    position: absolute;
+    left: 315px;
+    top: 25px;
+    color: #AAA7AE;
+}
+
+.reply-like-count{
+    font-size: 18px;
+    position: absolute;
+    left: 350px;
+    top: 30px;
+    color: #AAA7AE;
 }

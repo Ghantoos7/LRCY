@@ -17,7 +17,7 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-text class="comment-count">2</ion-text>
+  <ion-text class="comment-count">1</ion-text>
   <ion-text class="comment-word">Comments</ion-text>
   <ion-icon class="sort" name="options-outline"></ion-icon>
 
@@ -27,6 +27,25 @@
     <ion-text class="comment">ut labore et dolore magna aliqua</ion-text>
     <ion-icon class="likes" name="heart-outline"></ion-icon>
     <ion-text class="like-count">3</ion-text>
+    
+    <ion-accordion-group>
+      <ion-accordion class="accordition" value="first">
+        <ion-item slot="header">
+          <ion-label class="view-replies-button">View Replies</ion-label>
+        </ion-item>
+
+        <div slot="content">
+          <div class="reply-container">
+            <ion-img class="reply-profile-picture" src="assets/imgs/NayAbiSaad.png "></ion-img>
+            <ion-text class="reply-username">Nai Abi Saad</ion-text>
+            <ion-text class="reply-comment">ut labore et dolore magna aliqua</ion-text>
+            <ion-icon class="reply-likes" name="heart-outline"></ion-icon>
+            <ion-text class="reply-like-count">3</ion-text>
+          </div>
+        </div>
+      </ion-accordion>
+    </ion-accordion-group>
+
   </div>
 
 </ion-content>
