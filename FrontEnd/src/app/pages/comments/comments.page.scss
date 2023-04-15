@@ -150,3 +150,31 @@
     width: 250px;
     color:black;
 }
+
+.input {
+    position: fixed;
+    top: 780px;
+    width: 300px;
+    height: 50px;
+    left: 45px;
+    border-radius: 10px;
+    --background: #E9E7E7;
+    --color: #8F8F8F;
+    --padding-end: 45px;
+    --padding-start: 20px;
+    --placeholder-color: #8F8F8F;
+    --placeholder-opacity: 0.8;
+}
+
+.send-icon{
+    position: absolute;
+    left: 270px;
+    font-size: 20px;
+    color: #45579A;
+}
+
+.comment-profile{
+    position: relative;
+    width: 35px;
+    left: 8px;
+}
