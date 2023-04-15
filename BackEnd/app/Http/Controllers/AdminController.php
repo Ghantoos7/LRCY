@@ -18,33 +18,6 @@ use App\Models\goal;
 class AdminController extends Controller {
 
 
-    private function validatePassword($password) {
-    
-    // Validate the password
-
-        $errors = array();
-        
-        if (strlen($password) < 8) {
-            $errors[] = 'Password must be at least 8 characters long.';
-        }
-        
-        if (!preg_match('/[a-z]/', $password)) {
-            $errors[] = 'Password must contain at least one lowercase letter.';
-        }
-        
-        if (!preg_match('/[A-Z]/', $password)) {
-            $errors[] = 'Password must contain at least one uppercase letter.';
-        }
-
-        if (!preg_match('/\d/', $password)) {
-            $errors[] = 'Password must contain at least one digit.';
-        }
-        
-        return $errors;
-
-    }
-
-
     function adminLogin(Request $request) {
 
         $request->validate([

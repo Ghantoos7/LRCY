@@ -315,6 +315,7 @@ class PostController extends Controller {
         $status = $comment_saved ? 'success' : 'error';
         
         return response()->json(['status' => $status, 'message' => $message]);
+        
     }
     
 

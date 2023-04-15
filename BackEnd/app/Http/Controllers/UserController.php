@@ -31,7 +31,7 @@ class UserController extends Controller {
         // Determine the status message based on the existence and registration status of the volunteer user
         $status = $existing_volunteer_user ? ($existing_volunteer_user->is_registered ? 'Organization ID found, user already registered' : 'Organization ID found, user not registered') : 'Organization ID not found';
         
-        // Return a JSON response with the status message and appropriate HTTP status code
+        // Return a JSON response with the status message
         return response()->json([
 
             'status' => $status
@@ -121,8 +121,8 @@ class UserController extends Controller {
         $existing_volunteer_user->save();
 
         $token = $existing_volunteer_user->createToken('auth_token')->plainTextToken;
+        
         // Return a JSON response with the appropriate status message and HTTP status code
-
         return response()->json([
             'status' => 'Organization ID found, user registered successfully',
             'token' => $token,
@@ -287,12 +287,16 @@ class UserController extends Controller {
     }
 
     
-    function getUserInfo($user_id = null) {
+    function getUserInfo($user_id = null,$branch_id) {
         
         // Retrieve the user information from the database
-        $users = $user_id ? [volunteer_user::find($user_id)] : volunteer_user::paginate(10);
+        if ($user_id) {
+            $users = [volunteer_user::find($user_id)];
+        } else {
+            $users = volunteer_user::where('branch_id', $branch_id)->paginate(10);
+        }
     
-        // If no user(s) found, return a 404 response
+        // If no user(s) found, return an error response
         if (count($users) === 0 || $users[0] === null) {
             return response()->json([    
                 'status' => 'error', 'message' => 'User not found'
@@ -612,28 +616,28 @@ class UserController extends Controller {
 
     function getTotalLikesReceived($user_id) {
             
-            // Find the user
-            $existing_volunteer_user = volunteer_user::find($user_id);
+        // Find the user
+        $existing_volunteer_user = volunteer_user::find($user_id);
     
-            if (!$existing_volunteer_user) {
-                return response()->json(
-                    ['status' => 'error', 
-                    'message' => 'User not found'
+        if (!$existing_volunteer_user) {
+            return response()->json(
+                ['status' => 'error',                     
+                'message' => 'User not found'
                 ]);
-            }
+        }
     
-            // Get the user's posts
-            $posts = Post::where('user_id', $user_id)->get();
+        // Get the user's posts
+        $posts = Post::where('user_id', $user_id)->get();
 
-            // Get the user's comments
-            $comments = Comment::where('user_id', $user_id)->get();
+        // Get the user's comments
+        $comments = Comment::where('user_id', $user_id)->get();
     
-            // Total likes received = sum of likes on posts + sum of likes on comments
-            $total_likes_received = $posts->sum('like_count') + $comments->sum('comment_like_count');
+        // Total likes received = sum of likes on posts + sum of likes on comments
+        $total_likes_received = $posts->sum('like_count') + $comments->sum('comment_like_count');
 
-            return response()->json([
-                'total_likes_received' => $total_likes_received
-            ]);
+        return response()->json([
+            'total_likes_received' => $total_likes_received
+        ]);
 
     }
 

@@ -20,23 +20,22 @@ use App\Http\Middleware\AdminMiddleware;
 */
 
 Route::group(["prefix" => "v0.1",], function(){
-
-   
     
     Route::group(["prefix" => "auth"], function(){
+
         Route::post("signup", [UserController::class, "signup"]);
         Route::post("register", [UserController::class, "register"]);
         Route::post("login", [UserController::class, "login"]);
         Route::post("recover_request", [UserController::class, "recoverRequest"]);
         Route::post("change_password", [UserController::class, "changePassword"]);
         Route::post("admin_login", [AdminController::class, "adminLogin"]);
-       
 
     });
-    
 
     Route::group(["middleware" =>"auth:sanctum"], function(){
+
         Route::group(["prefix" => "user"], function(){
+
             Route::post("logout", [UserController::class, "logout"]);
             Route::post("edit_profile", [UserController::class, "editProfile"]);
             Route::get("get_user_info/{user_id?}", [UserController::class, "getUserInfo"]); 
@@ -49,9 +48,11 @@ Route::group(["prefix" => "v0.1",], function(){
             Route::get("get_comments_count/{user_id}", [UserController::class, "getCommentsCount"]);
             Route::get("get_total_likes_received/{user_id}", [UserController::class, "getTotalLikesReceived"]);
             Route::get("get_own_posts/{user_id}", [UserController::class, "getOwnPosts"]);
+
         });
 
         Route::group(["prefix" => "post"], function(){
+
             Route::post("create_post", [PostController::class, "createPost"]);
             Route::post("edit_post", [PostController::class, "editPost"]);
             Route::post("delete_post", [PostController::class, "deletePost"]);
@@ -70,9 +71,11 @@ Route::group(["prefix" => "v0.1",], function(){
             Route::get("get_replies/{comment_id}", [PostController::class, "getReplies"]);
             Route::get("get_post_likes/{post_id}", [PostController::class, "getPostLikes"]);
             Route::get("get_comment_likes/{comment_id}", [PostController::class, "getCommentLikes"]);
+
         });
 
         Route::group(["prefix" => "event"], function(){
+
             Route::get("get_yearly_goals/{year?}", [EventController::class, "getYearlyGoals"]);
             Route::get("get_event_info/{event_id?}", [EventController::class, "getEventInfo"]);
             Route::get("get_announcements", [EventController::class, "getAnnouncements"]);
@@ -83,7 +86,9 @@ Route::group(["prefix" => "v0.1",], function(){
     });
 
     Route::group(["middleware" => ["auth:sanctum",AdminMiddleware::class]], function(){
+
         Route::group(["prefix" => "admin"], function(){
+
             Route::post("logout", [AdminController::class, "logout"]);
             Route::post("add_user", [AdminController::class, "addUser"]);
             Route::post("edit_user", [AdminController::class, "editUser"]);
@@ -99,6 +104,7 @@ Route::group(["prefix" => "v0.1",], function(){
             Route::post("set_yearly_goal", [AdminController::class, "setYearlyGoal"]);
             Route::post("edit_yearly_goal", [AdminController::class, "editYearlyGoal"]);
             Route::post("delete_yearly_goal", [AdminController::class, "deleteYearlyGoal"]);
+
         });
 
      });
