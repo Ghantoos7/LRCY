@@ -38,7 +38,7 @@ Route::group(["prefix" => "v0.1",], function(){
 
             Route::post("logout", [UserController::class, "logout"]);
             Route::post("edit_profile", [UserController::class, "editProfile"]);
-            Route::get("get_user_info/{user_id?}", [UserController::class, "getUserInfo"]); 
+            Route::get("get_user_info/{branch_id}/{user_id?}", [UserController::class, "getUserInfo"]); 
             Route::get("get_trainings_info/{user_id}", [UserController::class, "getTrainingsInfo"]); 
             Route::get("get_events_organized/{user_id}", [UserController::class, "getEventsOrganized"]);
             Route::get("get_events_organized_count/{user_id}", [UserController::class, "getEventsOrganizedCount"]);

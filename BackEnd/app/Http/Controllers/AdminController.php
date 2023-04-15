@@ -832,7 +832,7 @@ class AdminController extends Controller {
     
     }
 
-    public function deleteYearlyGoal(Request $request) {
+    function deleteYearlyGoal(Request $request) {
 
         try {
             $goal = Goal::where('id', $request->input('goal_id'))->first();
@@ -930,11 +930,12 @@ class AdminController extends Controller {
         try {
             foreach ($users as $user) {
                 foreach ($trainings as $training) {
-                    Take::create([
+                    $take = new Take([
                         'user_id' => $user->id,
                         'training_id' => $training->id,
                         'takes_on_date' => \Carbon\Carbon::now()
                     ]);
+                    $take->save();
                 }
             }
             return response()->json([
@@ -944,7 +945,7 @@ class AdminController extends Controller {
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to add trainings to users',
+                'message' => $e->getMessage(),
             ]);
         }
       
