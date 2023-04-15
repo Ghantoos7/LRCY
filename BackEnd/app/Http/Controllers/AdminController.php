@@ -929,23 +929,28 @@ class AdminController extends Controller {
             ]);
         }
 
-        // Loop through the users and add the trainings to the users
-        foreach ($users as $user) {
-            foreach ($trainings as $training) {
-                Take::create([
-                    'user_id' => $user->id,
-                    'training_id' => $training->id,
-                    'takes_on_date' => \Carbon\Carbon::now()
-                ]);
+        // Loop through the users and add the trainings to the users in a try catch block and return a success message or an error message if an error occurs
+        try {
+            foreach ($users as $user) {
+                foreach ($trainings as $training) {
+                    Take::create([
+                        'user_id' => $user->id,
+                        'training_id' => $training->id,
+                        'takes_on_date' => \Carbon\Carbon::now()
+                    ]);
+                }
             }
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Trainings added to users successfully'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to add trainings to users',
+            ]);
         }
-
-        // Return a success message
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Trainings added to users successfully'
-        ]);
-
+      
     }
 
 
@@ -994,16 +999,21 @@ class AdminController extends Controller {
             ]);
         }
 
-        // Update the take record
-        $take->takes_on_date = $request->input('takes_on_date');
-        $take->save();
-
-        // Return a success message
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Training updated successfully'
-        ]);
-
+        // Update the take record in a try catch block and return a success message or an error message if it fails
+        try {
+            $take->takes_on_date = $request->input('takes_on_date');
+            $take->save();
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Training updated successfully'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to update training'
+            ]);
+        }
+    
     }
 
 
@@ -1051,14 +1061,19 @@ class AdminController extends Controller {
             ]);
         }
 
-        // Delete the take record
-        $take->delete();
-
-        // Return a success message
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Training deleted successfully'
-        ]);
+        // Delete the take record in a try catch block and return an error message if it fails
+        try {
+            $take->delete();
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Training deleted successfully'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to delete the training'
+            ]);
+        }
 
     }
 
@@ -1104,7 +1119,7 @@ class AdminController extends Controller {
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Training not created'
+                'message' => 'Failed to create the training'
             ]);
         }
 
