@@ -16,6 +16,7 @@ use App\Models\is_responsible;
 use App\Models\goal;
 use App\Models\training;
 use App\Models\take;
+use App\Models\program;
 
 class AdminController extends Controller {
 
@@ -1058,6 +1059,54 @@ class AdminController extends Controller {
             'status' => 'success',
             'message' => 'Training deleted successfully'
         ]);
+
+    }
+
+
+    function addTraining(Request $request) {
+
+        // Validate the request
+        $validator = Validator::make($request->all(), [
+            'program_id' => 'required|integer',
+            'training_name' => 'required|string',
+            'training_description' => 'required|string'
+        ]);
+
+        // Check if the validation fails
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Validation failed',
+                'errors' => $validator->errors()
+            ]);
+        }
+
+        // Get the program and check if it exists
+        $program = Program::find($request->input('program_id'));
+        if (!$program) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Program not found'
+            ]);
+        }
+
+        // Create the training and return a success message or error message if the training was not created
+        try {
+            Training::create([
+                'program_id' => $program->id,
+                'training_name' => $request->input('training_name'),
+                'training_description' => $request->input('training_description')
+            ]);
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Training created successfully'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Training not created'
+            ]);
+        }
 
     }
 
