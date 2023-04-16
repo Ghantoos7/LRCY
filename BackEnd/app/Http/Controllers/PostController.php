@@ -543,16 +543,30 @@ class PostController extends Controller {
     }
 
 
-    function getComments($post_id) {
-            
+    function getComments($post_id, $sort_by = 'date') {
+
         // Find the post
         $post = Post::find($post_id);
         
         // Return error response if post not found
-        if (!$post) return response()->json(['status' => 'error', 'message' => 'Post not found']);
+        if (!$post) {
+            return response()->json(['status' => 'error', 'message' => 'Post not found']);
+        }
         
-        // Get the comments associated with the post, paginated
-        $comments = Comment::where('post_id', $post_id)->orderBy('created_at', 'desc')->paginate(10);
+        // Get the comments associated with the post
+        $query = Comment::where('post_id', $post_id);
+        
+        // Sort by popularity
+        if ($sort_by === 'popularity') {
+            $query->orderByRaw('(comment_like_count + comment_reply_count) DESC')->orderBy('created_at', 'desc');
+        }
+        // Sort by date
+        else {
+            $query->orderBy('created_at', 'desc');
+        }
+        
+        // Paginate the comments
+        $comments = $query->paginate(10);
         
         // Remove the fields we don't want to return
         foreach ($comments as $comment) {
@@ -561,8 +575,8 @@ class PostController extends Controller {
         
         // Return the comments or an error response if no comments found
         return $comments->isEmpty() ? response()->json(['status' => 'error', 'message' => 'No comments found for this post']) : response()->json(['status' => 'success', 'comments' => $comments]);
-    
-    }
+   
+    }    
 
 
     function getReplies($comment_id) {

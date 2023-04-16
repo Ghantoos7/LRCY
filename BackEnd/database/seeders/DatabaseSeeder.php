@@ -41,7 +41,6 @@ class DatabaseSeeder extends Seeder
         post::factory(20)->create();
         branch::factory(20)->create();
         comment_like::factory(20)->create();
-        comment::factory(20)->create();
         event_image::factory(20)->create();
         event_type::factory(20)->create();
         is_responsible::factory(20)->create();
@@ -53,8 +52,8 @@ class DatabaseSeeder extends Seeder
         take::factory(50)->create();
         training::factory(15)->create();
         goal::factory(20)->create();
-        event::factory(20)->create();*/
-        announcement::factory(20)->create();
-
+        event::factory(20)->create();
+        announcement::factory(20)->create();*/
+        comment::factory(20)->create();
     }
 }
