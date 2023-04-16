@@ -145,5 +145,44 @@ ion-card{
     --background: #B11433;
 }
 
+.avatar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh; /* Set the height of the avatar container to fill the viewport */
+  }
+
+  ion-avatar{
+    height: 100px;
+    width: 100px;
+  }
+
+  .menu{
+    --ion-background-color: #45579A;
+  }
+
+  ion-label{
+    color: white;
+  }
+  ion-menu-button {
+    --color: #f0f0f0; 
+  
+  }
+
+  ion-title{
+    --color: white;
+  }
+  .custom-button{
+    --background: white;
+    --color: black;
+  }
+
+  ion-toolbar{
+    --background: #B11433;
+  }
+
+  .menu-tool{
+    --background:var(--ion-background-color)
+  }
 
 

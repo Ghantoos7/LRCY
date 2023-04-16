@@ -2,21 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { Router } from '@angular/router';
+
 @Component({
-  selector: 'app-statistics',
-  templateUrl: './statistics.page.html',
-  styleUrls: ['./statistics.page.scss'],
+  selector: 'app-edit-profile',
+  templateUrl: './edit-profile.page.html',
+  styleUrls: ['./edit-profile.page.scss'],
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule]
 })
-export class StatisticsPage implements OnInit {
+export class EditProfilePage implements OnInit {
 
-  constructor(private router:Router) { }
+  constructor() { }
 
   ngOnInit() {
   }
-
-
 
 }

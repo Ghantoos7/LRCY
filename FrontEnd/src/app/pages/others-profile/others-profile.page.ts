@@ -2,19 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { Route, Router } from '@angular/router';
 @Component({
-  selector: 'app-feed',
-  templateUrl: './feed.page.html',
-  styleUrls: ['./feed.page.scss'],
+  selector: 'app-profile',
+  templateUrl: './others-profile.page.html',
+  styleUrls: ['./others-profile.page.scss'],
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule]
 })
-export class FeedPage implements OnInit {
+export class ProfilePage implements OnInit {
 
   constructor(private router:Router) { }
 
   ngOnInit() {
+  }
+
+  goToEditForm(){
+this.router.navigate(['edit-profile']);
   }
 
   goProfile(){
@@ -43,4 +47,5 @@ export class FeedPage implements OnInit {
       logout(){
       
       }
+
 }

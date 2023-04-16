@@ -17,6 +17,11 @@ export const routes: Routes = [
     path: 'profile',
     loadChildren: () => import('../app/pages/profile/profile.routes').then((m) => m.routes)
   },
+
+  {
+    path: 'others-profile',
+    loadChildren: () => import('./pages/others-profile/others-profile.routes').then((m) => m.routes)
+  },
   
   {
     path: 'sign-in',
@@ -49,7 +54,8 @@ export const routes: Routes = [
   {
     path: 'new-password',
     loadComponent: () => import('./pages/new-password/new-password.page').then( m => m.NewPasswordPage)
-  },  {
+  },
+  {
     path: 'pending-request',
     loadComponent: () => import('./pages/pending-request/pending-request.page').then( m => m.PendingRequestPage)
   },
@@ -64,6 +70,10 @@ export const routes: Routes = [
   {
     path: 'comments',
     loadComponent: () => import('./pages/comments/comments.page').then( m => m.CommentsPage)
+  },
+  {
+    path: 'edit-profile',
+    loadComponent: () => import('./pages/edit-profile/edit-profile.page').then( m => m.EditProfilePage)
   },
 
 
