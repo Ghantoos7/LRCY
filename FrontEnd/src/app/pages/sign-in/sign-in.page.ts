@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-in',
@@ -12,9 +13,17 @@ import { IonicModule } from '@ionic/angular';
 })
 export class SignInPage implements OnInit {
 
-  constructor() { }
+  constructor(private router:Router) { }
 
   ngOnInit() {
+  }
+
+  goToSignUp(){
+    this.router.navigate(['/sign-up']);
+  }
+
+  goToRequest(){
+    this.router.navigate(['/recover-password']);
   }
 
 }
