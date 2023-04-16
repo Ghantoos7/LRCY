@@ -6,4 +6,17 @@ h6, ion-text {
      --color: white;
 }
 
+ion-checkbox {
+    --size: 32px;
+    --checkbox-background-checked: #45579A;
+    --checkbox-background: white;
+    color: white;
+    top: 30px;
+  }
+  
+  ion-checkbox::part(container) {
+    border-radius: 6px;
+    border: 1px solid #45579A;
+    color: white;
+  }
   
