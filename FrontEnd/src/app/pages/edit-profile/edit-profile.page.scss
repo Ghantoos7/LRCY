@@ -25,6 +25,32 @@ ion-card{
     --background: #45579A;
   }
 
+  ion-item{
+    padding-top: 60px;
+  }
+
+
+
+  ion-label{
+    color: black;
+  }
+
+  .bio{
+    height: 500px;
+  }
+
+  .custom-input{
+    --background: #46589B; 
+  --color: white; 
+  border-radius: 50px;
+  width: 300px;
+  }
+
+  .bio{
+
+  --height: 500px !important;
+  }
+
   .badge {
     position: absolute;
     bottom: -2px;
