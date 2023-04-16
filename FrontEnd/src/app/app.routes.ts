@@ -65,6 +65,10 @@ export const routes: Routes = [
     path: 'comments',
     loadComponent: () => import('./pages/comments/comments.page').then( m => m.CommentsPage)
   },
+  {
+    path: 'edit-profile',
+    loadComponent: () => import('./pages/edit-profile/edit-profile.page').then( m => m.EditProfilePage)
+  },
 
 
 ];
