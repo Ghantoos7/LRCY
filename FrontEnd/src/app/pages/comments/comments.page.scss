@@ -78,11 +78,19 @@
 }
 
 .username{
-    position:absolute;
+    position:relative;
     left: 70px;
-    bottom: 36px;
+    bottom: 55px;
     font-size: 15px;
     color:black;
+}
+
+.delete-comment{
+    position: absolute;
+    left: 200px;
+    bottom: 55px;
+    font-size: 23px;
+    color: #AAA7AE;
 }
 
 .comment{
@@ -112,12 +120,16 @@
 
 .accordition{
     position: absolute;
-    width: 300px;
     top: 65px;
     left: 55px;
     background-color: transparent;
     --background: transparent;
    }
+
+.accordition-box{
+    position: relative;
+    width: 142px;
+}
 
 .view-replies-button{
     color: #AAA7AE;
@@ -125,8 +137,7 @@
 
 .reply-container{
     position:relative;
-    width: 200px;
-    height: 15vh;
+    height: auto;
 }
 
 .reply-profile-picture{
