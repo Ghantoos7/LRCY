@@ -21,4 +21,31 @@ export class ProfilePage implements OnInit {
 this.router.navigate(['edit-profile']);
   }
 
+  goProfile(){
+    this.router.navigate(['/profile']);
+      }
+    
+      goFeed(){
+        this.router.navigate(['/feed']);
+      }
+      
+      goGoals(){
+        this.router.navigate(['/yearly-goals']);
+      }
+    
+      goGallery(){
+        this.router.navigate(['/gallery']);
+      }
+    
+      goAnnouncements(){
+        this.router.navigate(['/announcements']);
+      }
+    
+      toggleDarkMode(){
+    
+      }
+      logout(){
+      
+      }
+
 }
