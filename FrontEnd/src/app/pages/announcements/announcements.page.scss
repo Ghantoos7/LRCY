@@ -77,6 +77,10 @@ ion-text{
   align-items: center;
   height: 100vh; /* Set the height of the avatar container to fill the viewport */
 }
+.menu-tool{
+  --background:var(--ion-background-color)
+}
+
 
 ion-avatar{
   height: 100px;

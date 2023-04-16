@@ -91,6 +91,10 @@
     z-index: 1;
   }
 
+  .menu-tool{
+    --background:var(--ion-background-color)
+  }
+
   .avatar-container {
     display: flex;
     flex-direction: column;

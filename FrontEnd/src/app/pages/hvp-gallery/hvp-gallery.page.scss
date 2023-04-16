@@ -48,6 +48,10 @@
     --color: #f0f0f0; 
   
   }
+  .menu-tool{
+    --background:var(--ion-background-color)
+  }
+
   
   ion-tab-button ion-icon {
     color: #ffffff; 
