@@ -47,14 +47,14 @@
 .header-container .post-date{
     position: relative;
     bottom: 25px;
-    left: 5px;
+    right: 90px;
     font-size: 13px;
     color: #8F8F8F;
 }
 
 .header-container .name{
     position: relative;
-    right: 118px;
+    right:67px;
     bottom: 10px;
     font-size: 13px;
 }
@@ -139,8 +139,8 @@ ion-card{
 }
 
 .fab{
-    position: absolute;
-    top: 200px;
+    position: fixed;
+    top: 770px;
     left: 315px;
     --background: #B11433;
 }
@@ -149,40 +149,52 @@ ion-card{
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100vh; /* Set the height of the avatar container to fill the viewport */
-  }
+    height: 100vh;
+}
 
-  ion-avatar{
+ion-avatar{
     height: 100px;
     width: 100px;
-  }
+}
 
-  .menu{
-    --ion-background-color: #45579A;
-  }
+.menu{
+--ion-background-color: #45579A;
+}
 
-  ion-label{
-    color: white;
-  }
-  ion-menu-button {
-    --color: #f0f0f0; 
+ion-label{
+color: white;
+}
+
+ion-menu-button {
+--color: #f0f0f0; 
+}
+
+ion-title{
+--color: white;
+}
+
+.custom-button{
+--background: white;
+--color: black;
+}
+
+ion-toolbar{
+--background: #B11433;
+}
+
+.menu-tool{
+--background:var(--ion-background-color)
+}
+
+.my-custom-class .alert-wrapper {
+    background-color: white;
+}
   
-  }
-
-  ion-title{
-    --color: white;
-  }
-  .custom-button{
-    --background: white;
-    --color: black;
-  }
-
-  ion-toolbar{
-    --background: #B11433;
-  }
-
-  .menu-tool{
-    --background:var(--ion-background-color)
-  }
+.my-custom-class .alert-button {
+    color: black;
+}
+  
+  
+  
 
 

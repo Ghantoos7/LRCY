@@ -29,44 +29,45 @@
       <ion-title>Your Feed</ion-title>
     </ion-toolbar>
   </ion-header>
-<ion-content class="whitebackground">
 
-  <ion-card color="dark">
-    <div class="header-container">
-      <img class="card-profile-picture" src="assets/imgs/profile-picture.png">
-      <ion-text class="username">Ghnatoos7</ion-text>
-      <ion-text class="post-date"> • 1d ago</ion-text>
-      <ion-text class="name">Georgio Ghnatos</ion-text>
-      <ion-icon class="more-options" name="ellipsis-vertical-outline"></ion-icon>
-    </div>
+  <ion-content class="whitebackground">
 
-    <ion-card-content>
-      <div class="caption-container">
-        <ion-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
-        nostrud exercitation and big muah me love you all 
-        </ion-text>
-      </div>  
-      <ion-img class="post-image" src="assets/imgs/post.png"/>
-    </ion-card-content>
+    <ion-card color="dark">
+      <div class="header-container">
+        <img (click)="showProfile()" class="card-profile-picture" src="assets/imgs/profile-picture.png">
+        <ion-text (click)="showProfile()" class="username">Ghnatoos7</ion-text>
+        <ion-text (click)="showProfile()" class="name">Georgio Ghnatos</ion-text>
+        <ion-text class="post-date"> • 1d ago</ion-text>
+        <ion-icon class="more-options" name="ellipsis-vertical-outline"></ion-icon>
+      </div>
 
-    <ion-footer>
-      <ion-icon class="likes" name="heart-outline"></ion-icon>
-      <ion-text class="like-count" color="danger">0</ion-text>
-      <ion-img class="comments" src="assets/icon/comments.png"></ion-img>
-      <ion-text class="comment-count">0</ion-text>
-      <ion-input class="input"  placeholder="Comment on this post...">
-        <ion-icon class="send-icon" name="send"></ion-icon>
-      </ion-input>
-    </ion-footer>  
-  </ion-card>
+      <ion-card-content>
+        <div class="caption-container">
+          <ion-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
+          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
+          nostrud exercitation and big muah me love you all 
+          </ion-text>
+        </div>  
+        <ion-img class="post-image" src="assets/imgs/post.png"/>
+      </ion-card-content>
 
-  <ion-fab >
-    <ion-fab-button class="fab">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+      <ion-footer>
+        <ion-icon class="likes" name="heart-outline"></ion-icon>
+        <ion-text class="like-count" color="danger">0</ion-text>
+        <ion-img class="comments" src="assets/icon/comments.png"></ion-img>
+        <ion-text class="comment-count">0</ion-text>
+        <ion-input class="input"  placeholder="Comment on this post...">
+          <ion-icon class="send-icon" name="send"></ion-icon>
+        </ion-input>
+      </ion-footer>  
+    </ion-card>
 
-</ion-content>
+    <ion-fab>
+      <ion-fab-button class="fab">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
+  </ion-content>
 </div>
 
