@@ -3,7 +3,11 @@
 <ion-content [fullscreen]="true">
   <h1>Admin Panel</h1>
   <h1>Welcome Back!</h1>
-
+  <ion-fab  vertical="top" horizontal="end" [edge]="true">
+    <ion-fab-button>
+      <ion-icon name="moon"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
   <div class="card-container">
     <ion-card class="top-card">
       <ion-card-content>
@@ -50,4 +54,9 @@
       </ion-card-content>
     </ion-card>
   </div>
+  <ion-fab  vertical="bottom" horizontal="end" [edge]="true">
+    <ion-fab-button>
+      <ion-icon name="log-out"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
