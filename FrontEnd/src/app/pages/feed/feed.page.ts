@@ -20,18 +20,28 @@ export class FeedPage implements OnInit {
 
   async showProfile() {
     const alert = await this.alertController.create({
-      header: 'Profile',
-      message: 'hello',
+      header: 'Nay Abi Saad | General Assembly',
+      message: 'This is my bio',
       cssClass: 'my-custom-class',
-      buttons: ['View Profile'],
+      buttons: [{
+        text: 'View Profile',
+        cssClass: 'custom-alert-button',
+        handler: () => {
+          this.router.navigate(['/others-profile']); 
+        }
+      }]
     });
   
+
     await alert.present();
   }
 
   ngOnInit() {
   }
 
+  goToPostForm(){
+    this.router.navigate(['/post'])
+  }
   goProfile(){
     this.router.navigate(['/profile']);
   }

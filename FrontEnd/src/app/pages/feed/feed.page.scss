@@ -187,18 +187,15 @@ ion-toolbar{
 }
 
 .my-custom-class .alert-wrapper {
-    background-color: black;
-}
-  
-.my-custom-class .alert-button {
-    color: black;
+    background-color: #B11433;
+    color: white;
 }
 
-.my-custom-class img {
-    max-width: 100%;
-    height: auto;
+button.alert-button.custom-alert-button {
+    background-color: #B11433;
+    color: var(--ion-color-success-contrast);
   }
-  
+
   
   
   
