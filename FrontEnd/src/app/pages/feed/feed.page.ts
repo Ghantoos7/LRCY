@@ -21,7 +21,7 @@ export class FeedPage implements OnInit {
   async showProfile() {
     const alert = await this.alertController.create({
       header: 'Profile',
-      message: '<img src="assets/img/profile-picture.jpg" alt="Image description">',
+      message: 'hello',
       cssClass: 'my-custom-class',
       buttons: ['View Profile'],
     });

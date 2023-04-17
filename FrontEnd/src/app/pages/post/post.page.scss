@@ -1,0 +1,26 @@
+.header-container{
+    position: relative;
+}
+
+.top{
+    position: relative;
+    z-index: 1;
+}
+
+.back{
+    position: absolute;
+    z-index: 2;
+    bottom: 15px;
+    left: 20px;
+    font-size: 2em;
+    color: white;
+}
+
+.header-txt{
+    position: absolute;
+    z-index: 2;
+    bottom: 15px;
+    left: 120px;
+    font-size: 25px;
+    color: white;
+}
