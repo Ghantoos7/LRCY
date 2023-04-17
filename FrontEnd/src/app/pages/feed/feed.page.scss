@@ -187,12 +187,18 @@ ion-toolbar{
 }
 
 .my-custom-class .alert-wrapper {
-    background-color: white;
+    background-color: black;
 }
   
 .my-custom-class .alert-button {
     color: black;
 }
+
+.my-custom-class img {
+    max-width: 100%;
+    height: auto;
+  }
+  
   
   
   
