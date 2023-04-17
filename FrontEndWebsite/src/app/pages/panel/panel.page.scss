@@ -1,6 +1,10 @@
 ion-content{
     --background: url('../../../assets/imgs/panel-bg.png') no-repeat center center fixed;
     --background-size: cover;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
   }
 h1{
     text-align: center;
@@ -20,9 +24,9 @@ h1{
   
   .top-card,
   .bottom-card {
-    flex-basis: calc(30% - 20px); /* Adjust the width of each card as needed */
+    flex-basis: calc(30% - 10px); 
     background-color: #45579A; 
-    height: 200px; /* Set the height of the cards */
+    height: 200px; 
    
   }
 
