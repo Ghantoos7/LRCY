@@ -13,6 +13,10 @@ export const routes: Routes = [
   {
     path: 'admin-login',
     loadComponent: () => import('./pages/admin-login/admin-login.page').then( m => m.AdminLoginPage)
+  },  {
+    path: 'panel',
+    loadComponent: () => import('./pages/panel/panel.page').then( m => m.PanelPage)
   },
+
 
 ];
