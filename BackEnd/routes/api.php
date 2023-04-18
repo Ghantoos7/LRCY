@@ -32,7 +32,7 @@ Route::group(["prefix" => "v0.1",], function(){
 
     });
 
-    Route::group(["middleware" =>"auth:sanctum"], function(){
+    //Route::group(["middleware" =>"auth:sanctum"], function(){
 
         Route::group(["prefix" => "user"], function(){
 
@@ -83,7 +83,7 @@ Route::group(["prefix" => "v0.1",], function(){
 
         });
 
-    });
+    //});
 
     Route::group(["middleware" => ["auth:sanctum",AdminMiddleware::class]], function(){
 
