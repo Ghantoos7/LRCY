@@ -2,22 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { Router } from '@angular/router';
+
 @Component({
-  selector: 'app-panel',
-  templateUrl: './panel.page.html',
-  styleUrls: ['./panel.page.scss'],
+  selector: 'app-manage-profiles',
+  templateUrl: './manage-profiles.page.html',
+  styleUrls: ['./manage-profiles.page.scss'],
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule]
 })
-export class PanelPage implements OnInit {
+export class ManageProfilesPage implements OnInit {
 
-  constructor(private router:Router) { }
+  constructor() { }
 
   ngOnInit() {
   }
 
-  goToProfiles(){
-    this.router.navigate(['/manage-profiles']);
-  }
 }

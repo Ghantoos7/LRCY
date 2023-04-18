@@ -17,6 +17,10 @@ export const routes: Routes = [
     path: 'panel',
     loadComponent: () => import('./pages/panel/panel.page').then( m => m.PanelPage)
   },
+  {
+    path: 'manage-profiles',
+    loadComponent: () => import('./pages/manage-profiles/manage-profiles.page').then( m => m.ManageProfilesPage)
+  },
 
 
 ];
