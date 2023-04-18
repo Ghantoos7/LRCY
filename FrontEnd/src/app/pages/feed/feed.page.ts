@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-feed',
@@ -16,7 +17,15 @@ import { AlertController } from '@ionic/angular';
 
 export class FeedPage implements OnInit {
 
-  constructor(private router:Router, private alertController: AlertController) { }
+  constructor(private router:Router, private alertController: AlertController, private menuCtrl: MenuController) { }
+
+  ionViewWillLeave() {
+    this.menuCtrl.enable(false, 'menuFeed');
+  }
+
+  ionViewDidEnter() {
+    this.menuCtrl.enable(true, 'menuFeed');
+  }
 
   async showProfile() {
     const alert = await this.alertController.create({

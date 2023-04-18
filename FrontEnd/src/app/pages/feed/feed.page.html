@@ -1,4 +1,4 @@
-<ion-menu contentId="main-content" class="menu">
+<ion-menu menuId="menuFeed" contentId="main-content" class="menu">
   <ion-header>
     <ion-toolbar class="menu-tool">
     </ion-toolbar>
@@ -32,7 +32,7 @@
 
   <ion-content class="whitebackground">
 
-    <ion-card color="dark">
+    <ion-card>
       <div class="header-container">
         <img (click)="showProfile()" class="card-profile-picture" src="assets/imgs/profile-picture.png">
         <ion-text (click)="showProfile()" class="username">Ghnatoos7</ion-text>
@@ -56,7 +56,7 @@
         <ion-text class="like-count" color="danger">0</ion-text>
         <ion-img class="comments" src="assets/icon/comments.png"></ion-img>
         <ion-text class="comment-count">0</ion-text>
-        <ion-input class="input"  placeholder="Comment on this post...">
+        <ion-input class="input"  label="Comment on this post...">
           <ion-icon class="send-icon" name="send"></ion-icon>
         </ion-input>
       </ion-footer>  
