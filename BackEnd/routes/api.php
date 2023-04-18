@@ -48,6 +48,7 @@ Route::group(["prefix" => "v0.1",], function(){
             Route::get("get_comments_count/{user_id}", [UserController::class, "getCommentsCount"]);
             Route::get("get_total_likes_received/{user_id}", [UserController::class, "getTotalLikesReceived"]);
             Route::get("get_own_posts/{user_id}", [UserController::class, "getOwnPosts"]);
+            Route::get("get_branch_info/{branch_id}", [UserController::class, "getBranchInfo"]);
 
         });
 

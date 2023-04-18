@@ -15,6 +15,7 @@ use App\Models\post;
 use App\Models\comment;
 use App\Models\is_responsible;
 use App\Models\event;
+use App\Models\branch;
 
 
 class UserController extends Controller {
@@ -325,6 +326,12 @@ class UserController extends Controller {
             unset($user->created_at);
             unset($user->updated_at);
             $usersArray[] = $user;
+        }
+        // add to the response the user's branch name and location
+        foreach ($usersArray as $user) {
+            $branch = branch::find($user->branch_id);
+            $user->branch_name = $branch->branch_name;
+            $user->branch_location = $branch->branch_location;
         }
     
         // Return the user(s) information and pagination links
@@ -713,6 +720,39 @@ class UserController extends Controller {
         // Return a success response
         return response()->json(['message' => 'Profile updated successfully']);
 
+    }
+    
+    // get the user's branch info by matching the users branch id and the branch id in the branch table
+    function getBranchInfo($user_id) {
+
+        $existing_user = volunteer_user::find($user_id);
+
+        // If user is not found
+        if (!$existing_user) {
+            return response()->json(
+                ['status' => 'error', 
+                'message' => 'User not found'
+            ]);
+        }
+        
+        $branch = branch::where('id', $existing_user->branch_id)->first();
+
+        // If branch is not found
+        if (!$branch) {
+            return response()->json(
+                ['status' => 'error', 
+                'message' => 'Branch not found'
+            ]);
+        }
+
+        // Return the branch name and location
+        return response()->json([
+            'branch_name' => $branch->branch_name,
+            'branch_location' => $branch->branch_location
+        ]);
+
+
+       
     }
     
 
