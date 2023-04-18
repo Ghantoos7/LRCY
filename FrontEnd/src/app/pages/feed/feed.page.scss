@@ -17,7 +17,7 @@
 }
 
 .profile-picture{
-    position: absolute;
+    position: relative;
     top: 27px;
     left: 300px;
     width: 60px;
@@ -84,7 +84,7 @@
 
 .likes{
     font-size: 2em;
-    position: absolute;
+    position: relative;
     top: 23px;
     left: 25px;
     color: #B11433
@@ -93,31 +93,33 @@
 .like-count{
     font-size: 18px;
     position: relative;
-    top: 28px;
-    left: 55px;
+    top: 18px;
+    left: 25px;
     color: #AAA7AE
 }
 
 .comments{
-    position: absolute;
+    position: relative;
     width: 27px;
-    top: 23px;
+    bottom: 8px;
     left: 75px;
 }
 
 .comment-count{
     font-size: 18px;
     position: relative;
-    top: 28px;
-    left: 95px;
+    bottom: 30px;
+    left: 105px;
     color: #AAA7AE
 }
 
 .input {
-    position: absolute;
+    position: relative;
+    bottom: 60px;
     width: 210px;
     left: 130px;
     border-radius: 10px;
+    z-index: 1;
     --background: #E9E7E7;
     --color: #8F8F8F;
     --padding-end: 35px;
@@ -128,12 +130,14 @@
 
 .send-icon{
     position: absolute;
-    left: 180px;
+    left: 310px;
+    top: 30px;
     font-size: 20px;
     color: #B11433;
+    z-index: 2;
 }
 
-ion-card{
+.card{
     position: relative;
     background-color: #FDFDFD;
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
