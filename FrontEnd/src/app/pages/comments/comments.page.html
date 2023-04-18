@@ -1,0 +1,56 @@
+<ion-content class="whitebackground">
+
+  <div class="top-page-container">
+    <ion-img class="top-box" src="assets/imgs/comments-top.png"></ion-img>
+    <ion-text class="whose-post">Georgio's Post</ion-text>
+  </div>
+
+  <ion-icon class="back" name="arrow-back-outline"></ion-icon>
+  <ion-img class="post-image" src="assets/imgs/post.png"></ion-img>
+
+  <ion-card class="caption-container">
+    <ion-card-content>
+      <ion-text class="caption">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
+        nostrud exercitation and big muah me love you all 
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
+
+  <div class="comment-section-info"></div>
+  <ion-text class="comment-count">1</ion-text>
+  <ion-text class="comment-word">Comments</ion-text>
+  <ion-icon class="sort" name="options-outline"></ion-icon>
+
+  <div class="comment-container">
+    <ion-img class="profile-picture" src="assets/imgs/profile-picture.png "></ion-img>
+    <ion-text class="username">Georgio Ghnatos</ion-text>
+    <ion-icon class="delete-comment" name="trash-outline"></ion-icon>
+    <ion-text class="comment">ut labore et dolore magna aliqua</ion-text>
+    <ion-icon class="likes" name="heart-outline"></ion-icon>
+    <ion-text class="like-count">3</ion-text>
+    
+    <ion-accordion-group>
+      <ion-accordion class="accordition" value="first">
+        <ion-item class="accordition-box" slot="header">
+          <ion-label class="view-replies-button">View Replies</ion-label>
+        </ion-item>
+
+        <div slot="content">
+          <div class="reply-container">
+            <ion-img class="reply-profile-picture" src="assets/imgs/EddyAtallah.png "></ion-img>
+            <ion-text class="reply-username">Eddy Abdallah</ion-text>
+            <ion-text class="reply-comment">consectetur adipiscing elit, sed do eiusmod tempor incididunt</ion-text>
+          </div>          
+        </div>
+        
+      </ion-accordion>
+    </ion-accordion-group>
+  </div>
+
+  <ion-input class="input"  placeholder="Add comment...">
+    <ion-img class="comment-profile" src="assets/imgs/profile-picture.png"></ion-img>
+    <ion-icon class="send-icon" name="send"></ion-icon>
+  </ion-input>
+
+</ion-content>

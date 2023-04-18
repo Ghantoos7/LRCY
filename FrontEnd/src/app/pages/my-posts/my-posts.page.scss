@@ -1,0 +1,53 @@
+.container {
+    margin-top: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    
+  }
+
+  ion-card {
+    background-color: #45579A;
+  }
+
+  ion-item{
+    --background: transparent;
+ 
+  }
+
+h2, p{
+    color: white;
+    font-weight: 200;
+  }
+
+
+ ion-avatar{
+   height: 50px;
+   width: 50px;
+    
+ } 
+
+ .custom-icon{
+    color:#45579A !important;
+    position: absolute;
+    right: 12px;
+      
+ }
+
+ ion-icon, ion-col{
+    color: white !important;
+ }
+
+ ion-input{
+    --background: white;
+ --placeholder-color : gray;
+ --color:black;
+ 
+ }
+
+.custom-input{
+    border-radius: 25px;
+    padding: 20px; 
+}

@@ -1,0 +1,203 @@
+.feed-top-image{
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%
+}
+
+.menu-icon{
+    position: absolute;
+    top: 30px;
+    left: 10px;
+    font-size: 3em;
+}
+
+.profile-picture{
+    position: absolute;
+    top: 27px;
+    left: 300px;
+    width: 60px;
+}
+
+.your-feed{
+    position: absolute;
+    top: 43px;
+    left: 70px;
+    font-size: 20px;
+    color: white;
+}
+
+.header-container{
+    position: relative;
+    top: 20px;
+    left: 20px;
+}
+
+.header-container img{
+    width: 45px;
+}
+
+.header-container .username{
+    position: relative;
+    bottom: 25px;
+    left: 6px;
+    font-size: 15px;
+}
+
+.header-container .post-date{
+    position: relative;
+    bottom: 25px;
+    right: 90px;
+    font-size: 13px;
+    color: #8F8F8F;
+}
+
+.header-container .name{
+    position: relative;
+    right:67px;
+    bottom: 10px;
+    font-size: 13px;
+}
+
+.header-container .more-options{
+    position: relative;
+    font-size: 2em;
+    bottom: 10px;
+    left: 10px;
+}
+
+.caption-container{
+    position: relative;
+    width: 309px;
+    left: 15px;
+    top: 10px;
+}
+
+.post-image{
+    position: relative;
+    top: 30px;
+}
+
+.likes{
+    font-size: 2em;
+    position: absolute;
+    top: 23px;
+    left: 25px;
+    color: #B11433
+}
+
+.like-count{
+    font-size: 18px;
+    position: relative;
+    top: 28px;
+    left: 55px;
+    color: #AAA7AE
+}
+
+.comments{
+    position: absolute;
+    width: 27px;
+    top: 23px;
+    left: 75px;
+}
+
+.comment-count{
+    font-size: 18px;
+    position: relative;
+    top: 28px;
+    left: 95px;
+    color: #AAA7AE
+}
+
+.input {
+    position: absolute;
+    width: 210px;
+    left: 130px;
+    border-radius: 10px;
+    --background: #E9E7E7;
+    --color: #8F8F8F;
+    --padding-end: 35px;
+    --padding-start: 10px;
+    --placeholder-color: #8F8F8F;
+    --placeholder-opacity: 0.8;
+}
+
+.send-icon{
+    position: absolute;
+    left: 180px;
+    font-size: 20px;
+    color: #B11433;
+}
+
+ion-card{
+    position: relative;
+    top: 120px;
+    height: 520px;
+    background-color: #FDFDFD;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    border-radius: 10px;
+}
+
+.fab{
+    position: fixed;
+    top: 770px;
+    left: 315px;
+    --background: #B11433;
+}
+
+.avatar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+
+ion-avatar{
+    height: 100px;
+    width: 100px;
+}
+
+.menu{
+--ion-background-color: #45579A;
+}
+
+ion-label{
+color: white;
+}
+
+ion-menu-button {
+--color: #f0f0f0; 
+}
+
+ion-title{
+--color: white;
+}
+
+.custom-button{
+--background: white;
+--color: black;
+}
+
+ion-toolbar{
+--background: #B11433;
+}
+
+.menu-tool{
+--background:var(--ion-background-color)
+}
+
+.my-custom-class .alert-wrapper {
+    background-color: #B11433;
+    color: white;
+}
+
+button.alert-button.custom-alert-button {
+    background-color: #B11433;
+    color: var(--ion-color-success-contrast);
+  }
+
+  
+  
+  
+
+

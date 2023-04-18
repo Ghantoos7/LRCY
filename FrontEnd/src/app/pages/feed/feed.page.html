@@ -1,0 +1,73 @@
+<ion-menu contentId="main-content" class="menu">
+  <ion-header>
+    <ion-toolbar class="menu-tool">
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <div class="avatar-container">
+      <ion-avatar size="large" class="custom-avatar">
+        <img alt="Avatar" src="assets/imgs/NayAbiSaad.png" />
+      </ion-avatar>
+      <ion-label class="username-label">Username</ion-label>
+      <ion-button (click)="goProfile()" class="custom-button" expand="block"><ion-icon name="person" slot="start"></ion-icon>My Profile</ion-button>
+      <ion-button (click)="goFeed()" class="custom-button" expand="block"><ion-icon name="receipt" slot="start"></ion-icon>Feed</ion-button>
+      <ion-button (click)="goGallery()" class="custom-button" expand="block"><ion-icon name="images" slot="start"></ion-icon>Gallery</ion-button>
+      <ion-button (click)="goAnnouncements()" class="custom-button" expand="block"><ion-icon name="document-text" slot="start"></ion-icon>Announcements</ion-button>
+      <ion-button (click)="goGoals()" class="custom-button" expand="block"><ion-icon name="calendar" slot="start"></ion-icon>Yearly Goals</ion-button>
+      <ion-button (click)="toggleDarkMode()" class="custom-button" expand="block"><ion-icon name="moon" slot="start"></ion-icon>Dark Mode</ion-button>
+      <ion-button (click)="logout()" class="custom-button" expand="block"><ion-icon name="log-out" slot="start"></ion-icon>Log Out</ion-button>
+    </div>
+  </ion-content>
+</ion-menu>
+
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Your Feed</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="whitebackground">
+
+    <ion-card color="dark">
+      <div class="header-container">
+        <img (click)="showProfile()" class="card-profile-picture" src="assets/imgs/profile-picture.png">
+        <ion-text (click)="showProfile()" class="username">Ghnatoos7</ion-text>
+        <ion-text (click)="showProfile()" class="name">Georgio Ghnatos</ion-text>
+        <ion-text class="post-date"> • 1d ago</ion-text>
+        <ion-icon class="more-options" name="ellipsis-vertical-outline"></ion-icon>
+      </div>
+
+      <ion-card-content>
+        <div class="caption-container">
+          <ion-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
+          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
+          nostrud exercitation and big muah me love you all 
+          </ion-text>
+        </div>  
+        <ion-img class="post-image" src="assets/imgs/post.png"/>
+      </ion-card-content>
+
+      <ion-footer>
+        <ion-icon class="likes" name="heart-outline"></ion-icon>
+        <ion-text class="like-count" color="danger">0</ion-text>
+        <ion-img class="comments" src="assets/icon/comments.png"></ion-img>
+        <ion-text class="comment-count">0</ion-text>
+        <ion-input class="input"  placeholder="Comment on this post...">
+          <ion-icon class="send-icon" name="send"></ion-icon>
+        </ion-input>
+      </ion-footer>  
+    </ion-card>
+
+    <ion-fab>
+      <ion-fab-button (click)="goToPostForm()" class="fab">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
+  </ion-content>
+</div>
+

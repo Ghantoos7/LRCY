@@ -1,0 +1,85 @@
+.signin-circles{
+  width: 385px;
+}
+
+.greeting{
+  font-size: 40px;
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  transform: translate(-20%, -50%);
+  color: white;
+}
+
+.signin{
+  font-size: 40px;
+  position: absolute;
+  top: 40%;
+  left: 13%;
+  transform: translate(-20%, -50%);
+  color: white;
+}
+
+.container{
+  font-size: 10px; 
+  position: absolute; 
+  top: 42%; 
+  left: 6%;
+  color: white;
+}
+
+.id-icon{
+  width: 50px; 
+  height: 50px; 
+  margin-top: 20px;
+}
+
+.label {
+  --color: white;
+}
+
+.email{
+  border-bottom: 1px solid #ccc;
+}
+
+.pass-icon{
+  width: 50px;
+  height: 50px;
+  margin-top: 20px
+}
+
+.password{
+  border-bottom: 1px solid #ccc;
+}
+
+ion-checkbox {
+  font-size: 20px;
+  --size: 32px;
+  --checkbox-background-checked: #45579A;
+  --checkbox-background: white;
+  color: white;
+  top: 30px;
+}
+  
+ion-checkbox::part(container) {
+  border-radius: 6px;
+  border: 1px solid #45579A;
+  color: white;
+}
+
+.signin-button{
+  width: 80%; 
+  margin: 0 auto; 
+  --background: #B11433
+}
+
+.new-here{
+  color: #B11433; 
+  padding-left: 50px;
+}
+
+.forgot-pass{
+  color: #B11433; 
+  padding-left: 80px;
+}
+  

@@ -1,0 +1,44 @@
+ion-toolbar {
+    --background: #b11433;
+  }
+  
+  ion-menu-button {
+    --color: #f0f0f0; 
+  
+  }
+
+  ion-card.custom-card {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  ion-card-title{
+    font-size:large;
+    font-family: 'Cairo', sans-serif;
+  }
+
+  .layer-card{
+    position: absolute;
+  top: 0;
+  left: 0;
+   z-index: 1;
+margin-top: 50%;
+
+
+  }
+
+  .parent{
+    position: relative;
+
+  }
+.custom-img{
+  width: 25px;
+  height: 25px;
+}
+
+.label{
+  background-color: #D9D9D9;
+  border-radius: 20%;
+  
+}

@@ -1,0 +1,45 @@
+<ion-content class = "whitebackground">
+
+  <ion-img class="sigin-circles" src="assets/imgs/signin-circles.png"></ion-img>
+  <ion-text class="greeting">
+    WELCOME <br>
+      BACK!
+    <h6>GOOD TO SEE YOU AGAIN</h6>
+    <br><br>
+  </ion-text>  
+
+  <ion-text class="signin"><b>Sign In</b></ion-text>
+
+  <ion-text class="container">
+
+    <div class="input-field">  
+        <img class="id-icon" src="assets/icon/ID.png" alt="ID icon">
+        <ion-item>
+          <ion-label class="label" position="floating" >Volunteer ID </ion-label>
+          <ion-input class="email" type="email" name="email"></ion-input>
+        </ion-item> 
+    </div>
+
+    <div class="input-field">
+      <img class="pass-icon" src="assets/icon/Password.png"  alt="ID icon">
+      <ion-item>
+        <ion-label class="label" position="floating">Password</ion-label>
+        <ion-input class="password" type="password" name="password"></ion-input>
+      </ion-item>
+    </div>
+
+    <ion-checkbox>Remember me</ion-checkbox>
+
+  </ion-text>
+
+  <br>
+  <ion-button class="signin-button" shape="round" expand="block" size="large">Sign me in</ion-button>
+
+  <br>
+  <ion-label (click)="goToSignUp()" class="new-here">New here?</ion-label>
+  <ion-label (click)="goToRequest()" class="forgot-pass">Forgot Password?</ion-label>
+
+</ion-content>
+
+
+

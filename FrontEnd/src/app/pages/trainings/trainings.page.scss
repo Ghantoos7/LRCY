@@ -1,0 +1,48 @@
+.container {
+    margin-top: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  ion-card {
+    width: 90%;
+    max-width: 500px;
+    margin: 10px 0;
+    height:auto;
+  }
+  ion-label{
+    color:black;
+    font-weight: bold;
+    font-family: 'Cairo', sans-serif;
+  }
+h1{
+    color: black;
+    font-weight: bolder;
+}
+
+p{
+    font-weight: bold;
+}
+
+.env{
+ color: #348137;
+  }
+
+  ion-checkbox{
+    --checkbox-background-checked: #348137;
+ 
+  }
+
+  .hvp{
+    color: #45579A;
+  }
+
+  .yh{
+    color:#b11433;
+  }
+
+ion-item{
+    height: 40px;
+}

@@ -1,0 +1,107 @@
+.header-container{
+    position: relative;
+}
+
+.top{
+    position: relative;
+    z-index: 1;
+}
+
+.back{
+    position: absolute;
+    z-index: 2;
+    bottom: 15px;
+    left: 20px;
+    font-size: 2em;
+    color: white;
+}
+
+.header-txt{
+    position: absolute;
+    z-index: 2;
+    bottom: 15px;
+    left: 120px;
+    font-size: 25px;
+    color: white;
+}
+
+.user-info{
+    position: relative;
+    left: 20px;
+}
+
+.user-info .profile-picture{
+    width: 60px;
+    height: 60px;
+    position: relative;
+    top: 35px;
+    left: 40px;
+}
+
+.user-info .username{
+    position: relative;
+    bottom: 15px;
+    left: 105px;
+    font-size: 15px;
+    color:black;
+}
+
+.user-info .name{
+    position: relative;
+    left: 32px;
+    font-size: 13px;
+    color: black;
+}
+
+.input {
+    position: absolute;
+    width: 300px;
+    height: 500px;
+    top: 420px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    --background: #E9E7E7;
+    --color: #8F8F8F;
+    --padding-end: 35px;
+    --padding-start: 10px;
+    --placeholder-color: #8F8F8F;
+    --placeholder-opacity: 0.8;
+}
+
+.upload-options{
+    position: absolute;
+    top: 680px;
+    font-size: 2em;
+    color: #45579A;
+}
+
+.camera{
+    position: relative;
+    left: 50px;
+}
+
+.video{
+    position: relative;
+    left: 60px;
+}
+
+.image{
+    position: relative;
+    left: 70px;
+}
+
+.post-button{
+    position: relative;
+    top: 600px;
+    width: 80%; 
+    margin: 0 auto; 
+    --background: #45579A;
+}
+
+
+
+
+  
+  
+  
