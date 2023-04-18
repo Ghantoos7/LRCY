@@ -78,3 +78,13 @@
 .next-icon{
     color: #fff
 }
+
+ion-item{
+    --background: transparent;
+    --inner-padding-end: 0;
+  }
+  
+  .input-field {
+    display: flex;
+    align-items: center;
+  }
