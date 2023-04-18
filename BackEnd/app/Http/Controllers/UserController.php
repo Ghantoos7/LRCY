@@ -327,12 +327,6 @@ class UserController extends Controller {
             unset($user->updated_at);
             $usersArray[] = $user;
         }
-        // add to the response the user's branch name and location
-        foreach ($usersArray as $user) {
-            $branch = branch::find($user->branch_id);
-            $user->branch_name = $branch->branch_name;
-            $user->branch_location = $branch->branch_location;
-        }
     
         // Return the user(s) information and pagination links
         return response()->json($user_id ? ['user' => $usersArray[0]] : [
