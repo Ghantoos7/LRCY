@@ -55,8 +55,20 @@ height: 70%;
 background-color: white;
 border-top-right-radius: 10px;
 border-top-left-radius: 10px;
+padding-top: 50px;
   }
 
+  ion-item{
+    margin:15px;
+  }
+.custom-input{
+  margin-top: 22px;
+}
+.custom{
+  --color: #fff;
+  --placeholder-color: #ddd;
+  --placeholder-background: #373737;
+}
   .img{
         position: absolute;
         top: 30%;

@@ -18,8 +18,74 @@
           <div class="text-div">
           <h1 class="edit-user-text">Edit User</h1>
         </div>
-          <ion-icon size="large" slot="end" name="close" class="close-icon"></ion-icon>
-          <div class="inner-div"></div>
+          <ion-icon size="large" slot="end" name="close" (click) = "exitPage()" class="close-icon"></ion-icon>
+          <div class="inner-div">
+            <ion-grid>
+              <ion-row>
+                <ion-col size="4">
+                  <ion-item>
+                    <ion-input label="First Name" value="Georgio"></ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="4">
+                  <ion-item>
+                    <ion-input label="Last Name" value="Ghnatios"></ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="4">
+                  <ion-item>
+                    <ion-input label="ID" value="200201" [disabled]="true"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="4">
+                  
+                    <ion-item>
+                      <ion-select aria-label="User Privilege" interface="popover" placeholder="Privilege Type">
+                        <ion-select-option value="user">User</ion-select-option>
+                        <ion-select-option value="admin">Admin</ion-select-option>
+                      </ion-select>
+                    </ion-item>
+               
+                </ion-col>
+                <ion-col size="4">
+                  <ion-item>
+                    <ion-input label="Role" value="General Assembly"></ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="4">
+                  <ion-item>
+                    <ion-select aria-label="Status" interface="popover" placeholder="Status">
+                      <ion-select-option value="active">Active</ion-select-option>
+                      <ion-select-option value="inactive">Inactive</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+
+              <ion-row>
+                <ion-col size="4">
+                  <ion-item>
+                    <ion-input label="Brach" value="Jbail"></ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="4">
+                  <ion-item class="custom-input">
+                    <ion-label class="custom-label">Start Date</ion-label>
+                    <ion-input type="date"></ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="4">
+                  <ion-item class="custom-input">
+                    <ion-label class="custom-label">End Date</ion-label>
+                    <ion-input type="date"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          
+          </div>
 
           <ion-avatar class="img">
             <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
