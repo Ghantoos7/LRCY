@@ -32,7 +32,9 @@ export class StatisticsPage implements OnInit {
   posts_posted:any = [];
   total_posts_posted:string = '';
 
-
+  comments_posted:any = [];
+  total_comments_posted:string = '';
+  
   constructor(private router:Router, private service:UserService) { }
 
   ngOnInit() {
@@ -65,10 +67,17 @@ export class StatisticsPage implements OnInit {
     this.total_posts_posted = this.posts_posted['total_posts'];
   });
 
-
-    }
     
+  this.service.get_comments_count('1').subscribe(response => {
+    this.comments_posted = response;
+    this.total_comments_posted = this.comments_posted['total_comments'];
+
+  });
+
+
   }
+    
+}
 
 
 

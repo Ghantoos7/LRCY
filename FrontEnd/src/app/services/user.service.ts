@@ -37,12 +37,17 @@ private base_url = 'http://localhost:8000/api/v0.1/user/';
     return response;
   }
   
+  
   get_posts_count(user_id: string){
     const response = this.http.get(this.base_url + 'get_posts_count/' + user_id);
     return response;
   }
 
 
+  get_comments_count(user_id: string){
+    const response = this.http.get(this.base_url + 'get_comments_count/' + user_id);
+    return response;
+  }
 
 
 }
