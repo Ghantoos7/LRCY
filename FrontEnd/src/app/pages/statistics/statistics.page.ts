@@ -20,7 +20,9 @@ export class StatisticsPage implements OnInit {
   training_count:any = [];
   total_trainings_completed_count:string = '';
 
-
+  
+  event_count:any = [];
+  total_events_organized_count:string = '';
 
   constructor(private router:Router, private service:UserService) { }
 
@@ -31,15 +33,14 @@ export class StatisticsPage implements OnInit {
       this.total_trainings_completed_count = this.training_count['total_trainings'];
     });
 
+    
+    this.service.get_events_organized_count('1').subscribe(response => {
+      this.event_count = response;
+      this.total_events_organized_count = this.event_count['total_events'];
+    });
+
 
     }
-
-
-
-
-
-    
-
     
   }
 
