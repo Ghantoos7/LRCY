@@ -35,7 +35,7 @@ ion-content{
   
   .edit-user-text {
     margin-top: 7rem; 
-    margin-left: 14rem;/* Add margin from the top for spacing */
+    margin-left: 14rem;
   }
   
 
@@ -44,6 +44,23 @@ ion-content{
     color:#ffffff;
   }
 
+  ion-input {
+    --background: #bcb9b9; 
+    --padding-end: 10px; 
+    border-radius: 15px;
+  }
+
+  ion-label{
+    margin-right: 5px;
+  }
+.save{
+  margin-top: 10%;
+  margin-left: 42%;
+  --color: white !important;
+  --background:#45579A !important;
+  
+
+}
   .inner-div {
     bottom: 0;
     left: 0;
@@ -62,7 +79,7 @@ padding-top: 50px;
     margin:15px;
   }
 .custom-input{
-  margin-top: 22px;
+  margin-top: 15px;
 }
 .custom{
   --color: #fff;
