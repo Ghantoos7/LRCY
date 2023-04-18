@@ -5,6 +5,10 @@ ion-title, ion-item{
     font-family: 'Cairo', sans-serif;
 }
 
+ion-item{
+    cursor: pointer;
+}
+
 ion-menu-button{
     color:#45579A;
 }
@@ -33,5 +37,5 @@ ion-menu-button{
 
   h3{
     color: black;
-    
+
   }
