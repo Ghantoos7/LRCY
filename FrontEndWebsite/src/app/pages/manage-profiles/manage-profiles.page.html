@@ -1,10 +1,14 @@
 <ion-menu contentId="main-content">
   <ion-header>
     <ion-toolbar>
-      <ion-title>Menu Content</ion-title>
+      <ion-title>Manage Profiles</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-content class="ion-padding">This is the menu content.</ion-content>
+  <ion-content class="ion-padding"> <ion-list>
+    <ion-item>Add Member</ion-item>
+    <ion-item>Add Training</ion-item>
+    <ion-item>Remove Training</ion-item>
+  </ion-list></ion-content>
 </ion-menu>
 <div class="ion-page" id="main-content">
   <ion-header>
@@ -12,10 +16,11 @@
       <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
-      <ion-title>Menu</ion-title>
+      <ion-title>Show Members</ion-title>
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding">
-    Tap the button in the toolbar to open the menu.
+    
+<ion-searchbar animated="true" placeholder="Search up your member's name"></ion-searchbar>
   </ion-content>
 </div>
