@@ -3,19 +3,32 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { Route, Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { HttpClientModule } from '@angular/common/http';
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule, FormsModule, HttpClientModule]
 })
 export class ProfilePage implements OnInit {
 
-  constructor(private router:Router) { }
+  users:any = [];
+  name:string = '';
 
-  ngOnInit() {
+  constructor(private router:Router, private service:AuthService) { }
+
+  async ngOnInit() {
+    this.service.get_user('1', '').subscribe(response => {
+      this.users = response;
+      this.name = this.users['users']['0'].first_name;
+      console.log(this.users['users']['0'].first_name);
+    });
   }
+
+
 
   goToEditForm(){
 this.router.navigate(['edit-profile']);
