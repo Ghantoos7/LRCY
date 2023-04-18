@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { Route, Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { UserService } from '../../services/user.service';
 import { HttpClientModule } from '@angular/common/http';
 
 @Component({
@@ -15,19 +15,28 @@ import { HttpClientModule } from '@angular/common/http';
 })
 export class ProfilePage implements OnInit {
 
-  users:any = [];
-  name:string = '';
+  user:any = [];
+  first_name:string = '';
+  last_name:string = '';
+  full_name:string = '';
+  username:string = '';
+  bio:string = '';
+  user_type_id:string = '';
 
-  constructor(private router:Router, private service:AuthService) { }
+  constructor(private router:Router, private service:UserService) { }
 
   async ngOnInit() {
-    this.service.get_user('1', '').subscribe(response => {
-      this.users = response;
-      this.name = this.users['users']['0'].first_name;
-      console.log(this.users['users']['0'].first_name);
+    this.service.get_user('1', '1').subscribe(response => {
+      this.user = response;
+      this.last_name = (this.user['user'].last_name);
+      this.first_name = (this.user['user'].first_name);
+      this.full_name = this.first_name + ' ' + this.last_name;
+      this.username = (this.user['user'].username);
+      this.bio = (this.user['user'].bio);
+      this.user_type_id = (this.user['user'].user_type_id);
     });
-  }
 
+  }
 
 
   goToEditForm(){

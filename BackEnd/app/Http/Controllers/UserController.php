@@ -495,13 +495,6 @@ class UserController extends Controller {
         // Get the events with the matching IDs
         $events = Event::whereIn('id', $event_ids)->get();
         
-        // If the user did not organize any events
-        if ($events->isEmpty()) {
-            return response()->json([
-                'message' => 'No events found for this user'
-            ]);
-        }
-        
         // Return the total count of events
         return response()->json([
             'total_events' => count($events)
@@ -530,7 +523,7 @@ class UserController extends Controller {
         $diffInYears = floor($diffInMonths / 12);
         $diffInMonths = $diffInMonths % 12;
 
-        $total_time = ($diffInYears > 0 ? $diffInYears . " year" . ($diffInYears > 1 ? "s " : " ") : "") . ($diffInMonths > 0 ? $diffInMonths . " month" . ($diffInMonths > 1 ? "s" : "") : "");
+        $total_time = ($diffInYears > 0 ? $diffInYears . " Y "  : "") . ($diffInMonths . " M");
 
         // Return the response
         return response()->json(['status' => 'success', 'total_time' => $total_time]);
@@ -552,13 +545,7 @@ class UserController extends Controller {
         // Get the user's trainings
         $trainings_taken = take::where('user_id', $user_id)->get();
         
-        // If the user did not take any trainings
-        if ($trainings_taken->isEmpty()) {
-            return response()->json([
-            'message' => 'No trainings found for this user'
-             ]);
-          }
-            
+    
             // Return the total count of trainings
             return response()->json([
             'total_trainings' => count($trainings_taken)
@@ -582,13 +569,6 @@ class UserController extends Controller {
         // Get the user's posts
         $posts = Post::where('user_id', $user_id)->get();
 
-        // If no posts are found for the user
-        if ($posts->isEmpty()) {
-            return response()->json([
-                'message' => 'No posts found for this user'
-            ]);
-        }
-
         // Return the total count of posts
         return response()->json([
             'total_posts' => count($posts)
@@ -611,13 +591,6 @@ class UserController extends Controller {
 
         // Get the user's comments
         $comments = Comment::where('user_id', $user_id)->get();
-
-        // If no comments are found for the user
-        if ($comments->isEmpty()) {
-            return response()->json([
-                'message' => 'No comments found for this user'
-            ]);
-        }
 
         // Return the total count of comments
         return response()->json([
