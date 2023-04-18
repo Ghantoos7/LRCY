@@ -1,13 +1,110 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>add-member</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">add-member</ion-title>
+      <ion-title size="large">member-profile</ion-title>
     </ion-toolbar>
   </ion-header>
+  <ion-grid class="ion-no-padding ion-align-items-center ion-justify-content-center">
+    <ion-row>
+      <ion-col size-md="10" size-lg="9" size-xl="8" class="ion-padding"  offset-md="1" offset-lg="2" offset-xl="2">
+        <div class="custom-div">
+          <div class="text-div">
+          <h1>Add member</h1>
+        </div>
+          <ion-icon size="large" slot="end" name="close" (click)="goBack()" class="close-icon"></ion-icon>
+          <div class="inner-div">
+            <ion-grid>
+              <ion-row>
+                <ion-col size="6">
+                  <ion-item>
+                    <ion-label>First Name</ion-label>
+                    <ion-input></ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="6">
+                  <ion-item>
+                    <ion-label>Last Name</ion-label>
+                    <ion-input></ion-input>
+                  </ion-item>
+                </ion-col>
+                
+              </ion-row>
+              <ion-row>
+                <ion-col size="6">
+                  <ion-item>
+                    <ion-label>Volunteer ID</ion-label>
+                    <ion-input></ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="6">
+                  
+                    <ion-item>
+                      <ion-select aria-label="User Privilege" interface="popover" placeholder="Privilege Type">
+                        <ion-select-option value="user">User</ion-select-option>
+                        <ion-select-option value="admin">Admin</ion-select-option>
+                      </ion-select>
+                    </ion-item>
+               
+                </ion-col>
+                
+              </ion-row>
+
+              <ion-row>
+                <ion-col size="6">
+                  <ion-item>
+                    <ion-label>User Position</ion-label>
+                    <ion-input></ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="6">
+                  <ion-item>
+                    <ion-select aria-label="Status" interface="popover" placeholder="Status">
+                      <ion-select-option value="active">Active</ion-select-option>
+                      <ion-select-option value="inactive">Inactive</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+                </ion-col>
+                
+              </ion-row>
+              <ion-row>
+                <ion-col size="6">
+                  <ion-item class="custom-input">
+                    <ion-label class="custom-label">Date of Birth</ion-label>
+                    <ion-input type="date"></ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="6">
+                  <ion-item>
+                    <ion-label>Gender</ion-label>
+                    <ion-input></ion-input>
+                  </ion-item>
+                </ion-col>
+                
+              </ion-row>
+              <ion-row>
+                <ion-col size="6">
+                  <ion-item class="custom-input">
+                    <ion-label class="custom-label">End Date</ion-label>
+                    <ion-input type="date"></ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="6">
+                  <ion-item class="custom-input">
+                    <ion-label class="custom-label">End Date</ion-label>
+                    <ion-input type="date"></ion-input>
+                  </ion-item>
+                </ion-col>
+                
+              </ion-row>
+              
+            </ion-grid>
+          
+            <ion-button class="save">Add Member</ion-button>
+          </div>
+
+         
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
