@@ -1,3 +1,7 @@
+.whitebackground {
+  --background: #fff;
+}
+
 .signin-circles{
   width: 385px;
 }
@@ -81,5 +85,15 @@ ion-checkbox::part(container) {
 .forgot-pass{
   color: #B11433; 
   padding-left: 80px;
+}
+
+ion-item{
+  --background: transparent;
+  --inner-padding-end: 0;
+}
+
+.input-field {
+  display: flex;
+  align-items: center;
 }
   
