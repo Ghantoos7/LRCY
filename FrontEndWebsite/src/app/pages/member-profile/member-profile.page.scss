@@ -1,0 +1,25 @@
+ion-content{
+    --background: url('../../../assets/imgs/panel-bg.png') no-repeat center center fixed;
+    --background-size: cover;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+ .custom-div{
+     height: 95vh;
+     width: 90%;
+  display: flex;
+  justify-content: space-between;
+  background-color: #ffffff;
+  border-radius: 10px;
+  margin-left: 0;
+  margin-right: auto;
+  background-color: #45579A;
+  }
+
+  .close-icon {
+    margin-left: auto;
+    color:#ffffff;
+  }
