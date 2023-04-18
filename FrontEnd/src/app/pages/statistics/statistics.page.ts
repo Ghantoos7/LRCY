@@ -17,9 +17,19 @@ import { HttpClientModule } from '@angular/common/http';
 export class StatisticsPage implements OnInit {
 
 
+  training_count:any = [];
+  total_trainings_completed_count:string = '';
+
+
+
   constructor(private router:Router, private service:UserService) { }
 
   ngOnInit() {
+
+    this.service.get_completed_trainings_count('1').subscribe(response => {
+      this.training_count = response;
+      this.total_trainings_completed_count = this.training_count['total_trainings'];
+    });
 
 
     }
