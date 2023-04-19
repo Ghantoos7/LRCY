@@ -11,7 +11,7 @@ class login_attempt extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 
+        'organization_id', 
         'login_attempt_time', 
         'login_attempt_date'
     ];

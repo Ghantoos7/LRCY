@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->time('login_attempt_time');
             $table->date('login_attempt_date');
-            $table->integer('user_id');
+            $table->integer('organization_id');
             $table->string('field1')->nullable();
             $table->string('field2')->nullable();
             $table->timestamps();
