@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { Route, Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
+import { EventService } from '../../services/event.service';
 
 @Component({
   selector: 'app-youth-gallery',
@@ -14,9 +15,16 @@ import { MenuController } from '@ionic/angular';
 })
 export class YouthGalleryPage implements OnInit {
 
-  constructor(private router:Router, private menuCtrl: MenuController) { }
-
+  constructor(private event_service:EventService, private router:Router, private menuCtrl: MenuController) { }
+  youth_events: any = [];
+  events: any = [];
   ngOnInit() {
+    this.event_service.get_events().subscribe(response => {
+      this.events = response;
+      this.youth_events = Array.from(this.events['events']['1']);
+     
+    });
+
   }
 
   ionViewWillLeave() {
