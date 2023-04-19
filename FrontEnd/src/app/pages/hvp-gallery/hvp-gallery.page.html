@@ -33,27 +33,21 @@
 
     <ion-content class="ion-padding">
       <ion-row>
-        <ion-col>
+        <ion-col size='6' *ngFor="let event of hvp_events;">
           <ion-card>
             <div class="badge">
-              <ion-icon name="calendar-number-outline" size="large"></ion-icon>
+              <ion-icon *ngIf="event.event_type_id ==1" name="calendar-number-outline" size="large"></ion-icon>
+              <ion-icon *ngIf="event.event_type_id == 2" name="barbell-outline" size="large"></ion-icon>
+              <ion-icon *ngIf="event.event_type_id ==3" name="ellipsis-horizontal-outline" size="large"></ion-icon>
             </div>
-            <ion-img src="assets\imgs\gallery-default1.jpg" class="custom-image"></ion-img>
+            <ion-img src="{{event.event_main_picture}}" class="custom-image"></ion-img>
             <ion-card-header >
-              <ion-card-subtitle class="custom-subtitle">Beach Cleanup</ion-card-subtitle>
+              <ion-card-subtitle class="custom-subtitle">{{event.event_title}}</ion-card-subtitle>
             </ion-card-header>
           </ion-card>
         </ion-col>
         <ion-col>
-          <ion-card>
-            <div class="badge">
-              <ion-icon name="people-outline" size="large"></ion-icon>
-            </div>
-            <ion-img src="\assets\imgs\gallery-default2.jpeg" class="custom-image"></ion-img>
-            <ion-card-header>
-              <ion-card-subtitle class="custom-subtitle">Training</ion-card-subtitle>
-            </ion-card-header>
-          </ion-card>
+    
         </ion-col>
       </ion-row>
    
