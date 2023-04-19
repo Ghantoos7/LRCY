@@ -411,12 +411,24 @@ class UserController extends Controller {
     
         // Calculate the count of trainings in each program
         $programCounts = [];
-        foreach ($trainingsByProgram as $programId => $trainings) {
-            $programCounts[$programId] = count($trainings);
+        $specificProgramCounts = [
+            1 => 0,
+            2 => 0,
+            3 => 0,
+            4 => 0,
+        ];
+    
+        foreach ($trainingsByProgram as $program_id => $trainings) {
+            $programCounts[$program_id] = count($trainings);
+            
+            // Count the trainings taken in specific programs (1, 2, 3, 4)
+            if (array_key_exists($program_id, $specificProgramCounts)) {
+                $specificProgramCounts[$program_id] = count($trainings);
+            }
         }
     
         // Return the total count of trainings, the trainings themselves, and the counts of trainings in each program
-        return response()->json(['trainings' => $trainingsByProgram,'trainings_not_taken' => $trainingsNotTakenByProgram,'trainings not taken count' => $trainingsNotTakenCount,'program_counts' => $programCounts, ]);
+        return response()->json(['trainings' => $trainingsByProgram,'trainings_not_taken' => $trainingsNotTakenByProgram,'trainings not taken count' => $trainingsNotTakenCount,'program_counts' => $specificProgramCounts]);
    
     }
     
