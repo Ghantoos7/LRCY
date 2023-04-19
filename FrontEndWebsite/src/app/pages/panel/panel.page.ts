@@ -24,4 +24,8 @@ export class PanelPage implements OnInit {
   goToGallery(){
     this.router.navigate(['/manage-gallery']);
   }
+
+  goToRequests(){
+    this.router.navigate(['/requests']);
+  }
 }
