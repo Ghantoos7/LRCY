@@ -25,7 +25,6 @@ export class AchievementsPage implements OnInit {
 
     this.service.get_events_organized('1').subscribe(response => {
       this.events_organized = response;
-      console.log(this.events_organized);
 
     });
     
@@ -55,11 +54,11 @@ export class AchievementsPage implements OnInit {
   getEventIcon(event_id: number,): string {
     // Replace the conditions with the appropriate ones for your use case
     if (event_id == 1) {
-      return 'hand-right-outline';
+      return 'calendar-number-outline';
     } else if (event_id === 2) {
-      return 'book-outline';
+      return 'barbell-outline';
     } else if (event_id === 3) {
-      return 'people-outline';
+      return 'ellipsis-horizontal-outline';
     } else {
       return 'help-circle-outline'; // Default icon
     }
