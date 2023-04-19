@@ -153,7 +153,7 @@ class UserController extends Controller {
         // Check if the user has exceeded the maximum number of login attempts
         if ($this->hasExceededLoginAttempts($credentials->organization_id)) {
             // Check the last login attempt time
-            $last_attempt = login_attempt::where('user_id', '=', $credentials->organization_id)->orderBy('created_at', 'desc')->first();
+            $last_attempt = login_attempt::where('organization_id', '=', $credentials->organization_id)->orderBy('created_at', 'desc')->first();
             $now = Carbon::now();
             $last_attempt_time = Carbon::parse($last_attempt->created_at);
             $diff_in_hours = $last_attempt_time->diffInHours($now);
@@ -200,21 +200,21 @@ class UserController extends Controller {
         login_attempt::create([
             'login_attempt_time' => Carbon::now()->format('H:i:s'),
             'login_attempt_date' => Carbon::now()->format('Y-m-d'),
-            'user_id' => $organization_id,
+            'organization_id' => $organization_id,
         ]);
     }
     
 
     // Checks if the user has exceeded the maximum number of login attempts
     private function hasExceededLoginAttempts($organization_id) {
-        $total_attempts = login_attempt::where('user_id', '=', $organization_id)->count();
+        $total_attempts = login_attempt::where('organization_id', '=', $organization_id)->count();
         return ($total_attempts >= 5);
     }
     
 
     // Resets the number of login attempts to 0
     private function resetLoginAttempts($organization_id) {
-        login_attempt::where('user_id', '=', $organization_id)->delete();
+        login_attempt::where('organization_id', '=', $organization_id)->delete();
     }
     
 
