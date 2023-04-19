@@ -27,7 +27,7 @@ private base_url = 'http://localhost:8000/api/v0.1/auth/';
     const data = JSON.parse(JSON.stringify(response));
 
     console.log(organization_id);
-    
+
     return response;
   }
 
@@ -74,4 +74,5 @@ private base_url = 'http://localhost:8000/api/v0.1/auth/';
     return response;
   }
 
+  
 }
