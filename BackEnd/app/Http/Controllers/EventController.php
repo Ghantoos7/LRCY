@@ -8,6 +8,7 @@ use App\Models\event;
 use App\Models\announcement;
 use App\Models\volunteer_user;
 use App\Models\picture;
+use App\Models\is_responsible;
 
 
 class EventController extends Controller {
@@ -48,6 +49,22 @@ class EventController extends Controller {
 
         // Group events by program_id
         $eventsArray = collect($eventsArray)->groupBy('program_id');
+
+        // Adds a list of users who were responsible of each event, theyre first name last name role anme and profile picture
+        $eventsArray = $eventsArray->map(function($events) {
+            return $events->map(function($event) {
+                $event['responsibles'] = Is_responsible::where('event_id', $event['id'])->get()->map(function($responsible) {
+                    $user = Volunteer_user::find($responsible->user_id);
+                    return [
+                        'first_name' => $user->first_name,
+                        'last_name' => $user->last_name,
+                        'role_name' => $responsible->role_name,
+                        'profile_picture' => $user->profile_picture
+                    ];
+                });
+                return $event;
+            });
+        });
 
         // Return the event(s) information grouped by program_id
         return response()->json($event_id ? ['event' => $eventsArray->first()] : ['events' => $eventsArray]);
