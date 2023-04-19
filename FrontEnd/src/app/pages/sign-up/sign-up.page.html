@@ -18,10 +18,10 @@
       <img src="assets/icon/ID.png" class="id-icon" alt="ID icon">
       <ion-item>
         <ion-label class="label" position="floating" >Volunteer ID </ion-label>
-        <ion-input type="email" name="email" required class="email-input"></ion-input>
+        <ion-input type="email" [(ngModel)]="organization_id" name="organization_id" required class="email-input"></ion-input>
       </ion-item> 
     </div>
   </ion-text>
 
-  <ion-button class="submit-button" shape="round" expand="block" size="large"><b>Submit</b></ion-button>
+  <ion-button class="submit-button" shape="round" expand="block" size="large" (click)="signUp(organization_id)"><b>Submit</b></ion-button>
 </ion-content>
