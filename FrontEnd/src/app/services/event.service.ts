@@ -13,4 +13,10 @@ export class EventService {
     const response = this.http.get(this.base_url + 'get_event_info');
     return response;
   }
+
+ 
+  get_event(id: string){
+    const response = this.http.get(this.base_url + "get_event_info/" + id);
+    return response;
+  }
 }

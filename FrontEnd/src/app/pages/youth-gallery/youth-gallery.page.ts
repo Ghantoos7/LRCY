@@ -30,6 +30,9 @@ export class YouthGalleryPage implements OnInit {
     });
 
   }
+  seeDetails(event_id: string) {
+    this.router.navigate(["/event-details"], {state: { id : event_id }});
+    }
 
   reset(){
     this.showActivities= true;

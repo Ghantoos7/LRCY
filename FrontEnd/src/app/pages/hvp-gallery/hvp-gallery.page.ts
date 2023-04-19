@@ -31,6 +31,11 @@ export class HvpGalleryPage implements OnInit {
 
   }
 
+  seeDetails(event_id: string) {
+
+    this.router.navigate(["/event-details"], {state: { id : event_id }});
+    }
+
   reset(){
     this.showActivities= true;
   this.showTrainings = true;
@@ -54,7 +59,7 @@ export class HvpGalleryPage implements OnInit {
     this.showTrainings = false;
     this.showOthersEvents = true;
   }
-  
+
   ionViewWillLeave() {
     this.menuCtrl.enable(false, 'menuHvp');
   }
