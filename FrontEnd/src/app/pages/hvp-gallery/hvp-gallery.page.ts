@@ -32,7 +32,7 @@ export class HvpGalleryPage implements OnInit {
   }
 
   seeDetails(event_id: string) {
-    console.log(event_id);
+
     this.router.navigate(["/event-details"], {state: { id : event_id }});
     }
 
