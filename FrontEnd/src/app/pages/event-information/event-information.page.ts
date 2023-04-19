@@ -13,6 +13,7 @@ import { EventService } from 'src/app/services/event.service';
 })
 export class EventInformationPage implements OnInit {
   my_id: string = "";
+
   events: any = [];
   constructor(private service:EventService, private router: Router) { }
 
@@ -27,6 +28,14 @@ export class EventInformationPage implements OnInit {
  
    
     });
+  }
+
+  ionViewWillLeave() {
+    
+    const navigation = this.router.getCurrentNavigation();
+    if (navigation && navigation.extras && navigation.extras.state) {
+      navigation.extras.state = { id: null };
+    }
   }
 
   
