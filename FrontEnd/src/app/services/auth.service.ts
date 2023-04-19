@@ -9,10 +9,6 @@ private base_url = 'http://localhost:8000/api/v0.1/auth/';
 
   constructor(private http:HttpClient) { }
 
-  /*get_user(branch: string, user_id: string){
-    const response = this.http.get(this.base_url + 'get_user_info/' + branch + '/' + user_id);
-  }*/
-
   signUp(organization_id: string){
     const headers: HttpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
     const options = {headers: headers};
@@ -52,5 +48,5 @@ private base_url = 'http://localhost:8000/api/v0.1/auth/';
 
     return response;
   }
-  
+
 }
