@@ -22,7 +22,7 @@ export class OtherGalleryPage implements OnInit {
   showActivities: boolean = true;
   showTrainings: boolean = true;
   showOthersEvents: boolean = true;
-  
+
   ngOnInit() {
     this.event_service.get_events().subscribe(response => {
       this.events = response;
@@ -31,6 +31,10 @@ export class OtherGalleryPage implements OnInit {
     });
 
   }
+  seeDetails(event_id: string) {
+  
+    this.router.navigate(["/event-details"], {state: { id : event_id }});
+    }
 
   reset(){
     this.showActivities= true;

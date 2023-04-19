@@ -29,6 +29,8 @@ export class EventInformationPage implements OnInit {
     });
   }
 
+  
+
   goGallery(){
     this.router.navigate(['/gallery']);
   }
