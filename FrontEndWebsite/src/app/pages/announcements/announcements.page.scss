@@ -4,7 +4,7 @@
 
 ion-card{
     position: relative;
-    width: 1000px;
+    width: 800px;
     margin: 0 auto;
     border-radius: 20px;
     top: 10%;
@@ -17,7 +17,7 @@ ion-card-title{
 
 .input {
     position: relative;
-    height: 50px;
+    height: 100px;
     border-radius: 10px;
     --background: #E9E7E7;
     --color: #8F8F8F;
@@ -28,8 +28,35 @@ ion-card-title{
 }
 
 ion-segment {
-    --background: black;
-    background-color: #E9E7E7;
-    color: black;
+    position: relative;
+    height: 50px;
+    --background: #E9E7E7;
+    --color: #8F8F8F;
+    --padding-end: 45px;
+    --padding-start: 20px;
+    --placeholder-color: #8F8F8F;
+    --placeholder-opacity: 0.8;
 }
+
+ion-label{
+    color: #8F8F8F;
+}
+
+ion-text{
+    font-size: 30px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    color:#45579A;
+    top: 5%;
+}
+
+.send{
+    width: 80%; 
+    margin: 0 auto; 
+    --background: #45579A;
+    position: relative;
+    top: 15%;
+    width: 50%;
+  }
   

@@ -1,5 +1,7 @@
 <ion-content class="background">
 
+  <ion-text>Send an announcement to the members</ion-text>
+
   <ion-card>
     <ion-card-header>
       <ion-card-title>Fill in the fields below</ion-card-title>
@@ -13,6 +15,10 @@
       <ion-input class="input"  placeholder="Announcement Content..."></ion-input>
     </ion-card-content>
 
+    <ion-card-header>
+      <ion-card-title>Choose the importance level of the announcement</ion-card-title>
+    </ion-card-header>
+
     <ion-segment value="default">
       <ion-segment-button value="Optional">
         <ion-label>Optional</ion-label>
@@ -24,7 +30,9 @@
         <ion-label>Urgent</ion-label>
       </ion-segment-button>
     </ion-segment>
-
   </ion-card>
+
+  <ion-button class="send" shape="round" expand="block" size="large">Send Announcement</ion-button>
+  <ion-img src="assets/imgs/ann-design.png"></ion-img>
 
 </ion-content>
