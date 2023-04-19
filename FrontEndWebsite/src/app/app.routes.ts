@@ -33,6 +33,10 @@ export const routes: Routes = [
     path: 'manage-gallery',
     loadComponent: () => import('./pages/manage-gallery/manage-gallery.page').then( m => m.ManageGalleryPage)
   },
+  {
+    path: 'edit-gallery',
+    loadComponent: () => import('./pages/edit-gallery/edit-gallery.page').then( m => m.EditGalleryPage)
+  },
 
 
 ];
