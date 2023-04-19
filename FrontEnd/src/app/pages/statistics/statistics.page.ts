@@ -34,6 +34,10 @@ export class StatisticsPage implements OnInit {
 
   comments_posted:any = [];
   total_comments_posted:string = '';
+
+  branch_info:any = [];
+  branch_name:string = '';
+  branch_location:string = '';
   
   constructor(private router:Router, private service:UserService) { }
 
@@ -74,9 +78,16 @@ export class StatisticsPage implements OnInit {
 
   });
 
+  this.service.get_branch_info('1').subscribe(response => {
+    this.branch_info = response;
+    this.branch_name = this.branch_info['branch_name'];
+    this.branch_location = this.branch_info['branch_location'];
+  
 
-  }
+
+  });
     
+  }
 }
 
 

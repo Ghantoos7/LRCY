@@ -49,5 +49,10 @@ private base_url = 'http://localhost:8000/api/v0.1/user/';
     return response;
   }
 
+  get_branch_info(user_id : string){
+    const response = this.http.get(this.base_url + 'get_branch_info/' + user_id);
+    return response;
+  }
+
 
 }
