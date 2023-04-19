@@ -31,4 +31,8 @@ export class ManageProfilesPage implements OnInit {
     this.router.navigate(['/add-member'])
   }
 
+  goToAddTraining(){
+    this.router.navigate(['/add-training'])
+  }
+
 }

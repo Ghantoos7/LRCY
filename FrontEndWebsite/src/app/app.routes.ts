@@ -41,6 +41,10 @@ export const routes: Routes = [
     path: 'add-gallery',
     loadComponent: () => import('./pages/add-gallery/add-gallery.page').then( m => m.AddGalleryPage)
   },
+  {
+    path: 'add-training',
+    loadComponent: () => import('./pages/add-training/add-training.page').then( m => m.AddTrainingPage)
+  },
 
 
 ];
