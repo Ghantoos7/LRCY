@@ -20,4 +20,8 @@ export class PanelPage implements OnInit {
   goToProfiles(){
     this.router.navigate(['/manage-profiles']);
   }
+
+  goToGallery(){
+    this.router.navigate(['/manage-gallery']);
+  }
 }

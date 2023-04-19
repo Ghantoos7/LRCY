@@ -29,6 +29,10 @@ export const routes: Routes = [
     path: 'member-profile',
     loadComponent: () => import('./pages/member-profile/member-profile.page').then( m => m.MemberProfilePage)
   },
+  {
+    path: 'manage-gallery',
+    loadComponent: () => import('./pages/manage-gallery/manage-gallery.page').then( m => m.ManageGalleryPage)
+  },
 
 
 ];
