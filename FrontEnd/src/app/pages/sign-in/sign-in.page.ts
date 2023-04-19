@@ -20,7 +20,7 @@ export class SignInPage implements OnInit {
   password='';
   message: string = '';
 
-  constructor(private router:Router,private authService:AuthService,alertCtrl: AlertController) {
+  constructor(private router:Router,private authService:AuthService, alertCtrl: AlertController) {
     this.alertCtrl = alertCtrl; // Assign the alertCtrl property to the alertCtrl parameter
    }
 
