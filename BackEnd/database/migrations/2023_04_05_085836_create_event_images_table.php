@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('event_images', function (Blueprint $table) {
             $table->id();
-            $table->string('event_image_source');
-            $table->integer('event_id');
+            $table->string('event_image_source')->default(0);
+            $table->integer('event_id')->default(0);
             $table->string('field1')->nullable();
             $table->string('field2')->nullable();
             $table->timestamps();

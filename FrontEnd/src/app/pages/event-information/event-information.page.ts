@@ -30,11 +30,11 @@ export class EventInformationPage implements OnInit {
     });
   }
 
-  ionViewWillLeave() {
+ ionViewWillLeave() {
     
-    const navigation = this.router.getCurrentNavigation();
+   const navigation = this.router.getCurrentNavigation();
     if (navigation && navigation.extras && navigation.extras.state) {
-      navigation.extras.state = { id: null };
+     navigation.extras.state = { id: null };
     }
   }
 

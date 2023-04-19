@@ -5,7 +5,9 @@ import { IonicModule } from '@ionic/angular';
 import { Route, Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { EventService } from '../../services/event.service';
-
+import { NavController } from '@ionic/angular';
+import { EventPicturesPage } from '../event-pictures/event-pictures.page'; 
+import { EventInformationPage } from '../event-information/event-information.page'; 
 @Component({
   selector: 'app-youth-gallery',
   templateUrl: './youth-gallery.page.html',
@@ -15,7 +17,7 @@ import { EventService } from '../../services/event.service';
 })
 export class YouthGalleryPage implements OnInit {
 
-  constructor(private event_service:EventService, private router:Router, private menuCtrl: MenuController) { }
+  constructor(private navCtrl: NavController, private event_service:EventService, private router:Router, private menuCtrl: MenuController) { }
   youth_events: any = [];
   events: any = [];
   showActivities: boolean = true;
@@ -31,8 +33,13 @@ export class YouthGalleryPage implements OnInit {
 
   }
   seeDetails(event_id: string) {
-    this.router.navigate(["/event-details"], {state: { id : event_id }});
-    }
+    this.navCtrl.navigateForward('/receiving1', { state: { data: event_id } }) 
+    .then(() => {
+      this.navCtrl.navigateForward('/receiving2', { state: { data: event_id } }); 
+    });
+
+  }
+    
 
   reset(){
     this.showActivities= true;

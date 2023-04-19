@@ -15,7 +15,7 @@ import { EventService } from '../../services/event.service';
 })
 export class EnvGalleryPage implements OnInit {
 
-  constructor(private event_service:EventService, private router:Router, private menuCtrl: MenuController) { }
+  constructor( private event_service:EventService, private router:Router, private menuCtrl: MenuController) { }
   env_events: any = [];
   events: any = [];
   showActivities: boolean = true;
@@ -30,6 +30,8 @@ export class EnvGalleryPage implements OnInit {
     });
 
   }
+
+  
 
   seeDetails(event_id: string) {
  
