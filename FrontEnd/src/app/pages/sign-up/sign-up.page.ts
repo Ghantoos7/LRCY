@@ -50,5 +50,8 @@ export class SignUpPage implements OnInit {
   }
   
   
+  goBack(){
+    this.router.navigate(['/sign-in'])
+  }
 
 }
