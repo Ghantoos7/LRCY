@@ -20,6 +20,20 @@ ion-content{
   position: relative;
   }
 
+  .members{
+    width: 59%;
+    margin-left: 17.5%;
+  }
+
+  .add-member{
+    width: 50%;
+    margin: 10px;
+  }
+
+  ion-fab-button {
+    --background: #45579A;
+  }
+
   h1{
     color: white;
     font-family: 'Cairo', sans-serif;
@@ -92,6 +106,12 @@ padding-top: 50px;
     --color: #45579A;
   }
 
+
+  ion-card-title{
+    color: #45579A;
+    font-weight: bold;
+    padding: 10px;
+  }
   .edit-btn{
     position: absolute;
     top: 10%;
