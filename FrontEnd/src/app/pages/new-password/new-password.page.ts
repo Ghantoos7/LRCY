@@ -17,4 +17,6 @@ export class NewPasswordPage implements OnInit {
   ngOnInit() {
   }
 
+  
+
 }

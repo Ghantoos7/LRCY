@@ -74,5 +74,4 @@ private base_url = 'http://localhost:8000/api/v0.1/auth/';
     return response;
   }
 
-  
 }
