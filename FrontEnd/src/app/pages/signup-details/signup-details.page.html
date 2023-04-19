@@ -6,25 +6,25 @@
       <ion-list>
       <ion-item class="custom-item">
         <ion-icon size="large" slot="start" name="person"></ion-icon>
-        <ion-input placeholder="Username" type="text" name="name" required class="email-input"></ion-input>
+        <ion-input placeholder="Username" type="text" name="username" required class="email-input" [(ngModel)]="username"></ion-input>
       </ion-item> 
     
 
       <ion-item class="custom-item">
         <ion-icon size="large" slot="start" name="lock-closed"></ion-icon>
-        <ion-input placeholder="Password" type="password" name="pass" required class="email-input"></ion-input>
+        <ion-input placeholder="Password" type="password" name="password" required class="email-input" [(ngModel)]="password"></ion-input>
       </ion-item> 
 
       <ion-item class="custom-item">
         <ion-icon size="large" slot="start" name="lock-closed"></ion-icon>
-        <ion-input placeholder="Confirm Password" type="password" name="confirm-pass" required class="email-input"></ion-input>
+        <ion-input placeholder="Confirm Password" type="password" name="confirm_password" required class="email-input" [(ngModel)]="confirm_password"></ion-input>
       </ion-item> 
     
   </ion-list>
   </ion-card>
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
     <ion-fab-button>
-      <ion-icon class="icn" name="arrow-forward"></ion-icon>
+      <ion-icon class="icn" name="arrow-forward" (click)="register(username,password,confirm_password)"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 

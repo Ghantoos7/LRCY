@@ -76,6 +76,7 @@ class UserController extends Controller {
             'organization_id' => 'required',
             'username' => 'required',
             'password' => 'required',
+            'confirm_password' => 'required|same:password'
         ]);
     
         if ($validator->fails()) {
@@ -91,10 +92,11 @@ class UserController extends Controller {
         $password_errors = $this->validatePassword($request->input('password'));
     
         if (!empty($password_errors)) {
-            $status = 'Invalid password: ' . implode(', ', $password_errors);
-    
+            $status = 'Invalid password';
+            $errors = $password_errors;
             return response()->json([
                 'status' => $status,
+                'errors' => $errors,
             ]);
         }
     
