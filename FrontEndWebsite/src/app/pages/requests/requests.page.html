@@ -1,20 +1,38 @@
 <ion-content class="background">
 
-  <ion-list>
+  <ion-text class="text1">Password Reset Requests</ion-text>
+  <ion-text class="text2">Members cannot access the application until you accept their request!</ion-text>
+
+  <ion-list [inset]=true>
     <ion-item>
-      <ion-label>Georgio Ghatos</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>John Doe</ion-label>
-    </ion-item>
-    <ion-item>
+      <ion-img src="assets/imgs/profile-picture.png"></ion-img>
       <ion-label>Joe Wehbe</ion-label>
+      <ion-icon (click)="confirm()" class="accept" name="checkmark-outline"></ion-icon>
+      <ion-icon (click)="confirm()" class="decline" name="close-outline"></ion-icon>
     </ion-item>
     <ion-item>
+      <ion-img src="assets/imgs/profile-picture.png"></ion-img>
+      <ion-label>John Doe</ion-label>
+      <ion-icon (click)="confirm()" class="accept" name="checkmark-outline"></ion-icon>
+      <ion-icon (click)="confirm()" class="decline" name="close-outline"></ion-icon>
+    </ion-item>
+    <ion-item>
+      <ion-img src="assets/imgs/profile-picture.png"></ion-img>
+      <ion-label>Georgio Ghnatos</ion-label>
+      <ion-icon (click)="confirm()" class="accept" name="checkmark-outline"></ion-icon>
+      <ion-icon (click)="confirm()" class="decline" name="close-outline"></ion-icon>
+    </ion-item>
+    <ion-item>
+      <ion-img src="assets/imgs/profile-picture.png"></ion-img>
       <ion-label>Theresa Roukaibe</ion-label>
+      <ion-icon (click)="confirm()" class="accept" name="checkmark-outline"></ion-icon>
+      <ion-icon (click)="confirm()" class="decline" name="close-outline"></ion-icon>
     </ion-item>
     <ion-item>
+      <ion-img src="assets/imgs/profile-picture.png"></ion-img>
       <ion-label>Najat Nehme</ion-label>
+      <ion-icon (click)="confirm()" class="accept" name="checkmark-outline"></ion-icon>
+      <ion-icon (click)="confirm()" class="decline" name="close-outline"></ion-icon>
     </ion-item>
   </ion-list>
 
