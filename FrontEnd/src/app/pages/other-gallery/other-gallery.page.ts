@@ -19,6 +19,10 @@ export class OtherGalleryPage implements OnInit {
 
   other_events: any = [];
   events: any = [];
+  showActivities: boolean = true;
+  showTrainings: boolean = true;
+  showOthersEvents: boolean = true;
+
   ngOnInit() {
     this.event_service.get_events().subscribe(response => {
       this.events = response;
@@ -26,6 +30,34 @@ export class OtherGalleryPage implements OnInit {
      
     });
 
+  }
+  seeDetails(event_id: string) {
+  
+    this.router.navigate(["/event-details"], {state: { id : event_id }});
+    }
+
+  reset(){
+    this.showActivities= true;
+  this.showTrainings = true;
+  this.showOthersEvents = true;
+  }
+
+  showActivity() {
+    this.showActivities = true;
+    this.showTrainings = false;
+    this.showOthersEvents = false;
+  }
+  
+  showTraining() {
+    this.showActivities = false;
+    this.showTrainings = true;
+    this.showOthersEvents = false;
+  }
+  
+  showOthers() {
+    this.showActivities = false;
+    this.showTrainings = false;
+    this.showOthersEvents = true;
   }
 
   ionViewWillLeave() {

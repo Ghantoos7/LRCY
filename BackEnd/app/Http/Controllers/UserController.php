@@ -319,7 +319,7 @@ class UserController extends Controller {
             ]);
         }
     
-        // Remove specified fields (password, field1, field2, created_at, and updated_at) from user(s) information using unset() and handle case where user_id is specified (i.e. return a single user object instead of an array of user objects)
+        // Remove specified fields (password, field1, field2, created_at, and updated_at) from user(s) information using unset() and handle case where user_id is specified (i.e. return a single user object instead of an array of user objects) and add to each user a field called 'user_type' which is either 'volunteer' or 'admin' depending on the value of user_type_id (1 for admin, 0 for volunteer)
         $usersArray = [];
         foreach ($users as $user) {
             unset($user->password);
@@ -327,6 +327,7 @@ class UserController extends Controller {
             unset($user->field2);
             unset($user->created_at);
             unset($user->updated_at);
+            $user->user_type = $user->user_type_id === 1 ? 'admin' : 'volunteer';
             $usersArray[] = $user;
         }
     

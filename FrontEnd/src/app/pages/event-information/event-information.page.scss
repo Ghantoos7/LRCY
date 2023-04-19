@@ -18,9 +18,23 @@ ion-toolbar {
 
   ion-card.custom-card {
     width: 100%;
+
     margin: 0;
     padding: 0;
+ 
   }
+
+  ion-card-title {
+    white-space: normal; /* Allow text to wrap */
+    word-break: break-word; /* Break long words */
+  }
+  
+  ion-card-content {
+    white-space: normal; /* Allow text to wrap */
+    word-break: break-word; /* Break long words */
+  }
+
+
 
   ion-card-title{
     font-size:large;
@@ -28,11 +42,15 @@ ion-toolbar {
   }
 
   .layer-card{
-    position: absolute;
+    position: fixed;
   top: 0;
   left: 0;
    z-index: 1;
 margin-top: 50%;
+width: 100%;
+padding: 0;
+max-width: 90%;
+
 
 
   }
