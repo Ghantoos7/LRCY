@@ -37,6 +37,10 @@ export const routes: Routes = [
     path: 'edit-gallery',
     loadComponent: () => import('./pages/edit-gallery/edit-gallery.page').then( m => m.EditGalleryPage)
   },
+  {
+    path: 'add-gallery',
+    loadComponent: () => import('./pages/add-gallery/add-gallery.page').then( m => m.AddGalleryPage)
+  },
 
 
 ];
