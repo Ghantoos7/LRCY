@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
+import { EventService } from '../../services/event.service';
 
 @Component({
   selector: 'app-env-gallery',
@@ -14,9 +15,16 @@ import { MenuController } from '@ionic/angular';
 })
 export class EnvGalleryPage implements OnInit {
 
-  constructor(private router:Router, private menuCtrl: MenuController) { }
-
+  constructor(private event_service:EventService, private router:Router, private menuCtrl: MenuController) { }
+  env_events: any = [];
+  events: any = [];
   ngOnInit() {
+    this.event_service.get_events().subscribe(response => {
+      this.events = response;
+      this.env_events = Array.from(this.events['events']['3']);
+     
+    });
+
   }
 
   ionViewWillLeave() {

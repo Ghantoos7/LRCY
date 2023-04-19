@@ -31,7 +31,7 @@ class EventController extends Controller {
     function getEventInfo($event_id = null) {
     
         // Retrieve the event information from the database
-        $events = $event_id ? [Event::find($event_id)] : Event::paginate(10)->all();
+        $events = $event_id ? [Event::find($event_id)] : Event::all();
 
         // If no event(s) found, return an error message
         if (count($events) === 0 || $events[0] === null) {

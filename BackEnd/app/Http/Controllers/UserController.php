@@ -469,6 +469,11 @@ class UserController extends Controller {
                 'role_name' => $event->role_name
             ];
         })->toArray();
+
+        // sort the events based on date from newest to oldest  
+        usort($eventsArray, function ($a, $b) {
+            return strtotime($b['event_date']) - strtotime($a['event_date']);
+        });
     
         // Return the total count and the events
         return response()->json([
