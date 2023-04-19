@@ -35,7 +35,7 @@
     <ion-content class="ion-padding">
       <ion-row>
         <ion-col class="custom-col" size='6' *ngFor="let event of env_events;">
-          <ion-card mode='ios' class="custom-card">
+          <ion-card mode='ios' class="custom-card" *ngIf="showActivities && event.event_type_id == 1 || showTrainings && event.event_type_id == 2 || showOthersEvents && event.event_type_id == 3">
             <div class="badge">
               <ion-icon *ngIf="event.event_type_id ==1" name="calendar-number-outline" size="large"></ion-icon>
               <ion-icon *ngIf="event.event_type_id == 2" name="barbell-outline" size="large"></ion-icon>
@@ -57,14 +57,17 @@
           <ion-icon name="options-outline"></ion-icon>
         </ion-fab-button>
         <ion-fab-list side="top">
-          <ion-fab-button>
+          <ion-fab-button (click)="showActivity()">
             <ion-icon name="today-outline"></ion-icon>
           </ion-fab-button>
-          <ion-fab-button>
+          <ion-fab-button (click)="showTraining()">
             <ion-icon name="barbell-outline"></ion-icon>
           </ion-fab-button>
-          <ion-fab-button>
+          <ion-fab-button (click)="showOthers()">
             <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
+          </ion-fab-button>
+          <ion-fab-button (click)="reset()">
+            <ion-icon name="close"></ion-icon>
           </ion-fab-button>
         </ion-fab-list>
       </ion-fab>

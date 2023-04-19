@@ -18,6 +18,10 @@ export class EnvGalleryPage implements OnInit {
   constructor(private event_service:EventService, private router:Router, private menuCtrl: MenuController) { }
   env_events: any = [];
   events: any = [];
+  showActivities: boolean = true;
+  showTrainings: boolean = true;
+  showOthersEvents: boolean = true;
+  
   ngOnInit() {
     this.event_service.get_events().subscribe(response => {
       this.events = response;
@@ -25,6 +29,29 @@ export class EnvGalleryPage implements OnInit {
      
     });
 
+  }
+  reset(){
+    this.showActivities= true;
+  this.showTrainings = true;
+  this.showOthersEvents = true;
+  }
+
+  showActivity() {
+    this.showActivities = true;
+    this.showTrainings = false;
+    this.showOthersEvents = false;
+  }
+  
+  showTraining() {
+    this.showActivities = false;
+    this.showTrainings = true;
+    this.showOthersEvents = false;
+  }
+  
+  showOthers() {
+    this.showActivities = false;
+    this.showTrainings = false;
+    this.showOthersEvents = true;
   }
 
   ionViewWillLeave() {
