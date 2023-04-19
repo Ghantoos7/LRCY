@@ -40,4 +40,17 @@ private base_url = 'http://localhost:8000/api/v0.1/auth/';
     return response;
   }
 
+  recoverRequest(organization_id: string){
+    const headers: HttpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
+    const options = {headers: headers};
+
+    const body = {
+      'organization_id': organization_id
+    };
+
+    const response = this.http.post(this.base_url + 'recover_request', body, options);
+
+    return response;
+  }
+  
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-recover-password',
@@ -12,9 +13,26 @@ import { IonicModule } from '@ionic/angular';
 })
 export class RecoverPasswordPage implements OnInit {
 
-  constructor() { }
+  organization_id='';
+  message: string = '';
+
+  constructor(private authService:AuthService) { }
+
+  
 
   ngOnInit() {
+  }
+
+  recoverRequest(organization_id: string){
+    this.authService.recoverRequest(organization_id).subscribe({
+      next:(data) => {
+        const response = JSON.parse(JSON.stringify(data));
+        this.message = response.status;
+      },
+      error:(error) => {
+        console.log(error);
+      }
+    });
   }
 
 }
