@@ -4,13 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 @Component({
-  selector: 'app-add-training',
-  templateUrl: './add-training.page.html',
-  styleUrls: ['./add-training.page.scss'],
+  selector: 'app-delete-training',
+  templateUrl: './delete-training.page.html',
+  styleUrls: ['./delete-training.page.scss'],
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule]
 })
-export class AddTrainingPage implements OnInit {
+export class DeleteTrainingPage implements OnInit {
 
   constructor(private router:Router) { }
 

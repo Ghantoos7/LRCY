@@ -34,5 +34,9 @@ export class ManageProfilesPage implements OnInit {
   goToAddTraining(){
     this.router.navigate(['/add-training'])
   }
+  
+  goToDeleteTraining(){
+    this.router.navigate(['/delete-training']);
+  }
 
 }
