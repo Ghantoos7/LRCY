@@ -1,0 +1,35 @@
+.background{
+    --background: #fff;
+}
+
+ion-card{
+    position: relative;
+    width: 1000px;
+    margin: 0 auto;
+    border-radius: 20px;
+    top: 10%;
+    --background: #45579A;
+}
+
+ion-card-title{
+    text-align: center;
+}
+
+.input {
+    position: relative;
+    height: 50px;
+    border-radius: 10px;
+    --background: #E9E7E7;
+    --color: #8F8F8F;
+    --padding-end: 45px;
+    --padding-start: 20px;
+    --placeholder-color: #8F8F8F;
+    --placeholder-opacity: 0.8;
+}
+
+ion-segment {
+    --background: black;
+    background-color: #E9E7E7;
+    color: black;
+}
+  

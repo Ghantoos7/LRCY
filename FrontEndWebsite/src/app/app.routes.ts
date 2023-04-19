@@ -54,6 +54,10 @@ export const routes: Routes = [
     path: 'delete-training',
     loadComponent: () => import('./pages/delete-training/delete-training.page').then( m => m.DeleteTrainingPage)
   },
+  {
+    path: 'announcements',
+    loadComponent: () => import('./pages/announcements/announcements.page').then( m => m.AnnouncementsPage)
+  },
 
 
 ];
