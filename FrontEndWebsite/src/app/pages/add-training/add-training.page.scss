@@ -1,0 +1,59 @@
+ion-title, ion-item{
+    color:#45579A;
+    font-weight: bolder;
+    font-size: large;
+    font-family: 'Cairo', sans-serif;
+}
+
+ion-item{
+    cursor: pointer;
+}
+
+ion-icon{
+    color: #45579A;
+}
+
+ion-menu-button{
+    color:#45579A;
+}
+
+.custom-header {
+    height:-600px; 
+  }
+
+  .submit {
+    margin-left: 90%;
+   
+  }
+
+  ion-button{
+    --background:#45579A !important;
+  }
+
+  ion-searchbar{
+    --background: #505D8F;
+    --border-radius: 10px;
+    --color: white;
+    --icon-color: #fff;
+  }
+
+  ion-card-title{
+    color:#45579A;
+    font-weight: bolder;
+    font-size: 50px;
+    font-family: 'Cairo', sans-serif;
+  }
+.custom-title{
+    color:#45579A;
+    font-weight: bolder;
+    font-size: 25px !important;
+    font-family: 'Cairo', sans-serif;
+}
+  ion-label{
+    margin-bottom: -10px;
+  }
+
+  h3{
+    color: black;
+
+  }

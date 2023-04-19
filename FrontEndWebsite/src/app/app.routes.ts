@@ -13,7 +13,8 @@ export const routes: Routes = [
   {
     path: 'admin-login',
     loadComponent: () => import('./pages/admin-login/admin-login.page').then( m => m.AdminLoginPage)
-  },  {
+  },
+  {
     path: 'panel',
     loadComponent: () => import('./pages/panel/panel.page').then( m => m.PanelPage)
   },
@@ -40,6 +41,18 @@ export const routes: Routes = [
   {
     path: 'requests',
     loadComponent: () => import('./pages/requests/requests.page').then( m => m.RequestsPage)
+  },
+  {
+    path: 'add-gallery',
+    loadComponent: () => import('./pages/add-gallery/add-gallery.page').then( m => m.AddGalleryPage)
+  },
+  {
+    path: 'add-training',
+    loadComponent: () => import('./pages/add-training/add-training.page').then( m => m.AddTrainingPage)
+  },
+  {
+    path: 'delete-training',
+    loadComponent: () => import('./pages/delete-training/delete-training.page').then( m => m.DeleteTrainingPage)
   },
 
 

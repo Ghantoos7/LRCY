@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { MenuController } from '@ionic/angular';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-manage-gallery',
   templateUrl: './manage-gallery.page.html',
@@ -13,11 +13,14 @@ import { MenuController } from '@ionic/angular';
 })
 export class ManageGalleryPage implements OnInit {
 
-  constructor(private menuCtrl: MenuController) { }
+  constructor(private menuCtrl: MenuController, private router:Router) { }
 
   ngOnInit() {
   }
 
+  goToAddForm(){
+    this.router.navigate(['/add-gallery'])
+  }
   ionViewWillLeave() {
     this.menuCtrl.enable(false, 'menuGallery');
   }
