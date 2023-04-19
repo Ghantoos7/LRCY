@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { MenuController } from '@ionic/angular';
+
 @Component({
   selector: 'app-announcements',
   templateUrl: './announcements.page.html',
@@ -12,13 +14,20 @@ import { Router } from '@angular/router';
 })
 export class AnnouncementsPage implements OnInit {
   showDescriptions: boolean[] = [];
-
-  constructor(private router:Router) { 
+  constructor(private router:Router, private menuCtrl: MenuController) { 
     this.showDescriptions = new Array(3).fill(false);
   }
 
   ngOnInit() {
 
+  }
+
+  ionViewWillLeave() {
+    this.menuCtrl.enable(false, 'menuAnnouncements');
+  }
+
+  ionViewDidEnter() {
+    this.menuCtrl.enable(true, 'menuAnnouncements');
   }
 
   goProfile(){

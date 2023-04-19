@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { MenuController } from '@ionic/angular';
+
 @Component({
   selector: 'app-env-gallery',
   templateUrl: './env-gallery.page.html',
@@ -12,9 +14,17 @@ import { Router } from '@angular/router';
 })
 export class EnvGalleryPage implements OnInit {
 
-  constructor(private router:Router) { }
+  constructor(private router:Router, private menuCtrl: MenuController) { }
 
   ngOnInit() {
+  }
+
+  ionViewWillLeave() {
+    this.menuCtrl.enable(false, 'menuEnvGallery');
+  }
+
+  ionViewDidEnter() {
+    this.menuCtrl.enable(true, 'menuEnvGallery');
   }
 
   goProfile(){

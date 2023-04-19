@@ -1,3 +1,7 @@
+.whitebackground {
+    --background: #fff;
+  }  
+
 .top-page-container{
     position: relative;
     display: flex;
@@ -188,4 +192,14 @@
     position: relative;
     width: 35px;
     left: 8px;
+}
+
+ion-item{
+    --background: transparent;
+    --inner-padding-end: 0;
+}
+  
+.input-field {
+    display: flex;
+    align-items: center;
 }

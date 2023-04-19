@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { Route, Router } from '@angular/router';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-youth-gallery',
@@ -13,10 +14,19 @@ import { Route, Router } from '@angular/router';
 })
 export class YouthGalleryPage implements OnInit {
 
-  constructor(private router:Router) { }
+  constructor(private router:Router, private menuCtrl: MenuController) { }
 
   ngOnInit() {
   }
+
+  ionViewWillLeave() {
+    this.menuCtrl.enable(false, 'menuYouth');
+  }
+
+  ionViewDidEnter() {
+    this.menuCtrl.enable(true, 'menuYouth');
+  }
+
 
   
   goProfile(){

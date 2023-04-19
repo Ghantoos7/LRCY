@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { Route, Router } from '@angular/router';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-other-gallery',
@@ -13,9 +14,17 @@ import { Route, Router } from '@angular/router';
 })
 export class OtherGalleryPage implements OnInit {
 
-  constructor(private router:Router) { }
+  constructor(private router:Router, private menuCtrl: MenuController) { }
 
   ngOnInit() {
+  }
+
+  ionViewWillLeave() {
+    this.menuCtrl.enable(false, 'menuOtherGall');
+  }
+
+  ionViewDidEnter() {
+    this.menuCtrl.enable(true, 'menuOtherGall');
   }
 
   goProfile(){

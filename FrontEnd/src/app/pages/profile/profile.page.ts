@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { Route, Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { HttpClientModule } from '@angular/common/http';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-profile',
@@ -23,7 +24,7 @@ export class ProfilePage implements OnInit {
   bio:string = '';
   user_type_id:string = '';
 
-  constructor(private router:Router, private service:UserService) { }
+  constructor(private router:Router, private service:UserService,private menuCtrl: MenuController) { }
 
   async ngOnInit() {
     this.service.get_user('1', '1').subscribe(response => {
@@ -36,8 +37,16 @@ export class ProfilePage implements OnInit {
       this.user_type_id = (this.user['user'].user_type_id);
     });
 
+
   }
 
+  ionViewWillLeave() {
+    this.menuCtrl.enable(false, 'menuProfile');
+  }
+
+  ionViewDidEnter() {
+    this.menuCtrl.enable(true, 'menuProfile');
+  }
 
   goToEditForm(){
 this.router.navigate(['edit-profile']);
