@@ -17,4 +17,8 @@ export class AddGoalPage implements OnInit {
   ngOnInit() {
   }
 
+  pinFormatter(value: number) {
+    return `${value}%`;
+  }
+
 }

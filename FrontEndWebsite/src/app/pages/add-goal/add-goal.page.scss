@@ -102,5 +102,24 @@ ion-text{
     position: relative;
 }
 
+ion-range{
+    position: relative;
+    bottom: 20px;
+    width: 70%;
+    --bar-background: gray;
+    --bar-background-active: white;
+    --bar-height: 8px;
+    --bar-border-radius: 8px;
+    --knob-background: white;
+    --knob-size: 40px;
+    --pin-background: #45579A;
+    --pin-color: #fff;
+    margin: 0 auto;
+}
+
+ion-range::part(pin) {
+    top: 15px; /* Adjust this value to move the pin closer or further from the knob */
+  }
+
 
   
