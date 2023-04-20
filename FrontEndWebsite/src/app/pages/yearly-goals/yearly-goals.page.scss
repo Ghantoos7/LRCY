@@ -3,6 +3,7 @@
 }
 
 ion-toolbar{
+    position: relative;
     --background: #45579A;
 }
 
@@ -36,9 +37,15 @@ ion-card{
 
 .edit{
     position: relative;
-    font-size: 30px;
+    font-size: 25px;
     color: white;
     left: 470px;
+}
+
+.list{
+    position: relative;
+    top: 60px;
+    background-color: white;
 }
 
 ion-card-title{
@@ -69,6 +76,30 @@ ion-card-subtitle{
 
 ion-progress-bar{
     --background: darkgray;
-    --progress-background: white;
+    --progress-background: wheat;
+    height: 10px;
+    border-radius: 15px;
 }
+
+ion-item-divider{
+    font-size: 40px;
+    color: black;
+    --background: white;
+}
+
+.content{
+    --background: white;
+}
+
+ion-searchbar{
+    --background: #505D8F;
+    --border-radius: 10px;
+    --color: white;
+    --icon-color: #fff;
+    position: relative;
+    top: 60px;
+    width: 70%;
+    margin: 0 auto;
+}
+
 
