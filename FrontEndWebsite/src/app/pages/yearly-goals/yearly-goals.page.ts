@@ -21,7 +21,8 @@ export class YearlyGoalsPage implements OnInit {
 
   async confirm() {
     const alert = await this.alertController.create({
-      header: 'Are you sure you want to proceed?',
+      header: 'Delete Goal',
+      message: 'Are you sure you want to delete this goal?',
       cssClass: 'my-custom-class',
       buttons: [
         {

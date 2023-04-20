@@ -45,6 +45,7 @@ ion-card{
 .list{
     position: relative;
     background-color: white;
+    bottom: 100px;
 }
 
 ion-card-title{
@@ -84,7 +85,11 @@ ion-item-divider{
     font-size: 40px;
     color: black;
     --background: white;
+    border-bottom: none;
+    position: relative;
+    left: 45%;
 }
+
 
 .content{
     --background: white;
@@ -98,6 +103,7 @@ ion-searchbar{
     position: relative;
     width: 70%;
     margin: 0 auto;
+    bottom: 40px;
 }
 
 
