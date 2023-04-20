@@ -54,7 +54,7 @@
       <ion-footer>
         <ion-icon class="likes" name="heart-outline"></ion-icon>
         <ion-text class="like-count" color="danger">0</ion-text>
-        <ion-img class="comments" src="assets/icon/comments.png"></ion-img>
+        <ion-img (click) ="goToComments()" class="comments" src="assets/icon/comments.png"></ion-img>
         <ion-text class="comment-count">0</ion-text>
         <ion-input class="input"  placeholder="Comment on this post..."></ion-input>
         <ion-icon class="send-icon" name="send"></ion-icon>

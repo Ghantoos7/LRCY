@@ -32,7 +32,7 @@ export class YouthGalleryPage implements OnInit {
 
       this.events = response;
       this.youth_events = Array.from(this.events['events']['1']);
-      console.log(this.events['events']['1'][0].responsibles)
+
      
     });
 

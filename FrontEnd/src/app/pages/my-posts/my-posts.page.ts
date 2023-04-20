@@ -55,6 +55,10 @@ export class MyPostsPage implements OnInit {
     });
     await actionSheet.present();
   }
+
+  goToComments(){
+    this.router.navigate(['/comments']);
+  }
   }
 
  
