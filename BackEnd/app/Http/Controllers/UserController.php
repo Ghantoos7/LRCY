@@ -349,7 +349,7 @@ class UserController extends Controller {
         }
     
         // Return the user(s) information and pagination links
-        return response()->json($user_id ? ['user' => $usersArray[0]] : [
+        return response()->json($user_id ? ['status' => 'success', 'user' => $usersArray[0]] : [
             'status' => 'success',
             'users' => $usersArray,
             'links' => [
@@ -713,7 +713,9 @@ class UserController extends Controller {
     
         // Check if the user exists in the database
         if (!$existing_volunteer_user) {
-            return response()->json(['message' => 'User not found'],);
+            return response()->json([
+                'status' => 'error',
+                'message' => 'User not found'],);
         }
     
         // Validate the request data
@@ -725,7 +727,9 @@ class UserController extends Controller {
     
         // If validation fails, return a response with errors
         if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()]);
+            return response()->json([
+                'status' => 'error',
+                'errors' => $validator->errors()]);
         }
     
         // Update the user's profile picture if it was provided
@@ -750,7 +754,9 @@ class UserController extends Controller {
         $existing_volunteer_user->save();
     
         // Return a success response
-        return response()->json(['message' => 'Profile updated successfully']);
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Profile updated successfully']);
 
     }
     
