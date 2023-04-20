@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { Route, Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
+import { EventService } from 'src/app/services/event.service';
 
 @Component({
   selector: 'app-yearly-goals',
@@ -14,10 +15,17 @@ import { MenuController } from '@ionic/angular';
 })
 export class YearlyGoalsPage implements OnInit {
 
-  constructor(private router:Router, private menuCtrl: MenuController) { }
+  yearlyGoals: any;
+
+  constructor(private router:Router, private menuCtrl: MenuController, private service:EventService) { }
 
   ngOnInit() {
-  }
+    this.service.getYearlyGoals().subscribe((response: any) => {
+      const allGoals = [].concat.apply([], Object.values(response['goals']));
+      this.yearlyGoals = allGoals;
+      console.log(this.yearlyGoals);
+    });
+  }  
 
   ionViewWillLeave() {
     this.menuCtrl.enable(false, 'menuGoals');
