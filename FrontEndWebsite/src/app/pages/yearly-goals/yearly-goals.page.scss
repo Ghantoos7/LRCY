@@ -1,0 +1,59 @@
+.background{
+    --background: white;
+}
+
+ion-menu-button{
+    color: #45579A;
+}
+
+ion-title{
+    color: #45579A;
+}
+
+ion-item{
+    color: #45579A;
+}
+
+ion-card{
+    position: relative;
+    top: 10%;
+    width: 70%;
+    height: 20%;
+    background-color: #45579A;
+    margin: 0 auto;
+}
+
+.icon, ion-card-title{
+    color: white;
+}
+
+ion-card-title{
+    font-size: medium;
+    display: flex;
+    justify-content: space-between;
+}
+
+ion-footer{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.date{ 
+    font-size: small;
+    font-weight: lighter;
+    color:lightgray;
+    font-family: 'Cairo', sans-serif;
+}
+
+ion-card-subtitle{
+    font-size: small;
+    font-weight: bold;
+    color:white;
+    font-family: 'Cairo', sans-serif;
+}
+
+ion-progress-bar{
+    --background: darkgray;
+    --progress-background: white;
+}
+
