@@ -63,10 +63,10 @@ ion-text{
 .start-date{
     position: relative;
     border-radius: 10px;
-    --background: red;
+    --background: #E9E7E7;
     width: 45%;
     left: 2%;
-    --color: #8F8F8F;
+    --color: black;
     --padding-end: 45px;
     --padding-start: 20px;
     --placeholder-color: #8F8F8F;
@@ -87,11 +87,11 @@ ion-text{
 .end-date{
     position: absolute;
     border-radius: 10px;
-    --background: red;
+    --background: #E9E7E7;
     width: 45%;
     left: 53%;
     bottom: 13px;
-    --color: #8F8F8F;
+    --color: black;
     --padding-end: 45px;
     --padding-start: 20px;
     --placeholder-color: #8F8F8F;
@@ -118,8 +118,9 @@ ion-range{
 }
 
 ion-range::part(pin) {
-    top: 15px; /* Adjust this value to move the pin closer or further from the knob */
-  }
+    top: 15px;
+}
+
 
 
   
