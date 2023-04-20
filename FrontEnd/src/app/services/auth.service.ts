@@ -29,16 +29,26 @@ private base_url = 'http://localhost:8000/api/v0.1/auth/';
     return response;
   }
 
-  login(organization_id: string, password: string){
-    const headers: HttpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
-    const options = {headers: headers};
+  login(organization_id: string, password: string, rememberMe: boolean) {
+    const headers: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    const options = { headers: headers };
 
     const body = {
-      'organization_id': organization_id,
-      'password': password
+      organization_id: organization_id,
+      password: password
     };
 
     const response = this.http.post(this.base_url + 'login', body, options);
+
+    if (rememberMe) {
+      localStorage.setItem('orgId', organization_id);
+      localStorage.setItem('password', password);
+    } else {
+      localStorage.removeItem('orgId');
+      localStorage.removeItem('password');
+    }
 
     return response;
   }
