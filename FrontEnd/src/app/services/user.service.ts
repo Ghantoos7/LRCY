@@ -63,6 +63,11 @@ private base_url = 'http://localhost:8000/api/v0.1/user/';
     const response = this.http.get(this.base_url + 'get_trainings_info/' + user_id);
     return response;
   }
+  
+  get_own_posts(user_id: string){
+    const response = this.http.get(this.base_url + 'get_own_posts/' + user_id);
+    return response;
+  }
 
 
 

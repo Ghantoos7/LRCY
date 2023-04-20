@@ -383,11 +383,6 @@ class UserController extends Controller {
         // Get the trainings with the matching IDs
         $trainings = Training::whereIn('id', $training_ids)->select('id', 'training_name', 'training_description', 'program_id')->get();
     
-        // If no trainings are found for the user
-        if ($trainings->isEmpty()) {
-            return response()->json(['message' => 'No trainings found for this user']);
-        }
-    
         // Sort the trainings based on program ID
         $trainings = $trainings->sortBy('program_id');
     

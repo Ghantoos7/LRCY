@@ -35,6 +35,7 @@ export class SignInPage implements OnInit {
         if (response.status === 'Login successful') {
           // Store the token in local storage for future use
           localStorage.setItem('authToken', response.token);
+          localStorage.setItem('userId', response.user_id);
           // Redirect the user to the dashboard or any other page
           this.router.navigate(['/feed']);
         } else {
