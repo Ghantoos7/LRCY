@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-add-goal',
@@ -12,13 +14,21 @@ import { IonicModule } from '@ionic/angular';
 })
 export class AddGoalPage implements OnInit {
 
-  constructor() { }
+  constructor(private router:Router, private menuController: MenuController) { }
 
   ngOnInit() {
   }
 
   pinFormatter(value: number) {
     return `${value}%`;
+  }
+
+  goToGoals(){
+    this.router.navigate(['/yearly-goals']);
+  }
+
+  closeMenu() {
+    this.menuController.close();
   }
 
 }
