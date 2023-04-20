@@ -26,8 +26,6 @@ private base_url = 'http://localhost:8000/api/v0.1/auth/';
     
     const data = JSON.parse(JSON.stringify(response));
 
-    console.log(organization_id);
-
     return response;
   }
 
@@ -61,7 +59,7 @@ private base_url = 'http://localhost:8000/api/v0.1/auth/';
   register(username:string, password: string, confirm_password: string){
     const headers: HttpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
     const options = {headers: headers};
-    console.log(this.saved_id);
+    
     const body = {
       'organization_id': this.saved_id,
       'username': username,
@@ -70,6 +68,21 @@ private base_url = 'http://localhost:8000/api/v0.1/auth/';
     };
 
     const response = this.http.post(this.base_url + 'register', body, options);
+
+    return response;
+  }
+
+  changePassword(organization_id:string, password: string, confirm_password: string){
+    const headers: HttpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
+    const options = {headers: headers};
+
+    const body = {
+      'organization_id': organization_id,
+      'password': password,
+      'confirm_password': confirm_password
+    };
+
+    const response = this.http.post(this.base_url + 'change_password', body, options);
 
     return response;
   }

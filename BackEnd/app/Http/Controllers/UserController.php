@@ -244,13 +244,16 @@ class UserController extends Controller {
 
         // Validate the request
         $validator = Validator::make($request->all(), [
-            'user_id' => 'required',
+            'organization_id' => 'required',
             'password' => 'required',
             'confirm_password' => 'required|same:password'
         ]);
     
+        // Get the user ID from the organization ID of the request
+        $user_id = volunteer_user::where('organization_id', '=', $request->input('organization_id'))->first()->id;
+
         // Check this user's recover request,  If it is false(0) then return an error response stating that it has not yet been accepted. If it is true(1) then continue with the password change. If it is null, then return an error response stating that the user has not submitted a request.
-        $existing_request = recover_request::where('user_id', '=', $request->input('user_id'))->first();
+        $existing_request = recover_request::where('user_id', '=', $user_id)->first();
     
         if (!$existing_request) {
             return response()->json([
@@ -269,20 +272,18 @@ class UserController extends Controller {
         // Validate password
         $password_errors = $this->validatePassword($request->input('password'));
     
-        // Check if validation failed or there are password errors
-        if ($validator->fails() || !empty($password_errors)) {
-            $errors = $validator->errors();
-            foreach ($password_errors as $error) {
-                $errors->add('password', $error);
-            }
+        // Check if validation failed or there are password errors and return the status and message
+        if ($validator->fails() || $password_errors) {
             return response()->json([
                 'status' => 'error',
-                'message' => $errors
+                'message' => $validator->fails() ? $validator->errors()->first() : $password_errors
             ]);
         }
+
+
     
         // Retrieve a volunteer user record from the database based on the `organization_id` input parameter
-        $existing_volunteer_user = volunteer_user::where('id', '=', $request->input('user_id'))->first();
+        $existing_volunteer_user = volunteer_user::where('organization_id', '=', $request->input('organization_id'))->first();
     
         // Check if the user exists and is registered. If yes, update the password and save the record. If no, return an error response.
         if ($existing_volunteer_user && $existing_volunteer_user->is_registered) {
