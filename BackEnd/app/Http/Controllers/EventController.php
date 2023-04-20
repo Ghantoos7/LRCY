@@ -7,7 +7,6 @@ use App\Models\goal;
 use App\Models\event;
 use App\Models\announcement;
 use App\Models\volunteer_user;
-use App\Models\picture;
 use App\Models\event_image;
 use App\Models\is_responsible;
 
@@ -97,9 +96,25 @@ class EventController extends Controller {
             }
             // Remove unnecessary fields from the announcement
             unset($announcementArray['field1'], $announcementArray['field2'], $announcementArray['created_at'], $announcementArray['updated_at']);
+
+            // Convert the importance level to string
+            switch($announcementArray['importance_level']) {
+                case 0:
+                    $announcementArray['importance_level'] = 'optional';
+                    break;
+                case 1:
+                    $announcementArray['importance_level'] = 'important';
+                    break;
+                case 2:
+                    $announcementArray['importance_level'] = 'urgent';
+                    break;
+                default:
+                    break;
+            }
+
             return $announcementArray;
         });
-
+        
         // Return the announcements
         return response()->json(['announcements' => $announcements]);
     
