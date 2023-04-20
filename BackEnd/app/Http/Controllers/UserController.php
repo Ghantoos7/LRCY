@@ -16,6 +16,7 @@ use App\Models\comment;
 use App\Models\is_responsible;
 use App\Models\event;
 use App\Models\branch;
+use App\Models\like;
 
 
 class UserController extends Controller {
@@ -685,6 +686,12 @@ class UserController extends Controller {
         // Remove the fields we don't want to return
         foreach ($posts as $post) {
             unset($post->field1, $post->field2, $post->created_at, $post->updated_at);
+        }
+
+        // Adds the comment and like count to each post
+        foreach ($posts as $post) {
+            $post->comment_count = Comment::where('post_id', $post->id)->count();
+            $post->like_count = Like::where('post_id', $post->id)->count();
         }
     
         // Return the posts
