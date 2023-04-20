@@ -28,4 +28,8 @@ export class PanelPage implements OnInit {
   goToRequests(){
     this.router.navigate(['/requests']);
   }
+
+  goToAnnouncements(){
+    this.router.navigate(['/announcements']);
+  }
 }
