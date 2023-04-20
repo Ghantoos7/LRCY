@@ -62,6 +62,10 @@ export const routes: Routes = [
     path: 'yearly-goals',
     loadComponent: () => import('./pages/yearly-goals/yearly-goals.page').then( m => m.YearlyGoalsPage)
   },
+  {
+    path: 'add-goal',
+    loadComponent: () => import('./pages/add-goal/add-goal.page').then( m => m.AddGoalPage)
+  },
 
 
 ];

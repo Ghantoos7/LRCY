@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-yearly-goals',
@@ -14,7 +14,7 @@ import { AlertController } from '@ionic/angular';
 })
 export class YearlyGoalsPage implements OnInit {
 
-  constructor(private alertController: AlertController) { }
+  constructor(private alertController: AlertController, private router:Router) { }
 
   ngOnInit() {
   }
@@ -35,6 +35,10 @@ export class YearlyGoalsPage implements OnInit {
       ]
     });
     await alert.present();
+  }
+
+  goToAddGoal(){
+    this.router.navigate(['/add-goal']);
   }
 
 }
