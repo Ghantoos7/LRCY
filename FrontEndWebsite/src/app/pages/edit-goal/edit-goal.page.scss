@@ -2,6 +2,29 @@
     --background: #fff;
 }
 
+ion-toolbar{
+    position: relative;
+    --background: #45579A;
+}
+
+ion-menu-button{
+    color: white;
+}
+
+ion-title{
+    color: white;
+}
+
+ion-item{
+    color: white;
+}
+
+ion-button{
+    position: relative;
+    width: 100%;
+    --background: #45579A;
+}
+
 ion-card{
     position: relative;
     width: 800px;
@@ -27,17 +50,6 @@ ion-card-title{
     --placeholder-opacity: 0.8;
 }
 
-ion-segment {
-    position: relative;
-    height: 50px;
-    --background: #E9E7E7;
-    --color: #8F8F8F;
-    --padding-end: 45px;
-    --padding-start: 20px;
-    --placeholder-color: #8F8F8F;
-    --placeholder-opacity: 0.8;
-}
-
 ion-label{
     color: #8F8F8F;
 }
@@ -48,7 +60,7 @@ ion-text{
     display: flex;
     justify-content: center;
     color:#45579A;
-    top: 5%;
+    top: 8%;
 }
 
 .send{
@@ -120,6 +132,8 @@ ion-range{
 ion-range::part(pin) {
     top: 15px;
 }
+
+
 
 
 

@@ -1,10 +1,37 @@
 <ion-content class="background">
 
-  <ion-text>Editing Jbail Reforestation</ion-text>
+  <ion-menu menuId="menuGoals" contentId="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Manage Yearly Goals</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding"> 
+      <ion-list>
+        <ion-button (click) ="goToGoals()">View Goals</ion-button>
+        </ion-list>
+      <ion-list>
+      <ion-button (click) ="goToAddGoal()">Add a goal</ion-button>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <div class="ion-page" id="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Yearly Goals</ion-title>
+      </ion-toolbar>
+    </ion-header>
+  </div>
+
+  <ion-text>Add a yearly goal for the organization</ion-text>
 
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Edit title or description</ion-card-title>
+      <ion-card-title>Edit goal title or description</ion-card-title>
     </ion-card-header>
   
     <ion-card-content>
@@ -37,5 +64,6 @@
 
   <ion-button class="send" shape="round" expand="block" size="large">Update</ion-button>
   <ion-img src="assets/imgs/ann-design.png"></ion-img>
+
 
 </ion-content>
