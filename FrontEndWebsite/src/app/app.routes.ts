@@ -55,10 +55,6 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/delete-training/delete-training.page').then( m => m.DeleteTrainingPage)
   },
   {
-    path: 'announcements',
-    loadComponent: () => import('./pages/announcements/announcements.page').then( m => m.AnnouncementsPage)
-  },
-  {
     path: 'yearly-goals',
     loadComponent: () => import('./pages/yearly-goals/yearly-goals.page').then( m => m.YearlyGoalsPage)
   },
@@ -69,6 +65,14 @@ export const routes: Routes = [
   {
     path: 'edit-goal',
     loadComponent: () => import('./pages/edit-goal/edit-goal.page').then( m => m.EditGoalPage)
+  },
+  {
+    path: 'send-announcement',
+    loadComponent: () => import('./pages/send-announcement/send-announcement.page').then( m => m.SendAnnouncementPage)
+  },
+  {
+    path: 'announcements',
+    loadComponent: () => import('./pages/announcements/announcements.page').then( m => m.AnnouncementsPage)
   },
 
 

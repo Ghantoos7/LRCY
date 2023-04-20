@@ -1,38 +1,116 @@
-<ion-content class="background">
+<ion-content>
 
-  <ion-text>Send an announcement to the members</ion-text>
+  <ion-menu menuId="menuGoals" contentId="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Manage Announcements</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding"> 
+      <ion-list>
+        <ion-button>View Goals</ion-button>
+        </ion-list>
+      <ion-list>
+      <ion-button>Add a goal</ion-button>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
 
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Fill in the fields below</ion-card-title>
-    </ion-card-header>
+  <div class="ion-page" id="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Announcements</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+    <ion-card>
+      <ion-card-header>
+        <ion-item lines="none">
+          <ion-avatar class="avatar" slot="start">
+            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+          </ion-avatar>
+          <ion-label>
+            <h1>Finance Job</h1>
+            <p class="level">Optional</p>
+          </ion-label>
+        </ion-item>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-label class="ion-text-end">
+          <p>Georgio Ghantios</p>
+          <p>08/4/2023</p>
+        </ion-label>
+        <ion-text *ngIf="showDescriptions[0]" class="description">
+          This is the hidden paragraph that will be revealed when the button is pressed.
+        </ion-text>
+        <ion-footer class="ion-text-center">
+        <ion-button class="ion-align-items-center" slot="footer" (click)="toggleDescription(0)" fill="clear">
+          <ion-icon  [name]="showDescriptions[0] ? 'chevron-up-outline' : 'chevron-down-outline'"></ion-icon>
+        </ion-button>
+      </ion-footer>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-item lines="none">
+          <ion-avatar class="avatar" slot="start">
+            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+          </ion-avatar>
+          <ion-label>
+            <h1>Cleaning Shifts</h1>
+            <p class="urgent">Urgent</p>
+          </ion-label>
+        </ion-item>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-label class="ion-text-end">
+          <p>Georgio Ghantios</p>
+          <p>08/4/2023</p>
+        </ion-label>
+        <ion-text *ngIf="showDescriptions[1]" class="description">
+          This is the hidden paragraph that will be revealed when the button is pressed.
+        </ion-text>
+        <ion-footer class="ion-text-center">
+        <ion-button class="ion-align-items-center" slot="footer" (click)="toggleDescription(1)" fill="clear">
+          <ion-icon  [name]="showDescriptions[1] ? 'chevron-up-outline' : 'chevron-down-outline'"></ion-icon>
+        </ion-button>
+      </ion-footer>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-item lines="none">
+          <ion-avatar class="avatar" slot="start">
+            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+          </ion-avatar>
+          <ion-label>
+            <h1>Meeting this week</h1>
+            <p class="important">Important</p>
+          </ion-label>
+        </ion-item>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-label class="ion-text-end">
+          <p>Georgio Ghantios</p>
+          <p>08/4/2023</p>
+        </ion-label>
+        <ion-text *ngIf="showDescriptions[2]" class="description">
+          This is the hidden paragraph that will be revealed when the button is pressed.
+        </ion-text>
+        <ion-footer class="ion-text-center">
+        <ion-button class="ion-align-items-center" slot="footer" (click)="toggleDescription(2)" fill="clear">
+          <ion-icon  [name]="showDescriptions[2] ? 'chevron-up-outline' : 'chevron-down-outline'"></ion-icon>
+        </ion-button>
+      </ion-footer>
+      </ion-card-content>
+    </ion-card>
+  </ion-content>
+  </div>
+
   
-    <ion-card-content>
-      <ion-input class="input"  placeholder="Announcement Title..."></ion-input>
-    </ion-card-content>
-
-    <ion-card-content>
-      <ion-input class="input"  placeholder="Announcement Content..."></ion-input>
-    </ion-card-content>
-
-    <ion-card-header>
-      <ion-card-title>Choose the importance level of the announcement</ion-card-title>
-    </ion-card-header>
-
-    <ion-segment value="default">
-      <ion-segment-button value="Optional">
-        <ion-label>Optional</ion-label>
-      </ion-segment-button>
-      <ion-segment-button value="Important">
-        <ion-label>Important</ion-label>
-      </ion-segment-button>
-      <ion-segment-button value="Urgent">
-        <ion-label>Urgent</ion-label>
-      </ion-segment-button>
-    </ion-segment>
-  </ion-card>
-
-  <ion-button class="send" shape="round" expand="block" size="large">Send Announcement</ion-button>
-  <ion-img src="assets/imgs/ann-design.png"></ion-img>
-
 </ion-content>
