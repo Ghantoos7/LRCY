@@ -22,7 +22,7 @@ export class ProfilePage implements OnInit {
   full_name:string = '';
   username:string = '';
   bio:string = '';
-  user_type_id:string = '';
+  user_position:string = '';
 
   constructor(private router:Router, private service:UserService,private menuCtrl: MenuController) { }
 
@@ -34,7 +34,7 @@ export class ProfilePage implements OnInit {
       this.full_name = this.first_name + ' ' + this.last_name;
       this.username = (this.user['user'].username);
       this.bio = (this.user['user'].bio);
-      this.user_type_id = (this.user['user'].user_type_id);
+      this.user_position = (this.user['user'].user_position);
     });
 
 
