@@ -18,6 +18,7 @@ class announcementFactory extends Factory
     {
         return [
             'announcement_content' => fake()->text(),
+            'announcement_title' => fake()->text(),
             'announcement_date' => fake()->date(),
             'importance_level' => random_int(0, 3),
             'admin_id' => random_int(1, 70),

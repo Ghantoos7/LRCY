@@ -24,4 +24,9 @@ export class EventService {
     const response = this.http.get(this.base_url + "get_event_pictures/" + id);
     return response;
   }
+
+  getAnnouncements(){
+    const response = this.http.get(this.base_url + 'get_announcements');
+    return response;
+  }
 }
