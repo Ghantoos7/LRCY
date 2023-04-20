@@ -1,6 +1,6 @@
 <ion-content class="background">
 
-  <ion-text>Send an announcement to the members</ion-text>
+  <ion-text>Add a yearly goal for the organization</ion-text>
 
   <ion-card>
     <ion-card-header>
@@ -8,13 +8,26 @@
     </ion-card-header>
   
     <ion-card-content>
-      <ion-input class="input"  placeholder="Announcement Title..."></ion-input>
+      <ion-input class="input" placeholder="Goal Title..."></ion-input>
     </ion-card-content>
 
     <ion-card-content>
-      <ion-input class="input"  placeholder="Announcement Content..."></ion-input>
+      <ion-input class="input" placeholder="Goal Description..."></ion-input>
     </ion-card-content>
 
+    <div class="dates">
+      <ion-card-header>
+        <ion-card-title class="start">Start Date</ion-card-title>
+        <ion-card-title class="end">Deadline</ion-card-title>
+  
+      </ion-card-header>
+  
+      <ion-card-content>
+        <ion-input class="start-date"type="date"></ion-input>
+        <ion-input class="end-date"type="date"></ion-input>
+      </ion-card-content>
+    </div>
+  
     <ion-card-header>
       <ion-card-title>Choose the importance level of the announcement</ion-card-title>
     </ion-card-header>
