@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { EventService } from 'src/app/services/event.service';
+import { ActivatedRoute } from '@angular/router';
+import { SharedService } from 'src/app/services/shared.service';
 @Component({
   selector: 'app-event-information',
   templateUrl: './event-information.page.html',
@@ -15,15 +17,12 @@ export class EventInformationPage implements OnInit {
   my_id: string = "";
 
   events: any = [];
-  constructor(private service:EventService, private router: Router) { }
+  constructor(private shared:SharedService, private route: ActivatedRoute, private service:EventService, private router: Router) { }
 
   ngOnInit() {
-    const data = this.router.getCurrentNavigation()?.extras.state;
-    const event_id = JSON.stringify(data);
-    const id = JSON.parse(event_id)["id"];
-    this.my_id = id;
+
+  this.my_id = this.shared.getVariableValue();
     this.service.get_event(this.my_id).subscribe(response => {
-      const info = JSON.stringify(response);
       this.events = response;
  
    
@@ -31,11 +30,7 @@ export class EventInformationPage implements OnInit {
   }
 
  ionViewWillLeave() {
-    
-   const navigation = this.router.getCurrentNavigation();
-    if (navigation && navigation.extras && navigation.extras.state) {
-     navigation.extras.state = { id: null };
-    }
+  this.shared.setVariableValue(null);
   }
 
   
