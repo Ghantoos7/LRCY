@@ -5,7 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { Route, Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { EventService } from '../../services/event.service';
-
+import { SharedService } from 'src/app/services/shared.service';
 @Component({
   selector: 'app-hvp-gallery',
   templateUrl: './hvp-gallery.page.html',
@@ -15,7 +15,7 @@ import { EventService } from '../../services/event.service';
 })
 export class HvpGalleryPage implements OnInit {
 
-  constructor(private event_service:EventService, private router:Router, private menuCtrl: MenuController) { }
+  constructor(private shared:SharedService,private event_service:EventService, private router:Router, private menuCtrl: MenuController) { }
  hvp_events: any = [];
   events: any = [];
   showActivities: boolean = true;
@@ -32,9 +32,10 @@ export class HvpGalleryPage implements OnInit {
   }
 
   seeDetails(event_id: string) {
-
-    this.router.navigate(["/event-details"], {state: { id : event_id }});
+    this.shared.setVariableValue(event_id);
+      this.router.navigate(['/event-details']);
     }
+      
 
   reset(){
     this.showActivities= true;

@@ -5,6 +5,8 @@ import { IonicModule } from '@ionic/angular';
 import { Route, Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { EventService } from '../../services/event.service';
+import { SharedService } from '../../services/shared.service';
+
 
 @Component({
   selector: 'app-other-gallery',
@@ -15,7 +17,7 @@ import { EventService } from '../../services/event.service';
 })
 export class OtherGalleryPage implements OnInit {
 
-  constructor(private event_service:EventService, private router:Router, private menuCtrl: MenuController) { }
+  constructor(private sharedService: SharedService, private event_service:EventService, private router:Router, private menuCtrl: MenuController) { }
 
   other_events: any = [];
   events: any = [];
@@ -31,10 +33,12 @@ export class OtherGalleryPage implements OnInit {
     });
 
   }
+
   seeDetails(event_id: string) {
-  
-    this.router.navigate(["/event-details"], {state: { id : event_id }});
+    this.sharedService.setVariableValue(event_id);
+      this.router.navigate(['/event-details']);
     }
+      
 
   reset(){
     this.showActivities= true;

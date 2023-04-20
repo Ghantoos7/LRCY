@@ -59,7 +59,7 @@ class EventController extends Controller {
                         'first_name' => $user->first_name,
                         'last_name' => $user->last_name,
                         'role_name' => $responsible->role_name,
-                        'profile_picture' => $user->profile_picture
+                        'profile_picture' => $user->user_profile_pic
                     ];
                 });
                 return $event;
@@ -132,7 +132,7 @@ class EventController extends Controller {
         }
 
         // Retrieve the pictures of the event from the database
-        $pictures = event_image::where('event_id', $event_id)->get();
+        $pictures = Event_image::where('event_id', $event_id)->get();
 
         // If no pictures found, return an error message
         if ($pictures->isEmpty()) {
