@@ -56,10 +56,23 @@ private base_url = 'http://localhost:8000/api/v0.1/auth/';
     return response;
   }
 
+  checkRequestStatus(organization_id: string){
+    const headers: HttpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
+    const options = {headers: headers};
+
+    const body = {
+      'organization_id': organization_id
+    };
+
+    const response = this.http.post(this.base_url + 'check_request_status', body, options);
+    
+    return response;
+  }
+
   register(username:string, password: string, confirm_password: string){
     const headers: HttpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
     const options = {headers: headers};
-    
+
     const body = {
       'organization_id': this.saved_id,
       'username': username,
