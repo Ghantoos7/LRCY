@@ -60,7 +60,7 @@ class EventController extends Controller {
                         'first_name' => $user->first_name,
                         'last_name' => $user->last_name,
                         'role_name' => $responsible->role_name,
-                        'profile_picture' => $user->profile_picture
+                        'profile_picture' => $user->user_profile_pic
                     ];
                 });
                 return $event;

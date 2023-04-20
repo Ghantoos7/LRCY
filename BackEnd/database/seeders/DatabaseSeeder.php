@@ -54,9 +54,10 @@ class DatabaseSeeder extends Seeder
         goal::factory(20)->create();
         announcement::factory(20)->create();
         comment::factory(20)->create();
+          event_image::factory(20)->create();
         event::factory(20)->create();*/
 
-        event_image::factory(20)->create();
+        is_responsible::factory(20)->create();
 
     }
 }

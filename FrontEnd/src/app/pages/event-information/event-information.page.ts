@@ -17,6 +17,7 @@ export class EventInformationPage implements OnInit {
   my_id: string = "";
 
   events: any = [];
+  responsibles: any = [];
   constructor(private shared:SharedService, private route: ActivatedRoute, private service:EventService, private router: Router) { }
 
   ngOnInit() {
@@ -24,7 +25,7 @@ export class EventInformationPage implements OnInit {
   this.my_id = this.shared.getVariableValue();
     this.service.get_event(this.my_id).subscribe(response => {
       this.events = response;
- 
+       this.responsibles = this.events['event']['0']['responsibles'];
    
     });
   }

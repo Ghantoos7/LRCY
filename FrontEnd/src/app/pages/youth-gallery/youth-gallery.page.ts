@@ -31,8 +31,8 @@ export class YouthGalleryPage implements OnInit {
     this.event_service.get_events().subscribe(response => {
 
       this.events = response;
-      console.log(this.events);
       this.youth_events = Array.from(this.events['events']['1']);
+      console.log(this.events['events']['1'][0].responsibles)
      
     });
 
