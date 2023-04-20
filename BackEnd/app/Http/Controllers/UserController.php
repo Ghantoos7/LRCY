@@ -175,9 +175,11 @@ class UserController extends Controller {
             $this->resetLoginAttempts($credentials->organization_id);
             // Creates a new token for the user
             $token = $check_user->createToken('authToken')->plainTextToken;
+            $user_id = $check_user->id;
             return response()->json([
                 "status" => 'Login successful',
                 "token" => $token,
+                "user_id" => $user_id,
             ]);
         } else {
             // Adds a failed login attempt to the database if the user has inputted the wrong password
