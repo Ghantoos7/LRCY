@@ -239,6 +239,19 @@ class UserController extends Controller {
 
     }
     
+    function checkRequestStatus(Request $request){
+        // Get organization ID from request input
+        $organization_id = $request->input('organization_id');
+    
+        // Retrieve a volunteer user record from the database based on the `organization_id` input parameter
+        $existing_volunteer_user = volunteer_user::where('organization_id', '=', $organization_id)->first();
+    
+        // Check if user has already submitted a request
+        $existing_request = $existing_volunteer_user ? recover_request::where('user_id', '=', $existing_volunteer_user->id)->first() : null;
+    
+        // Return a JSON response based on whether the request_status is true or false. If the request_status is true, return a success message. If the request_status is false, return an error message.
+        return $existing_request ? ($existing_request->request_status ? response()->json(['status' => 'Request accepted']) : response()->json(['status' => 'Request not yet accepted'])) : response()->json(['status' => 'User has not submitted a request.']);
+    }
 
     function changePassword(Request $request) {
 

@@ -28,6 +28,7 @@ Route::group(["prefix" => "v0.1",], function(){
         Route::post("login", [UserController::class, "login"]);
         Route::post("recover_request", [UserController::class, "recoverRequest"]);
         Route::post("change_password", [UserController::class, "changePassword"]);
+        Route::post("check_request_status", [UserController::class, "checkRequestStatus"]);
         Route::post("admin_login", [AdminController::class, "adminLogin"]);
 
     });
