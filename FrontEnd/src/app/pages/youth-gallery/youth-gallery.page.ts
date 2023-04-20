@@ -29,7 +29,9 @@ export class YouthGalleryPage implements OnInit {
 
   ngOnInit() {
     this.event_service.get_events().subscribe(response => {
+
       this.events = response;
+      console.log(this.events);
       this.youth_events = Array.from(this.events['events']['1']);
      
     });

@@ -8,6 +8,7 @@ use App\Models\event;
 use App\Models\announcement;
 use App\Models\volunteer_user;
 use App\Models\picture;
+use App\Models\event_image;
 use App\Models\is_responsible;
 
 
@@ -116,7 +117,7 @@ class EventController extends Controller {
         }
 
         // Retrieve the pictures of the event from the database
-        $pictures = Picture::where('event_id', $event_id)->get();
+        $pictures = Event_image::where('event_id', $event_id)->get();
 
         // If no pictures found, return an error message
         if ($pictures->isEmpty()) {
