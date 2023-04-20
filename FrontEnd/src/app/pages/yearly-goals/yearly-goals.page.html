@@ -31,9 +31,14 @@
       </ion-toolbar>
     </ion-header>
     <ion-content class="ion-padding">
-    <ion-card>
+    <ion-card *ngFor="let goal of yearlyGoals" [ngClass]="{
+      'youth-health': goal.program_name === 'youth&health',
+      'hvp': goal.program_name === 'hvp',
+      'environment': goal.program_name === 'environment',
+      'other': goal.program_name === 'other'
+  }">
       <ion-card-header>
-        <ion-card-title class="title">Jbail Reforestation
+        <ion-card-title class="title">{{goal.goal_name}}
           <ion-icon class="icon" size="large" name="calendar"></ion-icon>
         </ion-card-title>
        
@@ -41,18 +46,18 @@
       </ion-card-header>
 
       <ion-card-content>
-        <ion-progress-bar class="bar" value="0.5"></ion-progress-bar>
+        <ion-progress-bar class="bar" [value]="goal.number_completed / goal.number_to_complete"></ion-progress-bar>
 
       </ion-card-content>
 
       <ion-footer>
         <div>
         <ion-card-title class="date">Start Date</ion-card-title>
-        <ion-card-subtitle>8/04/2023</ion-card-subtitle>
+        <ion-card-subtitle>{{goal.goal_year}}-01-01</ion-card-subtitle>
       </div>
       <div>
         <ion-card-title class="date">Deadline</ion-card-title>
-        <ion-card-subtitle>12/04/2023</ion-card-subtitle>
+        <ion-card-subtitle>{{goal.goal_deadline}}</ion-card-subtitle>
       </div>
 
       </ion-footer>

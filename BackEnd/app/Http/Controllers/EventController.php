@@ -9,6 +9,7 @@ use App\Models\announcement;
 use App\Models\volunteer_user;
 use App\Models\event_image;
 use App\Models\is_responsible;
+use App\Models\program;
 
 
 class EventController extends Controller {
@@ -16,15 +17,24 @@ class EventController extends Controller {
 
     function getYearlyGoals() {
 
-    // Gets yearly goals and return them grouped based on program id
+        // Gets yearly goals and return them grouped based on program id
 
         $year = date('Y');
 
-        $goals = goal::select('goal_description', 'goal_name', 'program_id', 'goal_status', 'number_completed', 'goal_year', 'event_type_id', 'goal_deadline')->where('goal_year', $year)->get();
+        $goals = goal::select('goal_description', 'goal_name', 'program_id', 'goal_status', 'number_completed', 'number_to_complete', 'goal_year', 'event_type_id', 'goal_deadline')->where('goal_year', $year)->get();
 
-        $goals = $goals->groupBy('program_id');
+        $goals = $goals->groupBy('program_id')->toArray();
 
-        return response()->json($goals);
+        // add the field program_name to each goal
+        foreach ($goals as $program_id => $goalsArray) {
+            foreach ($goalsArray as $goalIndex => $goal) {
+                $goals[$program_id][$goalIndex]['program_name'] = Program::find($program_id)->program_name;
+            }
+        }
+
+        return response()->json([
+            'goals' => $goals,
+        ]);    
 
     }
     
