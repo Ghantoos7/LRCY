@@ -1,13 +1,41 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>edit-goal</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="background">
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">edit-goal</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-text>Editing Jbail Reforestation</ion-text>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Edit title or description</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <ion-input class="input" placeholder="Goal Title..."></ion-input>
+    </ion-card-content>
+
+    <ion-card-content>
+      <ion-input class="input" placeholder="Goal Description..."></ion-input>
+    </ion-card-content>
+
+    <div class="dates">
+      <ion-card-header>
+        <ion-card-title class="start">Start Date</ion-card-title>
+        <ion-card-title class="end">Deadline</ion-card-title>
+  
+      </ion-card-header>
+  
+      <ion-card-content>
+        <ion-input class="start-date"type="date"></ion-input>
+        <ion-input class="end-date"type="date"></ion-input>
+      </ion-card-content>
+    </div>
+  
+    <ion-card-header>
+      <ion-card-title>Edit the progress of the goal</ion-card-title>
+    </ion-card-header>
+
+    <ion-range aria-label="Range with pin" [pin]="true" [pinFormatter]="pinFormatter"></ion-range>
+  </ion-card>
+
+  <ion-button class="send" shape="round" expand="block" size="large">Update</ion-button>
+  <ion-img src="assets/imgs/ann-design.png"></ion-img>
+
 </ion-content>

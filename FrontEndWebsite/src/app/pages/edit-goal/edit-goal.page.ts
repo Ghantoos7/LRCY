@@ -17,4 +17,8 @@ export class EditGoalPage implements OnInit {
   ngOnInit() {
   }
 
+  pinFormatter(value: number) {
+    return `${value}%`;
+  }
+
 }
