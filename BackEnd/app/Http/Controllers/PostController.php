@@ -201,21 +201,26 @@ class PostController extends Controller {
             }
         }
     
-        // Retrieve the posts for the specified user, or all posts if no user ID was provided, paginated
-        $posts = ($user_id) ? Post::where('user_id', $user_id)->paginate(10) : Post::paginate(10);
+        // Retrieve the posts for the specified user, or all posts if no user ID was provided (order by post date in descending order)
+        $posts = Post::where('user_id', $user_id ?? '!=', null)->orderBy('post_date', 'desc')->get();
         
         // If no posts were found, return an error response
         if ($posts->isEmpty()) {
             return response()->json(['status' => 'error', 'message' => 'No posts found']);
         }
         
-        // Remove unwanted fields from each post
-        $posts->transform(function($post) {
+        // Remove unwanted fields from each post and retrieve name(concatenate first_name and last_name), profile picture, and username of the post owner based on the user ID
+        $posts = $posts->transform(function($post) {
             unset($post->created_at, $post->updated_at, $post->field1, $post->field2);
+            $user = volunteer_user::select('first_name', 'last_name', 'user_profile_pic', 'username')->where('id', $post->user_id)->first();
+            // create name property by concatenating first and last name fields
+            $user->name = $user->first_name . ' ' . $user->last_name;
+            $post->user = $user;
             return $post;
         });
         
-        // Return a success response with the paginated posts
+        
+        // Return a success response
         return response()->json(['status' => 'success', 'message' => 'Posts found', 'posts' => $posts]);
 
     }    
