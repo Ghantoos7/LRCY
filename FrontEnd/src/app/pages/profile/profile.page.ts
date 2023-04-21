@@ -20,9 +20,10 @@ export class ProfilePage implements OnInit {
   first_name:string = '';
   last_name:string = '';
   full_name:string = '';
-  username:string = '';
+  username: string = localStorage.getItem('username') as string;
   bio:string = '';
   user_position:string = '';
+  
 
   constructor(private router:Router, private service:UserService,private menuCtrl: MenuController) { }
 
