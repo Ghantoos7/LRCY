@@ -18,7 +18,7 @@ class takeFactory extends Factory
     {
         return [
             'user_id' => random_int(1,1),
-            'training_id' => random_int(106,145),
+            'training_id' => random_int(146,179),
             'takes_on_date' => fake()->date()
         ];
     }

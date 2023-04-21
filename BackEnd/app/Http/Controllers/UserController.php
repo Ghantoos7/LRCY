@@ -180,6 +180,8 @@ class UserController extends Controller {
                 "status" => 'Login successful',
                 "token" => $token,
                 "user_id" => $user_id,
+                "username" => $check_user->username,
+                "user_profile_pic" => $check_user->user_profile_pic,
             ]);
         } else {
             // Adds a failed login attempt to the database if the user has inputted the wrong password

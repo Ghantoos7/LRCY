@@ -18,7 +18,7 @@ class trainingFactory extends Factory
     {
         return [
             'training_description' => fake()->sentence(),
-            'training_name' => fake()->sentence(),
+            'training_name' => fake()->word(),
             'program_id' => random_int(1,4)
         ];
     }

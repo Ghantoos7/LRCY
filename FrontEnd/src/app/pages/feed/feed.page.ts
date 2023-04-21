@@ -17,7 +17,12 @@ import { MenuController } from '@ionic/angular';
 
 export class FeedPage implements OnInit {
 
-  constructor(private router:Router, private alertController: AlertController, private menuCtrl: MenuController) { }
+  username: string = localStorage.getItem('username') as string;
+  user_profile_pic: string = localStorage.getItem('user_profile_pic') as string;
+
+  constructor(private router:Router, private alertController: AlertController, private menuCtrl: MenuController) { 
+  }
+
 
   ionViewWillLeave() {
     this.menuCtrl.enable(false, 'menuFeed');
