@@ -17,8 +17,8 @@ class takeFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => random_int(1,70),
-            'training_id' => random_int(1,10),
+            'user_id' => random_int(1,1),
+            'training_id' => random_int(106,145),
             'takes_on_date' => fake()->date()
         ];
     }
