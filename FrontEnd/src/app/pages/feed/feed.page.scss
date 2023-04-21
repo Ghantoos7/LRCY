@@ -40,7 +40,9 @@
     }
     
     .header-container img {
-    width: 45px;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
     }
     
     .header-container .username {
@@ -107,22 +109,22 @@
     position: relative;
     width: 27px;
     top: 0px;
-    left: 73px;
+    left: 82px;
     }
     
     .comment-count {
     font-size: 18px;
     position: relative;
     bottom: 25px;
-    left: 105px;
+    left: 115px;
     color: #AAA7AE
     }
     
     .input {
     position: relative;
-    bottom: 55px;
-    width: 210px;
-    left: 130px;
+    bottom: 53px;
+    width: 189px;
+    left: 150px;
     border-radius: 10px;
     z-index: 1;
     --background: #E9E7E7;
@@ -136,7 +138,7 @@
     .send-icon {
     position: absolute;
     left: 310px;
-    top: 30px;
+    top: 35px;
     font-size: 20px;
     color: #B11433;
     z-index: 2;

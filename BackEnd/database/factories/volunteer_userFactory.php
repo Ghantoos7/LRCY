@@ -31,7 +31,8 @@ class volunteer_userFactory extends Factory
             'user_start_date'=>fake()->date(),
             'password'=>fake()->password(),
             'username'=>fake()->userName(),
-            'user_bio'=>fake()->text()
+            'user_bio'=>fake()->text(),
+            'user_profile_pic'=>fake()->imageUrl()
         ];
     }
 }

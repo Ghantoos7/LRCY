@@ -190,7 +190,6 @@ class PostController extends Controller {
     
 
     function getPosts($user_id = null) {
-
         // If a user ID was provided, check if the user exists
         if ($user_id) {
             $user = volunteer_user::find($user_id);
@@ -200,7 +199,7 @@ class PostController extends Controller {
                 return response()->json(['status' => 'error', 'message' => 'User not found']);
             }
         }
-    
+        
         // Retrieve the posts for the specified user, or all posts if no user ID was provided (order by post date in descending order)
         $posts = Post::where('user_id', $user_id ?? '!=', null)->orderBy('post_date', 'desc')->get();
         
@@ -211,19 +210,22 @@ class PostController extends Controller {
         
         // Remove unwanted fields from each post and retrieve name(concatenate first_name and last_name), profile picture, and username of the post owner based on the user ID
         $posts = $posts->transform(function($post) {
-            unset($post->created_at, $post->updated_at, $post->field1, $post->field2);
-            $user = volunteer_user::select('first_name', 'last_name', 'user_profile_pic', 'username')->where('id', $post->user_id)->first();
-            // create name property by concatenating first and last name fields
-            $user->name = $user->first_name . ' ' . $user->last_name;
-            $post->user = $user;
-            return $post;
-        });
-        
+                 unset($post->created_at, $post->updated_at, $post->field1, $post->field2);
+                 $user = volunteer_user::select('first_name', 'last_name', 'user_profile_pic', 'username')->find($post->user_id);
+                 // If no user was found for the post, return null
+                 if (!$user) {
+                     $post->user = null;
+                 } else {
+                     // make field name which is the first name and last name
+                     $post->user = $user;
+                     $post->user->name = $user->first_name . ' ' . $user->last_name;
+                 }
+                 return $post;
+                });
         
         // Return a success response
         return response()->json(['status' => 'success', 'message' => 'Posts found', 'posts' => $posts]);
-
-    }    
+    }     
     
     
     function likePost(Request $request) {
