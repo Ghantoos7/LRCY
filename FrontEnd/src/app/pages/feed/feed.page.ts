@@ -21,6 +21,8 @@ export class FeedPage implements OnInit {
   posts: any;
 
   constructor(private router:Router, private alertController: AlertController, private menuCtrl: MenuController, private service:PostService) { }
+  username: string = localStorage.getItem('username') as string;
+  user_profile_pic: string = localStorage.getItem('user_profile_pic') as string;
 
   ionViewWillLeave() {
     this.menuCtrl.enable(false, 'menuFeed');

@@ -23,6 +23,7 @@ export class EditProfilePage implements OnInit {
   user_bio:string = '';
   user_position:string = '';
 
+
   constructor(private service:UserService, private alertController:AlertController, private router:Router) { }
 
   ngOnInit() {

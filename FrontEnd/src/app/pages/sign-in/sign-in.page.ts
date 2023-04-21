@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { Route, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { AlertController } from '@ionic/angular';
+import { profile } from 'console';
 
 @Component({
   selector: 'app-sign-in',
@@ -37,6 +38,8 @@ export class SignInPage implements OnInit {
           // Store the token in local storage for future use
           localStorage.setItem('authToken', response.token);
           localStorage.setItem('userId', response.user_id);
+          localStorage.setItem('username', response.username);
+          localStorage.setItem('user_profile_pic', response.user_porfile_pic);
           localStorage.setItem('rememberMe', this.rememberMe.toString());
           // Redirect the user to the dashboard or any other page
           this.router.navigate(['/feed']);

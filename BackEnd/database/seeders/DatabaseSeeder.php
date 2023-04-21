@@ -43,7 +43,7 @@ class DatabaseSeeder extends Seeder
         // comment_like::factory(20)->create();
         // event_image::factory(20)->create();
         // event_type::factory(20)->create();
-        is_responsible::factory(20)->create();
+        // is_responsible::factory(20)->create();
         // like::factory(20)->create();
         // login_attempt::factory(20)->create();
         // picture::factory(20)->create();
@@ -55,7 +55,7 @@ class DatabaseSeeder extends Seeder
         // announcement::factory(20)->create();
         // comment::factory(20)->create();
         // event_image::factory(20)->create();
-        event::factory(20)->create();
+        // event::factory(20)->create();
 
         // event_image::factory(5)->create();
         // announcement::factory(20)->create();
