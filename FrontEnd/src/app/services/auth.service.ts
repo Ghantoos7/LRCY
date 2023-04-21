@@ -42,14 +42,6 @@ export class AuthService {
 
     const response = this.http.post(this.base_url + 'login', body, options);
 
-    if (rememberMe) {
-      localStorage.setItem('orgId', organization_id);
-      localStorage.setItem('password', password);
-    } else {
-      localStorage.removeItem('orgId');
-      localStorage.removeItem('password');
-    }
-
     return response;
   }
 
