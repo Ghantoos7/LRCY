@@ -16,6 +16,8 @@ import { EventService } from 'src/app/services/event.service';
 export class YearlyGoalsPage implements OnInit {
 
   yearlyGoals: any;
+  username = localStorage.getItem('username') as string;
+  user_profile_pic = localStorage.getItem('user_profile_pic') as string;
 
   constructor(private router:Router, private menuCtrl: MenuController, private service:EventService) { }
 
