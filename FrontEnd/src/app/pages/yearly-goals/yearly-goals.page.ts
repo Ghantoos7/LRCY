@@ -22,7 +22,7 @@ export class YearlyGoalsPage implements OnInit {
   constructor(private router:Router, private menuCtrl: MenuController, private service:EventService) { }
 
   ngOnInit() {
-    this.service.getYearlyGoals().subscribe((response: any) => {
+    this.service.getYearlyGoals('502').subscribe((response: any) => {
       const allGoals = [].concat.apply([], Object.values(response['goals']));
       this.yearlyGoals = allGoals;
       console.log(this.yearlyGoals);

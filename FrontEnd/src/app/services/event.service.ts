@@ -25,13 +25,13 @@ export class EventService {
     return response;
   }
 
-  getAnnouncements(){
-    const response = this.http.get(this.base_url + 'get_announcements');
+  getAnnouncements(id: string){
+    const response = this.http.get(this.base_url + 'get_announcements/' + id);
     return response;
   }
 
-  getYearlyGoals(){
-    const response = this.http.get(this.base_url + 'get_yearly_goals');
+  getYearlyGoals(id: string){
+    const response = this.http.get(this.base_url + 'get_yearly_goals/' + id);
     return response;
   }
   

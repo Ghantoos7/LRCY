@@ -19,6 +19,7 @@ return new class extends Migration
             $table->boolean('goal_status');
             $table->integer('number_completed');
             $table->integer('number_to_complete');
+            $table->string('branch_id');
             $table->integer('goal_year');
             $table->integer('event_type_id');
             $table->date('start_date');

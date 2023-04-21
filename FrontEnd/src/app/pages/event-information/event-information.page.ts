@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { EventService } from 'src/app/services/event.service';
 import { ActivatedRoute } from '@angular/router';
 import { SharedService } from 'src/app/services/shared.service';
+import { NavController } from '@ionic/angular';
+
 @Component({
   selector: 'app-event-information',
   templateUrl: './event-information.page.html',
@@ -18,7 +20,7 @@ export class EventInformationPage implements OnInit {
 
   events: any = [];
   responsibles: any = [];
-  constructor(private shared:SharedService, private route: ActivatedRoute, private service:EventService, private router: Router) { }
+  constructor(private navCtrl:NavController, private shared:SharedService, private route: ActivatedRoute, private service:EventService, private router: Router) { }
 
   ngOnInit() {
 
@@ -37,7 +39,7 @@ export class EventInformationPage implements OnInit {
   
 
   goGallery(){
-    this.router.navigate(['/gallery']);
+    this.navCtrl.back();
   }
 
 }

@@ -40,7 +40,9 @@ export class SignInPage implements OnInit {
           localStorage.setItem('userId', response.user_id);
           localStorage.setItem('username', response.username);
           localStorage.setItem('user_profile_pic', response.user_porfile_pic);
+          localStorage.setItem('branch_id', response.branch_id);
           localStorage.setItem('rememberMe', this.rememberMe.toString());
+          localStorage.setItem('full_name', response.full_name);
           // Redirect the user to the dashboard or any other page
           this.router.navigate(['/feed']);
         } else {

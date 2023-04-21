@@ -38,30 +38,32 @@
     width: 60px;
     height: 60px;
     position: relative;
-    top: 35px;
-    left: 40px;
+    top: 32px;
+    left: 30px;
+    border-radius: 50%;
 }
 
 .user-info .username{
     position: relative;
-    bottom: 15px;
-    left: 105px;
+    top: 0px;
+    left: 44px;
     font-size: 15px;
     color:black;
 }
 
 .user-info .name{
     position: relative;
-    left: 32px;
+    left: 20px;
     font-size: 13px;
     color: black;
+    top: 20px;
 }
 
 .input {
     position: absolute;
     width: 300px;
-    height: 500px;
-    top: 420px;
+    height: 450px;
+    top: 415px;
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 10px;
@@ -85,19 +87,14 @@
     left: 50px;
 }
 
-.video{
+.image{
     position: relative;
     left: 60px;
 }
 
-.image{
-    position: relative;
-    left: 70px;
-}
-
 .post-button{
     position: relative;
-    top: 600px;
+    top: 610px;
     width: 80%; 
     margin: 0 auto; 
     --background: #45579A;

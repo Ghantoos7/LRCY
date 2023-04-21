@@ -39,7 +39,7 @@
           <ion-label>
             <h1>{{announcement.announcement_title}}</h1>
             <p [ngClass]="{
-              'level': announcement.importance_level === 'optional',
+              'optional': announcement.importance_level === 'optional',
               'important': announcement.importance_level === 'important',
               'urgent': announcement.importance_level === 'urgent'
             }">
