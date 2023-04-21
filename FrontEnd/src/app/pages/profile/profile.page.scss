@@ -23,6 +23,10 @@ ion-tab-button.tab-selected ion-icon{
     --background-color: #45579A;
   }
 
+  .bio-space {
+    margin-bottom: 10px; 
+  }
+
   .custom-avatar{
     z-index: 1;
     width: 100px;
@@ -85,12 +89,11 @@ ion-tab-button.tab-selected ion-icon{
   }
 .custom-card{
     position: relative;
-    margin-top: 50px;
     width:100% !important; 
     height: 80%;
     margin: 0;
     padding: 0;
-    margin-top: 15% !important;
+    margin-top: 10% !important;
     border-top-left-radius: 10%;
     border-top-right-radius: 10%;
     box-shadow: none;
@@ -98,9 +101,11 @@ ion-tab-button.tab-selected ion-icon{
   
 }
 
+
 ion-header{
     background-color: #45579A;
-    height: 20%;
+    height: 25%;
+    margin-bottom: 10px;
 }
 
 ion-content{
