@@ -16,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 export class StatisticsPage implements OnInit {
 
+  
 
   training_count:any = [];
   total_trainings_completed_count:string = '';
