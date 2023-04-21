@@ -21,6 +21,7 @@ export class FeedPage implements OnInit {
   username = localStorage.getItem('username') as string;
   user_profile_pic = localStorage.getItem('user_profile_pic') as string;
   posts: any;
+  index: number=0;
 
   constructor(private router:Router, private alertController: AlertController, private menuCtrl: MenuController, private service:PostService) { }
 
@@ -32,10 +33,10 @@ export class FeedPage implements OnInit {
     this.menuCtrl.enable(true, 'menuFeed');
   }
 
-  async showProfile() {
+  async showProfile(index: number) {
     const alert = await this.alertController.create({
-      header: 'Nay Abi Saad | General Assembly',
-      message: 'This is my bio',
+      header: this.posts[index]['user'].name+' | '+this.posts[index]['user'].user_position,
+      message: this.posts[index]['user'].user_bio,
       cssClass: 'my-custom-class',
       buttons: [{
         text: 'View Profile',

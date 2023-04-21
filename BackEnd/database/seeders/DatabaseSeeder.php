@@ -37,8 +37,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         
-        // volunteer_user::factory(50)->create();
-        // post::factory(20)->create();
+        volunteer_user::factory(20)->create();
+        post::factory(20)->create();
         // branch::factory(20)->create();
         // comment_like::factory(20)->create();
         // event_image::factory(20)->create();
@@ -56,7 +56,6 @@ class DatabaseSeeder extends Seeder
         // comment::factory(20)->create();
         // event_image::factory(20)->create();
         // event::factory(20)->create();
-
         // event_image::factory(5)->create();
         // announcement::factory(20)->create();
     }

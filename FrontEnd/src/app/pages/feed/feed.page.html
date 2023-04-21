@@ -32,11 +32,11 @@
 
   <ion-content class="whitebackground">
 
-    <ion-card class="card" *ngFor="let post of posts">
+    <ion-card class="card" *ngFor="let post of posts; let i = index">
       <div class="header-container">
-        <img (click)="showProfile()" class="card-profile-picture" src="assets/imgs/profile-picture.png">
-        <ion-text (click)="showProfile()" class="username">{{post['user'].username}}</ion-text>
-        <ion-text (click)="showProfile()" class="name">{{post['user'].name}}</ion-text>
+        <img (click)="showProfile(i)" class="card-profile-picture" src="{{post['user'].user_profile_pic}}">
+        <ion-text (click)="showProfile(i)" class="username">{{post['user'].username}}</ion-text>
+        <ion-text (click)="showProfile(i)" class="name">{{post['user'].name}}</ion-text>
         <ion-text class="post-date">{{getDaysAgo(post.post_date)}} d</ion-text>
         
       </div>
@@ -46,7 +46,7 @@
           <ion-text>{{post.post_caption}} 
           </ion-text>
         </div>  
-        <ion-img class="post-image" src="assets/imgs/post.png"/>
+        <ion-img class="post-image" src="{{post.post_media}}"/>
       </ion-card-content>
 
       <ion-footer>
