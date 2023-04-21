@@ -25,7 +25,6 @@ export class YearlyGoalsPage implements OnInit {
     this.service.getYearlyGoals('502').subscribe((response: any) => {
       const allGoals = [].concat.apply([], Object.values(response['goals']));
       this.yearlyGoals = allGoals;
-      console.log(this.yearlyGoals);
     });
   }  
 
