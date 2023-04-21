@@ -17,7 +17,8 @@ class event_imageFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'event_id' => random_int(20, 20),
+            'event_image_source' => fake()->imageUrl()
         ];
     }
 }
