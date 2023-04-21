@@ -2,6 +2,38 @@
     --background: #fff;
 }
 
+ion-toolbar{
+    position: relative;
+    --background: #45579A;
+}
+
+ion-menu-button{
+    color: white;
+}
+
+ion-title{
+    color: white;
+}
+
+ion-item{
+    color: white;
+}
+
+ion-button{
+    position: relative;
+    width: 100%;
+    --background: #45579A;
+}
+
+.text{
+    font-size: 30px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    color:#45579A;
+    top: 8%;
+}
+
 ion-card{
     position: relative;
     width: 800px;

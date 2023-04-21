@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-send-announcement',
@@ -12,9 +14,18 @@ import { IonicModule } from '@ionic/angular';
 })
 export class SendAnnouncementPage implements OnInit {
 
-  constructor() { }
+  constructor(private router:Router, private menuController: MenuController) { }
 
   ngOnInit() {
   }
+
+  goToAnnouncements(){
+    this.router.navigate(['/announcements']);
+  }
+
+  closeMenu() {
+    this.menuController.close();
+  }
+
 
 }
