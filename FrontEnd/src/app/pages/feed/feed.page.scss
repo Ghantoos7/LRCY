@@ -209,12 +209,20 @@ button.alert-button.custom-alert-button {
     color: var(--ion-color-success-contrast);
   }
 
-.my-custom-class .alert-header{
-    color: #ffffff !important; /* set the text color to white */
-  }
-
 .my-custom-class .alert-message {
   color: #ffffff; /* set the text color to white */
+}
+
+.my-custom-class .alert-header {
+  --ion-text-color: #ffffff;
+}
+
+.my-custom-class .alert-title {
+  --ion-text-color: #ffffff; /* set the text color to white */
+}
+
+.likes.active {
+  color: #B11433;
 }
 
   

@@ -22,6 +22,8 @@ export class FeedPage implements OnInit {
   user_profile_pic = localStorage.getItem('user_profile_pic') as string;
   posts: any;
   index: number=0;
+  isLiked: {[key: number]: boolean} = {};
+  post_id: number=0;
 
   constructor(private router:Router, private alertController: AlertController, private menuCtrl: MenuController, private service:PostService) { }
 
@@ -52,11 +54,14 @@ export class FeedPage implements OnInit {
   }
 
   ngOnInit() {
-    this.service.getPosts().subscribe((data:any) => {
-      this.posts=data['posts'];
+    this.service.getPosts().subscribe((data: any) => {
+      this.posts = data['posts'];
       console.log(this.posts);
-    }
-    );
+      for (let i = 0; i < this.posts.length; i++) {
+        const postId = this.posts[i].id;
+        this.isLiked[postId] = localStorage.getItem(`post_${postId}`) === 'true'; // retrieve the like state from Local Storage
+      }
+    });
   }
 
   getDaysAgo(postDate: string) {
@@ -100,4 +105,29 @@ export class FeedPage implements OnInit {
   logout(){
   
   }
+
+  toggleLike(post_id: number) {
+    if (this.isLiked[post_id]) {
+    this.unlikePost(post_id);
+    } else {
+    this.likePost(post_id);
+    }
+  }
+    
+  likePost(post_id: number) {
+    this.service.likePost(post_id).subscribe((data: any) => {
+      console.log(data);
+      localStorage.setItem(`post_${post_id}`, 'true'); // store the like state in Local Storage
+      this.isLiked[post_id] = true;
+    });
+  }
+  
+  unlikePost(post_id: number) {
+    this.service.unlikePost(post_id).subscribe((data: any) => {
+      console.log(data);
+      localStorage.setItem(`post_${post_id}`, 'false'); // store the like state in Local Storage
+      this.isLiked[post_id] = false;
+    });
+  }
+
 }
