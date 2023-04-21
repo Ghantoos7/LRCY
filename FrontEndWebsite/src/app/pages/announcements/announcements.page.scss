@@ -12,8 +12,14 @@ ion-toolbar{
 }
 
 ion-card{
-    margin-bottom: -10px;
+    margin-bottom: -5px;
 }
+
+.menu-button{
+    width: 100%;
+    --background: #45579A;
+}
+
 
 .avatar {
     width: 72px;

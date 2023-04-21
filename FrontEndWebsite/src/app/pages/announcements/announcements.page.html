@@ -1,6 +1,6 @@
 <ion-content>
 
-  <ion-menu menuId="menuGoals" contentId="main-content">
+  <ion-menu menuId="menuAnnouncements" contentId="main-content">
     <ion-header>
       <ion-toolbar>
         <ion-title>Manage Announcements</ion-title>
@@ -8,10 +8,10 @@
     </ion-header>
     <ion-content class="ion-padding"> 
       <ion-list>
-        <ion-button>View Goals</ion-button>
+        <ion-button (click)="closeMenu()" class="menu-button">View Announcements</ion-button>
         </ion-list>
       <ion-list>
-      <ion-button>Add a goal</ion-button>
+      <ion-button (click)="goToSendAnnouncement()" class="menu-button">Send an announcement</ion-button>
       </ion-list>
     </ion-content>
   </ion-menu>
@@ -112,5 +112,4 @@
   </ion-content>
   </div>
 
-  
 </ion-content>
