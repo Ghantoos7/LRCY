@@ -25,13 +25,13 @@ ion-toolbar {
   }
 
   ion-card-title {
-    white-space: normal; /* Allow text to wrap */
-    word-break: break-word; /* Break long words */
+    white-space: normal; 
+    word-break: break-word; 
   }
   
   ion-card-content {
-    white-space: normal; /* Allow text to wrap */
-    word-break: break-word; /* Break long words */
+    white-space: normal; 
+    word-break: break-word; 
   }
 
 
@@ -42,11 +42,10 @@ ion-toolbar {
   }
 
   .layer-card{
-    position: fixed;
   top: 0;
   left: 0;
    z-index: 1;
-margin-top: 50%;
+   transform: translateY(-40%);
 width: 100%;
 padding: 0;
 max-width: 90%;
