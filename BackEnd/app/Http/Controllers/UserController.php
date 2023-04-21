@@ -16,7 +16,6 @@ use App\Models\comment;
 use App\Models\is_responsible;
 use App\Models\event;
 use App\Models\branch;
-use App\Models\like;
 
 
 class UserController extends Controller {
@@ -383,7 +382,7 @@ class UserController extends Controller {
     
         // Get the trainings with the matching IDs
         $trainings = Training::whereIn('id', $training_ids)->select('id', 'training_name', 'training_description', 'program_id')->get();
-    
+        
         // Sort the trainings based on program ID
         $trainings = $trainings->sortBy('program_id');
     
@@ -673,8 +672,8 @@ class UserController extends Controller {
             ]);
         }
     
-        // Get the user's posts with pagination
-        $posts = Post::where('user_id', $user_id)->paginate(10);
+        // Get the user's posts 
+        $posts = Post::where('user_id', $user_id)->orderBy('post_date', 'desc')->get();
     
         // If the user did not post anything
         if ($posts->isEmpty()) {
@@ -688,16 +687,15 @@ class UserController extends Controller {
             unset($post->field1, $post->field2, $post->created_at, $post->updated_at);
         }
 
-        // Adds the comment and like count to each post
         foreach ($posts as $post) {
-            $post->comment_count = Comment::where('post_id', $post->id)->count();
-            $post->like_count = Like::where('post_id', $post->id)->count();
+            $post->full_name = volunteer_user::find($post->user_id)->first_name . " " . volunteer_user::find($post->user_id)->last_name;
         }
+        
     
         // Return the posts
         return response()->json([
             'posts' => $posts,
-            'total_posts' => $posts->total()
+
         ]);
     
     }      

@@ -21,7 +21,7 @@ class eventFactory extends Factory
             'event_description' => fake()->text(),
             'event_location' => fake()->address(),
             'event_date' => fake()->date(),
-            'event_title' => fake()->text(),
+            'event_title' => 'balssy tile',
             'event_type_id' => random_int(1, 5),
             'program_id' => random_int(1, 3),
             'budget_sheet' => fake()->imageUrl(),
