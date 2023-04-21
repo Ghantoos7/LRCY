@@ -17,6 +17,9 @@ export class AnnouncementsPage implements OnInit {
   showDescriptions: boolean[] = [];
   announcements: any = [];
   i: number = 0;
+  username = localStorage.getItem('username') as string;
+  user_profile_pic = localStorage.getItem('user_profile_pic') as string;
+  
   constructor(private router:Router, private menuCtrl: MenuController, private service:EventService) { 
     this.showDescriptions = new Array(this.announcements.length).fill(false);
   }
