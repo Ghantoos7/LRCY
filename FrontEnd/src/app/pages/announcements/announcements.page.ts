@@ -17,13 +17,19 @@ export class AnnouncementsPage implements OnInit {
   showDescriptions: boolean[] = [];
   announcements: any = [];
   i: number = 0;
+  username = localStorage.getItem('username') as string;
+  user_profile_pic = localStorage.getItem('user_profile_pic') as string;
+  
   constructor(private router:Router, private menuCtrl: MenuController, private service:EventService) { 
     this.showDescriptions = new Array(this.announcements.length).fill(false);
   }
 
   ngOnInit() {
-    this.service.getAnnouncements().subscribe((response: any) => {
+    this.service.getAnnouncements('502').subscribe((response: any) => {
       this.announcements = response['announcements'];
+      this.announcements = Array.from(this.announcements);
+      console.log(this.announcements);
+
     });
   }
 

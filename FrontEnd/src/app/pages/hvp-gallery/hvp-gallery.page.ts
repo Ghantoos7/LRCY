@@ -14,9 +14,12 @@ import { SharedService } from 'src/app/services/shared.service';
   imports: [IonicModule, CommonModule, FormsModule]
 })
 export class HvpGalleryPage implements OnInit {
+  
+  username = localStorage.getItem('username') as string;
+  user_profile_pic = localStorage.getItem('user_profile_pic') as string;
 
   constructor(private shared:SharedService,private event_service:EventService, private router:Router, private menuCtrl: MenuController) { }
- hvp_events: any = [];
+  hvp_events: any = [];
   events: any = [];
   showActivities: boolean = true;
   showTrainings: boolean = true;

@@ -8,7 +8,7 @@
       <ion-avatar size="large" class="custom-avatar">
         <img alt="Avatar" src="assets/imgs/NayAbiSaad.png" />
       </ion-avatar>
-      <ion-label class="username-label">Username</ion-label>
+      <ion-label class="username-label">{{username}}</ion-label>
       <ion-button (click)="goProfile()" class="custom-button" expand="block"><ion-icon name="person" slot="start"></ion-icon>My Profile</ion-button>
       <ion-button (click)="goFeed()" class="custom-button" expand="block"><ion-icon name="receipt" slot="start"></ion-icon>Feed</ion-button>
       <ion-button (click)="goGallery()" class="custom-button" expand="block"><ion-icon name="images" slot="start"></ion-icon>Gallery</ion-button>
@@ -32,30 +32,28 @@
 
   <ion-content class="whitebackground">
 
-    <ion-card class="card">
+    <ion-card class="card" *ngFor="let post of posts; let i = index">
       <div class="header-container">
-        <img (click)="showProfile()" class="card-profile-picture" src="assets/imgs/profile-picture.png">
-        <ion-text (click)="showProfile()" class="username">Ghnatoos7</ion-text>
-        <ion-text (click)="showProfile()" class="name">Georgio Ghnatos</ion-text>
-        <ion-text class="post-date"> • 1d ago</ion-text>
+        <img (click)="showProfile(i)" class="card-profile-picture" src="{{post['user'].user_profile_pic}}">
+        <ion-text (click)="showProfile(i)" class="username">{{post['user'].username}}</ion-text>
+        <ion-text (click)="showProfile(i)" class="name">{{post['user'].name}}</ion-text>
+        <ion-text class="post-date">{{getDaysAgo(post.post_date)}} d</ion-text>
         
       </div>
 
       <ion-card-content>
         <div class="caption-container">
-          <ion-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
-          nostrud exercitation and big muah me love you all 
+          <ion-text>{{post.post_caption}} 
           </ion-text>
         </div>  
-        <ion-img class="post-image" src="assets/imgs/post.png"/>
+        <ion-img class="post-image" src="{{post.post_media}}"/>
       </ion-card-content>
 
       <ion-footer>
-        <ion-icon class="likes" name="heart-outline"></ion-icon>
-        <ion-text class="like-count" color="danger">0</ion-text>
+        <ion-icon class="likes" [class.active]="isLiked[post.id]" name="{{ isLiked[post.id] ? 'heart' : 'heart-outline' }}" (click)="toggleLike(post.id)"></ion-icon>
+        <ion-text class="like-count" color="danger">{{post.like_count}}</ion-text>
         <ion-img (click) ="goToComments()" class="comments" src="assets/icon/comments.png"></ion-img>
-        <ion-text class="comment-count">0</ion-text>
+        <ion-text class="comment-count">{{post.comment_count}}</ion-text>
         <ion-input class="input"  placeholder="Comment on this post..."></ion-input>
         <ion-icon class="send-icon" name="send"></ion-icon>
 

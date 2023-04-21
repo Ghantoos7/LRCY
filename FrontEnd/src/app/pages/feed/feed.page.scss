@@ -1,125 +1,130 @@
 .whitebackground {
     --background: #fff;
-  }
-
-.feed-top-image{
-    position: absolute; 
-    top: 0; 
-    left: 0; 
+    }
+    
+    .feed-top-image {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%
-}
-
-.menu-icon{
+    }
+    
+    .menu-icon {
     position: absolute;
     top: 30px;
     left: 10px;
     font-size: 3em;
-}
-
-.profile-picture{
-    position: relative;
-    top: 27px;
-    left: 300px;
+    }
+    
+    .profile-picture {
+    position: absolute;
+    top: 30px;
+    left: 90px;
     width: 60px;
-}
-
-.your-feed{
+    border-radius: 50%;
+    border: 2px solid #B11433;
+    }
+    
+    .your-feed {
     position: absolute;
     top: 43px;
-    left: 70px;
+    left: 170px;
     font-size: 20px;
     color: white;
-}
-
-.header-container{
+    }
+    
+    .header-container {
     position: relative;
     top: 20px;
     left: 20px;
-}
-
-.header-container img{
-    width: 45px;
-}
-
-.header-container .username{
-    position: relative;
-    bottom: 25px;
-    left: 6px;
+    }
+    
+    .header-container img {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+    }
+    
+    .header-container .username {
+    position: absolute;
+    top: 5px;
+    left: 55px;
     font-size: 15px;
-}
-
-.header-container .post-date{
-    position: relative;
-    bottom: 25px;
-    right: 90px;
+    color: #8F8F8F;
+    }
+    
+    .header-container .name {
+    position: absolute;
+    top: 25px;
+    left: 55px;
     font-size: 13px;
     color: #8F8F8F;
-}
+    }
 
-
-
-.header-container .name{
-    position: relative;
-    right:67px;
-    bottom: 10px;
-    font-size: 13px;
-}
-
-.header-container .more-options{
-    position: relative;
+    .header-container .post-date {
+        position: absolute;
+        top: 20px;
+        right: 35px;
+        font-size: 13px;
+        color: #8F8F8F;
+      }      
+    
+    .header-container .more-options {
+    position: absolute;
     font-size: 2em;
-    bottom: 10px;
-    left: 10px;
-}
-
-.caption-container{
+    top: 35px;
+    right: 10px;
+    color: #8F8F8F;
+    }
+    
+    .caption-container {
     position: relative;
     width: 309px;
     left: 15px;
     top: 10px;
-}
-
-.post-image{
+    }
+    
+    .post-image {
     position: relative;
     top: 30px;
-}
-
-.likes{
+    }
+    
+    .likes {
     font-size: 2em;
     position: relative;
-    top: 23px;
-    left: 25px;
+    top: 30px;
+    left: 15px;
     color: #B11433
-}
-
-.like-count{
-    font-size: 18px;
+    }
+    
+    .like-count {
+    font-size: 17px;
     position: relative;
-    top: 18px;
-    left: 25px;
+    top: 23px;
+    left: 18px;
     color: #AAA7AE
-}
-
-.comments{
+    }
+    
+    .comments {
     position: relative;
     width: 27px;
-    bottom: 8px;
-    left: 75px;
-}
-
-.comment-count{
+    top: 0px;
+    left: 82px;
+    }
+    
+    .comment-count {
     font-size: 18px;
     position: relative;
-    bottom: 30px;
-    left: 105px;
+    bottom: 25px;
+    left: 115px;
     color: #AAA7AE
-}
-
-.input {
+    }
+    
+    .input {
     position: relative;
-    bottom: 60px;
-    width: 210px;
-    left: 130px;
+    bottom: 53px;
+    width: 189px;
+    left: 150px;
     border-radius: 10px;
     z-index: 1;
     --background: #E9E7E7;
@@ -128,30 +133,30 @@
     --padding-start: 10px;
     --placeholder-color: #8F8F8F;
     --placeholder-opacity: 0.8;
-}
-
-.send-icon{
+    }
+    
+    .send-icon {
     position: absolute;
     left: 310px;
-    top: 30px;
+    top: 35px;
     font-size: 20px;
     color: #B11433;
     z-index: 2;
-}
-
-.card{
+    }
+    
+    .card {
     position: relative;
     background-color: #FDFDFD;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
-}
-
-.fab{
+    }
+    
+    .fab {
     position: fixed;
     top: 770px;
     left: 315px;
     --background: #B11433;
-}
+    }
 
 .avatar-container {
     display: flex;
@@ -203,6 +208,22 @@ button.alert-button.custom-alert-button {
     background-color: #B11433;
     color: var(--ion-color-success-contrast);
   }
+
+.my-custom-class .alert-message {
+  color: #ffffff; /* set the text color to white */
+}
+
+.my-custom-class .alert-header {
+  --ion-text-color: #ffffff;
+}
+
+.my-custom-class .alert-title {
+  --ion-text-color: #ffffff; /* set the text color to white */
+}
+
+.likes.active {
+  color: #B11433;
+}
 
   
   

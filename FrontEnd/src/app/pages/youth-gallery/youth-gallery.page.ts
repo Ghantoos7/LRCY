@@ -20,6 +20,9 @@ import { SharedService } from '../../services/shared.service';
 })
 export class YouthGalleryPage implements OnInit {
 
+  username = localStorage.getItem('username') as string;
+  user_profile_pic: string = localStorage.getItem('user_profile_pic') as string;
+
   constructor(private sharedService: SharedService, private navCtrl: NavController, private event_service:EventService, private router:Router, private menuCtrl: MenuController) { }
   youth_events: any = [];
   events: any = [];

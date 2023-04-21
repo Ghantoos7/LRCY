@@ -6,7 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 
 export class AuthService {
-private base_url = 'http://localhost:8000/api/v0.1/auth/';
+  private base_url = 'http://localhost:8000/api/v0.1/auth/';
 
   constructor(private http:HttpClient) { }
 
@@ -41,14 +41,6 @@ private base_url = 'http://localhost:8000/api/v0.1/auth/';
     };
 
     const response = this.http.post(this.base_url + 'login', body, options);
-
-    if (rememberMe) {
-      localStorage.setItem('orgId', organization_id);
-      localStorage.setItem('password', password);
-    } else {
-      localStorage.removeItem('orgId');
-      localStorage.removeItem('password');
-    }
 
     return response;
   }

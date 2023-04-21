@@ -16,16 +16,48 @@ import { EventService } from 'src/app/services/event.service';
 export class YearlyGoalsPage implements OnInit {
 
   yearlyGoals: any;
+  username = localStorage.getItem('username') as string;
+  user_profile_pic = localStorage.getItem('user_profile_pic') as string;
 
   constructor(private router:Router, private menuCtrl: MenuController, private service:EventService) { }
 
   ngOnInit() {
-    this.service.getYearlyGoals().subscribe((response: any) => {
+    this.service.getYearlyGoals('1').subscribe((response: any) => {
       const allGoals = [].concat.apply([], Object.values(response['goals']));
       this.yearlyGoals = allGoals;
       console.log(this.yearlyGoals);
     });
   }  
+
+
+  
+  getProgramIcon(program_id: number,): string {
+    // Replace the conditions with the appropriate ones for your use case
+    if (program_id == 1) {
+      return 'heart-half-outline';
+    } 
+    else if (program_id === 2) {
+      return 'male-female-outline';
+    } 
+    else if (program_id === 3) {
+      return 'leaf-outline';
+    } 
+    else if (program_id === 4) {
+      return 'calendar-number-outline';
+    }
+    else {
+      return 'help-circle-outline'; // Default icon
+    }
+  }
+
+  isGoalComplete(goal_status : boolean): string {
+    if (goal_status == true) {
+      return 'checkmark-circle-outline';
+    } 
+    else {
+      return 'close-circle-outline';
+    }
+  }
 
   ionViewWillLeave() {
     this.menuCtrl.enable(false, 'menuGoals');

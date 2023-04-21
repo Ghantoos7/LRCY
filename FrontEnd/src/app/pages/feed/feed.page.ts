@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { MenuController } from '@ionic/angular';
+import { PostService } from 'src/app/services/post.service';
 
 @Component({
   selector: 'app-feed',
@@ -17,7 +18,14 @@ import { MenuController } from '@ionic/angular';
 
 export class FeedPage implements OnInit {
 
-  constructor(private router:Router, private alertController: AlertController, private menuCtrl: MenuController) { }
+  username = localStorage.getItem('username') as string;
+  user_profile_pic = localStorage.getItem('user_profile_pic') as string;
+  posts: any;
+  index: number=0;
+  isLiked: {[key: number]: boolean} = {};
+  post_id: number=0;
+
+  constructor(private router:Router, private alertController: AlertController, private menuCtrl: MenuController, private service:PostService) { }
 
   ionViewWillLeave() {
     this.menuCtrl.enable(false, 'menuFeed');
@@ -27,10 +35,10 @@ export class FeedPage implements OnInit {
     this.menuCtrl.enable(true, 'menuFeed');
   }
 
-  async showProfile() {
+  async showProfile(index: number) {
     const alert = await this.alertController.create({
-      header: 'Nay Abi Saad | General Assembly',
-      message: 'This is my bio',
+      header: this.posts[index]['user'].name+' | '+this.posts[index]['user'].user_position,
+      message: this.posts[index]['user'].user_bio,
       cssClass: 'my-custom-class',
       buttons: [{
         text: 'View Profile',
@@ -46,6 +54,22 @@ export class FeedPage implements OnInit {
   }
 
   ngOnInit() {
+    this.service.getPosts().subscribe((data: any) => {
+      this.posts = data['posts'];
+      console.log(this.posts);
+      for (let i = 0; i < this.posts.length; i++) {
+        const postId = this.posts[i].id;
+        this.isLiked[postId] = localStorage.getItem(`post_${postId}`) === 'true'; // retrieve the like state from Local Storage
+      }
+    });
+  }
+
+  getDaysAgo(postDate: string) {
+    const today = new Date();
+    const post = new Date(postDate);
+    const timeDiff = Math.abs(today.getTime() - post.getTime());
+    const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+    return daysDiff;
   }
 
   goToComments(){
@@ -81,4 +105,29 @@ export class FeedPage implements OnInit {
   logout(){
   
   }
+
+  toggleLike(post_id: number) {
+    if (this.isLiked[post_id]) {
+    this.unlikePost(post_id);
+    } else {
+    this.likePost(post_id);
+    }
+  }
+    
+  likePost(post_id: number) {
+    this.service.likePost(post_id).subscribe((data: any) => {
+      console.log(data);
+      localStorage.setItem(`post_${post_id}`, 'true'); // store the like state in Local Storage
+      this.isLiked[post_id] = true;
+    });
+  }
+  
+  unlikePost(post_id: number) {
+    this.service.unlikePost(post_id).subscribe((data: any) => {
+      console.log(data);
+      localStorage.setItem(`post_${post_id}`, 'false'); // store the like state in Local Storage
+      this.isLiked[post_id] = false;
+    });
+  }
+
 }

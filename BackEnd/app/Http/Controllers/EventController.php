@@ -15,22 +15,15 @@ use App\Models\program;
 class EventController extends Controller {
 
 
-    function getYearlyGoals() {
+    function getYearlyGoals($branch_id) {
 
         // Gets yearly goals and return them grouped based on program id
 
         $year = date('Y');
 
-        $goals = goal::select('goal_description', 'goal_name', 'program_id', 'goal_status', 'number_completed', 'number_to_complete', 'goal_year', 'event_type_id', 'goal_deadline')->where('goal_year', $year)->get();
+        $goals = goal::select('goal_description', 'goal_name', 'program_id', 'goal_status', 'number_completed', 'number_to_complete', 'goal_year', 'event_type_id', 'goal_deadline','start_date')->where('goal_year', $year)->get();
 
         $goals = $goals->groupBy('program_id')->toArray();
-
-        // add the field program_name to each goal
-        foreach ($goals as $program_id => $goalsArray) {
-            foreach ($goalsArray as $goalIndex => $goal) {
-                $goals[$program_id][$goalIndex]['program_name'] = Program::find($program_id)->program_name;
-            }
-        }
 
         return response()->json([
             'goals' => $goals,
@@ -82,31 +75,30 @@ class EventController extends Controller {
     }
 
 
-    function getAnnouncements() {
+    function getAnnouncements($branch_id) {
 
-        // Retrieve the announcements from the database and return them in descending order of creation date (newest first) and paginate them
-        $announcements = Announcement::orderBy('announcement_date', 'desc')->paginate(5);
+        // Retrieve the announcements from the database and return them in descending order of creation date (newest first)
+        $announcements = Announcement::orderBy('announcement_date', 'desc')->get();
     
-        // If no announcements found, return an error message
+        // If no announcements found, return an empty array
         if ($announcements->isEmpty()) {
-            return response()->json([
-                'message' => 'Announcements not found'
-            ]);
+            return [];
         }
-
+    
         // Transform the announcements to include the announcer's name and profile picture
         $announcements = $announcements->map(function($announcement) {
             $announcementArray = $announcement->toArray();
-            // Get the announcer's name and last name and profile picture
+            // Get the announcer's name and last name and profile picture and branch id
             $announcer = Volunteer_user::find($announcement->admin_id);
-
+    
             if ($announcer){
-            $announcementArray['announcer_name'] = $announcer->first_name . ' ' . $announcer->last_name;
-            $announcementArray['announcer_profile_picture'] = $announcer->profile_picture;
+                $announcementArray['announcer_name'] = $announcer->first_name . ' ' . $announcer->last_name;
+                $announcementArray['announcer_profile_picture'] = $announcer->profile_picture;
+                $announcementArray['branch_id'] = $announcer->branch_id;
             }
             // Remove unnecessary fields from the announcement
             unset($announcementArray['field1'], $announcementArray['field2'], $announcementArray['created_at'], $announcementArray['updated_at']);
-
+    
             // Convert the importance level to string
             switch($announcementArray['importance_level']) {
                 case 0:
@@ -121,13 +113,16 @@ class EventController extends Controller {
                 default:
                     break;
             }
-
+    
             return $announcementArray;
         });
-        
-        // Return the announcements
-        return response()->json(['announcements' => $announcements]);
     
+        $announcements = $announcements->filter(function($announcement) use ($branch_id) {
+            return $announcement['branch_id'] == $branch_id;
+        });
+    
+        // Return the announcements as a JSON response
+        return response()->json(['announcements' => $announcements->values()]);
     }
 
     
