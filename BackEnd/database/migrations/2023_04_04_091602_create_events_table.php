@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('event_main_picture');
             $table->string('event_description');
             $table->string('event_location');
+            $table->string('branch_id');
             $table->date('event_date');
             $table->string('event_title');
             $table->integer('event_type_id');

@@ -21,6 +21,7 @@ class goal extends Model
         'event_type_id',
         'goal_deadline',
         'start_date',
+        'branch_id'
     ];
 
 }
