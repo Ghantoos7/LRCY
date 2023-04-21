@@ -16,6 +16,12 @@ ion-label{
   font-weight: bold;
   font-family: 'Cairo', sans-serif;
 }
+
+ion-checkbox {
+  pointer-events: none;
+}
+
+
 h1{
   color: black;
   font-weight: bolder;

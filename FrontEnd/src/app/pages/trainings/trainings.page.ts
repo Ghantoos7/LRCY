@@ -37,7 +37,6 @@ export class TrainingsPage implements OnInit {
 
     this.service.get_trainings_info("1").subscribe((response) => {
       this.training_info = response;
-      console.log(response);
       this.yah_count = this.training_info['program_counts']["1"];
       this.hvp_count = this.training_info['program_counts']["2"];
       this.env_count = this.training_info['program_counts']["3"];
