@@ -1,13 +1,67 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>edit-announcement</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="background">
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">edit-announcement</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-menu menuId="menuAnnouncements" contentId="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Manage Announcements</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding"> 
+      <ion-list>
+        <ion-button (click)="goToAnnouncements()">View Announcements</ion-button>
+        </ion-list>
+      <ion-list>
+      <ion-button (click)="goToSendAnnouncement">Add an announcement</ion-button>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <div class="ion-page" id="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Announcements</ion-title>
+      </ion-toolbar>
+    </ion-header>
+  </div>
+
+  <div class="text">
+    <ion-text>Editing Announcement</ion-text>
+  </div>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Edit announcement title or content</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <ion-input class="input" placeholder="Announcement Title..."></ion-input>
+    </ion-card-content>
+
+    <ion-card-content>
+      <ion-input class="input" placeholder="Announcement Content..."></ion-input>
+    </ion-card-content>
+
+    <ion-card-header>
+      <ion-card-title>Edit the importance level of the announcement</ion-card-title>
+    </ion-card-header>
+
+    <ion-segment value="default">
+      <ion-segment-button value="Optional">
+        <ion-label>Optional</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="Important">
+        <ion-label>Important</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="Urgent">
+        <ion-label>Urgent</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-card>
+
+  <ion-button class="send" shape="round" expand="block" size="large">Update</ion-button>
+  <ion-img src="assets/imgs/ann-design.png"></ion-img>
+
 </ion-content>
