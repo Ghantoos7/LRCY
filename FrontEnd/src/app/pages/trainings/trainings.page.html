@@ -64,16 +64,14 @@
       <ion-card-content>
         <ion-grid>
           <ion-row>
-            <ion-col size="6">
+            <ion-col size="6" *ngFor="let training of taken_env;">
               <div>
-                <ion-checkbox>Training 1 </ion-checkbox>
-                <ion-checkbox checked>Training 2</ion-checkbox>
+                <ion-checkbox disabled="true" checked>{{training.training_name}}</ion-checkbox>
               </div>
             </ion-col>
-            <ion-col size="6">
+            <ion-col size="6" *ngFor="let training of not_taken_env;">
               <div>
-                <ion-checkbox checked>Training 1</ion-checkbox>
-                <ion-checkbox>Training 2</ion-checkbox>
+                <ion-checkbox disabled="true">{{training.training_name}}</ion-checkbox>
               </div>
             </ion-col>
             
@@ -91,16 +89,14 @@
       <ion-card-content>
         <ion-grid>
           <ion-row>
-            <ion-col size="6">
+            <ion-col size="6" *ngFor="let training of taken_hvp;">
               <div>
-                <ion-checkbox>Training 1 </ion-checkbox>
-                <ion-checkbox checked>Training 2</ion-checkbox>
+                <ion-checkbox disabled="true" checked>{{training.training_name}}</ion-checkbox>
               </div>
             </ion-col>
-            <ion-col size="6">
+            <ion-col size="6" *ngFor="let training of not_taken_hvp;">
               <div>
-                <ion-checkbox checked>Training 1</ion-checkbox>
-                <ion-checkbox>Training 2</ion-checkbox>
+                <ion-checkbox disabled="true">{{training.training_name}}</ion-checkbox>
               </div>
             </ion-col>
             
@@ -118,16 +114,14 @@
       <ion-card-content>
         <ion-grid>
           <ion-row>
-            <ion-col size="6">
+            <ion-col size="6" *ngFor="let training of taken_yah;">
               <div>
-                <ion-checkbox>Training 1 </ion-checkbox>
-                <ion-checkbox checked>Training 2</ion-checkbox>
+                <ion-checkbox disabled="true" checked>{{training.training_name}}</ion-checkbox>
               </div>
             </ion-col>
-            <ion-col size="6">
+            <ion-col size="6" *ngFor="let training of not_taken_yah;">
               <div>
-                <ion-checkbox checked>Training 1</ion-checkbox>
-                <ion-checkbox>Training 2</ion-checkbox>
+                <ion-checkbox disabled="true">{{training.training_name}}</ion-checkbox>
               </div>
             </ion-col>
             

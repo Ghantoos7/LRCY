@@ -22,6 +22,14 @@ export class TrainingsPage implements OnInit {
   env_count: string = '';
   other_count: string = '';
   left_count: string = '';
+  taken_yah: any = [];
+  not_taken_yah: any = [];
+  taken_hvp: any = [];
+  not_taken_hvp: any = [];
+  taken_env: any = [];
+  not_taken_env: any = [];
+  taken_other: any = [];
+  not_taken_other: any = [];
 
   constructor(private router:Router, private service:UserService) { }
 
@@ -29,12 +37,21 @@ export class TrainingsPage implements OnInit {
 
     this.service.get_trainings_info("1").subscribe((response) => {
       this.training_info = response;
+      console.log(response);
       this.yah_count = this.training_info['program_counts']["1"];
       this.hvp_count = this.training_info['program_counts']["2"];
       this.env_count = this.training_info['program_counts']["3"];
       this.other_count = this.training_info['program_counts']["4"];
       this.left_count = this.training_info['trainings not taken count'];
+      this.taken_yah = this.training_info['trainings']['1'];
+      this.taken_hvp = this.training_info['trainings']['2'];
+      this.taken_env = this.training_info['trainings']['3'];
+      this.taken_other = this.training_info['trainings']['4'];
 
+      this.not_taken_yah = this.training_info['trainings_not_taken']['1'];
+      this.not_taken_hvp = this.training_info['trainings_not_taken']['2'];
+      this.not_taken_env = this.training_info['trainings_not_taken']['3'];
+      this.not_taken_other = this.training_info['trainings_not_taken']['4'];
     });
 
 

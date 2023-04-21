@@ -60,6 +60,5 @@ class DatabaseSeeder extends Seeder
        // event_image::factory(5)->create();
         //announcement::factory(20)->create();
 
-        post::factory(10)->create();
     }
 }
