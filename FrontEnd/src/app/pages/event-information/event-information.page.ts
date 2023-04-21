@@ -25,7 +25,7 @@ export class EventInformationPage implements OnInit {
   ngOnInit() {
 
   this.my_id = this.shared.getVariableValue();
-    this.service.get_event(this.my_id).subscribe(response => {
+    this.service.get_event("1",this.my_id).subscribe(response => {
       this.events = response;
        this.responsibles = this.events['event']['0']['responsibles'];
    

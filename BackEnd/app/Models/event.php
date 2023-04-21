@@ -20,7 +20,8 @@ class event extends Model
         'program_id',
         'budget_sheet',
         'proposal',
-        'meeting_minute'
+        'meeting_minute',
+        'branch_id',
     ];
 
 }

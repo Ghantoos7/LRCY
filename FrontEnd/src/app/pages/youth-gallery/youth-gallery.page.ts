@@ -29,10 +29,11 @@ export class YouthGalleryPage implements OnInit {
   showActivities: boolean = true;
   showTrainings: boolean = true;
   showOthersEvents: boolean = true;
+  branch_id = localStorage.getItem('branch_id') as string;
+
 
   ngOnInit() {
-    this.event_service.get_events().subscribe(response => {
-
+    this.event_service.get_events(this.branch_id).subscribe(response => {
       this.events = response;
       this.youth_events = Array.from(this.events['events']['1']);
 

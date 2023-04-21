@@ -9,14 +9,14 @@ export class EventService {
 
   constructor(private http:HttpClient) { }
 
-  get_events(){
-    const response = this.http.get(this.base_url + 'get_event_info');
+  get_events(branch: string){
+    const response = this.http.get(this.base_url + 'get_event_info/' + branch);
     return response;
   }
 
  
-  get_event(id: string){
-    const response = this.http.get(this.base_url + "get_event_info/" + id);
+  get_event(branch: string,id: string){
+    const response = this.http.get(this.base_url + "get_event_info/" + branch+"/" + id);
     return response;
   }
 

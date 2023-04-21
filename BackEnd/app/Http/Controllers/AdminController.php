@@ -511,6 +511,7 @@ class AdminController extends Controller {
             'budget_sheet' => 'required|string',
             'proposal' => 'required|string',
             'meeting_minute' => 'nullable|string',
+            'branch_id' => 'required|integer',
             'responsibles' => 'required|array',
             'responsibles.*.user_id' => 'required|integer',
             'responsibles.*.role_name' => 'required|string',
@@ -540,6 +541,7 @@ class AdminController extends Controller {
                 'budget_sheet' => $request->input('budget_sheet'),
                 'proposal' => $request->input('proposal'),
                 'meeting_minute' => $request->input('meeting_minute'),
+                'branch_id' => $request->input('branch_id'),
             ]);
 
         }catch (\Exception $e) {
@@ -620,7 +622,7 @@ class AdminController extends Controller {
                 'program_id',
                 'budget_sheet',
                 'proposal',
-                'meeting_minute'
+                'meeting_minute',
             ];
             $event->fill($request->only($fillableFields));
             $event->save();

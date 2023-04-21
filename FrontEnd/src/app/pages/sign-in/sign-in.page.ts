@@ -39,7 +39,7 @@ export class SignInPage implements OnInit {
           localStorage.setItem('authToken', response.token);
           localStorage.setItem('userId', response.user_id);
           localStorage.setItem('username', response.username);
-          localStorage.setItem('user_profile_pic', response.user_porfile_pic);
+          localStorage.setItem('user_profile_pic', response.user_profile_pic);
           localStorage.setItem('branch_id', response.branch_id);
           localStorage.setItem('rememberMe', this.rememberMe.toString());
           localStorage.setItem('full_name', response.full_name);
