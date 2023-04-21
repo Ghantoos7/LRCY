@@ -25,8 +25,11 @@ export class AnnouncementsPage implements OnInit {
   }
 
   ngOnInit() {
-    this.service.getAnnouncements().subscribe((response: any) => {
+    this.service.getAnnouncements('502').subscribe((response: any) => {
       this.announcements = response['announcements'];
+      this.announcements = Array.from(this.announcements);
+      console.log(this.announcements);
+
     });
   }
 
