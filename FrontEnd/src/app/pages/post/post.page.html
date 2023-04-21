@@ -7,18 +7,17 @@
   </div>
 
   <div class="user-info">
-    <ion-img class="profile-picture" src="assets/imgs/profile-picture.png"></ion-img>
-    <ion-text class="username">Ghnatoos7</ion-text>
-    <ion-text class="name">Georgio Ghnatos</ion-text>
+    <img class="profile-picture" src="{{user_profile_pic}}">
+    <ion-text class="username">{{username}}</ion-text>
+    <ion-text class="name">{{full_name}}</ion-text>
   </div>
 
   <ion-input class="input"  placeholder="What's happening..."></ion-input>
 
   <div class="upload-options">
-    <ion-icon class="camera" name="camera-outline"></ion-icon>
-    <ion-icon class="video" name="videocam-outline"></ion-icon>
-    <ion-icon class="image" name="image-outline"></ion-icon>  
-  </div>
+    <ion-icon class="camera" name="camera-outline" (click)="takePicture()"></ion-icon>
+    <ion-icon class="image" name="image-outline" (click)="choosePicture()"></ion-icon>  
+  </div>  
 
   <ion-button class="post-button" shape="round" expand="block" size="large">Post</ion-button>
 

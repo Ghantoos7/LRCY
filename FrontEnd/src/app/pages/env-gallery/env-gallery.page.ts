@@ -71,12 +71,13 @@ export class EnvGalleryPage implements OnInit {
   }
 
   ionViewWillLeave() {
-    this.menuCtrl.enable(false, 'menuEnvGallery');
+    this.menuCtrl.enable(false, 'menuEnv');
   }
 
   ionViewDidEnter() {
-    this.menuCtrl.enable(true, 'menuEnvGallery');
+    this.menuCtrl.enable(true, 'menuEnv');
   }
+
 
   goProfile(){
     this.router.navigate(['/profile']);

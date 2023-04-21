@@ -56,7 +56,6 @@ export class FeedPage implements OnInit {
   ngOnInit() {
     this.service.getPosts().subscribe((data: any) => {
       this.posts = data['posts'];
-      console.log(this.posts);
       for (let i = 0; i < this.posts.length; i++) {
         const postId = this.posts[i].id;
         this.isLiked[postId] = localStorage.getItem(`post_${postId}`) === 'true'; // retrieve the like state from Local Storage

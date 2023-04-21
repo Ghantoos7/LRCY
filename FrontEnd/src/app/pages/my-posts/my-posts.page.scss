@@ -25,6 +25,11 @@ h2, p{
     font-weight: 200;
   }
 
+  .edit{
+    color:#45579A !important;
+    margin-left: 70%;
+  }
+
 
  ion-avatar{
    height: 50px;
@@ -40,7 +45,7 @@ h2, p{
  }
 
  ion-icon, ion-col{
-    color: white !important;
+    color: white ;
  }
 
  ion-input{
@@ -53,4 +58,141 @@ h2, p{
 .custom-input{
     border-radius: 25px;
     padding: 20px; 
+}
+
+.header-container {
+  position: relative;
+  top: 20px;
+  left: 20px;
+  }
+  
+  .header-container img {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+  }
+  
+  .header-container .username {
+  position: absolute;
+  top: 5px;
+  left: 55px;
+  font-size: 15px;
+  color: #8F8F8F;
+  }
+  
+  .header-container .name {
+  position: absolute;
+  top: 25px;
+  left: 55px;
+  font-size: 13px;
+  color: #8F8F8F;
+  }
+
+  .header-container .post-date {
+      position: absolute;
+      top: 20px;
+      right: 100px;
+      font-size: 13px;
+      color: #8F8F8F;
+    }      
+  
+  .header-container .more-options {
+  position: absolute;
+  font-size: 2em;
+  top: 35px;
+  right: 10px;
+  color: #8F8F8F;
+  }
+  
+  .caption-container {
+  position: relative;
+  width: 309px;
+  left: 15px;
+  top: 10px;
+  }
+  
+  .post-image {
+  position: relative;
+  top: 30px;
+  }
+  
+  .likes {
+  font-size: 2em;
+  position: relative;
+  top: 30px;
+  left: 15px;
+  color: #B11433 !important;
+  }
+  
+  .like-count {
+  font-size: 17px;
+  position: relative;
+  top: 23px;
+  left: 18px;
+  color: #AAA7AE
+  }
+  
+  .comments {
+  position: relative;
+  width: 27px;
+  top: 0px;
+  left: 82px;
+  }
+  
+  .comment-count {
+  font-size: 18px;
+  position: relative;
+  bottom: 25px;
+  left: 115px;
+  color: #AAA7AE
+  }
+  
+  .input {
+  position: relative;
+  bottom: 53px;
+  width: 189px;
+  left: 150px;
+  border-radius: 10px;
+  z-index: 1;
+  --background: #E9E7E7;
+  --color: #8F8F8F;
+  --padding-end: 35px;
+  --padding-start: 10px;
+  --placeholder-color: #8F8F8F;
+  --placeholder-opacity: 0.8;
+  }
+  
+  .send-icon {
+  position: absolute;
+  left: 310px;
+  top: 35px;
+  font-size: 20px;
+  color: #B11433;
+  z-index: 2;
+  }
+  
+  .card {
+  position: relative;
+  background-color: #FDFDFD;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  }
+  
+  .fab {
+  position: fixed;
+  top: 770px;
+  left: 315px;
+  --background: #B11433;
+  }
+
+.avatar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+}
+
+ion-avatar{
+  height: 100px;
+  width: 100px;
 }
