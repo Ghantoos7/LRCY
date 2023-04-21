@@ -211,7 +211,7 @@ class PostController extends Controller {
         // Remove unwanted fields from each post and retrieve name(concatenate first_name and last_name), profile picture, and username of the post owner based on the user ID
         $posts = $posts->transform(function($post) {
                  unset($post->created_at, $post->updated_at, $post->field1, $post->field2);
-                 $user = volunteer_user::select('first_name', 'last_name', 'user_profile_pic', 'username')->find($post->user_id);
+                 $user = volunteer_user::select('first_name', 'last_name', 'user_profile_pic', 'username', 'user_position', 'user_bio')->find($post->user_id);
                  // If no user was found for the post, return null
                  if (!$user) {
                      $post->user = null;
