@@ -17,8 +17,8 @@ import { MenuController } from '@ionic/angular';
 
 export class FeedPage implements OnInit {
 
-  username: string = localStorage.getItem('username') as string;
-  user_profile_pic: string = localStorage.getItem('user_profile_pic') as string;
+  username = localStorage.getItem('username') as string;
+  user_profile_pic = localStorage.getItem('user_profile_pic') as string;
 
   constructor(private router:Router, private alertController: AlertController, private menuCtrl: MenuController) { 
   }

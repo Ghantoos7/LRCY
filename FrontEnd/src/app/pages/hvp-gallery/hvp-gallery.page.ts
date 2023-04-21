@@ -16,8 +16,8 @@ import { SharedService } from 'src/app/services/shared.service';
 export class HvpGalleryPage implements OnInit {
   
   username = localStorage.getItem('username') as string;
-  user_profile_pic: string = localStorage.getItem('user_profile_pic') as string;
-  
+  user_profile_pic = localStorage.getItem('user_profile_pic') as string;
+
   constructor(private shared:SharedService,private event_service:EventService, private router:Router, private menuCtrl: MenuController) { }
   hvp_events: any = [];
   events: any = [];

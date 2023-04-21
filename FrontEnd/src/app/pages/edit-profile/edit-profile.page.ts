@@ -42,6 +42,7 @@ export class EditProfilePage implements OnInit {
     this.service.editProfile(username, user_bio).subscribe(response => {
       const parsedResponse = JSON.parse(JSON.stringify(response));
       if (parsedResponse.status === 'success') {
+        localStorage.setItem('username', username);
         const alert = this.alertController.create({
           header: 'Success',
           message: 'Profile updated successfully.',
