@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-announcements',
@@ -15,11 +16,29 @@ import { MenuController } from '@ionic/angular';
 export class AnnouncementsPage implements OnInit {
   showDescriptions: boolean[] = [];
 
-  constructor(private router:Router, private menuController: MenuController) { 
+  constructor(private alertController: AlertController, private router:Router, private menuController: MenuController) { 
     this.showDescriptions = new Array(3).fill(false);
   }
 
   ngOnInit() {
+  }
+
+  async confirm() {
+    const alert = await this.alertController.create({
+      header: 'Delete Announcement',
+      message: 'Are you sure you want to delete this announcement?',
+      cssClass: 'my-custom-class',
+      buttons: [
+        {
+          text: 'Yes',
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        }
+      ]
+    });
+    await alert.present();
   }
 
   toggleDescription(index: number) {
@@ -28,6 +47,10 @@ export class AnnouncementsPage implements OnInit {
 
   goToSendAnnouncement(){
     this.router.navigate(['/send-announcement']);
+  }
+
+  goToEditAnnouncement(){
+    this.router.navigate(['/edit-announcement']);
   }
 
   closeMenu() {

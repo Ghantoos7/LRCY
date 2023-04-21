@@ -74,6 +74,10 @@ export const routes: Routes = [
     path: 'announcements',
     loadComponent: () => import('./pages/announcements/announcements.page').then( m => m.AnnouncementsPage)
   },
+  {
+    path: 'edit-announcement',
+    loadComponent: () => import('./pages/edit-announcement/edit-announcement.page').then( m => m.EditAnnouncementPage)
+  },
 
 
 ];

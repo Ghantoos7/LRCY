@@ -6,7 +6,6 @@ import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 
-
 @Component({
   selector: 'app-yearly-goals',
   templateUrl: './yearly-goals.page.html',
