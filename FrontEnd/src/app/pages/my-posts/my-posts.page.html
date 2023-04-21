@@ -6,39 +6,34 @@
 
 <ion-content fullscreen>
   <div class="container">
-    <ion-card *ngFor="let post of posts_array">
-      <ion-card-header>
-        <ion-item lines="none">
-          <ion-avatar slot="start">
-            <img src="assets\imgs\gallery-default2.jpeg">
-          </ion-avatar>
-          <ion-label>
-            <h2>{{ post.full_name }}</h2>
-            <p>{{ post.post_date}}</p>
-            <p>{{ post.post_caption }}</p>
-          </ion-label>
-          
-          <ion-icon name="ellipsis-vertical-outline" (click)="showActionSheet()"></ion-icon>
-       
-        </ion-item>
    
-      </ion-card-header>
+    <ion-card class="card" *ngFor="let post of posts_array; let i = index">
+      <div class="header-container">
+        <img  class="card-profile-picture" src="{{user_profile_pic}}">
+        <ion-text class="username">{{username}}</ion-text>
+        <ion-text class="name">{{full_name}}</ion-text>
+        <ion-text class="post-date">{{getDaysAgo(post.post_date)}} d</ion-text>
+        <ion-icon size="large"class="edit" name="ellipsis-vertical-outline" (click)="showActionSheet()"></ion-icon>
+      
+      </div>
+
       <ion-card-content>
-        <img *ngIf="post.post_media" [src]="post.post_media" style="width: 100%; border-radius: 20px;">
-        <ion-row>
-          <ion-col size="3" >
-            <ion-icon name="heart" style="font-size: 24px; padding-right: 5px;"></ion-icon>{{ post.like_count }}
-          </ion-col>
-          <ion-col size="2" >
-            <ion-icon (click)="goToComments" name="chatbubble" style="font-size: 24px; padding-right: 5px;"></ion-icon>3
-          </ion-col>
-          <ion-col size="7" >
-            <ion-input placeholder="Comment..." class="custom-input" style="--border-radius: 20px;">
-              <ion-icon class="custom-icon" name="paper-plane"  size="large" slot="end"></ion-icon>
-            </ion-input>
-          </ion-col>
-        </ion-row>
+        <div class="caption-container">
+          <ion-text>{{post.post_caption}} 
+          </ion-text>
+        </div>  
+        <ion-img class="post-image" src="{{post.post_media}}"/>
       </ion-card-content>
+
+      <ion-footer>
+        <ion-icon class="likes" [class.active]="isLiked[post.id]" name="{{ isLiked[post.id] ? 'heart' : 'heart-outline' }}" (click)="toggleLike(post.id)"></ion-icon>
+        <ion-text class="like-count" color="danger">{{post.like_count}}</ion-text>
+        <ion-img (click) ="goToComments()" class="comments" src="assets/icon/comments.png"></ion-img>
+        <ion-text class="comment-count">{{post.comment_count}}</ion-text>
+        <ion-input class="input"  placeholder="Comment on this post..."></ion-input>
+        <ion-icon class="send-icon" name="send"></ion-icon>
+
+      </ion-footer>  
     </ion-card>
   </div>
   

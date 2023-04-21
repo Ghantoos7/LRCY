@@ -24,7 +24,8 @@ export class ProfilePage implements OnInit {
   bio:string = '';
   user_position:string = '';
   user_profile_pic = localStorage.getItem('user_profile_pic') as string;
-  
+  id = localStorage.getItem('userId') as string;
+
 
   constructor(private router:Router, private service:UserService,private menuCtrl: MenuController) { }
 
