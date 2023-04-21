@@ -22,7 +22,8 @@ class postFactory extends Factory
             'like_count' => random_int(0, 100),
             'post_date' => fake()->date,
             'post_type_id' => 3,
-            'user_id' => random_int(1, 70)
+            'user_id' => random_int(2,3),
+            'post_media' => fake()->imageUrl,
         ];
     }
 }

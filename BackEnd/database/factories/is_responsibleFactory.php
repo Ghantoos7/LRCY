@@ -17,7 +17,10 @@ class is_responsibleFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'user_id' => $this->faker->numberBetween(1, 5),
+            'organization_id' => $this->faker->numberBetween(1, 5),
+            'event_id' => $this->faker->numberBetween(150, 500),
+            'role_name' => 'role_name',
         ];
     }
 }
