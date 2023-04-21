@@ -21,7 +21,7 @@ export class SplashScreenPage implements OnInit {
   ionViewWillEnter() {
     // Check if "Remember Me" is selected
     const rememberMe = localStorage.getItem('rememberMe');
-    if (rememberMe && rememberMe === 'true') {
+    if (rememberMe === 'true') {
       // Skip the login page and navigate to the feed page
       setTimeout(() => {
         this.router.navigate(['/feed']);
