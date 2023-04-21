@@ -48,6 +48,10 @@ export class FeedPage implements OnInit {
   ngOnInit() {
   }
 
+  goToComments(){
+    this.router.navigate(['/comments']);
+  }
+
   goToPostForm(){
     this.router.navigate(['/post'])
   }

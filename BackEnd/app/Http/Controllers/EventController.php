@@ -7,8 +7,9 @@ use App\Models\goal;
 use App\Models\event;
 use App\Models\announcement;
 use App\Models\volunteer_user;
-use App\Models\picture;
+use App\Models\event_image;
 use App\Models\is_responsible;
+use App\Models\program;
 
 
 class EventController extends Controller {
@@ -16,15 +17,24 @@ class EventController extends Controller {
 
     function getYearlyGoals() {
 
-    // Gets yearly goals and return them grouped based on program id
+        // Gets yearly goals and return them grouped based on program id
 
         $year = date('Y');
 
-        $goals = goal::select('goal_description', 'goal_name', 'program_id', 'goal_status', 'number_completed', 'goal_year', 'event_type_id', 'goal_deadline')->where('goal_year', $year)->get();
+        $goals = goal::select('goal_description', 'goal_name', 'program_id', 'goal_status', 'number_completed', 'number_to_complete', 'goal_year', 'event_type_id', 'goal_deadline')->where('goal_year', $year)->get();
 
-        $goals = $goals->groupBy('program_id');
+        $goals = $goals->groupBy('program_id')->toArray();
 
-        return response()->json($goals);
+        // add the field program_name to each goal
+        foreach ($goals as $program_id => $goalsArray) {
+            foreach ($goalsArray as $goalIndex => $goal) {
+                $goals[$program_id][$goalIndex]['program_name'] = Program::find($program_id)->program_name;
+            }
+        }
+
+        return response()->json([
+            'goals' => $goals,
+        ]);    
 
     }
     
@@ -59,7 +69,7 @@ class EventController extends Controller {
                         'first_name' => $user->first_name,
                         'last_name' => $user->last_name,
                         'role_name' => $responsible->role_name,
-                        'profile_picture' => $user->profile_picture
+                        'profile_picture' => $user->user_profile_pic
                     ];
                 });
                 return $event;
@@ -96,9 +106,25 @@ class EventController extends Controller {
             }
             // Remove unnecessary fields from the announcement
             unset($announcementArray['field1'], $announcementArray['field2'], $announcementArray['created_at'], $announcementArray['updated_at']);
+
+            // Convert the importance level to string
+            switch($announcementArray['importance_level']) {
+                case 0:
+                    $announcementArray['importance_level'] = 'optional';
+                    break;
+                case 1:
+                    $announcementArray['importance_level'] = 'important';
+                    break;
+                case 2:
+                    $announcementArray['importance_level'] = 'urgent';
+                    break;
+                default:
+                    break;
+            }
+
             return $announcementArray;
         });
-
+        
         // Return the announcements
         return response()->json(['announcements' => $announcements]);
     
@@ -116,7 +142,7 @@ class EventController extends Controller {
         }
 
         // Retrieve the pictures of the event from the database
-        $pictures = Picture::where('event_id', $event_id)->get();
+        $pictures = Event_image::where('event_id', $event_id)->get();
 
         // If no pictures found, return an error message
         if ($pictures->isEmpty()) {

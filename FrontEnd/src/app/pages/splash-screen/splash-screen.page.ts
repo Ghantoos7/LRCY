@@ -18,9 +18,26 @@ export class SplashScreenPage implements OnInit {
   ngOnInit() {
   }
 
+  ionViewWillEnter() {
+    // Check if "Remember Me" is selected
+    const rememberMe = localStorage.getItem('rememberMe');
+    if (rememberMe && rememberMe === 'true') {
+      // Skip the login page and navigate to the feed page
+      setTimeout(() => {
+        this.router.navigate(['/feed']);
+      }, 3000);
+    } else {
+      // Navigate to the login page after 3 seconds
+      setTimeout(() => {
+        this.router.navigate(['/sign-in']);
+      }, 3000);
+    }
+  }
+
   ionViewDidEnter() {
     setTimeout(() => {
-      this.router.navigateByUrl('/sign-in');
+      // Do nothing in this hook
     }, 3000); 
   }
+
 }

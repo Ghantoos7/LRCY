@@ -69,6 +69,19 @@ private base_url = 'http://localhost:8000/api/v0.1/user/';
     return response;
   }
 
+  editProfile(username: string, user_bio?: string, user_profile_pic?: string){
+    const headers: HttpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
+    const options = {headers: headers};
 
+    const body = {
+      'user_id': localStorage.getItem('userId'),
+      'username': username,
+      'user_bio': user_bio,
+      'user_profile_pic': user_profile_pic
+    };
+
+    const response = this.http.post(this.base_url + 'edit_profile', body, options);
+    return response;
+  }
 
 }

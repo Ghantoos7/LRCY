@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
+import { EventService } from 'src/app/services/event.service';
 
 @Component({
   selector: 'app-announcements',
@@ -14,12 +15,16 @@ import { MenuController } from '@ionic/angular';
 })
 export class AnnouncementsPage implements OnInit {
   showDescriptions: boolean[] = [];
-  constructor(private router:Router, private menuCtrl: MenuController) { 
-    this.showDescriptions = new Array(3).fill(false);
+  announcements: any = [];
+  i: number = 0;
+  constructor(private router:Router, private menuCtrl: MenuController, private service:EventService) { 
+    this.showDescriptions = new Array(this.announcements.length).fill(false);
   }
 
   ngOnInit() {
-
+    this.service.getAnnouncements().subscribe((response: any) => {
+      this.announcements = response['announcements'];
+    });
   }
 
   ionViewWillLeave() {
@@ -57,7 +62,9 @@ export class AnnouncementsPage implements OnInit {
       
       }
 
+  
   toggleDescription(index: number) {
-    this.showDescriptions[index] = !this.showDescriptions[index];
+      this.showDescriptions[index] = !this.showDescriptions[index];
   }
+      
 }

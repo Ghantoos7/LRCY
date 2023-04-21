@@ -7,6 +7,11 @@ ion-title{
     font-family: 'Cairo', sans-serif;
 }
 
+p{
+  padding-top: 5px;
+  color: white;
+}
+
 ion-toolbar{
     --background: #b11433;
 }
@@ -46,8 +51,8 @@ ion-card-subtitle{
 }
 
 ion-progress-bar{
-    --background: darkgray;
-    --progress-background: #45579A;
+    --background: rgba(0, 0, 0, 0.197);
+    --progress-background: white;
     
 }
 
@@ -80,7 +85,22 @@ ion-progress-bar{
     --background:var(--ion-background-color)
   }
 
-
+  .youth-health {
+    background-color: #b11433;
+  }
+  
+  .hvp {
+    background-color: #45579A;
+  }
+  
+  .environment {
+    background-color: #348137;
+  }
+  
+  .other {
+    background-color: darkgray;
+  }
+  
 
  
 

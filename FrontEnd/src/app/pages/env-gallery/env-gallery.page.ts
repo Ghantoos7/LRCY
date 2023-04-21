@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { EventService } from '../../services/event.service';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-env-gallery',
@@ -15,7 +16,7 @@ import { EventService } from '../../services/event.service';
 })
 export class EnvGalleryPage implements OnInit {
 
-  constructor( private event_service:EventService, private router:Router, private menuCtrl: MenuController) { }
+  constructor(private sharedService:SharedService, private event_service:EventService, private router:Router, private menuCtrl: MenuController) { }
   env_events: any = [];
   events: any = [];
   showActivities: boolean = true;
@@ -34,9 +35,10 @@ export class EnvGalleryPage implements OnInit {
   
 
   seeDetails(event_id: string) {
- 
-    this.router.navigate(["/event-details"], {state: { id : event_id }});
+    this.sharedService.setVariableValue(event_id);
+      this.router.navigate(['/event-details']);
     }
+      
   
   
 

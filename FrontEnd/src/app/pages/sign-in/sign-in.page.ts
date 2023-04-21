@@ -19,6 +19,7 @@ export class SignInPage implements OnInit {
   organization_id='';
   password='';
   message: string = '';
+  rememberMe: boolean = false; // New variable to keep track of remember me checkbox
 
   constructor(private router:Router,private authService:AuthService, alertCtrl: AlertController) {
     this.alertCtrl = alertCtrl; // Assign the alertCtrl property to the alertCtrl parameter
@@ -28,7 +29,7 @@ export class SignInPage implements OnInit {
   }
 
   login(organization_id: string, password: string) {
-    this.authService.login(organization_id, password).subscribe({
+    this.authService.login(organization_id, password,this.rememberMe).subscribe({
       next: (data) => {
         console.log(data);
         const response = JSON.parse(JSON.stringify(data));
@@ -36,6 +37,7 @@ export class SignInPage implements OnInit {
           // Store the token in local storage for future use
           localStorage.setItem('authToken', response.token);
           localStorage.setItem('userId', response.user_id);
+          localStorage.setItem('rememberMe', this.rememberMe.toString());
           // Redirect the user to the dashboard or any other page
           this.router.navigate(['/feed']);
         } else {
