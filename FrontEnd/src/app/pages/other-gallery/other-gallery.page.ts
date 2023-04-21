@@ -17,6 +17,9 @@ import { SharedService } from '../../services/shared.service';
 })
 export class OtherGalleryPage implements OnInit {
 
+  username = localStorage.getItem('username') as string;
+  user_profile_pic = localStorage.getItem('user_profile_pic') as string;
+
   constructor(private sharedService: SharedService, private event_service:EventService, private router:Router, private menuCtrl: MenuController) { }
 
   other_events: any = [];
