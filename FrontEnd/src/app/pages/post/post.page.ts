@@ -5,7 +5,6 @@ import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { PostService } from 'src/app/services/post.service';
-import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 
 @Component({
   selector: 'app-post',
@@ -23,9 +22,7 @@ export class PostPage implements OnInit {
   username = localStorage.getItem('username') as string;
   user_profile_pic :string = '';
 
-  imageData: string='';
-
-  constructor(private router:Router, private userService:UserService, private postService:PostService, private camera: Camera) { }
+  constructor(private router:Router, private userService:UserService, private postService:PostService) { }
 
   ngOnInit() {
     this.userService.get_user('1', '1').subscribe(response => {
@@ -42,41 +39,5 @@ export class PostPage implements OnInit {
 this.router.navigate(['/feed']);
   }
 
-  takePicture(imageData: string) {
-    const options: CameraOptions = {
-      quality: 50,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
-    }
-
-    this.camera.getPicture(options).then((imageData) => {
-      // imageData is a base64 encoded string
-      let base64Image = 'data:image/jpeg;base64,' + imageData;
-      // Do something with the image data, like displaying it in an <img> tag
-    }, (err) => {
-      // Handle error
-    });
-  }
-
-  choosePicture(imageData: string) {
-    const options: CameraOptions = {
-      quality: 50,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
-    }
-
-    this.camera.getPicture(options).then((imageData) => {
-      // imageData is a base64 encoded string
-      let base64Image = 'data:image/jpeg;base64,' + imageData;
-      // Do something with the image data, like displaying it in an <img> tag
-    }, (err) => {
-      // Handle error
-    });
-  }
-
 }
 
-}

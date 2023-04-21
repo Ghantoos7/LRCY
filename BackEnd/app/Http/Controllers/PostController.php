@@ -187,6 +187,31 @@ class PostController extends Controller {
         }
     
     }
+
+    function getPost($post_id){
+        // Find the post with the given ID
+        $post = Post::find($post_id);
+    
+        // If the post is not found, return an error response
+        if (!$post) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Post not found'
+            ]);
+        }
+
+        // Unset field1 and field2 from the post data, and get the name of the user who posted the post
+        unset($post->field1);
+        unset($post->field2);
+        $post->user_name = volunteer_user::where('id', $post->user_id)->value('first_name');
+
+        // Return a success response with the post data
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Post found successfully',
+            'post' => $post
+        ]);
+    }
     
 
     function getPosts($user_id = null) {

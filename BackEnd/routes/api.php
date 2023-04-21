@@ -58,7 +58,8 @@ Route::group(["prefix" => "v0.1",], function(){
             Route::post("create_post", [PostController::class, "createPost"]);
             Route::post("edit_post", [PostController::class, "editPost"]);
             Route::post("delete_post", [PostController::class, "deletePost"]);
-            Route::get("get_posts/{post_id?}", [PostController::class, "getPosts"]);
+            Route::get("get_posts/{user_id?}", [PostController::class, "getPosts"]);
+            Route::get("get_post/{post_id}", [PostController::class, "getPost"]);
             Route::post("like_post", [PostController::class, "likePost"]);
             Route::post("unlike_post", [PostController::class, "unlikePost"]);
             Route::post("comment_post", [PostController::class, "commentPost"]);
