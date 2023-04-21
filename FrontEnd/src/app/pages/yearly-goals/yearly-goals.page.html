@@ -47,7 +47,7 @@
 
       <ion-card-content>
         
-        
+        <p>{{goal.number_completed}}/{{goal.number_to_complete}}</p>
         <ion-progress-bar class="bar" [value]="goal.number_completed / goal.number_to_complete"></ion-progress-bar>
         <p>{{goal.goal_description}}</p>
       </ion-card-content>
