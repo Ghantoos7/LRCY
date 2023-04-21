@@ -41,4 +41,20 @@ export class PostService {
     const response = this.http.post(this.base_url + 'unlike_post', body, options);
     return response;
   }
+
+  getPost(post_id: number){
+    const response = this.http.get(this.base_url + 'get_post/' + post_id);
+    return response;
+  }
+
+  getComments(post_id: number){
+    const response = this.http.get(this.base_url + 'get_comments/' + post_id);
+    return response;
+  }
+
+  getReplies(comment_id: number){
+    const response = this.http.get(this.base_url + 'get_replies/' + comment_id);
+    return response;
+  }
+
 }

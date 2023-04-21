@@ -586,28 +586,31 @@ class PostController extends Controller {
         }
         
         // Get the comments associated with the post
-        $query = Comment::where('post_id', $post_id);
-        
+        $comments = Comment::where('post_id', $post_id);
+
         // Sort by popularity
         if ($sort_by === 'popularity') {
-            $query->orderByRaw('(comment_like_count + comment_reply_count) DESC')->orderBy('created_at', 'desc');
+            $comments->orderByRaw('(comment_like_count + comment_reply_count) DESC')->orderBy('created_at', 'desc');
         }
         // Sort by date
         else {
-            $query->orderBy('created_at', 'desc');
+            $comments->orderBy('created_at', 'desc');
         }
-        
-        // Paginate the comments
-        $comments = $query->paginate(10);
-        
-        // Remove the fields we don't want to return
-        foreach ($comments as $comment) {
+
+        // Get the comments as a collection of results
+        $comments = $comments->get();
+
+        // Remove the fields we don't want to return and get the user who made the comment
+        $comments->transform(function ($comment) {
             unset($comment->field1, $comment->field2, $comment->created_at, $comment->updated_at);
-        }
-        
+            $comment->user = volunteer_user::find($comment->user_id);
+            unset($comment->user_id);
+            return $comment;
+        });
+
         // Return the comments or an error response if no comments found
         return $comments->isEmpty() ? response()->json(['status' => 'error', 'message' => 'No comments found for this post']) : response()->json(['status' => 'success', 'comments' => $comments]);
-   
+
     }    
 
 
@@ -619,17 +622,19 @@ class PostController extends Controller {
         // Return error response if comment not found
         if (!$comment) return response()->json(['status' => 'error', 'message' => 'Comment not found']);
     
-        // Get the replies associated with the comment
-        $replies = Reply::where('comment_id', $comment_id)->orderBy('created_at', 'desc')->paginate(10);
-    
-        // Remove the fields we don't want to return
+        // Get the replies associated with the comment and convert to a collection
+        $replies = Reply::where('comment_id', $comment_id)->orderBy('created_at', 'desc')->get();
+
+        // Transform the collection to remove unwanted fields and get user info
         $replies->transform(function ($reply) {
             unset($reply->field1, $reply->field2, $reply->created_at, $reply->updated_at);
+            $reply->user = volunteer_user::find($reply->user_id);
             return $reply;
         });
-    
+
         // Return the replies or an error response if no replies found
         return $replies->isEmpty() ? response()->json(['status' => 'error', 'message' => 'No replies found for this comment']) : response()->json(['status' => 'success', 'replies' => $replies]);
+
     
     }    
 
