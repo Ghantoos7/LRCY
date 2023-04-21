@@ -25,7 +25,7 @@ export class MyPostsPage implements OnInit {
   constructor(private router: Router, private alertController: AlertController, private actionSheetController: ActionSheetController, private service: UserService) { }
 
   ngOnInit() {
-    this.service.get_own_posts('1').subscribe(response => {
+    this.service.get_own_posts('24').subscribe(response => {
       this.posts = response;
       this.posts_array = Array.from(this.posts['posts']);
       console.log(this.posts_array);
