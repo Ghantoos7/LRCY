@@ -21,16 +21,9 @@ class EventController extends Controller {
 
         $year = date('Y');
 
-        $goals = goal::select('goal_description', 'goal_name', 'program_id', 'goal_status', 'number_completed', 'number_to_complete', 'goal_year', 'event_type_id', 'goal_deadline')->where('goal_year', $year)->get();
+        $goals = goal::select('goal_description', 'goal_name', 'program_id', 'goal_status', 'number_completed', 'number_to_complete', 'goal_year', 'event_type_id', 'goal_deadline','start_date')->where('goal_year', $year)->get();
 
         $goals = $goals->groupBy('program_id')->toArray();
-
-        // add the field program_name to each goal
-        foreach ($goals as $program_id => $goalsArray) {
-            foreach ($goalsArray as $goalIndex => $goal) {
-                $goals[$program_id][$goalIndex]['program_name'] = Program::find($program_id)->program_name;
-            }
-        }
 
         return response()->json([
             'goals' => $goals,

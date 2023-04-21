@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('number_to_complete');
             $table->integer('goal_year');
             $table->integer('event_type_id');
+            $table->date('start_date');
             $table->date('goal_deadline');
             $table->string('field1')->nullable();
             $table->string('field2')->nullable();

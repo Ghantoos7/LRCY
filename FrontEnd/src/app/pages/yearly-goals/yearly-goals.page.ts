@@ -29,6 +29,36 @@ export class YearlyGoalsPage implements OnInit {
     });
   }  
 
+
+  
+  getProgramIcon(program_id: number,): string {
+    // Replace the conditions with the appropriate ones for your use case
+    if (program_id == 1) {
+      return 'heart-half-outline';
+    } 
+    else if (program_id === 2) {
+      return 'male-female-outline';
+    } 
+    else if (program_id === 3) {
+      return 'leaf-outline';
+    } 
+    else if (program_id === 4) {
+      return 'calendar-number-outline';
+    }
+    else {
+      return 'help-circle-outline'; // Default icon
+    }
+  }
+
+  isGoalComplete(goal_status : boolean): string {
+    if (goal_status == true) {
+      return 'checkmark-circle-outline';
+    } 
+    else {
+      return 'close-circle-outline';
+    }
+  }
+
   ionViewWillLeave() {
     this.menuCtrl.enable(false, 'menuGoals');
   }

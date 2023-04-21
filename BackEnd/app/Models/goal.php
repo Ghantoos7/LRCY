@@ -19,7 +19,8 @@ class goal extends Model
         'number_completed',
         'goal_year',
         'event_type_id',
-        'goal_deadline'
+        'goal_deadline',
+        'start_date',
     ];
 
 }

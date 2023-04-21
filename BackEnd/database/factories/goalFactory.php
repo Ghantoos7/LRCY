@@ -25,7 +25,8 @@ class goalFactory extends Factory
             'number_to_complete' => random_int(1,3),
             'goal_year' => random_int(2023,2030),
             'event_type_id' => random_int(1,5),
-            'goal_deadline' => fake()->date
+            'goal_deadline' => fake()->date,
+            'start_date' => fake()->date,
         ];
     }
 }

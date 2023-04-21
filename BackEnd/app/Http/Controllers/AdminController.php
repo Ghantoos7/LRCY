@@ -728,6 +728,7 @@ class AdminController extends Controller {
             'goal_year' => 'required|integer',
             'event_type_id' => 'required|integer',
             'goal_deadline' => 'required|date',
+            'start_date' => 'required|date',
         ]);
 
         // Check if the validation fails
@@ -752,6 +753,7 @@ class AdminController extends Controller {
                 'goal_year' => $request->input('goal_year'),
                 'event_type_id' => $request->input('event_type_id'),
                 'goal_deadline' => $request->input('goal_deadline'),
+                'start_date' => $request->input('start_date')
             ]);
         } catch (\Exception $e) {
             return response()->json([
@@ -780,6 +782,7 @@ class AdminController extends Controller {
                 'goal_year' => 'required|integer',
                 'event_type_id' => 'required|integer',
                 'goal_deadline' => 'required|date',
+                'start_date' => 'required|date',
             ]);
 
             // Check if the validation fails
@@ -809,7 +812,8 @@ class AdminController extends Controller {
                 'number_to_complete',
                 'goal_year',
                 'event_type_id',
-                'goal_deadline'
+                'goal_deadline',
+                'start_date',
             ];
             $goal->fill($request->only($fillableFields));
             $goal->save();
