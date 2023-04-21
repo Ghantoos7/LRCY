@@ -45,7 +45,7 @@
     color: white;
     position: relative;
     top: 20px;
-    font-size: 13px;
+    font-size: 15px;
 }
 
 .comment-count{
@@ -75,24 +75,28 @@
     top: 250px;
     left: 10px;
     width: 300px;
+    margin-bottom: 50px;
 }
 
 .profile-picture{
     width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    bottom: 100px;
 }
 
 .username{
     position:relative;
-    left: 70px;
-    bottom: 55px;
+    left: 10px;
+    bottom: 40px;
     font-size: 15px;
     color:black;
 }
 
 .delete-comment{
     position: absolute;
-    left: 200px;
-    bottom: 55px;
+    left: 320px;
+    top: 60px;
     font-size: 23px;
     color: #AAA7AE;
 }
@@ -101,7 +105,7 @@
     position:absolute;
     left: 70px;
     top: 30px;
-    font-size: 18px;
+    font-size: 15px;
     width: 250px;
     color:black;
 }
@@ -136,6 +140,7 @@
 }
 
 .view-replies-button{
+    margin-top: 20px;
     color: #AAA7AE;
 }
 

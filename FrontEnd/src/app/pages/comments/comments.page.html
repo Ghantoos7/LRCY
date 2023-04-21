@@ -2,31 +2,29 @@
 
   <div class="top-page-container">
     <ion-img class="top-box" src="assets/imgs/comments-top.png"></ion-img>
-    <ion-text class="whose-post">Georgio's Post</ion-text>
+    <ion-text class="whose-post">{{user_name}}'s Post</ion-text>
   </div>
 
   <ion-icon class="back" name="arrow-back-outline"></ion-icon>
-  <ion-img class="post-image" src="assets/imgs/post.png"></ion-img>
+  <ion-img class="post-image" src="{{post_media}}"></ion-img>
 
   <ion-card class="caption-container">
     <ion-card-content>
-      <ion-text class="caption">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
-        nostrud exercitation and big muah me love you all 
+      <ion-text class="caption">{{post_caption}} 
       </ion-text>
     </ion-card-content>
   </ion-card>
 
   <div class="comment-section-info"></div>
-  <ion-text class="comment-count">1</ion-text>
+  <ion-text class="comment-count">{{comment_count}}</ion-text>
   <ion-text class="comment-word">Comments</ion-text>
   <ion-icon class="sort" name="options-outline"></ion-icon>
 
-  <div class="comment-container">
-    <ion-img class="profile-picture" src="assets/imgs/profile-picture.png "></ion-img>
-    <ion-text class="username">Georgio Ghnatos</ion-text>
+  <div class="comment-container" *ngFor="let comment of comments">
+    <img class="profile-picture" src="{{comment['user'].user_profile_pic}}">
+    <ion-text class="username">{{comment['user'].first_name}} {{comment['user'].last_name}}</ion-text>
     <ion-icon class="delete-comment" name="trash-outline"></ion-icon>
-    <ion-text class="comment">ut labore et dolore magna aliqua</ion-text>
+    <ion-text class="comment">{{comment.comment_content}}</ion-text>
     <ion-icon class="likes" name="heart-outline"></ion-icon>
     <ion-text class="like-count">3</ion-text>
     
