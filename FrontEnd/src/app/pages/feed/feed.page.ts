@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { MenuController } from '@ionic/angular';
+import { PostService } from 'src/app/services/post.service';
 
 @Component({
   selector: 'app-feed',
@@ -19,10 +20,9 @@ export class FeedPage implements OnInit {
 
   username = localStorage.getItem('username') as string;
   user_profile_pic = localStorage.getItem('user_profile_pic') as string;
+  posts: any;
 
-  constructor(private router:Router, private alertController: AlertController, private menuCtrl: MenuController) { 
-  }
-
+  constructor(private router:Router, private alertController: AlertController, private menuCtrl: MenuController, private service:PostService) { }
 
   ionViewWillLeave() {
     this.menuCtrl.enable(false, 'menuFeed');
@@ -51,6 +51,19 @@ export class FeedPage implements OnInit {
   }
 
   ngOnInit() {
+    this.service.getPosts().subscribe((data:any) => {
+      this.posts=data['posts'];
+      console.log(this.posts);
+    }
+    );
+  }
+
+  getDaysAgo(postDate: string) {
+    const today = new Date();
+    const post = new Date(postDate);
+    const timeDiff = Math.abs(today.getTime() - post.getTime());
+    const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+    return daysDiff;
   }
 
   goToComments(){
