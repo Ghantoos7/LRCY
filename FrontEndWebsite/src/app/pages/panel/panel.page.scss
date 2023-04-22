@@ -20,14 +20,26 @@ h1{
     align-items: center;
     justify-content: center;
     height: 100%;
+    width: 80%;
+    position: absolute;
+    left: 8%;
   }
   
-  .top-card,
+  .top-card{
+    flex-basis: calc(30% - 10px); 
+    height: 200px; 
+    background-color: white;
+    border-radius: 15px;
+
+  }
+
   .bottom-card {
     flex-basis: calc(30% - 10px); 
-    background-color: #45579A; 
+    background-color: white; 
     height: 200px; 
-   
+    position: relative;
+    bottom: 220px;
+    border-radius: 15px;
   }
 
   .top-card{
@@ -66,13 +78,13 @@ h1{
   }
 
   ion-icon{
-    color: white;
+    color: #45579A;
     font-size: 50px;
   }
 
   
   h3{
-    color: #ffffff;
+    color: #45579A;
     font-family: 'Cairo', sans-serif;
     font-weight: bold;
     font-size: 18px;
