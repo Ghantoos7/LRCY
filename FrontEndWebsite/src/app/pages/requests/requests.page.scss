@@ -8,8 +8,8 @@ ion-toolbar{
 }
 
 .header-button{
-    margin-left: 20px;
-
+    --background: none;
+    --box-shadow: none;
 }
 
 .text1{
@@ -35,7 +35,6 @@ ion-item{
     height: 60px;
     --background: white;
     color: black;
-
 }
 
 .accept{
@@ -52,7 +51,7 @@ ion-item{
 
 ion-label{
     padding-left: 15px;
-    color: red;
+    color: white;
 }
 
 ion-img{
