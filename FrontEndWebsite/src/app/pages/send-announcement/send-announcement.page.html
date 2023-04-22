@@ -8,10 +8,10 @@
     </ion-header>
     <ion-content class="ion-padding"> 
       <ion-list>
-        <ion-button (click)="goToAnnouncements()">View Announcements</ion-button>
+        <ion-button class="menu-button" (click)="goToAnnouncements()">View Announcements</ion-button>
         </ion-list>
       <ion-list>
-      <ion-button (click)="closeMenu()">Add an announcement</ion-button>
+      <ion-button class="menu-button" (click)="closeMenu()">Add an announcement</ion-button>
       </ion-list>
     </ion-content>
   </ion-menu>
@@ -22,7 +22,10 @@
         <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <ion-title>Announcements</ion-title>
+        <ion-title><ion-text class="ann">Announcements</ion-text>
+          <ion-button (click)="goToPanel()" class="header-button"><ion-label>Panel</ion-label></ion-button>
+          <ion-button (click)="goToHome()" class="header-button"><ion-label>Log out</ion-label></ion-button>
+        </ion-title>
       </ion-toolbar>
     </ion-header>
   </div>
@@ -50,13 +53,13 @@
 
     <ion-segment value="default">
       <ion-segment-button value="Optional">
-        <ion-label>Optional</ion-label>
+        <ion-label class="importance">Optional</ion-label>
       </ion-segment-button>
       <ion-segment-button value="Important">
-        <ion-label>Important</ion-label>
+        <ion-label class="importance">Important</ion-label>
       </ion-segment-button>
       <ion-segment-button value="Urgent">
-        <ion-label>Urgent</ion-label>
+        <ion-label class="importance">Urgent</ion-label>
       </ion-segment-button>
     </ion-segment>
   </ion-card>

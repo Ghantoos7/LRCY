@@ -19,7 +19,7 @@ ion-item{
     color: white;
 }
 
-ion-button{
+.menu-button{
     position: relative;
     width: 100%;
     --background: #45579A;
@@ -71,16 +71,7 @@ ion-segment {
 }
 
 ion-label{
-    color: #8F8F8F;
-}
-
-ion-text{
-    font-size: 30px;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    color:#45579A;
-    top: 5%;
+    color: white;
 }
 
 .send{
@@ -90,4 +81,20 @@ ion-text{
     position: relative;
     top: 15%;
     width: 50%;
-  }
+}
+
+.ann{
+    position: relative;
+    top: 7px;
+}
+
+.header-button{
+    --background: none;
+    --box-shadow: none;
+    position: relative;
+    left: 75%;
+}
+
+.importance{
+    color: #8F8F8F;
+}
