@@ -18,7 +18,6 @@ import { SharedService } from 'src/app/services/shared.service';
 export class AchievementsPage implements OnInit {
 
   selectedUser: any;
-
   user_id: string= '';
   events_organized:any = [];
 
