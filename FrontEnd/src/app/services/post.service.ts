@@ -53,6 +53,7 @@ export class PostService {
   unlikeComment(comment_id: number, user_id: string) {
     const body = { comment_id: comment_id, user_id: this.user_id };
     const response = this.http.post(this.base_url + 'unlike_comment', body, { headers: this.getAuthHeaders() });
+    return response;
   }
   
   likeComment(comment_id: number, user_id: string) {
