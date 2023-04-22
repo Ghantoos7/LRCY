@@ -15,6 +15,7 @@
     top: 20px;
     font-size: 20px;
     color: white;
+    font-weight: bold;
 }
 
 .back{
@@ -35,9 +36,8 @@
     z-index: 1;
     top: 260px;
     right: 20px;
-    width: 395px;
+    width: 100%;
     height: 160px;
-    border-radius: 25px;
     background-color: #45579A;
 }
 
@@ -46,6 +46,7 @@
     position: relative;
     top: 20px;
     font-size: 15px;
+    font-weight: bold;
 }
 
 .comment-count{
@@ -60,74 +61,160 @@
     top: 240px;
     left: 150px;
     color: black;
+    margin-left: 5px;
 }
 
 .sort{
     position:relative;
     top: 250px;
-    left: 250px;
-    font-size: 2em;
+    margin-left: 240px;
+    font-size: 30px;
     color: black;
 }
 
 .comment-container{
     position:relative;
-    margin-top: 250px;
-    left: 10px;
-    width: 300px;
-    margin-bottom: 50px;
+    margin-top: 50px;
+    left: 1px;
+    width: 98%;
+    margin-bottom: 80px;
 
 }
+
+.comment-card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    border: 1px solid #E6E6E6;
+    margin-bottom: 10px;
+    padding: 5px;
+  }
+
 
 .profile-picture{
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    bottom: 100px;
+    margin-right: 10px;
 }
 
 .username{
     position:relative;
-    left: 10px;
-    bottom: 40px;
+    font-weight: bold;
     font-size: 15px;
     color:black;
+    left: 65px;
+    bottom: 40px;
 }
 
 .delete-comment{
     position: absolute;
-    left: 320px;
-    top: 60px;
-    font-size: 23px;
+    left: 240px;
+    top: 24px;
+    font-size: 24px;
     color: #AAA7AE;
 }
 
 .comment{
     position:absolute;
     left: 70px;
-    top: 30px;
+    top: 55px;
     font-size: 15px;
     width: 250px;
     color:black;
 }
 
-
-
 .likes{
-    font-size: 2em;
+    font-size: 28px;
     position: absolute;
-    left: 315px;
-    top: 25px;
+    left: 275px;
+    top: 23px;
     color: #AAA7AE;
 }
 
 .like-count{
-    font-size: 18px;
+    font-size: 22px;
     position: absolute;
-    left: 350px;
-    top: 30px;
+    left: 310px;
+    top: 23px;
     color: #AAA7AE;
 }
+
+.input {
+    width: 310px;
+    left: 5px;
+    border-radius: 20px;
+    --color: #8F8F8F;
+    --padding-end: 45px;
+    --padding-start: 20px;
+    --placeholder-color: #8F8F8F;
+    --placeholder-opacity: 0.8;
+    background-color: #F1F1F1;
+    margin-top: 40px;
+}
+
+.comment-profile{
+    position: relative;
+    width: 38px;
+    height: 38px;
+    left: 5px;
+    border-radius: 50%;
+}
+
+
+.send-icon{
+    position: relative;
+    left: 330px;
+    font-size: 20px;
+    color: white;
+    z-index: 1;
+    top: -32px;
+}
+
+.reply-container {
+    position: relative;
+    height: auto;
+    max-height: 200px;
+    overflow-y: auto;
+    padding-bottom: 10px; /* Add padding at the bottom for spacing */
+  }
+  
+
+.reply-profile-picture{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    bottom: 40px;
+}
+
+.reply-username{
+    position:relative;
+    left: 4px;
+    bottom: 15px;
+    font-size: 15px;
+    color:black;
+    font-weight: bold;
+}
+
+.reply-comment{
+    position:absolute;
+    left: 45px;
+    bottom: -7px;
+    font-size: 16px;
+    width: 250px;
+    color:black;
+}
+
+.reply-container .reply-comment {
+    margin-bottom: 10px; /* Add margin between each comment for spacing */
+}
+
+.replies-container {
+    margin-top: 10px;
+    padding-left: 10px;
+}
+
+////////////////////////////
 
 .accordition{
     position: absolute;
@@ -148,64 +235,6 @@
     margin-bottom: 20px;
 }
 
-.reply-container{
-    position:relative;
-    height: auto;
-    margin-top: 10px;
-}
-
-.reply-profile-picture{
-    width: 40px;
-    bottom: 60px;
-}
-
-.reply-username{
-    position:relative;
-    left: 46px;
-    bottom: 40px;
-    font-size: 12px;
-    color:black;
-}
-
-.reply-comment{
-    position:absolute;
-    left: 45px;
-    top: 20px;
-    font-size: 16px;
-    width: 250px;
-    color:black;
-}
-
-.input {
-    margin-top: 25px;;
-    width: 300px;
-    left: 5px;
-    border-radius: 10px;
-    --background: #E9E7E7;
-    --color: #8F8F8F;
-    --padding-end: 45px;
-    --padding-start: 20px;
-    --placeholder-color: #8F8F8F;
-    --placeholder-opacity: 0.8;
-}
-
-.send-icon{
-    position: relative;
-    left: 330px;
-    font-size: 20px;
-    color: white;
-    z-index: 1;
-    top: -35px;
-}
-
-.comment-profile{
-    position: relative;
-    width: 50px;
-    height: 50px;
-    left: 8px;
-    border-radius: 50% !important;
-}
-
 ion-item{
     --background: transparent;
     --inner-padding-end: 0;
@@ -217,16 +246,7 @@ ion-item{
 }
 .likes.active {
     color: #B11433;
-  }
+}
   
-  .reply-container {
-    position: relative;
-    height: auto;
-    max-height: 200px;
-    overflow-y: auto;
-    padding-bottom: 10px; /* Add padding at the bottom for spacing */
-  }
+
   
-  .reply-container .reply-comment {
-    margin-bottom: 10px; /* Add margin between each comment for spacing */
-  }

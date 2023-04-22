@@ -1,5 +1,4 @@
 <ion-content class="whitebackground">
-
   <div class="top-page-container">
     <ion-img class="top-box" src="assets/imgs/comments-top.png"></ion-img>
     <ion-text class="whose-post">{{user_name}}'s Post</ion-text>
@@ -10,49 +9,39 @@
 
   <ion-card class="caption-container">
     <ion-card-content>
-      <ion-text class="caption">{{post_caption}} 
-      </ion-text>
-      <ion-input [(ngModel)]="comment_content" class="input"  placeholder="Add comment...">
-        <ion-img class="comment-profile" src="{{user_profile_pic}}"></ion-img>
-       
+      <ion-text class="caption">{{post_caption}}</ion-text>
+      <ion-input [(ngModel)]="comment_content" class="input" placeholder="Add comment...">
+        <img class="comment-profile" src="{{user_profile_pic}}">
       </ion-input>
       <ion-icon (click)="sendComment()" class="send-icon" name="send"></ion-icon>
     </ion-card-content>
   </ion-card>
 
-  <div class="comment-section-info"></div>
   <ion-text class="comment-count">{{comment_count}}</ion-text>
   <ion-text class="comment-word">Comments</ion-text>
-  <ion-icon (click)="openAlert()" id="sort" class="sort" name="options-outline" ></ion-icon>
+  <ion-icon (click)="openAlert()" id="sort" class="sort" name="options-outline"></ion-icon>
 
+  <div class="comment-container" *ngFor="let comment of comments; let i = index">
+    <ion-card class="comment-card">
+      <img class="profile-picture" src="{{comment['user'].user_profile_pic}}">
+      <ion-text class="username">{{comment['user'].first_name}} {{comment['user'].last_name}}</ion-text>
+      <ion-icon (click)="deleteComment(comment.id)" *ngIf="current_id == comment['user'].id" class="delete-comment" name="trash-outline"></ion-icon>
+      <ion-text class="comment">{{comment.comment_content}}</ion-text>
+      <ion-icon [class.active]="isLiked[comment.id]" name="{{ isLiked[comment.id] ? 'heart' : 'heart-outline' }}" (click)="toggleLike(comment.id)" class="likes"></ion-icon>
+      <ion-text class="like-count">{{comment.comment_like_count}}</ion-text>
 
-  <div class="comment-container" *ngFor="let comment of comments">
-    <img class="profile-picture" src="{{comment['user'].user_profile_pic}}">
-    <ion-text class="username">{{comment['user'].first_name}} {{comment['user'].last_name}}</ion-text>
-    <ion-icon (click)="deleteComment(comment.id)" *ngIf ="current_id == comment['user'].id"class="delete-comment" name="trash-outline"></ion-icon>
-    <ion-text class="comment">{{comment.comment_content}}</ion-text>
-    <ion-icon [class.active]="isLiked[comment.id]" name="{{ isLiked[comment.id] ? 'heart' : 'heart-outline' }}" (click)="toggleLike(comment.id)" class="likes"></ion-icon>
-    <ion-text class="like-count">{{comment.comment_like_count}}</ion-text>
-    
-    <ion-accordion-group (click)="openReplies(comment.id)">
-      <ion-accordion class="accordition" value="first">
-        <ion-item class="accordition-box" slot="header">
-          <ion-label class="view-replies-button">View Replies</ion-label>
-        </ion-item>
+      <ion-item class="accordion-header" (click)="openReplies(comment.id)">
+        <ion-icon slot="end" [name]="repliesOpen[comment.id] ? 'chevron-down-outline' : 'chevron-forward-outline'"></ion-icon>
+        <ion-label>View Replies</ion-label>
+      </ion-item>
 
-        <div slot="content" class="reply-container">
-          <div class="reply-container" *ngFor="let reply of replies">
-            <ion-img class="reply-profile-picture" src="{{reply['user'].user_profile_pic}}"></ion-img>
-            <ion-text class="reply-username">{{reply['user'].first_name}} {{reply['user'].last_name}}</ion-text>
-            <ion-text class="reply-comment">{{reply.reply_content}}</ion-text>
-          </div>          
-        </div>
-        
-      </ion-accordion>
-    </ion-accordion-group>
-   
+      <ion-card-content class="replies-container" *ngIf="repliesOpen[comment.id]">
+        <div class="reply-container" *ngFor="let reply of replies">
+          <img class="reply-profile-picture" src="{{reply['user'].user_profile_pic}}">
+          <ion-text class="reply-username">{{reply['user'].first_name}} {{reply['user'].last_name}}</ion-text>
+          <ion-text class="reply-comment">{{reply.reply_content}}</ion-text>
+        </div>          
+      </ion-card-content>
+    </ion-card>
   </div>
-
- 
-
 </ion-content>

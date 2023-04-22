@@ -28,8 +28,7 @@ export class CommentsPage implements OnInit {
   post_id: number = 0;
   isLiked: {[key: number]: boolean} = {};
   comment_likes: any;
-  selectedOption: string = '';
-  showOptions: boolean = false;
+  repliesOpen: {[key: number]: boolean} = {};
   replies: any = [];
   constructor(private alrt:AlertController, private router:Router, private postService:PostService, private alertController:AlertController) { }
  
@@ -143,8 +142,7 @@ export class CommentsPage implements OnInit {
     this.postService.getReplies(comment_id).subscribe((data: any) => {
       this.replies = data['replies'];
     });
-  
-    
+    this.repliesOpen[comment_id] = !this.repliesOpen[comment_id];
   }
 
   unlikeComment(comment_id: number) {
