@@ -31,7 +31,7 @@ export class CommentsPage implements OnInit {
   selectedOption: string = '';
   showOptions: boolean = false;
   replies: any = [];
-  constructor(private alrt:AlertController, private router:Router, private postService:PostService) { }
+  constructor(private alrt:AlertController, private router:Router, private postService:PostService, private alertController:AlertController) { }
  
 
 
@@ -182,26 +182,36 @@ export class CommentsPage implements OnInit {
   }
 
   deleteComment(comm_id: number){
-    this.postService.deleteComment(comm_id, this.current_id).subscribe(response=>{
-      const str = JSON.stringify(response);
-      const result = JSON.parse(str);
-      const status = result['status'];
-       if(status == "success"){
-        this.alrt.create({
-          message: 'Your comment was deleted!',
-          buttons: ['OK']
-        }).then(alrt => alrt.present());
-        window.location.reload();
-      }
-    else if (status == "error"){
-      this.alrt.create({
-        message: 'Something went wrong. Please try again.',
-        buttons: ['OK']
-      }).then(alrt => alrt.present());
-      }
-    });
-    
+    this.alertController.create({
+      header: 'Confirm',
+      message: 'Are you sure you want to delete this comment?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        },
+        {
+          text: 'Delete',
+          handler: () => {
+            this.postService.deleteComment(comm_id, this.current_id).subscribe(response=>{
+              const str = JSON.stringify(response);
+              const result = JSON.parse(str);
+              const status = result['status'];
+              if(status == "success"){
+                window.location.reload();
+              } else if (status == "error"){
+                this.alrt.create({
+                  message: 'Something went wrong. Please try again.',
+                  buttons: ['OK']
+                }).then(alrt => alrt.present());
+              }
+            });
+          }
+        }
+      ]
+    }).then(alert => alert.present());
   }
+
 
   goBack(){
     this.router.navigate(['/feed']);

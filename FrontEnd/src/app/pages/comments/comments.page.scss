@@ -36,7 +36,7 @@
     top: 260px;
     right: 20px;
     width: 395px;
-    height: 140px;
+    height: 160px;
     border-radius: 25px;
     background-color: #45579A;
 }
@@ -190,12 +190,12 @@
 }
 
 .send-icon{
-    position: absolute;
-    left: 350px;
+    position: relative;
+    left: 330px;
     font-size: 20px;
     color: white;
     z-index: 1;
-    top: 80px;
+    top: -35px;
 }
 
 .comment-profile{
