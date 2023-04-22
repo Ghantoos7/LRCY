@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-requests',
@@ -14,7 +14,7 @@ import { AlertController } from '@ionic/angular';
 })
 export class RequestsPage implements OnInit {
 
-  constructor(private alertController: AlertController) { }
+  constructor(private alertController: AlertController, private router:Router) { }
 
   ngOnInit() {
   }
@@ -35,6 +35,12 @@ export class RequestsPage implements OnInit {
     });
     await alert.present();
   }
-  
 
+  goToHome(){
+    this.router.navigate(['/home']);
+  }
+
+  goToPanel(){
+    this.router.navigate(['/panel']);
+  }
 }

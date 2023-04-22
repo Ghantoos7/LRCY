@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-panel',
   templateUrl: './panel.page.html',
@@ -36,6 +37,7 @@ export class PanelPage implements OnInit {
   goToYearlyGoals(){
     this.router.navigate(['/yearly-goals']);
   }
+  
   goToHome(){
     this.router.navigate(['/home']);
   }
