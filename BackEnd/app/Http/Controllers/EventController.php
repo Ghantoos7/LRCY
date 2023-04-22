@@ -101,7 +101,7 @@ class EventController extends Controller {
     
             if ($announcer){
                 $announcementArray['announcer_name'] = $announcer->first_name . ' ' . $announcer->last_name;
-                $announcementArray['announcer_profile_picture'] = $announcer->profile_picture;
+                $announcementArray['announcer_profile_picture'] = $announcer->user_profile_pic;
                 $announcementArray['branch_id'] = $announcer->branch_id;
             }
             // Remove unnecessary fields from the announcement
