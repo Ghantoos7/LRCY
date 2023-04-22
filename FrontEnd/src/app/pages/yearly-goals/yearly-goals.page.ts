@@ -49,6 +49,22 @@ export class YearlyGoalsPage implements OnInit {
     }
   }
 
+  getEventIcon(event_id: number,): string {
+    // Replace the conditions with the appropriate ones for your use case
+    if (event_id == 1) {
+      return 'calendar-number-outline';
+    } else if (event_id === 2) {
+      return 'barbell-outline';
+    } else if (event_id === 3) {
+      return 'ellipsis-horizontal-outline';
+    } else {
+      return 'help-circle-outline'; // Default icon
+    }
+  }
+
+
+  
+
   isGoalComplete(goal_status : boolean): string {
     if (goal_status == true) {
       return 'checkmark-circle-outline';
