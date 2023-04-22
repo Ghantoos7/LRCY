@@ -128,8 +128,8 @@ export class MyPostsPage implements OnInit {
   }
 
 
-  goToComments(){
-    this.router.navigate(['/comments']);
+  goToComments(post_id: string){
+    this.router.navigate(["/comments"], {state: { p_id : post_id }});
   }
   }
 

@@ -23,6 +23,9 @@ ion-tab-button.tab-selected ion-icon{
     --background-color: #45579A;
   }
 
+
+
+
   .bio-space {
     margin-bottom: 10px; 
   }
@@ -102,6 +105,9 @@ ion-tab-button.tab-selected ion-icon{
 }
 
 
+
+
+
 ion-header{
     background-color: #45579A;
     height: 25%;
@@ -166,7 +172,8 @@ ion-card-content {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100vh; /* Set the height of the avatar container to fill the viewport */
+    height: 100vh; 
+ 
   }
 
   ion-avatar{
@@ -176,6 +183,8 @@ ion-card-content {
 
   .menu{
     --ion-background-color: #45579A;
+    position: fixed;
+  z-index: 10; /* Added z-index to place the menu content above other elements */
   }
 
   ion-label{
