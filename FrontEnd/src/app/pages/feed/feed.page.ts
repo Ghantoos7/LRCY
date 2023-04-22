@@ -26,7 +26,7 @@ export class FeedPage implements OnInit {
   isLiked: {[key: number]: boolean} = {};
   post_id: number=0;
   comment_content: string='';
-
+  user: any;
 
   constructor(private router:Router, private alertController: AlertController, private menuCtrl: MenuController, private service:PostService) { }
 
@@ -39,22 +39,21 @@ export class FeedPage implements OnInit {
   }
 
   async showProfile(index: number) {
+    const user = this.posts[index]['user'];
     const alert = await this.alertController.create({
-      header: this.posts[index]['user'].name+' | '+this.posts[index]['user'].user_position,
-      message: this.posts[index]['user'].user_bio,
+      header: user.name + ' | ' + user.user_position,
+      message: user.user_bio,
       cssClass: 'my-custom-class',
       buttons: [{
         text: 'View Profile',
         cssClass: 'custom-alert-button',
         handler: () => {
-          this.router.navigate(['/others-profile']); 
+          this.router.navigate(['/others-profile'], { state: { user } }); // pass the user object as state to others-profile page
         }
       }]
     });
-  
-
     await alert.present();
-  }
+  }  
 
   ngOnInit() {
     this.service.getPosts().subscribe((data: any) => {

@@ -112,7 +112,7 @@ ion-content{
 
 .details{
     width: 100%;
-   
+   margin-top: -40px;
 }
 .special-col{
     margin-left: 40px;
@@ -187,4 +187,11 @@ ion-card-content {
   
   
   
-
+  .custom-container {
+    margin-top: -20px;
+    height: 200px;
+  }
+  
+  .bio-space {
+    margin-bottom: 10px; 
+  }
