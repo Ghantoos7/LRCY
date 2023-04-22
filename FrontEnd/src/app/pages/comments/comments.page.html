@@ -30,7 +30,7 @@
     <ion-text class="username">{{comment['user'].first_name}} {{comment['user'].last_name}}</ion-text>
     <ion-icon (click)="deleteComment(comment.id)" *ngIf ="current_id == comment['user'].id"class="delete-comment" name="trash-outline"></ion-icon>
     <ion-text class="comment">{{comment.comment_content}}</ion-text>
-    <ion-icon class="likes" name="heart-outline"></ion-icon>
+    <ion-icon [class.active]="isLiked[comment.id]" name="{{ isLiked[comment.id] ? 'heart' : 'heart-outline' }}" (click)="toggleLike(comment.id)" class="likes"></ion-icon>
     <ion-text class="like-count">{{comment.comment_like_count}}</ion-text>
     
     <ion-accordion-group>

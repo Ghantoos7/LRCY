@@ -26,6 +26,8 @@ export class CommentsPage implements OnInit {
   current_id = localStorage.getItem('userId') as string;
   comment_content: string ='';
   post_id: number = 0;
+  isLiked: {[key: number]: boolean} = {};
+  comment_likes: any;
   constructor(private alrt:AlertController, private router:Router, private postService:PostService) { }
 
   ngOnInit() {
@@ -33,6 +35,8 @@ export class CommentsPage implements OnInit {
     const post_id = JSON.stringify(data);
     const id = JSON.parse(post_id)["p_id"];
     this.post_id = id;
+    
+
     this.postService.getPost(id).subscribe((data: any) => {
       this.user_name = data['post'].user_name;
       this.post_media = data['post'].post_media;
@@ -43,9 +47,43 @@ export class CommentsPage implements OnInit {
 
     this.postService.getComments(id).subscribe((data: any) => {
       this.comments = data['comments'];
+      for (let i = 0; i < this.comments.length; i++) {
+        const commentId = this.comments[i].id;
+        this.isLiked[commentId] = localStorage.getItem(`comment_like_${commentId}`) === 'true'; // retrieve the like state from Local Storage
+      
+      }
+     
+  
     });
+    
+  
   }
 
+ 
+  toggleLike(comment_id: number) {
+    if (this.isLiked[comment_id]) {
+    this.unlikeComment(comment_id);
+    } else {
+    this.likeComment(comment_id);
+    }
+  }
+    
+  likeComment(comment_id: number) {
+    this.postService.likeComment(comment_id, this.current_id).subscribe((data: any) => {
+      localStorage.setItem(`comment_like_${comment_id}`, 'true'); // store the like state in Local Storage
+      this.isLiked[comment_id] = true;
+      console.log(this.isLiked);
+    });
+   
+  }
+
+  unlikeComment(comment_id: number) {
+    this.postService.unlikeComment(comment_id, this.current_id).subscribe((data: any) => {
+      localStorage.setItem(`comment_like_${comment_id}`, 'false'); // store the like state in Local Storage
+      this.isLiked[comment_id] = false;
+    });
+   
+  }
 
   
   async sendComment(){

@@ -140,10 +140,11 @@ export class FeedPage implements OnInit {
     
   likePost(post_id: number) {
     this.service.likePost(post_id).subscribe((data: any) => {
-      console.log(data);
       localStorage.setItem(`post_${post_id}`, 'true'); // store the like state in Local Storage
       this.isLiked[post_id] = true;
+      window.location.reload();
     });
+   
   }
   
   unlikePost(post_id: number) {
@@ -151,7 +152,9 @@ export class FeedPage implements OnInit {
       console.log(data);
       localStorage.setItem(`post_${post_id}`, 'false'); // store the like state in Local Storage
       this.isLiked[post_id] = false;
+      window.location.reload();
     });
+   
   }
 
 }

@@ -70,6 +70,31 @@ export class PostService {
     return response;
   }
 
+  unlikeComment(comment_id: number, user_id:string){
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    const options = { headers: headers };
+
+    const body = {
+      comment_id: comment_id,
+      user_id: this.user_id
+    };
+
+    const response = this.http.post(this.base_url + 'unlike_comment', body, options);
+    return response;
+  }
+
+  likeComment(comment_id: number, user_id:string){
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    const options = { headers: headers };
+
+    const body = {
+      comment_id: comment_id,
+      user_id: this.user_id
+    };
+
+    const response = this.http.post(this.base_url + 'like_comment', body, options);
+    return response;
+  }
 
 
   getPost(post_id: number){
