@@ -107,6 +107,8 @@ export class PostService {
     return response;
   }
 
+
+
   getSortedComments(post_id: number, sort_by:string){
     const response = this.http.get(this.base_url + 'get_comments/' + post_id + "/" + sort_by);
     return response;

@@ -30,7 +30,7 @@ export class CommentsPage implements OnInit {
   comment_likes: any;
   selectedOption: string = '';
 showOptions: boolean = false;
-
+replies: any = [];
   constructor(private alrt:AlertController, private router:Router, private postService:PostService) { }
  
 
@@ -139,6 +139,14 @@ showOptions: boolean = false;
     });
     window.location.reload();
    
+  }
+
+  openReplies(comment_id: number){
+    this.postService.getReplies(comment_id).subscribe((data: any) => {
+      this.replies = data['replies'];
+    });
+  
+    
   }
 
   unlikeComment(comment_id: number) {

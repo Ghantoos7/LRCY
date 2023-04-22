@@ -72,10 +72,11 @@
 
 .comment-container{
     position:relative;
-    top: 250px;
+    margin-top: 250px;
     left: 10px;
     width: 300px;
     margin-bottom: 50px;
+
 }
 
 .profile-picture{
@@ -144,11 +145,13 @@
 .view-replies-button{
     margin-top: 20px;
     color: #AAA7AE;
+    margin-bottom: 20px;
 }
 
 .reply-container{
     position:relative;
     height: auto;
+    margin-top: 10px;
 }
 
 .reply-profile-picture{
@@ -216,3 +219,14 @@ ion-item{
     color: #B11433;
   }
   
+  .reply-container {
+    position: relative;
+    height: auto;
+    max-height: 200px;
+    overflow-y: auto;
+    padding-bottom: 10px; /* Add padding at the bottom for spacing */
+  }
+  
+  .reply-container .reply-comment {
+    margin-bottom: 10px; /* Add margin between each comment for spacing */
+  }
