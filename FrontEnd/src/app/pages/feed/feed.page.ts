@@ -20,10 +20,13 @@ export class FeedPage implements OnInit {
 
   username = localStorage.getItem('username') as string;
   user_profile_pic = localStorage.getItem('user_profile_pic') as string;
+  user_id = localStorage.getItem('userId') as string;
   posts: any;
   index: number=0;
   isLiked: {[key: number]: boolean} = {};
   post_id: number=0;
+  comment_content: string='';
+
 
   constructor(private router:Router, private alertController: AlertController, private menuCtrl: MenuController, private service:PostService) { }
 
@@ -71,8 +74,8 @@ export class FeedPage implements OnInit {
     return daysDiff;
   }
 
-  goToComments(){
-    this.router.navigate(['/comments']);
+  goToComments(post_id: string){
+    this.router.navigate(["/comments"], {state: { p_id : post_id }});
   }
 
   goToPostForm(){
@@ -105,6 +108,28 @@ export class FeedPage implements OnInit {
   
   }
 
+  async sendComment(p_id: number){
+    this.service.commentPost(p_id, this.user_id, this.comment_content).subscribe(response=>{
+      const str = JSON.stringify(response);
+      const result = JSON.parse(str);
+      const status = result['status'];
+       if(status == "success"){
+        this.alertController.create({
+          message: 'Your comment was added!',
+          buttons: ['OK']
+        }).then(alert => alert.present());
+        window.location.reload();
+      }
+    else if (status == "error"){
+      this.alertController.create({
+        message: 'Something went wrong.',
+        buttons: ['OK']
+      }).then(alert => alert.present());
+      }
+    });
+    
+   
+  }
   toggleLike(post_id: number) {
     if (this.isLiked[post_id]) {
     this.unlikePost(post_id);

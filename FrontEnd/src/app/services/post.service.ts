@@ -42,6 +42,22 @@ export class PostService {
     return response;
   }
 
+  
+ commentPost(post_id: number, user_id:string, comment_content:string){
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    const options = { headers: headers };
+
+    const body = {
+      post_id: post_id,
+      user_id: this.user_id,
+      comment_content: comment_content
+    };
+
+    const response = this.http.post(this.base_url + 'comment_post', body, options);
+    return response;
+  }
+
+
   getPost(post_id: number){
     const response = this.http.get(this.base_url + 'get_post/' + post_id);
     return response;

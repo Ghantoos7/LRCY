@@ -110,6 +110,8 @@
     color:black;
 }
 
+
+
 .likes{
     font-size: 2em;
     position: absolute;
@@ -172,11 +174,9 @@
 }
 
 .input {
-    position: fixed;
-    top: 780px;
+    margin-top: 25px;;
     width: 300px;
-    height: 50px;
-    left: 45px;
+    left: 5px;
     border-radius: 10px;
     --background: #E9E7E7;
     --color: #8F8F8F;
@@ -188,15 +188,19 @@
 
 .send-icon{
     position: absolute;
-    left: 270px;
+    left: 350px;
     font-size: 20px;
-    color: #45579A;
+    color: white;
+    z-index: 1;
+    top: 80px;
 }
 
 .comment-profile{
     position: relative;
-    width: 35px;
+    width: 50px;
+    height: 50px;
     left: 8px;
+    border-radius: 50% !important;
 }
 
 ion-item{

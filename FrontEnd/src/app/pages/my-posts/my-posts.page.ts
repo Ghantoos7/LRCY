@@ -33,6 +33,8 @@ export class MyPostsPage implements OnInit {
   ngOnInit() {
     this.service.get_own_posts(this.id).subscribe(response => {
       this.posts = response;
+      console.log(this.posts);
+      console.log(this.id);
       this.posts_array = Array.from(this.posts['posts']);
       for (let i = 0; i < this.posts.length; i++) {
         const postId = this.posts[i].id;
