@@ -41,8 +41,10 @@
         <ion-card-title class="title">{{goal.goal_name}}
           <ion-icon class="icon" size="large" [name]="isGoalComplete(goal.goal_status)"></ion-icon>
         </ion-card-title>
+        <div>
           <ion-icon class="icon" size="large" [name]="getProgramIcon(goal.program_id)"></ion-icon>
-          
+          <ion-icon class="icon" size="large" [name]="getEventIcon(goal.event_type_id)"></ion-icon>
+        </div>
       </ion-card-header>
 
       <ion-card-content>
