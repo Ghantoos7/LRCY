@@ -34,17 +34,17 @@
     <ion-icon [class.active]="isLiked[comment.id]" name="{{ isLiked[comment.id] ? 'heart' : 'heart-outline' }}" (click)="toggleLike(comment.id)" class="likes"></ion-icon>
     <ion-text class="like-count">{{comment.comment_like_count}}</ion-text>
     
-    <ion-accordion-group>
+    <ion-accordion-group (click)="openReplies(comment.id)">
       <ion-accordion class="accordition" value="first">
         <ion-item class="accordition-box" slot="header">
           <ion-label class="view-replies-button">View Replies</ion-label>
         </ion-item>
 
-        <div slot="content">
-          <div class="reply-container">
-            <ion-img class="reply-profile-picture" src="assets/imgs/EddyAtallah.png "></ion-img>
-            <ion-text class="reply-username">Eddy Abdallah</ion-text>
-            <ion-text class="reply-comment">consectetur adipiscing elit, sed do eiusmod tempor incididunt</ion-text>
+        <div slot="content" class="reply-container">
+          <div class="reply-container" *ngFor="let reply of replies">
+            <ion-img class="reply-profile-picture" src="{{reply['user'].user_profile_pic}}"></ion-img>
+            <ion-text class="reply-username">{{reply['user'].first_name}} {{reply['user'].last_name}}</ion-text>
+            <ion-text class="reply-comment">{{reply.reply_content}}</ion-text>
           </div>          
         </div>
         

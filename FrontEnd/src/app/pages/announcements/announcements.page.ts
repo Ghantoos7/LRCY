@@ -5,6 +5,8 @@ import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { EventService } from 'src/app/services/event.service';
+import { UserService } from 'src/app/services/user.service';
+
 
 @Component({
   selector: 'app-announcements',
@@ -20,7 +22,8 @@ export class AnnouncementsPage implements OnInit {
   username = localStorage.getItem('username') as string;
   user_profile_pic = localStorage.getItem('user_profile_pic') as string;
   
-  constructor(private router:Router, private menuCtrl: MenuController, private service:EventService) { 
+  
+  constructor(private router:Router, private menuCtrl: MenuController, private service:EventService, private userservice:UserService) { 
     this.showDescriptions = new Array(this.announcements.length).fill(false);
   }
 
@@ -28,7 +31,8 @@ export class AnnouncementsPage implements OnInit {
     this.service.getAnnouncements('502').subscribe((response: any) => {
       this.announcements = response['announcements'];
       this.announcements = Array.from(this.announcements);
-      console.log(this.announcements);
+
+
 
     });
   }
@@ -64,9 +68,13 @@ export class AnnouncementsPage implements OnInit {
       toggleDarkMode(){
     
       }
-      logout(){
-      
+      logout() {
+        this.userservice.logout().subscribe((data: any) => {
+          localStorage.clear();
+          this.router.navigate(['/sign-in']);
+        });
       }
+    
 
   
   toggleDescription(index: number) {

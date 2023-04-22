@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { MenuController } from '@ionic/angular';
 import { PostService } from 'src/app/services/post.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-feed',
@@ -28,7 +29,7 @@ export class FeedPage implements OnInit {
   comment_content: string='';
 
 
-  constructor(private router:Router, private alertController: AlertController, private menuCtrl: MenuController, private service:PostService) { }
+  constructor(private router:Router, private alertController: AlertController, private menuCtrl: MenuController, private service:PostService, private userservice:UserService) { }
 
   ionViewWillLeave() {
     this.menuCtrl.enable(false, 'menuFeed');
@@ -104,8 +105,11 @@ export class FeedPage implements OnInit {
   toggleDarkMode(){
 
   }
-  logout(){
-  
+  logout() {
+    this.userservice.logout().subscribe((data: any) => {
+      localStorage.clear();
+      this.router.navigate(['/sign-in']);
+    });
   }
 
   async sendComment(p_id: number){

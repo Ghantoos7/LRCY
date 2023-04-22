@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { Route, Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-profile',
@@ -14,7 +15,7 @@ import { MenuController } from '@ionic/angular';
 })
 export class ProfilePage implements OnInit {
 
-  constructor(private router:Router, private menuCtrl: MenuController) { }
+  constructor(private router:Router, private menuCtrl: MenuController, private service: UserService) { }
 
   ngOnInit() {
   }
@@ -54,8 +55,11 @@ this.router.navigate(['edit-profile']);
       toggleDarkMode(){
     
       }
-      logout(){
-      
+      logout() {
+        this.service.logout().subscribe((data: any) => {
+          localStorage.clear();
+          this.router.navigate(['/sign-in']);
+        });
       }
 
 }

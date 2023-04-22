@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { Route, Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { EventService } from 'src/app/services/event.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-yearly-goals',
@@ -19,7 +20,7 @@ export class YearlyGoalsPage implements OnInit {
   username = localStorage.getItem('username') as string;
   user_profile_pic = localStorage.getItem('user_profile_pic') as string;
 
-  constructor(private router:Router, private menuCtrl: MenuController, private service:EventService) { }
+  constructor(private router:Router, private menuCtrl: MenuController, private service:EventService, private userservice: UserService) { }
 
   ngOnInit() {
     this.service.getYearlyGoals('502').subscribe((response: any) => {
@@ -105,8 +106,11 @@ export class YearlyGoalsPage implements OnInit {
       toggleDarkMode(){
     
       }
-      logout(){
-      
+      logout() {
+        this.userservice.logout().subscribe((data: any) => {
+          localStorage.clear();
+          this.router.navigate(['/sign-in']);
+        });
       }
 
  

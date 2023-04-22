@@ -78,8 +78,10 @@ this.router.navigate(['edit-profile']);
       toggleDarkMode(){
     
       }
-      logout(){
-      
+      logout() {
+        this.service.logout().subscribe((data: any) => {
+          localStorage.clear();
+          this.router.navigate(['/sign-in']);
+        });
       }
-
 }

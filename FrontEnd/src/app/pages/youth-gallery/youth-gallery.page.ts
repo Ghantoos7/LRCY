@@ -9,6 +9,7 @@ import { NavController } from '@ionic/angular';
 import { EventPicturesPage } from '../event-pictures/event-pictures.page'; 
 import { EventInformationPage } from '../event-information/event-information.page'; 
 import { SharedService } from '../../services/shared.service';
+import { UserService } from 'src/app/services/user.service';
 
 
 @Component({
@@ -23,7 +24,7 @@ export class YouthGalleryPage implements OnInit {
   username = localStorage.getItem('username') as string;
   user_profile_pic: string = localStorage.getItem('user_profile_pic') as string;
 
-  constructor(private sharedService: SharedService, private navCtrl: NavController, private event_service:EventService, private router:Router, private menuCtrl: MenuController) { }
+  constructor(private sharedService: SharedService, private navCtrl: NavController, private event_service:EventService, private router:Router, private menuCtrl: MenuController, private userservice: UserService) { }
   youth_events: any = [];
   events: any = [];
   showActivities: boolean = true;
@@ -104,7 +105,10 @@ this.router.navigate(['/profile']);
   toggleDarkMode(){
 
   }
-  logout(){
-  
+  logout() {
+    this.userservice.logout().subscribe((data: any) => {
+      localStorage.clear();
+      this.router.navigate(['/sign-in']);
+    });
   }
 }
