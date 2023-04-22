@@ -28,7 +28,14 @@ export class EditGoalPage implements OnInit {
 
   goToAddGoal(){
     this.router.navigate(['/add-goal']);
+  }
 
+  goToHome(){
+    this.router.navigate(['/home']);
+  }
+
+  goToPanel(){
+    this.router.navigate(['/panel']);
   }
 
 }

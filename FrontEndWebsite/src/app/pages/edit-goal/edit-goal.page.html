@@ -8,10 +8,10 @@
     </ion-header>
     <ion-content class="ion-padding"> 
       <ion-list>
-        <ion-button (click) ="goToGoals()">View Goals</ion-button>
+        <ion-button class="menu-button" (click) ="goToGoals()">View Goals</ion-button>
         </ion-list>
       <ion-list>
-      <ion-button (click) ="goToAddGoal()">Add a goal</ion-button>
+      <ion-button class="menu-button" (click) ="goToAddGoal()">Add a goal</ion-button>
       </ion-list>
     </ion-content>
   </ion-menu>
@@ -22,12 +22,15 @@
         <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <ion-title>Yearly Goals</ion-title>
+        <ion-title><ion-text class="ann">Yearly Goals</ion-text>
+          <ion-button (click)="goToPanel()" class="header-button"><ion-label>Panel</ion-label></ion-button>
+          <ion-button (click)="goToHome()" class="header-button"><ion-label>Log out</ion-label></ion-button>
+        </ion-title>
       </ion-toolbar>
     </ion-header>
   </div>
 
-  <ion-text>Editing Jbail Reforestation</ion-text>
+  <ion-text class="text">Editing yearly goal</ion-text>
 
   <ion-card>
     <ion-card-header>
@@ -62,7 +65,7 @@
     <ion-range aria-label="Range with pin" [pin]="true" [pinFormatter]="pinFormatter"></ion-range>
   </ion-card>
 
-  <ion-button class="send" shape="round" expand="block" size="large">Update</ion-button>
+  <ion-button class="send" shape="round" expand="block" size="large">Update Goal</ion-button>
   <ion-img src="assets/imgs/ann-design.png"></ion-img>
 
 
