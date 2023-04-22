@@ -11,8 +11,8 @@ h1{
     color: #ffffff;
     font-family: 'Cairo', sans-serif;
     font-weight: bold;
-    font-size: 30px;
-    margin-top: 20px;
+    font-size: 50px;
+    margin-top: 100px;
 }
 .card-container {
     display: flex;
@@ -23,6 +23,7 @@ h1{
     width: 80%;
     position: absolute;
     left: 8%;
+    top: 20%;
   }
   
   .top-card{
@@ -54,9 +55,7 @@ h1{
   ion-fab-button{
     --background: #45579A;
   }
-  
-
-  
+ 
   ion-card {
     width: 50% !important; 
     position: relative;
@@ -88,4 +87,19 @@ h1{
     font-family: 'Cairo', sans-serif;
     font-weight: bold;
     font-size: 18px;
+  }
+
+  .dark-mode{
+    color: #45579A;
+  }
+
+  .logout{
+    color: #45579A;
+  }
+
+  ion-fab-button{
+    --background: white;
+    margin-top: 20px;
+    position: relative;
+    bottom: 20px;
   }
