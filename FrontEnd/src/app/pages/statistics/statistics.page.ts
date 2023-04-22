@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { Route, Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -13,83 +12,84 @@ import { HttpClientModule } from '@angular/common/http';
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule, HttpClientModule]
 })
-
 export class StatisticsPage implements OnInit {
 
-  
+  user: any;
 
-  training_count:any = [];
-  total_trainings_completed_count:string = '';
-  
-  event_count:any = [];
-  total_events_organized_count:string = '';
+  user_id: string= '';
 
-  volunteering_time:any = [];
-  total_volunteering_time:string = '';
+  training_count: any = [];
+  total_trainings_completed_count: string = '';
 
-  likes_received:any = [];
-  total_likes_received:string = '';
-  
-  posts_posted:any = [];
-  total_posts_posted:string = '';
+  event_count: any = [];
+  total_events_organized_count: string = '';
 
-  comments_posted:any = [];
-  total_comments_posted:string = '';
+  volunteering_time: any = [];
+  total_volunteering_time: string = '';
 
-  branch_info:any = [];
-  branch_name:string = '';
-  branch_location:string = '';
-  
-  constructor(private router:Router, private service:UserService) { }
+  likes_received: any = [];
+  total_likes_received: string = '';
+
+  posts_posted: any = [];
+  total_posts_posted: string = '';
+
+  comments_posted: any = [];
+  total_comments_posted: string = '';
+
+  branch_info: any = [];
+  branch_name: string = '';
+  branch_location: string = '';
+
+  constructor(
+    private service: UserService
+  ) {}
 
   ngOnInit() {
+    this.user = history.state.user;
+    this.user_id = this.user['id'];
+    if (!this.user_id) {
+      // If user ID is not passed through URL, use logged-in user's ID
+      this.user_id = localStorage.getItem('userId') as string;
+    }
 
-    this.service.get_completed_trainings_count('1').subscribe(response => {
+    this.service.get_completed_trainings_count(this.user_id).subscribe((response) => {
       this.training_count = response;
       this.total_trainings_completed_count = this.training_count['total_trainings'];
     });
 
-
-    this.service.get_events_organized_count('1').subscribe(response => {
+    this.service.get_events_organized_count(this.user_id).subscribe((response) => {
       this.event_count = response;
       this.total_events_organized_count = this.event_count['total_events'];
     });
 
-
-    this.service.get_volunteering_time('1').subscribe(response => {
+    this.service.get_volunteering_time(this.user_id).subscribe((response) => {
       this.volunteering_time = response;
       this.total_volunteering_time = this.volunteering_time['total_time'];
-    }); 
+    });
 
-
-    this.service.get_total_likes_received('1').subscribe(response => {
+    this.service.get_total_likes_received(this.user_id).subscribe((response) => {
       this.likes_received = response;
       this.total_likes_received = this.likes_received['total_likes_received'];
-   });
+    });
 
-   this.service.get_posts_count('1').subscribe(response => {
-    this.posts_posted = response;
-    this.total_posts_posted = this.posts_posted['total_posts'];
-  });
+    this.service.get_posts_count(this.user_id).subscribe((response) => {
+      this.posts_posted = response;
+      this.total_posts_posted = this.posts_posted['total_posts'];
+    });
 
-    
-  this.service.get_comments_count('1').subscribe(response => {
-    this.comments_posted = response;
-    this.total_comments_posted = this.comments_posted['total_comments'];
+    this.service.get_comments_count(this.user_id).subscribe((response) => {
+      this.comments_posted = response;
+      this.total_comments_posted = this.comments_posted['total_comments'];
+    });
 
-  });
-
-  this.service.get_branch_info('1').subscribe(response => {
-    this.branch_info = response;
-    this.branch_name = this.branch_info['branch_name'];
-    this.branch_location = this.branch_info['branch_location'];
-  
-
-
-  });
-    
+    this.service.get_branch_info(this.user_id).subscribe((response) => {
+      this.branch_info = response;
+      this.branch_name = this.branch_info['branch_name'];
+      this.branch_location = this.branch_info['branch_location'];
+    });
   }
 }
+
 
 
 

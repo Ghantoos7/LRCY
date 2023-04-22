@@ -16,6 +16,10 @@ import { HttpClientModule } from '@angular/common/http';
 
 export class AchievementsPage implements OnInit {
 
+  user: any;
+
+  user_id: string= '';
+
   events_organized:any = [];
 
 
@@ -23,7 +27,15 @@ export class AchievementsPage implements OnInit {
 
   ngOnInit() {
 
-    this.service.get_events_organized('1').subscribe(response => {
+    this.user = history.state.user;
+    console.log(this.user);
+    this.user_id = this.user['id'];
+    if (!this.user_id) {
+      // If user ID is not passed through URL, use logged-in user's ID
+      this.user_id = localStorage.getItem('userId') as string;
+    }
+
+    this.service.get_events_organized(this.user_id).subscribe(response => {
       this.events_organized = response;
 
     });
