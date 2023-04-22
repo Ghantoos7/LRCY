@@ -35,6 +35,8 @@ export class MyPostsPage implements OnInit {
   isLiked: {[key: number]: boolean} = {};
   post_id: number=0;
 
+  comment_content: string='';
+
   constructor(private post_service:PostService, private router: Router, private alertController: AlertController, private actionSheetController: ActionSheetController, private service: UserService, private sharedService:SharedService) { }
 
   ngOnInit() {
@@ -75,7 +77,7 @@ export class MyPostsPage implements OnInit {
     return daysDiff;
   }
 
-  async showActionSheet(){
+  async showActionSheet(i: number) {
     const actionSheet = await this.actionSheetController.create({
       header: 'Options',
       buttons: [
@@ -89,8 +91,26 @@ export class MyPostsPage implements OnInit {
         {
           text: 'Delete',
           icon: 'trash-outline',
-          handler: () => {
-            // Implement the delete action here
+          handler: async () => {
+            const confirm = await this.alertController.create({
+              header: 'Confirm',
+              message: 'Are you sure you want to delete this post?',
+              buttons: [
+                {
+                  text: 'Cancel',
+                  role: 'cancel'
+                },
+                {
+                  text: 'Delete',
+                  handler: () => {
+                    this.post_service.deletePost(i).subscribe((data: any) => {
+                      window.location.reload();
+                    });
+                  }
+                }
+              ]
+            });
+            await confirm.present();
           }
         },
         {
@@ -103,7 +123,8 @@ export class MyPostsPage implements OnInit {
       ]
     });
     await actionSheet.present();
-  }
+}
+
 
   toggleLike(post_id: number) {
     if (this.isLiked[post_id]) {
@@ -117,6 +138,7 @@ export class MyPostsPage implements OnInit {
     this.post_service.likePost(post_id).subscribe((data: any) => {
       localStorage.setItem(`post_${post_id}`, 'true'); // store the like state in Local Storage
       this.isLiked[post_id] = true;
+      window.location.reload();
     });
   }
   
@@ -124,6 +146,7 @@ export class MyPostsPage implements OnInit {
     this.post_service.unlikePost(post_id).subscribe((data: any) => {
       localStorage.setItem(`post_${post_id}`, 'false'); // store the like state in Local Storage
       this.isLiked[post_id] = false;
+      window.location.reload();
     });
   }
 
@@ -131,9 +154,29 @@ export class MyPostsPage implements OnInit {
   goToComments(post_id: string){
     this.router.navigate(["/comments"], {state: { p_id : post_id }});
   }
+
+
+  async sendComment(p_id: number){
+    this.post_service.commentPost(p_id, this.user_id, this.comment_content).subscribe(response=>{
+      const str = JSON.stringify(response);
+      const result = JSON.parse(str);
+      const status = result['status'];
+       if(status == "success"){
+        this.alertController.create({
+          message: 'Your comment was added!',
+          buttons: ['OK']
+        }).then(alert => alert.present());
+        window.location.reload();
+      }
+    else if (status == "error"){
+      this.alertController.create({
+        message: 'Something went wrong.',
+        buttons: ['OK']
+      }).then(alert => alert.present());
+      }
+    });
+
   }
 
- 
 
-
-
+}

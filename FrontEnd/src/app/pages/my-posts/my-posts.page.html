@@ -13,7 +13,7 @@
         <ion-text class="username">{{username}}</ion-text>
         <ion-text class="name">{{full_name}}</ion-text>
         <ion-text class="post-date">{{getDaysAgo(post.post_date)}} d</ion-text>
-        <ion-icon *ngIf="!othersPage" size="large"class="edit" name="ellipsis-vertical-outline" (click)="showActionSheet()"></ion-icon>
+        <ion-icon *ngIf="!othersPage" size="large"class="edit" name="ellipsis-vertical-outline" (click)="showActionSheet(post.id)"></ion-icon>
       
       </div>
 
@@ -30,8 +30,8 @@
         <ion-text class="like-count" color="danger">{{post.like_count}}</ion-text>
         <ion-img (click) ="goToComments(post.id)" class="comments" src="assets/icon/comments.png"></ion-img>
         <ion-text class="comment-count">{{post.comment_count}}</ion-text>
-        <ion-input class="input"  placeholder="Comment on this post..."></ion-input>
-        <ion-icon class="send-icon" name="send"></ion-icon>
+        <ion-input class="input"  [(ngModel)]="comment_content" placeholder="Comment on this post..."></ion-input>
+        <ion-icon (click)="sendComment(post.id)" class="send-icon" name="send"></ion-icon>
 
       </ion-footer>  
     </ion-card>
