@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import {Route, Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
+import { SharedService } from 'src/app/services/shared.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -14,12 +15,12 @@ import { UserService } from 'src/app/services/user.service';
   imports: [IonicModule, CommonModule, FormsModule]
 })
 export class ProfilePage implements OnInit {
-  user: any;
+  selectedUser: any;
 
-  constructor(private router:Router, private menuCtrl: MenuController, private service: UserService) { }
+  constructor(private router:Router, private menuCtrl: MenuController, private sharedService:SharedService, private service: UserService) { }
 
   ngOnInit() {
-    this.user = history.state.user; // get the user object from the state
+    this.selectedUser = this.sharedService.getSelectedUser();
   }
 
   ionViewWillLeave() {
