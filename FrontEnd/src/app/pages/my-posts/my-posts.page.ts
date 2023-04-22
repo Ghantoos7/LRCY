@@ -24,6 +24,8 @@ export class MyPostsPage implements OnInit {
 
   user_id: string= '';
 
+  othersPage: boolean = false;
+
   username: string='';
   user_profile_pic: string='';
   full_name: string='';
@@ -52,6 +54,7 @@ export class MyPostsPage implements OnInit {
       this.username = this.selectedUser['username'];
       this.user_profile_pic = this.selectedUser['user_profile_pic'];
       this.full_name = this.selectedUser['name'];
+      this.othersPage = true;
     }
 
     this.service.getOwnPosts(this.user_id).subscribe(response => {

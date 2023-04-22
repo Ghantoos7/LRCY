@@ -13,7 +13,7 @@
         <ion-text class="username">{{username}}</ion-text>
         <ion-text class="name">{{full_name}}</ion-text>
         <ion-text class="post-date">{{getDaysAgo(post.post_date)}} d</ion-text>
-        <ion-icon size="large"class="edit" name="ellipsis-vertical-outline" (click)="showActionSheet()"></ion-icon>
+        <ion-icon *ngIf="!othersPage" size="large"class="edit" name="ellipsis-vertical-outline" (click)="showActionSheet()"></ion-icon>
       
       </div>
 
