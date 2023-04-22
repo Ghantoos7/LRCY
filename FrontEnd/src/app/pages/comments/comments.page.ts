@@ -52,16 +52,14 @@ export class CommentsPage implements OnInit {
 
     this.postService.getComments(id).subscribe((data: any) => {
       this.comments = data['comments'];
-      for (let i = 0; i < this.comments.length; i++) {
-        const commentId = this.comments[i].id;
-        this.isLiked[commentId] = localStorage.getItem(`comment_like_${commentId}`) === 'true'; // retrieve the like state from Local Storage
-      
+      if (this.comments && this.comments.length > 0) {
+        for (let i = 0; i < this.comments.length; i++) {
+          const commentId = this.comments[i].id;
+          this.isLiked[commentId] = localStorage.getItem(`comment_like_${commentId}`) === 'true';
+        }
       }
-     
-  
     });
-    
-  
+   
   }
 
   async openAlert() {
