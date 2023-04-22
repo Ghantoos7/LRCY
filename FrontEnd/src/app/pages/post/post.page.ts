@@ -21,11 +21,13 @@ export class PostPage implements OnInit {
   full_name:string = '';
   username = localStorage.getItem('username') as string;
   user_profile_pic :string = '';
+  user_id = localStorage.getItem('user_id') as string;
+  branch_id = localStorage.getItem('branch_id') as string;
 
   constructor(private router:Router, private userService:UserService, private postService:PostService) { }
 
   ngOnInit() {
-    this.userService.get_user('1', '1').subscribe(response => {
+    this.userService.getUser(this.branch_id,this.user_id).subscribe(response => {
       this.user = response;
       this.last_name = (this.user['user'].last_name);
       this.first_name = (this.user['user'].first_name);

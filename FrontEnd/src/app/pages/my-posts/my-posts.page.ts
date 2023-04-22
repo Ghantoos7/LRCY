@@ -54,10 +54,8 @@ export class MyPostsPage implements OnInit {
       this.full_name = this.selectedUser['name'];
     }
 
-    this.service.get_own_posts(this.user_id).subscribe(response => {
+    this.service.getOwnPosts(this.user_id).subscribe(response => {
       this.posts = response;
-      console.log(this.posts);
-      console.log(this.user_id);
       this.posts_array = Array.from(this.posts['posts']);
       for (let i = 0; i < this.posts.length; i++) {
         const postId = this.posts[i].id;
@@ -83,7 +81,6 @@ export class MyPostsPage implements OnInit {
           icon: 'create-outline',
           handler: () => {
             // Implement the edit action here
-            console.log('Edit clicked');
           }
         },
         {
@@ -91,7 +88,6 @@ export class MyPostsPage implements OnInit {
           icon: 'trash-outline',
           handler: () => {
             // Implement the delete action here
-            console.log('Delete clicked');
           }
         },
         {
@@ -99,7 +95,6 @@ export class MyPostsPage implements OnInit {
           icon: 'close',
           role: 'cancel',
           handler: () => {
-            console.log('Cancel clicked');
           }
         }
       ]
@@ -117,7 +112,6 @@ export class MyPostsPage implements OnInit {
 
   likePost(post_id: number) {
     this.post_service.likePost(post_id).subscribe((data: any) => {
-      console.log(data);
       localStorage.setItem(`post_${post_id}`, 'true'); // store the like state in Local Storage
       this.isLiked[post_id] = true;
     });
@@ -125,7 +119,6 @@ export class MyPostsPage implements OnInit {
   
   unlikePost(post_id: number) {
     this.post_service.unlikePost(post_id).subscribe((data: any) => {
-      console.log(data);
       localStorage.setItem(`post_${post_id}`, 'false'); // store the like state in Local Storage
       this.isLiked[post_id] = false;
     });

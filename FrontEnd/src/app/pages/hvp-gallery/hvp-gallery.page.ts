@@ -18,8 +18,6 @@ export class HvpGalleryPage implements OnInit {
   
   username = localStorage.getItem('username') as string;
   user_profile_pic = localStorage.getItem('user_profile_pic') as string;
-
-  constructor(private shared:SharedService,private event_service:EventService, private router:Router, private menuCtrl: MenuController, private userservice: UserService) { }
   hvp_events: any = [];
   events: any = [];
   showActivities: boolean = true;
@@ -27,9 +25,10 @@ export class HvpGalleryPage implements OnInit {
   showOthersEvents: boolean = true;
   branch_id = localStorage.getItem('branch_id') as string;
 
-
+  constructor(private shared:SharedService,private event_service:EventService, private router:Router, private menuCtrl: MenuController, private userservice: UserService) { }
+  
   ngOnInit() {
-    this.event_service.get_events(this.branch_id).subscribe(response => {
+    this.event_service.getEvents(this.branch_id).subscribe(response => {
       this.events = response;
       this.hvp_events = Array.from(this.events['events']['2']);
      

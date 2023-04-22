@@ -25,14 +25,14 @@ export class ProfilePage implements OnInit {
   bio:string = '';
   user_position:string = '';
   user_profile_pic = localStorage.getItem('user_profile_pic') as string;
-  id = localStorage.getItem('userId') as string;
-
+  user_id = localStorage.getItem('userId') as string;
+  branch_id = localStorage.getItem('branchId') as string;
 
   constructor(private router:Router, private service:UserService,private menuCtrl: MenuController, private sharedService:SharedService) { }
 
   async ngOnInit() {
     this.sharedService.setSelectedUser(this.user);
-    this.service.get_user('1', '1').subscribe(response => {
+    this.service.getUser(this.branch_id,this.user_id).subscribe(response => {
       this.user = response;
       this.last_name = (this.user['user'].last_name);
       this.first_name = (this.user['user'].first_name);

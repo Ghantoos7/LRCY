@@ -36,6 +36,7 @@ export class TrainingsPage implements OnInit {
   taken_other: any = [];
   not_taken_other: any = [];
 
+
   constructor(private router:Router, private service:UserService, private sharedService:SharedService) { }
 
   ngOnInit() {
@@ -47,7 +48,7 @@ export class TrainingsPage implements OnInit {
       this.user_id = localStorage.getItem('userId') as string;
     }
 
-    this.service.get_trainings_info(this.user_id).subscribe((response) => {
+    this.service.getTrainingsInfo(this.user_id).subscribe((response) => {
       this.training_info = response;
       this.yah_count = this.training_info['program_counts']["1"];
       this.hvp_count = this.training_info['program_counts']["2"];

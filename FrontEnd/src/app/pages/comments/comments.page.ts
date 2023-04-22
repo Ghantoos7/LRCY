@@ -29,8 +29,8 @@ export class CommentsPage implements OnInit {
   isLiked: {[key: number]: boolean} = {};
   comment_likes: any;
   selectedOption: string = '';
-showOptions: boolean = false;
-replies: any = [];
+  showOptions: boolean = false;
+  replies: any = [];
   constructor(private alrt:AlertController, private router:Router, private postService:PostService) { }
  
 
@@ -188,7 +188,6 @@ replies: any = [];
       const str = JSON.stringify(response);
       const result = JSON.parse(str);
       const status = result['status'];
-      console.log(status);
        if(status == "success"){
         this.alrt.create({
           message: 'Your comment was deleted!',

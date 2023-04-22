@@ -20,9 +20,6 @@ export class OtherGalleryPage implements OnInit {
 
   username = localStorage.getItem('username') as string;
   user_profile_pic = localStorage.getItem('user_profile_pic') as string;
-
-  constructor(private sharedService: SharedService, private event_service:EventService, private router:Router, private menuCtrl: MenuController, private userservice: UserService) { }
-
   other_events: any = [];
   events: any = [];
   showActivities: boolean = true;
@@ -30,8 +27,10 @@ export class OtherGalleryPage implements OnInit {
   showOthersEvents: boolean = true;
   branch_id = localStorage.getItem('branch_id') as string;
 
+  constructor(private sharedService: SharedService, private event_service:EventService, private router:Router, private menuCtrl: MenuController, private userservice: UserService) { }
+
   ngOnInit() {
-    this.event_service.get_events(this.branch_id).subscribe(response => {
+    this.event_service.getEvents(this.branch_id).subscribe(response => {
       this.events = response;
       this.other_events = Array.from(this.events['events']['4']);
      

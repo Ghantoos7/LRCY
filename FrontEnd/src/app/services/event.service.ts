@@ -21,19 +21,19 @@ export class EventService {
     return headers;
   }
 
-  get_events(branch: string) {
+  getEvents(branch: string) {
     const headers = this.getAuthHeaders();
     const response = this.http.get(this.base_url + 'get_event_info/' + branch, { headers: headers });
     return response;
   }
   
-  get_event(branch: string, id: string) {
+  getEvent(branch: string, id: string) {
     const headers = this.getAuthHeaders();
     const response = this.http.get(this.base_url + "get_event_info/" + branch + "/" + id, { headers: headers });
     return response;
   }
   
-  get_event_pictures(id: string) {
+  getEventPictures(id: string) {
     const headers = this.getAuthHeaders();
     const response = this.http.get(this.base_url + "get_event_pictures/" + id, { headers: headers });
     return response;

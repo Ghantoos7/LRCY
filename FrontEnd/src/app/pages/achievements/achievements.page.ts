@@ -20,7 +20,6 @@ export class AchievementsPage implements OnInit {
   selectedUser: any;
 
   user_id: string= '';
-
   events_organized:any = [];
 
 
@@ -35,7 +34,7 @@ export class AchievementsPage implements OnInit {
       this.user_id = localStorage.getItem('userId') as string;
     }
 
-    this.service.get_events_organized(this.user_id).subscribe(response => {
+    this.service.getEventsOrganized(this.user_id).subscribe(response => {
       this.events_organized = response;
 
     });

@@ -19,11 +19,12 @@ export class YearlyGoalsPage implements OnInit {
   yearlyGoals: any;
   username = localStorage.getItem('username') as string;
   user_profile_pic = localStorage.getItem('user_profile_pic') as string;
+  branch_id = localStorage.getItem('branch_id') as string;
 
   constructor(private router:Router, private menuCtrl: MenuController, private service:EventService, private userservice: UserService) { }
 
   ngOnInit() {
-    this.service.getYearlyGoals('502').subscribe((response: any) => {
+    this.service.getYearlyGoals(this.branch_id).subscribe((response: any) => {
       const allGoals = [].concat.apply([], Object.values(response['goals']));
       this.yearlyGoals = allGoals;
     });
