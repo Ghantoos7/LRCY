@@ -16,16 +16,21 @@ import { NavController } from '@ionic/angular';
   imports: [IonicModule, CommonModule, FormsModule]
 })
 export class EventInformationPage implements OnInit {
+
   my_id: string = "";
 
   events: any = [];
+
   responsibles: any = [];
+
+  branch_id = localStorage.getItem('branch_id') as string;
+
   constructor(private navCtrl:NavController, private shared:SharedService, private route: ActivatedRoute, private service:EventService, private router: Router) { }
 
   ngOnInit() {
 
   this.my_id = this.shared.getVariableValue();
-    this.service.get_event("1",this.my_id).subscribe(response => {
+    this.service.getEvent(this.branch_id,this.my_id).subscribe(response => {
       this.events = response;
        this.responsibles = this.events['event']['0']['responsibles'];
    

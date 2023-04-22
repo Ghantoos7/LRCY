@@ -152,7 +152,6 @@ export class FeedPage implements OnInit {
   
   unlikePost(post_id: number) {
     this.service.unlikePost(post_id).subscribe((data: any) => {
-      console.log(data);
       localStorage.setItem(`post_${post_id}`, 'false'); // store the like state in Local Storage
       this.isLiked[post_id] = false;
       window.location.reload();

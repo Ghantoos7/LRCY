@@ -23,7 +23,7 @@ export class EventPicturesPage implements OnInit {
   ngOnInit() {
     this.my_id = this.shared.getVariableValue();
     
-    this.service.get_event_pictures(this.my_id).subscribe(response => {
+    this.service.getEventPictures(this.my_id).subscribe(response => {
      
       this.pictures = response;
 

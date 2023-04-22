@@ -20,67 +20,67 @@
       return headers;
     }
 
-    get_user(branch: string, user_id: string) {
+    getUser(branch: string, user_id: string) {
       const headers = this.getAuthHeaders();
       const response = this.http.get(this.base_url + 'get_user_info/' + branch + '/' + user_id, { headers: headers });
       return response;
     }
     
-    get_completed_trainings_count(user_id: string) {
+    getCompletedTrainingsCount(user_id: string) {
       const headers = this.getAuthHeaders();
       const response = this.http.get(this.base_url + 'get_completed_trainings_count/' + user_id, { headers: headers });
       return response;
     }
     
-    get_events_organized_count(user_id: string) {
+    getEventsOrganizedCount(user_id: string) {
       const headers = this.getAuthHeaders();
       const response = this.http.get(this.base_url + 'get_events_organized_count/' + user_id, { headers: headers });
       return response;
     }
     
-    get_volunteering_time(user_id: string) {
+    getVolunteeringTime(user_id: string) {
       const headers = this.getAuthHeaders();
       const response = this.http.get(this.base_url + 'get_total_volunteering_time/' + user_id, { headers: headers });
       return response;
     }
     
-    get_total_likes_received(user_id: string) {
+    getTotalLikesReceived(user_id: string) {
       const headers = this.getAuthHeaders();
       const response = this.http.get(this.base_url + 'get_total_likes_received/' + user_id, { headers: headers });
       return response;
     }
     
-    get_posts_count(user_id: string) {
+    getPostsCount(user_id: string) {
       const headers = this.getAuthHeaders();
       const response = this.http.get(this.base_url + 'get_posts_count/' + user_id, { headers: headers });
       return response;
     }
     
-    get_comments_count(user_id: string) {
+    getCommentsCount(user_id: string) {
       const headers = this.getAuthHeaders();
       const response = this.http.get(this.base_url + 'get_comments_count/' + user_id, { headers: headers });
       return response;
     }
     
-    get_branch_info(user_id: string) {
+    getBranchInfo(user_id: string) {
       const headers = this.getAuthHeaders();
       const response = this.http.get(this.base_url + 'get_branch_info/' + user_id, { headers: headers });
       return response;
     }
     
-    get_events_organized(user_id: string) {
+    getEventsOrganized(user_id: string) {
       const headers = this.getAuthHeaders();
       const response = this.http.get(this.base_url + 'get_events_organized/' + user_id, { headers: headers });
       return response;
     }
     
-    get_trainings_info(user_id: string) {
+    getTrainingsInfo(user_id: string) {
       const headers = this.getAuthHeaders();
       const response = this.http.get(this.base_url + 'get_trainings_info/' + user_id, { headers: headers });
       return response;
     }
     
-    get_own_posts(user_id: string) {
+    getOwnPosts(user_id: string) {
       const headers = this.getAuthHeaders();
       const response = this.http.get(this.base_url + 'get_own_posts/' + user_id, { headers: headers });
       return response;

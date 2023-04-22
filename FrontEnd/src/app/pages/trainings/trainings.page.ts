@@ -30,12 +30,13 @@ export class TrainingsPage implements OnInit {
   not_taken_env: any = [];
   taken_other: any = [];
   not_taken_other: any = [];
+  user_id = localStorage.getItem('user_id') as string;
 
   constructor(private router:Router, private service:UserService) { }
 
   ngOnInit() {
 
-    this.service.get_trainings_info("1").subscribe((response) => {
+    this.service.getTrainingsInfo(this.user_id).subscribe((response) => {
       this.training_info = response;
       this.yah_count = this.training_info['program_counts']["1"];
       this.hvp_count = this.training_info['program_counts']["2"];

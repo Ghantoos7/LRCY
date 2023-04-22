@@ -20,7 +20,6 @@ export class ProfilePage implements OnInit {
 
   ngOnInit() {
     this.user = history.state.user; // get the user object from the state
-    console.log(this.user);
   }
 
   ionViewWillLeave() {

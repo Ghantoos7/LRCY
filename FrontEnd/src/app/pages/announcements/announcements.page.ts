@@ -21,6 +21,7 @@ export class AnnouncementsPage implements OnInit {
   i: number = 0;
   username = localStorage.getItem('username') as string;
   user_profile_pic = localStorage.getItem('user_profile_pic') as string;
+  branch_id = localStorage.getItem('branch_id') as string;
   
   
   constructor(private router:Router, private menuCtrl: MenuController, private service:EventService, private userservice:UserService) { 
@@ -28,7 +29,7 @@ export class AnnouncementsPage implements OnInit {
   }
 
   ngOnInit() {
-    this.service.getAnnouncements('502').subscribe((response: any) => {
+    this.service.getAnnouncements(this.branch_id).subscribe((response: any) => {
       this.announcements = response['announcements'];
       this.announcements = Array.from(this.announcements);
 
