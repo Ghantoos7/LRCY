@@ -9,6 +9,7 @@ import { ActionSheetController } from '@ionic/angular';
 import { UserService } from '../../services/user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { PostService } from 'src/app/services/post.service';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-my-posts',
@@ -19,22 +20,44 @@ import { PostService } from 'src/app/services/post.service';
 })
 export class MyPostsPage implements OnInit {
 
-  username = localStorage.getItem('username') as string;
-  id = localStorage.getItem('userId') as string;
-  user_profile_pic = localStorage.getItem('user_profile_pic') as string;
-  full_name = localStorage.getItem('full_name') as string;
+  selectedUser: any;
+
+  user_id: string= '';
+
+  username: string='';
+  user_profile_pic: string='';
+  full_name: string='';
+
   posts: any  = [];
   posts_array: any = [];
   isLiked: {[key: number]: boolean} = {};
   post_id: number=0;
 
-  constructor(private post_service:PostService, private router: Router, private alertController: AlertController, private actionSheetController: ActionSheetController, private service: UserService) { }
+  constructor(private post_service:PostService, private router: Router, private alertController: AlertController, private actionSheetController: ActionSheetController, private service: UserService, private sharedService:SharedService) { }
 
   ngOnInit() {
-    this.service.get_own_posts(this.id).subscribe(response => {
+
+    this.selectedUser = this.sharedService.getSelectedUser();
+    this.user_id = this.selectedUser['id'];
+    console.log(this.selectedUser);
+    if (!this.user_id) {
+      // If user ID is not passed through URL, use logged-in user's ID and info
+      this.user_id = localStorage.getItem('userId') as string;
+      this.username = localStorage.getItem('username') as string;
+      this.user_profile_pic = localStorage.getItem('user_profile_pic') as string;
+      this.full_name = localStorage.getItem('full_name') as string;
+    }
+    else{
+      this.user_id = this.selectedUser['id'];
+      this.username = this.selectedUser['username'];
+      this.user_profile_pic = this.selectedUser['user_profile_pic'];
+      this.full_name = this.selectedUser['name'];
+    }
+
+    this.service.get_own_posts(this.user_id).subscribe(response => {
       this.posts = response;
       console.log(this.posts);
-      console.log(this.id);
+      console.log(this.user_id);
       this.posts_array = Array.from(this.posts['posts']);
       for (let i = 0; i < this.posts.length; i++) {
         const postId = this.posts[i].id;
