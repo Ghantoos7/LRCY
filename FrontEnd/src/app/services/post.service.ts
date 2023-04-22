@@ -82,4 +82,16 @@ export class PostService {
     return response;
   }
 
+  deletePost(post_id: number) {
+    const headers = this.getAuthHeaders().set('Content-Type', 'application/json');
+    const options = { headers: headers };
+  
+    const body = {
+      'post_id': post_id,
+      'user_id': this.user_id
+    };
+  
+    const response = this.http.post(this.base_url + 'delete_post', body, options);
+    return response;
+  }
 }

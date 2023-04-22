@@ -152,7 +152,7 @@ class PostController extends Controller {
         }
     
         // If the user ID from the request does not match the user ID of the post, return an error response
-        if ($post->user_id !== $user_id) {
+        if ($post->user_id != $user_id) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'You are not authorized to delete this post'

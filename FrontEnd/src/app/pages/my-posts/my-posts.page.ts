@@ -75,7 +75,7 @@ export class MyPostsPage implements OnInit {
     return daysDiff;
   }
 
-  async showActionSheet(){
+  async showActionSheet(i: number) {
     const actionSheet = await this.actionSheetController.create({
       header: 'Options',
       buttons: [
@@ -89,8 +89,26 @@ export class MyPostsPage implements OnInit {
         {
           text: 'Delete',
           icon: 'trash-outline',
-          handler: () => {
-            // Implement the delete action here
+          handler: async () => {
+            const confirm = await this.alertController.create({
+              header: 'Confirm',
+              message: 'Are you sure you want to delete this post?',
+              buttons: [
+                {
+                  text: 'Cancel',
+                  role: 'cancel'
+                },
+                {
+                  text: 'Delete',
+                  handler: () => {
+                    this.post_service.deletePost(i).subscribe((data: any) => {
+                      window.location.reload();
+                    });
+                  }
+                }
+              ]
+            });
+            await confirm.present();
           }
         },
         {
@@ -103,7 +121,8 @@ export class MyPostsPage implements OnInit {
       ]
     });
     await actionSheet.present();
-  }
+}
+
 
   toggleLike(post_id: number) {
     if (this.isLiked[post_id]) {
@@ -117,6 +136,7 @@ export class MyPostsPage implements OnInit {
     this.post_service.likePost(post_id).subscribe((data: any) => {
       localStorage.setItem(`post_${post_id}`, 'true'); // store the like state in Local Storage
       this.isLiked[post_id] = true;
+      window.location.reload();
     });
   }
   
@@ -124,14 +144,16 @@ export class MyPostsPage implements OnInit {
     this.post_service.unlikePost(post_id).subscribe((data: any) => {
       localStorage.setItem(`post_${post_id}`, 'false'); // store the like state in Local Storage
       this.isLiked[post_id] = false;
+      window.location.reload();
     });
   }
 
 
   goToComments(){
     this.router.navigate(['/comments']);
-  }
-  }
+  } 
+
+}
 
  
 
