@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { UserService } from '../../services/user.service';
 import { HttpClientModule } from '@angular/common/http';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-statistics',
@@ -14,7 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 })
 export class StatisticsPage implements OnInit {
 
-  user: any;
+  selectedUser: any;
 
   user_id: string= '';
 
@@ -41,12 +42,13 @@ export class StatisticsPage implements OnInit {
   branch_location: string = '';
 
   constructor(
-    private service: UserService
+    private service: UserService,
+    private sharedService:SharedService
   ) {}
 
   ngOnInit() {
-    this.user = history.state.user;
-    this.user_id = this.user['id'];
+    this.selectedUser = this.sharedService.getSelectedUser();
+    this.user_id = this.selectedUser['id'];
     if (!this.user_id) {
       // If user ID is not passed through URL, use logged-in user's ID
       this.user_id = localStorage.getItem('userId') as string;

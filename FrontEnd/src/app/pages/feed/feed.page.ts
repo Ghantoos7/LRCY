@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { MenuController } from '@ionic/angular';
 import { PostService } from 'src/app/services/post.service';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-feed',
@@ -28,7 +29,7 @@ export class FeedPage implements OnInit {
   comment_content: string='';
   user: any;
 
-  constructor(private router:Router, private alertController: AlertController, private menuCtrl: MenuController, private service:PostService) { }
+  constructor(private router:Router, private alertController: AlertController, private menuCtrl: MenuController, private service:PostService, private sharedService:SharedService) { }
 
   ionViewWillLeave() {
     this.menuCtrl.enable(false, 'menuFeed');
@@ -48,7 +49,8 @@ export class FeedPage implements OnInit {
         text: 'View Profile',
         cssClass: 'custom-alert-button',
         handler: () => {
-          this.router.navigate(['/others-profile'], { state: { user } }); // pass the user object as state to others-profile page
+          this.sharedService.setSelectedUser(user);
+          this.router.navigate(['/others-profile']);
         }
       }]
     });

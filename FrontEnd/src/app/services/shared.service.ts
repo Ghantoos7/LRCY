@@ -6,6 +6,8 @@ import { Injectable } from '@angular/core';
 export class SharedService {
   private event: any;
 
+  private selectedUser: any;
+
   constructor() { }
 
   setVariableValue(value: any) {
@@ -15,4 +17,13 @@ export class SharedService {
   getVariableValue() {
     return this.event;
   }
+
+  setSelectedUser(user: any) {
+    this.selectedUser = user;
+  }
+
+  getSelectedUser() {
+    return this.selectedUser;
+  }
+  
 }

@@ -36,7 +36,7 @@
           <div class="badge">
             <ion-icon name="camera" ></ion-icon>
           </div>
-          <img alt="Silhouette of a person's head" src="{{user.user_profile_pic}}" />
+          <img alt="Silhouette of a person's head" src="{{selectedUser.user_profile_pic}}" />
         </ion-avatar>
       </ion-col>
     </ion-row>
@@ -49,18 +49,18 @@
          
           <ion-row class="details">
             <ion-col class="special-col">
-              <ion-label>{{user.name}}</ion-label>
+              <ion-label>{{selectedUser.name}}</ion-label>
         </ion-col>
        
         <ion-col class="special-col">
-          <ion-label>{{user.user_position}}</ion-label>
+          <ion-label>{{selectedUser.user_position}}</ion-label>
         </ion-col>
         </ion-row>
       
         </ion-card-header>
         <ion-card-content>
-          <p>{{user.username}}</p>
-          <p class="p1">{{user.user_bio}}</p>
+          <p>{{selectedUser.username}}</p>
+          <p class="p1">{{selectedUser.user_bio}}</p>
           <p class="bio-space"></p>
         </ion-card-content>
         

@@ -6,6 +6,7 @@ import { Route, Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MenuController } from '@ionic/angular';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-profile',
@@ -27,9 +28,10 @@ export class ProfilePage implements OnInit {
   id = localStorage.getItem('userId') as string;
 
 
-  constructor(private router:Router, private service:UserService,private menuCtrl: MenuController) { }
+  constructor(private router:Router, private service:UserService,private menuCtrl: MenuController, private sharedService:SharedService) { }
 
   async ngOnInit() {
+    this.sharedService.setSelectedUser(this.user);
     this.service.get_user('1', '1').subscribe(response => {
       this.user = response;
       this.last_name = (this.user['user'].last_name);
