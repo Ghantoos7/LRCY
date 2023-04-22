@@ -44,6 +44,8 @@ export class SignInPage implements OnInit {
           localStorage.setItem('full_name', response.full_name);
           // Redirect the user to the dashboard or any other page
           this.router.navigate(['/feed']);
+          this.organization_id = '';
+          this.password = '';
         } else {
           // Display an error message to the user
           let message: string;
