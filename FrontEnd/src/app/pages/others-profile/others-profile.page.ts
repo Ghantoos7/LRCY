@@ -14,8 +14,12 @@ import { UserService } from 'src/app/services/user.service';
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule]
 })
+
 export class ProfilePage implements OnInit {
   selectedUser: any;
+
+  username = localStorage.getItem('username') as string;
+  user_profile_pic = localStorage.getItem('user_profile_pic') as string;
 
   constructor(private router:Router, private menuCtrl: MenuController, private sharedService:SharedService, private service: UserService) { }
 

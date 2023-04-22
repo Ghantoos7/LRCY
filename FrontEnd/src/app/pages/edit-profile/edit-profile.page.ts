@@ -22,8 +22,9 @@ export class EditProfilePage implements OnInit {
   username:string = '';
   user_bio:string = '';
   user_position:string = '';
-  user_id = localStorage.getItem('user_id') as string;
+  user_id = localStorage.getItem('userId') as string;
   branch_id = localStorage.getItem('branch_id') as string;
+  user_profile_pic = localStorage.getItem('user_profile_pic')
 
 
   constructor(private service:UserService, private alertController:AlertController, private router:Router) { }
