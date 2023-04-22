@@ -206,7 +206,9 @@ replies: any = [];
     
   }
 
-
+  goBack(){
+    this.router.navigate(['/feed']);
+  }
 
 
 

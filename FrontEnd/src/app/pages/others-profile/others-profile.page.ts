@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { Route, Router } from '@angular/router';
+import {Route, Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { UserService } from 'src/app/services/user.service';
 
@@ -14,10 +14,13 @@ import { UserService } from 'src/app/services/user.service';
   imports: [IonicModule, CommonModule, FormsModule]
 })
 export class ProfilePage implements OnInit {
+  user: any;
 
   constructor(private router:Router, private menuCtrl: MenuController, private service: UserService) { }
 
   ngOnInit() {
+    this.user = history.state.user; // get the user object from the state
+    console.log(this.user);
   }
 
   ionViewWillLeave() {

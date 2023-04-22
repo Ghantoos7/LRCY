@@ -5,7 +5,7 @@
     <ion-text class="whose-post">{{user_name}}'s Post</ion-text>
   </div>
 
-  <ion-icon class="back" name="arrow-back-outline"></ion-icon>
+  <ion-icon class="back" name="arrow-back-outline" (click)="goBack()"></ion-icon>
   <ion-img class="post-image" src="{{post_media}}"></ion-img>
 
   <ion-card class="caption-container">
