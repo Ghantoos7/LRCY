@@ -19,11 +19,6 @@ ion-item{
     color: white;
 }
 
-ion-button{
-    width: 100%;
-    --background: #45579A;
-}
-
 ion-card{
     position: relative;
     top: 10%;
@@ -88,13 +83,12 @@ ion-progress-bar{
 
 ion-item-divider{
     font-size: 40px;
-    color: black;
+    color: gray;
     --background: white;
     border-bottom: none;
     position: relative;
     left: 45%;
 }
-
 
 .content{
     --background: white;
@@ -109,6 +103,28 @@ ion-searchbar{
     width: 50%;
     margin: 0 auto;
     bottom: 40px;
+}
+
+.ann{
+    position: relative;
+    top: 7px;
+}
+
+.header-button{
+    --background: none;
+    --box-shadow: none;
+    position: relative;
+    left: 75%;
+}
+
+.menu-button{
+    position: relative;
+    width: 100%;
+    --background: #45579A;
+}
+
+ion-label{
+    color: white;
 }
 
 

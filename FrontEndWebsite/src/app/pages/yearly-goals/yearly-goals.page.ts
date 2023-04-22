@@ -50,4 +50,12 @@ export class YearlyGoalsPage implements OnInit {
     this.menuController.close();
   }
 
+  goToHome(){
+    this.router.navigate(['/home']);
+  }
+
+  goToPanel(){
+    this.router.navigate(['/home']);
+  }
+
 }
