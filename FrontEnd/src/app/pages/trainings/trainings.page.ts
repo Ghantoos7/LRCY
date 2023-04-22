@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { Route, Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { HttpClientModule } from '@angular/common/http';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-trainings',
@@ -15,6 +16,10 @@ import { HttpClientModule } from '@angular/common/http';
 })
 
 export class TrainingsPage implements OnInit {
+
+  selectedUser: any;
+
+  user_id: string= '';
 
   training_info: any = [];
   yah_count: string = '';
@@ -31,11 +36,18 @@ export class TrainingsPage implements OnInit {
   taken_other: any = [];
   not_taken_other: any = [];
 
-  constructor(private router:Router, private service:UserService) { }
+  constructor(private router:Router, private service:UserService, private sharedService:SharedService) { }
 
   ngOnInit() {
 
-    this.service.get_trainings_info("1").subscribe((response) => {
+    this.selectedUser = this.sharedService.getSelectedUser();
+    this.user_id = this.selectedUser['id'];
+    if (!this.user_id) {
+      // If user ID is not passed through URL, use logged-in user's ID
+      this.user_id = localStorage.getItem('userId') as string;
+    }
+
+    this.service.get_trainings_info(this.user_id).subscribe((response) => {
       this.training_info = response;
       this.yah_count = this.training_info['program_counts']["1"];
       this.hvp_count = this.training_info['program_counts']["2"];
