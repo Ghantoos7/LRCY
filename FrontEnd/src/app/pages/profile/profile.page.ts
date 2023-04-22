@@ -79,7 +79,8 @@ this.router.navigate(['edit-profile']);
     
       }
       logout(){
-      
+        localStorage.clear();
+        this.router.navigate(['/login']);
       }
 
 }

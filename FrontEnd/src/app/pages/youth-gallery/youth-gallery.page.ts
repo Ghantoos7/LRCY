@@ -105,6 +105,7 @@ this.router.navigate(['/profile']);
 
   }
   logout(){
-  
+    localStorage.clear();
+    this.router.navigate(['/login']);
   }
 }

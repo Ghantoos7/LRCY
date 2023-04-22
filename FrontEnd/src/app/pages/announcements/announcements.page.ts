@@ -65,6 +65,8 @@ export class AnnouncementsPage implements OnInit {
     
       }
       logout(){
+        localStorage.clear();
+        this.router.navigate(['/login']);
       
       }
 

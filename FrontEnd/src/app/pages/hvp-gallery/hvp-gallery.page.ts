@@ -98,6 +98,8 @@ export class HvpGalleryPage implements OnInit {
     
       }
       logout(){
+        localStorage.clear();
+        this.router.navigate(['/login']);
       
       }
 
