@@ -72,6 +72,29 @@ export class CommentsPage implements OnInit {
    
   }
 
+  deleteComment(comm_id: number){
+    this.postService.deleteComment(comm_id, this.current_id).subscribe(response=>{
+      const str = JSON.stringify(response);
+      const result = JSON.parse(str);
+      const status = result['status'];
+      console.log(status);
+       if(status == "success"){
+        this.alrt.create({
+          message: 'Your comment was deleted!',
+          buttons: ['OK']
+        }).then(alrt => alrt.present());
+        window.location.reload();
+      }
+    else if (status == "error"){
+      this.alrt.create({
+        message: 'Something went wrong. Please try again.',
+        buttons: ['OK']
+      }).then(alrt => alrt.present());
+      }
+    });
+    
+  }
+
 
 
 

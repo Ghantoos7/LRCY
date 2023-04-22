@@ -57,6 +57,20 @@ export class PostService {
     return response;
   }
 
+  deleteComment(comment_id: number, user_id:string){
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    const options = { headers: headers };
+
+    const body = {
+      comment_id: comment_id,
+      user_id: this.user_id
+    };
+
+    const response = this.http.post(this.base_url + 'delete_comment', body, options);
+    return response;
+  }
+
+
 
   getPost(post_id: number){
     const response = this.http.get(this.base_url + 'get_post/' + post_id);
