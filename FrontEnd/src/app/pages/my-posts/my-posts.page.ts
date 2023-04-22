@@ -43,7 +43,6 @@ export class MyPostsPage implements OnInit {
 
     this.selectedUser = this.sharedService.getSelectedUser();
     this.user_id = this.selectedUser['id'];
-    console.log(this.selectedUser);
     if (!this.user_id) {
       // If user ID is not passed through URL, use logged-in user's ID and info
       this.user_id = localStorage.getItem('userId') as string;
@@ -62,11 +61,12 @@ export class MyPostsPage implements OnInit {
     this.service.getOwnPosts(this.user_id).subscribe(response => {
       this.posts = response;
       this.posts_array = Array.from(this.posts['posts']);
-      for (let i = 0; i < this.posts.length; i++) {
-        const postId = this.posts[i].id;
+      for (let i = 0; i < this.posts_array.length; i++) {
+        const postId = this.posts_array[i].id;
         this.isLiked[postId] = localStorage.getItem(`post_${postId}`) === 'true'; // retrieve the like state from Local Storage
       }
     });
+
   }
 
   getDaysAgo(postDate: string) {
@@ -140,6 +140,7 @@ export class MyPostsPage implements OnInit {
       this.isLiked[post_id] = true;
       window.location.reload();
     });
+   
   }
   
   unlikePost(post_id: number) {
@@ -148,6 +149,7 @@ export class MyPostsPage implements OnInit {
       this.isLiked[post_id] = false;
       window.location.reload();
     });
+
   }
 
 
