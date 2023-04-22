@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { EventService } from '../../services/event.service';
 import { SharedService } from 'src/app/services/shared.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-env-gallery',
@@ -19,7 +20,7 @@ export class EnvGalleryPage implements OnInit {
   username = localStorage.getItem('username') as string;
   user_profile_pic: string = localStorage.getItem('user_profile_pic') as string;
 
-  constructor(private sharedService:SharedService, private event_service:EventService, private router:Router, private menuCtrl: MenuController) { }
+  constructor(private sharedService:SharedService, private event_service:EventService, private router:Router, private menuCtrl: MenuController, private userservice: UserService) { }
   env_events: any = [];
   events: any = [];
   showActivities: boolean = true;
@@ -102,10 +103,11 @@ export class EnvGalleryPage implements OnInit {
       toggleDarkMode(){
     
       }
-      logout(){
-        localStorage.clear();
-        this.router.navigate(['/login']);
-      
+      logout() {
+        this.userservice.logout().subscribe((data: any) => {
+          localStorage.clear();
+          this.router.navigate(['/sign-in']);
+        });
       }
 
 }

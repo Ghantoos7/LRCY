@@ -32,7 +32,6 @@ export class SignInPage implements OnInit {
   login(organization_id: string, password: string) {
     this.authService.login(organization_id, password,this.rememberMe).subscribe({
       next: (data) => {
-        console.log(data);
         const response = JSON.parse(JSON.stringify(data));
         if (response.status === 'Login successful') {
           // Store the token in local storage for future use

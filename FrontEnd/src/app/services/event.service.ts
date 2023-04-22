@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -9,29 +10,44 @@ export class EventService {
 
   constructor(private http:HttpClient) { }
 
-  get_events(branch: string){
-    const response = this.http.get(this.base_url + 'get_event_info/' + branch);
-    return response;
+
+  private getAuthHeaders(): HttpHeaders {
+    const token = localStorage.getItem('authToken');
+  
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+  
+    return headers;
   }
 
- 
-  get_event(branch: string,id: string){
-    const response = this.http.get(this.base_url + "get_event_info/" + branch+"/" + id);
+  get_events(branch: string) {
+    const headers = this.getAuthHeaders();
+    const response = this.http.get(this.base_url + 'get_event_info/' + branch, { headers: headers });
     return response;
   }
-
-  get_event_pictures(id: string){
-    const response = this.http.get(this.base_url + "get_event_pictures/" + id);
+  
+  get_event(branch: string, id: string) {
+    const headers = this.getAuthHeaders();
+    const response = this.http.get(this.base_url + "get_event_info/" + branch + "/" + id, { headers: headers });
     return response;
   }
-
-  getAnnouncements(id: string){
-    const response = this.http.get(this.base_url + 'get_announcements/' + id);
+  
+  get_event_pictures(id: string) {
+    const headers = this.getAuthHeaders();
+    const response = this.http.get(this.base_url + "get_event_pictures/" + id, { headers: headers });
     return response;
   }
-
-  getYearlyGoals(id: string){
-    const response = this.http.get(this.base_url + 'get_yearly_goals/' + id);
+  
+  getAnnouncements(id: string) {
+    const headers = this.getAuthHeaders();
+    const response = this.http.get(this.base_url + 'get_announcements/' + id, { headers: headers });
+    return response;
+  }
+  
+  getYearlyGoals(id: string) {
+    const headers = this.getAuthHeaders();
+    const response = this.http.get(this.base_url + 'get_yearly_goals/' + id, { headers: headers });
     return response;
   }
   

@@ -6,6 +6,7 @@ import { Route, Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { EventService } from '../../services/event.service';
 import { SharedService } from '../../services/shared.service';
+import { UserService } from 'src/app/services/user.service';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class OtherGalleryPage implements OnInit {
   username = localStorage.getItem('username') as string;
   user_profile_pic = localStorage.getItem('user_profile_pic') as string;
 
-  constructor(private sharedService: SharedService, private event_service:EventService, private router:Router, private menuCtrl: MenuController) { }
+  constructor(private sharedService: SharedService, private event_service:EventService, private router:Router, private menuCtrl: MenuController, private userservice: UserService) { }
 
   other_events: any = [];
   events: any = [];
@@ -99,10 +100,11 @@ export class OtherGalleryPage implements OnInit {
       toggleDarkMode(){
     
       }
-      logout(){
-        localStorage.clear();
-        this.router.navigate(['/login']);
-      
+      logout() {
+        this.userservice.logout().subscribe((data: any) => {
+          localStorage.clear();
+          this.router.navigate(['/sign-in']);
+        });
       }
 
 }

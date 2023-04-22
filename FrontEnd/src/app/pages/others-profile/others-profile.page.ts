@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import {Route, Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { SharedService } from 'src/app/services/shared.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-profile',
@@ -16,7 +17,7 @@ import { SharedService } from 'src/app/services/shared.service';
 export class ProfilePage implements OnInit {
   selectedUser: any;
 
-  constructor(private router:Router, private menuCtrl: MenuController, private sharedService:SharedService) { }
+  constructor(private router:Router, private menuCtrl: MenuController, private sharedService:SharedService, private service: UserService) { }
 
   ngOnInit() {
     this.selectedUser = this.sharedService.getSelectedUser();
@@ -57,9 +58,11 @@ this.router.navigate(['edit-profile']);
       toggleDarkMode(){
     
       }
-      logout(){
-        localStorage.clear();
-        this.router.navigate(['/login']);
+      logout() {
+        this.service.logout().subscribe((data: any) => {
+          localStorage.clear();
+          this.router.navigate(['/sign-in']);
+        });
       }
 
 }
