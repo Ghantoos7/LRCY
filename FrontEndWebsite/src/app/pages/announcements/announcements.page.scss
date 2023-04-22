@@ -121,3 +121,15 @@ ion-label{
   --background: white;
   --color: black;
 }
+
+.header-button{
+  --background: none;
+  --box-shadow: none;
+  position: relative;
+  left: 75%;
+}
+
+.ann{
+  position: relative;
+  top: 7px;
+}

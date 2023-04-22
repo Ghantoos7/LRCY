@@ -53,6 +53,14 @@ export class AnnouncementsPage implements OnInit {
     this.router.navigate(['/edit-announcement']);
   }
 
+  goToHome(){
+    this.router.navigate(['/home']);
+  }
+
+  goToPanel(){
+    this.router.navigate(['/panel']);
+  }
+
   closeMenu() {
     this.menuController.close();
   }
