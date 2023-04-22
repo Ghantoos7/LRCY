@@ -23,7 +23,8 @@
   <div class="comment-section-info"></div>
   <ion-text class="comment-count">{{comment_count}}</ion-text>
   <ion-text class="comment-word">Comments</ion-text>
-  <ion-icon class="sort" name="options-outline"></ion-icon>
+  <ion-icon (click)="openAlert()" id="sort" class="sort" name="options-outline" ></ion-icon>
+
 
   <div class="comment-container" *ngFor="let comment of comments">
     <img class="profile-picture" src="{{comment['user'].user_profile_pic}}">

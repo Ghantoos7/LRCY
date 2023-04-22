@@ -28,7 +28,12 @@ export class CommentsPage implements OnInit {
   post_id: number = 0;
   isLiked: {[key: number]: boolean} = {};
   comment_likes: any;
+  selectedOption: string = '';
+showOptions: boolean = false;
+
   constructor(private alrt:AlertController, private router:Router, private postService:PostService) { }
+ 
+
 
   ngOnInit() {
     const data = this.router.getCurrentNavigation()?.extras.state;
@@ -59,7 +64,65 @@ export class CommentsPage implements OnInit {
   
   }
 
+  async openAlert() {
+    const alert = await this.alrt.create({
+      header: 'Sort Comments By',
+      buttons: [
+        {
+          text: 'Sort',
+          role: 'cancel'
+        }
+      ],
+      inputs: [
+        {
+          name: 'radio-option',
+          type: 'radio',
+          label: 'Date',
+          value: 'date',
+          checked: false
+        },
+        {
+          name: 'radio-option',
+          type: 'radio',
+          label: 'Popularity',
+          value: 'likes',
+          checked: false
+        }
+      ]
+    });
+  
+    await alert.present();
+  
+    alert.onDidDismiss().then((data) => {
+      const selectedValue = data.data['values'];
+      if(selectedValue == 'likes'){
+        this.postService.getSortedComments(this.post_id, "popularity").subscribe((data: any) => {
+          this.comments = data['comments'];
+          for (let i = 0; i < this.comments.length; i++) {
+            const commentId = this.comments[i].id;
+            this.isLiked[commentId] = localStorage.getItem(`comment_like_${commentId}`) === 'true'; // retrieve the like state from Local Storage
+          
+          }
+          
+      
+        });
+      }else{
+        this.postService.getComments(this.post_id).subscribe((data: any) => {
+          this.comments = data['comments'];
+          for (let i = 0; i < this.comments.length; i++) {
+            const commentId = this.comments[i].id;
+            this.isLiked[commentId] = localStorage.getItem(`comment_like_${commentId}`) === 'true'; // retrieve the like state from Local Storage
+          
+          }
+      
+        });
+       
+      }
+    });
+  }
+
  
+
   toggleLike(comment_id: number) {
     if (this.isLiked[comment_id]) {
     this.unlikeComment(comment_id);
@@ -72,8 +135,9 @@ export class CommentsPage implements OnInit {
     this.postService.likeComment(comment_id, this.current_id).subscribe((data: any) => {
       localStorage.setItem(`comment_like_${comment_id}`, 'true'); // store the like state in Local Storage
       this.isLiked[comment_id] = true;
-      console.log(this.isLiked);
+     
     });
+    window.location.reload();
    
   }
 
@@ -82,6 +146,7 @@ export class CommentsPage implements OnInit {
       localStorage.setItem(`comment_like_${comment_id}`, 'false'); // store the like state in Local Storage
       this.isLiked[comment_id] = false;
     });
+    window.location.reload();
    
   }
 
