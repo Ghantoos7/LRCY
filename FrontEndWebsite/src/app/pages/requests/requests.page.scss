@@ -7,9 +7,18 @@ ion-toolbar{
     --background: #45579A;
 }
 
+.req{
+    font-size: 22px;
+    position: relative;
+    left: 25px;
+    top: 7px;
+}
+
 .header-button{
     --background: none;
     --box-shadow: none;
+    position: relative;
+    left: 75%;
 }
 
 .text1{
