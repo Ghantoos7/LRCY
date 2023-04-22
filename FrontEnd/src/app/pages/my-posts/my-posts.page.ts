@@ -35,6 +35,8 @@ export class MyPostsPage implements OnInit {
   isLiked: {[key: number]: boolean} = {};
   post_id: number=0;
 
+  comment_content: string='';
+
   constructor(private post_service:PostService, private router: Router, private alertController: AlertController, private actionSheetController: ActionSheetController, private service: UserService, private sharedService:SharedService) { }
 
   ngOnInit() {
@@ -153,9 +155,26 @@ export class MyPostsPage implements OnInit {
     this.router.navigate(['/comments']);
   } 
 
+  async sendComment(p_id: number){
+    this.post_service.commentPost(p_id, this.user_id, this.comment_content).subscribe(response=>{
+      const str = JSON.stringify(response);
+      const result = JSON.parse(str);
+      const status = result['status'];
+       if(status == "success"){
+        this.alertController.create({
+          message: 'Your comment was added!',
+          buttons: ['OK']
+        }).then(alert => alert.present());
+        window.location.reload();
+      }
+    else if (status == "error"){
+      this.alertController.create({
+        message: 'Something went wrong.',
+        buttons: ['OK']
+      }).then(alert => alert.present());
+      }
+    });
+  }
+
+
 }
-
- 
-
-
-
