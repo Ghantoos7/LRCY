@@ -1,11 +1,11 @@
 <ion-content [fullscreen]="true">
   <h1>Admin Panel</h1>
-  <ion-fab  vertical="bottom" horizontal="end" [edge]="true">
+  <ion-fab class="buttons" vertical="bottom" horizontal="end" [edge]="true">
     <ion-fab-button>
       <ion-icon class="dark-mode" name="moon"></ion-icon>
     </ion-fab-button>
     <ion-fab-button>
-      <ion-icon class="logout"name="log-out"></ion-icon>
+      <ion-icon (click)="goToHome()" class="logout"name="log-out"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 

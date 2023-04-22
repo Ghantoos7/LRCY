@@ -36,4 +36,8 @@ export class PanelPage implements OnInit {
   goToYearlyGoals(){
     this.router.navigate(['/yearly-goals']);
   }
+  goToHome(){
+    this.router.navigate(['/home']);
+  }
+
 }
