@@ -27,4 +27,12 @@ export class EditAnnouncementPage implements OnInit {
     this.router.navigate(['/send-announcement']);
   }
 
+  goToHome(){
+    this.router.navigate(['/home']);
+  }
+
+  goToPanel(){
+    this.router.navigate(['/panel']);
+  }
+
 }
