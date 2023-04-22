@@ -1,16 +1,44 @@
 .container {
-  margin-top: 50%;
+  margin-top: 52%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 130vh;
 }
 ion-card {
   width: 90%;
+  height: 120%;
   margin: 10px 0;
   padding-bottom: 20px;
 }
+
+
+
+
+.large-card {
+  height: 150%;
+  width: 90%;
+  margin: 0;
+  padding-bottom: 50px;
+  margin-top: 2%;
+}
+
+//change the card content of only the ion cards implementing large-card class
+.large-card .card-content-ios{
+  font-size: 15px;
+  height: 600vh;
+}
+
+
+
+
+
+
+
+
+
+
 ion-label{
   color:black;
   font-weight: bold;
@@ -48,6 +76,10 @@ ion-checkbox{
   color:#b11433;
 }
 
+.others{
+  color: #8c8c8c;
+}
+
 ion-item{
-  height: 40px;
+  height: 35px;
 }
