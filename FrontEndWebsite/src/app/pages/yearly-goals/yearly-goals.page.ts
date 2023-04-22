@@ -55,7 +55,7 @@ export class YearlyGoalsPage implements OnInit {
   }
 
   goToPanel(){
-    this.router.navigate(['/home']);
+    this.router.navigate(['/panel']);
   }
 
 }

@@ -31,4 +31,12 @@ export class AddGoalPage implements OnInit {
     this.menuController.close();
   }
 
+  goToHome(){
+    this.router.navigate(['/home']);
+  }
+
+  goToPanel(){
+    this.router.navigate(['/panel']);
+  }
+
 }

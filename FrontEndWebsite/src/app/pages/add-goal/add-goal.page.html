@@ -8,10 +8,10 @@
     </ion-header>
     <ion-content class="ion-padding"> 
       <ion-list>
-        <ion-button (click) ="goToGoals()">View Goals</ion-button>
+        <ion-button class="menu-button" (click) ="goToGoals()">View Goals</ion-button>
         </ion-list>
       <ion-list>
-      <ion-button (click) ="closeMenu()">Add a goal</ion-button>
+      <ion-button class="menu-button" (click) ="closeMenu()">Add a goal</ion-button>
       </ion-list>
     </ion-content>
   </ion-menu>
@@ -22,7 +22,10 @@
         <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <ion-title>Yearly Goals</ion-title>
+        <ion-title><ion-text class="ann">Yearly Goals</ion-text>
+          <ion-button (click)="goToPanel()" class="header-button"><ion-label>Panel</ion-label></ion-button>
+          <ion-button (click)="goToHome()" class="header-button"><ion-label>Log out</ion-label></ion-button>
+        </ion-title>
       </ion-toolbar>
     </ion-header>
   </div>

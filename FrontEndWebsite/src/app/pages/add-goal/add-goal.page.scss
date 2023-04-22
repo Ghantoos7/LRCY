@@ -19,12 +19,6 @@ ion-item{
     color: white;
 }
 
-ion-button{
-    position: relative;
-    width: 100%;
-    --background: #45579A;
-}
-
 ion-card{
     position: relative;
     width: 800px;
@@ -51,16 +45,7 @@ ion-card-title{
 }
 
 ion-label{
-    color: #8F8F8F;
-}
-
-ion-text{
-    font-size: 30px;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    color:#45579A;
-    top: 8%;
+    color: white;
 }
 
 .send{
@@ -131,6 +116,24 @@ ion-range{
 
 ion-range::part(pin) {
     top: 15px;
+}
+
+.ann{
+    position: relative;
+    top: 7px;
+}
+
+.header-button{
+    --background: none;
+    --box-shadow: none;
+    position: relative;
+    left: 75%;
+}
+
+.menu-button{
+    position: relative;
+    width: 100%;
+    --background: #45579A;
 }
 
 
