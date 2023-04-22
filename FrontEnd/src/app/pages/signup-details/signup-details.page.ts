@@ -62,7 +62,7 @@ export class SignupDetailsPage implements OnInit {
                     // Store the token in local storage for future use
                     localStorage.setItem('authToken', parsedResponse.token);
                     // Redirect the user to the dashboard or any other page
-                    this.router.navigate(['/feed']);
+                    this.router.navigate(['/sign-in']);
                     break;
                 default:
                     this.alertController.create({
