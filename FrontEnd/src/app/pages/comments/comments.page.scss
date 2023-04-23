@@ -109,7 +109,7 @@
 
 .delete-comment{
     position: absolute;
-    left: 240px;
+    left: 230px;
     top: 24px;
     font-size: 24px;
     color: #AAA7AE;
@@ -127,7 +127,7 @@
 .likes{
     font-size: 28px;
     position: absolute;
-    left: 275px;
+    left: 265px;
     top: 23px;
     color: #AAA7AE;
 }
@@ -135,7 +135,7 @@
 .like-count{
     font-size: 22px;
     position: absolute;
-    left: 310px;
+    left: 300px;
     top: 23px;
     color: #AAA7AE;
 }
@@ -224,7 +224,7 @@
 
 .edit-comment{
     position: absolute;
-    left: 205px;
+    left: 200px;
     top: 24px;
     font-size: 24px;
     color: #AAA7AE;
@@ -236,6 +236,22 @@
     top: 10px;
     font-size: 24px;
     color: #AAA7AE;
+}
+
+.add-reply{
+    position: absolute;
+    left: 267px;
+    top: 60px;
+    font-size: 24px;
+    color: #AAA7AE;
+}
+
+.reply-word{
+    position:relative;
+    top: -18px;
+    left: 285px;
+    color: black;
+    margin-left: 5px;
 }
 
 

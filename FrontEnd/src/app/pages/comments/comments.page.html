@@ -30,10 +30,13 @@
       <ion-text class="comment">{{comment.comment_content}}</ion-text>
       <ion-icon [class.active]="isLiked[comment.id]" name="{{ isLiked[comment.id] ? 'heart' : 'heart-outline' }}" (click)="toggleLike(comment.id)" class="likes"></ion-icon>
       <ion-text class="like-count">{{comment.comment_like_count}}</ion-text>
+      <ion-icon (click)="replyComment(comment.id)" class="add-reply" name="chatbubble-ellipses-outline"></ion-icon>
+      <ion-text class="reply-word">Reply...</ion-text>
 
       <ion-item class="accordion-header" (click)="openReplies(comment.id)">
         <ion-icon slot="end" [name]="repliesOpen[comment.id] ? 'chevron-down-outline' : 'chevron-forward-outline'"></ion-icon>
-        <ion-label>View Replies</ion-label>
+        <ion-label *ngIf="!repliesOpen[comment.id]">View Replies</ion-label>
+        <ion-label *ngIf="repliesOpen[comment.id]">Hide Replies</ion-label>
       </ion-item>
 
       <ion-card-content class="replies-container" *ngIf="repliesOpen[comment.id]">

@@ -128,4 +128,18 @@ export class PostService {
     const response = this.http.post(this.base_url + 'edit_reply', body, options);
     return response;
   }
+
+  replyComment(comment_id: number, reply_content: string) {
+    const headers = this.getAuthHeaders().set('Content-Type', 'application/json');
+    const options = { headers: headers };
+  
+    const body = {
+      'comment_id': comment_id,
+      'reply_content': reply_content,
+      'user_id': this.user_id
+    };
+  
+    const response = this.http.post(this.base_url + 'reply_comment', body, options);
+    return response;
+  }
 }

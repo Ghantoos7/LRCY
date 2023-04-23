@@ -322,4 +322,43 @@ export class CommentsPage implements OnInit {
     }).then(alert => alert.present());
   }
 
+  replyComment(comm_id: number){
+    //use alert controller to get reply content
+    this.alertController.create({
+      header: 'Reply to Comment',
+      inputs: [
+        {
+          name: 'content',
+          type: 'text',
+          value: this.content
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        },
+        {
+          text: 'Reply',
+          handler: (data) => {
+            this.postService.replyComment(comm_id, data.content).subscribe(response=>{
+              const str = JSON.stringify(response);
+              const result = JSON.parse(str);
+              const status = result['status'];
+              if(status == "success"){
+                window.location.reload();
+              } else if (status == "error"){
+                this.alrt.create({
+                  message: 'Something went wrong. Please try again.',
+                  buttons: ['OK']
+                }).then(alrt => alrt.present());
+              }
+            });
+          }
+        }
+      ]
+    }).then(alert => alert.present());
+  }
+
+
 }
