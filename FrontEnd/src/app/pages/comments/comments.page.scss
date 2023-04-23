@@ -173,8 +173,8 @@
 
 .reply-container {
     position: relative;
-    height: auto;
-    max-height: 200px;
+    height: 90px;
+    max-height: 500px;
     overflow-y: auto;
     padding-bottom: 10px; /* Add padding at the bottom for spacing */
   }
@@ -199,7 +199,7 @@
 .reply-comment{
     position:absolute;
     left: 45px;
-    bottom: -7px;
+    bottom: 10px;
     font-size: 16px;
     width: 250px;
     color:black;
@@ -216,7 +216,7 @@
 
 .delete-reply{
     position: absolute;
-    left: 280px;
+    left: 235px;
     top: 10px;
     font-size: 24px;
     color: #AAA7AE;
@@ -232,7 +232,7 @@
 
 .edit-reply{
     position: absolute;
-    left: 250px;
+    left: 200px;
     top: 10px;
     font-size: 24px;
     color: #AAA7AE;
@@ -248,12 +248,26 @@
 
 .reply-word{
     position:relative;
-    top: -18px;
+    top: -34px;
     left: 285px;
     color: black;
     margin-left: 5px;
 }
 
+.comment-date{
+    position:relative;
+    top: 10px;
+    left: 290px;
+    color: #AAA7AE;
+    margin-left: 5px;
+}
+
+.reply-date{
+    position:absolute;
+    top: 13px;
+    left: 270px;
+    color: #AAA7AE;
+}
 
 
 ////////////////////////////

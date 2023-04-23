@@ -360,5 +360,13 @@ export class CommentsPage implements OnInit {
     }).then(alert => alert.present());
   }
 
+  getDaysAgo(date: string) {
+    const today = new Date();
+    const post = new Date(date);
+    const timeDiff = Math.abs(today.getTime() - post.getTime());
+    const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+    return daysDiff;
+  }
+
 
 }

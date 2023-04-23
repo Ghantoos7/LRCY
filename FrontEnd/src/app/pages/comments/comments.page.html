@@ -25,6 +25,7 @@
     <ion-card class="comment-card">
       <img class="profile-picture" src="{{comment['user'].user_profile_pic}}">
       <ion-text class="username">{{comment['user'].first_name}} {{comment['user'].last_name}}</ion-text>
+      <ion-text class="comment-date">{{getDaysAgo(comment.comment_date)}} d</ion-text>
       <ion-icon (click)="editComment(comment.id)" *ngIf="current_id == comment['user'].id" class="edit-comment" name="pencil"></ion-icon>
       <ion-icon (click)="deleteComment(comment.id)" *ngIf="current_id == comment['user'].id" class="delete-comment" name="trash-outline"></ion-icon>
       <ion-text class="comment">{{comment.comment_content}}</ion-text>
@@ -32,7 +33,6 @@
       <ion-text class="like-count">{{comment.comment_like_count}}</ion-text>
       <ion-icon (click)="replyComment(comment.id)" class="add-reply" name="chatbubble-ellipses-outline"></ion-icon>
       <ion-text class="reply-word">Reply...</ion-text>
-
       <ion-item class="accordion-header" (click)="openReplies(comment.id)">
         <ion-icon slot="end" [name]="repliesOpen[comment.id] ? 'chevron-down-outline' : 'chevron-forward-outline'"></ion-icon>
         <ion-label *ngIf="!repliesOpen[comment.id]">View Replies</ion-label>
@@ -46,6 +46,7 @@
           <ion-icon (click)="deleteReply(reply.id)" *ngIf="current_id == reply['user'].id" class="delete-reply" name="trash-outline"></ion-icon>
           <ion-icon (click)="editReply(reply.id)" *ngIf="current_id == reply['user'].id" class="edit-reply" name="pencil"></ion-icon>
           <ion-text class="reply-comment">{{reply.reply_content}}</ion-text>
+          <ion-text class="reply-date">{{getDaysAgo(reply.reply_date)}} d</ion-text>
         </div>          
       </ion-card-content>
     </ion-card>
