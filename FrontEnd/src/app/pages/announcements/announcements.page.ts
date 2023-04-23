@@ -32,7 +32,6 @@ export class AnnouncementsPage implements OnInit {
     this.service.getAnnouncements(this.branch_id).subscribe((response: any) => {
       this.announcements = response['announcements'];
       this.announcements = Array.from(this.announcements);
-      console.log(this.announcements);
 
 
 
