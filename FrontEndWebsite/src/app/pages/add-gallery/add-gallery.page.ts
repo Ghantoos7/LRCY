@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-add-gallery',
@@ -13,13 +14,25 @@ import { Router } from '@angular/router';
 })
 export class AddGalleryPage implements OnInit {
 
-  constructor(private router:Router) { }
+  constructor(private router:Router, private menuController: MenuController) { }
 
   ngOnInit() {
   }
 
-  goBack(){
+  goToPanel(){
+    this.router.navigate(['/panel']);
+  }
+
+  goToHome(){
+    this.router.navigate(['/home']);
+  }
+
+  goToGallery(){
     this.router.navigate(['/manage-gallery']);
+  }
+  
+  closeMenu() {
+    this.menuController.close();
   }
 
 }

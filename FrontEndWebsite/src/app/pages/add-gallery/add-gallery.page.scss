@@ -98,6 +98,10 @@ ion-label{
   height: 60px;
 }
 
+ion-menu-button{
+  color: #45579A;
+}
+
 .inner-div {
   bottom: 0;
   left: 0;
@@ -199,11 +203,15 @@ ion-card{
 
 .menu-button{
   position: relative;
-  width: 100%;
-  --background: #45579A;
+  width: 98%;
+  --background: white;
 }
 
 ion-toolbar{
   position: relative;
   --background: white;
+}
+
+ion-title{
+  color: #45579A;
 }
