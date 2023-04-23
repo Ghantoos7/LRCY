@@ -1,0 +1,130 @@
+.background{
+    --background: white;
+}
+
+ion-toolbar{
+    position: relative;
+    --background: #45579A;
+}
+
+ion-menu-button{
+    color: white;
+}
+
+ion-title{
+    color: white;
+}
+
+ion-item{
+    color: white;
+}
+
+ion-card{
+    position: relative;
+    top: 10%;
+    width: 80%;
+    height: 20%;
+    background-color: #45579A;
+    margin: 0 auto;
+    border-radius: 10px;
+}
+
+.delete{
+    position: relative;
+    font-size: 25px;
+    color: white;
+}
+
+.edit{
+    position: relative;
+    font-size: 25px;
+    color: white;
+    left: 470px;
+}
+
+.list{
+    position: relative;
+    background-color: white;
+    bottom: 100px;
+}
+
+ion-card-title{
+    font-size: large;
+    display: flex;
+    justify-content: space-between;
+    color: white;
+}
+
+ion-footer{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.date{ 
+    font-size: small;
+    font-weight: lighter;
+    color:lightgray;
+    font-family: 'Cairo', sans-serif;
+}
+
+ion-card-subtitle{
+    font-size: small;
+    font-weight: bold;
+    color:white;
+    font-family: 'Cairo', sans-serif;
+}
+
+ion-progress-bar{
+    --background: darkgray;
+    --progress-background: wheat;
+    height: 10px;
+    border-radius: 15px;
+}
+
+ion-item-divider{
+    font-size: 40px;
+    color: gray;
+    --background: white;
+    border-bottom: none;
+    position: relative;
+    left: 45%;
+}
+
+.content{
+    --background: white;
+}
+
+ion-searchbar{
+    --background: #505D8F;
+    --border-radius: 10px;
+    --color: white;
+    --icon-color: #fff;
+    position: relative;
+    width: 50%;
+    margin: 0 auto;
+    bottom: 40px;
+}
+
+.ann{
+    position: relative;
+    top: 7px;
+}
+
+.header-button{
+    --background: none;
+    --box-shadow: none;
+    position: relative;
+    left: 75%;
+}
+
+.menu-button{
+    position: relative;
+    width: 100%;
+    --background: #45579A;
+}
+
+ion-label{
+    color: white;
+}
+
+

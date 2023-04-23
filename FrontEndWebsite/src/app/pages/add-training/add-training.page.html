@@ -1,0 +1,87 @@
+<ion-menu menuId="menuProfiles" contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Manage Profiles</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding"> 
+    <ion-button class="menu-button"(click) = "goBack()">View Members</ion-button>
+    <ion-button class="menu-button"(click) = "goToAddForm()">Add Member</ion-button>
+    <ion-button class="menu-button"(click) = "closeMenu()">Add Training</ion-button>
+    <ion-button class="menu-button"(click) = "goToDeleteTraining()">Remove Training</ion-button>
+ </ion-content>
+</ion-menu>
+
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title><ion-text class="ann">Training</ion-text>
+        <ion-button (click)="goToPanel()" class="header-button"><ion-label class="header-label">Panel</ion-label></ion-button>
+        <ion-button (click)="goToHome()" class="header-button"><ion-label class="header-label">Log out</ion-label></ion-button>
+      </ion-title>
+      <ion-icon size="large" slot="end" name="close" (click)="goBack()"></ion-icon>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6">
+          <ion-card>
+            <ion-card-title class="custom-title">
+              Add Training Here
+            </ion-card-title>
+            <ion-card>
+            <ion-list>
+            <ion-item lines="none">
+              <ion-label>Training title one</ion-label>
+              <ion-icon name="add" slot="end"></ion-icon>
+            </ion-item>
+          </ion-list>
+        </ion-card>
+        <ion-item-divider></ion-item-divider>
+        <ion-card>
+          <ion-list>
+            <ion-item lines="none">
+              <ion-label>Training title one</ion-label>
+              <ion-icon name="trash" slot="end"></ion-icon>
+            </ion-item>
+          </ion-list>
+        </ion-card>
+          </ion-card>
+        </ion-col>
+        <ion-col size="6">
+        <ion-card>
+          <ion-card-title class="custom-title">
+           Add Members Here
+          </ion-card-title>
+          <ion-card>
+            <ion-list>
+            <ion-item lines="none">
+              <ion-label>User one</ion-label>
+              <ion-icon name="add" slot="end"></ion-icon>
+            </ion-item>
+          </ion-list>
+        </ion-card>
+        <ion-item-divider></ion-item-divider>
+        <ion-card>
+          <ion-list>
+            <ion-item lines="none">
+              <ion-label>User two</ion-label>
+              <ion-icon name="trash" slot="end"></ion-icon>
+            </ion-item>
+          </ion-list>
+        </ion-card>
+        </ion-card>
+        </ion-col>
+      </ion-row>
+      
+    </ion-grid>
+    
+
+    <ion-button class="submit">Submit</ion-button>
+  
+ 

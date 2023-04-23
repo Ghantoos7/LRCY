@@ -1,0 +1,77 @@
+.background {
+    --background: #fff;
+}
+
+ion-toolbar{
+    position: relative;
+    --background: #45579A;
+}
+
+.req{
+    font-size: 22px;
+    position: relative;
+    left: 25px;
+    top: 7px;
+}
+
+.header-button{
+    --background: none;
+    --box-shadow: none;
+    position: relative;
+    left: 75%;
+}
+
+.text1{
+    color: #45579A;
+    font-size: 30px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    top: 20px;
+}
+
+.text2{
+    color: gray;
+    font-size: 20px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    top: 25px;
+}
+
+ion-item{
+    position: relative;
+    height: 60px;
+    --background: white;
+    color: black;
+}
+
+.accept{
+    position: relative;
+    padding-left: 20px;
+    color: green;
+}
+
+.decline{
+    position: relative;
+    padding-left: 20px;
+    color: red;
+}
+
+ion-label{
+    padding-left: 15px;
+    color: white;
+}
+
+ion-img{
+    width: 40px;
+}
+
+ion-list{
+    position: relative;
+    top: 20px;
+    background-color: transparent;
+}
+
+
+  

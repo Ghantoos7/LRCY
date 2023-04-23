@@ -1,0 +1,148 @@
+<ion-menu menuId="menuGallery" contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Manage Gallery</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding"> 
+      <ion-button (click) ="closeMenu()" class="menu-button">View Gallery</ion-button>
+    <ion-button (click) ="goToAddForm()" class="menu-button">Add an Event</ion-button>
+  </ion-content>
+</ion-menu>
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title><ion-text class="ann">Gallery</ion-text>
+        <ion-button (click)="goToPanel()" class="header-button"><ion-label>Panel</ion-label></ion-button>
+        <ion-button (click)="goToHome()" class="header-button"><ion-label>Log out</ion-label></ion-button>
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding">
+    
+     <ion-searchbar animated="true" placeholder="Search up your event title"></ion-searchbar>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Youth & Health
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="ion-grid">
+        <ion-row>
+          <ion-col size="3">
+            <ion-card>
+              <div class="badge">
+                <ion-icon name="calendar-number-outline" size="large"></ion-icon>
+              </div>
+              <ion-img src="assets/imgs/gallery-default1.jpg" class="custom-image"></ion-img>
+              <ion-card-header class="custom-card-header">
+                <ion-card-subtitle class="custom-subtitle">Beach Cleanup</ion-card-subtitle>
+              </ion-card-header>
+            </ion-card>
+          </ion-col>
+          <ion-col size="3">
+            <ion-card>
+              <div class="badge">
+                <ion-icon name="calendar-number-outline" size="large"></ion-icon>
+              </div>
+              <ion-img src="assets/imgs/gallery-default1.jpg" class="custom-image"></ion-img>
+              <ion-card-header class="custom-card-header">
+                <ion-card-subtitle class="custom-subtitle">Hiking Adventure</ion-card-subtitle>
+              </ion-card-header>
+            </ion-card>
+          </ion-col>
+          <ion-col size="3">
+            <ion-card>
+              <div class="badge">
+                <ion-icon name="calendar-number-outline" size="large"></ion-icon>
+              </div>
+              <ion-img src="assets/imgs/gallery-default1.jpg" class="custom-image"></ion-img>
+              <ion-card-header class="custom-card-header">
+                <ion-card-subtitle class="custom-subtitle">Hiking Adventure</ion-card-subtitle>
+              </ion-card-header>
+            </ion-card>
+          </ion-col>
+          <ion-col size="3">
+            <ion-card>
+              <div class="badge">
+                <ion-icon name="calendar-number-outline" size="large"></ion-icon>
+              </div>
+              <ion-img src="assets/imgs/gallery-default1.jpg" class="custom-image"></ion-img>
+              <ion-card-header class="custom-card-header">
+                <ion-card-subtitle class="custom-subtitle">Hiking Adventure</ion-card-subtitle>
+              </ion-card-header>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </div>
+    
+    </ion-card-content>
+     
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Environment
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="ion-grid">
+        <ion-row>
+          <ion-col size="3">
+            <ion-card>
+              <div class="badge-env">
+                <ion-icon name="calendar-number-outline" size="large"></ion-icon>
+              </div>
+              <ion-img src="assets/imgs/gallery-default1.jpg" class="custom-image"></ion-img>
+              <ion-card-header class="custom-card-header-env">
+                <ion-card-subtitle class="custom-subtitle">Beach Cleanup</ion-card-subtitle>
+              </ion-card-header>
+            </ion-card>
+          </ion-col>
+          <ion-col size="3">
+            <ion-card>
+              <div class="badge-env">
+                <ion-icon name="calendar-number-outline" size="large"></ion-icon>
+              </div>
+              <ion-img src="assets/imgs/gallery-default1.jpg" class="custom-image"></ion-img>
+              <ion-card-header class="custom-card-header-env">
+                <ion-card-subtitle class="custom-subtitle">Hiking Adventure</ion-card-subtitle>
+              </ion-card-header>
+            </ion-card>
+          </ion-col>
+          <ion-col size="3">
+            <ion-card>
+              <div class="badge-env">
+                <ion-icon name="calendar-number-outline" size="large"></ion-icon>
+              </div>
+              <ion-img src="assets/imgs/gallery-default1.jpg" class="custom-image"></ion-img>
+              <ion-card-header class="custom-card-header-env">
+                <ion-card-subtitle class="custom-subtitle">Hiking Adventure</ion-card-subtitle>
+              </ion-card-header>
+            </ion-card>
+          </ion-col>
+          <ion-col size="3">
+            <ion-card>
+              <div class="badge-env">
+                <ion-icon name="calendar-number-outline" size="large"></ion-icon>
+              </div>
+              <ion-img src="assets/imgs/gallery-default1.jpg" class="custom-image"></ion-img>
+              <ion-card-header class="custom-card-header-env">
+                <ion-card-subtitle class="custom-subtitle">Hiking Adventure</ion-card-subtitle>
+              </ion-card-header>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </div>
+    
+    </ion-card-content>
+     
+  </ion-card>
+ 
+
+

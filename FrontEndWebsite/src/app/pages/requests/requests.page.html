@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-text class="req">Requests</ion-text>
+
+    <ion-button (click)="goToPanel()" class="header-button"><ion-label>Panel</ion-label></ion-button>
+    <ion-button (click)="goToHome()" class="header-button"><ion-label>Log out</ion-label></ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="background">
+
+  <ion-text class="text1">Password Reset Requests</ion-text>
+  <ion-text class="text2">Verify with members if they requested the password reset before approving or denying!</ion-text>
+
+  <ion-list [inset]=true>
+
+    <ion-item>
+      <ion-img src="assets/imgs/profile-picture.png"></ion-img>
+      <ion-grid>
+        <ion-row>
+          <ion-col><ion-label>Joe Wehbe</ion-label></ion-col>
+          <ion-col>1/2/2023</ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-icon (click)="confirm()" class="accept" name="checkmark-outline"></ion-icon>
+      <ion-icon (click)="confirm()" class="decline" name="close-outline"></ion-icon>
+    </ion-item>
+
+    <ion-item>
+      <ion-img src="assets/imgs/profile-picture.png"></ion-img>
+      <ion-grid>
+        <ion-row>
+          <ion-col><ion-label>John Doe</ion-label></ion-col>
+          <ion-col>1/12/2023</ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-icon (click)="confirm()" class="accept" name="checkmark-outline"></ion-icon>
+      <ion-icon (click)="confirm()" class="decline" name="close-outline"></ion-icon>
+    </ion-item>
+
+    <ion-item>
+      <ion-img src="assets/imgs/profile-picture.png"></ion-img>
+      <ion-grid>
+        <ion-row>
+          <ion-col><ion-label>Theresa Roukaibe</ion-label></ion-col>
+          <ion-col>1/2/2023</ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-icon (click)="confirm()" class="accept" name="checkmark-outline"></ion-icon>
+      <ion-icon (click)="confirm()" class="decline" name="close-outline"></ion-icon>
+    </ion-item>
+
+    <ion-item>
+      <ion-img src="assets/imgs/profile-picture.png"></ion-img>
+      <ion-grid>
+        <ion-row>
+          <ion-col><ion-label>Najat Nehme</ion-label></ion-col>
+          <ion-col>1/1/2023</ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-icon (click)="confirm()" class="accept" name="checkmark-outline"></ion-icon>
+      <ion-icon (click)="confirm()" class="decline" name="close-outline"></ion-icon>
+    </ion-item>
+    
+    <ion-item>
+      <ion-img src="assets/imgs/profile-picture.png"></ion-img>
+      <ion-grid>
+        <ion-row>
+          <ion-col><ion-label>Georgio Ghnatos</ion-label></ion-col>
+          <ion-col>1/8/2023</ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-icon (click)="confirm()" class="accept" name="checkmark-outline"></ion-icon>
+      <ion-icon (click)="confirm()" class="decline" name="close-outline"></ion-icon>
+    </ion-item>
+
+  </ion-list>
+</ion-content>

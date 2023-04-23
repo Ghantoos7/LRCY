@@ -1,0 +1,138 @@
+<ion-content [fullscreen]="true">
+
+  <ion-menu menuId="menuGoals" contentId="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Manage Gallery</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding"> 
+      <ion-button class="menu-button"(click) = "goToManageProfiles()">View Members</ion-button>
+      <ion-button class="menu-button"(click) = "closeMenu()">Add Member</ion-button>
+      <ion-button class="menu-button"(click) = "goToAddTraining()">Add Training</ion-button>
+      <ion-button class="menu-button"(click) = "goToDeleteTraining()">Remove Training</ion-button>
+    </ion-content>
+  </ion-menu>
+
+  <div id="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title><ion-text class="ann">Members</ion-text>
+          <ion-button (click)="goToPanel()" class="header-button"><ion-label>Panel</ion-label></ion-button>
+          <ion-button (click)="goToHome()" class="header-button"><ion-label>Log out</ion-label></ion-button>
+        </ion-title>
+      </ion-toolbar>
+    </ion-header>
+  
+    <ion-grid class="ion-no-padding ion-align-items-center ion-justify-content-center">
+  
+      <ion-row>
+        <ion-col size-md="10" size-lg="9" size-xl="8" class="ion-padding"  offset-md="1" offset-lg="2" offset-xl="2">
+          <div class="custom-div">
+            <ion-text class="form-title">John Doe</ion-text>
+  
+            <div class="text-div"></div>
+            <div class="inner-div">
+              <ion-grid>
+                <ion-card-title> &nbsp; Edit Member Information</ion-card-title>
+                <ion-row>
+                  <ion-col size="6">
+                    <ion-item>
+                      <ion-label>First Name</ion-label>
+                      <ion-input class="first-card-input"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size="6">
+                    <ion-item class="custom-input">
+                      <ion-label class="custom-label">Last Name</ion-label>
+                      <ion-input class="first-card-input"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                  
+                </ion-row>
+                <ion-row>
+                  <ion-col size="6">
+                    <ion-item>
+                      <ion-label>Volunteer ID</ion-label>
+                      <ion-input class="first-card-input"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size="6">
+                    
+                    <ion-item>
+                      <ion-select aria-label="User Privilege" interface="popover" placeholder="Privilege Type">
+                        <ion-select-option value="user">User</ion-select-option>
+                        <ion-select-option value="admin">Admin</ion-select-option>
+                      </ion-select>
+                    </ion-item>
+                 
+                  </ion-col>
+                  
+                </ion-row>
+  
+                <ion-row>
+                  <ion-col size="6">
+                    <ion-item>
+                      <ion-label>User Position</ion-label>
+                      <ion-input class="first-card-input"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size="6">
+                    <ion-item>
+                      <ion-select aria-label="Status" interface="popover" placeholder="Status">
+                        <ion-select-option value="active">Active</ion-select-option>
+                        <ion-select-option value="inactive">Inactive</ion-select-option>
+                      </ion-select>
+                    </ion-item>
+                  </ion-col>
+                  
+                </ion-row>
+                <ion-row>
+                  <ion-col size="6">
+                    <ion-item>
+                      <ion-label>Date of Birth</ion-label>
+                      <ion-input class="first-card-input" type="date" ></ion-input>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size="6">
+                    <ion-item>
+                      <ion-label>Gender</ion-label>
+                      <ion-input class="first-card-input"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size="6">
+                    <ion-item>
+                      <ion-label>Start Date</ion-label>
+                      <ion-input class="first-card-input" type="date"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size="6">
+                    <ion-item>
+                      <ion-label>End Date</ion-label>
+                      <ion-input class="first-card-input" type="date"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                  
+                </ion-row>
+                
+                
+              </ion-grid>
+            
+            </div>
+                      
+          </div>
+          <ion-avatar class="img">
+            <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
+          </ion-avatar>
+        </ion-col>
+      </ion-row>  
+    </ion-grid>
+
+    <ion-button class="save">Save Changes</ion-button>
+    <ion-button (click)="confirm()"class="delete">Delete Profile</ion-button>
+
+  </div>
+</ion-content>
