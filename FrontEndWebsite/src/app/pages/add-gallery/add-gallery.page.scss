@@ -15,7 +15,7 @@ ion-content{
 }
 
 .custom-div{
-  height: 80vh;
+  height: 70vh;
   width: 880px;
   display: flex;
   justify-content: space-between;
@@ -83,13 +83,19 @@ h1{
 
 ion-label{
   margin-right: 5px;
+  color: #45579A;
 }
 
 .save{
-  margin-top: 2%;
-  margin-left: 80%;
-  --color: white !important;
-  --background:#45579A !important;
+  position: relative;
+  margin: 0 auto;
+  margin-left: 35%;
+  margin-top: 20px;
+  margin-bottom: 50px;
+  --background: white !important;
+  --color:#45579A !important;
+  width: 30%;
+  height: 60px;
 }
 
 .inner-div {
@@ -178,3 +184,26 @@ ion-card{
   margin-bottom: 30px;
 }
 
+.ann{
+  position: relative;
+  top: 7px;
+  color: #45579A;
+}
+
+.header-button{
+  --background: none;
+  --box-shadow: none;
+  position: relative;
+  left: 75%;
+}
+
+.menu-button{
+  position: relative;
+  width: 100%;
+  --background: #45579A;
+}
+
+ion-toolbar{
+  position: relative;
+  --background: white;
+}

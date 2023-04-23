@@ -1,7 +1,13 @@
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+  <ion-header>
     <ion-toolbar>
-      <ion-title size="large">member-profile</ion-title>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title><ion-text class="ann">Yearly Goals</ion-text>
+        <ion-button class="header-button"><ion-label>Panel</ion-label></ion-button>
+        <ion-button class="header-button"><ion-label>Log out</ion-label></ion-button>
+      </ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -14,7 +20,6 @@
 
           <ion-button class="edit-btn" size="small" ><ion-icon name="create"></ion-icon>Add Cover Photo</ion-button>
           <div class="text-div"></div>
-          <ion-icon size="large" slot="end" name="close" (click)="goBack()" class="close-icon"></ion-icon>
           <div class="inner-div">
             <ion-grid>
               <ion-card-title> &nbsp; Event Information</ion-card-title>
@@ -85,7 +90,6 @@
               
             </ion-grid>
           
-            <ion-button class="save">Add Event</ion-button>
           </div>
          
           <img class="img" alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
@@ -158,8 +162,9 @@
           <ion-button class="add-img">Add Images</ion-button>
           </ion-card>
         </ion-col>
-        
       </ion-row>
     </ion-grid>
   </ion-card>
+  <ion-button class="save">Add Gallery</ion-button>
+
 </ion-content>
