@@ -629,6 +629,7 @@ class PostController extends Controller {
         $replies->transform(function ($reply) {
             unset($reply->field1, $reply->field2, $reply->created_at, $reply->updated_at);
             $reply->user = volunteer_user::find($reply->user_id);
+            unset($reply->user_id);
             return $reply;
         });
 

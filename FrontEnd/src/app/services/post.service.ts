@@ -44,7 +44,7 @@ export class PostService {
     return response;
   }
   
-  deleteComment(comment_id: number, user_id: string) {
+  deleteComment(comment_id: number) {
     const body = { comment_id: comment_id, user_id: this.user_id };
     const response = this.http.post(this.base_url + 'delete_comment', body, { headers: this.getAuthHeaders() });
     return response;
@@ -79,6 +79,12 @@ export class PostService {
   
   getReplies(comment_id: number) {
     const response = this.http.get(this.base_url + 'get_replies/' + comment_id, { headers: this.getAuthHeaders() });
+    return response;
+  }
+
+  deleteReply(reply_id: number) {
+    const body = { reply_id: reply_id, user_id: this.user_id };
+    const response = this.http.post(this.base_url + 'delete_reply', body, { headers: this.getAuthHeaders() });
     return response;
   }
 

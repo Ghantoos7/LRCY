@@ -191,7 +191,7 @@ export class CommentsPage implements OnInit {
         {
           text: 'Delete',
           handler: () => {
-            this.postService.deleteComment(comm_id, this.current_id).subscribe(response=>{
+            this.postService.deleteComment(comm_id).subscribe(response=>{
               const str = JSON.stringify(response);
               const result = JSON.parse(str);
               const status = result['status'];
@@ -210,6 +210,37 @@ export class CommentsPage implements OnInit {
     }).then(alert => alert.present());
   }
 
+  deleteReply(reply_id: number){
+    console.log(reply_id);
+    this.alertController.create({
+      header: 'Confirm',
+      message: 'Are you sure you want to delete this reply?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        },
+        {
+          text: 'Delete',
+          handler: () => {
+            this.postService.deleteReply(reply_id).subscribe(response=>{
+              const str = JSON.stringify(response);
+              const result = JSON.parse(str);
+              const status = result['status'];
+              if(status == "success"){
+                window.location.reload();
+              } else if (status == "error"){
+                this.alrt.create({
+                  message: 'Something went wrong. Please try again.',
+                  buttons: ['OK']
+                }).then(alrt => alrt.present());
+              }
+            });
+          }
+        }
+      ]
+    }).then(alert => alert.present());
+  }
 
   goBack(){
     this.router.navigate(['/feed']);
