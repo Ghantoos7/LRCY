@@ -21,7 +21,10 @@
   <ion-text class="comment-word">Comments</ion-text>
   <ion-icon (click)="openAlert()" id="sort" class="sort" name="options-outline"></ion-icon>
 
+  <div class="comment-container"><ion-card class="empty-card"></ion-card></div>
+
   <div class="comment-container" *ngFor="let comment of comments; let i = index">
+    
     <ion-card class="comment-card">
       <img class="profile-picture" src="{{comment['user'].user_profile_pic}}">
       <ion-text class="username">{{comment['user'].first_name}} {{comment['user'].last_name}}</ion-text>
@@ -50,5 +53,6 @@
         </div>          
       </ion-card-content>
     </ion-card>
+
   </div>
 </ion-content>
