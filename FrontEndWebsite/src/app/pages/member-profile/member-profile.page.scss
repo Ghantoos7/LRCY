@@ -92,8 +92,7 @@ ion-label{
   position: relative;
   margin: 0 auto;
   margin-left: 35%;
-  margin-top: 20px;
-  margin-bottom: 50px;
+  margin-top: 10px;
   --background: white !important;
   --color:#45579A !important;
   width: 30%;
@@ -216,4 +215,16 @@ ion-toolbar{
 
 ion-title{
   color: #45579A;
+}
+
+.delete{
+  position: relative;
+  margin: 0 auto;
+  margin-left: 35%;
+  margin-top: 10px;
+  margin-bottom: 50px;
+  --background: white !important;
+  --color:red !important;
+  width: 30%;
+  height: 60px;
 }

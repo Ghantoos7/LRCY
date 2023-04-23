@@ -1,3 +1,16 @@
+<ion-menu menuId="menuProfiles" contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Manage Profiles</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding"> 
+    <ion-button class="menu-button"(click) = "goBack()">View Members</ion-button>
+    <ion-button class="menu-button"(click) = "goToAddForm()">Add Member</ion-button>
+    <ion-button class="menu-button"(click) = "closeMenu()">Add Training</ion-button>
+    <ion-button class="menu-button"(click) = "goToDeleteTraining()">Remove Training</ion-button>
+ </ion-content>
+</ion-menu>
 
 <div class="ion-page" id="main-content">
   <ion-header>
@@ -5,7 +18,10 @@
       <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
-      <ion-title>Add Trainings</ion-title>
+      <ion-title><ion-text class="ann">Training</ion-text>
+        <ion-button (click)="goToPanel()" class="header-button"><ion-label class="header-label">Panel</ion-label></ion-button>
+        <ion-button (click)="goToHome()" class="header-button"><ion-label class="header-label">Log out</ion-label></ion-button>
+      </ion-title>
       <ion-icon size="large" slot="end" name="close" (click)="goBack()"></ion-icon>
     </ion-toolbar>
   </ion-header>
@@ -16,7 +32,7 @@
         <ion-col size="6">
           <ion-card>
             <ion-card-title class="custom-title">
-              Add Trainings Here
+              Add Training Here
             </ion-card-title>
             <ion-card>
             <ion-list>

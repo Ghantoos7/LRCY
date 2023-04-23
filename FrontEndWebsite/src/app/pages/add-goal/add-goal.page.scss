@@ -36,11 +36,11 @@ ion-card-title{
     position: relative;
     height: 100px;
     border-radius: 10px;
-    --background: #E9E7E7;
+    --background: #bcb9b9;
     --color: #8F8F8F;
     --padding-end: 45px;
     --padding-start: 20px;
-    --placeholder-color: #8F8F8F;
+    --placeholder-color: white;
     --placeholder-opacity: 0.8;
 }
 
@@ -69,10 +69,10 @@ ion-label{
 .start-date{
     position: relative;
     border-radius: 10px;
-    --background: #E9E7E7;
+    --background: #bcb9b9;
     width: 45%;
     left: 2%;
-    --color: black;
+    --color: white;
     --padding-end: 45px;
     --padding-start: 20px;
     --placeholder-color: #8F8F8F;
@@ -93,11 +93,11 @@ ion-label{
 .end-date{
     position: absolute;
     border-radius: 10px;
-    --background: #E9E7E7;
+    --background: #bcb9b9;
     width: 45%;
     left: 53%;
     bottom: 13px;
-    --color: black;
+    --color: white;
     --padding-end: 45px;
     --padding-start: 20px;
     --placeholder-color: #8F8F8F;
