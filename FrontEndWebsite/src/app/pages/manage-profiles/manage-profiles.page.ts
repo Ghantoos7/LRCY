@@ -47,4 +47,8 @@ export class ManageProfilesPage implements OnInit {
     this.router.navigate(['/panel']);
   }
 
+  closeMenu() {
+    this.menuCtrl.close();
+  }
+
 }

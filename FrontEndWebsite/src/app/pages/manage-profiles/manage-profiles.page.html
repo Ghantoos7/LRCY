@@ -4,11 +4,12 @@
       <ion-title>Manage Profiles</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-content class="ion-padding"> <ion-list>
-    <ion-item (click) = "goToAddForm()">Add Member</ion-item>
-    <ion-item (click) = "goToAddTraining()">Add Training</ion-item>
-    <ion-item (click) = "goToDeleteTraining()">Remove Training</ion-item>
-  </ion-list></ion-content>
+  <ion-content class="ion-padding"> 
+    <ion-button class="menu-button"(click) = "closeMenu()">View Members</ion-button>
+    <ion-button class="menu-button"(click) = "goToAddForm()">Add Member</ion-button>
+    <ion-button class="menu-button"(click) = "goToAddTraining()">Add Training</ion-button>
+    <ion-button class="menu-button"(click) = "goToDeleteTraining()">Remove Training</ion-button>
+ </ion-content>
 </ion-menu>
 <div class="ion-page" id="main-content">
   <ion-header>
@@ -16,7 +17,7 @@
       <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
-      <ion-title><ion-text class="ann">Yearly Goals</ion-text>
+      <ion-title><ion-text class="ann">Members</ion-text>
         <ion-button (click)="goToPanel()" class="header-button"><ion-label>Panel</ion-label></ion-button>
         <ion-button (click)="goToHome()" class="header-button"><ion-label>Log out</ion-label></ion-button>
       </ion-title>
