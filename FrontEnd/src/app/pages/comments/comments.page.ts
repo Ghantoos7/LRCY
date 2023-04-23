@@ -57,6 +57,7 @@ export class CommentsPage implements OnInit {
         for (let i = 0; i < this.comments.length; i++) {
           const commentId = this.comments[i].id;
           this.isLiked[commentId] = localStorage.getItem(`comment_like_${commentId}`) === 'true';
+          console.log(this.isLiked);
         }
       }
     });
@@ -134,9 +135,9 @@ export class CommentsPage implements OnInit {
     this.postService.likeComment(comment_id, this.current_id).subscribe((data: any) => {
       localStorage.setItem(`comment_like_${comment_id}`, 'true'); // store the like state in Local Storage
       this.isLiked[comment_id] = true;
-     
+      window.location.reload();
     });
-    window.location.reload();
+    
    
   }
 
@@ -151,8 +152,9 @@ export class CommentsPage implements OnInit {
     this.postService.unlikeComment(comment_id, this.current_id).subscribe((data: any) => {
       localStorage.setItem(`comment_like_${comment_id}`, 'false'); // store the like state in Local Storage
       this.isLiked[comment_id] = false;
+      window.location.reload();
     });
-    window.location.reload();
+   
    
   }
 

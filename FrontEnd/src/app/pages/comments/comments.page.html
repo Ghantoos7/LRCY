@@ -23,9 +23,9 @@
 
   <div class="comment-container"><ion-card class="empty-card"></ion-card></div>
 
-  <div class="comment-container" *ngFor="let comment of comments; let i = index">
+  <div class="comment-container" >
     
-    <ion-card class="comment-card">
+    <ion-card class="comment-card" *ngFor="let comment of comments; let i = index">
       <img class="profile-picture" src="{{comment['user'].user_profile_pic}}">
       <ion-text class="username">{{comment['user'].first_name}} {{comment['user'].last_name}}</ion-text>
       <ion-text class="comment-date">{{getDaysAgo(comment.comment_date)}} d</ion-text>
