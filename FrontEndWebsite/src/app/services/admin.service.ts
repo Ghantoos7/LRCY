@@ -11,6 +11,8 @@ export class AdminService {
   constructor(private http:HttpClient) { }
 
   base_url = "http://localhost:8000/api/v0.1/admin/";
+  base_url_event = "http://localhost:8000/api/v0.1/event/";
+
 
   private getAuthHeaders(): HttpHeaders {
     const token = localStorage.getItem('authToken');
@@ -50,6 +52,12 @@ export class AdminService {
     
       const response = this.http.post(this.base_url + 'decline_request', body, options);
       return response;
+  }
+
+  getYearlyGoals(id: string) {
+    const headers = this.getAuthHeaders();
+    const response = this.http.get(this.base_url_event + 'get_yearly_goals/' + id, { headers: headers });
+    return response;
   }
 
 }
