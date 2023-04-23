@@ -22,12 +22,25 @@ export class YearlyGoalsPage implements OnInit {
   username = localStorage.getItem('username') as string;
   user_profile_pic = localStorage.getItem('user_profile_pic') as string;
   branch_id = localStorage.getItem('branch_id') as string;
+  filteredGoals: any;
+  searchTerm: string = '';
 
   ngOnInit() {
     this.service.getYearlyGoals(this.branch_id).subscribe((response: any) => {
       const allGoals = [].concat.apply([], Object.values(response['goals']));
       this.yearlyGoals = allGoals;
+      this.filteredGoals = allGoals;
       console.log(this.yearlyGoals);
+    });
+  }
+
+  onSearchChange() {
+    this.filteredGoals = this.filterGoals(this.searchTerm);
+  }
+
+  filterGoals(searchTerm: string) {
+    return this.yearlyGoals.filter((goal: any) => {
+      return goal.goal_name.toLowerCase().includes(searchTerm.toLowerCase());
     });
   }
 
