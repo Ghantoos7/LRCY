@@ -28,4 +28,16 @@ export class AdminService {
     return response;
   }
 
+  acceptRequest(request_id: string){
+    const headers = this.getAuthHeaders().set('Content-Type', 'application/json');
+      const options = { headers: headers };
+    
+      const body = {
+        'request_id': request_id
+      };
+    
+      const response = this.http.post(this.base_url + 'accept_request', body, options);
+      return response;
+  }
+
 }

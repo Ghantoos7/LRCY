@@ -22,7 +22,7 @@
           <ion-col>{{request.request_date}}</ion-col>
         </ion-row>
       </ion-grid>
-      <ion-icon (click)="confirmAccept()" class="accept" name="checkmark-outline"></ion-icon>
+      <ion-icon (click)="confirmAccept(request.id)" class="accept" name="checkmark-outline"></ion-icon>
       <ion-icon (click)="confirmDecline()" class="decline" name="close-outline"></ion-icon>
     </ion-item>
 
