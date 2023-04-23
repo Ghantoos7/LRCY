@@ -100,4 +100,18 @@ export class PostService {
     const response = this.http.post(this.base_url + 'delete_post', body, options);
     return response;
   }
+
+  editComment(comment_id: number, comment_content: string) {
+    const headers = this.getAuthHeaders().set('Content-Type', 'application/json');
+    const options = { headers: headers };
+  
+    const body = {
+      'comment_id': comment_id,
+      'comment_content': comment_content,
+      'user_id': this.user_id
+    };
+  
+    const response = this.http.post(this.base_url + 'edit_comment', body, options);
+    return response;
+  }
 }

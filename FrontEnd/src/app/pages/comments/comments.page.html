@@ -25,6 +25,7 @@
     <ion-card class="comment-card">
       <img class="profile-picture" src="{{comment['user'].user_profile_pic}}">
       <ion-text class="username">{{comment['user'].first_name}} {{comment['user'].last_name}}</ion-text>
+      <ion-icon (click)="editComment(comment.id)" *ngIf="current_id == comment['user'].id" class="edit-comment" name="pencil"></ion-icon>
       <ion-icon (click)="deleteComment(comment.id)" *ngIf="current_id == comment['user'].id" class="delete-comment" name="trash-outline"></ion-icon>
       <ion-text class="comment">{{comment.comment_content}}</ion-text>
       <ion-icon [class.active]="isLiked[comment.id]" name="{{ isLiked[comment.id] ? 'heart' : 'heart-outline' }}" (click)="toggleLike(comment.id)" class="likes"></ion-icon>
@@ -40,6 +41,7 @@
           <img class="reply-profile-picture" src="{{reply['user'].user_profile_pic}}">
           <ion-text class="reply-username">{{reply['user'].first_name}} {{reply['user'].last_name}}</ion-text>
           <ion-icon (click)="deleteReply(reply.id)" *ngIf="current_id == reply['user'].id" class="delete-reply" name="trash-outline"></ion-icon>
+          <ion-icon *ngIf="current_id == reply['user'].id" class="edit-reply" name="pencil"></ion-icon>
           <ion-text class="reply-comment">{{reply.reply_content}}</ion-text>
         </div>          
       </ion-card-content>

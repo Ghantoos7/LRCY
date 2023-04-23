@@ -30,6 +30,8 @@ export class CommentsPage implements OnInit {
   comment_likes: any;
   repliesOpen: {[key: number]: boolean} = {};
   replies: any = [];
+
+  content: string = '';
   constructor(private alrt:AlertController, private router:Router, private postService:PostService, private alertController:AlertController) { }
  
 
@@ -246,6 +248,42 @@ export class CommentsPage implements OnInit {
     this.router.navigate(['/feed']);
   }
 
+  editComment(comm_id: number){
+    this.alertController.create({
+      header: 'Edit Comment',
+      inputs: [
+        {
+          name: 'content',
+          type: 'text',
+          value: this.content
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        },
+        {
+          text: 'Edit',
+          handler: (data) => {
+            this.postService.editComment(comm_id, data.content).subscribe(response=>{
+              const str = JSON.stringify(response);
+              const result = JSON.parse(str);
+              const status = result['status'];
+              if(status == "success"){
+                window.location.reload();
+              } else if (status == "error"){
+                this.alrt.create({
+                  message: 'Something went wrong. Please try again.',
+                  buttons: ['OK']
+                }).then(alrt => alrt.present());
+              }
+            });
+          }
+        }
+      ]
+    }).then(alert => alert.present());
+  }
 
 
 }
