@@ -8,7 +8,7 @@
     </ion-header>
     <ion-content class="ion-padding"> 
         <ion-button (click)="goToGallery()"class="menu-button">View Gallery</ion-button>
-        <ion-button (click)="closeMenu()" class="menu-button">Add a gallery</ion-button>
+        <ion-button (click)="closeMenu()" class="menu-button">Add an Event</ion-button>
     </ion-content>
   </ion-menu>
 
@@ -18,7 +18,7 @@
         <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <ion-title><ion-text class="ann">Yearly Goals</ion-text>
+        <ion-title><ion-text class="ann">Gallery</ion-text>
           <ion-button (click)="goToPanel()" class="header-button"><ion-label>Panel</ion-label></ion-button>
           <ion-button (click)="goToHome()" class="header-button"><ion-label>Log out</ion-label></ion-button>
         </ion-title>
@@ -30,7 +30,7 @@
       <ion-row>
         <ion-col size-md="10" size-lg="9" size-xl="8" class="ion-padding"  offset-md="1" offset-lg="2" offset-xl="2">
           <div class="custom-div">
-            <ion-text class="form-title">Add Gallery</ion-text>
+            <ion-text class="form-title">Add Event</ion-text>
   
             <ion-button class="edit-btn" size="small" ><ion-icon name="create"></ion-icon>Add Cover Photo</ion-button>
             <div class="text-div"></div>
@@ -179,6 +179,6 @@
         </ion-row>
       </ion-grid>
     </ion-card>
-    <ion-button class="save">Add Gallery</ion-button>
+    <ion-button class="save">Add Event</ion-button>
   </div>
 </ion-content>
