@@ -10,7 +10,7 @@ export class AdminService {
 
   constructor(private http:HttpClient) { }
 
-  base_url = "http://localhost:8000/api/v0.1/admin";
+  base_url = "http://localhost:8000/api/v0.1/admin/";
 
   private getAuthHeaders(): HttpHeaders {
     const token = localStorage.getItem('authToken');
@@ -24,7 +24,7 @@ export class AdminService {
 
   getRequests(branch_id: string){
     const headers = this.getAuthHeaders();
-    const response = this.http.get(this.base_url + '/get_requests/' + branch_id, { headers: headers });
+    const response = this.http.get(this.base_url + 'get_requests/' + branch_id, { headers: headers });
     return response;
   }
 
@@ -37,6 +37,18 @@ export class AdminService {
       };
     
       const response = this.http.post(this.base_url + 'accept_request', body, options);
+      return response;
+  }
+
+  declineRequest(request_id: string){
+    const headers = this.getAuthHeaders().set('Content-Type', 'application/json');
+      const options = { headers: headers };
+    
+      const body = {
+        'request_id': request_id
+      };
+    
+      const response = this.http.post(this.base_url + 'decline_request', body, options);
       return response;
   }
 

@@ -63,13 +63,23 @@ export class RequestsPage implements OnInit {
     await alert.present();
   }
 
-  async confirmDecline() {
+  async confirmDecline(request_id: string) {
     const alert = await this.alertController.create({
       header: 'Are you sure you want to proceed?',
       cssClass: 'my-custom-class',
       buttons: [
         {
           text: 'Yes',
+          handler: () => {
+            this.adminService.declineRequest(request_id).subscribe((data)=>{
+              const response = data;
+              const parsedResponse = JSON.parse(JSON.stringify(response));
+              console.log(parsedResponse);
+              if (parsedResponse.status == "success") {
+                this.ngOnInit();
+              }
+            });
+          }
         },
         {
           text: 'Cancel',
