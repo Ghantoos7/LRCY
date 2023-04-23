@@ -39,4 +39,12 @@ export class ManageProfilesPage implements OnInit {
     this.router.navigate(['/delete-training']);
   }
 
+  goToHome(){
+    this.router.navigate(['/home']);
+  }
+
+  goToPanel(){
+    this.router.navigate(['/panel']);
+  }
+
 }
