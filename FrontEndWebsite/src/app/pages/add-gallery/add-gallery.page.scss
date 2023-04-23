@@ -8,7 +8,7 @@ ion-content{
 }
 
 .custom-div{
-  height: 73vh;
+  height: 80vh;
   width: 880px;
   display: flex;
   justify-content: space-between;
@@ -27,7 +27,7 @@ ion-content{
 }
 
 .add-member{
-  width: 90%;
+  width: 110%;
   margin: 10px;
   --background: #bcb9b9; 
   --padding-end: 10px; 
@@ -40,7 +40,7 @@ ion-fab-button {
 }
 
 .add-img{
-  margin-left: 30%;
+  margin-left: 33%;
   --color: white !important;
   --background:#45579A !important;
 }
@@ -147,10 +147,27 @@ ion-card-title{
 ion-card{
   --background: white;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
-
 }
 
 .list{
   background-color: white;
+}
+
+.add{
+  position: absolute;
+  left: 90px;
+}
+
+.list-img{
+  background-color: white;
+  height: 56px;
+}
+
+.mountains-img{
+  height: 40px;
+}
+
+.img-trash{
+  margin-bottom: 30px;
 }
 
