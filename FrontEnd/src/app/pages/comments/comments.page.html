@@ -43,7 +43,7 @@
       </ion-item>
 
       <ion-card-content class="replies-container" *ngIf="repliesOpen[comment.id]">
-        <div class="reply-container" *ngFor="let reply of replies">
+        <div class="reply-container" *ngFor="let reply of replies[comment.id]">
           <img class="reply-profile-picture" src="{{reply['user'].user_profile_pic}}">
           <ion-text class="reply-username">{{reply['user'].first_name}} {{reply['user'].last_name}}</ion-text>
           <ion-icon (click)="deleteReply(reply.id)" *ngIf="current_id == reply['user'].id" class="delete-reply" name="trash-outline"></ion-icon>

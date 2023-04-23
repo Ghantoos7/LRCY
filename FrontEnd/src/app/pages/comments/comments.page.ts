@@ -28,7 +28,7 @@ export class CommentsPage implements OnInit {
   post_id: number = 0;
   isLiked: {[key: number]: boolean} = {};
   comment_likes: any;
-  repliesOpen: {[key: number]: boolean} = {};
+  repliesOpen: { [comment_id: number]: boolean } = {};
   replies: any = [];
 
   content: string = '';
@@ -143,10 +143,11 @@ export class CommentsPage implements OnInit {
 
   openReplies(comment_id: number){
     this.postService.getReplies(comment_id).subscribe((data: any) => {
-      this.replies = data['replies'];
+      this.replies[comment_id] = data['replies'];
+      this.repliesOpen[comment_id] = !this.repliesOpen[comment_id];
     });
-    this.repliesOpen[comment_id] = !this.repliesOpen[comment_id];
   }
+   
 
   unlikeComment(comment_id: number) {
     this.postService.unlikeComment(comment_id, this.current_id).subscribe((data: any) => {
