@@ -55,7 +55,8 @@ class AdminController extends Controller {
             // Creates a new token for the user
             $token = $user->createToken('authToken')->plainTextToken;
             return response()->json([
-                'status' => $user,
+                'status' => 'Login successful',
+                'user' => $user,
                 'token' => $token
             ]);
         }
@@ -84,7 +85,7 @@ class AdminController extends Controller {
         login_attempt::create([
         'login_attempt_time' => date('H:i:s'),
         'login_attempt_date' => date('Y-m-d'),
-        'user_id' => $organization_id,
+        'organization_id' => $organization_id,
         ]);
 
     }
@@ -93,7 +94,7 @@ class AdminController extends Controller {
     // Checks if the user has exceeded the maximum number of login attempts
     private function hasExceededLoginAttempts($organization_id) {
         
-        $last_attempt = login_attempt::where('user_id', '=', $organization_id)->latest()->first();
+        $last_attempt = login_attempt::where('organization_id', '=', $organization_id)->latest()->first();
 
         // Check if there is no previous login attempt made by the user
         if (!$last_attempt) {
@@ -110,7 +111,7 @@ class AdminController extends Controller {
         }
 
         // Check if the user has exceeded the maximum number of login attempts
-        $total_attempts = login_attempt::where('user_id', '=', $organization_id)->count();
+        $total_attempts = login_attempt::where('organization_id', '=', $organization_id)->count();
         return ($total_attempts >= 5);
 
     }
@@ -119,7 +120,7 @@ class AdminController extends Controller {
     // Resets the number of login attempts to 0
     private function resetLoginAttempts($organization_id) {
 
-        login_attempt::where('user_id', '=', $organization_id)->delete();
+        login_attempt::where('organization_id', '=', $organization_id)->delete();
 
     }
 
@@ -255,6 +256,41 @@ class AdminController extends Controller {
         }
 
     }
+
+
+    function getRequests($branch_id) {
+        // Get all the requests regardless of branch
+        $requests = Recover_request::where('request_status', 0)->get();
+    
+        // get the user IDs of the users who made the requests and check if they are in the same branch as the one provided
+        $user_ids = $requests->pluck('user_id')->toArray();
+    
+        $users = Volunteer_user::whereIn('id', $user_ids)->where('branch_id', $branch_id)->get();
+    
+        // Get the user IDs of the users who are in the same branch as the one provided
+        $user_ids = $users->pluck('id')->toArray();
+    
+        // Get the requests that are made by users in the same branch as the one provided, and make fields hidden, and return the user who made the request. check for null values
+        $requests = $requests->whereIn('user_id', $user_ids)->map(function ($request) {
+            $request->makeHidden(['field1', 'field2', 'created_at', 'updated_at']);
+            $request->user = Volunteer_user::where('id', $request->user_id)->first();
+            return $request;
+        });
+    
+        // Return the requests or an error message if no requests are found
+        if ($requests->count() > 0) {
+            return response()->json([
+                'status' => 'success',
+                'requests' => $requests
+            ]);
+        } else {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'No requests found'
+            ]);
+        }
+    }
+    
 
 
     function acceptRequest(Request $request) {

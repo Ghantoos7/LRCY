@@ -96,6 +96,7 @@ Route::group(["prefix" => "v0.1",], function(){
             Route::post("add_user", [AdminController::class, "addUser"]);
             Route::post("edit_user", [AdminController::class, "editUser"]);
             Route::post("delete_user", [AdminController::class, "deleteUser"]);
+            Route::get("get_requests/{branch_id}", [AdminController::class, "getRequests"]);
             Route::post("accept_request", [AdminController::class, "acceptRequest"]);
             Route::post("decline_request", [AdminController::class, "declineRequest"]);
             Route::post("send_announcement", [AdminController::class, "sendAnnouncement"]);
