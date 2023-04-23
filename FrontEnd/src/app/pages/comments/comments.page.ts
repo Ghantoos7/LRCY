@@ -285,5 +285,41 @@ export class CommentsPage implements OnInit {
     }).then(alert => alert.present());
   }
 
+  editReply(reply_id: number){
+    this.alertController.create({
+      header: 'Edit Reply',
+      inputs: [
+        {
+          name: 'content',
+          type: 'text',
+          value: this.content
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        },
+        {
+          text: 'Edit',
+          handler: (data) => {
+            this.postService.editReply(reply_id, data.content).subscribe(response=>{
+              const str = JSON.stringify(response);
+              const result = JSON.parse(str);
+              const status = result['status'];
+              if(status == "success"){
+                window.location.reload();
+              } else if (status == "error"){
+                this.alrt.create({
+                  message: 'Something went wrong. Please try again.',
+                  buttons: ['OK']
+                }).then(alrt => alrt.present());
+              }
+            });
+          }
+        }
+      ]
+    }).then(alert => alert.present());
+  }
 
 }
