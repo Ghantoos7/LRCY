@@ -1,8 +1,15 @@
-ion-title, ion-item{
-    color:#45579A;
-    font-weight: bolder;
+ion-title{
+  color: white;
+  font-size: large;
+} 
+
+ion-item{
+    color: #45579A;
     font-size: large;
-    font-family: 'Cairo', sans-serif;
+}
+
+ion-toolbar{
+  --background: #45579A;
 }
 
 ion-item{
@@ -14,7 +21,7 @@ ion-icon{
 }
 
 ion-menu-button{
-    color:#45579A;
+    color:white;
 }
 
 .custom-header {
@@ -48,12 +55,32 @@ ion-menu-button{
     font-weight: bolder;
     font-size: 25px !important;
     font-family: 'Cairo', sans-serif;
+    text-align: center;
 }
   ion-label{
-    margin-bottom: -10px;
+    color: white;
   }
 
   h3{
     color: black;
 
   }
+
+  .ann{
+    position: relative;
+    top: 7px;
+  }
+  
+  .header-button{
+    --background: none;
+    --box-shadow: none;
+    position: relative;
+    left: 80%;
+  }
+  
+  .menu-button{
+    position: relative;
+    width: 100%;
+    --background: #45579A;
+  }
+  
