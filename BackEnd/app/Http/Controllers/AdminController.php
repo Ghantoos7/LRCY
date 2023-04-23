@@ -258,6 +258,41 @@ class AdminController extends Controller {
     }
 
 
+    function getRequests($branch_id) {
+        // Get all the requests regardless of branch
+        $requests = Recover_request::where('request_status', 0)->get();
+    
+        // get the user IDs of the users who made the requests and check if they are in the same branch as the one provided
+        $user_ids = $requests->pluck('user_id')->toArray();
+    
+        $users = Volunteer_user::whereIn('id', $user_ids)->where('branch_id', $branch_id)->get();
+    
+        // Get the user IDs of the users who are in the same branch as the one provided
+        $user_ids = $users->pluck('id')->toArray();
+    
+        // Get the requests that are made by users in the same branch as the one provided, and make fields hidden, and return the user who made the request. check for null values
+        $requests = $requests->whereIn('user_id', $user_ids)->map(function ($request) {
+            $request->makeHidden(['field1', 'field2', 'created_at', 'updated_at']);
+            $request->user = Volunteer_user::where('id', $request->user_id)->first();
+            return $request;
+        });
+    
+        // Return the requests or an error message if no requests are found
+        if ($requests->count() > 0) {
+            return response()->json([
+                'status' => 'success',
+                'requests' => $requests
+            ]);
+        } else {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'No requests found'
+            ]);
+        }
+    }
+    
+
+
     function acceptRequest(Request $request) {
 
         // Validate the request
