@@ -44,16 +44,17 @@
               <ion-card-header>
                 <ion-card-title class="title">{{goal.goal_name}}
                   <ion-icon (click)="goToEditGoal()" class="edit" name="create-outline"></ion-icon>
-                  <ion-icon (click)="confirm()" class="delete" name="trash-outline"></ion-icon>
+                  <ion-icon (click)="confirm(goal.id)" class="delete" name="trash-outline"></ion-icon>
                 </ion-card-title>
               </ion-card-header>
         
               <ion-card-content>
                 <div class="icons-and-count">
+                  <ion-icon class="is-complete-icon" [name]="isGoalComplete(goal.goal_status)"></ion-icon>
                   <ion-icon class="program-icon" [name]="getProgramIcon(goal.program_id)"></ion-icon>
                   <ion-icon class="event-icon" [name]="getEventIcon(goal.event_type_id)"></ion-icon>
                   <span class="completed-count">{{goal.number_completed}}/{{goal.number_to_complete}}</span>
-                  <ion-icon class="is-complete-icon" [name]="isGoalComplete(goal.goal_status)"></ion-icon>
+                  
                 </div>
                 <ion-progress-bar class="bar" [value]="goal.number_completed / goal.number_to_complete"></ion-progress-bar>
               </ion-card-content>

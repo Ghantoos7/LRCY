@@ -22,7 +22,7 @@ class EventController extends Controller {
         $year = date('Y');
 
         // Get all goals for the current year and branch    
-        $goals = goal::select('goal_description', 'goal_name', 'program_id', 'goal_status', 'number_completed', 'number_to_complete', 'goal_year', 'event_type_id', 'goal_deadline','start_date','branch_id')->where('goal_year', $year)->where('branch_id',$branch_id)->get();
+        $goals = goal::select('id','goal_description', 'goal_name', 'program_id', 'goal_status', 'number_completed', 'number_to_complete', 'goal_year', 'event_type_id', 'goal_deadline','start_date','branch_id')->where('goal_year', $year)->where('branch_id',$branch_id)->get();
 
         $goals = $goals->groupBy('program_id')->toArray();
 

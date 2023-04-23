@@ -60,4 +60,11 @@ export class AdminService {
     return response;
   }
 
+  deleteYearlyGoal(goal_id: string) {
+    const headers = this.getAuthHeaders();
+    const body = { goal_id: goal_id };
+    const response = this.http.post(this.base_url + 'delete_yearly_goal', body, { headers: headers });
+    return response;
+}
+
 }
