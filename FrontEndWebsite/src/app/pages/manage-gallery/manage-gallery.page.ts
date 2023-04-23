@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { MenuController } from '@ionic/angular';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-manage-gallery',
   templateUrl: './manage-gallery.page.html',
@@ -13,7 +14,7 @@ import { Router } from '@angular/router';
 })
 export class ManageGalleryPage implements OnInit {
 
-  constructor(private menuCtrl: MenuController, private router:Router) { }
+  constructor(private menuCtrl: MenuController, private router:Router, private menuController: MenuController) { }
 
   ngOnInit() {
   }
@@ -36,5 +37,10 @@ export class ManageGalleryPage implements OnInit {
   goToPanel(){
     this.router.navigate(['/panel']);
   }
+
+  closeMenu() {
+    this.menuController.close();
+  }
+
 
 }

@@ -4,9 +4,14 @@
       <ion-title>Manage Gallery</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-content class="ion-padding"> <ion-list>
-    <ion-item (click)="goToAddForm()">Add A Gallery</ion-item>
-  </ion-list></ion-content>
+  <ion-content class="ion-padding"> 
+    <ion-list>
+      <ion-button (click) ="closeMenu()" class="menu-button">View Gallery</ion-button>
+      </ion-list>
+    <ion-list>
+    <ion-button (click) ="goToAddForm()" class="menu-button">Add a gallery</ion-button>
+    </ion-list>
+  </ion-content>
 </ion-menu>
 <div class="ion-page" id="main-content">
   <ion-header>
@@ -14,7 +19,7 @@
       <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
-      <ion-title><ion-text class="ann">Events</ion-text>
+      <ion-title><ion-text class="ann">Gallery</ion-text>
         <ion-button (click)="goToPanel()" class="header-button"><ion-label>Panel</ion-label></ion-button>
         <ion-button (click)="goToHome()" class="header-button"><ion-label>Log out</ion-label></ion-button>
       </ion-title>
