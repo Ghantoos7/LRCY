@@ -51,4 +51,8 @@ export class ManageProfilesPage implements OnInit {
     this.menuCtrl.close();
   }
 
+  goToProfile(){
+    this.router.navigate(['/member-profile']);
+  }
+
 }
