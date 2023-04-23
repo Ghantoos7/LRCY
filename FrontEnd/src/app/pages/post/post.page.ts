@@ -72,7 +72,9 @@ this.router.navigate(['/feed']);
       
       this.postService.post(formData).subscribe((response) => {
         const parsedResponse = JSON.parse(JSON.stringify(response));
-        console.log(parsedResponse);
+        if(parsedResponse.status == 'success'){
+this.router.navigate(['/feed']);
+        }
       });
     } else {
       console.error('No file selected.');
