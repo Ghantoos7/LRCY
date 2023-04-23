@@ -55,7 +55,8 @@ class AdminController extends Controller {
             // Creates a new token for the user
             $token = $user->createToken('authToken')->plainTextToken;
             return response()->json([
-                'status' => $user,
+                'status' => 'Login successful',
+                'user' => $user,
                 'token' => $token
             ]);
         }
@@ -84,7 +85,7 @@ class AdminController extends Controller {
         login_attempt::create([
         'login_attempt_time' => date('H:i:s'),
         'login_attempt_date' => date('Y-m-d'),
-        'user_id' => $organization_id,
+        'organization_id' => $organization_id,
         ]);
 
     }
@@ -93,7 +94,7 @@ class AdminController extends Controller {
     // Checks if the user has exceeded the maximum number of login attempts
     private function hasExceededLoginAttempts($organization_id) {
         
-        $last_attempt = login_attempt::where('user_id', '=', $organization_id)->latest()->first();
+        $last_attempt = login_attempt::where('organization_id', '=', $organization_id)->latest()->first();
 
         // Check if there is no previous login attempt made by the user
         if (!$last_attempt) {
@@ -110,7 +111,7 @@ class AdminController extends Controller {
         }
 
         // Check if the user has exceeded the maximum number of login attempts
-        $total_attempts = login_attempt::where('user_id', '=', $organization_id)->count();
+        $total_attempts = login_attempt::where('organization_id', '=', $organization_id)->count();
         return ($total_attempts >= 5);
 
     }
@@ -119,7 +120,7 @@ class AdminController extends Controller {
     // Resets the number of login attempts to 0
     private function resetLoginAttempts($organization_id) {
 
-        login_attempt::where('user_id', '=', $organization_id)->delete();
+        login_attempt::where('organization_id', '=', $organization_id)->delete();
 
     }
 
