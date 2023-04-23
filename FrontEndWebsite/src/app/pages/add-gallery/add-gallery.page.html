@@ -18,13 +18,13 @@
                 <ion-col size="6">
                   <ion-item>
                     <ion-label>Title</ion-label>
-                    <ion-input></ion-input>
+                    <ion-input class="first-card-input"></ion-input>
                   </ion-item>
                 </ion-col>
                 <ion-col size="6">
                   <ion-item class="custom-input">
                     <ion-label class="custom-label">Date of Event</ion-label>
-                    <ion-input  type="date"></ion-input>
+                    <ion-input class="first-card-input" type="date"></ion-input>
                   </ion-item>
                 </ion-col>
                 
@@ -33,14 +33,14 @@
                 <ion-col size="6">
                   <ion-item>
                     <ion-label>Program</ion-label>
-                    <ion-input ></ion-input>
+                    <ion-input class="first-card-input"></ion-input>
                   </ion-item>
                 </ion-col>
                 <ion-col size="6">
                   
                   <ion-item>
                     <ion-label>Event Type</ion-label>
-                    <ion-input ></ion-input>
+                    <ion-input class="first-card-input"></ion-input>
                   </ion-item>
                
                 </ion-col>
@@ -51,13 +51,13 @@
                 <ion-col size="6">
                   <ion-item>
                     <ion-label>Location</ion-label>
-                    <ion-input ></ion-input>
+                    <ion-input class="first-card-input"></ion-input>
                   </ion-item>
                 </ion-col>
                 <ion-col size="6">
                   <ion-item>
                     <ion-label>Budget Sheet</ion-label>
-                    <ion-input type="file"></ion-input>
+                    <ion-input class="first-card-input" type="file"></ion-input>
                   </ion-item>
                 </ion-col>
                 
@@ -66,13 +66,13 @@
                 <ion-col size="6">
                   <ion-item>
                     <ion-label>Proposal</ion-label>
-                    <ion-input type="file" ></ion-input>
+                    <ion-input class="first-card-input" type="file" ></ion-input>
                   </ion-item>
                 </ion-col>
                 <ion-col size="6">
                   <ion-item>
                     <ion-label>Meeting minute</ion-label>
-                    <ion-input type="file"></ion-input>
+                    <ion-input class="first-card-input" type="file"></ion-input>
                   </ion-item>
                 </ion-col>
                 
@@ -96,67 +96,66 @@
 
   <ion-card class="members">
     <ion-grid>
-    <ion-row>
-      <ion-col size="6">
-        <ion-card>
-          <ion-card-title>Member List</ion-card-title>
-        <ion-list>
-          <ion-item>
-            <ion-avatar slot="start">
-              <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-            </ion-avatar>
-            <ion-label>
-              Georgio Ghantios
-            </ion-label>
-            <ion-icon name="trash" slot="end"></ion-icon>
-          </ion-item>
-          <ion-item>
-            <ion-avatar slot="start">
-              <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-            </ion-avatar>
-            <ion-label>
-              Georgio Ghantios
-            </ion-label>
-            <ion-icon name="trash" slot="end"></ion-icon>
-          </ion-item>
-          
-          
-        </ion-list>
-        <ion-card>
-          <ion-grid>
-            <ion-row>
-              <ion-col size="8">
-          <ion-input class="add-member" type="text" placeholder="ID"></ion-input>
-          <ion-input class="add-member" type="text" placeholder="Role"></ion-input>
-              </ion-col>
-              <ion-col size="2">
-                <ion-fab  horizontal="center" vertical="center">
-                  <ion-fab-button>
-                    <ion-icon name="add"></ion-icon>
-                  </ion-fab-button>
-                  </ion-fab>
-               </ion-col>
-        </ion-row>
-        </ion-grid>
-        </ion-card>
-      </ion-card>
-      </ion-col>
-      <ion-col size="6">
-        <ion-card>
+      <ion-row>
+        <ion-col size="6">
+          <ion-card>
+            <ion-card-title>Member List</ion-card-title>
           <ion-list>
-          <ion-item>
-            <ion-thumbnail slot="start">
-              <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
-            </ion-thumbnail>
-           <ion-icon name="trash"></ion-icon>
-          </ion-item>
-        </ion-list>
-        <ion-button class="add-img">Add Images</ion-button>
-        </ion-card>
-      </ion-col>
-      
-    </ion-row>
-  </ion-grid>
- 
-</ion-card>
+            <ion-item>
+              <ion-avatar slot="start">
+                <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+              </ion-avatar>
+              <ion-label>
+                Georgio Ghantios
+              </ion-label>
+              <ion-icon name="trash" slot="end"></ion-icon>
+            </ion-item>
+            <ion-item>
+              <ion-avatar slot="start">
+                <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+              </ion-avatar>
+              <ion-label>
+                Georgio Ghantios
+              </ion-label>
+              <ion-icon name="trash" slot="end"></ion-icon>
+            </ion-item>
+            
+            
+          </ion-list>
+          <ion-card>
+              <ion-grid>
+                <ion-row>
+                  <ion-col size="8">
+                    <ion-input class="add-member" type="text" placeholder="ID"></ion-input>
+                    <ion-input class="add-member" type="text" placeholder="Role"></ion-input>
+                  </ion-col>
+                  <ion-col size="2">
+                    <ion-fab  horizontal="center" vertical="center">
+                      <ion-fab-button>
+                        <ion-icon name="add"></ion-icon>
+                      </ion-fab-button>
+                    </ion-fab>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-card>
+          </ion-card>
+        </ion-col>
+        <ion-col size="6">
+          <ion-card>
+            <ion-list>
+            <ion-item>
+              <ion-thumbnail slot="start">
+                <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
+              </ion-thumbnail>
+            <ion-icon name="trash"></ion-icon>
+            </ion-item>
+          </ion-list>
+          <ion-button class="add-img">Add Images</ion-button>
+          </ion-card>
+        </ion-col>
+        
+      </ion-row>
+    </ion-grid>
+  </ion-card>
 </ion-content>
