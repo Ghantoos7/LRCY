@@ -14,7 +14,10 @@
       <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
-      <ion-title>Show Events</ion-title>
+      <ion-title><ion-text class="ann">Events</ion-text>
+        <ion-button (click)="goToPanel()" class="header-button"><ion-label>Panel</ion-label></ion-button>
+        <ion-button (click)="goToHome()" class="header-button"><ion-label>Log out</ion-label></ion-button>
+      </ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -22,10 +25,6 @@
     
      <ion-searchbar animated="true" placeholder="Search up your event title"></ion-searchbar>
 
-
-
-
-  
   <ion-card>
     <ion-card-header>
       <ion-card-title>Youth & Health

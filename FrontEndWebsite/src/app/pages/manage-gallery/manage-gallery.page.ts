@@ -29,4 +29,12 @@ export class ManageGalleryPage implements OnInit {
     this.menuCtrl.enable(true, 'menuGallery');
   }
 
+  goToHome(){
+    this.router.navigate(['/home']);
+  }
+
+  goToPanel(){
+    this.router.navigate(['/panel']);
+  }
+
 }
