@@ -115,6 +115,13 @@ export class PostService {
     return response;
   }
 
+  post(formData: FormData) {
+    const headers = this.getAuthHeaders();
+    const options = { headers: headers };
+    const response = this.http.post(this.base_url + 'create_post', formData, options);
+    return response;
+  }
+
   editReply(reply_id: number, reply_content: string) {
     const headers = this.getAuthHeaders().set('Content-Type', 'application/json');
     const options = { headers: headers };

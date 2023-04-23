@@ -23,6 +23,8 @@ export class PostPage implements OnInit {
   user_profile_pic :string = '';
   user_id = localStorage.getItem('userId') as string;
   branch_id = localStorage.getItem('branch_id') as string;
+post_caption:string='';
+post_src_img: any;
 
   constructor(private router:Router, private userService:UserService, private postService:PostService) { }
 
@@ -42,5 +44,39 @@ export class PostPage implements OnInit {
 this.router.navigate(['/feed']);
   }
 
+  readFileAsBase64(file: File): Promise<string> {
+    return new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        resolve(reader.result as string);
+      };
+      reader.onerror = () => {
+        reject(reader.error);
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  onChange(event: any) {
+    this.post_src_img = event.target.files[0];
+
+  }
+
+  post(){
+    if (this.post_src_img) {
+      const formData = new FormData();
+      formData.append('user_id', this.user_id);
+      formData.append('post_type', 'image');
+      formData.append('post_caption', this.post_caption);
+      formData.append('post_media', this.post_src_img);
+      
+      this.postService.post(formData).subscribe((response) => {
+        const parsedResponse = JSON.parse(JSON.stringify(response));
+        console.log(parsedResponse);
+      });
+    } else {
+      console.error('No file selected.');
+    }
+}
 }
 
