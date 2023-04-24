@@ -30,6 +30,7 @@
     goal_deadline: string = '';
 
 
+
     constructor(private router:Router,private route: ActivatedRoute, private adminService: AdminService, private alertController: AlertController) { }
 
     ngOnInit() {
@@ -41,12 +42,13 @@
         this.goal_description = this.goal_info['goal'].goal_description;
         this.number_completed = this.goal_info['goal'].number_completed;
         this.number_to_complete = this.goal_info['goal'].number_to_complete;
-        this.program_id = this.goal_info['goal'].program_id;
-        this.event_type_id = this.goal_info['goal'].event_type_id;
+        this.program_id = this.mapProgramId(this.goal_info['goal'].program_id);
+        this.event_type_id = this.mapEventTypeId(this.goal_info['goal'].event_type_id);
         this.goal_year = this.goal_info['goal'].goal_year;
         this.start_date = this.goal_info['goal'].start_date;
+        console.log(this.goal_info['goal'].start_date)
         this.goal_deadline = this.goal_info['goal'].goal_deadline;
-        
+
       });
 
 
@@ -71,6 +73,34 @@
         }
       }); 
     }
+
+    mapProgramId(programId: number): string {
+        switch(programId) {
+          case 1:
+            return 'Youth and Health';
+          case 2:
+            return 'Human values and principles';
+          case 3:
+            return 'Environment';
+          case 4:
+            return "Other";
+          default:
+            return 'Other';
+        }
+      }
+
+    mapEventTypeId(eventTypeId: number): string {
+        switch(eventTypeId) {
+          case 1:
+            return 'Activity';
+          case 2:
+            return 'Training';
+          case 3:
+            return 'Other';
+          default:
+            return 'Other';
+        }
+      }
 
     mapProgramName(programName: string): number {
         switch(programName) {
