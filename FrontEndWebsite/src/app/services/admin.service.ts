@@ -101,9 +101,9 @@ export class AdminService {
     return response;
   }
 
-  getYearlyGoals(branch_id: string, goal_id : string) {
+  getYearlyGoals(branch_id: string) {
     const headers = this.getAuthHeaders();
-    const response = this.http.get(this.base_url_event + 'get_yearly_goals/' + branch_id + "/" + goal_id, { headers: headers });
+    const response = this.http.get(this.base_url_event + 'get_yearly_goals/' + branch_id , { headers: headers });
     return response;
   }
 

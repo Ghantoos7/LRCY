@@ -63,7 +63,7 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/add-goal/add-goal.page').then( m => m.AddGoalPage)
   },
   {
-    path: 'edit-goal/:goalId',
+    path: 'edit-goal',
     loadComponent: () => import('./pages/edit-goal/edit-goal.page').then( m => m.EditGoalPage)
   },
   {

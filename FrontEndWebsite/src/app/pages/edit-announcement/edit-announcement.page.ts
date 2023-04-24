@@ -31,7 +31,6 @@ export class EditAnnouncementPage implements OnInit {
   }
 
   editAnnouncement(){
-    console.log(this.announcement_id, this.admin_id, this.announcement_title, this.announcement_content, this.mapImportanceLevel(this.importance_level).toString());
     this.adminService.editAnnouncement(this.announcement_id, this.admin_id, this.announcement_title, this.announcement_content, this.mapImportanceLevel(this.importance_level).toString()).subscribe((response: any) => {
       const parsedResponse = JSON.parse(JSON.stringify(response));
       if(parsedResponse.status == 'success') {
