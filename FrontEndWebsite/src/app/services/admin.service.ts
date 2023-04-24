@@ -185,11 +185,30 @@ export class AdminService {
   }
 
   deleteUser(user_id: string) {
-    const headers = this.getAuthHeaders();
+    const headers = this.getAuthHeaders().set('Content-Type', 'application/json');
     const body = { user_id: user_id };
     const response = this.http.post(this.base_url + 'delete_user', body, { headers: headers });
     return response;
   }
 
 
+  addUser(branch_id:number, first_name:string, last_name:string, organization_id : number, user_dob: string, user_position:string, gender:number, user_type_id : number, is_active: number, user_start_date: string, user_end_date:string){
+    const headers = this.getAuthHeaders().set('Content-Type', 'application/json');
+    const body = {
+      'branch_id': branch_id,
+      'first_name': first_name,
+      'last_name': last_name,
+      'organization_id': organization_id,
+      'user_dob': user_dob,
+      'user_position': user_position,
+      'gender' : gender,
+      'user_type_id' : user_type_id,
+      'is_active' : is_active,
+      'user_start_date' : user_start_date,
+      'user_end_date' : user_end_date
+
+  }
+    const response = this.http.post(this.base_url + 'add_user', body, { headers: headers });
+    return response;
+  }
 }
