@@ -85,15 +85,15 @@ export class AdminService {
     return response;
   }
 
-  editAnnouncement(announcement_id: string, admin_id: string, title?: string, content?: string, importance_level?: string) {
+  editAnnouncement(announcement_id: string, admin_id: string, title: string, content: string, importance_level: string) {
     const headers = this.getAuthHeaders().set('Content-Type', 'application/json');
     const options = { headers: headers };
 
     const body = {
       'announcement_id': announcement_id,
       'admin_id': admin_id,
-      'title': title,
-      'content': content,
+      'announcement_title': title,
+      'announcement_content': content,
       'importance_level': importance_level
     };
 

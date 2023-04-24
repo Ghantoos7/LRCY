@@ -534,6 +534,10 @@ class AdminController extends Controller {
         }
 
         // Update the announcement
+        if ($request->has('announcement_title')) {
+            $announcement->announcement_title = $request->input('announcement_title');
+        }
+
         if ($request->has('announcement_content')) {
             $announcement->announcement_content = $request->input('announcement_content');
         }

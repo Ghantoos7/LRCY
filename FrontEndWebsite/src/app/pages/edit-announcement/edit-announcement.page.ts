@@ -20,7 +20,6 @@ export class EditAnnouncementPage implements OnInit {
   announcement_content: string="";
   importance_level: string="";
   admin_id = localStorage.getItem('adminId') as string;
-  refresh: boolean = true;
   constructor(private router:Router, private adminService:AdminService, private alertController:AlertController) { }
 
   ngOnInit() {
@@ -31,8 +30,9 @@ export class EditAnnouncementPage implements OnInit {
     this.announcement_id = announcement.id;
   }
 
-  editAnnouncement(title: string, content: string, importance_level: string){
-    this.adminService.editAnnouncement(this.announcement_id, this.admin_id, title, content, importance_level).subscribe((response: any) => {
+  editAnnouncement(){
+    console.log(this.announcement_id, this.admin_id, this.announcement_title, this.announcement_content, this.mapImportanceLevel(this.importance_level).toString());
+    this.adminService.editAnnouncement(this.announcement_id, this.admin_id, this.announcement_title, this.announcement_content, this.mapImportanceLevel(this.importance_level).toString()).subscribe((response: any) => {
       const parsedResponse = JSON.parse(JSON.stringify(response));
       if(parsedResponse.status == 'success') {
         this.alertController.create({
