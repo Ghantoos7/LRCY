@@ -101,6 +101,19 @@ export class PostService {
     return response;
   }
 
+  editPost(post_id: string, post_caption:string) {
+    const headers = this.getAuthHeaders().set('Content-Type', 'application/json');
+    const options = { headers: headers };
+  
+    const body = {
+      'post_id': post_id,
+      'post_caption': post_caption
+    };
+  
+    const response = this.http.post(this.base_url + 'edit_post', body, options);
+    return response;
+  }
+
   editComment(comment_id: number, comment_content: string) {
     const headers = this.getAuthHeaders().set('Content-Type', 'application/json');
     const options = { headers: headers };
