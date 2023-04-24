@@ -85,7 +85,7 @@ export class MyPostsPage implements OnInit {
           text: 'Edit',
           icon: 'create-outline',
           handler: () => {
-            // Implement the edit action here
+           this.router.navigate(['/edit-post']);
           }
         },
         {

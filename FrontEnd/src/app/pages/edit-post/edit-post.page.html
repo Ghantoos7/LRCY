@@ -1,13 +1,14 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>edit-post</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="whitebackground">
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">edit-post</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class = "header-container">
+    <ion-img class="top" src="assets/imgs/post-top.png"></ion-img>
+    <ion-icon class="back" name="arrow-back-outline"></ion-icon>
+    <ion-text class="header-txt">Edit Post</ion-text>
+  </div>
+
+  <ion-input  class="input"  placeholder="What's happening..."></ion-input>
+
+  <ion-button class="post-button" shape="round" expand="block" size="large">Save Changes</ion-button>
+
+
 </ion-content>
