@@ -125,8 +125,8 @@ export class YearlyGoalsPage implements OnInit {
     this.router.navigate(['/add-goal']);
   }
 
-  goToEditGoal(){
-    this.router.navigate(['/edit-goal']);
+  goToEditGoal(goal_id: string) {
+    this.router.navigate(['/edit-goal', goal_id]);
   }
 
   closeMenu() {
