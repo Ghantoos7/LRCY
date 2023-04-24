@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { AdminService } from '../../services/admin.service';
 import { debounceTime } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'app-manage-profiles',
@@ -25,20 +26,23 @@ export class ManageProfilesPage implements OnInit {
   usersByLetter: { [letter: string]: any[] } = {};
   filteredUsersByLetter: { [letter: string]: any[] } = {};
 
-  constructor(private router:Router, private menuCtrl: MenuController, private adminService :AdminService) { }
+  constructor(private router: Router, private menuCtrl: MenuController, private adminService: AdminService, private activatedRoute: ActivatedRoute) { }
 
   
 
   ngOnInit() {
-    this.adminService.getUserInfo(this.branch_id, "").subscribe((data: any) => {
-      this.processUsers(data['users']);
-    });
-  
-    this.searchControl.valueChanges.pipe(debounceTime(300)).subscribe((searchQuery: string) => {
-      this.searchQuery = searchQuery;
-      this.filterUsers();
-    });
-  }
+
+  this.router.events.subscribe((event) => {
+    if (event instanceof NavigationEnd && event.url === '/manage-profiles') {
+      this.fetchUsers();
+    }
+  });
+
+  this.searchControl.valueChanges.pipe(debounceTime(300)).subscribe((searchQuery: string) => {
+    this.searchQuery = searchQuery;
+    this.filterUsers();
+  });
+}
 
   processUsers(users: any[]) {
     users.forEach(user => {
@@ -49,6 +53,13 @@ export class ManageProfilesPage implements OnInit {
       this.usersByLetter[firstLetter].push(user);
     });
     this.filterUsers();
+  }
+
+  fetchUsers() {
+    this.usersByLetter = {}; // Clear existing data
+    this.adminService.getUserInfo(this.branch_id, "").subscribe((data: any) => {
+      this.processUsers(data['users']);
+    });
   }
   
   filterUsers() {
