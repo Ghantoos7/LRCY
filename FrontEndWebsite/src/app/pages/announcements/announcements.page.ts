@@ -18,6 +18,7 @@ export class AnnouncementsPage implements OnInit {
   showDescriptions: boolean[] = [];
   announcements: any = [];
   i: number = 0;
+  current_id = localStorage.getItem('adminId') as string;
   branch_id = localStorage.getItem('branch_id') as string;
   constructor(private alertController: AlertController, private router:Router, private menuController: MenuController, private adminService:AdminService) { 
     this.showDescriptions = new Array(this.announcements.length).fill(false);
@@ -40,7 +41,7 @@ export class AnnouncementsPage implements OnInit {
     }
   }
 
-  async confirm() {
+  async confirm(id: string) {
     const alert = await this.alertController.create({
       header: 'Delete Announcement',
       message: 'Are you sure you want to delete this announcement?',
@@ -48,6 +49,26 @@ export class AnnouncementsPage implements OnInit {
       buttons: [
         {
           text: 'Yes',
+          handler: () => {
+            this.adminService.deleteAnnouncement(id, this.current_id).subscribe((response: any) => {
+              const parsedResponse = JSON.parse(JSON.stringify(response));
+              if(parsedResponse.status == 'success') {
+                this.alertController.create({
+                  header: 'Success',
+                  message: 'Announcement deleted successfully!',
+                  buttons: ['OK']
+                }).then(alert => alert.present());
+                this.ngOnInit();
+              } else {
+                this.alertController.create({
+                  header: 'Error',
+                  message: parsedResponse.message,
+                  buttons: ['OK']
+                }).then(alert => alert.present());
+              }
+            }
+            );
+        },
         },
         {
           text: 'Cancel',

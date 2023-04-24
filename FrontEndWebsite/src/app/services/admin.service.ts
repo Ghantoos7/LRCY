@@ -72,6 +72,19 @@ export class AdminService {
     return response;
   }
 
+  deleteAnnouncement(announcement_id: string, admin_id: string) {
+    const headers = this.getAuthHeaders().set('Content-Type', 'application/json');
+    const options = { headers: headers };
+
+    const body = {
+      'announcement_id': announcement_id,
+      'admin_id': admin_id
+    };
+
+    const response = this.http.post(this.base_url + 'delete_announcement', body, options);
+    return response;
+  }
+
   getYearlyGoals(id: string) {
     const headers = this.getAuthHeaders();
     const response = this.http.get(this.base_url_event + 'get_yearly_goals/' + id, { headers: headers });
