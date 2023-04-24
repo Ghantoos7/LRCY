@@ -479,13 +479,22 @@ class AdminController extends Controller {
     function editAnnouncement(Request $request) {
 
         // Validate the request
-        $request->validate([
-            'announcement_id' => 'required|integer',
+        $validator = Validator::make($request->all(), [
+            'announcement_title' => 'required|string',
+            'announcement_content' => 'required|string',
             'admin_id' => 'required|integer',
-            'announcement_title' => 'nullable|string',
-            'announcement_content' => 'nullable|string',
-            'importance_level' => 'nullable|integer'
+            'importance_level' => 'required|integer'
         ]);
+    
+        // Check if validation failed and return the errors
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $validator->errors()->first()
+            ]);
+        }
+
+        
 
         // Get the announcement based on the provided announcement ID
         $announcement = Announcement::where('id', $request->input('announcement_id'))->first();
@@ -798,10 +807,9 @@ class AdminController extends Controller {
         if ($validator->fails()) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Validation failed',
-                'errors' => $validator->errors()
+                'message' => $validator->errors()->first()
             ]);
-        }        
+        }  
 
 
         try {
@@ -837,7 +845,7 @@ class AdminController extends Controller {
 
         try{
 
-            $validate = Validator::make($request->all(), [
+            $validator = Validator::make($request->all(), [
                 'goal_id' => 'required|integer',
                 'goal_name' => 'required|string',
                 'goal_description' => 'required|string',
@@ -852,13 +860,13 @@ class AdminController extends Controller {
 
             // Check if the validation fails
 
-            if ($validate->fails()) {
+            if ($validator->fails()) {
                 return response()->json([
                     'status' => 'error',
-                    'message' => 'Validation failed',
-                    'errors' => $validate->errors()
+                    'message' => $validator->errors()->first()
                 ]);
-            }
+            }  
+    
 
 
             $goal = Goal::where('id', $request->input('goal_id'))->first();
@@ -886,7 +894,20 @@ class AdminController extends Controller {
 
             // Reset number completed 
             $goal->number_completed = 0;
-            $goal->number_completed = $request->input('number_completed');
+            
+            $validator = Validator::make($request->all(), [
+                'number_completed' => 'required|integer',
+            ]);
+
+            // Check if the validation fails
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => $validator->errors()->first()
+                ]);
+            }  
+
             if ($goal->number_completed >= $goal->number_to_complete) {
                 $goal->goal_status = 1;
             }
