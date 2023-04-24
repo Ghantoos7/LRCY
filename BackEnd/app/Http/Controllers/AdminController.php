@@ -482,6 +482,7 @@ class AdminController extends Controller {
         $request->validate([
             'announcement_id' => 'required|integer',
             'admin_id' => 'required|integer',
+            'announcement_title' => 'nullable|string',
             'announcement_content' => 'nullable|string',
             'importance_level' => 'nullable|integer'
         ]);
@@ -494,6 +495,14 @@ class AdminController extends Controller {
             return response()->json([
                 'status' => 'error',
                 'message' => 'Announcement not found'
+            ]);
+        }
+
+        // Check if the importance level is valid
+        if ($request->input('importance_level') < 0 || $request->input('importance_level') > 2) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'The importance level field is required'
             ]);
         }
 
