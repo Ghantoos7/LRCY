@@ -6,13 +6,17 @@ import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { AdminService } from 'src/app/services/admin.service';
+import { FormControl } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { debounceTime } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-yearly-goals',
   templateUrl: './yearly-goals.page.html',
   styleUrls: ['./yearly-goals.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule, FormsModule, ReactiveFormsModule]
 })
 export class YearlyGoalsPage implements OnInit {
 
@@ -23,7 +27,8 @@ export class YearlyGoalsPage implements OnInit {
   user_profile_pic = localStorage.getItem('user_profile_pic') as string;
   branch_id = localStorage.getItem('branch_id') as string;
   filteredGoals: any;
-  searchTerm: string = '';
+  searchControl: FormControl = new FormControl('');
+
 
   ngOnInit() {
     this.service.getYearlyGoals(this.branch_id).subscribe((response: any) => {
@@ -31,21 +36,23 @@ export class YearlyGoalsPage implements OnInit {
       this.yearlyGoals = allGoals;
       this.filteredGoals = allGoals;
     });
+  
+    this.searchControl.valueChanges.pipe(debounceTime(300)).subscribe(() => {
+      this.onSearchChange();
+    });
   }
 
   
 
   onSearchChange() {
-    this.filteredGoals = this.filterGoals(this.searchTerm);
+    this.filteredGoals = this.filterGoals(this.searchControl.value);
   }
-
+  
   filterGoals(searchTerm: string) {
     return this.yearlyGoals.filter((goal: any) => {
       return goal.goal_name.toLowerCase().includes(searchTerm.toLowerCase());
     });
   }
-
-
 
 
   getProgramIcon(program_id: number,): string {

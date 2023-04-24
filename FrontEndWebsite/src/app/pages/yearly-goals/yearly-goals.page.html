@@ -28,7 +28,7 @@
       </ion-toolbar>
     </ion-header>
 
-    <ion-searchbar animated="true" placeholder="Search for a goal..." [(ngModel)]="searchTerm" (ionChange)="onSearchChange()"></ion-searchbar>
+    <ion-searchbar animated="true" placeholder="Search for a goal..." [formControl]="searchControl"></ion-searchbar>
 
     <ion-list class="list">
       <ion-item-group>
