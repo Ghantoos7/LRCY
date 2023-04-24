@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { AdminService } from 'src/app/services/admin.service';
 import { FormControl } from '@angular/forms';
@@ -31,14 +31,24 @@ export class YearlyGoalsPage implements OnInit {
 
 
   ngOnInit() {
+
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd && event.url === '/yearly-goals') {
+        this.fetchYearlyGoals();
+      }
+    });
+  
+  
+    this.searchControl.valueChanges.pipe(debounceTime(300)).subscribe(() => {
+      this.onSearchChange();
+    });
+  }
+
+  fetchYearlyGoals() {
     this.service.getYearlyGoals(this.branch_id).subscribe((response: any) => {
       const allGoals = [].concat.apply([], Object.values(response['goals']));
       this.yearlyGoals = allGoals;
       this.filteredGoals = allGoals;
-    });
-  
-    this.searchControl.valueChanges.pipe(debounceTime(300)).subscribe(() => {
-      this.onSearchChange();
     });
   }
 
