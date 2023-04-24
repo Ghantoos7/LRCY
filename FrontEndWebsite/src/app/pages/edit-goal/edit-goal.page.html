@@ -30,14 +30,15 @@
 
   <ion-card>
     <ion-card-header>
+      <ion-card-title>Edit the fields below</ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
-      <ion-input [(ngModel)]="goal_name" class="input" placeholder="Goal Title..."></ion-input>
+      <ion-input [(ngModel)]="goal_name" class="input" placeholder="Goal Title..." maxlength="48"></ion-input>
     </ion-card-content>
     
     <ion-card-content>
-      <ion-input [(ngModel)]="goal_description" class="input" placeholder="Goal Description..."></ion-input>
+      <ion-input [(ngModel)]="goal_description" class="input" placeholder="Goal Description..."maxlength="255"></ion-input>
     </ion-card-content>
     
     <ion-card-content>

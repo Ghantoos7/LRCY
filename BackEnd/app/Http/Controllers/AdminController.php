@@ -791,7 +791,7 @@ class AdminController extends Controller {
             'event_type_id' => 'required|integer',
             'goal_deadline' => 'required|date',
             'start_date' => 'required|date',
-            'branch_id' => 'required|integer,',
+            'branch_id' => 'required|integer',
         ]);
 
         // Check if the validation fails
@@ -828,7 +828,7 @@ class AdminController extends Controller {
         }
 
         // Return a response indicating success
-        return response()->json(['message' => 'Goal created successfully']);
+        return response()->json(['status' => 'success', 'message' => 'Goal created successfully',  ]);
 
     }
 

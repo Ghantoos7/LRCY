@@ -46,7 +46,6 @@
         this.event_type_id = this.mapEventTypeId(this.goal_info['goal'].event_type_id);
         this.goal_year = this.goal_info['goal'].goal_year;
         this.start_date = this.goal_info['goal'].start_date;
-        console.log(this.goal_info['goal'].start_date)
         this.goal_deadline = this.goal_info['goal'].goal_deadline;
 
       });
