@@ -722,7 +722,7 @@ class UserController extends Controller {
     
         // Validate the request data
         $validator = Validator::make($request->all(), [
-            'user_profile_pic' => 'nullable|image|max:2048',
+            'user_profile_pic' => 'nullable',
             'username' => 'nullable|string|max:255|unique:volunteer_users,username,' . $existing_volunteer_user->id,
             'user_bio' => 'nullable|string|max:500',
         ]);
@@ -734,12 +734,13 @@ class UserController extends Controller {
                 'errors' => $validator->errors()]);
         }
     
-        // Update the user's profile picture if it was provided
-        if ($request->hasFile('user_profile_pic')) {
-            $image = $request->file('user_profile_pic');
-            $filename = time() . '.' . $image->getClientOriginalExtension();
-            $path = $image->storeAs('public/profile_pictures', $filename);
-            $existing_volunteer_user->user_profile_pic = $filename;
+        if($request->hasFile('user_profile_pic')){
+            $request->validate([
+                'user_profile_pic' => 'mimes:jpeg,bmp,png,jpg'
+            ]);
+
+            $request->user_profile_pic->store('public/images');
+            $existing_volunteer_user->user_profile_pic = $request->user_profile_pic->hashName();
         }
     
         // Update the user's username if it was provided
@@ -758,7 +759,9 @@ class UserController extends Controller {
         // Return a success response
         return response()->json([
             'status' => 'success',
-            'message' => 'Profile updated successfully']);
+            'message' => 'Profile updated successfully',
+        'new_pic' => $existing_volunteer_user->user_profile_pic
+    ]);
 
     }
     

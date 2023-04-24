@@ -85,19 +85,12 @@
       const response = this.http.get(this.base_url + 'get_own_posts/' + user_id, { headers: headers });
       return response;
     }
-    
-    editProfile(username: string, user_bio?: string, user_profile_pic?: string) {
-      const headers = this.getAuthHeaders().set('Content-Type', 'application/json');
+ 
+
+    editProfile(formData: FormData) {
+      const headers = this.getAuthHeaders();
       const options = { headers: headers };
-    
-      const body = {
-        'user_id': localStorage.getItem('userId'),
-        'username': username,
-        'user_bio': user_bio,
-        'user_profile_pic': user_profile_pic
-      };
-    
-      const response = this.http.post(this.base_url + 'edit_profile', body, options);
+      const response = this.http.post(this.base_url + 'edit_profile', formData, options);
       return response;
     }
 

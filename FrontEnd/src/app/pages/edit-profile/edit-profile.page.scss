@@ -20,6 +20,10 @@ ion-card{
   
   }
 
+  input{
+    font-size: 12px;
+  }
+
   ion-button{
     --color: white;
     --background: #45579A;
@@ -129,7 +133,7 @@ ion-header{
 }
 
 ion-content{
-    padding: 0;
+    padding: 3;
 }
 
 ion-card-content {
