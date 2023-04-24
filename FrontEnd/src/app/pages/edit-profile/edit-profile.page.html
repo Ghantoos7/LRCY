@@ -6,7 +6,7 @@
           <div class="badge">
             <ion-icon name="camera" ></ion-icon>
           </div>
-          <img alt="Silhouette of a person's head" src="{{user_profile_pic}}" />
+          <img alt="Silhouette of a person's head" src="http://127.0.0.1:8000/storage/images/{{user_profile_pic}}" />
         </ion-avatar>
       </ion-col>
     </ion-row>
@@ -22,7 +22,7 @@
       
         </ion-card-header>
         <ion-card-content>
-         <ion-button size="small" style="margin-top: 10px;">Edit Photo</ion-button>
+         <input [(ngModel)]="user_src_img" (change)="onChange($event)" type="file" accept="image/png, image/jpeg, image/jpg" size="small" style="margin-top: 10px;">Edit Photo
 
         </ion-card-content>
 
@@ -36,17 +36,17 @@
  
   <ion-item lines="none">
     <ion-label position="stacked">First Name</ion-label>
-    <input type="text" class="custom-input readonly" placeholder="{{first_name}}" readonly>
+    <input type="text" class="custom-input readonly" value="{{first_name}}" placeholder="{{first_name}}" readonly>
   </ion-item>
 
   <ion-item lines="none">
     <ion-label position="stacked">Last Name</ion-label>
-    <input type="text" class="custom-input readonly" placeholder="{{last_name}}" readonly>
+    <input type="text" class="custom-input readonly" value="{{last_name}}"  placeholder="{{last_name}}" readonly>
   </ion-item>
 
   <ion-item lines="none">
     <ion-label position="stacked">Position</ion-label>
-    <input type="text" class="custom-input readonly" placeholder="{{user_position}}" readonly>
+    <input type="text" class="custom-input readonly" value="{{user_position}}"  placeholder="{{user_position}}" readonly>
   </ion-item>
 
   <ion-item lines="none">
@@ -60,6 +60,6 @@
   </ion-item>    
 
   
-  <ion-button expand="block" style="margin-top: 50px;" (click)="editProfileWithoutPic(username,user_bio)">Save</ion-button>
+  <ion-button expand="block" style="margin-top: 50px;" (click)="editProfile()">Save</ion-button>
 </ion-content>
 

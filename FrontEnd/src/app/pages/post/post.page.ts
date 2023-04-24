@@ -44,18 +44,7 @@ post_src_img: any;
 this.router.navigate(['/feed']);
   }
 
-  readFileAsBase64(file: File): Promise<string> {
-    return new Promise<string>((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        resolve(reader.result as string);
-      };
-      reader.onerror = () => {
-        reject(reader.error);
-      };
-      reader.readAsDataURL(file);
-    });
-  }
+
 
   onChange(event: any) {
       this.post_src_img = event.target.files[0];

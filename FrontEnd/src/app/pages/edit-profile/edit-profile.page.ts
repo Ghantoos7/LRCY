@@ -24,8 +24,8 @@ export class EditProfilePage implements OnInit {
   user_position:string = '';
   user_id = localStorage.getItem('userId') as string;
   branch_id = localStorage.getItem('branch_id') as string;
-  user_profile_pic = localStorage.getItem('user_profile_pic')
-
+  user_profile_pic = localStorage.getItem('user_profile_pic');
+  user_src_img: any;
 
   constructor(private service:UserService, private alertController:AlertController, private router:Router) { }
 
@@ -39,36 +39,59 @@ export class EditProfilePage implements OnInit {
       this.user_bio = (this.user['user'].user_bio);
       this.user_position = (this.user['user'].user_position);
     });
+console.log(this.user_profile_pic);
   }
 
-  editProfileWithoutPic(username: string, user_bio: string){
-    this.service.editProfile(username, user_bio).subscribe(response => {
-      const parsedResponse = JSON.parse(JSON.stringify(response));
-      if (parsedResponse.status === 'success') {
-        localStorage.setItem('username', username);
-        const alert = this.alertController.create({
-          header: 'Success',
-          message: 'Profile updated successfully.',
-          buttons: ['OK']
-        });
+  onChange(event: any) {
+    this.user_src_img = event.target.files[0];
 
-        alert.then(res => {
-          res.present();
-          this.router.navigate(['/profile']); // navigate to profile page after successful update
-        });
-      } else {
-        const alert = this.alertController.create({
-          header: 'Error',
-          message: 'An error occurred while updating your profile. Please try again later.',
-          buttons: ['OK']
-        });
-
-        alert.then(res => {
-          res.present();
-        });
-      }
-    });
 }
+
+  editProfile(){
+
+    const formData = new FormData();
+    formData.append('user_id', this.user_id);
+    formData.append('username', this.username);
+    formData.append('user_bio', this.user_bio);
+    if (!this.user_src_img) {
+      formData.append('user_profile_pic', 'null');
+    }else{
+    formData.append('user_profile_pic', this.user_src_img);
+    }
+  
+      
+      this.service.editProfile(formData).subscribe((response) => {
+        const parsedResponse = JSON.parse(JSON.stringify(response));
+        if (parsedResponse.status === 'success') {
+          localStorage.setItem('username', this.username);
+          const newProfilePicUrl = parsedResponse.new_pic;
+          localStorage.setItem('user_profile_pic', newProfilePicUrl);
+          localStorage.setItem('user_bio', this.user_bio);
+          const alert = this.alertController.create({
+            header: 'Success',
+            message: 'Profile updated successfully.',
+            buttons: ['OK']
+          });
+  
+          alert.then(res => {
+            res.present();
+            this.router.navigate(['/profile']); // navigate to profile page after successful update
+          });
+        } else {
+          const alert = this.alertController.create({
+            header: 'Error',
+            message: 'An error occurred while updating your profile. Please try again later.',
+            buttons: ['OK']
+          });
+  
+          alert.then(res => {
+            res.present();
+          });
+        }
+      });
+    
+}
+
 
 
 }
