@@ -85,8 +85,10 @@ class EventController extends Controller {
 
     function getAnnouncements($branch_id) {
 
-        // Retrieve the announcements from the database and return them in descending order of creation date (newest first)
-        $announcements = Announcement::orderBy('announcement_date', 'desc')->get();
+        // Retrieve the announcements from the database where branch_id matches
+        $announcements = Announcement::where('branch_id', $branch_id)
+                                     ->orderBy('announcement_date', 'desc')
+                                     ->get();
     
         // If no announcements found, return an empty array
         if ($announcements->isEmpty()) {
@@ -96,13 +98,12 @@ class EventController extends Controller {
         // Transform the announcements to include the announcer's name and profile picture
         $announcements = $announcements->map(function($announcement) {
             $announcementArray = $announcement->toArray();
-            // Get the announcer's name and last name and profile picture and branch id
+            // Get the announcer's name and last name and profile picture
             $announcer = Volunteer_user::find($announcement->admin_id);
     
             if ($announcer){
                 $announcementArray['announcer_name'] = $announcer->first_name . ' ' . $announcer->last_name;
                 $announcementArray['announcer_profile_picture'] = $announcer->user_profile_pic;
-                $announcementArray['branch_id'] = $announcer->branch_id;
             }
             // Remove unnecessary fields from the announcement
             unset($announcementArray['field1'], $announcementArray['field2'], $announcementArray['created_at'], $announcementArray['updated_at']);
@@ -125,12 +126,9 @@ class EventController extends Controller {
             return $announcementArray;
         });
     
-        $announcements = $announcements->filter(function($announcement) use ($branch_id) {
-            return $announcement['branch_id'] == $branch_id;
-        });
-    
         // Return the announcements as a JSON response
         return response()->json(['announcements' => $announcements->values()]);
+        
     }
 
     

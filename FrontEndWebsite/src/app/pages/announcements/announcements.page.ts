@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
+import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
   selector: 'app-announcements',
@@ -15,12 +16,28 @@ import { AlertController } from '@ionic/angular';
 })
 export class AnnouncementsPage implements OnInit {
   showDescriptions: boolean[] = [];
-
-  constructor(private alertController: AlertController, private router:Router, private menuController: MenuController) { 
-    this.showDescriptions = new Array(3).fill(false);
+  announcements: any = [];
+  i: number = 0;
+  branch_id = localStorage.getItem('branch_id') as string;
+  constructor(private alertController: AlertController, private router:Router, private menuController: MenuController, private adminService:AdminService) { 
+    this.showDescriptions = new Array(this.announcements.length).fill(false);
   }
 
   ngOnInit() {
+    this.adminService.getAnnouncements(this.branch_id).subscribe((response: any) => {
+      this.announcements = response['announcements'];
+      this.announcements = Array.from(this.announcements);
+
+    });
+  }
+
+  public getAnnouncerProfilePic(index: number) {
+    let currentAnnouncement = this.announcements[index];
+    if (currentAnnouncement.announcer_profile_picture == null) {
+      return "https://ionicframework.com/docs/img/demos/avatar.svg";
+    } else {
+      return currentAnnouncement.announcer_profile_picture;
+    }
   }
 
   async confirm() {
