@@ -85,7 +85,7 @@ export class MyPostsPage implements OnInit {
           text: 'Edit',
           icon: 'create-outline',
           handler: () => {
-           this.router.navigate(['/edit-post']);
+            this.router.navigate(["/edit-post"], {state: { p_id :i }});
           }
         },
         {

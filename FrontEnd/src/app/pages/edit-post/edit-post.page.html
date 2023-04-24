@@ -6,9 +6,9 @@
     <ion-text class="header-txt">Edit Post</ion-text>
   </div>
 
-  <ion-input  class="input"  placeholder="What's happening..."></ion-input>
+  <ion-input  class="input"  value="{{user_bio}}"></ion-input>
 
-  <ion-button class="post-button" shape="round" expand="block" size="large">Save Changes</ion-button>
+  <ion-button class="post-button" shape="round" expand="block" size="large" (click)="editPost()">Save Changes</ion-button>
 
 
 </ion-content>
