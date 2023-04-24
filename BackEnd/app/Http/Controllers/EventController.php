@@ -15,7 +15,22 @@ use App\Models\program;
 class EventController extends Controller {
 
 
-    function getYearlyGoals($branch_id) {
+    function getYearlyGoals($branch_id, $goal_id = null) {
+
+        // If a goal id is provided, return the goal information
+        if ($goal_id) {
+            $goal = goal::find($goal_id);
+            if (!$goal) {
+                return response()->json([
+                    'message' => 'Goal not found'
+                ]);
+            }
+            $goal = $goal->toArray();
+            unset($goal['field1'], $goal['field2'], $goal['created_at'], $goal['updated_at']);
+            return response()->json([
+                'goal' => $goal
+            ]);
+        }
 
         // Gets yearly goals and return them grouped based on program id
 

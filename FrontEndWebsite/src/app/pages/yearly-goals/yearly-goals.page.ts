@@ -26,10 +26,11 @@ export class YearlyGoalsPage implements OnInit {
   searchTerm: string = '';
 
   ngOnInit() {
-    this.service.getYearlyGoals(this.branch_id).subscribe((response: any) => {
+    this.service.getYearlyGoals(this.branch_id,"").subscribe((response: any) => {
       const allGoals = [].concat.apply([], Object.values(response['goals']));
       this.yearlyGoals = allGoals;
       this.filteredGoals = allGoals;
+      console.log(this.yearlyGoals)
     });
   }
 
@@ -101,7 +102,7 @@ export class YearlyGoalsPage implements OnInit {
                     this.service.deleteYearlyGoal(goal_id).subscribe((response: any) => {
                         if (response.status === 'success') {
                             // Reload the list of yearly goals
-                            this.service.getYearlyGoals(this.branch_id).subscribe((response: any) => {
+                            this.service.getYearlyGoals(this.branch_id,"").subscribe((response: any) => {
                                 const allGoals = [].concat.apply([], Object.values(response['goals']));
                                 this.yearlyGoals = allGoals;
                                 this.filteredGoals = allGoals;
