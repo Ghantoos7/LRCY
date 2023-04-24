@@ -98,35 +98,36 @@ export class YearlyGoalsPage implements OnInit {
 
   async confirm(goal_id: string) {
     const alert = await this.alertController.create({
-        header: 'Delete Goal',
-        message: 'Are you sure you want to delete this goal?',
-        cssClass: 'my-custom-class',
-        buttons: [
-            {
-              text: 'Yes',
-                handler: () => {
-                    this.service.deleteYearlyGoal(goal_id).subscribe((response: any) => {
-                        if (response.status === 'success') {
-                            // Reload the list of yearly goals
-                            this.service.getYearlyGoals(this.branch_id).subscribe((response: any) => {
-                                const allGoals = [].concat.apply([], Object.values(response['goals']));
-                                this.yearlyGoals = allGoals;
-                                this.filteredGoals = allGoals;
-                            });
-                        } else {
-                            console.log(response.message);
-                        }
-                    });
-                }
-            },
-            {
-                text: 'Cancel',
-                role: 'cancel',
-            }
-        ]
+      header: 'Delete Goal',
+      message: 'Are you sure you want to delete this goal?',
+      cssClass: 'my-custom-class',
+      buttons: [
+        {
+          text: 'Yes',
+          handler: () => {
+            this.service.deleteYearlyGoal(goal_id).subscribe((response: any) => {
+              if (response.status === 'success') {
+                // Reload the list of yearly goals
+                this.service.getYearlyGoals(this.branch_id).subscribe((response: any) => {
+                  const allGoals = [].concat.apply([], Object.values(response['goals']));
+                  this.yearlyGoals = allGoals;
+                  this.filteredGoals = allGoals;
+                });
+              } else {
+                console.log(response.message);
+              }
+            });
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        }
+      ]
     });
+  
     await alert.present();
-}
+  }
 
   goToAddGoal(){
     this.router.navigate(['/add-goal']);

@@ -124,7 +124,7 @@ export class MemberProfilePage implements OnInit {
   }
 
 
-  async confirm() {
+  async confirm(user_id: string) {
     const alert = await this.alertController.create({
       header: 'Delete Profile',
       message: 'Are you sure you want to remove this member?',
@@ -132,12 +132,23 @@ export class MemberProfilePage implements OnInit {
       buttons: [
         {
           text: 'Yes',
+          handler: () => {
+            this.adminService.deleteUser(user_id).subscribe((response: any) => {
+              if (response.status === 'success') {
+                // Handle the success case, e.g., navigate to another page or display a success message
+                this.router.navigate(['/manage-profiles']);
+              } else {
+                // Handle the error case, e.g., display an error message
+                console.log(response.message);
+              }
+            });
+          },
         },
         {
           text: 'Cancel',
           role: 'cancel',
-        }
-      ]
+        },
+      ],
     });
     await alert.present();
   }

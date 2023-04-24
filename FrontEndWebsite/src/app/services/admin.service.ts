@@ -184,5 +184,12 @@ export class AdminService {
     return response;
   }
 
+  deleteUser(user_id: string) {
+    const headers = this.getAuthHeaders();
+    const body = { user_id: user_id };
+    const response = this.http.post(this.base_url + 'delete_user', body, { headers: headers });
+    return response;
+  }
+
 
 }
