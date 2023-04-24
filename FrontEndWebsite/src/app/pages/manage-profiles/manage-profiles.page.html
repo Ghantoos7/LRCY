@@ -25,9 +25,9 @@
   </ion-header>
 
   <ion-content class="ion-padding">
-  <ion-searchbar animated="true" placeholder="Search up your member's name"></ion-searchbar>
+    <ion-searchbar animated="true" placeholder="Search up your member's name" [formControl]="searchControl"></ion-searchbar>
 
-  <ng-container *ngFor="let letter of (usersByLetter | keyvalue)">
+    <ng-container *ngFor="let letter of (filteredUsersByLetter | keyvalue)">
     <ion-card>
       <ion-card-header>
         <ion-card-title>{{ letter.key }}</ion-card-title>
