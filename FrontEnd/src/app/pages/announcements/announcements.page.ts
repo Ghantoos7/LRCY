@@ -76,6 +76,7 @@ export class AnnouncementsPage implements OnInit {
       toggleDarkMode(){
     
       }
+      
       logout() {
         this.userservice.logout().subscribe((data: any) => {
           localStorage.clear();

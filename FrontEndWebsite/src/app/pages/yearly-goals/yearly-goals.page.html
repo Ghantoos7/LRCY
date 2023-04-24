@@ -1,5 +1,4 @@
 <ion-content class="background">
-  
   <ion-menu menuId="menuGoals" contentId="main-content">
     <ion-header>
       <ion-toolbar>
@@ -8,27 +7,28 @@
     </ion-header>
     <ion-content class="ion-padding"> 
 
-        <ion-button (click) ="closeMenu()" class="menu-button">View Goals</ion-button>
-      <ion-button (click) ="goToAddGoal()" class="menu-button">Add a goal</ion-button>
+      <ion-button (click)="closeMenu()" class="menu-button">View Goals</ion-button>
+      <ion-button (click)="goToAddGoal()" class="menu-button">Add a goal</ion-button>
 
     </ion-content>
   </ion-menu>
-  
-  <div class="ion-page" id="main-content">
-  
+
+  <div class="ion-page" id="main-content" style="height: 100%;">
+
     <ion-header>
       <ion-toolbar>
         <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <ion-title><ion-text class="ann">Yearly Goals</ion-text>
+        <ion-title>
+          <ion-text class="ann">Yearly Goals</ion-text>
           <ion-button (click)="goToPanel()" class="header-button"><ion-label>Panel</ion-label></ion-button>
           <ion-button (click)="goToHome()" class="header-button"><ion-label>Log out</ion-label></ion-button>
         </ion-title>
       </ion-toolbar>
     </ion-header>
 
-    <ion-searchbar animated="true" placeholder="Search for a goal..."></ion-searchbar>
+    <ion-searchbar animated="true" placeholder="Search for a goal..." [(ngModel)]="searchTerm" (ionChange)="onSearchChange()"></ion-searchbar>
 
     <ion-list class="list">
       <ion-item-group>
@@ -37,99 +37,42 @@
             2023
           </ion-label>
         </ion-item-divider>
-    
-        <ion-item class="content" lines="none">
-          <ion-label><ion-card>
-            <ion-card-header>
-              <ion-card-title class="title">Jbail Reforestation
-                <ion-icon (click)="goToEditGoal()" class="edit" name="create-outline"></ion-icon>
-                <ion-icon (click)="confirm()" class="delete" name="trash-outline"></ion-icon>
-              </ion-card-title>
-            </ion-card-header>
-          
-            <ion-card-content>
-              <ion-progress-bar class="bar" value="0.5"></ion-progress-bar>
-            </ion-card-content>
-          
-            <ion-footer>
-              <div>
-                <ion-card-title class="date">Start Date</ion-card-title>
-                <ion-card-subtitle>8/04/2023</ion-card-subtitle>
-              </div>
-              <div>
-                <ion-card-title class="date">Deadline</ion-card-title>
-                <ion-card-subtitle>12/04/2023</ion-card-subtitle>
-              </div>
-            </ion-footer>
-          
-          </ion-card></ion-label>
-        </ion-item>
-        <ion-item class="content" lines="none">
-          <ion-label><ion-card>
-            <ion-card-header>
-              <ion-card-title class="title">Jbail Reforestation
-                <ion-icon (click)="goToEditGoal()" class="edit" name="create-outline"></ion-icon>
-                <ion-icon (click)="confirm()" class="delete" name="trash-outline"></ion-icon>
-              </ion-card-title>
-            </ion-card-header>
-          
-            <ion-card-content>
-              <ion-progress-bar class="bar" value="0.5"></ion-progress-bar>
-            </ion-card-content>
-          
-            <ion-footer>
-              <div>
-                <ion-card-title class="date">Start Date</ion-card-title>
-                <ion-card-subtitle>8/04/2023</ion-card-subtitle>
-              </div>
-              <div>
-                <ion-card-title class="date">Deadline</ion-card-title>
-                <ion-card-subtitle>12/04/2023</ion-card-subtitle>
-              </div>
-            </ion-footer>
-          
-          </ion-card></ion-label>
-        </ion-item>
-        
-      </ion-item-group>
-    
-      <ion-item-group>
-        <ion-item-divider>
+
+        <ion-item *ngFor="let goal of filteredGoals" class="content" lines="none">
           <ion-label>
-            2022
+            <ion-card>
+              <ion-card-header>
+                <ion-card-title class="title">{{goal.goal_name}}
+                  <ion-icon (click)="goToEditGoal()" class="edit" name="create-outline"></ion-icon>
+                  <ion-icon (click)="confirm(goal.id)" class="delete" name="trash-outline"></ion-icon>
+                </ion-card-title>
+              </ion-card-header>
+        
+              <ion-card-content>
+                <div class="icons-and-count">
+                  <ion-icon class="is-complete-icon" [name]="isGoalComplete(goal.goal_status)"></ion-icon>
+                  <ion-icon class="program-icon" [name]="getProgramIcon(goal.program_id)"></ion-icon>
+                  <ion-icon class="event-icon" [name]="getEventIcon(goal.event_type_id)"></ion-icon>
+                  <span class="completed-count">{{goal.number_completed}}/{{goal.number_to_complete}}</span>
+                  
+                </div>
+                <ion-progress-bar class="bar" [value]="goal.number_completed / goal.number_to_complete"></ion-progress-bar>
+              </ion-card-content>
+        
+              <ion-footer>
+                <div>
+                  <ion-card-title class="date">Start Date</ion-card-title>
+                  <ion-card-subtitle>{{goal.start_date}}</ion-card-subtitle>
+                </div>
+                <div>
+                  <ion-card-title class="date">Deadline</ion-card-title>
+                  <ion-card-subtitle>{{goal.goal_deadline}}</ion-card-subtitle>
+                </div>
+              </ion-footer>
+            </ion-card>
           </ion-label>
-        </ion-item-divider>
-    
-        <ion-item class="content" lines="none">
-          <ion-label><ion-card>
-            <ion-card-header>
-              <ion-card-title class="title">Jbail Reforestation
-                <ion-icon (click)="goToEditGoal()" class="edit" name="create-outline"></ion-icon>
-                <ion-icon (click)="confirm()" class="delete" name="trash-outline"></ion-icon>
-              </ion-card-title>
-            </ion-card-header>
-          
-            <ion-card-content>
-              <ion-progress-bar class="bar" value="0.5"></ion-progress-bar>
-            </ion-card-content>
-          
-            <ion-footer>
-              <div>
-                <ion-card-title class="date">Start Date</ion-card-title>
-                <ion-card-subtitle>8/04/2023</ion-card-subtitle>
-              </div>
-              <div>
-                <ion-card-title class="date">Deadline</ion-card-title>
-                <ion-card-subtitle>12/04/2023</ion-card-subtitle>
-              </div>
-            </ion-footer>
-          
-          </ion-card></ion-label>
         </ion-item>
-  
       </ion-item-group>
     </ion-list>
-   
   </div>
 </ion-content>
-

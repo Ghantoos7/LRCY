@@ -15,13 +15,13 @@ class PostController extends Controller {
 
 
     function createPost(Request $request) {
-
+        
         // Validate the request inputs.
         $request->validate([
             'user_id' => 'required',
             'post_type' => 'required|in:text,image,video',
             'post_caption' => $request->input('post_type') === 'text' ? 'required' : 'nullable',
-            'post_media' => $request->input('post_type') !== 'text' && !$request->has('post_caption') ? 'required|file|mimes:jpeg,png,jpg,gif,mp4,avi|max:2048' : 'nullable'
+            'post_media' => 'required_if:post_type,image'
         ]);
 
         // Get the user ID from the request.
@@ -52,33 +52,37 @@ class PostController extends Controller {
             ]);
         }
 
-        // Create a new post instance.
-        $post = new Post([
-            'user_id' => $user_id,
-            'post_type_id' => $post_type_id,
-            'comment_count' => 0,
-            'like_count' => 0,
-            'post_date' => now(),
-            'post_caption' => $request->input('post_caption') ?? null
-        ]);
+         // Create a new post instance.
+    $post = new Post([
+        'user_id' => $user_id,
+        'post_type_id' => $post_type_id,
+        'comment_count' => 0,
+        'like_count' => 0,
+        'post_date' => now(),
+        'post_caption' => $request->input('post_caption') ?? null
+    ]);
 
-        // If the post type is not text, upload the post media file.
-        if ($post_type !== 'text') {
-            $image = $request->file('post_media');
-            $filename = time() . '.' . $image->getClientOriginalExtension();
-            $path = $image->storeAs('public/post_media', $filename);
-            $post->post_media = $filename;
+    // If the post type is not text, upload the post media file.
+    if ($post_type !== 'text') {
+        if($request->hasFile('post_media')){
+            $request->validate([
+                'image' => 'mimes:jpeg,bmp,png,jpg'
+            ]);
+
+            $request->post_media->store('public/images');
+            $post->post_media = $request->post_media->hashName();
         }
+    }
 
-        // Save the post to the database.
-        $post->save();
+    // Save the post to the database.
+    $post->save();
 
-        // Return a success response with the post ID.
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Post created successfully',
-            'post_id' => $post->id
-        ]);
+    // Return a success response with the post ID.
+    return response()->json([
+        'status' => 'success',
+        'message' => 'Post created successfully',
+        'post_id' => $post->id
+    ]);
 
     }
     
