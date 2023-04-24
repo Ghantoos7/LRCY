@@ -365,46 +365,57 @@ class AdminController extends Controller {
     function sendAnnouncement(Request $request) {
 
         // Validate the request
-        $request->validate([
+        $validator = Validator::make($request->all(), [
+            'announcement_title' => 'required|string',
             'announcement_content' => 'required|string',
             'admin_id' => 'required|integer',
             'importance_level' => 'required|integer'
         ]);
+    
+        // Check if validation failed and return the errors
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $validator->errors()->first()
+            ]);
+        }
 
+        // Check if the importance level is valid
+        if ($request->input('importance_level') < 0 || $request->input('importance_level') > 2) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'The importance level field is required'
+            ]);
+        }
+    
         // Get the admin user based on the provided admin ID
         $admin = volunteer_user::where('id', $request->input('admin_id'))->first();
-
-        // Check if the admin user exists
-        if (!$admin) {
+    
+        // Check if the admin user exists and is an admin
+        if (!$admin || $admin->user_type_id != 1) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Admin user not found'
+                'message' => 'Invalid admin user'
             ]);
         }
-
-        // Check if the admin user is an admin
-        if ($admin->user_type_id != 1) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'User is not an admin'
-            ]);
-        }
-
+    
         // Create the announcement
         $announcement = Announcement::create([
+            'announcement_title' => $request->input('announcement_title'),
             'announcement_content' => $request->input('announcement_content'),
             'admin_id' => $request->input('admin_id'),
             'importance_level' => $request->input('importance_level'),
+            'branch_id' => $admin->branch_id,
             'announcement_date' => Carbon::now()
         ]);
-
+    
         // Return a success response
         return response()->json([
             'status' => 'success',
             'message' => 'Announcement sent successfully'
         ]);
-
     }
+    
 
 
     function deleteAnnouncement(Request $request) {

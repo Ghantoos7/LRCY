@@ -6,8 +6,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class AdminService {
 
-  branch_id: string="";
-
   constructor(private http:HttpClient) { }
 
   base_url = "http://localhost:8000/api/v0.1/admin/";
@@ -58,6 +56,22 @@ export class AdminService {
     const response = this.http.get(this.base_url_event + 'get_announcements/' + id, { headers: headers });
     return response;
   }
+
+  sendAnnouncement(title: string, content: string, importance_level: string, id: string) {
+    const headers = this.getAuthHeaders().set('Content-Type', 'application/json');
+    const options = { headers: headers };
+
+    const body = {
+      'announcement_title': title,
+      'announcement_content': content,
+      'importance_level': importance_level,
+      'admin_id': id
+    };
+
+    const response = this.http.post(this.base_url + 'send_announcement', body, options);
+    return response;
+  }
+
   getYearlyGoals(id: string) {
     const headers = this.getAuthHeaders();
     const response = this.http.get(this.base_url_event + 'get_yearly_goals/' + id, { headers: headers });
@@ -70,5 +84,6 @@ export class AdminService {
     const response = this.http.post(this.base_url + 'delete_yearly_goal', body, { headers: headers });
     return response;
 }
+
 
 }

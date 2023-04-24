@@ -88,6 +88,7 @@ class EventController extends Controller {
         // Retrieve the announcements from the database where branch_id matches
         $announcements = Announcement::where('branch_id', $branch_id)
                                      ->orderBy('announcement_date', 'desc')
+                                     ->orderBy('created_at', 'desc')
                                      ->get();
     
         // If no announcements found, return an empty array
