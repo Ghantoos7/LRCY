@@ -6,7 +6,7 @@
   <ion-content class="ion-padding">
     <div class="avatar-container">
       <ion-avatar size="large" class="custom-avatar">
-        <img alt="Avatar" src="{{user_profile_pic}}" />
+        <img alt="Avatar" src="http://127.0.0.1:8000/storage/images/{{user_profile_pic}}" />
       </ion-avatar>
       <ion-label class="username-label">{{username}}</ion-label>
       <ion-button (click)="goProfile()" class="custom-button" expand="block"><ion-icon name="person" slot="start"></ion-icon>My Profile</ion-button>
@@ -34,7 +34,7 @@
 
     <ion-card class="card" *ngFor="let post of posts; let i = index">
       <div class="header-container">
-        <img (click)="showProfile(i)" class="card-profile-picture" src="{{post['user'].user_profile_pic}}">
+        <img (click)="showProfile(i)" class="card-profile-picture" src="http://127.0.0.1:8000/storage/images/{{post['user'].user_profile_pic}}">
         <ion-text (click)="showProfile(i)" class="username">{{post['user'].username}}</ion-text>
         <ion-text (click)="showProfile(i)" class="name">{{post['user'].name}}</ion-text>
         <ion-text class="post-date">{{getDaysAgo(post.post_date)}} d</ion-text>

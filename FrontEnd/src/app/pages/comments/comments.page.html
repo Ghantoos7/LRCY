@@ -11,7 +11,7 @@
     <ion-card-content>
       <ion-text class="caption">{{post_caption}}</ion-text>
       <ion-input [(ngModel)]="comment_content" class="input" placeholder="Add comment...">
-        <img class="comment-profile" src="{{user_profile_pic}}">
+        <img class="comment-profile" src="http://127.0.0.1:8000/storage/images/{{user_profile_pic}}">
       </ion-input>
       <ion-icon (click)="sendComment()" class="send-icon" name="send"></ion-icon>
     </ion-card-content>
