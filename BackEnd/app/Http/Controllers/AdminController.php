@@ -128,23 +128,23 @@ class AdminController extends Controller {
     function addUser(Request $request) {
         
         $validator = Validator::make($request->all(), [
-            "admin_branch_id" => "required|integer",
+            "branch_id" => "required|integer",
             "first_name" => "required|string",
             "last_name" => "required|string",
             "organization_id" => "required|integer",
-            "date_of_birth" => "required|date",
-            "position" => "required|string",
+            "user_dob" => "required|date",
+            "user_position" => "required|string",
             "gender" => "required|integer",
             "user_type_id" => "required|integer|in:0,1",
-            "status" => "required|string",
-            "start_date" => "required|date",
-            "end_date" => "nullable|date",
+            "is_active" => "required|integer|in:0,1",
+            "user_start_date" => "required|date",
+            "user_end_date" => "nullable|date",
         ]);
     
         if ($validator->fails()) {
             return response()->json([
                 "status" => "Validation failed",
-                "errors" => $validator->errors()
+                "error" => $validator->errors()->first()
             ]);
         }
     
@@ -154,23 +154,23 @@ class AdminController extends Controller {
                 'first_name' => $request->input('first_name'),
                 'last_name' => $request->input('last_name'),
                 'organization_id' => $request->input('organization_id'),
-                'user_dob' => $request->input('date_of_birth'),
-                'user_position' => $request->input('position'),
-                'gender' => $gender,
-                'branch_id' => $request->input('admin_branch_id'),
+                'user_dob' => $request->input('user_dob'),
+                'user_position' => $request->input('user_position'),
+                'gender' => $request->input('gender'),
+                'branch_id' => $request->input('branch_id'),
                 'user_type_id' => $request->input('user_type_id'),
-                'status' => $request->input('status'),
-                'user_start_date' => $request->input('start_date'),
-                'user_end_date' => $request->input('end_date'),
+                'user_start_date' => $request->input('user_start_date'),
+                'user_end_date' => $request->input('user_end_date'),
                 'user_age' => Carbon::parse($request->input('date_of_birth'))->age,
                 'is_registered' => 0,
-                'is_active' => ($request->input('status') == 'active') ? 1 : 0,
+                'is_active' => $request->input('is_active'),
                 'password' => Hash::make('default_password'),
                 'username' => $request->input('first_name') . $request->input('last_name')
             ]);
     
             return response()->json([
-                "status" => "User added successfully",
+                "status" => 'success',
+                "message" => "User added successfully",
                 "user" => $user
             ]);
         } catch (\Exception $e) {

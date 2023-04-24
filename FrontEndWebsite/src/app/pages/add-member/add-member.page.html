@@ -42,13 +42,13 @@
                   <ion-col size="6">
                     <ion-item>
                       <ion-label>First Name</ion-label>
-                      <ion-input class="first-card-input"></ion-input>
+                      <ion-input  [(ngModel)] = "first_name" class="first-card-input"></ion-input>
                     </ion-item>
                   </ion-col>
                   <ion-col size="6">
                     <ion-item class="custom-input">
                       <ion-label class="custom-label">Last Name</ion-label>
-                      <ion-input class="first-card-input"></ion-input>
+                      <ion-input [(ngModel)] = "last_name" class="first-card-input"></ion-input>
                     </ion-item>
                   </ion-col>
                   
@@ -57,13 +57,13 @@
                   <ion-col size="6">
                     <ion-item>
                       <ion-label>Volunteer ID</ion-label>
-                      <ion-input class="first-card-input"></ion-input>
+                      <ion-input [(ngModel)] = "organization_id" type="number" class="first-card-input"></ion-input>
                     </ion-item>
                   </ion-col>
                   <ion-col size="6">
                     
                     <ion-item>
-                      <ion-select aria-label="User Privilege" interface="popover" placeholder="Privilege Type">
+                      <ion-select [(ngModel)] = "user_type_id" placeholder="Privilege Type">
                         <ion-select-option value="user">User</ion-select-option>
                         <ion-select-option value="admin">Admin</ion-select-option>
                       </ion-select>
@@ -77,12 +77,12 @@
                   <ion-col size="6">
                     <ion-item>
                       <ion-label>User Position</ion-label>
-                      <ion-input class="first-card-input"></ion-input>
+                      <ion-input [(ngModel)] = "user_position" class="first-card-input"></ion-input>
                     </ion-item>
                   </ion-col>
                   <ion-col size="6">
                     <ion-item>
-                      <ion-select aria-label="Status" interface="popover" placeholder="Status">
+                      <ion-select [(ngModel)] = "is_active" placeholder="Status">
                         <ion-select-option value="active">Active</ion-select-option>
                         <ion-select-option value="inactive">Inactive</ion-select-option>
                       </ion-select>
@@ -94,25 +94,28 @@
                   <ion-col size="6">
                     <ion-item>
                       <ion-label>Date of Birth</ion-label>
-                      <ion-input class="first-card-input" type="date" ></ion-input>
+                      <ion-input [(ngModel)] = "user_dob" class="first-card-input" type="date" ></ion-input>
                     </ion-item>
                   </ion-col>
                   <ion-col size="6">
                     <ion-item>
-                      <ion-label>Gender</ion-label>
-                      <ion-input class="first-card-input"></ion-input>
+                      <ion-select [(ngModel)] = "gender" placeholder="Gender">
+                        <ion-select-option value="Male">Male</ion-select-option>
+                        <ion-select-option value="Female">Female</ion-select-option>
+                        <ion-select-option value="Other">Other</ion-select-option>
+                      </ion-select>
                     </ion-item>
                   </ion-col>
                   <ion-col size="6">
                     <ion-item>
                       <ion-label>Start Date</ion-label>
-                      <ion-input class="first-card-input" type="date"></ion-input>
+                      <ion-input [(ngModel)]  = "user_start_date" class="first-card-input" type="date"></ion-input>
                     </ion-item>
                   </ion-col>
                   <ion-col size="6">
                     <ion-item>
                       <ion-label>End Date</ion-label>
-                      <ion-input class="first-card-input" type="date"></ion-input>
+                      <ion-input [(ngModel)] = "user_end_date" class="first-card-input" type="date"></ion-input>
                     </ion-item>
                   </ion-col>
                   
@@ -128,6 +131,6 @@
       </ion-row>  
     </ion-grid>
 
-    <ion-button class="save">Add Member</ion-button>
+    <ion-button (click)= "addUser()" class="save">Add Member</ion-button>
   </div>
 </ion-content>

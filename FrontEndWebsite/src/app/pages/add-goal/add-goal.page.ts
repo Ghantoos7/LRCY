@@ -34,7 +34,6 @@ export class AddGoalPage implements OnInit {
   }
 
   setYearlyGoal(){
-    console.log(this.branch_id,this.goal_name, this.goal_description, this.number_to_complete, this.mapProgramName(this.program_id), this.mapEventType(this.event_type_id), this.goal_year, this.start_date, this.goal_deadline);
     this.adminService.setYearlyGoal(this.branch_id, this.goal_name, this.goal_description, this.number_to_complete, this.mapProgramName(this.program_id), this.mapEventType(this.event_type_id), this.goal_year, this.start_date, this.goal_deadline).subscribe((response: any) => {
       const parsedResponse = JSON.parse(JSON.stringify(response));
       if(parsedResponse.status == 'success') {

@@ -165,6 +165,10 @@ export class MemberProfilePage implements OnInit {
     this.router.navigate(['/delete-training']);
   }
 
+  goToAddForm(){
+    this.router.navigate(['/add-member'])
+  }
+
   closeMenu() {
     this.menuCtrl.close();
   }
