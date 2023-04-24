@@ -163,5 +163,26 @@ export class AdminService {
     return response;
   }
 
+  editUser(user_id:  string, first_name: string, last_name: string, is_active : number , user_start_date : string, user_end_date : string, user_position : string, user_type_id : number , gender: string, user_dob : string) {
+    const headers = this.getAuthHeaders().set('Content-Type', 'application/json');
+    const options = { headers: headers };
+
+    const body = {
+      'user_id': user_id,
+      'first_name': first_name,
+      'last_name': last_name,
+      'is_active': is_active,
+      'user_start_date': user_start_date,
+      'user_end_date': user_end_date,
+      'user_position': user_position,
+      'user_type_id': user_type_id,
+      'gender' : gender,
+      'user_dob' : user_dob,
+    };
+
+    const response = this.http.post(this.base_url + 'edit_user', body, options);
+    return response;
+  }
+
 
 }

@@ -16,7 +16,7 @@
   })
   export class EditGoalPage implements OnInit {
 
-    goal_info: any ;
+
     goal_id: number = 0;
     branch_id = localStorage.getItem('branchId') as unknown as number;
     goal_name: string = '';

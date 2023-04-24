@@ -97,8 +97,8 @@ export class ManageProfilesPage implements OnInit {
     this.menuCtrl.close();
   }
 
-  goToProfile(){
-    this.router.navigate(['/member-profile']);
+  goToProfile(user : any){
+    this.router.navigate(['/member-profile'], { state: { user: user } });
   }
 
 }

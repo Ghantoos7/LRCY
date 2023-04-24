@@ -35,7 +35,7 @@
       <ion-card-content>
         <ion-list>
           <ng-container *ngFor="let user of letter.value">
-            <ion-item (click)="goToProfile()">
+            <ion-item (click)="goToProfile(user)">
               <ion-avatar slot="start">
                 <img alt="Profile picture" [src]="user.profilePicture || 'https://ionicframework.com/docs/img/demos/thumbnail.svg'" />
               </ion-avatar>

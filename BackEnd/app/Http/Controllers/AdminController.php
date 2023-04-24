@@ -134,7 +134,7 @@ class AdminController extends Controller {
             "organization_id" => "required|integer",
             "date_of_birth" => "required|date",
             "position" => "required|string",
-            "gender" => "required|string",
+            "gender" => "required|integer",
             "user_type_id" => "required|integer|in:0,1",
             "status" => "required|string",
             "start_date" => "required|date",
@@ -148,19 +148,6 @@ class AdminController extends Controller {
             ]);
         }
     
-        // check gender input(male:0,female:1,other:2) and convert to integer
-        $genderInput = $request->input('gender');
-        if ($genderInput === 'male') {
-            $gender = 0;
-        } else if ($genderInput === 'female') {
-            $gender = 1;
-        } else if ($genderInput === 'other') {
-            $gender = 2;
-        } else {
-            return response()->json([
-                "status" => "Invalid gender input"
-            ]);
-        }
     
         try {
             $user = volunteer_user::create([
@@ -199,6 +186,27 @@ class AdminController extends Controller {
     function editUser(Request $request) {
 
         try {
+
+            $validator = Validator::make($request->all(), [
+                "first_name" => "required|string",
+                "last_name" => "required|string",
+                "user_dob" => "required|date",
+                "user_position" => "required|string",
+                "gender" => "required|integer",
+                "user_type_id" => "required|integer|in:0,1",
+                "is_active" => "required|integer",
+                "user_start_date" => "required|date",
+                "user_end_date" => "nullable|date",
+            ]);
+        
+            if ($validator->fails()) {
+                return response()->json([
+                    "status" => "Validation failed",
+                    "errors" => $validator->errors()->first()
+                ]);
+            }
+
+
             $user = Volunteer_user::where('id', $request->input('user_id'))->first();
 
             if (!$user) {
@@ -208,7 +216,7 @@ class AdminController extends Controller {
                 ]);
             }
 
-            $fillableFields = ['first_name', 'last_name', 'is_active', 'user_start_date', 'user_end_date', 'branch_id', 'user_position', 'user_type_id'];
+            $fillableFields = ['first_name', 'last_name', 'is_active', 'user_start_date', 'user_end_date', 'user_position', 'user_type_id', 'gender','user_dob'];
 
             $user->fill($request->only($fillableFields));
 
