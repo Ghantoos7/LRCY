@@ -16,6 +16,7 @@
   })
   export class EditGoalPage implements OnInit {
 
+    goal_info: any ;
     goal_id: number = 0;
     branch_id = localStorage.getItem('branchId') as unknown as number;
     goal_name: string = '';
@@ -34,6 +35,19 @@
     ngOnInit() {
       const goal = history.state.goal;
       this.goal_id = this.route.snapshot.paramMap.get('goalId') as unknown as number;
+      this.adminService.getYearlyGoals(this.branch_id.toString(),this.goal_id.toString()).subscribe((response: any) => {
+        this.goal_info = response;
+        this.goal_name = this.goal_info['goal'].goal_name;
+        this.goal_description = this.goal_info['goal'].goal_description;
+        this.number_completed = this.goal_info['goal'].number_completed;
+        this.number_to_complete = this.goal_info['goal'].number_to_complete;
+        this.program_id = this.goal_info['goal'].program_id;
+        this.event_type_id = this.goal_info['goal'].event_type_id;
+        this.goal_year = this.goal_info['goal'].goal_year;
+        this.start_date = this.goal_info['goal'].start_date;
+        this.goal_deadline = this.goal_info['goal'].goal_deadline;
+        
+      });
 
 
       }
