@@ -882,6 +882,7 @@ class AdminController extends Controller {
 
             // Reset number completed 
             $goal->number_completed = 0;
+            $goal->number_completed = $request->input('number_completed');
             $goal->save();
 
             // Get all events for the goal

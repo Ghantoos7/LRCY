@@ -22,7 +22,8 @@ export class EditGoalPage implements OnInit {
   ngOnInit() {
     this.goal_id = this.route.snapshot.paramMap.get('goalId') as string;
     console.log(this.goal_id)
-  }
+    console.log(localStorage.getItem('authToken'));
+    }
 
   pinFormatter(value: number) {
     return `${value}%`;

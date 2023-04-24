@@ -32,7 +32,7 @@
     <ion-card-header>
       <ion-card-title>Edit goal title or description</ion-card-title>
     </ion-card-header>
-  
+
     <ion-card-content>
       <ion-input class="input" placeholder="Goal Title..."></ion-input>
     </ion-card-content>
@@ -41,28 +41,52 @@
       <ion-input class="input" placeholder="Goal Description..."></ion-input>
     </ion-card-content>
 
+    <ion-card-content>
+      <ion-input class="input" type="number" placeholder="Number Completed..."></ion-input>
+    </ion-card-content>
+
+    <ion-card-content>
+      <ion-input class="input" type="number" placeholder="Number to Complete..."></ion-input>
+    </ion-card-content>
+
+    <ion-card-content>
+      <div class="select-wrapper">
+        <ion-select class="input" placeholder="Program">
+          <ion-select-option value="Youth and Health">Youth and Health</ion-select-option>
+          <ion-select-option value="Human values and principles">Human values and principles</ion-select-option>
+          <ion-select-option value="Environment">Environment</ion-select-option>
+          <ion-select-option value="Other">Other</ion-select-option>
+        </ion-select>
+      </div>
+    </ion-card-content>
+    
+    <ion-card-content>
+      <div class="select-wrapper">
+        <ion-select class="input" placeholder="Event Type">
+          <ion-select-option value="Activity">Activity</ion-select-option>
+          <ion-select-option value="Training">Training</ion-select-option>
+          <ion-select-option value="Other">Other</ion-select-option>
+        </ion-select>
+      </div>
+    </ion-card-content>
+
+    <ion-card-content>
+      <ion-input class="input" type="number" placeholder="Goal Year..."></ion-input>
+    </ion-card-content>
+
     <div class="dates">
       <ion-card-header>
         <ion-card-title class="start">Start Date</ion-card-title>
         <ion-card-title class="end">Deadline</ion-card-title>
-  
       </ion-card-header>
-  
+
       <ion-card-content>
-        <ion-input class="start-date"type="date"></ion-input>
-        <ion-input class="end-date"type="date"></ion-input>
+        <ion-input class="start-date" type="date"></ion-input>
+        <ion-input class="end-date" type="date"></ion-input>
       </ion-card-content>
     </div>
-  
-    <ion-card-header>
-      <ion-card-title>Edit the progress of the goal</ion-card-title>
-    </ion-card-header>
-
-    <ion-range aria-label="Range with pin" [pin]="true" [pinFormatter]="pinFormatter"></ion-range>
   </ion-card>
 
   <ion-button class="send" shape="round" expand="block" size="large">Update Goal</ion-button>
   <ion-img src="assets/imgs/ann-design.png"></ion-img>
-
-
 </ion-content>
