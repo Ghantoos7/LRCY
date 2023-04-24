@@ -15,7 +15,8 @@ class announcement extends Model
         'announcement_title',
         'announcement_date',
         'admin_id',
-        'importance_level'
+        'importance_level',
+        'branch_id'
     ];
 
 }

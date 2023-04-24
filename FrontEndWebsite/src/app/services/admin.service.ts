@@ -6,11 +6,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class AdminService {
 
-  branch_id: string="";
-
   constructor(private http:HttpClient) { }
 
   base_url = "http://localhost:8000/api/v0.1/admin/";
+  base_url_event = "http://localhost:8000/api/v0.1/event/";
 
   private getAuthHeaders(): HttpHeaders {
     const token = localStorage.getItem('authToken');
@@ -51,5 +50,69 @@ export class AdminService {
       const response = this.http.post(this.base_url + 'decline_request', body, options);
       return response;
   }
+
+  getAnnouncements(id: string) {
+    const headers = this.getAuthHeaders();
+    const response = this.http.get(this.base_url_event + 'get_announcements/' + id, { headers: headers });
+    return response;
+  }
+
+  sendAnnouncement(title: string, content: string, importance_level: string, id: string) {
+    const headers = this.getAuthHeaders().set('Content-Type', 'application/json');
+    const options = { headers: headers };
+
+    const body = {
+      'announcement_title': title,
+      'announcement_content': content,
+      'importance_level': importance_level,
+      'admin_id': id
+    };
+
+    const response = this.http.post(this.base_url + 'send_announcement', body, options);
+    return response;
+  }
+
+  deleteAnnouncement(announcement_id: string, admin_id: string) {
+    const headers = this.getAuthHeaders().set('Content-Type', 'application/json');
+    const options = { headers: headers };
+
+    const body = {
+      'announcement_id': announcement_id,
+      'admin_id': admin_id
+    };
+
+    const response = this.http.post(this.base_url + 'delete_announcement', body, options);
+    return response;
+  }
+
+  editAnnouncement(announcement_id: string, admin_id: string, title: string, content: string, importance_level: string) {
+    const headers = this.getAuthHeaders().set('Content-Type', 'application/json');
+    const options = { headers: headers };
+
+    const body = {
+      'announcement_id': announcement_id,
+      'admin_id': admin_id,
+      'announcement_title': title,
+      'announcement_content': content,
+      'importance_level': importance_level
+    };
+
+    const response = this.http.post(this.base_url + 'edit_announcement', body, options);
+    return response;
+  }
+
+  getYearlyGoals(id: string) {
+    const headers = this.getAuthHeaders();
+    const response = this.http.get(this.base_url_event + 'get_yearly_goals/' + id, { headers: headers });
+    return response;
+  }
+
+  deleteYearlyGoal(goal_id: string) {
+    const headers = this.getAuthHeaders();
+    const body = { goal_id: goal_id };
+    const response = this.http.post(this.base_url + 'delete_yearly_goal', body, { headers: headers });
+    return response;
+}
+
 
 }

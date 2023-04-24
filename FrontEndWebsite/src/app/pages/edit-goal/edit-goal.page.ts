@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-edit-goal',
@@ -13,9 +15,13 @@ import { Router } from '@angular/router';
 })
 export class EditGoalPage implements OnInit {
 
-  constructor(private router:Router) { }
+  goal_id: string = '';
+
+  constructor(private router:Router,private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.goal_id = this.route.snapshot.paramMap.get('goalId') as string;
+    console.log(this.goal_id)
   }
 
   pinFormatter(value: number) {

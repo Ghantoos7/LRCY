@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
+import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
   selector: 'app-announcements',
@@ -15,15 +16,32 @@ import { AlertController } from '@ionic/angular';
 })
 export class AnnouncementsPage implements OnInit {
   showDescriptions: boolean[] = [];
-
-  constructor(private alertController: AlertController, private router:Router, private menuController: MenuController) { 
-    this.showDescriptions = new Array(3).fill(false);
+  announcements: any = [];
+  i: number = 0;
+  current_id = localStorage.getItem('adminId') as string;
+  branch_id = localStorage.getItem('branch_id') as string;
+  constructor(private alertController: AlertController, private router:Router, private menuController: MenuController, private adminService:AdminService) { 
+    this.showDescriptions = new Array(this.announcements.length).fill(false);
   }
 
   ngOnInit() {
+    this.adminService.getAnnouncements(this.branch_id).subscribe((response: any) => {
+      this.announcements = response['announcements'];
+      this.announcements = Array.from(this.announcements);
+
+    });
   }
 
-  async confirm() {
+  public getAnnouncerProfilePic(index: number) {
+    let currentAnnouncement = this.announcements[index];
+    if (currentAnnouncement.announcer_profile_picture == null) {
+      return "https://ionicframework.com/docs/img/demos/avatar.svg";
+    } else {
+      return currentAnnouncement.announcer_profile_picture;
+    }
+  }
+
+  async confirm(id: string) {
     const alert = await this.alertController.create({
       header: 'Delete Announcement',
       message: 'Are you sure you want to delete this announcement?',
@@ -31,6 +49,26 @@ export class AnnouncementsPage implements OnInit {
       buttons: [
         {
           text: 'Yes',
+          handler: () => {
+            this.adminService.deleteAnnouncement(id, this.current_id).subscribe((response: any) => {
+              const parsedResponse = JSON.parse(JSON.stringify(response));
+              if(parsedResponse.status == 'success') {
+                this.alertController.create({
+                  header: 'Success',
+                  message: 'Announcement deleted successfully!',
+                  buttons: ['OK']
+                }).then(alert => alert.present());
+                this.ngOnInit();
+              } else {
+                this.alertController.create({
+                  header: 'Error',
+                  message: parsedResponse.message,
+                  buttons: ['OK']
+                }).then(alert => alert.present());
+              }
+            }
+            );
+        },
         },
         {
           text: 'Cancel',
@@ -49,8 +87,8 @@ export class AnnouncementsPage implements OnInit {
     this.router.navigate(['/send-announcement']);
   }
 
-  goToEditAnnouncement(){
-    this.router.navigate(['/edit-announcement']);
+  goToEditAnnouncement(announcement: any) {
+    this.router.navigate(['/edit-announcement'], { state: { announcement: announcement } });
   }
 
   goToHome(){

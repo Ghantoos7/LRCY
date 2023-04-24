@@ -18,6 +18,7 @@ return new class extends Migration
             $table->date('announcement_date');
             $table->integer('importance_level');
             $table->integer('admin_id');
+            $table->integer('branch_id');
             $table->string('field1')->nullable();
             $table->string('field2')->nullable();
             $table->timestamps();

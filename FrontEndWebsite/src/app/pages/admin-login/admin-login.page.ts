@@ -29,11 +29,11 @@ export class AdminLoginPage implements OnInit {
         if (response.status === 'Login successful') {
           // Store the token in local storage for future use
           localStorage.setItem('authToken', response.token);
-          localStorage.setItem('userId', response['user'].user_id);
+          localStorage.setItem('adminId', response['user'].id);
           localStorage.setItem('username', response['user'].username);
-          localStorage.setItem('user_profile_pic', response['user'].user_profile_pic);
-          localStorage.setItem('branch_id', response['user'].branch_id);
-          localStorage.setItem('full_name', response['user'].full_name);
+          localStorage.setItem('userProfilePic', response['user'].user_profile_pic);
+          localStorage.setItem('branchId', response['user'].branch_id);
+          localStorage.setItem('fullName', response['user'].first_name+' '+response['user'].last_name);
           // Redirect the user to the dashboard or any other page
           this.router.navigate(['/panel']);
           this.organization_id = '';

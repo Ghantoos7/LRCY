@@ -33,8 +33,6 @@ export class AnnouncementsPage implements OnInit {
       this.announcements = response['announcements'];
       this.announcements = Array.from(this.announcements);
 
-
-
     });
   }
 
