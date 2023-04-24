@@ -34,24 +34,24 @@
     </ion-card-header>
 
     <ion-card-content>
-      <ion-input class="input" placeholder="Goal Title..."></ion-input>
+      <ion-input [(ngModel)]="goal_name" class="input" placeholder="Goal Title..."></ion-input>
     </ion-card-content>
-
+    
     <ion-card-content>
-      <ion-input class="input" placeholder="Goal Description..."></ion-input>
+      <ion-input [(ngModel)]="goal_description" class="input" placeholder="Goal Description..."></ion-input>
     </ion-card-content>
-
+    
     <ion-card-content>
-      <ion-input class="input" type="number" placeholder="Number Completed..."></ion-input>
+      <ion-input [(ngModel)]="number_completed" class="input" type="number" placeholder="Number Completed..."></ion-input>
     </ion-card-content>
-
+    
     <ion-card-content>
-      <ion-input class="input" type="number" placeholder="Number to Complete..."></ion-input>
+      <ion-input [(ngModel)]="number_to_complete" class="input" type="number" placeholder="Number to Complete..."></ion-input>
     </ion-card-content>
-
+    
     <ion-card-content>
       <div class="select-wrapper">
-        <ion-select class="input" placeholder="Program">
+        <ion-select [(ngModel)]="program_id" class="input" placeholder="Program">
           <ion-select-option value="Youth and Health">Youth and Health</ion-select-option>
           <ion-select-option value="Human values and principles">Human values and principles</ion-select-option>
           <ion-select-option value="Environment">Environment</ion-select-option>
@@ -62,31 +62,31 @@
     
     <ion-card-content>
       <div class="select-wrapper">
-        <ion-select class="input" placeholder="Event Type">
+        <ion-select [(ngModel)]="event_type_id" class="input" placeholder="Event Type">
           <ion-select-option value="Activity">Activity</ion-select-option>
           <ion-select-option value="Training">Training</ion-select-option>
           <ion-select-option value="Other">Other</ion-select-option>
         </ion-select>
       </div>
     </ion-card-content>
-
+    
     <ion-card-content>
-      <ion-input class="input" type="number" placeholder="Goal Year..."></ion-input>
+      <ion-input [(ngModel)]="goal_year" class="input" type="number" placeholder="Goal Year..."></ion-input>
     </ion-card-content>
-
+    
     <div class="dates">
       <ion-card-header>
         <ion-card-title class="start">Start Date</ion-card-title>
         <ion-card-title class="end">Deadline</ion-card-title>
       </ion-card-header>
-
+    
       <ion-card-content>
-        <ion-input class="start-date" type="date"></ion-input>
-        <ion-input class="end-date" type="date"></ion-input>
+        <ion-input [(ngModel)]="start_date" class="start-date" type="date"></ion-input>
+        <ion-input [(ngModel)]="goal_deadline" class="end-date" type="date"></ion-input>
       </ion-card-content>
     </div>
   </ion-card>
 
-  <ion-button class="send" shape="round" expand="block" size="large">Update Goal</ion-button>
+  <ion-button (click)="editYearlyGoal()" class="send" shape="round" expand="block" size="large">Update Goal</ion-button>
   <ion-img src="assets/imgs/ann-design.png"></ion-img>
 </ion-content>

@@ -114,5 +114,27 @@ export class AdminService {
     return response;
 }
 
+  editYearlyGoal(goal_id : number, branch_id : number, goal_name : string, goal_description : string, number_completed: number, number_to_complete: number, program_id:number, event_type_id:number, goal_year : number, start_date:string, goal_deadline:string ){
+    const headers = this.getAuthHeaders().set('Content-Type', 'application/json');
+    const options = { headers: headers };
+
+    const body = {
+      'goal_id': goal_id,
+      'branch_id': branch_id,
+      'goal_name': goal_name,
+      'goal_description': goal_description,
+      'number_completed': number_completed,
+      'number_to_complete': number_to_complete,
+      'program_id': program_id,
+      'event_type_id': event_type_id,
+      'goal_year': goal_year,
+      'start_date': start_date,
+      'goal_deadline': goal_deadline
+    };
+
+    const response = this.http.post(this.base_url + 'edit_yearly_goal', body, options);
+    return response;
+  }
+
 
 }
