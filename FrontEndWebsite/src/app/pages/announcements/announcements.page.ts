@@ -87,8 +87,8 @@ export class AnnouncementsPage implements OnInit {
     this.router.navigate(['/send-announcement']);
   }
 
-  goToEditAnnouncement(){
-    this.router.navigate(['/edit-announcement']);
+  goToEditAnnouncement(announcement: any) {
+    this.router.navigate(['/edit-announcement'], { state: { announcement: announcement } });
   }
 
   goToHome(){

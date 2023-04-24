@@ -37,18 +37,18 @@
     </ion-card-header>
   
     <ion-card-content>
-      <ion-input class="input"  placeholder="Announcement Title..."></ion-input>
+      <ion-input class="input"  placeholder="Announcement Title..." [(ngModel)]="announcement.announcement_title"></ion-input>
     </ion-card-content>
 
     <ion-card-content>
-      <ion-input class="input"  placeholder="Announcement Content..."></ion-input>
+      <ion-input class="input"  placeholder="Announcement Content..." [(ngModel)]="announcement.announcement_content"></ion-input>
     </ion-card-content>
 
     <ion-card-header>
       <ion-card-title>Edit the importance level of the announcement</ion-card-title>
     </ion-card-header>
 
-    <ion-segment value="default">
+    <ion-segment value="default" [(ngModel)]="announcement.importance_level">
       <ion-segment-button value="Optional">
         <ion-label class="importance">Optional</ion-label>
       </ion-segment-button>

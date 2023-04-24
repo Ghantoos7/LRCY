@@ -14,9 +14,15 @@ import { Router } from '@angular/router';
 })
 export class EditAnnouncementPage implements OnInit {
 
+  announcement: any;
+  announcement_title: string="";
+  announcement_content: string="";
+  importance_level: string="";
   constructor(private router:Router,) { }
 
   ngOnInit() {
+    const announcement = history.state.announcement;
+    this.announcement = announcement;
   }
 
   goToAnnouncements(){
