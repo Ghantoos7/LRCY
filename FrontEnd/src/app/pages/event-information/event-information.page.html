@@ -9,7 +9,7 @@
         <ion-card-header>
           <ion-card-title>  <ion-icon (click) = "goGallery()" size="large" name="arrow-back" ></ion-icon>{{event.event_title}}</ion-card-title>
         </ion-card-header>
-        <img alt="Silhouette of mountains" src="{{event.event_main_picture}}" />
+        <img alt="Silhouette of mountains" src="http://127.0.0.1:8000/storage/images/{{event.event_main_picture}}" />
       </ion-card>
 
       <ion-card class="layer-card" *ngFor="let event of events.event">
@@ -66,7 +66,7 @@
       <ion-list lines="none">
       <ion-item *ngFor="let member of responsibles">
         <ion-avatar slot="start">
-          <img alt="Silhouette of a person's head" src="{{member.profile_picture}}" />
+          <img alt="Silhouette of a person's head" src="http://127.0.0.1:8000/storage/images/{{member.profile_picture}}" />
         </ion-avatar>
         <ion-label>
           <h2>{{member.first_name}} {{member.last_name}}</h2>
