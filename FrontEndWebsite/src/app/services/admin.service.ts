@@ -10,6 +10,7 @@ export class AdminService {
 
   base_url = "http://localhost:8000/api/v0.1/admin/";
   base_url_event = "http://localhost:8000/api/v0.1/event/";
+  base_url_user = "http://localhost:8000/api/v0.1/user/";
 
   private getAuthHeaders(): HttpHeaders {
     const token = localStorage.getItem('authToken');
@@ -153,6 +154,12 @@ export class AdminService {
     };
   
     const response = this.http.post(this.base_url + 'set_yearly_goal', body, options);
+    return response;
+  }
+
+  getUserInfo(branch_id: string, user_id: string) {
+    const headers = this.getAuthHeaders();
+    const response = this.http.get(this.base_url_user + 'get_user_info/' + branch_id + '/' + user_id, { headers: headers });
     return response;
   }
 

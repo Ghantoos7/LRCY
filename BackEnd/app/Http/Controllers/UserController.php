@@ -335,11 +335,12 @@ class UserController extends Controller {
         if ($user_id) {
             $users = [volunteer_user::find($user_id)];
         } else {
-            $users = volunteer_user::where('branch_id', $branch_id)->paginate(10);
+            $users = volunteer_user::where('branch_id',$branch_id)->get();
+
         }
     
         // If no user(s) found, return an error response
-        if (count($users) === 0 || $users[0] === null) {
+        if (!$users) {
             return response()->json([    
                 'status' => 'error', 'message' => 'User(s) not found'
             ]);
@@ -356,21 +357,12 @@ class UserController extends Controller {
             $user->user_type = $user->user_type_id === 1 ? 'admin' : 'volunteer';
             $usersArray[] = $user;
         }
+
     
         // Return the user(s) information and pagination links
         return response()->json($user_id ? ['status' => 'success', 'user' => $usersArray[0]] : [
             'status' => 'success',
             'users' => $usersArray,
-            'links' => [
-                'first_page_url' => $users->url(1),
-                'last_page_url' => $users->url($users->lastPage()),
-                'prev_page_url' => $users->previousPageUrl(),
-                'next_page_url' => $users->nextPageUrl(),
-                'current_page' => $users->currentPage(),
-                'last_page' => $users->lastPage(),
-                'per_page' => $users->perPage(),
-                'total' => $users->total()
-            ]
         ]);
         
     }
