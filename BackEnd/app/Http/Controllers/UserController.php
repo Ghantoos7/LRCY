@@ -151,7 +151,13 @@ class UserController extends Controller {
                 "status" => "Invalid credentials",
             ]);
         }
-    
+
+        if(!$check_user->is_active){
+            return response()->json([
+                "status" => "Invalid credentials",
+            ]);
+        }
+
         // Check if the user has exceeded the maximum number of login attempts
         if ($this->hasExceededLoginAttempts($credentials->organization_id)) {
             // Check the last login attempt time
