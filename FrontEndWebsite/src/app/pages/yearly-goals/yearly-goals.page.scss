@@ -88,6 +88,14 @@
     color: white;
     font-family: 'Cairo', sans-serif;
   }
+
+  ion-searchbar{
+    --background: #505D8F;
+    --border-radius: 10px;
+    --color: white;
+    --icon-color: #fff;
+  }
+  
   
   ion-progress-bar {
     --background: darkgray;
@@ -109,15 +117,7 @@
     --background: white;
   }
   
-  ion-searchbar {
-    --background: #505D8F;
-    --border-radius: 10px;
-    --color: white;
-    --icon-color: #fff;
-    position: relative;
-    width: 50%;
-    margin: 20px auto; /* Adjust the margin value as needed */
-  }
+
   .ann {
     position: relative;
     top: 7px;

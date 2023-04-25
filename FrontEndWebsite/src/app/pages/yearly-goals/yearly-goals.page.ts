@@ -116,16 +116,27 @@ export class YearlyGoalsPage implements OnInit {
           text: 'Yes',
           handler: () => {
             this.service.deleteYearlyGoal(goal_id).subscribe((response: any) => {
-              if (response.status === 'success') {
-                // Reload the list of yearly goals
-                this.service.getYearlyGoals(this.branch_id).subscribe((response: any) => {
-                  const allGoals = [].concat.apply([], Object.values(response['goals']));
+                this.service.getYearlyGoals(this.branch_id).subscribe((data: any) => {
+                  const allGoals = [].concat.apply([], Object.values(data['goals']));
                   this.yearlyGoals = allGoals;
                   this.filteredGoals = allGoals;
+                  const parsedResponse = JSON.parse(JSON.stringify(response));
+                  if(parsedResponse.status == 'success') {
+                    this.alertController.create({
+                      header: 'Success',
+                      message: 'Goal deleted successfully',
+                      buttons: ['OK']
+                    }).then(alert => alert.present());
+                    this.ngOnInit();
+                  } else {
+                    this.alertController.create({
+                      header: 'Error',
+                      message: parsedResponse.message,
+                      buttons: ['OK']
+                    }).then(alert => alert.present());
+                  }
+
                 });
-              } else {
-                console.log(response.message);
-              }
             });
           }
         },

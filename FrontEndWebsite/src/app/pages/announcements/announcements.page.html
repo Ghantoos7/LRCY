@@ -24,9 +24,9 @@
         </ion-title>
       </ion-toolbar>
     </ion-header>
-  <ion-content class="ion-padding">
-
-    <ion-card *ngFor="let announcement of announcements; let i = index">
+    <ion-content class="ion-padding">
+      <ion-searchbar animated="true" placeholder="Search for an announcement..." [formControl]="searchControl"></ion-searchbar>
+      <ion-card *ngFor="let announcement of filteredAnnouncements; let i = index">
       <ion-card-header>
         <ion-item lines="none">
           <ion-avatar class="avatar" slot="start">

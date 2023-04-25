@@ -23,12 +23,21 @@ ion-card{
     --background: #45579A;
 }
 
+ion-searchbar{
+  --background: #505D8F;
+  --border-radius: 10px;
+  --color: white;
+  --icon-color: #fff;
+}
+
+
 .delete{
   position: relative;
   font-size: 25px;
   color: rgb(5, 5, 5);
   top: 20px;
   left: 30px;
+  cursor: pointer;
 }
 
 .edit{
@@ -37,6 +46,13 @@ ion-card{
   color: black;
   top: 20px;
   left: 20px;
+  cursor: pointer;
+}
+
+.delete:hover, .edit:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+
+  padding: 5px;
 }
 
 
