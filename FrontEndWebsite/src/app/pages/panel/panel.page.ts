@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { AdminService } from 'src/app/services/admin.service';
+
 
 @Component({
   selector: 'app-panel',
@@ -13,7 +15,7 @@ import { Router } from '@angular/router';
 })
 export class PanelPage implements OnInit {
 
-  constructor(private router:Router) { }
+  constructor(private router:Router, private adminService : AdminService) { }
 
   ngOnInit() {
   }
@@ -39,7 +41,9 @@ export class PanelPage implements OnInit {
   }
   
   goToHome(){
-    this.router.navigate(['/home']);
+    this.adminService.logout().subscribe((response: any) => {
+      localStorage.clear();
+      this.router.navigate(['/home']);
+   });
   }
-
 }

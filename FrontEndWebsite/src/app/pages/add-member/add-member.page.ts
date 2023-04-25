@@ -91,7 +91,10 @@ export class AddMemberPage implements OnInit {
   }
 
   goToHome(){
-    this.router.navigate(['/home']);
+    this.adminService.logout().subscribe((response: any) => {
+      localStorage.clear();
+      this.router.navigate(['/home']);
+   });
   }
 
   goToAddTraining(){

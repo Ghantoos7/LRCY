@@ -145,7 +145,7 @@ export class AdminService {
       'branch_id': branch_id,
       'goal_name': goal_name,
       'goal_description': goal_description,
-      'number_to_complete': number_to_complete, // Change this line
+      'number_to_complete': number_to_complete, 
       'program_id': program_id,
       'event_type_id': event_type_id,
       'goal_year': goal_year,
@@ -269,4 +269,12 @@ export class AdminService {
     return response;
 
   }
+
+  logout() {
+    const headers = this.getAuthHeaders();
+    const response = this.http.post(this.base_url + 'logout', {}, { headers: headers });
+  return response;
+  }
+
+
 }
