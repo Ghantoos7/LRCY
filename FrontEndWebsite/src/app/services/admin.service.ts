@@ -242,4 +242,31 @@ export class AdminService {
     return response;
   }
 
+  getTrainingInfo(training_id: string) {
+    const headers = this.getAuthHeaders();
+    const response = this.http.get(this.base_url_event + 'get_training_info/' + training_id, { headers: headers });
+    return response;
+  }
+
+
+  addTrainingForUsers(training_ids : number [], user_ids : number []){
+    const headers = this.getAuthHeaders().set('Content-Type', 'application/json');
+    const body = {
+      'training_ids': training_ids,
+      'user_ids': user_ids
+    }
+    const response = this.http.post(this.base_url + 'add_training_for_user', body, { headers: headers });
+    return response;
+  }
+
+  deleteTrainingForUsers(training_ids : number [], user_ids : number []){
+    const headers = this.getAuthHeaders().set('Content-Type', 'application/json');
+    const body = {
+      'training_ids': training_ids,
+      'user_ids': user_ids,
+    }
+    const response = this.http.post(this.base_url + 'delete_training_for_user', body, { headers: headers });
+    return response;
+
+  }
 }

@@ -8,7 +8,7 @@
     <ion-button class="menu-button"(click) = "goBack()">View Members</ion-button>
     <ion-button class="menu-button"(click) = "goToAddForm()">Add Member</ion-button>
     <ion-button class="menu-button"(click) = "goToAddTraining()">Add Training</ion-button>
-    <ion-button class="menu-button"(click) = "closeMenu()">Remove Training</ion-button>
+    <ion-button class="menu-button"(click) = "goToDeleteTraining()">Remove Training</ion-button>
  </ion-content>
 </ion-menu>
 
@@ -27,61 +27,44 @@
   </ion-header>
 
   <ion-content class="ion-padding">
+    <h2 class="page-title">Remove Trainings</h2>
     <ion-grid>
       <ion-row>
         <ion-col size="6">
           <ion-card>
             <ion-card-title class="custom-title">
-              Remove Training Here
+              Trainings
             </ion-card-title>
-            <ion-card>
             <ion-list>
-            <ion-item lines="none">
-              <ion-label>Training title one</ion-label>
-              <ion-icon name="add" slot="end"></ion-icon>
-            </ion-item>
-          </ion-list>
-        </ion-card>
-        <ion-item-divider></ion-item-divider>
-        <ion-card>
-          <ion-list>
-            <ion-item lines="none">
-              <ion-label>Training title one</ion-label>
-              <ion-icon name="trash" slot="end"></ion-icon>
-            </ion-item>
-          </ion-list>
-        </ion-card>
+              <ion-item *ngFor="let training of trainings">
+                <ion-label>{{training.training_name}}</ion-label>
+                <ion-checkbox slot="end" (ionChange)="toggleTrainingSelection(training.id)"></ion-checkbox>
+              </ion-item>
+            </ion-list>
           </ion-card>
         </ion-col>
         <ion-col size="6">
-        <ion-card>
-          <ion-card-title class="custom-title">
-           Modify Members Here
-          </ion-card-title>
           <ion-card>
+            <ion-card-title class="custom-title">
+              Users
+            </ion-card-title>
             <ion-list>
-            <ion-item lines="none">
-              <ion-label>User one</ion-label>
-              <ion-icon name="add" slot="end"></ion-icon>
-            </ion-item>
-          </ion-list>
-        </ion-card>
-        <ion-item-divider></ion-item-divider>
-        <ion-card>
-          <ion-list>
-            <ion-item lines="none">
-              <ion-label>User two</ion-label>
-              <ion-icon name="trash" slot="end"></ion-icon>
-            </ion-item>
-          </ion-list>
-        </ion-card>
-        </ion-card>
+              <ion-item *ngFor="let user of users">
+                <ion-avatar slot="start">
+                  <img [src]="user.user_profile_pic">
+                </ion-avatar>
+                <ion-label>{{user.first_name}} {{user.last_name}}</ion-label>
+                <ion-checkbox slot="end" (ionChange)="toggleUserSelection(user.id)"></ion-checkbox>
+              </ion-item>
+            </ion-list>
+          </ion-card>
         </ion-col>
       </ion-row>
-      
+      <ion-row>
+        <ion-col>
+          <ion-button expand="full" (click)="deleteTrainingForUsers()">Apply Changes</ion-button>
+        </ion-col>
+      </ion-row>
     </ion-grid>
-    
-
-    <ion-button class="submit">Remove</ion-button>
-  
- 
+  </ion-content>
+</div>

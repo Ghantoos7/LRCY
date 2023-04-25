@@ -10,6 +10,8 @@ use App\Models\volunteer_user;
 use App\Models\event_image;
 use App\Models\is_responsible;
 use App\Models\program;
+use App\Models\event_type;
+use App\Models\training;
 
 
 class EventController extends Controller {
@@ -168,6 +170,35 @@ class EventController extends Controller {
         // Return the pictures
         return response()->json(['pictures' => $pictures]);
    
+    }
+
+    function getTrainingInfo($training_id = null){
+            
+            if($training_id){
+                // Get training information
+                $trainings = training::where('id', $training_id)->toArray();
+            }
+            else{
+                // Get all trainings
+                $trainings = training::all()->toArray();
+            }
+    
+            // Remove unnecessary fields from training(s) information
+            $trainingsArray = array_map(function($training) {
+                unset($training['field1'], $training['field2'], $training['created_at'], $training['updated_at']);
+                return $training;
+            }, collect($trainings)->toArray());
+
+
+            $trainingsArray = collect($trainingsArray)->map(function($training) {
+                $program = Program::find($training['program_id']);
+                $training['program_name'] = $program->program_name;
+                return $training;
+            });
+
+    
+            // Return the training(s) information
+            return response()->json($training_id ? ['training' => $trainingsArray[0]] : ['trainings' => $trainingsArray]);
     }
 
 

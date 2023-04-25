@@ -22,7 +22,6 @@ use App\Http\Middleware\AdminMiddleware;
 Route::group(["prefix" => "v0.1",], function(){
     
     Route::group(["prefix" => "auth"], function(){
-
         Route::post("signup", [UserController::class, "signup"]);
         Route::post("register", [UserController::class, "register"]);
         Route::post("login", [UserController::class, "login"]);
@@ -34,9 +33,7 @@ Route::group(["prefix" => "v0.1",], function(){
     });
 
     Route::group(["middleware" =>"auth:sanctum"], function(){
-
         Route::group(["prefix" => "user"], function(){
-
             Route::post("logout", [UserController::class, "logout"]);
             Route::post("edit_profile", [UserController::class, "editProfile"]);
             Route::get("get_user_info/{branch_id}/{user_id?}", [UserController::class, "getUserInfo"]); 
@@ -54,7 +51,6 @@ Route::group(["prefix" => "v0.1",], function(){
         });
 
         Route::group(["prefix" => "post"], function(){
-
             Route::post("create_post", [PostController::class, "createPost"]);
             Route::post("edit_post", [PostController::class, "editPost"]);
             Route::post("delete_post", [PostController::class, "deletePost"]);
@@ -78,20 +74,18 @@ Route::group(["prefix" => "v0.1",], function(){
         });
 
         Route::group(["prefix" => "event"], function(){
-
             Route::get("get_yearly_goals/{branch_id}/{goal_id?}", [EventController::class, "getYearlyGoals"]);
             Route::get("get_event_info/{branch_id}/{event_id?}", [EventController::class, "getEventInfo"]);
             Route::get("get_announcements/{branch_id}", [EventController::class, "getAnnouncements"]);
             Route::get("get_event_pictures/{event_id}", [EventController::class, "getEventPictures"]);
+            Route::get("get_training_info/{training_id?}", [EventController::class, "getTrainingInfo"]);
 
         });
 
     });
 
     Route::group(["middleware" => ["auth:sanctum",AdminMiddleware::class]], function(){
-
         Route::group(["prefix" => "admin"], function(){
-
             Route::post("logout", [AdminController::class, "logout"]);
             Route::post("add_user", [AdminController::class, "addUser"]);
             Route::post("edit_user", [AdminController::class, "editUser"]);
