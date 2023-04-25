@@ -1146,10 +1146,12 @@ class AdminController extends Controller {
 
         // Validate the request
         $validator = Validator::make($request->all(), [
-            'training_id' => 'required|integer',
-            'user_id' => 'required|integer'
+            'training_ids' => 'required|array',
+            'user_ids' => 'required|array',
+            'user_ids.*' => 'integer',
+            'training_ids.*' => 'integer'
         ]);
-
+    
         // Check if the validation fails
         if ($validator->fails()) {
             return response()->json([
@@ -1158,48 +1160,52 @@ class AdminController extends Controller {
                 'errors' => $validator->errors()
             ]);
         }
-
-        // Get the training and check if it exists
-        $training = Training::find($request->input('training_id'));
-        if (!$training) {
+    
+        // Get the list of trainings and check if they exist
+        $trainings = Training::findMany($request->input('training_ids'));
+        if ($trainings->count() != count($request->input('training_ids'))) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Training not found'
+                'message' => 'One or more trainings do not exist'
             ]);
         }
-
-        // Get the user and check if it exists
-        $user = Volunteer_user::find($request->input('user_id'));
-        if (!$user) {
+    
+        // Get the list of users and check if they exist
+        $users = Volunteer_user::findMany($request->input('user_ids'));
+        if ($users->count() != count($request->input('user_ids'))) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'User not found'
+                'message' => 'One or more users do not exist'
             ]);
         }
-
-        // Get the take record and check if it exists
-        $take = Take::where('user_id', $user->id)->where('training_id', $training->id)->first();
-        if (!$take) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'User did not take this training yet'
-            ]);
-        }
-
-        // Delete the take record in a try catch block and return an error message if it fails
+    
+        // Loop through the users and remove the trainings from the users in a try catch block and return a success message or an error message if an error occurs
         try {
-            $take->delete();
+            foreach ($users as $user) {
+                foreach ($trainings as $training) {
+                    // Check if the user has taken this training
+                    $existing_take = Take::where('user_id', $user->id)
+                        ->where('training_id', $training->id)
+                        ->first();
+    
+                    // If the user has taken this training, delete the Take record
+                    if ($existing_take) {
+                        $existing_take->delete();
+                    }
+                }
+            }
             return response()->json([
                 'status' => 'success',
-                'message' => 'Training deleted successfully'
+                'message' => 'Trainings removed from users successfully',
+                'request' => $request->all()
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to delete the training'
+                'message' => $e->getMessage(),
             ]);
         }
-
+    
     }
 
 
