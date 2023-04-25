@@ -50,7 +50,7 @@
       </ion-card-content>
 
       <ion-footer>
-        <ion-icon class="likes" [class.active]="isLiked[post.id]" name="{{ isLiked[post.id] ? 'heart' : 'heart-outline' }}" (click)="toggleLike(post.id)"></ion-icon>
+        <ion-icon class="likes" [class.active]="isLikedUser[post.id]" name="{{isLikedUser[post.id] ? 'heart' : 'heart-outline' }}" (click)="toggleLike(post.id)"></ion-icon>
         <ion-text class="like-count" color="danger">{{post.like_count}}</ion-text>
         <ion-img (click) ="goToComments(post.id)" class="comments" src="assets/icon/comments.png"></ion-img>
         <ion-text class="comment-count">{{post.comment_count}}</ion-text>
