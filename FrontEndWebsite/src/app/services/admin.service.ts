@@ -212,9 +212,9 @@ export class AdminService {
     return response;
   }
 
-  getEvents(branch_id: string) {
+  getEvents(branch_id: string, event_type_id: string) {
     const headers = this.getAuthHeaders();
-    const response = this.http.get(this.base_url_event + 'get_event_info/' + branch_id, { headers: headers });
+    const response = this.http.get(this.base_url_event + 'get_event_info/' + branch_id + "/" + event_type_id,  { headers: headers });
     return response;
   }
 

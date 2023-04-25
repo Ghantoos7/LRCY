@@ -69,11 +69,14 @@ class EventController extends Controller {
         // Group events by program name
         $eventsArray = collect($eventsArray)->groupBy('program_name');
     
-        // Adds a list of users who were responsible of each event, theyre first name last name role anme and profile picture
+        // Adds a list of users who were responsible of each event, their first name last name role name and profile picture
         $eventsArray = $eventsArray->map(function($events) {
             return $events->map(function($event) {
                 $event['responsibles'] = Is_responsible::where('event_id', $event['id'])->get()->map(function($responsible) {
                     $user = Volunteer_user::find($responsible->user_id);
+                    if(!$user){
+                        return [];
+                    }
                     return [
                         'first_name' => $user->first_name,
                         'last_name' => $user->last_name,
