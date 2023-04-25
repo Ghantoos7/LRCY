@@ -31,6 +31,7 @@ export class SignInPage implements OnInit {
 
   login(organization_id: string, password: string) {
     this.authService.login(organization_id, password,this.rememberMe).subscribe({
+  
       next: (data) => {
         const response = JSON.parse(JSON.stringify(data));
         if (response.status === 'Login successful') {
@@ -46,6 +47,7 @@ export class SignInPage implements OnInit {
           this.router.navigate(['/feed']);
           this.organization_id = '';
           this.password = '';
+          
         } else {
           // Display an error message to the user
           let message: string;

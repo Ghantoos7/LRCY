@@ -34,6 +34,7 @@ export class AnnouncementsPage implements OnInit {
       this.announcements = Array.from(this.announcements);
 
     });
+    console.log(this.user_profile_pic);
   }
 
   public getAnnouncerProfilePic(index: number) {
