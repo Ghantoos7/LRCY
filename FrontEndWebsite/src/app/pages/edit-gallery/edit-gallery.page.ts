@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
+import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
   selector: 'app-edit-gallery',
@@ -15,7 +16,7 @@ import { AlertController } from '@ionic/angular';
 })
 export class EditGalleryPage implements OnInit {
 
-  constructor(private router:Router, private menuController: MenuController, private alertController: AlertController) { }
+  constructor(private router:Router, private menuController: MenuController, private alertController: AlertController, private adminService : AdminService) { }
 
   ngOnInit() {
   }
@@ -43,7 +44,10 @@ export class EditGalleryPage implements OnInit {
   }
 
   goToHome(){
-    this.router.navigate(['/home']);
+    this.adminService.logout().subscribe((response: any) => {
+      localStorage.clear();
+      this.router.navigate(['/home']);
+   });
   }
 
   goToGallery(){

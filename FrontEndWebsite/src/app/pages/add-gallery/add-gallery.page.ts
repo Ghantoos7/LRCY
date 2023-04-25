@@ -62,7 +62,10 @@ export class AddGalleryPage implements OnInit {
   }
 
   goToHome(){
-    this.router.navigate(['/home']);
+    this.service.logout().subscribe((response: any) => {
+      localStorage.clear();
+      this.router.navigate(['/home']);
+   });
   }
 
   goToGallery(){

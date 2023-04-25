@@ -48,7 +48,10 @@ export class ManageGalleryPage implements OnInit {
   }
 
   goToHome(){
-    this.router.navigate(['/home']);
+    this.service.logout().subscribe((response: any) => {
+      localStorage.clear();
+      this.router.navigate(['/home']);
+   });
   }
 
   goToPanel(){
