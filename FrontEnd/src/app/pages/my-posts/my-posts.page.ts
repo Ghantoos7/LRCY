@@ -32,9 +32,9 @@ export class MyPostsPage implements OnInit {
 
   posts: any  = [];
   posts_array: any = [];
-  isLiked: {[key: number]: boolean} = {};
+  isLikedUser: {[key: number]: boolean} = {};
   post_id: number=0;
-
+  isLiked: { [key: number]: { commentId: number, isLiked: boolean }[] } = {};
   comment_content: string='';
 
   constructor(private post_service:PostService, private router: Router, private alertController: AlertController, private actionSheetController: ActionSheetController, private service: UserService, private sharedService:SharedService) { }
@@ -63,9 +63,11 @@ export class MyPostsPage implements OnInit {
       this.posts_array = Array.from(this.posts['posts']);
       for (let i = 0; i < this.posts_array.length; i++) {
         const postId = this.posts_array[i].id;
-        this.isLiked[postId] = localStorage.getItem(`post_${postId}`) === 'true'; // retrieve the like state from Local Storage
+        this.isLikedUser[postId] = localStorage.getItem(`user_${this.user_id}_post_${postId}`) === 'true'; // retrieve the like state from Local Storage
       }
     });
+
+    console.log(this.isLikedUser);
 
   }
 
@@ -127,17 +129,17 @@ export class MyPostsPage implements OnInit {
 
 
   toggleLike(post_id: number) {
-    if (this.isLiked[post_id]) {
+    if (this.isLikedUser[post_id]) {
     this.unlikePost(post_id);
     } else {
     this.likePost(post_id);
     }
   }
-
+    
   likePost(post_id: number) {
     this.post_service.likePost(post_id).subscribe((data: any) => {
-      localStorage.setItem(`post_${post_id}`, 'true'); // store the like state in Local Storage
-      this.isLiked[post_id] = true;
+      localStorage.setItem(`user_${this.user_id}_post_${post_id}`, 'true'); // store the like state in Local Storage
+      this.isLikedUser[post_id] = true;
       window.location.reload();
     });
    
@@ -145,12 +147,13 @@ export class MyPostsPage implements OnInit {
   
   unlikePost(post_id: number) {
     this.post_service.unlikePost(post_id).subscribe((data: any) => {
-      localStorage.setItem(`post_${post_id}`, 'false'); // store the like state in Local Storage
-      this.isLiked[post_id] = false;
+      localStorage.setItem(`user_${this.user_id}_post_${post_id}`, 'false'); // store the like state in Local Storage
+      this.isLikedUser[post_id] = false;
       window.location.reload();
     });
-
+   
   }
+
 
 
   goToComments(post_id: string){

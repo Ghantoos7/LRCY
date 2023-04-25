@@ -66,9 +66,8 @@ export class FeedPage implements OnInit {
       for (let i = 0; i < this.posts.length; i++) {
         const postId = this.posts[i].id;
         this.isLikedUser[postId] = localStorage.getItem(`user_${this.user_id}_post_${postId}`) === 'true'; // retrieve the like state from Local Storage
-      };
+      }
     });
-    console.log(this.isLikedUser);
   }
 
   getDaysAgo(postDate: string) {
