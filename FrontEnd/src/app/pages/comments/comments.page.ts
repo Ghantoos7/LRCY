@@ -251,42 +251,42 @@ export class CommentsPage implements OnInit {
     this.router.navigate(['/feed']);
   }
 
-  editComment(comm_id: number){
-    this.alertController.create({
-      header: 'Edit Comment',
-      inputs: [
-        {
-          name: 'content',
-          type: 'text',
-          value: this.content
+ editComment(comm_id: number, currentContent: string) {
+  this.alertController.create({
+    header: 'Edit Comment',
+    inputs: [
+      {
+        name: 'content',
+        type: 'text',
+        value: currentContent
+      }
+    ],
+    buttons: [
+      {
+        text: 'Cancel',
+        role: 'cancel'
+      },
+      {
+        text: 'Edit',
+        handler: (data) => {
+          this.postService.editComment(comm_id, data.content).subscribe(response => {
+            const str = JSON.stringify(response);
+            const result = JSON.parse(str);
+            const status = result['status'];
+            if (status == "success") {
+              window.location.reload();
+            } else if (status == "error") {
+              this.alrt.create({
+                message: 'Something went wrong. Please try again.',
+                buttons: ['OK']
+              }).then(alrt => alrt.present());
+            }
+          });
         }
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel'
-        },
-        {
-          text: 'Edit',
-          handler: (data) => {
-            this.postService.editComment(comm_id, data.content).subscribe(response=>{
-              const str = JSON.stringify(response);
-              const result = JSON.parse(str);
-              const status = result['status'];
-              if(status == "success"){
-                window.location.reload();
-              } else if (status == "error"){
-                this.alrt.create({
-                  message: 'Something went wrong. Please try again.',
-                  buttons: ['OK']
-                }).then(alrt => alrt.present());
-              }
-            });
-          }
-        }
-      ]
-    }).then(alert => alert.present());
-  }
+      }
+    ]
+  }).then(alert => alert.present());
+}
 
   editReply(reply_id: number){
     this.alertController.create({
