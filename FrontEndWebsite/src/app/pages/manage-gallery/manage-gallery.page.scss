@@ -29,12 +29,20 @@ ion-card{
   height: 100%; 
   object-fit: cover; 
 }
-.custom-card-header{
+.custom-card-header-yah{
   --background: #B11433;
 }
 
 .custom-card-header-env{
   --background: #348137;
+}
+
+.custom-card-header-hvp{
+  --background: #45579A;
+}
+
+.custom-card-header-other{
+  --background: #bebebe;
 }
 
 .custom-subtitle {
@@ -44,7 +52,7 @@ ion-card{
   font-size: 12px;
   font-family: 'Cairo', sans-serif;
 }
-.badge {
+.badge-yah {
   position: absolute;
   top: 0;
   right: 0;
@@ -64,6 +72,36 @@ ion-card{
   top: 0;
   right: 0;
   background-color: #348137;
+  color: white;
+  width: 50px;
+  height:50px;
+  border-radius: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.badge-hvp {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #45579A;
+  color: white;
+  width: 50px;
+  height:50px;
+  border-radius: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.badge-other {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #bebebe;
   color: white;
   width: 50px;
   height:50px;

@@ -27,7 +27,7 @@ export class FeedPage implements OnInit {
   index: number=0;
   isLiked: {[key: number]: boolean} = {};
   post_id: number=0;
-  comment_content: string='';
+  comment_contents: any=[];
   user: any;
 
   constructor(private router:Router, private alertController: AlertController, private menuCtrl: MenuController, private service:PostService, private sharedService:SharedService, private userservice:UserService) { }
@@ -77,7 +77,14 @@ export class FeedPage implements OnInit {
   }
 
   goToComments(post_id: string){
+    
     this.router.navigate(["/comments"], {state: { p_id : post_id }});
+
+    setTimeout(() => {
+      
+      window.location.reload();
+
+    }, 50);
   }
 
   goToPostForm(){
@@ -113,8 +120,8 @@ export class FeedPage implements OnInit {
     });
   }
 
-  async sendComment(p_id: number){
-    this.service.commentPost(p_id, this.user_id, this.comment_content).subscribe(response=>{
+  async sendComment(p_id: number, i:number){
+    this.service.commentPost(p_id, this.user_id, this.comment_contents[i]).subscribe(response=>{
       const str = JSON.stringify(response);
       const result = JSON.parse(str);
       const status = result['status'];

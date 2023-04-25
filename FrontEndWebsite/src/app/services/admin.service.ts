@@ -211,4 +211,35 @@ export class AdminService {
     const response = this.http.post(this.base_url + 'add_user', body, { headers: headers });
     return response;
   }
+
+  getEvents(branch_id: string) {
+    const headers = this.getAuthHeaders();
+    const response = this.http.get(this.base_url_event + 'get_event_info/' + branch_id, { headers: headers });
+    return response;
+  }
+
+  addEvent(branch_id : string, event_title : string, event_description : string, event_date : string, event_type_id : string, program_id : string, event_main_picture : string, event_location : string, budget_sheet : string, proposal : string, responsibles : [], meeting_minute? : string){
+    const headers = this.getAuthHeaders().set('Content-Type', 'application/json');
+    const options = { headers: headers };
+
+    const body = {
+      'branch_id': branch_id,
+      'event_title': event_title,
+      'event_description': event_description,
+      'event_date': event_date,
+      'event_type_id': event_type_id,
+      'program_id': program_id,
+      'event_main_picture': event_main_picture,
+      'event_location': event_location,
+      'budget_sheet': budget_sheet,
+      'proposal': proposal,
+      'meeting_minute': meeting_minute,// can be null
+      'responsibles': responsibles,
+
+    };
+
+    const response = this.http.post(this.base_url + 'add_event', body, options);
+    return response;
+  }
+
 }

@@ -34,47 +34,14 @@
     <ion-card-content>
       <div class="ion-grid">
         <ion-row>
-          <ion-col size="3">
+          <ion-col size="3" *ngFor="let yah_event of yah_events">
             <ion-card>
-              <div class="badge">
+              <div class="badge-yah">
                 <ion-icon name="calendar-number-outline" size="large"></ion-icon>
               </div>
-              <ion-img src="assets/imgs/gallery-default1.jpg" class="custom-image"></ion-img>
-              <ion-card-header class="custom-card-header">
-                <ion-card-subtitle class="custom-subtitle">Beach Cleanup</ion-card-subtitle>
-              </ion-card-header>
-            </ion-card>
-          </ion-col>
-          <ion-col size="3">
-            <ion-card>
-              <div class="badge">
-                <ion-icon name="calendar-number-outline" size="large"></ion-icon>
-              </div>
-              <ion-img src="assets/imgs/gallery-default1.jpg" class="custom-image"></ion-img>
-              <ion-card-header class="custom-card-header">
-                <ion-card-subtitle class="custom-subtitle">Hiking Adventure</ion-card-subtitle>
-              </ion-card-header>
-            </ion-card>
-          </ion-col>
-          <ion-col size="3">
-            <ion-card>
-              <div class="badge">
-                <ion-icon name="calendar-number-outline" size="large"></ion-icon>
-              </div>
-              <ion-img src="assets/imgs/gallery-default1.jpg" class="custom-image"></ion-img>
-              <ion-card-header class="custom-card-header">
-                <ion-card-subtitle class="custom-subtitle">Hiking Adventure</ion-card-subtitle>
-              </ion-card-header>
-            </ion-card>
-          </ion-col>
-          <ion-col size="3">
-            <ion-card>
-              <div class="badge">
-                <ion-icon name="calendar-number-outline" size="large"></ion-icon>
-              </div>
-              <ion-img src="assets/imgs/gallery-default1.jpg" class="custom-image"></ion-img>
-              <ion-card-header class="custom-card-header">
-                <ion-card-subtitle class="custom-subtitle">Hiking Adventure</ion-card-subtitle>
+              <ion-img src="{{yah_event.event_main_picture}}" class="custom-image"></ion-img>
+              <ion-card-header class="custom-card-header-yah">
+                <ion-card-subtitle class="custom-subtitle">{{yah_event.event_title}}</ion-card-subtitle>
               </ion-card-header>
             </ion-card>
           </ion-col>
@@ -85,6 +52,7 @@
      
   </ion-card>
 
+
   <ion-card>
     <ion-card-header>
       <ion-card-title>Environment
@@ -93,47 +61,14 @@
     <ion-card-content>
       <div class="ion-grid">
         <ion-row>
-          <ion-col size="3">
+          <ion-col size="3" *ngFor="let environment_event of environment_events">
             <ion-card>
               <div class="badge-env">
                 <ion-icon name="calendar-number-outline" size="large"></ion-icon>
               </div>
-              <ion-img src="assets/imgs/gallery-default1.jpg" class="custom-image"></ion-img>
+              <ion-img src="{{environment_event.event_main_picture}}" class="custom-image"></ion-img>
               <ion-card-header class="custom-card-header-env">
-                <ion-card-subtitle class="custom-subtitle">Beach Cleanup</ion-card-subtitle>
-              </ion-card-header>
-            </ion-card>
-          </ion-col>
-          <ion-col size="3">
-            <ion-card>
-              <div class="badge-env">
-                <ion-icon name="calendar-number-outline" size="large"></ion-icon>
-              </div>
-              <ion-img src="assets/imgs/gallery-default1.jpg" class="custom-image"></ion-img>
-              <ion-card-header class="custom-card-header-env">
-                <ion-card-subtitle class="custom-subtitle">Hiking Adventure</ion-card-subtitle>
-              </ion-card-header>
-            </ion-card>
-          </ion-col>
-          <ion-col size="3">
-            <ion-card>
-              <div class="badge-env">
-                <ion-icon name="calendar-number-outline" size="large"></ion-icon>
-              </div>
-              <ion-img src="assets/imgs/gallery-default1.jpg" class="custom-image"></ion-img>
-              <ion-card-header class="custom-card-header-env">
-                <ion-card-subtitle class="custom-subtitle">Hiking Adventure</ion-card-subtitle>
-              </ion-card-header>
-            </ion-card>
-          </ion-col>
-          <ion-col size="3">
-            <ion-card>
-              <div class="badge-env">
-                <ion-icon name="calendar-number-outline" size="large"></ion-icon>
-              </div>
-              <ion-img src="assets/imgs/gallery-default1.jpg" class="custom-image"></ion-img>
-              <ion-card-header class="custom-card-header-env">
-                <ion-card-subtitle class="custom-subtitle">Hiking Adventure</ion-card-subtitle>
+                <ion-card-subtitle class="custom-subtitle">{{environment_event.event_title}}</ion-card-subtitle>
               </ion-card-header>
             </ion-card>
           </ion-col>
@@ -146,3 +81,58 @@
  
 
 
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>HVP
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="ion-grid">
+        <ion-row>
+          <ion-col size="3" *ngFor="let hvp_event of hvp_events">
+            <ion-card>
+              <div class="badge-hvp">
+                <ion-icon name="calendar-number-outline" size="large"></ion-icon>
+              </div>
+              <ion-img src="{{hvp_event.event_main_picture}}" class="custom-image"></ion-img>
+              <ion-card-header class="custom-card-header-hvp">
+                <ion-card-subtitle class="custom-subtitle">{{hvp_event.event_title}}</ion-card-subtitle>
+              </ion-card-header>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </div>
+    
+    </ion-card-content>
+     
+  </ion-card>
+
+
+
+
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Other
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="ion-grid">
+        <ion-row>
+          <ion-col size="3" *ngFor="let other_event of other_events">
+            <ion-card>
+              <div class="badge-other">
+                <ion-icon name="calendar-number-outline" size="large"></ion-icon>
+              </div>
+              <ion-img src="{{other_event.event_main_picture}}" class="custom-image"></ion-img>
+              <ion-card-header class="custom-card-header-other">
+                <ion-card-subtitle class="custom-subtitle">{{other_event.event_title}}</ion-card-subtitle>
+              </ion-card-header>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </div>
+    
+    </ion-card-content>
+     
+  </ion-card>

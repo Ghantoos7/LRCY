@@ -215,3 +215,13 @@ ion-toolbar{
 ion-title{
   color: #45579A;
 }
+
+.drop-down{
+  --background: #bcb9b9; 
+  --padding-end: 10px; 
+  --color: white;
+  border-radius: 15px;
+  position: absolute;
+  width: 270px;
+  left: 115px;
+}

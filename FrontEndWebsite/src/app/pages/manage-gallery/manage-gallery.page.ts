@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { MenuController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
   selector: 'app-manage-gallery',
@@ -14,9 +15,25 @@ import { Router } from '@angular/router';
 })
 export class ManageGalleryPage implements OnInit {
 
-  constructor(private menuCtrl: MenuController, private router:Router, private menuController: MenuController) { }
+  branch_id = localStorage.getItem('branch_id') as string;
+  events: any=[];
+  yah_events: any=[];
+  environment_events: any=[];
+  hvp_events: any=[];
+  other_events: any=[];
+  constructor(private menuCtrl: MenuController, private router:Router, private menuController: MenuController, private service:AdminService) { }
 
   ngOnInit() {
+    this.service.getEvents(this.branch_id).subscribe((response: any)=>{
+      const parsedResponse = JSON.parse(JSON.stringify(response));
+      this.events=parsedResponse['events'];
+      this.yah_events=this.events['youth&health'];
+      this.environment_events=this.events['environment'];
+      this.hvp_events=this.events['hvp'];
+      this.other_events=this.events['other'];
+      console.log(this.yah_events, this.environment_events, this.hvp_events, this.other_events)
+    });
+
   }
 
   goToAddForm(){
