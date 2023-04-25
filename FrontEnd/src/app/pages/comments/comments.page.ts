@@ -100,7 +100,7 @@ export class CommentsPage implements OnInit {
           this.comments = data['comments'];
           for (let i = 0; i < this.comments.length; i++) {
             const commentId = this.comments[i].id;
-            this.isLikedUser[commentId] = localStorage.getItem(`comment_like_${commentId}`) === 'true'; // retrieve the like state from Local Storage
+            this.isLikedUser[commentId] = localStorage.getItem(`comment_${commentId}`) === 'true'; // retrieve the like state from Local Storage
           
           }
           
@@ -111,7 +111,7 @@ export class CommentsPage implements OnInit {
           this.comments = data['comments'];
           for (let i = 0; i < this.comments.length; i++) {
             const commentId = this.comments[i].id;
-            this.isLikedUser[commentId] = localStorage.getItem(`comment_like_${commentId}`) === 'true'; // retrieve the like state from Local Storage
+            this.isLikedUser[commentId] = localStorage.getItem(`comment_${commentId}`) === 'true'; // retrieve the like state from Local Storage
           
           }
       
@@ -135,7 +135,7 @@ export class CommentsPage implements OnInit {
     
   likeComment(comment_id: number) {
     this.postService.likeComment(comment_id, this.current_id).subscribe((data: any) => {
-      localStorage.setItem(`user_${this.current_id}_post_${comment_id}`, 'true'); // store the like state in Local Storage
+      localStorage.setItem(`user_${this.current_id}_comment_${comment_id}`, 'true'); // store the like state in Local Storage
       this.isLikedUser[comment_id] = true;
       window.location.reload();
     });
@@ -153,7 +153,7 @@ export class CommentsPage implements OnInit {
 
   unlikeComment(comment_id: number) {
     this.postService.unlikeComment(comment_id, this.current_id).subscribe((data: any) => {
-      localStorage.setItem(`user_${this.current_id}_post_${comment_id}`, 'false'); // store the like state in Local Storage
+      localStorage.setItem(`user_${this.current_id}_comment_${comment_id}`, 'false'); // store the like state in Local Storage
       this.isLikedUser[comment_id] = false;
       window.location.reload();
     });
