@@ -59,6 +59,11 @@ export class FeedPage implements OnInit {
     await alert.present();
   }  
 
+  handleImageError(event: any) {
+    // Set a default image source when the image fails to load
+    event.target.src = '/assets/imgs/ext.jpg';
+  }
+
   ngOnInit() {
 
     this.service.getPosts().subscribe((data: any) => {
@@ -115,6 +120,9 @@ export class FeedPage implements OnInit {
   toggleDarkMode(){
 
   }
+
+ 
+
   logout() {
     this.userservice.logout().subscribe((data: any) => {
       localStorage.removeItem('authToken');
