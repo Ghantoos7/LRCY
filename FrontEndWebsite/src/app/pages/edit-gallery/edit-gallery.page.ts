@@ -19,6 +19,7 @@ export class EditGalleryPage implements OnInit {
   constructor(private router:Router, private menuController: MenuController, private alertController: AlertController, private adminService : AdminService) { }
 
   ngOnInit() {
+    const event = history.state.event;
   }
 
   async confirm() {

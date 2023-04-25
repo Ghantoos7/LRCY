@@ -24,16 +24,27 @@ export class ManageGalleryPage implements OnInit {
   constructor(private menuCtrl: MenuController, private router:Router, private menuController: MenuController, private service:AdminService) { }
 
   ngOnInit() {
-    this.service.getEvents(this.branch_id).subscribe((response: any)=>{
+    this.service.getEvents(this.branch_id,"").subscribe((response: any)=>{
       const parsedResponse = JSON.parse(JSON.stringify(response));
       this.events=parsedResponse['events'];
-      this.yah_events=this.events['youth&health'];
-      this.environment_events=this.events['environment'];
-      this.hvp_events=this.events['hvp'];
-      this.other_events=this.events['other'];
-      console.log(this.yah_events, this.environment_events, this.hvp_events, this.other_events)
+      this.yah_events=this.events['Youth and Health'];
+      this.environment_events=this.events['Environment'];
+      this.hvp_events=this.events['Human Values and Principles'];
+      this.other_events=this.events['Others'];
     });
 
+  }
+
+  mapEventIcon(event_type_id: number) : string{
+    if(event_type_id == 1){
+      return "calendar-number-outline";
+    }
+    else if(event_type_id == 2){
+      return "barbell-outline";
+    }
+    else{
+      return "ellipsis-horizontal-outline";
+    }
   }
 
   goToAddForm(){
@@ -52,6 +63,10 @@ export class ManageGalleryPage implements OnInit {
       localStorage.clear();
       this.router.navigate(['/home']);
    });
+  }
+
+  goToEditGallery(event : any){
+    this.router.navigate(['/edit-gallery'] ,{ state: { event: event } });
   }
 
   goToPanel(){
