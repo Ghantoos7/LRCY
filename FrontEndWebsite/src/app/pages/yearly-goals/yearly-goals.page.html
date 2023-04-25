@@ -6,36 +6,29 @@
       </ion-toolbar>
     </ion-header>
     <ion-content class="ion-padding"> 
-
       <ion-button (click)="closeMenu()" class="menu-button">View Goals</ion-button>
       <ion-button (click)="goToAddGoal()" class="menu-button">Add a goal</ion-button>
 
     </ion-content>
   </ion-menu>
 
-  <div class="ion-page" id="main-content" style="height: 100%;">
-
+  <div class="ion-page" id="main-content">
     <ion-header>
       <ion-toolbar>
         <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <ion-title>
-          <ion-text class="ann">Yearly Goals</ion-text>
+        <ion-title><ion-text class="ann">Announcements</ion-text>
           <ion-button (click)="goToPanel()" class="header-button"><ion-label>Panel</ion-label></ion-button>
           <ion-button (click)="goToHome()" class="header-button"><ion-label>Log out</ion-label></ion-button>
         </ion-title>
       </ion-toolbar>
     </ion-header>
 
-    <ion-searchbar animated="true" placeholder="Search for a goal..." [formControl]="searchControl"></ion-searchbar>
-
-    <ion-list class="list">
+    <ion-content class="ion-padding">
+      <ion-searchbar animated="true" placeholder="Search for an announcement..." [formControl]="searchControl"></ion-searchbar>
       <ion-item-group>
         <ion-item-divider>
-          <ion-label>
-            2023
-          </ion-label>
         </ion-item-divider>
 
         <ion-item *ngFor="let goal of filteredGoals" class="content" lines="none">
@@ -73,6 +66,6 @@
           </ion-label>
         </ion-item>
       </ion-item-group>
-    </ion-list>
+    </ion-content>
   </div>
 </ion-content>

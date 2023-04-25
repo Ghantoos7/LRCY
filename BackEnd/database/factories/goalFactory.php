@@ -23,10 +23,11 @@ class goalFactory extends Factory
             'goal_status' => fake()->boolean,
             'number_completed' => random_int(1,3),
             'number_to_complete' => random_int(1,3),
-            'goal_year' => random_int(2023,2030),
+            'goal_year' => random_int(2023,2023),
             'event_type_id' => random_int(1,5),
             'goal_deadline' => fake()->date,
             'start_date' => fake()->date,
+            'branch_id' => random_int(502,502),
         ];
     }
 }
