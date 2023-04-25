@@ -10,6 +10,24 @@ export class AuthService {
 
   private base_url = 'http://localhost:8000/api/v0.1/auth/';
 
+  isLoggedIn() {
+    const authToken = localStorage.getItem('authToken');
+    if (authToken) {
+      return true;
+    } else {
+      return undefined;
+    }
+  }
+
+  hasPermission(){
+    const permission = localStorage.getItem('permission');
+    if (permission === '1') {
+      return true;
+    } else {
+      return undefined;
+    }
+  }
+
   adminLogin(organization_id: string, password: string) {
     const headers: HttpHeaders = new HttpHeaders({
       'Content-Type': 'application/json'

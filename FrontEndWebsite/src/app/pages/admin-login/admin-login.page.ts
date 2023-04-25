@@ -34,6 +34,7 @@ export class AdminLoginPage implements OnInit {
           localStorage.setItem('userProfilePic', response['user'].user_profile_pic);
           localStorage.setItem('branchId', response['user'].branch_id);
           localStorage.setItem('fullName', response['user'].first_name+' '+response['user'].last_name);
+          localStorage.setItem('permission', response['user'].user_type_id);
           // Redirect the user to the dashboard or any other page
           this.router.navigate(['/panel']);
           this.organization_id = '';
