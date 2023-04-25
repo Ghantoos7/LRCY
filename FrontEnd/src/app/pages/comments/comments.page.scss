@@ -26,20 +26,26 @@
     color: white;
 }
 
-.post-image{
-    position: absolute;
-    z-index: 2;
-}
+.post-and-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: -50px;
+  }
 
-.caption-container{
+.post-image {
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .caption-container {
     position: relative;
     z-index: 1;
-    top: 260px;
-    right: 20px;
     width: 105%;
     height: 160px;
     background-color: #45579A;
-}
+    margin-top: 0px;
+    margin-left: -10px;
+  }
 
 .caption{
     color: white;
@@ -51,14 +57,14 @@
 
 .comment-count{
     position:relative;
-    top: 240px;
+    top: 20px;
     left: 145px;
     color: black;
 }
 
 .comment-word{
     position:relative;
-    top: 240px;
+    top: 20px;
     left: 150px;
     color: black;
     margin-left: 5px;
@@ -66,7 +72,7 @@
 
 .sort{
     position:relative;
-    top: 250px;
+    top: 30px;
     margin-left: 240px;
     font-size: 30px;
     color: black;
