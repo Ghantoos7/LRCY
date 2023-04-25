@@ -12,6 +12,16 @@ export class AuthService {
 
   private saved_id = '';
 
+  isLoggedIn(){
+    // use local storage to see if the user is logged in
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      return JSON.parse(JSON.stringify(token));
+    } else {
+      return undefined;
+    }
+  }
+
   signUp(organization_id: string){
     const headers: HttpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
     const options = {headers: headers};

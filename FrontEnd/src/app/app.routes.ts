@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -7,19 +8,23 @@ export const routes: Routes = [
   },
   {
     path: 'gallery',
+    canActivate: [AuthGuard],
     loadChildren: () => import('../app/pages/gallery/gallery.routes').then((m) => m.routes),
   },
   {
     path: 'event-details',
+    canActivate: [AuthGuard],
     loadChildren: () => import('../app/pages/event-details/event-details.routes').then((m) => m.routes),
   },
   {
     path: 'profile',
+    canActivate: [AuthGuard],
     loadChildren: () => import('../app/pages/profile/profile.routes').then((m) => m.routes)
   },
-
+  
   {
     path: 'others-profile',
+    canActivate: [AuthGuard],
     loadChildren: () => import('./pages/others-profile/others-profile.routes').then((m) => m.routes)
   },
   
@@ -29,10 +34,12 @@ export const routes: Routes = [
   },
   {
     path: 'yearly-goals',
+    canActivate: [AuthGuard],
     loadComponent: () => import('./pages/yearly-goals/yearly-goals.page').then( m => m.YearlyGoalsPage)
   },
   {
     path: 'announcements',
+    canActivate: [AuthGuard],
     loadComponent: () => import('./pages/announcements/announcements.page').then( m => m.AnnouncementsPage)
   },
   {
@@ -65,21 +72,27 @@ export const routes: Routes = [
   },
   {
     path: 'feed',
+    canActivate: [AuthGuard],
     loadComponent: () => import('./pages/feed/feed.page').then( m => m.FeedPage)
   },
   {
     path: 'comments',
+    canActivate: [AuthGuard],
     loadComponent: () => import('./pages/comments/comments.page').then( m => m.CommentsPage)
   },
   {
     path: 'edit-profile',
+    canActivate: [AuthGuard],
     loadComponent: () => import('./pages/edit-profile/edit-profile.page').then( m => m.EditProfilePage)
-  },  {
+  },
+  {
     path: 'post',
+    canActivate: [AuthGuard],
     loadComponent: () => import('./pages/post/post.page').then( m => m.PostPage)
   },
   {
     path: 'edit-post',
+    canActivate: [AuthGuard],
     loadComponent: () => import('./pages/edit-post/edit-post.page').then( m => m.EditPostPage)
   },
 
