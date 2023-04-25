@@ -2,33 +2,62 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { AdminService } from 'src/app/services/admin.service';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormControl } from '@angular/forms';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-announcements',
   templateUrl: './announcements.page.html',
   styleUrls: ['./announcements.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule, FormsModule, ReactiveFormsModule]
 })
 export class AnnouncementsPage implements OnInit {
   showDescriptions: boolean[] = [];
   announcements: any = [];
+  filteredAnnouncements: any = [];
   i: number = 0;
   current_id = localStorage.getItem('adminId') as string;
   branch_id = localStorage.getItem('branch_id') as string;
+  searchControl: FormControl = new FormControl('');
+
   constructor(private alertController: AlertController, private router:Router, private menuController: MenuController, private adminService:AdminService) { 
     this.showDescriptions = new Array(this.announcements.length).fill(false);
   }
 
   ngOnInit() {
+    this.fetchAnnouncements();
+
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd && event.url === '/announcements') {
+        this.fetchAnnouncements();
+      }
+    });
+
+    this.searchControl.valueChanges.pipe(debounceTime(300)).subscribe(() => {
+      this.onSearchChange();
+    });
+  }
+
+  fetchAnnouncements() {
     this.adminService.getAnnouncements(this.branch_id).subscribe((response: any) => {
       this.announcements = response['announcements'];
-      this.announcements = Array.from(this.announcements);
+      this.filteredAnnouncements = this.announcements;
+    });
+  }
 
+  onSearchChange() {
+    this.filteredAnnouncements = this.filterAnnouncements(this.searchControl.value);
+  }
+  
+  filterAnnouncements(searchTerm: string) {
+    return this.announcements.filter((announcement: any) => {
+      return announcement.announcement_title.toLowerCase().includes(searchTerm.toLowerCase());
     });
   }
 
