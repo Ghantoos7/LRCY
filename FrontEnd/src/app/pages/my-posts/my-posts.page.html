@@ -9,7 +9,7 @@
    
     <ion-card class="card" *ngFor="let post of posts_array; let i = index">
       <div class="header-container">
-        <img  class="card-profile-picture" src="http://127.0.0.1:8000/storage/images/{{user_profile_pic}}">
+        <img  class="card-profile-picture" src="http://127.0.0.1:8000/storage/images/{{user_profile_pic}}" onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'">
         <ion-text class="username">{{username}}</ion-text>
         <ion-text class="name">{{full_name}}</ion-text>
         <ion-text class="post-date">{{getDaysAgo(post.post_date)}} d</ion-text>
@@ -22,11 +22,11 @@
           <ion-text>{{post.post_caption}} 
           </ion-text>
         </div>  
-        <ion-img *ngIf="post.post_media" class="post-image" src="http://127.0.0.1:8000/storage/images/{{post.post_media}}"/>
+        <img *ngIf="post.post_media" class="post-image" src="http://127.0.0.1:8000/storage/images/{{post.post_media}}" onerror="this.src='assets/imgs/ext.jpg'"/>
       </ion-card-content>
 
       <ion-footer>
-        <ion-icon class="likes" [class.active]="isLiked[post.id]" name="{{ isLiked[post.id] ? 'heart' : 'heart-outline' }}" (click)="toggleLike(post.id)"></ion-icon>
+        <ion-icon class="likes" [class.active]="isLikedUser[post.id]" name="{{ isLikedUser[post.id] ? 'heart' : 'heart-outline' }}" (click)="toggleLike(post.id)"></ion-icon>
         <ion-text class="like-count" color="danger">{{post.like_count}}</ion-text>
         <ion-img (click) ="goToComments(post.id)" class="comments" src="assets/icon/comments.png"></ion-img>
         <ion-text class="comment-count">{{post.comment_count}}</ion-text>

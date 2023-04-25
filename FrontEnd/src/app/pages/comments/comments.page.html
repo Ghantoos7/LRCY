@@ -5,13 +5,13 @@
   </div>
 
   <ion-icon class="back" name="arrow-back-outline" (click)="goBack()"></ion-icon>
-  <ion-img *ngIf="post_media" class="post-image" src="http://127.0.0.1:8000/storage/images/{{post_media}}"></ion-img>
+  <img *ngIf="post_media" class="post-image" src="http://127.0.0.1:8000/storage/images/{{post_media}}" onerror="this.src='assets/imgs/ext.jpg'">
 
   <ion-card class="caption-container">
     <ion-card-content>
       <ion-text class="caption">{{post_caption}}</ion-text>
       <ion-input [(ngModel)]="comment_content" class="input" placeholder="Add comment...">
-        <img class="comment-profile" src="http://127.0.0.1:8000/storage/images/{{user_profile_pic}}">
+        <img class="comment-profile" src="http://127.0.0.1:8000/storage/images/{{user_profile_pic}}" onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'">
       </ion-input>
       <ion-icon (click)="sendComment()" class="send-icon" name="send"></ion-icon>
     </ion-card-content>
@@ -26,13 +26,13 @@
   <div class="comment-container" >
     
     <ion-card class="comment-card" *ngFor="let comment of comments; let i = index">
-      <img class="profile-picture" src="{{comment['user'].user_profile_pic}}">
+      <img class="profile-picture" src="http://127.0.0.1:8000/storage/images/{{comment['user'].user_profile_pic}}" onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'">
       <ion-text class="username">{{comment['user'].first_name}} {{comment['user'].last_name}}</ion-text>
       <ion-text class="comment-date">{{getDaysAgo(comment.comment_date)}} d</ion-text>
       <ion-icon (click)="editComment(comment.id, comment.comment_content)" *ngIf="current_id == comment['user'].id" class="edit-comment" name="pencil"></ion-icon>
       <ion-icon (click)="deleteComment(comment.id)" *ngIf="current_id == comment['user'].id" class="delete-comment" name="trash-outline"></ion-icon>
       <ion-text class="comment">{{comment.comment_content}}</ion-text>
-      <ion-icon [class.active]="isLiked[comment.id]" name="{{ isLiked[comment.id] ? 'heart' : 'heart-outline' }}" (click)="toggleLike(comment.id)" class="likes"></ion-icon>
+      <ion-icon [class.active]="isLikedUser[comment.id]" name="{{ isLikedUser[comment.id] ? 'heart' : 'heart-outline' }}" (click)="toggleLike(comment.id)" class="likes"></ion-icon>
       <ion-text class="like-count">{{comment.comment_like_count}}</ion-text>
       <ion-icon (click)="replyComment(comment.id)" class="add-reply" name="chatbubble-ellipses-outline"></ion-icon>
       <ion-text class="reply-word">Reply...</ion-text>
@@ -44,7 +44,7 @@
 
       <ion-card-content class="replies-container" *ngIf="repliesOpen[comment.id]">
         <div class="reply-container" *ngFor="let reply of replies[comment.id]">
-          <img class="reply-profile-picture" src="{{reply['user'].user_profile_pic}}">
+          <img class="reply-profile-picture" src="http://127.0.0.1:8000/storage/images/{{reply['user'].user_profile_pic}}" onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'">
           <ion-text class="reply-username">{{reply['user'].first_name}} {{reply['user'].last_name}}</ion-text>
           <ion-icon (click)="deleteReply(reply.id)" *ngIf="current_id == reply['user'].id" class="delete-reply" name="trash-outline"></ion-icon>
           <ion-icon (click)="editReply(reply.id)" *ngIf="current_id == reply['user'].id" class="edit-reply" name="pencil"></ion-icon>
