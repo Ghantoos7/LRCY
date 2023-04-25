@@ -36,34 +36,39 @@ class EventController extends Controller {
     }
     
 
-    function getEventInfo($branch_id,$event_id = null) {
-
+    function getEventInfo($branch_id, $event_id = null) {
+        if($event_id) {
+            // Get event information with program name
+            $events = Event::select('events.*', 'programs.program_name')
+                           ->join('programs', 'programs.id', '=', 'events.program_id')
+                           ->where('events.id', $event_id)
+                           ->get()
+                           ->toArray();
+        } else {
+            // Get all events for the current year and branch with program name
+            $events = Event::select('events.*', 'programs.program_name')
+                           ->join('programs', 'programs.id', '=', 'events.program_id')
+                           ->where('events.branch_id', $branch_id)
+                           ->get()
+                           ->toArray();
+        }
     
-        if($event_id){
-            // Get event information
-            $events = event::where('id', $event_id)->get()->toArray();
-        }
-        else{
-            // Get all events for the current year and branch    
-            $events = event::where('branch_id',$branch_id)->get()->toArray();
-        }
-
         // If no event(s) found, return an error message
         if (count($events) === 0 || $events[0] === null) {
             return response()->json([
                 'message' => 'Event not found'
             ]);
         }
-
+    
         // Remove unnecessary fields from event(s) information
         $eventsArray = array_map(function($event) {
             unset($event['field1'], $event['field2'], $event['created_at'], $event['updated_at']);
             return $event;
         }, collect($events)->toArray());
-
-        // Group events by program_id
-        $eventsArray = collect($eventsArray)->groupBy('program_id');
-
+    
+        // Group events by program name
+        $eventsArray = collect($eventsArray)->groupBy('program_name');
+    
         // Adds a list of users who were responsible of each event, theyre first name last name role anme and profile picture
         $eventsArray = $eventsArray->map(function($events) {
             return $events->map(function($event) {
@@ -79,11 +84,10 @@ class EventController extends Controller {
                 return $event;
             });
         });
-
-        // Return the event(s) information grouped by program_id
-        return response()->json($event_id ? ['event' => $eventsArray->first()] : ['events' => $eventsArray]);
     
-    }
+        // Return the event(s) information grouped by program name
+        return response()->json($event_id ? ['event' => $eventsArray->first()] : ['events' => $eventsArray]);
+    }    
 
 
     function getAnnouncements($branch_id) {
