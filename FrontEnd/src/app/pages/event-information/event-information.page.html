@@ -66,7 +66,7 @@
       <ion-list lines="none">
       <ion-item *ngFor="let member of responsibles">
         <ion-avatar slot="start">
-          <img alt="Silhouette of a person's head" src="http://127.0.0.1:8000/storage/images/{{member.profile_picture}}" />
+          <img alt="Silhouette of a person's head" src="http://127.0.0.1:8000/storage/images/{{member.profile_picture}}" onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'"/>
         </ion-avatar>
         <ion-label>
           <h2>{{member.first_name}} {{member.last_name}}</h2>
