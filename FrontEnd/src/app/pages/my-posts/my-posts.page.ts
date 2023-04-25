@@ -67,7 +67,6 @@ export class MyPostsPage implements OnInit {
       }
     });
 
-    console.log(this.isLikedUser);
 
   }
 

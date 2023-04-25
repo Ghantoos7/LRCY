@@ -26,11 +26,11 @@ export class CommentsPage implements OnInit {
   current_id = localStorage.getItem('userId') as string;
   comment_content: string ='';
   post_id: number = 0;
-  isLiked: {[key: number]: boolean} = {};
+  isLikedUser: {[key: number]: boolean} = {};
   comment_likes: any;
   repliesOpen: { [comment_id: number]: boolean } = {};
   replies: any = [];
-
+  isLiked: { [key: number]: { postId: number, isLiked: boolean }[] } = {};
   content: string = '';
   constructor(private alrt:AlertController, private router:Router, private postService:PostService, private alertController:AlertController) { }
  
@@ -56,8 +56,7 @@ export class CommentsPage implements OnInit {
       if (this.comments && this.comments.length > 0) {
         for (let i = 0; i < this.comments.length; i++) {
           const commentId = this.comments[i].id;
-          this.isLiked[commentId] = localStorage.getItem(`comment_like_${commentId}`) === 'true';
-          console.log(this.isLiked);
+          this.isLikedUser[commentId] = localStorage.getItem(`user_${this.current_id}_comment_${commentId}`) === 'true'; // retrieve the like state from Local Storage
         }
       }
     });
@@ -93,6 +92,7 @@ export class CommentsPage implements OnInit {
   
     await alert.present();
   
+    
     alert.onDidDismiss().then((data) => {
       const selectedValue = data.data['values'];
       if(selectedValue == 'likes'){
@@ -100,7 +100,7 @@ export class CommentsPage implements OnInit {
           this.comments = data['comments'];
           for (let i = 0; i < this.comments.length; i++) {
             const commentId = this.comments[i].id;
-            this.isLiked[commentId] = localStorage.getItem(`comment_like_${commentId}`) === 'true'; // retrieve the like state from Local Storage
+            this.isLikedUser[commentId] = localStorage.getItem(`comment_like_${commentId}`) === 'true'; // retrieve the like state from Local Storage
           
           }
           
@@ -111,7 +111,7 @@ export class CommentsPage implements OnInit {
           this.comments = data['comments'];
           for (let i = 0; i < this.comments.length; i++) {
             const commentId = this.comments[i].id;
-            this.isLiked[commentId] = localStorage.getItem(`comment_like_${commentId}`) === 'true'; // retrieve the like state from Local Storage
+            this.isLikedUser[commentId] = localStorage.getItem(`comment_like_${commentId}`) === 'true'; // retrieve the like state from Local Storage
           
           }
       
@@ -122,9 +122,11 @@ export class CommentsPage implements OnInit {
   }
 
  
+  
+  
 
   toggleLike(comment_id: number) {
-    if (this.isLiked[comment_id]) {
+    if (this.isLikedUser[comment_id]) {
     this.unlikeComment(comment_id);
     } else {
     this.likeComment(comment_id);
@@ -133,8 +135,8 @@ export class CommentsPage implements OnInit {
     
   likeComment(comment_id: number) {
     this.postService.likeComment(comment_id, this.current_id).subscribe((data: any) => {
-      localStorage.setItem(`comment_like_${comment_id}`, 'true'); // store the like state in Local Storage
-      this.isLiked[comment_id] = true;
+      localStorage.setItem(`user_${this.current_id}_post_${comment_id}`, 'true'); // store the like state in Local Storage
+      this.isLikedUser[comment_id] = true;
       window.location.reload();
     });
     
@@ -151,8 +153,8 @@ export class CommentsPage implements OnInit {
 
   unlikeComment(comment_id: number) {
     this.postService.unlikeComment(comment_id, this.current_id).subscribe((data: any) => {
-      localStorage.setItem(`comment_like_${comment_id}`, 'false'); // store the like state in Local Storage
-      this.isLiked[comment_id] = false;
+      localStorage.setItem(`user_${this.current_id}_post_${comment_id}`, 'false'); // store the like state in Local Storage
+      this.isLikedUser[comment_id] = false;
       window.location.reload();
     });
    
