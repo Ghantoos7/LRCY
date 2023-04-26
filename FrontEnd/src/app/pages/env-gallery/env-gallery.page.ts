@@ -32,7 +32,6 @@ export class EnvGalleryPage implements OnInit {
     this.event_service.getEvents(this.branch_id).subscribe(response => {
       this.events = response;
       this.env_events = Array.from(this.events['events']['Environment']);
-     
     });
 
   }

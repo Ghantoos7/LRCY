@@ -33,7 +33,6 @@ export class OtherGalleryPage implements OnInit {
     this.event_service.getEvents(this.branch_id).subscribe(response => {
       this.events = response;
       this.other_events = Array.from(this.events['events']['Others']);
-     
     });
 
   }
