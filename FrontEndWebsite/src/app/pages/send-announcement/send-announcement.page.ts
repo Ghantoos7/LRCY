@@ -30,6 +30,7 @@ export class SendAnnouncementPage implements OnInit {
     this.adminService.sendAnnouncement(announcement_title, announcement_content, importance_level, this.admin_id).subscribe((response: any) => {
       const parsedResponse = JSON.parse(JSON.stringify(response));
       if(parsedResponse.status == 'success') {
+        console.log(parsedResponse);
         this.alertController.create({
           header: 'Success',
           message: 'Announcement sent successfully!',
