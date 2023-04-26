@@ -51,7 +51,7 @@ export class AddGalleryPage implements OnInit {
       this.event_date,
       this.mapEventType(this.event_type_id),
       this.mapProgramName(this.program_id),
-      this.event_main_picture, // to be added 
+      "baba", // to be added 
       this.event_location,
       this.budget_sheet,
       this.proposal,

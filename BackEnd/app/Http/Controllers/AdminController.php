@@ -16,6 +16,7 @@ use App\Models\goal;
 use App\Models\training;
 use App\Models\take;
 use App\Models\program;
+use App\Models\event_image;
 
 class AdminController extends Controller {
 
@@ -197,6 +198,7 @@ class AdminController extends Controller {
                 "is_active" => "required|integer",
                 "user_start_date" => "required|date",
                 "user_end_date" => "nullable|date",
+
             ]);
         
             if ($validator->fails()) {
@@ -667,7 +669,6 @@ class AdminController extends Controller {
     
     function editEvent(Request $request)  {
 
-
          // validate the request
          $validator = Validator::make($request->all(), [
             'event_id' => 'required|integer',
@@ -684,6 +685,7 @@ class AdminController extends Controller {
             'responsibles' => 'required',
             'responsibles.*.user_id' => 'required|integer',
             'responsibles.*.role_name' => 'required|string',
+            'event_images' => 'required'
         ]);
         
         // checks if validation worked
@@ -784,9 +786,22 @@ class AdminController extends Controller {
                 }
 
                 }
+            
+            // delete existing pictures from the event_pictures table
+            event_image::where('event_id', $event->id)->delete();
+
+            // Add new pictures to the event_pictures table
+            $event_images = json_decode($request->input('event_images', []), true);
+
+            foreach ($event_images as $event_image) {
+                event_image::create([
+                    'event_id' => $event->id,
+                    'event_image_source' => $event_image,
+                ]);
+            }
   
             // Update responsible people for the event
-            $responsibles = $request->input('responsibles', []);
+            $responsibles = json_decode($request->input('responsibles', []), true);
     
             // Delete existing responsible people from is_responsible table
             is_responsible::where('event_id', $event->id)->delete();

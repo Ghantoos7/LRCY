@@ -40,7 +40,6 @@ export class EditGalleryPage implements OnInit {
 
   ngOnInit() {
     const event = history.state.event;
-    console.log(event)
     this.event_id = event.id;
     this.event_title = event.event_title;
     this.event_description = event.event_description;
@@ -63,9 +62,6 @@ export class EditGalleryPage implements OnInit {
   }
 
   
-   
-     
-      
 
   editGalleryEvent() {
     const formData = new FormData();
@@ -74,7 +70,7 @@ export class EditGalleryPage implements OnInit {
     formData.append('event_description', this.event_description);
     formData.append('event_date', this.event_date);
     formData.append('event_type_id',  this.mapEventType(this.event_type_id).toString());
-    formData.append('program_id',  this.mapEventType(this.program_id).toString());
+    formData.append('program_id',  this.mapProgramName(this.program_id).toString());
     formData.append('event_main_picture',  this.event_main_picture);
     formData.append('event_location',  this.event_location);
     formData.append('event_main_picture',  this.event_main_picture);
@@ -83,6 +79,8 @@ export class EditGalleryPage implements OnInit {
     formData.append('meeting_minute', this.meeting_minute);
     const data = JSON.stringify(this.transformData(this.selectedUsers));
     formData.append('responsibles', data);
+    const event_photos = JSON.stringify(this.event_photos);
+    formData.append('event_images', event_photos);
     this.adminService.editEvent(formData).subscribe((response: any) => {
       const parsedResponse = JSON.parse(JSON.stringify(response));
       if(parsedResponse.status == 'success') {
@@ -135,7 +133,6 @@ onChangeMeet(event: any) {
       };
       this.selectedUsers.push(selectedUser);
       this.allUsers = this.allUsers.filter(u => u.id !== user.id);
-      console.log(this.selectedUsers);
     } else {
       this.removeSelectedUser(user);
     }
@@ -146,7 +143,10 @@ onChangeMeet(event: any) {
     if (userToUpdate) {
       userToUpdate.role_name = newRole;
     }
-    console.log(this.selectedUsers);
+  }
+
+  printball(){
+    console.log(this.program_id)
   }
 
   removeSelectedUser(selectedUser: any) {
@@ -155,11 +155,11 @@ onChangeMeet(event: any) {
     if (originalUser) {
       this.allUsers.push(originalUser);
     }
-    console.log(this.selectedUsers);
   }
   
   addPhotoInput() {
     this.photoInputs.push(this.photoInputs.length);
+    console.log(this.event_photos)
   }
 
 
@@ -193,7 +193,7 @@ mapProgramId(programId: number): string {
     case 4:
       return "Other";
     default:
-      return 'Other';
+      return 'error';
   }
 }
 
@@ -236,7 +236,7 @@ mapEventType(eventType: string): number {
     default:
       return 4;
   }
-}
+} 
 
   async confirm() {
     const alert = await this.alertController.create({
