@@ -7,6 +7,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\AdminController;
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Controllers\DownloadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,7 +80,7 @@ Route::group(["prefix" => "v0.1",], function(){
             Route::get("get_announcements/{branch_id}", [EventController::class, "getAnnouncements"]);
             Route::get("get_event_pictures/{event_id}", [EventController::class, "getEventPictures"]);
             Route::get("get_training_info/{training_id?}", [EventController::class, "getTrainingInfo"]);
-
+            Route::get("/download/{picture_id}", [DownloadController::class, "downloadPicture"]);
         });
 
     });
