@@ -34,7 +34,7 @@ export class EditGalleryPage implements OnInit {
   event_photos: Array<string> = [];
   responsibles : any [] = [];
   originalUsers: any[] = [];
-
+new_event_main_picture:string='';
 
   constructor(private router:Router, private menuController: MenuController, private alertController: AlertController, private adminService : AdminService) { }
 
@@ -83,6 +83,7 @@ export class EditGalleryPage implements OnInit {
     formData.append('event_images', event_photos);
     this.adminService.editEvent(formData).subscribe((response: any) => {
       const parsedResponse = JSON.parse(JSON.stringify(response));
+      console.log(parsedResponse);
       if(parsedResponse.status == 'success') {
         this.alertController.create({
           header: 'Success',
@@ -101,7 +102,7 @@ export class EditGalleryPage implements OnInit {
   }
 
   onChange(event: any) {
-    this.event_main_picture = event.target.files[0];
+    this.new_event_main_picture = event.target.files[0];
 
 }
 

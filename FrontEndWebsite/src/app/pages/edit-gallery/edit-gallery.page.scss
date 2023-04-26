@@ -7,11 +7,30 @@ ion-content{
   padding-bottom: 0;
 }
 
+ion-button.menu-button{
+  color:white;
+ --background:#45579A;
+}
+
+
 .form-title{
   font-size: 30px;
   position: relative;
   top: 40px;
   left: 40px;
+}
+.toolbar-background{
+  --background: #45579A !important;
+}
+
+ion-menu{
+  ion-content{
+    --background: white;
+  }
+}
+
+.menu-title{
+  color: white;
 }
 
 .custom-div{

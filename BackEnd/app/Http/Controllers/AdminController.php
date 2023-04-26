@@ -591,7 +591,7 @@ class AdminController extends Controller {
             'proposal' => 'required|string',
             'meeting_minute' => 'nullable|string',
             'branch_id' => 'required|integer',
-            'responsibles' => 'required|array',
+            'responsibles' => 'required',
             'responsibles.*.user_id' => 'required|integer',
             'responsibles.*.role_name' => 'required|string',
         ]);
@@ -605,20 +605,17 @@ class AdminController extends Controller {
         }
         
         // try catch block to handle the exception and add the event
+        
 
         try {
             // Create the event
             $event = Event::create([
-                'event_main_picture' => $request->input('event_main_picture'),
                 'event_description' => $request->input('event_description'),
                 'event_location' => $request->input('event_location'),
                 'event_date' => $request->input('event_date'),
                 'event_title' => $request->input('event_title'),
                 'event_type_id' => $request->input('event_type_id'),
                 'program_id' => $request->input('program_id'),
-                'budget_sheet' => $request->input('budget_sheet'),
-                'proposal' => $request->input('proposal'),
-                'meeting_minute' => $request->input('meeting_minute'),
                 'branch_id' => $request->input('branch_id'),
             ]);
 
@@ -629,6 +626,44 @@ class AdminController extends Controller {
                     'error' => $e->getMessage()
                 ]);
         }
+
+        
+        if($request->hasFile('event_main_picture')){
+            $request->validate([
+                'image' => 'mimes:jpeg,bmp,png,jpg'
+            ]);
+
+            $request->event_main_picture->store('public/images');
+            $event->event_main_picture = $request->event_main_picture->hashName();
+        }
+
+        if($request->hasFile('budget_sheet')){
+            $request->validate([
+                'image' => 'mimes:jpeg,bmp,png,jpg'
+            ]);
+
+            $request->budget_sheet->store('public/images');
+            $event->budget_sheet = $request->budget_sheet->hashName();
+        }
+
+        if($request->hasFile('proposal')){
+            $request->validate([
+                'image' => 'mimes:jpeg,bmp,png,jpg'
+            ]);
+
+            $request->proposal->store('public/images');
+            $event->proposal = $request->proposal->hashName();
+        }
+
+        if($request->hasFile('meeting_minute')){
+            $request->validate([
+                'image' => 'mimes:jpeg,bmp,png,jpg'
+            ]);
+
+            $request->meeting_minute->store('public/images');
+            $event->meeting_minute = $request->meeting_minute->hashName();
+        }
+        $event->save();
 
         // Create the responsibles
         try {
@@ -734,7 +769,7 @@ class AdminController extends Controller {
                 'meeting_minute',
             ];
             $event->fill($request->only($fillableFields));
-            $event->save();
+
 
             if($request->hasFile('event_main_picture')){
                 $request->validate([
