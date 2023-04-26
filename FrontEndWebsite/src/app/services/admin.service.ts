@@ -251,6 +251,15 @@ export class AdminService {
     return response;
   }
 
+  deleteEvent(event_id : number){
+    const headers = this.getAuthHeaders().set('Content-Type', 'application/json');
+    const body = {
+      'event_id': event_id,
+    };
+    const response = this.http.post(this.base_url + 'delete_event', body, { headers: headers });
+    return response;
+  }
+
 
 
 
