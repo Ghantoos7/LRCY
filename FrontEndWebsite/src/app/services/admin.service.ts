@@ -250,6 +250,13 @@ export class AdminService {
     const response = this.http.post(this.base_url + 'edit_event', formData, options);
     return response;
   }
+
+  postEvent(formData: FormData) {
+    const headers = this.getAuthHeaders();
+    const options = { headers: headers };
+    const response = this.http.post(this.base_url + 'add_event', formData, options);
+    return response;
+  }
   
 
   deleteEvent(event_id : number){

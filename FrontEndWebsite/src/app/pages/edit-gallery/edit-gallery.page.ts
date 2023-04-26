@@ -34,7 +34,7 @@ export class EditGalleryPage implements OnInit {
   event_photos: Array<string> = [];
   responsibles : any [] = [];
   originalUsers: any[] = [];
-
+new_event_main_picture:string='';
 
   constructor(private router:Router, private menuController: MenuController, private alertController: AlertController, private adminService : AdminService) { }
 
@@ -75,7 +75,7 @@ export class EditGalleryPage implements OnInit {
     formData.append('event_date', this.event_date);
     formData.append('event_type_id',  this.mapEventType(this.event_type_id).toString());
     formData.append('program_id',  this.mapEventType(this.program_id).toString());
-    formData.append('event_main_picture',  this.event_main_picture);
+    formData.append('event_main_picture',  this.new_event_main_picture);
     formData.append('event_location',  this.event_location);
     formData.append('event_main_picture',  this.event_main_picture);
     formData.append('budget_sheet',  this.budget_sheet);
@@ -104,7 +104,7 @@ export class EditGalleryPage implements OnInit {
   }
 
   onChange(event: any) {
-    this.event_main_picture = event.target.files[0];
+    this.new_event_main_picture = event.target.files[0];
 
 }
 
