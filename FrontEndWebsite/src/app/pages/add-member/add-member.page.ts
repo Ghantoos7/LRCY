@@ -113,5 +113,12 @@ export class AddMemberPage implements OnInit {
     this.router.navigate(['/manage-profiles']);
   }
 
+  ionViewWillLeave() {
+    this.menuCtrl.enable(false, 'menuAddMember');
+  }
+
+  ionViewDidEnter() {
+    this.menuCtrl.enable(true, 'menuAddMember');
+  }
 
 }

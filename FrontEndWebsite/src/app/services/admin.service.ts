@@ -163,6 +163,8 @@ export class AdminService {
     return response;
   }
 
+
+  
   editUser(user_id:  string, first_name: string, last_name: string, is_active : number , user_start_date : string, user_end_date : string, user_position : string, user_type_id : number , gender: string, user_dob : string) {
     const headers = this.getAuthHeaders().set('Content-Type', 'application/json');
     const options = { headers: headers };
@@ -242,29 +244,11 @@ export class AdminService {
     return response;
   }
 
-  editEvent(event_id : number, event_title : string, event_description : string, event_date : string, event_type_id : number, program_id : number, event_main_picture : string, event_location : string, budget_sheet : string, proposal : string, responsibles : any, meeting_minute? : string){
-    const headers = this.getAuthHeaders().set('Content-Type', 'application/json');
+  editEvent(formData: FormData) {
+    const headers = this.getAuthHeaders();
     const options = { headers: headers };
-
-    const body = {
-      'event_id': event_id,
-      'event_title': event_title,
-      'event_description': event_description,
-      'event_date': event_date,
-      'event_type_id': event_type_id,
-      'program_id': program_id,
-      'event_main_picture': event_main_picture,
-      'event_location': event_location,
-      'budget_sheet': budget_sheet,
-      'proposal': proposal,
-      'meeting_minute': meeting_minute,// can be null
-      'responsibles': responsibles,
-    
-    };
-
-    const response = this.http.post(this.base_url + 'edit_event', body, options);
+    const response = this.http.post(this.base_url + 'edit_event', formData, options);
     return response;
-
   }
   
 
@@ -276,6 +260,9 @@ export class AdminService {
     const response = this.http.post(this.base_url + 'delete_event', body, { headers: headers });
     return response;
   }
+
+
+
 
 
 

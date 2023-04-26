@@ -181,4 +181,12 @@ export class AddGalleryPage implements OnInit {
     this.menuController.close();
   }
 
+  ionViewWillLeave() {
+    this.menuController.enable(false, 'menuAddGallery');
+  }
+
+  ionViewDidEnter() {
+    this.menuController.enable(true, 'menuAddGallery');
+  }
+
 }

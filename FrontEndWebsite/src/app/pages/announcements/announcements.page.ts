@@ -61,15 +61,7 @@ export class AnnouncementsPage implements OnInit {
     });
   }
 
-  public getAnnouncerProfilePic(index: number) {
-    let currentAnnouncement = this.announcements[index];
-    if (currentAnnouncement.announcer_profile_picture == null) {
-      return "https://ionicframework.com/docs/img/demos/avatar.svg";
-    } else {
-      return currentAnnouncement.announcer_profile_picture;
-    }
-  }
-
+  
   async confirm(id: string) {
     const alert = await this.alertController.create({
       header: 'Delete Announcement',
@@ -135,4 +127,12 @@ export class AnnouncementsPage implements OnInit {
     this.menuController.close();
   }
 
+
+  ionViewWillLeave() {
+    this.menuController.enable(false, 'menuAnnouncements');
+  }
+
+  ionViewDidEnter() {
+    this.menuController.enable(true, 'menuAnnouncements');
+  }
 }

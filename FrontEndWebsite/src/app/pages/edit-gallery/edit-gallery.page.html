@@ -1,6 +1,6 @@
 <ion-content [fullscreen]="true">
 
-  <ion-menu menuId="menuGoals" contentId="main-content">
+  <ion-menu menuId="editGallery" contentId="main-content">
     <ion-header>
       <ion-toolbar>
         <ion-title>Manage Gallery</ion-title>
@@ -32,7 +32,7 @@
           <div class="custom-div">
             <ion-text class="form-title">Edit Event</ion-text>
   
-            <ion-button class="edit-btn" size="small" ><ion-icon name="create"></ion-icon>Edit Cover Photo</ion-button>
+            <ion-button class="edit-btn" size="small" ><input [(ngModel)]="event_main_picture" (change)="onChange($event)" type="file" accept="image/png, image/jpeg, image/jpg"></ion-button>
             <div class="text-div"></div>
             <div class="inner-div">
               <ion-grid>
@@ -87,7 +87,7 @@
                   <ion-col size="6">
                     <ion-item>
                       <ion-label>Budget Sheet</ion-label>
-                      <ion-input [(ngModel)] = "budget_sheet" class="first-card-input" type="file"></ion-input>
+                      <ion-input [(ngModel)] = "budget_sheet"  (change)="onChangeBudget($event)" class="first-card-input" type="file" accept="image/png, image/jpeg, image/jpg"></ion-input>
                     </ion-item>
                   </ion-col>
                   
@@ -96,13 +96,13 @@
                   <ion-col size="6">
                     <ion-item>
                       <ion-label>Proposal</ion-label>
-                      <ion-input [(ngModel)] = "proposal" class="first-card-input" type="file" ></ion-input>
+                      <ion-input [(ngModel)] = "proposal"  (change)="onChangeProp($event)" class="first-card-input" type="file" accept="image/png, image/jpeg, image/jpg"></ion-input>
                     </ion-item>
                   </ion-col>
                   <ion-col size="6">
                     <ion-item>
                       <ion-label>Meeting minute</ion-label>
-                      <ion-input [(ngModel)] = "meeting_minute" class="first-card-input" type="file"></ion-input>
+                      <ion-input [(ngModel)] = "meeting_minute"  (change)="onChangeMeet($event)" class="first-card-input" type="file" accept="image/png, image/jpeg, image/jpg"></ion-input>
                     </ion-item>
                   </ion-col>
                   
@@ -149,7 +149,7 @@
                 <ion-list class="list">
                   <ion-item *ngFor="let user of selectedUsers">
                     <ion-avatar slot="start">
-                      <img [src]="user.user_profile_pic" alt="User avatar" />
+                      <img src="http://127.0.0.1:8000/storage/images/{{user.user_profile_pic}}"  onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'" alt="User avatar" />
                     </ion-avatar>
                     <ion-label>{{ user.first_name }} {{ user.last_name }}</ion-label>
                     <ion-input slot="end" class="add-member" type="text" [(ngModel)]="user.role_name" (ngModelChange)="updateUserRole(user, user.role_name)" placeholder="Role..."></ion-input>
