@@ -260,6 +260,10 @@ mapEventType(eventType: string): number {
    });
   }
 
+  goToAddGallery(){
+    this.router.navigate(['/add-gallery']);
+    }
+
   goToGallery(){
     this.router.navigate(['/manage-gallery']);
   }

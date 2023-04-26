@@ -1,17 +1,17 @@
 <ion-content [fullscreen]="true">
-
   <ion-menu menuId="menuGoals" contentId="main-content">
     <ion-header>
       <ion-toolbar>
         <ion-title>Manage Gallery</ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content class="ion-padding"> 
-        <ion-button (click)="goToGallery()"class="menu-button">View Gallery</ion-button>
-        <ion-button (click)="closeMenu()" class="menu-button">Add an Event</ion-button>
+    <ion-content class="ion-padding">
+      <ion-button (click)="goToGallery()" class="menu-button">View Gallery</ion-button>
+      <ion-button (click)="closeMenu()" class="menu-button">Add an Event</ion-button>
     </ion-content>
   </ion-menu>
 
+  
   <div id="main-content">
     <ion-header>
       <ion-toolbar>
@@ -36,18 +36,18 @@
             <div class="text-div"></div>
             <div class="inner-div">
               <ion-grid>
-                <ion-card-title> &nbsp; Event Information</ion-card-title>
+                <ion-card-title> &nbsp; Add Event Information</ion-card-title>
                 <ion-row>
                   <ion-col size="6">
                     <ion-item>
                       <ion-label>Title</ion-label>
-                      <ion-input class="first-card-input" [(ngModel)]="event_title"></ion-input>
+                      <ion-input [(ngModel)]="event_title" class="first-card-input"></ion-input>
                     </ion-item>
                   </ion-col>
                   <ion-col size="6">
                     <ion-item class="custom-input">
                       <ion-label class="custom-label">Date of Event</ion-label>
-                      <ion-input class="first-card-input" type="date" [(ngModel)]="event_date"></ion-input>
+                      <ion-input [(ngModel)]="event_date" class="first-card-input" type="date"></ion-input>
                     </ion-item>
                   </ion-col>
                   
@@ -55,11 +55,10 @@
                 <ion-row>
                   <ion-col size="6">
                     <ion-item>
-                      <ion-label>Program</ion-label>
-                      <ion-select class="drop-down" [(ngModel)]="program" (ionChange)="convertProgram()">
-                        <ion-select-option value="Youth and Health">Youth and health</ion-select-option>
+                      <ion-select [(ngModel)]="program_id" class="input" placeholder="Program">
+                        <ion-select-option value="Youth and Health">Youth and Health</ion-select-option>
+                        <ion-select-option value="Human values and principles">Human values and principles</ion-select-option>
                         <ion-select-option value="Environment">Environment</ion-select-option>
-                        <ion-select-option value="HVP">HVP</ion-select-option>
                         <ion-select-option value="Other">Other</ion-select-option>
                       </ion-select>
                     </ion-item>
@@ -67,8 +66,11 @@
                   <ion-col size="6">
                     
                     <ion-item>
-                      <ion-label>Event Type</ion-label>
-                      <ion-input class="first-card-input" [(ngModel)]="event_type_id"></ion-input>
+                      <ion-select [(ngModel)]="event_type_id" class="input" placeholder="Event Type">
+                        <ion-select-option value="Activity">Activity</ion-select-option>
+                        <ion-select-option value="Training">Training</ion-select-option>
+                        <ion-select-option value="Other">Other</ion-select-option>
+                      </ion-select>
                     </ion-item>
                  
                   </ion-col>
@@ -79,13 +81,13 @@
                   <ion-col size="6">
                     <ion-item>
                       <ion-label>Location</ion-label>
-                      <ion-input class="first-card-input" [(ngModel)]="event_location"></ion-input>
+                      <ion-input [(ngModel)] = "event_location" class="first-card-input"></ion-input>
                     </ion-item>
                   </ion-col>
                   <ion-col size="6">
                     <ion-item>
                       <ion-label>Budget Sheet</ion-label>
-                      <ion-input class="first-card-input" type="file" [(ngModel)]="budget_sheet"></ion-input>
+                      <ion-input [(ngModel)] = "budget_sheet" class="first-card-input" type="file"></ion-input>
                     </ion-item>
                   </ion-col>
                   
@@ -94,96 +96,108 @@
                   <ion-col size="6">
                     <ion-item>
                       <ion-label>Proposal</ion-label>
-                      <ion-input class="first-card-input" type="file" [(ngModel)]="proposal"></ion-input>
+                      <ion-input [(ngModel)] = "proposal" class="first-card-input" type="file" ></ion-input>
                     </ion-item>
                   </ion-col>
                   <ion-col size="6">
                     <ion-item>
                       <ion-label>Meeting minute</ion-label>
-                      <ion-input class="first-card-input" type="file" [(ngModel)]="meeting_minute"></ion-input>
+                      <ion-input [(ngModel)] = "meeting_minute" class="first-card-input" type="file"></ion-input>
                     </ion-item>
                   </ion-col>
                   
                 </ion-row>
-                
-                
+
+                <ion-row>
+                  <ion-col size="12">
+                    <ion-item>
+                      <ion-label position="stacked">Description</ion-label>
+                      <ion-textarea [(ngModel)]="event_description" rows="4"></ion-textarea>
+                    </ion-item>
+                  </ion-col>
+                </ion-row> 
               </ion-grid>
-            
             </div>
-           
-            <img class="img" alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
-           
+            <img class="img" alt="Silhouette of mountains" src="http://127.0.0.1:8000/storage/images/{{event_main_picture}}" onerror="this.src='assets/imgs/ext.jpg'" />
           </div>
         </ion-col>
       </ion-row>
-  
-      
     </ion-grid>
   
-  
-    <ion-card class="members">
-      <ion-grid>
-        <ion-row>
-          <ion-col size="6">
-            <ion-card>
-              <ion-card-title>Members</ion-card-title>
-            <ion-list class="list">
-              <ion-item>
-                <ion-avatar slot="start">
-                  <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-                </ion-avatar>
-                <ion-label>
-                  Georgio Ghantios
-                </ion-label>
-                <ion-icon name="trash" slot="end"></ion-icon>
-              </ion-item>
-              <ion-item>
-                <ion-avatar slot="start">
-                  <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-                </ion-avatar>
-                <ion-label>
-                  Georgio Ghantios
-                </ion-label>
-                <ion-icon name="trash" slot="end"></ion-icon>
-              </ion-item>  
-            </ion-list>
-  
-            <ion-card>
-                <ion-grid>
-                  <ion-row>
-                    <ion-col size="8">
-                      <ion-input [(ngModel)]="id" class="add-member" type="text" placeholder="ID..."></ion-input>
-                      <ion-input  [(ngModel)]="role" class="add-member" type="text" placeholder="Role..."></ion-input>
-                    </ion-col>
-                    <ion-col size="2">
-                      <ion-fab  class="add" horizontal="center" vertical="center">
-                        <ion-fab-button>
-                          <ion-icon name="add" (click)="addMember()"></ion-icon>
-                        </ion-fab-button>
-                      </ion-fab>
-                    </ion-col>
-                  </ion-row>
-                </ion-grid>
+
+    <ion-grid>
+      <ion-card class="members">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="6">
+              <ion-card>
+                <ion-card-title>All Users</ion-card-title>
+                <ion-list class="list">
+                  <ion-item *ngFor="let user of allUsers">
+                    <ion-avatar slot="start">
+                      <img src="http://127.0.0.1:8000/storage/images/{{user.user_profile_pic}}"  onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'" />
+                    </ion-avatar>
+                    <ion-label>{{ user.first_name }} {{ user.last_name }}</ion-label>
+                    <ion-button slot="end" (click)="selectUser(user, true)">Add</ion-button>
+                  </ion-item>
+                </ion-list>
               </ion-card>
-            </ion-card>
-          </ion-col>
-          <ion-col size="6">
-            <ion-card>
-              <ion-card-title>Images</ion-card-title>
-              <ion-list class="list">
-              <ion-item class="list-img">
-                <ion-thumbnail slot="start">
-                  <img class="mountains-img"alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
-                </ion-thumbnail>
-              <ion-icon class="img-trash" name="trash" slot="end"></ion-icon>
-              </ion-item>
-            </ion-list>
-            <ion-button class="add-img">Add Images</ion-button>
-            </ion-card>
+            </ion-col>
+            <ion-col size="6">
+              <ion-card>
+                <ion-card-title>Selected Users</ion-card-title>
+                <ion-list class="list">
+                  <ion-item *ngFor="let user of selectedUsers">
+                    <ion-avatar slot="start">
+                      <img [src]="user.user_profile_pic" alt="User avatar" />
+                    </ion-avatar>
+                    <ion-label>{{ user.first_name }} {{ user.last_name }}</ion-label>
+                    <ion-input slot="end" class="add-member" type="text" [(ngModel)]="user.role_name" (ngModelChange)="updateUserRole(user, user.role_name)" placeholder="Role..."></ion-input>
+                    <ion-icon
+                      slot="end"
+                      name="trash"
+                      (click)="removeSelectedUser(user)"
+                    ></ion-icon>
+                  </ion-item>
+                </ion-list>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+    </ion-grid>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size-md="10" size-lg="9" size-xl="8" offset-md="1" offset-lg="2" offset-xl="2">
+        <ion-row *ngFor="let photoInput of photoInputs; let i = index">
+          <ion-col size="12">
+            <ion-item>
+              <ion-label>Event Photo {{ i + 1 }}</ion-label>
+              <ion-input class="first-card-input" type="file" [(ngModel)]="event_photos[i]"></ion-input>
+              <ion-button slot="end" (click)="removePhotoInput(i)" fill="clear" color="danger">
+                <ion-icon name="trash"></ion-icon>
+              </ion-button>
+            </ion-item>
           </ion-col>
         </ion-row>
-      </ion-grid>
-    </ion-card>
-    <ion-button class="save">Add Event</ion-button>
+  
+        <ion-row>
+          <ion-col size="12" class="ion-text-center">
+            <ion-button (click)="addPhotoInput()">Add another photo</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+    <ion-button (click)="addEvent()" class="save">Add Event</ion-button>
   </div>
+
+
+
 </ion-content>
+
+
+    
+
