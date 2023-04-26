@@ -41,7 +41,7 @@
               <div class="badge-yah">
                 <ion-icon [name]="mapEventIcon(yah_event.event_type_id)" size="large"></ion-icon>
               </div>
-              <ion-img src="{{yah_event.event_main_picture}}" class="custom-image"></ion-img>
+              <ion-img  src="http://127.0.0.1:8000/storage/images/{{yah_event.event_main_picture}}" onerror="this.src='assets/imgs/ext.jpg'" class="custom-image"></ion-img>
               <ion-card-header class="custom-card-header-yah">
                 <ion-card-subtitle class="custom-subtitle">{{yah_event.event_title}}</ion-card-subtitle>
               </ion-card-header>
@@ -68,7 +68,7 @@
               <div class="badge-env">
                 <ion-icon [name]="mapEventIcon(environment_event.event_type_id)" size="large"></ion-icon>
               </div>
-              <ion-img src="{{environment_event.event_main_picture}}" class="custom-image"></ion-img>
+              <ion-img src="http://127.0.0.1:8000/storage/images/{{environment_event.event_main_picture}}" onerror="this.src='assets/imgs/ext.jpg'" class="custom-image"></ion-img>
               <ion-card-header class="custom-card-header-env">
                 <ion-card-subtitle class="custom-subtitle">{{environment_event.event_title}}</ion-card-subtitle>
               </ion-card-header>
@@ -96,7 +96,7 @@
               <div class="badge-hvp">
                 <ion-icon [name]="mapEventIcon(hvp_event.event_type_id)" size="large"></ion-icon>
               </div>
-              <ion-img src="{{hvp_event.event_main_picture}}" class="custom-image"></ion-img>
+              <ion-img src="http://127.0.0.1:8000/storage/images/{{hvp_event.event_main_picture}}" onerror="this.src='assets/imgs/ext.jpg'" class="custom-image"></ion-img>
               <ion-card-header class="custom-card-header-hvp">
                 <ion-card-subtitle class="custom-subtitle">{{hvp_event.event_title}}</ion-card-subtitle>
               </ion-card-header>
@@ -126,7 +126,7 @@
               <div class="badge-other">
                 <ion-icon [name]="mapEventIcon(other_event.event_type_id)" size="large"></ion-icon>
               </div>
-              <ion-img src="{{other_event.event_main_picture}}" class="custom-image"></ion-img>
+              <ion-img src="http://127.0.0.1:8000/storage/images/{{other_event.event_main_picture}}" onerror="this.src='assets/imgs/ext.jpg'" class="custom-image"></ion-img>
               <ion-card-header class="custom-card-header-other">
                 <ion-card-subtitle class="custom-subtitle">{{other_event.event_title}}</ion-card-subtitle>
               </ion-card-header>

@@ -124,7 +124,7 @@
               </ion-grid>
             </div>
            
-            <img class="img" alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
+            <img class="img" alt="Silhouette of mountains" src="http://127.0.0.1:8000/storage/images/{{event_main_picture}}" onerror="this.src='assets/imgs/ext.jpg'" />
            
           </div>
         </ion-col>
@@ -142,7 +142,7 @@
                 <ion-list class="list">
                   <ion-item *ngFor="let user of allUsers">
                     <ion-avatar slot="start">
-                      <img [src]="user.user_profile_pic" alt="User avatar" />
+                      <img src="http://127.0.0.1:8000/storage/images/{{user.user_profile_pic}}"  onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'" />
                     </ion-avatar>
                     <ion-label>{{ user.first_name }} {{ user.last_name }}</ion-label>
                     <ion-button slot="end" (click)="selectUser(user, true)">Add</ion-button>
