@@ -85,6 +85,7 @@ export class EditGalleryPage implements OnInit {
     formData.append('responsibles', data);
     this.adminService.editEvent(formData).subscribe((response: any) => {
       const parsedResponse = JSON.parse(JSON.stringify(response));
+      console.log(parsedResponse);
       if(parsedResponse.status == 'success') {
         this.alertController.create({
           header: 'Success',
