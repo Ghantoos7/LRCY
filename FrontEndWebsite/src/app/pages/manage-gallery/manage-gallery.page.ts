@@ -3,15 +3,17 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { MenuController } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { AdminService } from 'src/app/services/admin.service';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'app-manage-gallery',
   templateUrl: './manage-gallery.page.html',
   styleUrls: ['./manage-gallery.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule, FormsModule,ReactiveFormsModule]
 })
 export class ManageGalleryPage implements OnInit {
 
@@ -24,6 +26,15 @@ export class ManageGalleryPage implements OnInit {
   constructor(private menuCtrl: MenuController, private router:Router, private menuController: MenuController, private service:AdminService) { }
 
   ngOnInit() {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd && event.url === '/manage-gallery') {
+        this.fetchEvents();
+      }
+    });
+
+  }
+
+  fetchEvents(){
     this.service.getEvents(this.branch_id,"").subscribe((response: any)=>{
       const parsedResponse = JSON.parse(JSON.stringify(response));
       this.events=parsedResponse['events'];
@@ -32,7 +43,6 @@ export class ManageGalleryPage implements OnInit {
       this.hvp_events=this.events['Human Values and Principles'];
       this.other_events=this.events['Others'];
     });
-
   }
 
   mapEventIcon(event_type_id: number) : string{

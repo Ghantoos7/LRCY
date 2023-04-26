@@ -134,12 +134,20 @@ export class MemberProfilePage implements OnInit {
           text: 'Yes',
           handler: () => {
             this.adminService.deleteUser(user_id).subscribe((response: any) => {
-              if (response.status === 'success') {
-                // Handle the success case, e.g., navigate to another page or display a success message
+              const parsedResponse = JSON.parse(JSON.stringify(response));
+              if(parsedResponse.status == 'success') {
+                this.alertController.create({
+                  header: 'Success',
+                  message: 'user deleted successfully',
+                  buttons: ['OK']
+                }).then(alert => alert.present());
                 this.router.navigate(['/manage-profiles']);
               } else {
-                // Handle the error case, e.g., display an error message
-                console.log(response.message);
+                this.alertController.create({
+                  header: 'Error',
+                  message: parsedResponse.message,
+                  buttons: ['OK']
+                }).then(alert => alert.present());
               }
             });
           },

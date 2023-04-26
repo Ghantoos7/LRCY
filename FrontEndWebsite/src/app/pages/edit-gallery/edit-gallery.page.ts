@@ -219,6 +219,25 @@ mapEventType(eventType: string): number {
       buttons: [
         {
           text: 'Yes',
+          handler: () => {
+            this.adminService.deleteEvent(this.event_id).subscribe((response: any) => {
+                  const parsedResponse = JSON.parse(JSON.stringify(response));
+                  if(parsedResponse.status == 'success') {
+                    this.alertController.create({
+                      header: 'Success',
+                      message: 'event deleted successfully',
+                      buttons: ['OK']
+                    }).then(alert => alert.present());
+                    this.router.navigate(['/manage-gallery']);
+                  } else {
+                    this.alertController.create({
+                      header: 'Error',
+                      message: parsedResponse.message,
+                      buttons: ['OK']
+                    }).then(alert => alert.present());
+                  }
+            });
+          }
         },
         {
           text: 'Cancel',
@@ -226,6 +245,7 @@ mapEventType(eventType: string): number {
         }
       ]
     });
+  
     await alert.present();
   }
 
