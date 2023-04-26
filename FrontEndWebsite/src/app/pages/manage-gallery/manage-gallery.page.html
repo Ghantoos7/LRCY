@@ -1,3 +1,5 @@
+
+<ion-content class="background">
 <ion-menu menuId="menuGallery" contentId="main-content">
   <ion-header>
     <ion-toolbar>
@@ -35,9 +37,9 @@
       <div class="ion-grid">
         <ion-row>
           <ion-col size="3" *ngFor="let yah_event of yah_events">
-            <ion-card>
+            <ion-card (click)="goToEditGallery(yah_event)">
               <div class="badge-yah">
-                <ion-icon name="calendar-number-outline" size="large"></ion-icon>
+                <ion-icon [name]="mapEventIcon(yah_event.event_type_id)" size="large"></ion-icon>
               </div>
               <ion-img src="{{yah_event.event_main_picture}}" class="custom-image"></ion-img>
               <ion-card-header class="custom-card-header-yah">
@@ -62,9 +64,9 @@
       <div class="ion-grid">
         <ion-row>
           <ion-col size="3" *ngFor="let environment_event of environment_events">
-            <ion-card>
+            <ion-card (click)="goToEditGallery(environment_event)">
               <div class="badge-env">
-                <ion-icon name="calendar-number-outline" size="large"></ion-icon>
+                <ion-icon [name]="mapEventIcon(environment_event.event_type_id)" size="large"></ion-icon>
               </div>
               <ion-img src="{{environment_event.event_main_picture}}" class="custom-image"></ion-img>
               <ion-card-header class="custom-card-header-env">
@@ -90,9 +92,9 @@
       <div class="ion-grid">
         <ion-row>
           <ion-col size="3" *ngFor="let hvp_event of hvp_events">
-            <ion-card>
+            <ion-card (click)="goToEditGallery(hvp_event)">
               <div class="badge-hvp">
-                <ion-icon name="calendar-number-outline" size="large"></ion-icon>
+                <ion-icon [name]="mapEventIcon(hvp_event.event_type_id)" size="large"></ion-icon>
               </div>
               <ion-img src="{{hvp_event.event_main_picture}}" class="custom-image"></ion-img>
               <ion-card-header class="custom-card-header-hvp">
@@ -120,9 +122,9 @@
       <div class="ion-grid">
         <ion-row>
           <ion-col size="3" *ngFor="let other_event of other_events">
-            <ion-card>
+            <ion-card (click)="goToEditGallery(other_event)">
               <div class="badge-other">
-                <ion-icon name="calendar-number-outline" size="large"></ion-icon>
+                <ion-icon [name]="mapEventIcon(other_event.event_type_id)" size="large"></ion-icon>
               </div>
               <ion-img src="{{other_event.event_main_picture}}" class="custom-image"></ion-img>
               <ion-card-header class="custom-card-header-other">
@@ -136,3 +138,4 @@
     </ion-card-content>
      
   </ion-card>
+  </ion-content>

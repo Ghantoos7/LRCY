@@ -340,12 +340,14 @@ class UserController extends Controller {
         }
     
         // If no user(s) found, return an error response
-        if (!$users) {
-            return response()->json([    
-                'status' => 'error', 'message' => 'User(s) not found'
+        if ($users[0] === null || $users[0] === [] ) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'No user(s) found'
             ]);
         }
-    
+
+
         // Remove specified fields (password, field1, field2, created_at, and updated_at) from user(s) information using unset() and handle case where user_id is specified (i.e. return a single user object instead of an array of user objects) and add to each user a field called 'user_type' which is either 'volunteer' or 'admin' depending on the value of user_type_id (1 for admin, 0 for volunteer)
         $usersArray = [];
         foreach ($users as $user) {

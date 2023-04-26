@@ -212,9 +212,9 @@ export class AdminService {
     return response;
   }
 
-  getEvents(branch_id: string) {
+  getEvents(branch_id: string, event_type_id: string) {
     const headers = this.getAuthHeaders();
-    const response = this.http.get(this.base_url_event + 'get_event_info/' + branch_id, { headers: headers });
+    const response = this.http.get(this.base_url_event + 'get_event_info/' + branch_id + "/" + event_type_id,  { headers: headers });
     return response;
   }
 
@@ -241,6 +241,33 @@ export class AdminService {
     const response = this.http.post(this.base_url + 'add_event', body, options);
     return response;
   }
+
+  editEvent(event_id : number, event_title : string, event_description : string, event_date : string, event_type_id : number, program_id : number, event_main_picture : string, event_location : string, budget_sheet : string, proposal : string, responsibles : any, meeting_minute? : string){
+    const headers = this.getAuthHeaders().set('Content-Type', 'application/json');
+    const options = { headers: headers };
+
+    const body = {
+      'event_id': event_id,
+      'event_title': event_title,
+      'event_description': event_description,
+      'event_date': event_date,
+      'event_type_id': event_type_id,
+      'program_id': program_id,
+      'event_main_picture': event_main_picture,
+      'event_location': event_location,
+      'budget_sheet': budget_sheet,
+      'proposal': proposal,
+      'meeting_minute': meeting_minute,// can be null
+      'responsibles': responsibles,
+    
+    };
+
+    const response = this.http.post(this.base_url + 'edit_event', body, options);
+    return response;
+
+  }
+
+
 
   getTrainingInfo(training_id: string) {
     const headers = this.getAuthHeaders();
@@ -275,6 +302,9 @@ export class AdminService {
     const response = this.http.post(this.base_url + 'logout', {}, { headers: headers });
   return response;
   }
+
+  
+  
 
 
 }
