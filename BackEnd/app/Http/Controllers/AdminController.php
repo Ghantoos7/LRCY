@@ -748,7 +748,8 @@ class AdminController extends Controller {
             $responsibles = $request->input('responsibles', []);
     
             // Delete existing responsible people from is_responsible table
-            is_responsible::where('event_id', $event->event_id)->delete();
+            is_responsible::where('event_id', $event->id)->delete();
+            
     
             // Add new responsible people to is_responsible table
             foreach ($responsibles as $responsible) {

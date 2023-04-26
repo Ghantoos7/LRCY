@@ -31,7 +31,7 @@ export class EnvGalleryPage implements OnInit {
   ngOnInit() {
     this.event_service.getEvents(this.branch_id).subscribe(response => {
       this.events = response;
-      this.env_events = Array.from(this.events['events']['3']);
+      this.env_events = Array.from(this.events['events']['Environment']);
      
     });
 
