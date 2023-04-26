@@ -5,8 +5,7 @@
   import { Router } from '@angular/router';
   import { ActivatedRoute } from '@angular/router';
   import { AdminService } from 'src/app/services/admin.service';
-
-
+  import { MenuController } from '@ionic/angular';
   @Component({
     selector: 'app-edit-goal',
     templateUrl: './edit-goal.page.html',
@@ -31,7 +30,7 @@
 
 
 
-    constructor(private router:Router,private route: ActivatedRoute, private adminService: AdminService, private alertController: AlertController) { }
+    constructor(private ctrl:MenuController, private router:Router,private route: ActivatedRoute, private adminService: AdminService, private alertController: AlertController) { }
 
     ngOnInit() {
       const goal = history.state.goal;
@@ -147,4 +146,12 @@
       this.router.navigate(['/panel']);
     }
 
+
+    ionViewWillLeave() {
+      this.ctrl.enable(false, 'editGoal');
+    }
+  
+    ionViewDidEnter() {
+      this.ctrl.enable(true, 'editGoal');
+    }
   }

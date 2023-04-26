@@ -598,8 +598,7 @@ class AdminController extends Controller {
         if ($validator->fails()) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Validation failed',
-                'errors' => $validator->errors()
+                'message' => $validator->errors()->first()
             ]);
         }
         
@@ -625,7 +624,7 @@ class AdminController extends Controller {
                 return response()->json([
                     'status' => 'error',
                     'message' => 'Error creating event',
-                    'message' => $e->getMessage()
+                    'error' => $e->getMessage()
                 ]);
         }
 
@@ -638,7 +637,8 @@ class AdminController extends Controller {
                 is_responsible::create([
                     'user_id' => $responsible['user_id'],
                     'role_name' => $responsible['role_name'],
-                    'event_id' => $event->id
+                    'event_id' => $event->id,
+                    'organization_id' => $user->organization_id,
                 ]);
             }
 
@@ -658,7 +658,9 @@ class AdminController extends Controller {
             
         }
         // Return a response indicating success
-        return response()->json(['message' => 'Event created successfully']);
+        return response()->json(['status' => 'success' ,
+        'message' => 'Event created successfully'
+        ]);
 
     }
 
@@ -670,16 +672,16 @@ class AdminController extends Controller {
          $validator = Validator::make($request->all(), [
             'event_id' => 'required|integer',
             'program_id' => 'required|integer',
-            'event_main_picture' => 'required|string',
+            'event_main_picture' => 'required',
             'event_description' => 'required|string',
             'event_location' => 'required|string',
             'event_date' => 'required|date',
             'event_title' => 'required|string',
             'event_type_id' => 'required|integer',
-            'budget_sheet' => 'required|string',
-            'proposal' => 'required|string',
-            'meeting_minute' => 'nullable|string',
-            'responsibles' => 'required|array',
+            'budget_sheet' => 'required',
+            'proposal' => 'required',
+            'meeting_minute' => 'nullable',
+            'responsibles' => 'required',
             'responsibles.*.user_id' => 'required|integer',
             'responsibles.*.role_name' => 'required|string',
         ]);
@@ -691,6 +693,7 @@ class AdminController extends Controller {
                 'message' => $validator->errors()->first(),
             ]);
         }
+
 
         
             // Find the event by event_id
@@ -731,6 +734,44 @@ class AdminController extends Controller {
             $event->fill($request->only($fillableFields));
             $event->save();
 
+            if($request->hasFile('event_main_picture')){
+                $request->validate([
+                    'image' => 'mimes:jpeg,bmp,png,jpg'
+                ]);
+    
+                $request->event_main_picture->store('public/images');
+                $event->event_main_picture = $request->event_main_picture->hashName();
+            }
+
+            if($request->hasFile('budget_sheet')){
+                $request->validate([
+                    'image' => 'mimes:jpeg,bmp,png,jpg'
+                ]);
+    
+                $request->budget_sheet->store('public/images');
+                $event->budget_sheet = $request->budget_sheet->hashName();
+            }
+
+            if($request->hasFile('proposal')){
+                $request->validate([
+                    'image' => 'mimes:jpeg,bmp,png,jpg'
+                ]);
+    
+                $request->proposal->store('public/images');
+                $event->proposal = $request->proposal->hashName();
+            }
+
+            if($request->hasFile('meeting_minute')){
+                $request->validate([
+                    'image' => 'mimes:jpeg,bmp,png,jpg'
+                ]);
+    
+                $request->meeting_minute->store('public/images');
+                $event->meeting_minute = $request->meeting_minute->hashName();
+            }
+
+            $event->save();
+
             // in the goals table, increment all rows that have the same program id and event type id as the event that was just created
 
             $goals = Goal::where('program_id', $event->program_id)->where('event_type_id', $event->event_type_id)->get();
@@ -748,7 +789,8 @@ class AdminController extends Controller {
             $responsibles = $request->input('responsibles', []);
     
             // Delete existing responsible people from is_responsible table
-            is_responsible::where('event_id', $event->event_id)->delete();
+            is_responsible::where('event_id', $event->id)->delete();
+            
     
             // Add new responsible people to is_responsible table
             foreach ($responsibles as $responsible) {

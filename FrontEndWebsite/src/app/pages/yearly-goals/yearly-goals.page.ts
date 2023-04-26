@@ -172,4 +172,11 @@ export class YearlyGoalsPage implements OnInit {
     this.router.navigate(['/panel']);
   }
 
+  ionViewWillLeave() {
+    this.menuController.enable(false, 'menuGoals');
+  }
+
+  ionViewDidEnter() {
+    this.menuController.enable(true, 'menuGoals');
+  }
 }

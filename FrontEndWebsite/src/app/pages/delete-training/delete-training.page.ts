@@ -119,4 +119,12 @@ export class DeleteTrainingPage implements OnInit {
   goToProfile(){
     this.router.navigate(['/member-profile']);
   }
+
+  ionViewWillLeave() {
+    this.menuCtrl.enable(false, 'deleteTraining');
+  }
+
+  ionViewDidEnter() {
+    this.menuCtrl.enable(true, 'deleteTraining');
+  }
 }

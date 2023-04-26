@@ -30,7 +30,7 @@ export class HvpGalleryPage implements OnInit {
   ngOnInit() {
     this.event_service.getEvents(this.branch_id).subscribe(response => {
       this.events = response;
-      this.hvp_events = Array.from(this.events['events']['Human Values and Principles']);
+      this.hvp_events = Array.from(this.events['events']['Human Values and Principles']);   
     });
 
   }

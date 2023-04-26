@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { AlertController, IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AdminService } from 'src/app/services/admin.service';
-
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-edit-announcement',
@@ -20,7 +20,7 @@ export class EditAnnouncementPage implements OnInit {
   announcement_content: string="";
   importance_level: string="";
   admin_id = localStorage.getItem('adminId') as string;
-  constructor(private router:Router, private adminService:AdminService, private alertController:AlertController) { }
+  constructor(private ctrl:MenuController, private router:Router, private adminService:AdminService, private alertController:AlertController) { }
 
   ngOnInit() {
     const announcement = history.state.announcement;
@@ -80,6 +80,14 @@ export class EditAnnouncementPage implements OnInit {
 
   goToPanel(){
     this.router.navigate(['/panel']);
+  }
+
+  ionViewWillLeave() {
+    this.ctrl.enable(false, 'editAnnouncements');
+  }
+
+  ionViewDidEnter() {
+    this.ctrl.enable(true, 'editAnnouncements');
   }
 
 }
