@@ -68,6 +68,14 @@ export class SendAnnouncementPage implements OnInit {
     this.menuController.close();
   }
 
+  ionViewWillLeave() {
+    this.menuController.enable(false, 'menuSendAnnouncements');
+  }
+
+  ionViewDidEnter() {
+    this.menuController.enable(true, 'menuSendAnnouncements');
+  }
+
   goToHome(){
     this.adminService.logout().subscribe((response: any) => {
       localStorage.clear();
@@ -78,5 +86,7 @@ export class SendAnnouncementPage implements OnInit {
   goToPanel(){
     this.router.navigate(['/panel']);
   }
+
+  
 
 }

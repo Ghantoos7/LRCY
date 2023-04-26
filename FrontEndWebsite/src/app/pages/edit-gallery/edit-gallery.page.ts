@@ -294,5 +294,12 @@ mapEventType(eventType: string): number {
   closeMenu() {
     this.menuController.close();
   }
+  ionViewWillLeave() {
+    this.menuController.enable(false, 'editGallery');
+  }
 
+  ionViewDidEnter() {
+    this.menuController.enable(true, 'editGallery');
+  }
+  
 }

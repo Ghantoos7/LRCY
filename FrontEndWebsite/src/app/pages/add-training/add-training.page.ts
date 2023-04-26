@@ -122,4 +122,11 @@ export class AddTrainingPage implements OnInit {
   goToProfile(){
     this.router.navigate(['/member-profile']);
   }
+  ionViewWillLeave() {
+    this.menuCtrl.enable(false, 'menuAddTraining');
+  }
+
+  ionViewDidEnter() {
+    this.menuCtrl.enable(true, 'menuAddTraining');
+  }
 }

@@ -107,4 +107,12 @@ mapEventType(eventType: string): number {
     this.router.navigate(['/panel']);
   }
 
+  ionViewWillLeave() {
+    this.menuController.enable(false, 'menuAddGoals');
+  }
+
+  ionViewDidEnter() {
+    this.menuController.enable(true, 'menuAddGoals');
+  }
+
 }
