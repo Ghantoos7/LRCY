@@ -665,7 +665,34 @@ class AdminController extends Controller {
     
     function editEvent(Request $request)  {
 
-        try {
+
+         // validate the request
+         $validator = Validator::make($request->all(), [
+            'event_id' => 'required|integer',
+            'program_id' => 'required|integer',
+            'event_main_picture' => 'required|string',
+            'event_description' => 'required|string',
+            'event_location' => 'required|string',
+            'event_date' => 'required|date',
+            'event_title' => 'required|string',
+            'event_type_id' => 'required|integer',
+            'budget_sheet' => 'required|string',
+            'proposal' => 'required|string',
+            'meeting_minute' => 'nullable|string',
+            'responsibles' => 'required|array',
+            'responsibles.*.user_id' => 'required|integer',
+            'responsibles.*.role_name' => 'required|string',
+        ]);
+        
+        // checks if validation worked
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $validator->errors()->first(),
+            ]);
+        }
+
+        
             // Find the event by event_id
             $event = Event::where('id', $request->input('event_id'))->first();
     
@@ -715,7 +742,7 @@ class AdminController extends Controller {
                     $this->goalIncrement($goal);
                 }
 
-                }   
+                }
   
             // Update responsible people for the event
             $responsibles = $request->input('responsibles', []);
@@ -726,11 +753,13 @@ class AdminController extends Controller {
             // Add new responsible people to is_responsible table
             foreach ($responsibles as $responsible) {
                  // Get the user based on the provided organization id
-                $user = volunteer_user::where('organization_id', $responsible['organization_id'])->first();
+                $user = volunteer_user::where('id', $responsible['user_id'])->first();
                 is_responsible::create([
                     'event_id' => $event->id,
                     'user_id' => $responsible['user_id'],
-                    'role_name' => $responsible['role_name']
+                    'role_name' => $responsible['role_name'],
+                    'organization_id' => $user->organization_id,
+
                 ]);
             }
  
@@ -739,13 +768,6 @@ class AdminController extends Controller {
                 'message' => 'Event updated successfully'
             ]);
             
-        } catch (\Exception $e) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'An error occurred while updating the event',
-                'error' => $e->getMessage()
-            ]);
-        }
 
     }
 
