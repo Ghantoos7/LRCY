@@ -50,7 +50,7 @@ export class AddGalleryPage implements OnInit {
     formData.append('event_description', this.event_description);
     formData.append('event_date', this.event_date);
     formData.append('event_type_id',  this.mapEventType(this.event_type_id).toString());
-    formData.append('program_id',  this.mapEventType(this.program_id).toString());
+    formData.append('program_id',  this.mapProgramName(this.program_id).toString());
     formData.append('event_main_picture',  this.event_main_picture);
     formData.append('event_location',  this.event_location);
     formData.append('event_main_picture',  this.event_main_picture);
