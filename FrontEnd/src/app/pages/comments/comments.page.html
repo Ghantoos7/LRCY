@@ -5,8 +5,10 @@
   </div>
 
   <ion-icon class="back" name="arrow-back-outline" (click)="goBack()"></ion-icon>
+  <div class="post-and-content-wrapper">
   <img *ngIf="post_media" class="post-image" src="http://127.0.0.1:8000/storage/images/{{post_media}}" onerror="this.src='assets/imgs/ext.jpg'">
 
+  <div class="content-wrapper">
   <ion-card class="caption-container">
     <ion-card-content>
       <ion-text class="caption">{{post_caption}}</ion-text>
@@ -16,12 +18,12 @@
       <ion-icon (click)="sendComment()" class="send-icon" name="send"></ion-icon>
     </ion-card-content>
   </ion-card>
+  </div>
+  </div>
 
   <ion-text class="comment-count">{{comment_count}}</ion-text>
   <ion-text class="comment-word">Comments</ion-text>
   <ion-icon (click)="openAlert()" id="sort" class="sort" name="options-outline"></ion-icon>
-
-  <div class="comment-container"><ion-card class="empty-card"></ion-card></div>
 
   <div class="comment-container" >
     
