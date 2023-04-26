@@ -220,7 +220,7 @@ export class AdminService {
     return response;
   }
 
-  addEvent(branch_id : string, event_title : string, event_description : string, event_date : string, event_type_id : string, program_id : string, event_main_picture : string, event_location : string, budget_sheet : string, proposal : string, responsibles : [], meeting_minute? : string){
+  addEvent(branch_id : number, event_title : string, event_description : string, event_date : string, event_type_id : number, program_id : number, event_main_picture : string, event_location : string, budget_sheet : string, proposal : string, responsibles : any, meeting_minute? : string){
     const headers = this.getAuthHeaders().set('Content-Type', 'application/json');
     const options = { headers: headers };
 
@@ -250,6 +250,7 @@ export class AdminService {
     const response = this.http.post(this.base_url + 'edit_event', formData, options);
     return response;
   }
+  
 
   deleteEvent(event_id : number){
     const headers = this.getAuthHeaders().set('Content-Type', 'application/json');

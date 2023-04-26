@@ -23,17 +23,14 @@ export class HvpGalleryPage implements OnInit {
   showActivities: boolean = true;
   showTrainings: boolean = true;
   showOthersEvents: boolean = true;
-  branch_id = localStorage.getItem('branch_id') as string;
+  branch_id = localStorage.getItem('branchId') as string;
 
   constructor(private shared:SharedService,private event_service:EventService, private router:Router, private menuCtrl: MenuController, private userservice: UserService) { }
   
   ngOnInit() {
     this.event_service.getEvents(this.branch_id).subscribe(response => {
       this.events = response;
-      console.log(this.events)
-      this.hvp_events = Array.from(this.events['events']['Human Values and Principles']);
-      
-     
+      this.hvp_events = Array.from(this.events['events']['Human Values and Principles']);   
     });
 
   }

@@ -51,12 +51,12 @@ class DatabaseSeeder extends Seeder
         // reply::factory(20)->create();
         // take::factory(20)->create();
         // training::factory(20)->create();
-        goal::factory(1)->create();
+        // goal::factory(1)->create();
         // announcement::factory(20)->create();
         // comment::factory(20)->create();
         // event_image::factory(20)->create();
-        // event::factory(20)->create();
-        // event_image::factory(5)->create();
+         event::factory(5)->create();
+         event_image::factory(5)->create();
         // announcement::factory(20)->create();
 
         //is_responsible::factory(3)->create();

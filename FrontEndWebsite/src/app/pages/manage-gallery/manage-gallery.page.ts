@@ -40,7 +40,7 @@ export class ManageGalleryPage implements OnInit {
       this.events=parsedResponse['events'];
       this.yah_events=this.events['Youth and Health'];
       this.environment_events=this.events['Environment'];
-      this.hvp_events=this.events['Human Values and Principles'];
+      this.hvp_events=this.events['HVP'];
       this.other_events=this.events['Others'];
     });
   }

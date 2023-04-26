@@ -598,8 +598,7 @@ class AdminController extends Controller {
         if ($validator->fails()) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Validation failed',
-                'errors' => $validator->errors()
+                'message' => $validator->errors()->first()
             ]);
         }
         
@@ -625,7 +624,7 @@ class AdminController extends Controller {
                 return response()->json([
                     'status' => 'error',
                     'message' => 'Error creating event',
-                    'message' => $e->getMessage()
+                    'error' => $e->getMessage()
                 ]);
         }
 
@@ -638,7 +637,8 @@ class AdminController extends Controller {
                 is_responsible::create([
                     'user_id' => $responsible['user_id'],
                     'role_name' => $responsible['role_name'],
-                    'event_id' => $event->id
+                    'event_id' => $event->id,
+                    'organization_id' => $user->organization_id,
                 ]);
             }
 
@@ -658,7 +658,9 @@ class AdminController extends Controller {
             
         }
         // Return a response indicating success
-        return response()->json(['message' => 'Event created successfully']);
+        return response()->json(['status' => 'success' ,
+        'message' => 'Event created successfully'
+        ]);
 
     }
 

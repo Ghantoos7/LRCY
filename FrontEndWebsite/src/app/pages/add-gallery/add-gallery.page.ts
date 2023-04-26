@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
@@ -16,66 +17,157 @@ import { AdminService } from 'src/app/services/admin.service';
 export class AddGalleryPage implements OnInit {
 
   branch_id = localStorage.getItem('branch_id') as string;
-  event_title: string = '';
-  event_description: string = '';
-  event_date: string = '';
-  event_type_id: string = '';
-  program: string = '';
-  event_main_picture: string = '';
-  event_location: string = '';
-  budget_sheet: string = '';
-  proposal: string = '';
-  responsibles: any=[];
-  meeting_minute: string = '';
-  program_id: number=0;
-id: string ='';
-role: string ='';
-name:string ='';
+  allUsers: any[] = [];
+  selectedUsers: any[] = [];
+  event_title : string = "";
+  event_description : string = "";
+  event_date : string = "";
+  event_type_id: string = "";
+  program_id: string = "";
+  event_main_picture : string = "";
+  event_location : string = "";
+  budget_sheet : string = "";
+  proposal : string = "";
+  meeting_minute : string = "";
+  photoInputs: Array<number> = [0];
+  event_photos: Array<string> = [];
+  responsibles : any [] = [];
+  originalUsers: any[] = [];
 
-  constructor(private router:Router, private menuController: MenuController, private service:AdminService) { }
+  constructor(private router:Router, private menuController: MenuController, private alertController: AlertController, private adminService : AdminService) { }
 
   ngOnInit() {
-
+    this.adminService.getUserInfo(this.branch_id,"").subscribe((response: any) => {
+      this.allUsers = response['users'];
+      this.originalUsers = JSON.parse(JSON.stringify(this.allUsers));
+    });
   }
 
- convertProgram() {
-    switch (this.program) {
-      case 'Youth and health':
-        this.program_id = 1;
-        break;
+  addEvent(){
+    this.adminService.addEvent(
+      this.branch_id as unknown as number ,
+      this.event_title,
+      this.event_description,
+      this.event_date,
+      this.mapEventType(this.event_type_id),
+      this.mapProgramName(this.program_id),
+      this.event_main_picture, // to be added 
+      this.event_location,
+      this.budget_sheet,
+      this.proposal,
+      this.transformData(this.selectedUsers),
+      this.meeting_minute,
+    ).subscribe((response: any) => {
+      const parsedResponse = JSON.parse(JSON.stringify(response));
+      if(parsedResponse.status == 'success') {
+        this.alertController.create({
+          header: 'Success',
+          message: 'Event added successfully!',
+          buttons: ['OK']
+        }).then(alert => alert.present());
+        this.router.navigate(['/manage-gallery']);
+      } else {
+        this.alertController.create({
+          header: 'Error',
+          message: parsedResponse.message,
+          buttons: ['OK']
+        }).then(alert => alert.present());
+      }
+    });
+  }
+
+  
+
+
+  mapProgramName(programName: string): number {
+    switch(programName) {
+      case 'Youth and Health':
+        return 1;
+      case 'Human values and principles':
+        return 2;
       case 'Environment':
-        this.program_id = 2;
-        break;
-      case 'HIP':
-        this.program_id = 3;
-        break;
-      case 'Other':
-        this.program_id = 4;
-        break;
+        return 3;
+      case "Other":
+        return 4;
       default:
-        this.program_id = 0; //change api so that if program id is 0 it will say program id should be added
-        break;
+        return 5;
     }
-    //make the program_id based on programs table
   }
   
-  addMember(){
-    console.log(this.id);
-    this.service.getUserInfo(this.branch_id, this.id).subscribe((data: any) => {
-      
-      console.log(data);
-    });
-    //const newUser = { id, role };
-    
-  //this.responsibles.push(newUser); 
+  mapEventType(eventType: string): number {
+    switch(eventType) {
+      case 'Activity':
+        return 1;
+      case 'Training':
+        return 2;
+      case 'Other':
+        return 3;
+      default:
+        return 4;
+    }
   }
+
+  selectUser(user: any, checked: boolean) {
+    if (checked) {
+      const selectedUser = {
+        id: user.id,
+        role_name: '',
+        first_name: user.first_name,
+        last_name: user.last_name,
+        user_profile_pic : user.user_profile_pic
+      };
+      this.selectedUsers.push(selectedUser);
+      this.allUsers = this.allUsers.filter(u => u.id !== user.id);
+      console.log(this.selectedUsers);
+    } else {
+      this.removeSelectedUser(user);
+    }
+  }
+  
+  updateUserRole(user: any, newRole: string) {
+    const userToUpdate = this.selectedUsers.find(u => u.id === user.id);
+    if (userToUpdate) {
+      userToUpdate.role_name = newRole;
+    }
+    console.log(this.selectedUsers);
+  }
+
+  removeSelectedUser(selectedUser: any) {
+    this.selectedUsers = this.selectedUsers.filter(u => u.id !== selectedUser.id);
+    const originalUser = this.originalUsers.find(u => u.id === selectedUser.id);
+    if (originalUser) {
+      this.allUsers.push(originalUser);
+    }
+    console.log(this.selectedUsers);
+  }
+  
+  addPhotoInput() {
+    this.photoInputs.push(this.photoInputs.length);
+  }
+
+  transformData(inputList: { id: string, role_name: string, first_name: string, last_name: string, user_profile_pic: string }[]): { user_id: string, role_name: string }[] {
+    const outputList = inputList.map(item => ({
+      user_id: item.id,
+      role_name: item.role_name
+    }));
+    return outputList;
+  }
+  
+  removePhotoInput(photoInput: number) {
+    const index = this.photoInputs.findIndex(input => input === photoInput);
+    if (index > -1) {
+      this.photoInputs.splice(index, 1);
+      this.event_photos.splice(index, 1);
+    }
+  }
+  
 
   goToPanel(){
     this.router.navigate(['/panel']);
   }
 
   goToHome(){
-    this.service.logout().subscribe((response: any) => {
+    this.adminService.logout().subscribe((response: any) => {
       localStorage.clear();
       this.router.navigate(['/home']);
    });

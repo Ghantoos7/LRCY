@@ -8,7 +8,7 @@
     </ion-header>
     <ion-content class="ion-padding"> 
         <ion-button (click)="goToGallery()"class="menu-button">View Gallery</ion-button>
-        <ion-button (click)="closeMenu()" class="menu-button">Add an Event</ion-button>
+        <ion-button (click)="goToAddGallery()" class="menu-button">Add an Event</ion-button>
     </ion-content>
   </ion-menu>
 
@@ -115,17 +115,10 @@
                       <ion-textarea [(ngModel)]="event_description" rows="4"></ion-textarea>
                     </ion-item>
                   </ion-col>
-                </ion-row>
-
-                  
-
-                
-                
+                </ion-row> 
               </ion-grid>
             </div>
-           
             <img class="img" alt="Silhouette of mountains" src="http://127.0.0.1:8000/storage/images/{{event_main_picture}}" onerror="this.src='assets/imgs/ext.jpg'" />
-           
           </div>
         </ion-col>
       </ion-row>
