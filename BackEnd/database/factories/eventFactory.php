@@ -26,7 +26,8 @@ class eventFactory extends Factory
             'program_id' => random_int(1, 4),
             'budget_sheet' => fake()->imageUrl(),
             'proposal' => fake()->imageUrl(),
-            'meeting_minute' => fake()->imageUrl()
+            'meeting_minute' => fake()->imageUrl(),
+            'branch_id' => '502'
         ];
     }
 }
