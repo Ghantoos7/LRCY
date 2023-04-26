@@ -22,7 +22,7 @@ export class AnnouncementsPage implements OnInit {
   username = localStorage.getItem('username') as string;
   user_profile_pic = localStorage.getItem('user_profile_pic') as string;
   branch_id = localStorage.getItem('branch_id') as string;
-  
+  announcer_profile_pic: string ="";
   
   constructor(private router:Router, private menuCtrl: MenuController, private service:EventService, private userservice:UserService) { 
     this.showDescriptions = new Array(this.announcements.length).fill(false);

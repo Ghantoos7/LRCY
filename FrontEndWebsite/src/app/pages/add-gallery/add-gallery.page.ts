@@ -28,6 +28,9 @@ export class AddGalleryPage implements OnInit {
   responsibles: any=[];
   meeting_minute: string = '';
   program_id: number=0;
+id: string ='';
+role: string ='';
+name:string ='';
 
   constructor(private router:Router, private menuController: MenuController, private service:AdminService) { }
 
@@ -56,6 +59,16 @@ export class AddGalleryPage implements OnInit {
     //make the program_id based on programs table
   }
   
+  addMember(){
+    console.log(this.id);
+    this.service.getUserInfo(this.branch_id, this.id).subscribe((data: any) => {
+      
+      console.log(data);
+    });
+    //const newUser = { id, role };
+    
+  //this.responsibles.push(newUser); 
+  }
 
   goToPanel(){
     this.router.navigate(['/panel']);

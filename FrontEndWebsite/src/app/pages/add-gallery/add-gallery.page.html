@@ -68,7 +68,7 @@
                     
                     <ion-item>
                       <ion-label>Event Type</ion-label>
-                      <ion-input class="first-card-input" [(ngModel)]="event_type_id"></ion-input> //take event type as dropdown
+                      <ion-input class="first-card-input" [(ngModel)]="event_type_id"></ion-input>
                     </ion-item>
                  
                   </ion-col>
@@ -152,13 +152,13 @@
                 <ion-grid>
                   <ion-row>
                     <ion-col size="8">
-                      <ion-input class="add-member" type="text" placeholder="ID..."></ion-input>
-                      <ion-input class="add-member" type="text" placeholder="Role..."></ion-input>
+                      <ion-input [(ngModel)]="id" class="add-member" type="text" placeholder="ID..."></ion-input>
+                      <ion-input  [(ngModel)]="role" class="add-member" type="text" placeholder="Role..."></ion-input>
                     </ion-col>
                     <ion-col size="2">
                       <ion-fab  class="add" horizontal="center" vertical="center">
                         <ion-fab-button>
-                          <ion-icon name="add"></ion-icon>
+                          <ion-icon name="add" (click)="addMember()"></ion-icon>
                         </ion-fab-button>
                       </ion-fab>
                     </ion-col>
