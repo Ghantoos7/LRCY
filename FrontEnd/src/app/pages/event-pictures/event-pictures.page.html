@@ -8,7 +8,10 @@
     <ion-content class="ion-padding">
   
       <ion-card *ngFor="let pic of pictures.pictures">
-        <img src="http://127.0.0.1:8000/storage/images/{{pic.event_image_source}}" onerror="this.src='assets/imgs/ext.jpg'"/>
+        <img class="picture" src="http://127.0.0.1:8000/storage/images/{{pic.event_image_source}}" onerror="this.src='assets/imgs/ext.jpg'"/>
+        <ion-button class="download-button">
+          <ion-icon name="download-outline"></ion-icon>
+        </ion-button>
       </ion-card>
       
     </ion-content>

@@ -24,16 +24,27 @@ export class HvpGalleryPage implements OnInit {
   showTrainings: boolean = true;
   showOthersEvents: boolean = true;
   branch_id = localStorage.getItem('branch_id') as string;
+  errorMessage: string = '';
 
   constructor(private shared:SharedService,private event_service:EventService, private router:Router, private menuCtrl: MenuController, private userservice: UserService) { }
   
   ngOnInit() {
-    this.event_service.getEvents(this.branch_id).subscribe(response => {
-      this.events = response;
-      this.hvp_events = Array.from(this.events['events']['Human Values and Principles']);   
+    this.event_service.getEvents(this.branch_id).subscribe({
+      next: response => {
+        const parsedResponse = JSON.parse(JSON.stringify(response));
+        this.events = parsedResponse;
+        if (this.events && this.events['events'] && this.events['events']['Human Values and Principles']) {
+          this.hvp_events = Array.from(this.events['events']['Human Values and Principles']);
+        } else {
+          this.errorMessage = 'No Human Values and Principles events found';
+        }
+      },
+      error: error => {
+        console.error('An error occurred while fetching events:', error);
+        this.errorMessage = 'No events found';
+      }
     });
-
-  }
+  }  
 
   seeDetails(event_id: string) {
     this.shared.setVariableValue(event_id);

@@ -26,16 +26,27 @@ export class OtherGalleryPage implements OnInit {
   showTrainings: boolean = true;
   showOthersEvents: boolean = true;
   branch_id = localStorage.getItem('branch_id') as string;
+  errorMessage = '';
 
   constructor(private sharedService: SharedService, private event_service:EventService, private router:Router, private menuCtrl: MenuController, private userservice: UserService) { }
 
   ngOnInit() {
-    this.event_service.getEvents(this.branch_id).subscribe(response => {
-      this.events = response;
-      this.other_events = Array.from(this.events['events']['Others']);
+    this.event_service.getEvents(this.branch_id).subscribe({
+      next: response => {
+        const parsedResponse = JSON.parse(JSON.stringify(response));
+        this.events = parsedResponse;
+        if (this.events && this.events['events'] && this.events['events']['Others']) {
+          this.other_events = Array.from(this.events['events']['Others']);
+        } else {
+          this.errorMessage = 'No other events found';
+        }
+      },
+      error: error => {
+        console.error('An error occurred while fetching events:', error);
+        this.errorMessage = 'No events found';
+      }
     });
-
-  }
+  }  
 
   seeDetails(event_id: string) {
     this.sharedService.setVariableValue(event_id);

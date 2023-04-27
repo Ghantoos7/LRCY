@@ -25,16 +25,27 @@ export class EnvGalleryPage implements OnInit {
   showTrainings: boolean = true;
   showOthersEvents: boolean = true;
   branch_id = localStorage.getItem('branch_id') as string;
+  errorMessage: string = '';
 
   constructor(private sharedService:SharedService, private event_service:EventService, private router:Router, private menuCtrl: MenuController, private userservice: UserService) { }
  
   ngOnInit() {
-    this.event_service.getEvents(this.branch_id).subscribe(response => {
-      this.events = response;
-      this.env_events = Array.from(this.events['events']['Environment']);
+    this.event_service.getEvents(this.branch_id).subscribe({
+      next: response => {
+        const parsedResponse = JSON.parse(JSON.stringify(response));
+        this.events = parsedResponse;
+        if (this.events && this.events['events'] && this.events['events']['Environment']) {
+          this.env_events = Array.from(this.events['events']['Environment']);
+        } else {
+          this.errorMessage = 'No Environment events found';
+        }
+      },
+      error: error => {
+        console.error('An error occurred while fetching events:', error);
+        this.errorMessage = 'No events found';
+      }
     });
-
-  }
+  }  
 
   
 
