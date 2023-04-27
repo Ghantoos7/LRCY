@@ -1478,4 +1478,51 @@ class AdminController extends Controller {
     }
 
 
+    function addImageToEvent(Request $request) {
+
+        // Validate the request
+        $validator = Validator::make($request->all(), [
+            'event_id' => 'required|integer',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ]);
+
+        // Check if the validation fails
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Validation failed',
+                'errors' => $validator->errors()
+            ]);
+        }
+
+        // Get the event and check if it exists
+        $event = Event::find($request->input('event_id'));
+        if (!$event) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Event not found'
+            ]);
+        }
+         
+        
+        if ($request->hasFile('image')) {
+            $request->validate([
+                'image' => 'mimes:jpeg,bmp,png,jpg'
+            ]);
+
+            $request->image->store('public/images');
+
+            event_image::create([
+                'event_id' => $event->id,
+                'image' => $request->image->hashName()
+            ]);
+            
+        }
+    }
+
+
+   
+
+
+
 }

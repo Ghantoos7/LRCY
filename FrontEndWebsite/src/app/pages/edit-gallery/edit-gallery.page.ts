@@ -81,6 +81,7 @@ new_event_main_picture:string='';
     formData.append('responsibles', data);
     const event_photos = JSON.stringify(this.event_photos);
     formData.append('event_images', event_photos);
+    
     this.adminService.editEvent(formData).subscribe((response: any) => {
       const parsedResponse = JSON.parse(JSON.stringify(response));
       console.log(parsedResponse);

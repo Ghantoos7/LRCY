@@ -23,8 +23,8 @@ export class PostPage implements OnInit {
   user_profile_pic :string = '';
   user_id = localStorage.getItem('userId') as string;
   branch_id = localStorage.getItem('branch_id') as string;
-post_caption:string='';
-post_src_img: any;
+  post_caption:string='';
+  post_src_img: any;
 
   constructor(private router:Router, private userService:UserService, private postService:PostService) { }
 
