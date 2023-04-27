@@ -44,7 +44,7 @@ export class EventInformationPage implements OnInit {
   
 
   goGallery(){
-    this.navCtrl.back();
+    this.router.navigate(['/gallery']);
   }
 
 }
