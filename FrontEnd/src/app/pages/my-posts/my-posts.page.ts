@@ -35,7 +35,7 @@ export class MyPostsPage implements OnInit {
   isLikedUser: {[key: number]: boolean} = {};
   post_id: number=0;
   isLiked: { [key: number]: { commentId: number, isLiked: boolean }[] } = {};
-  comment_content: string='';
+  comment_contents: any = [];
 
   constructor(private post_service:PostService, private router: Router, private alertController: AlertController, private actionSheetController: ActionSheetController, private service: UserService, private sharedService:SharedService) { }
 
@@ -173,8 +173,8 @@ export class MyPostsPage implements OnInit {
   }
 
 
-  async sendComment(p_id: number){
-    this.post_service.commentPost(p_id, this.user_id, this.comment_content).subscribe(response=>{
+  async sendComment(p_id: number, i: number){
+    this.post_service.commentPost(p_id, this.user_id, this.comment_contents[i]).subscribe(response=>{
       const str = JSON.stringify(response);
       const result = JSON.parse(str);
       const status = result['status'];
