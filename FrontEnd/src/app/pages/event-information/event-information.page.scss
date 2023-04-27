@@ -34,6 +34,12 @@ ion-toolbar {
     word-break: break-word; 
   }
 
+  .picture {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
 
 
   ion-card-title{

@@ -9,7 +9,7 @@
         <ion-card-header>
           <ion-card-title>  <ion-icon (click) = "goGallery()" size="large" name="arrow-back" ></ion-icon>{{event.event_title}}</ion-card-title>
         </ion-card-header>
-        <img alt="Silhouette of mountains" src="http://127.0.0.1:8000/storage/images/{{event.event_main_picture}}" onerror="this.src='assets/imgs/ext.jpg'"/>
+        <img class="picture" alt="Silhouette of mountains" src="http://127.0.0.1:8000/storage/images/{{event.event_main_picture}}" onerror="this.src='assets/imgs/ext.jpg'"/>
       </ion-card>
 
       <ion-card class="layer-card" *ngFor="let event of events.event">

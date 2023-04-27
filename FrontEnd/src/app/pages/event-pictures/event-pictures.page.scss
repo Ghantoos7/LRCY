@@ -6,3 +6,21 @@ ion-toolbar {
     --color: #f0f0f0; 
   
   }
+
+  .picture {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  ion-card {
+    position: relative;
+  }
+  
+  .download-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    --background: transparent;
+    --box-shadow: none;
+  }
