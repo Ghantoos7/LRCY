@@ -58,7 +58,7 @@ class PostController extends Controller {
         'post_type_id' => $post_type_id,
         'comment_count' => 0,
         'like_count' => 0,
-        'post_date' => now(),
+        'post_date' => date('Y-m-d H:i:s'),
         'post_caption' => $request->input('post_caption') ?? null
     ]);
 
@@ -276,7 +276,7 @@ class PostController extends Controller {
         }
     
         // Create a new like instance with default value for like_date
-        $like = new Like(['post_id' => $post->id, 'user_id' => $user->id, 'like_date' => now()]);
+        $like = new Like(['post_id' => $post->id, 'user_id' => $user->id, 'like_date' => date('Y-m-d H:i:s')]);
     
         // Save the like to the database
         $like_saved = $like->save();
@@ -338,7 +338,7 @@ class PostController extends Controller {
             'post_id' => $post->id,
             'user_id' => $user->id,
             'comment_content' => $request->input('comment_content'),
-            'comment_date' => now(),
+            'comment_date' => date('Y-m-d H:i:s'),
             'comment_like_count' => 0,
             'comment_reply_count' => 0
         ]);
@@ -373,7 +373,7 @@ class PostController extends Controller {
             'comment_id' => $comment->id,
             'user_id' => $user->id,
             'reply_content' => $request->input('reply_content'),
-            'reply_date' => now()
+            'reply_date' => date('Y-m-d H:i:s'),
         ]);
         
         // Save the reply to the database
@@ -407,7 +407,7 @@ class PostController extends Controller {
         }
     
         // Create a new comment like instance with default value for like_date
-        $like = new Comment_like(['comment_id' => $comment->id, 'user_id' => $user->id, 'like_date' => now()]);
+        $like = new Comment_like(['comment_id' => $comment->id, 'user_id' => $user->id, 'like_date' => date('Y-m-d H:i:s')]);
     
         // Save the like to the database
         $like_saved = $like->save();
