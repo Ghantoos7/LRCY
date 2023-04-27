@@ -30,8 +30,8 @@
         <ion-text class="like-count" color="danger">{{post.like_count}}</ion-text>
         <ion-img (click) ="goToComments(post.id)" class="comments" src="assets/icon/comments.png"></ion-img>
         <ion-text class="comment-count">{{post.comment_count}}</ion-text>
-        <ion-input class="input"  [(ngModel)]="comment_content" placeholder="Comment on this post..."></ion-input>
-        <ion-icon (click)="sendComment(post.id)" class="send-icon" name="send"></ion-icon>
+        <ion-input class="input"  [(ngModel)]="comment_contents[i]" placeholder="Comment on this post..."></ion-input>
+        <ion-icon (click)="sendComment(post.id,i)" class="send-icon" name="send"></ion-icon>
 
       </ion-footer>  
     </ion-card>
