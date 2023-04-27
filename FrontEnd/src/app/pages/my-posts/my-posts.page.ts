@@ -74,8 +74,16 @@ export class MyPostsPage implements OnInit {
     const today = new Date();
     const post = new Date(postDate);
     const timeDiff = Math.abs(today.getTime() - post.getTime());
+    const minutesDiff = Math.floor(timeDiff / (1000 * 60));
+    if (minutesDiff < 60) {
+      return `${minutesDiff}m ago`;
+    }
+    const hoursDiff = Math.floor(timeDiff / (1000 * 3600));
+    if (hoursDiff < 24) {
+      return `${hoursDiff}h ago`;
+    }
     const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
-    return daysDiff;
+    return `${daysDiff}d ago`;
   }
 
   async showActionSheet(i: number) {

@@ -30,7 +30,7 @@ export class YouthGalleryPage implements OnInit {
   showActivities: boolean = true;
   showTrainings: boolean = true;
   showOthersEvents: boolean = true;
-  branch_id = localStorage.getItem('branchId') as string;
+  branch_id = localStorage.getItem('branch_id') as string;
 
 
   ngOnInit() {

@@ -37,7 +37,7 @@
         <img (click)="showProfile(i)" class="card-profile-picture" src="http://127.0.0.1:8000/storage/images/{{post['user'].user_profile_pic}}" onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'">
         <ion-text (click)="showProfile(i)" class="username">{{post['user'].username}}</ion-text>
         <ion-text (click)="showProfile(i)" class="name">{{post['user'].name}}</ion-text>
-        <ion-text class="post-date">{{getDaysAgo(post.post_date)}} d</ion-text>
+        <ion-text class="post-date">{{getDaysAgo(post.post_date)}}</ion-text>
         
       </div>
 

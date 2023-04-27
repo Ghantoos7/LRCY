@@ -25,7 +25,7 @@ export class OtherGalleryPage implements OnInit {
   showActivities: boolean = true;
   showTrainings: boolean = true;
   showOthersEvents: boolean = true;
-  branch_id = localStorage.getItem('branchId') as string;
+  branch_id = localStorage.getItem('branch_id') as string;
 
   constructor(private sharedService: SharedService, private event_service:EventService, private router:Router, private menuCtrl: MenuController, private userservice: UserService) { }
 
