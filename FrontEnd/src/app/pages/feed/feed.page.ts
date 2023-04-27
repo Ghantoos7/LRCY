@@ -2,19 +2,20 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { MenuController } from '@ionic/angular';
 import { PostService } from 'src/app/services/post.service';
 import { SharedService } from 'src/app/services/shared.service';
 import { UserService } from 'src/app/services/user.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-feed',
   templateUrl: './feed.page.html',
   styleUrls: ['./feed.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule],
+  imports: [IonicModule, CommonModule, FormsModule,ReactiveFormsModule],
   encapsulation: ViewEncapsulation.None
 })
 
@@ -66,6 +67,14 @@ export class FeedPage implements OnInit {
 
   ngOnInit() {
 
+   this.router.events.subscribe((event: any) => {
+      if (event instanceof NavigationEnd) {
+        this.fetchPosts();
+      }
+    });
+  }
+
+  fetchPosts() {
     this.service.getPosts().subscribe((data: any) => {
       this.posts = data['posts'];
       for (let i = 0; i < this.posts.length; i++) {
@@ -75,21 +84,29 @@ export class FeedPage implements OnInit {
     });
   }
 
-  getDaysAgo(postDate: string) {
+  getDaysAgo(postDate: string): string {
     const today = new Date();
     const post = new Date(postDate);
-    const timeDiff = Math.abs(today.getTime() - post.getTime());
-    const minutesDiff = Math.floor(timeDiff / (1000 * 60));
-    if (minutesDiff < 60) {
-      return `${minutesDiff}m ago`;
+    const yearDiff = today.getFullYear() - post.getFullYear();
+    const monthDiff = today.getMonth() - post.getMonth();
+    const dayDiff = today.getDate() - post.getDate();
+    if (yearDiff > 0) {
+      return `${yearDiff}y ago`;
+    } else if (monthDiff > 0) {
+      return `${monthDiff}mo ago`;
+    } else if (dayDiff > 0) {
+      return `${dayDiff}d ago`;
+    } else {
+      const hourDiff = today.getHours() - post.getHours();
+      const minuteDiff = today.getMinutes() - post.getMinutes();
+      if (hourDiff > 0) {
+        return `${hourDiff}h ago`;
+      } else {
+        return `${minuteDiff}m ago`;
+      }
     }
-    const hoursDiff = Math.floor(timeDiff / (1000 * 3600));
-    if (hoursDiff < 24) {
-      return `${hoursDiff}h ago`;
-    }
-    const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
-    return `${daysDiff}d ago`;
   }
+
 
   goToComments(post_id: string){
     

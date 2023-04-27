@@ -39,7 +39,6 @@ export class EditProfilePage implements OnInit {
       this.user_bio = (this.user['user'].user_bio);
       this.user_position = (this.user['user'].user_position);
     });
-console.log(this.user_profile_pic);
   }
 
   onChange(event: any) {
