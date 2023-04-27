@@ -157,6 +157,11 @@ export class MyPostsPage implements OnInit {
 
   goToComments(post_id: string){
     this.router.navigate(["/comments"], {state: { p_id : post_id }});
+    setTimeout(() => {
+      
+      window.location.reload();
+
+    }, 50);
   }
 
 

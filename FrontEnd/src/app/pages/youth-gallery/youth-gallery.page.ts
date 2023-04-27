@@ -30,16 +30,28 @@ export class YouthGalleryPage implements OnInit {
   showActivities: boolean = true;
   showTrainings: boolean = true;
   showOthersEvents: boolean = true;
-  branch_id = localStorage.getItem('branchId') as string;
+  branch_id = localStorage.getItem('branch_id') as string;
+  errorMessage: string = '';
 
 
   ngOnInit() {
-    this.event_service.getEvents(this.branch_id).subscribe(response => {
-      this.events = response;
-      this.youth_events = Array.from(this.events['events']['Youth and Health']);
+    this.event_service.getEvents(this.branch_id).subscribe({
+      next: response => {
+        const parsedResponse = JSON.parse(JSON.stringify(response));
+        this.events = parsedResponse;
+        if (this.events && this.events['events'] && this.events['events']['Youth and Health']) {
+          this.youth_events = Array.from(this.events['events']['Youth and Health']);
+        } else {
+          this.errorMessage = 'No Youth and Health events found';
+        }
+      },
+      error: error => {
+        console.error('An error occurred while fetching events:', error);
+        this.errorMessage = 'No events found';
+      }
     });
-
-  }
+  }  
+  
   seeDetails(event_id: string) {
   this.sharedService.setVariableValue(event_id);
     this.router.navigate(['/event-details']);
@@ -106,12 +118,12 @@ this.router.navigate(['/profile']);
   logout() {
     this.userservice.logout().subscribe((data: any) => {
       localStorage.removeItem('authToken');
-localStorage.removeItem('userId');
-localStorage.removeItem('username');
-localStorage.removeItem('user_profile_pic');
-localStorage.removeItem('branch_id');
-localStorage.removeItem('rememberMe');
-localStorage.removeItem('full_name');
+      localStorage.removeItem('userId');
+      localStorage.removeItem('username');
+      localStorage.removeItem('user_profile_pic');
+      localStorage.removeItem('branch_id');
+      localStorage.removeItem('rememberMe');
+      localStorage.removeItem('full_name');
       this.router.navigate(['/sign-in']);
     });
   }
