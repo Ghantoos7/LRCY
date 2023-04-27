@@ -1520,6 +1520,58 @@ class AdminController extends Controller {
         }
     }
 
+    function removeImageFromEvent(Request $request){
+
+        // Validate the request
+        $validator = Validator::make($request->all(), [
+            'event_id' => 'required|integer',
+            'image_id' => 'required|integer'
+        ]);
+
+        // Check if the validation fails
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Validation failed',
+                'errors' => $validator->errors()
+            ]);
+        }
+        
+        // Get the event and check if it exists
+        $event = Event::find($request->input('event_id'));
+        if (!$event) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Event not found'
+            ]);
+        }
+
+        // Get the image and check if it exists
+        $image = event_image::find($request->input('image_id'));
+        if (!$image) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Image not found'
+            ]);
+        }
+
+        // Delete the image in a try catch block and return an error message if it fails
+        try {
+            $image->delete();
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Image deleted successfully'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to delete the image'
+            ]);
+        }
+
+    }
+
+
 
    
 
