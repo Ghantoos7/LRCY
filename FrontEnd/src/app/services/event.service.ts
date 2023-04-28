@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 
 @Injectable({
@@ -58,4 +59,10 @@ export class EventService {
     return response;
   }
   
+  downloadDoc(pictureUrl: string): Observable<string> {
+    const headers = this.getAuthHeaders();
+    const response = this.http.get(this.base_url + 'download_picture_url/' + encodeURIComponent(pictureUrl), { headers: headers, responseType: 'json' });
+    return response.pipe(map((res: any) => res.data));
+  }
+
 }

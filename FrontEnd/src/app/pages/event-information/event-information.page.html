@@ -1,5 +1,5 @@
 <ion-content [fullscreen]="true">
-=
+
 
   <div class="ion-page" id="main-content">
    
@@ -34,23 +34,32 @@
           <ion-item>
             
               <img class="custom-img" slot="start" alt="Silhouette of a person's head" src="assets\imgs\word.png" />
-        <div class="label">
+        
           <img alt="Silhouette of mountains" src="http://127.0.0.1:8000/storage/images/{{event.proposal}}" onerror="this.src='assets/imgs/ext.jpg'"/>
-          </div>
+          <ion-button class="download-button" (click)="downloadDoc('http://127.0.0.1:8000/storage/images/{{event.proposal}}')">
+            <ion-icon name="download-outline"></ion-icon>
+          </ion-button>
+       
           </ion-item>
           <ion-item>
        
             <img slot="start" class="custom-img"alt="Silhouette of a person's head" src="assets\imgs\sheet.png" />
-            <div class="label">
+            
               <img alt="Silhouette of mountains" src="http://127.0.0.1:8000/storage/images/{{event.budget_sheet}}" onerror="this.src='assets/imgs/ext.jpg'"/>
-          </div>
+              <ion-button class="download-button" (click)="downloadDoc('http://127.0.0.1:8000/storage/images/{{event.budget_sheet}}')">
+                <ion-icon name="download-outline"></ion-icon>
+              </ion-button>
+            
         </ion-item>
         <ion-item>
    
           <img slot="start" class="custom-img"alt="Silhouette of a person's head" src="assets\imgs\word.png" />
-          <div class="label">
+         
             <img alt="Silhouette of mountains" src="http://127.0.0.1:8000/storage/images/{{event.meeting_minute}}" onerror="this.src='assets/imgs/ext.jpg'"/>
-        </div>
+            <ion-button class="download-button" (click)="downloadDoc('http://127.0.0.1:8000/storage/images/{{event.meeting_minute}}')">
+              <ion-icon name="download-outline"></ion-icon>
+            </ion-button>
+
       </ion-item>
         </ion-list>
     </ion-col>

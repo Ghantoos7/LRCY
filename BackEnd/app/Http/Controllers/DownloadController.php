@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\event_image;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class DownloadController extends Controller
 {
@@ -21,5 +22,20 @@ class DownloadController extends Controller
         }
 
         return response()->json(['message' => 'Image not found.'], 404);
+    }
+
+    public function downloadPictureByUrl($pictureUrl) {
+
+        $filePath = str_replace('http://127.0.0.1:8000/storage/', '', $pictureUrl);
+        $exists = Storage::disk('public')->exists($filePath);
+
+        if ($exists) {
+            $fileContent = Storage::disk('public')->get($filePath);
+            $base64Content = base64_encode($fileContent);
+            return response()->json(['data' => $base64Content]);
+        }
+
+        return response()->json(['message' => 'Image not found.'], 404);
+
     }
 }

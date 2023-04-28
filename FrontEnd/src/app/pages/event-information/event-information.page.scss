@@ -74,3 +74,15 @@ max-width: 90%;
   border-radius: 20%;
   
 }
+
+.download-button {
+  position: absolute;
+  align-items: center;
+  top: 5px;
+  right:20px;
+  --background: white;
+  --box-shadow: none;
+  --border-radius: 30%; // Add this line to make the button a circle
+  --border-width: 0; // Add this line to remove the border
+  --ripple-color: transparent; // Add this line to remove the blue color on click
+}

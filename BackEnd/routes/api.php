@@ -81,7 +81,8 @@ Route::group(["prefix" => "v0.1",], function(){
             Route::get("get_event_pictures/{event_id}", [EventController::class, "getEventPictures"]);
             Route::get("get_training_info/{training_id?}", [EventController::class, "getTrainingInfo"]);
             Route::get("download_picture/{picture_id}", [DownloadController::class, "downloadPicture"]);
-           
+            Route::get("download_picture_url/{pictureUrl}", [DownloadController::class, "downloadPictureUrl"]); 
+
         });
 
     });
