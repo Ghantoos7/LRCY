@@ -187,6 +187,7 @@ localStorage.removeItem('full_name');
   }
   toggleLike(post_id: number) {
     if (this.isLikedUser[post_id]) {
+
     this.unlikePost(post_id);
     } else {
     this.likePost(post_id);
