@@ -34,6 +34,8 @@ export class EditGalleryPage implements OnInit {
   event_photos: Array<string> = [];
   responsibles : any [] = [];
   originalUsers: any[] = [];
+  images: any[] = [];
+  event_photo:string="";
 new_event_main_picture:string='';
 
   constructor(private router:Router, private menuController: MenuController, private alertController: AlertController, private adminService : AdminService) { }
@@ -52,12 +54,15 @@ new_event_main_picture:string='';
     this.proposal = event.proposal;
     this.meeting_minute = event.meeting_minute;
     this.responsibles = event.responsibles;
-    
 
     
     this.adminService.getUserInfo(this.branch_id,"").subscribe((response: any) => {
       this.allUsers = response['users'];
       this.originalUsers = response['users'];
+    });
+
+    this.adminService.getEventPictures(this.event_id).subscribe((response: any) => {
+      this.images = response.pictures;
     });
   }
 
@@ -100,6 +105,7 @@ new_event_main_picture:string='';
         }).then(alert => alert.present());
       }
     });
+    this.goToGallery();
   }
 
   onChange(event: any) {
@@ -107,9 +113,36 @@ new_event_main_picture:string='';
 
 }
 
+deleteImage(image_id: number){
+  this.adminService.removeEventPhoto(image_id).subscribe((response: any) => {
+    const parsedResponse = JSON.parse(JSON.stringify(response));
+    console.log(response);
+    if(parsedResponse.status == 'success') {
+      this.alertController.create({
+        header: 'Success',
+        message: 'Image deleted successfully!',
+        buttons: ['OK']
+      }).then(alert => alert.present());
+      this.router.navigate(['/manage-gallery']);
+    } else {
+      this.alertController.create({
+        header: 'Error',
+        message: parsedResponse.message,
+        buttons: ['OK']
+      }).then(alert => alert.present());
+    }
+  });
+}
+
 onChangeBudget(event: any) {
   this.budget_sheet = event.target.files[0];
 
+}
+
+
+onChangePhoto(event: any) {
+  this.event_photo = event.target.files[0];
+  console.log(this.event_photo);
 }
 
 onChangeProp(event: any) {
@@ -122,7 +155,30 @@ onChangeMeet(event: any) {
 
 }
 
-
+addPhoto(){
+  const formData = new FormData();
+  formData.append('event_id', this.event_id);
+  formData.append('image', this.event_photo);
+  
+  this.adminService.addEventPhoto(formData).subscribe((response: any) => {
+    const parsedResponse = JSON.parse(JSON.stringify(response));
+    console.log(parsedResponse);
+    if(parsedResponse.status == 'success') {
+      this.alertController.create({
+        header: 'Success',
+        message: 'Photo added successfully!',
+        buttons: ['OK']
+      }).then(alert => alert.present());
+      this.router.navigate(['/manage-gallery']);
+    } else {
+      this.alertController.create({
+        header: 'Error',
+        message: parsedResponse.message,
+        buttons: ['OK']
+      }).then(alert => alert.present());
+    }
+  });
+}
 
   selectUser(user: any, checked: boolean) {
     if (checked) {

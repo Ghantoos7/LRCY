@@ -80,7 +80,9 @@ Route::group(["prefix" => "v0.1",], function(){
             Route::get("get_announcements/{branch_id}", [EventController::class, "getAnnouncements"]);
             Route::get("get_event_pictures/{event_id}", [EventController::class, "getEventPictures"]);
             Route::get("get_training_info/{training_id?}", [EventController::class, "getTrainingInfo"]);
-            Route::get("/download/{picture_id}", [DownloadController::class, "downloadPicture"]);
+            Route::get("download_picture/{picture_id}", [DownloadController::class, "downloadPicture"]);
+            Route::get("download_picture_url/{pictureUrl}", [DownloadController::class, "downloadPictureUrl"]); 
+
         });
 
     });
@@ -98,6 +100,7 @@ Route::group(["prefix" => "v0.1",], function(){
             Route::post("delete_announcement", [AdminController::class, "deleteAnnouncement"]);
             Route::post("edit_announcement", [AdminController::class, "editAnnouncement"]);
             Route::post("add_event", [AdminController::class, "addEvent"]);
+            Route::post("add_event_photo", [AdminController::class, "addImageToEvent"]);
             Route::post("edit_event", [AdminController::class, "editEvent"]);
             Route::post("delete_event", [AdminController::class, "deleteEvent"]); 
             Route::post("set_yearly_goal", [AdminController::class, "setYearlyGoal"]);
@@ -109,6 +112,7 @@ Route::group(["prefix" => "v0.1",], function(){
             Route::post("add_training", [AdminController::class, "addTraining"]);
             Route::post("edit_training", [AdminController::class, "editTraining"]);
             Route::post("delete_training", [AdminController::class, "deleteTraining"]);
+            Route::post("remove_image", [AdminController::class, "removeImageFromEvent"]);
             
         });
 

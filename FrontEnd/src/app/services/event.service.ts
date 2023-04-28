@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 
 @Injectable({
@@ -50,5 +52,17 @@ export class EventService {
     const response = this.http.get(this.base_url + 'get_yearly_goals/' + id, { headers: headers });
     return response;
   }
+
+  downloadPicture(imageId: number): Observable<string> {
+    const headers = this.getAuthHeaders();
+    const response = this.http.get(this.base_url + 'download_picture/' +imageId, { headers: headers, responseType: 'text' });
+    return response;
+  }
   
+  downloadDoc(pictureUrl: string): Observable<string> {
+    const headers = this.getAuthHeaders();
+    const response = this.http.get(this.base_url + 'download_picture_url/' + encodeURIComponent(pictureUrl), { headers: headers, responseType: 'json' });
+    return response.pipe(map((res: any) => res.data));
+  }
+
 }

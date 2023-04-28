@@ -36,6 +36,7 @@ export class MyPostsPage implements OnInit {
   post_id: number=0;
   isLiked: { [key: number]: { commentId: number, isLiked: boolean }[] } = {};
   comment_contents: any = [];
+  likeCount: { [key: number]: number } = {};
 
   constructor(private post_service:PostService, private router: Router, private alertController: AlertController, private actionSheetController: ActionSheetController, private service: UserService, private sharedService:SharedService) { }
 
@@ -64,6 +65,7 @@ export class MyPostsPage implements OnInit {
       for (let i = 0; i < this.posts_array.length; i++) {
         const postId = this.posts_array[i].id;
         this.isLikedUser[postId] = localStorage.getItem(`user_${this.user_id}_post_${postId}`) === 'true'; // retrieve the like state from Local Storage
+        this.likeCount[postId] = this.posts_array[i].like_count;
       }
     });
 
@@ -147,7 +149,7 @@ export class MyPostsPage implements OnInit {
     this.post_service.likePost(post_id).subscribe((data: any) => {
       localStorage.setItem(`user_${this.user_id}_post_${post_id}`, 'true'); // store the like state in Local Storage
       this.isLikedUser[post_id] = true;
-      window.location.reload();
+      this.likeCount[post_id]++;
     });
    
   }
@@ -156,7 +158,7 @@ export class MyPostsPage implements OnInit {
     this.post_service.unlikePost(post_id).subscribe((data: any) => {
       localStorage.setItem(`user_${this.user_id}_post_${post_id}`, 'false'); // store the like state in Local Storage
       this.isLikedUser[post_id] = false;
-      window.location.reload();
+      this.likeCount[post_id]--;
     });
    
   }

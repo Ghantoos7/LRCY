@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { AlertController, IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { EventService } from 'src/app/services/event.service';
 import { ActivatedRoute } from '@angular/router';
@@ -25,15 +25,16 @@ export class EventInformationPage implements OnInit {
 
   branch_id = localStorage.getItem('branch_id') as string;
 
-  constructor(private navCtrl:NavController, private shared:SharedService, private route: ActivatedRoute, private service:EventService, private router: Router) { }
+  constructor(private alertController:AlertController, private navCtrl:NavController, private shared:SharedService, private route: ActivatedRoute, private service:EventService, private router: Router) { }
 
   ngOnInit() {
 
   this.my_id = this.shared.getVariableValue();
     this.service.getEvent(this.branch_id,this.my_id).subscribe(response => {
       this.events = response;
-       this.responsibles = this.events['event']['0']['responsibles'];
-   
+      if (this.events['event'] && this.events['event']['0']) {
+        this.responsibles = this.events['event']['0']['responsibles'];
+      }
     });
   }
 
@@ -45,6 +46,44 @@ export class EventInformationPage implements OnInit {
 
   goGallery(){
     this.router.navigate(['/gallery']);
+  }
+
+  downloadDoc(pictureUrl: string) {
+    this.service.downloadDoc(pictureUrl).subscribe({
+      next: (data: string) => {
+        const url = 'data:image/jpg;base64,' + data;
+        const link = document.createElement('a');
+        link.href = url;
+        const fileName = pictureUrl.split('/').pop() || 'image.jpg';
+        link.download = fileName;
+        link.click();
+        this.presentSuccessAlert();
+      },
+      error: () => {
+        this.presentErrorAlert();
+      }
+    });
+  }
+  
+  
+  async presentSuccessAlert() {
+    const alert = await this.alertController.create({
+      header: 'Success',
+      message: 'Image downloaded successfully!',
+      buttons: ['OK']
+    });
+  
+    await alert.present();
+  }
+  
+  async presentErrorAlert() {
+    const alert = await this.alertController.create({
+      header: 'Error',
+      message: 'Error downloading image. Please try again later.',
+      buttons: ['OK']
+    });
+  
+    await alert.present();
   }
 
 }

@@ -1,5 +1,5 @@
 <ion-content [fullscreen]="true">
-=
+
 
   <div class="ion-page" id="main-content">
    
@@ -11,7 +11,7 @@
         </ion-card-header>
         <img class="picture" alt="Silhouette of mountains" src="http://127.0.0.1:8000/storage/images/{{event.event_main_picture}}" onerror="this.src='assets/imgs/ext.jpg'"/>
       </ion-card>
-
+    
       <ion-card class="layer-card" *ngFor="let event of events.event">
         <ion-card-header>
           <ion-row>
@@ -34,35 +34,38 @@
           <ion-item>
             
               <img class="custom-img" slot="start" alt="Silhouette of a person's head" src="assets\imgs\word.png" />
-        <div class="label">
-            <ion-label>
-              {{event.proposal}}
-            </ion-label>
-          </div>
+        
+          <img alt="Silhouette of mountains" src="http://127.0.0.1:8000/storage/images/{{event.proposal}}" onerror="this.src='assets/imgs/ext.jpg'"/>
+          <ion-button class="download-button" (click)="downloadDoc('http://127.0.0.1:8000/storage/images/{{event.proposal}}')">
+            <ion-icon name="download-outline"></ion-icon>
+          </ion-button>
+       
           </ion-item>
-  
+          <ion-item>
+       
+            <img slot="start" class="custom-img"alt="Silhouette of a person's head" src="assets\imgs\sheet.png" />
+            
+              <img alt="Silhouette of mountains" src="http://127.0.0.1:8000/storage/images/{{event.budget_sheet}}" onerror="this.src='assets/imgs/ext.jpg'"/>
+              <ion-button class="download-button" (click)="downloadDoc('http://127.0.0.1:8000/storage/images/{{event.budget_sheet}}')">
+                <ion-icon name="download-outline"></ion-icon>
+              </ion-button>
+            
+        </ion-item>
+        <ion-item>
+   
+          <img slot="start" class="custom-img"alt="Silhouette of a person's head" src="assets\imgs\word.png" />
+         
+            <img alt="Silhouette of mountains" src="http://127.0.0.1:8000/storage/images/{{event.meeting_minute}}" onerror="this.src='assets/imgs/ext.jpg'"/>
+            <ion-button class="download-button" (click)="downloadDoc('http://127.0.0.1:8000/storage/images/{{event.meeting_minute}}')">
+              <ion-icon name="download-outline"></ion-icon>
+            </ion-button>
+
+      </ion-item>
         </ion-list>
     </ion-col>
-    <ion-col>
-
-      <ion-list lines="none">
-    
-
-      <ion-item>
-       
-          <img slot="start" class="custom-img"alt="Silhouette of a person's head" src="assets\imgs\sheet.png" />
-          <div class="label">
-        <ion-label>
-        {{event.budget_sheet}}
-        </ion-label>
-        </div>
-      </ion-item>
-    </ion-list>
-</ion-col>
   
     </ion-row>
-
-    <ion-card>
+   
       <ion-list lines="none">
       <ion-item *ngFor="let member of responsibles">
         <ion-avatar slot="start">
@@ -73,18 +76,20 @@
           <p>{{member.role_name}}</p>
         </ion-label>
       </ion-item>
+
       
       
     </ion-list>
-    </ion-card>
+  
       </ion-card>
-
      
-
+     
     </ion-content>
 
    
 
+  
   </div>
+ 
 
 </ion-content>

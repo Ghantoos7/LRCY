@@ -581,15 +581,15 @@ class AdminController extends Controller {
         // validate the request
         $validator = Validator::make($request->all(), [
             'program_id' => 'required|integer',
-            'event_main_picture' => 'required|string',
+            'event_main_picture' => 'nullable',
             'event_description' => 'required|string',
             'event_location' => 'required|string',
             'event_date' => 'required|date',
             'event_title' => 'required|string',
             'event_type_id' => 'required|integer',
-            'budget_sheet' => 'required|string',
-            'proposal' => 'required|string',
-            'meeting_minute' => 'nullable|string',
+            'budget_sheet' => 'nullable',
+            'proposal' => 'nullable',
+            'meeting_minute' => 'nullable',
             'branch_id' => 'required|integer',
             'responsibles' => 'required',
             'responsibles.*.user_id' => 'required|integer',
@@ -604,10 +604,14 @@ class AdminController extends Controller {
             ]);
         }
         
+       
         // try catch block to handle the exception and add the event
         
 
         try {
+
+           
+
             // Create the event
             $event = Event::create([
                 'event_description' => $request->input('event_description'),
@@ -619,24 +623,16 @@ class AdminController extends Controller {
                 'branch_id' => $request->input('branch_id'),
             ]);
 
-        }catch (\Exception $e) {
-                return response()->json([
-                    'status' => 'error',
-                    'message' => 'Error creating event',
-                    'error' => $e->getMessage()
-                ]);
-        }
-
-        
         if($request->hasFile('event_main_picture')){
             $request->validate([
                 'image' => 'mimes:jpeg,bmp,png,jpg'
             ]);
-
+    
             $request->event_main_picture->store('public/images');
             $event->event_main_picture = $request->event_main_picture->hashName();
-        }
+            }
 
+            
         if($request->hasFile('budget_sheet')){
             $request->validate([
                 'image' => 'mimes:jpeg,bmp,png,jpg'
@@ -663,12 +659,24 @@ class AdminController extends Controller {
             $request->meeting_minute->store('public/images');
             $event->meeting_minute = $request->meeting_minute->hashName();
         }
+
         $event->save();
 
+        }catch (\Exception $e) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Error creating event',
+                    'error' => $e->getMessage()
+                ]);
+        }
+
+         // Update responsible people for the event
+         $responsibles = json_decode($request->input('responsibles', []), true);
+         
         // Create the responsibles
         try {
 
-            foreach ($request->input('responsibles') as $responsible) {
+            foreach ($responsibles as $responsible) {
                 // Get the user based on the provided organization id
                 $user = volunteer_user::where('id', $responsible['user_id'])->first();
                 is_responsible::create([
@@ -1483,7 +1491,7 @@ class AdminController extends Controller {
         // Validate the request
         $validator = Validator::make($request->all(), [
             'event_id' => 'required|integer',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            'image' => 'required'
         ]);
 
         // Check if the validation fails
@@ -1514,18 +1522,20 @@ class AdminController extends Controller {
 
             event_image::create([
                 'event_id' => $event->id,
-                'image' => $request->image->hashName()
+                'event_image_source' => $request->image->hashName()
             ]);
             
         }
+        return response()->json(['status' => 'success' ,
+        'message' => 'Image created successfully'
+        ]);
     }
 
     function removeImageFromEvent(Request $request){
 
         // Validate the request
         $validator = Validator::make($request->all(), [
-            'event_id' => 'required|integer',
-            'image_id' => 'required|integer'
+            'id' => 'required|integer'
         ]);
 
         // Check if the validation fails
@@ -1537,17 +1547,8 @@ class AdminController extends Controller {
             ]);
         }
         
-        // Get the event and check if it exists
-        $event = Event::find($request->input('event_id'));
-        if (!$event) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Event not found'
-            ]);
-        }
-
         // Get the image and check if it exists
-        $image = event_image::find($request->input('image_id'));
+        $image = event_image::find($request->input('id'));
         if (!$image) {
             return response()->json([
                 'status' => 'error',

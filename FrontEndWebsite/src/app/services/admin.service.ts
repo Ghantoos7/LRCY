@@ -108,6 +108,27 @@ export class AdminService {
     return response;
   }
 
+  getEventPictures(event_id: number) {
+    const headers = this.getAuthHeaders();
+    const response = this.http.get(this.base_url_event + 'get_event_pictures/' + event_id , { headers: headers });
+    return response;
+  }
+
+  addEventPhoto(formData: FormData) {
+    const headers = this.getAuthHeaders();
+    const options = { headers: headers };
+    const response = this.http.post(this.base_url + 'add_event_photo', formData, options);
+    return response;
+  }
+
+  removeEventPhoto(id: number) {
+    const headers = this.getAuthHeaders();
+    const body = { id: id };
+    const response = this.http.post(this.base_url + 'remove_image', body, { headers: headers });
+    return response;
+}
+  
+
   deleteYearlyGoal(goal_id: string) {
     const headers = this.getAuthHeaders();
     const body = { goal_id: goal_id };
