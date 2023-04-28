@@ -31,6 +31,7 @@ export class FeedPage implements OnInit {
   comment_contents: any=[];
   user: any;
   isLiked: { [key: number]: { postId: number, isLiked: boolean }[] } = {};
+  likeCount: { [key: number]: number } = {};
 
   constructor(private router:Router, private alertController: AlertController, private menuCtrl: MenuController, private service:PostService, private sharedService:SharedService, private userservice:UserService) { }
 
@@ -79,7 +80,8 @@ export class FeedPage implements OnInit {
       this.posts = data['posts'];
       for (let i = 0; i < this.posts.length; i++) {
         const postId = this.posts[i].id;
-        this.isLikedUser[postId] = localStorage.getItem(`user_${this.user_id}_post_${postId}`) === 'true'; // retrieve the like state from Local Storage
+        this.isLikedUser[postId] = localStorage.getItem(`user_${this.user_id}_post_${postId}`) === 'true'; // retrieve the like state from Local Storag
+        this.likeCount[postId] = this.posts[i].like_count;
       }
     });
   }
@@ -195,7 +197,7 @@ localStorage.removeItem('full_name');
     this.service.likePost(post_id).subscribe((data: any) => {
       localStorage.setItem(`user_${this.user_id}_post_${post_id}`, 'true'); // store the like state in Local Storage
       this.isLikedUser[post_id] = true;
-      window.location.reload();
+      this.likeCount[post_id]++;
     });
    
   }
@@ -204,7 +206,7 @@ localStorage.removeItem('full_name');
     this.service.unlikePost(post_id).subscribe((data: any) => {
       localStorage.setItem(`user_${this.user_id}_post_${post_id}`, 'false'); // store the like state in Local Storage
       this.isLikedUser[post_id] = false;
-      window.location.reload();
+     this.likeCount[post_id]--;
     });
    
   }
