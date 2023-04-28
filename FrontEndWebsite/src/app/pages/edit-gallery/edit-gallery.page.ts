@@ -105,6 +105,7 @@ new_event_main_picture:string='';
         }).then(alert => alert.present());
       }
     });
+    this.goToGallery();
   }
 
   onChange(event: any) {
