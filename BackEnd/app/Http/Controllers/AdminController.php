@@ -581,15 +581,15 @@ class AdminController extends Controller {
         // validate the request
         $validator = Validator::make($request->all(), [
             'program_id' => 'required|integer',
-            'event_main_picture' => 'required|string',
+            'event_main_picture' => 'nullable',
             'event_description' => 'required|string',
             'event_location' => 'required|string',
             'event_date' => 'required|date',
             'event_title' => 'required|string',
             'event_type_id' => 'required|integer',
-            'budget_sheet' => 'required|string',
-            'proposal' => 'required|string',
-            'meeting_minute' => 'nullable|string',
+            'budget_sheet' => 'nullable',
+            'proposal' => 'nullable',
+            'meeting_minute' => 'nullable',
             'branch_id' => 'required|integer',
             'responsibles' => 'required',
             'responsibles.*.user_id' => 'required|integer',
@@ -604,10 +604,14 @@ class AdminController extends Controller {
             ]);
         }
         
+       
         // try catch block to handle the exception and add the event
         
 
         try {
+
+           
+
             // Create the event
             $event = Event::create([
                 'event_description' => $request->input('event_description'),
@@ -618,25 +622,16 @@ class AdminController extends Controller {
                 'program_id' => $request->input('program_id'),
                 'branch_id' => $request->input('branch_id'),
             ]);
-
-        }catch (\Exception $e) {
-                return response()->json([
-                    'status' => 'error',
-                    'message' => 'Error creating event',
-                    'error' => $e->getMessage()
+            if($request->hasFile('event_main_picture')){
+                $request->validate([
+                    'image' => 'mimes:jpeg,bmp,png,jpg'
                 ]);
-        }
+    
+                $request->event_main_picture->store('public/images');
+                $event->event_main_picture = $request->event_main_picture->hashName();
+            }
 
-        
-        if($request->hasFile('event_main_picture')){
-            $request->validate([
-                'image' => 'mimes:jpeg,bmp,png,jpg'
-            ]);
-
-            $request->event_main_picture->store('public/images');
-            $event->event_main_picture = $request->event_main_picture->hashName();
-        }
-
+            
         if($request->hasFile('budget_sheet')){
             $request->validate([
                 'image' => 'mimes:jpeg,bmp,png,jpg'
@@ -665,10 +660,21 @@ class AdminController extends Controller {
         }
         $event->save();
 
+        }catch (\Exception $e) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Error creating event',
+                    'error' => $e->getMessage()
+                ]);
+        }
+
+         // Update responsible people for the event
+         $responsibles = json_decode($request->input('responsibles', []), true);
+         
         // Create the responsibles
         try {
 
-            foreach ($request->input('responsibles') as $responsible) {
+            foreach ($responsibles as $responsible) {
                 // Get the user based on the provided organization id
                 $user = volunteer_user::where('id', $responsible['user_id'])->first();
                 is_responsible::create([

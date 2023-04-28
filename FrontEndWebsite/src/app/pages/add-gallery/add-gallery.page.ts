@@ -41,7 +41,9 @@ export class AddGalleryPage implements OnInit {
       this.allUsers = response['users'];
       this.originalUsers = JSON.parse(JSON.stringify(this.allUsers));
     });
+    
   }
+
 
   addEvent(){
     const formData = new FormData();
@@ -61,6 +63,7 @@ export class AddGalleryPage implements OnInit {
     formData.append('responsibles', data);
     this.adminService.addEvent(formData).subscribe((response: any) => {
       const parsedResponse = JSON.parse(JSON.stringify(response));
+      console.log(parsedResponse);
       if(parsedResponse.status == 'success') {
         this.alertController.create({
           header: 'Success',
