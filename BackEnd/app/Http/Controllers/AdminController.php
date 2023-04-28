@@ -1548,7 +1548,7 @@ class AdminController extends Controller {
         }
         
         // Get the image and check if it exists
-        $image = event_image::find($request->input('image_id'));
+        $image = event_image::find($request->input('id'));
         if (!$image) {
             return response()->json([
                 'status' => 'error',
