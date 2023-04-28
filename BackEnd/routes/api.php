@@ -81,6 +81,7 @@ Route::group(["prefix" => "v0.1",], function(){
             Route::get("get_event_pictures/{event_id}", [EventController::class, "getEventPictures"]);
             Route::get("get_training_info/{training_id?}", [EventController::class, "getTrainingInfo"]);
             Route::get("download_picture/{picture_id}", [DownloadController::class, "downloadPicture"]);
+           
         });
 
     });
@@ -110,6 +111,7 @@ Route::group(["prefix" => "v0.1",], function(){
             Route::post("add_training", [AdminController::class, "addTraining"]);
             Route::post("edit_training", [AdminController::class, "editTraining"]);
             Route::post("delete_training", [AdminController::class, "deleteTraining"]);
+            Route::post("remove_image", [AdminController::class, "removeImageFromEvent"]);
             
         });
 

@@ -121,6 +121,14 @@ export class AdminService {
     return response;
   }
 
+  removeEventPhoto(id: number) {
+    const headers = this.getAuthHeaders();
+    const body = { id: id };
+    const response = this.http.post(this.base_url + 'remove_image', body, { headers: headers });
+    return response;
+}
+  
+
   deleteYearlyGoal(goal_id: string) {
     const headers = this.getAuthHeaders();
     const body = { goal_id: goal_id };

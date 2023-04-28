@@ -113,7 +113,24 @@ new_event_main_picture:string='';
 }
 
 deleteImage(image_id: number){
-  
+  this.adminService.removeEventPhoto(image_id).subscribe((response: any) => {
+    const parsedResponse = JSON.parse(JSON.stringify(response));
+    console.log(response);
+    if(parsedResponse.status == 'success') {
+      this.alertController.create({
+        header: 'Success',
+        message: 'Image deleted successfully!',
+        buttons: ['OK']
+      }).then(alert => alert.present());
+      this.router.navigate(['/manage-gallery']);
+    } else {
+      this.alertController.create({
+        header: 'Error',
+        message: parsedResponse.message,
+        buttons: ['OK']
+      }).then(alert => alert.present());
+    }
+  });
 }
 
 onChangeBudget(event: any) {
