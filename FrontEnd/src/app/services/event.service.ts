@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -48,6 +49,12 @@ export class EventService {
   getYearlyGoals(id: string) {
     const headers = this.getAuthHeaders();
     const response = this.http.get(this.base_url + 'get_yearly_goals/' + id, { headers: headers });
+    return response;
+  }
+
+  downloadPicture(imageId: number): Observable<string> {
+    const headers = this.getAuthHeaders();
+    const response = this.http.get(this.base_url + 'download_picture/' +imageId, { headers: headers, responseType: 'text' });
     return response;
   }
   
