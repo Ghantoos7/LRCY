@@ -35,7 +35,7 @@
       <ion-icon (click)="deleteComment(comment.id)" *ngIf="current_id == comment['user'].id" class="delete-comment" name="trash-outline"></ion-icon>
       <ion-text class="comment">{{comment.comment_content}}</ion-text>
       <ion-icon [class.active]="isLikedUser[comment.id]" name="{{ isLikedUser[comment.id] ? 'heart' : 'heart-outline' }}" (click)="toggleLike(comment.id)" class="likes"></ion-icon>
-      <ion-text class="like-count">{{comment.comment_like_count}}</ion-text>
+      <ion-text class="like-count">{{this.commentLikeCount[comment.id]}}</ion-text>
       <ion-icon (click)="replyComment(comment.id)" class="add-reply" name="chatbubble-ellipses-outline"></ion-icon>
       <ion-text class="reply-word">Reply...</ion-text>
       <ion-item class="accordion-header" (click)="openReplies(comment.id)">
