@@ -108,6 +108,12 @@ export class AdminService {
     return response;
   }
 
+  getEventPictures(event_id: number) {
+    const headers = this.getAuthHeaders();
+    const response = this.http.get(this.base_url_event + 'get_event_pictures/' + event_id , { headers: headers });
+    return response;
+  }
+
   addEventPhoto(formData: FormData) {
     const headers = this.getAuthHeaders();
     const options = { headers: headers };

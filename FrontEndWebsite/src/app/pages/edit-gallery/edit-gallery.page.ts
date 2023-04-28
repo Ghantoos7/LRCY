@@ -34,6 +34,7 @@ export class EditGalleryPage implements OnInit {
   event_photos: Array<string> = [];
   responsibles : any [] = [];
   originalUsers: any[] = [];
+  images: any[] = [];
   event_photo:string="";
 new_event_main_picture:string='';
 
@@ -53,12 +54,15 @@ new_event_main_picture:string='';
     this.proposal = event.proposal;
     this.meeting_minute = event.meeting_minute;
     this.responsibles = event.responsibles;
-    
 
     
     this.adminService.getUserInfo(this.branch_id,"").subscribe((response: any) => {
       this.allUsers = response['users'];
       this.originalUsers = response['users'];
+    });
+
+    this.adminService.getEventPictures(this.event_id).subscribe((response: any) => {
+      this.images = response.pictures;
     });
   }
 
@@ -106,6 +110,10 @@ new_event_main_picture:string='';
   onChange(event: any) {
     this.new_event_main_picture = event.target.files[0];
 
+}
+
+deleteImage(image_id: number){
+  
 }
 
 onChangeBudget(event: any) {
