@@ -16,7 +16,6 @@ interface CustomEvent extends Event {
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule]
 })
-
 export class PanelPage implements OnInit {
   myBoolean: boolean = false;
 
@@ -34,7 +33,7 @@ export class PanelPage implements OnInit {
       document.body.setAttribute('color-theme','light');
     }
   }
-  
+
   ngOnInit() {
   }
 

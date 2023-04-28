@@ -9,7 +9,6 @@ import { debounceTime } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
-
 @Component({
   selector: 'app-manage-profiles',
   templateUrl: './manage-profiles.page.html',
