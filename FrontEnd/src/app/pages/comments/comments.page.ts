@@ -123,17 +123,24 @@ export class CommentsPage implements OnInit {
     });
   }
 
- 
+  public animateLikeButton(postId: number) {
+    const likeButton = document.getElementById(`like-button-${postId}`);
+    likeButton?.classList.add('like-animation');
   
-  
+    likeButton?.addEventListener('animationend', () => {
+      likeButton.classList.remove('like-animation');
+    });
+  }
 
   toggleLike(comment_id: number) {
     if (this.isLikedUser[comment_id]) {
-    this.unlikeComment(comment_id);
+      this.unlikeComment(comment_id);
     } else {
-    this.likeComment(comment_id);
+      this.likeComment(comment_id);
     }
+      this.animateLikeButton(comment_id);
   }
+  
     
   likeComment(comment_id: number) {
     this.postService.likeComment(comment_id, this.current_id).subscribe((data: any) => {

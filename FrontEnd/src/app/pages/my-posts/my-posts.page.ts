@@ -136,15 +136,26 @@ export class MyPostsPage implements OnInit {
     await actionSheet.present();
 }
 
+public animateLikeButton(postId: number) {
+  const likeButton = document.getElementById(`like-button-${postId}`);
+  likeButton?.classList.add('like-animation');
 
-  toggleLike(post_id: number) {
-    if (this.isLikedUser[post_id]) {
+  likeButton?.addEventListener('animationend', () => {
+    likeButton.classList.remove('like-animation');
+  });
+}
+
+
+
+toggleLike(post_id: number) {
+  if (this.isLikedUser[post_id]) {
     this.unlikePost(post_id);
-    } else {
+  } else {
     this.likePost(post_id);
-    }
   }
-    
+    this.animateLikeButton(post_id);
+}
+
   likePost(post_id: number) {
     this.post_service.likePost(post_id).subscribe((data: any) => {
       localStorage.setItem(`user_${this.user_id}_post_${post_id}`, 'true'); // store the like state in Local Storage
