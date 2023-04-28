@@ -658,6 +658,7 @@ class AdminController extends Controller {
             $request->meeting_minute->store('public/images');
             $event->meeting_minute = $request->meeting_minute->hashName();
         }
+        
         $event->save();
 
         }catch (\Exception $e) {
