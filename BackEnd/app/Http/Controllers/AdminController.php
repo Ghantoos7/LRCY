@@ -1521,10 +1521,13 @@ class AdminController extends Controller {
 
             event_image::create([
                 'event_id' => $event->id,
-                'image' => $request->image->hashName()
+                'event_image_source' => $request->image->hashName()
             ]);
             
         }
+        return response()->json(['status' => 'success' ,
+        'message' => 'Image created successfully'
+        ]);
     }
 
     function removeImageFromEvent(Request $request){

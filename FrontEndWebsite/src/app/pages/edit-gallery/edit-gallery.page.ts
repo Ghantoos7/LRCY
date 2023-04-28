@@ -116,7 +116,7 @@ onChangeBudget(event: any) {
 
 onChangePhoto(event: any) {
   this.event_photo = event.target.files[0];
-
+  console.log(this.event_photo);
 }
 
 onChangeProp(event: any) {
@@ -130,7 +130,28 @@ onChangeMeet(event: any) {
 }
 
 addPhoto(){
-
+  const formData = new FormData();
+  formData.append('event_id', this.event_id);
+  formData.append('image', this.event_photo);
+  
+  this.adminService.addEventPhoto(formData).subscribe((response: any) => {
+    const parsedResponse = JSON.parse(JSON.stringify(response));
+    console.log(parsedResponse);
+    if(parsedResponse.status == 'success') {
+      this.alertController.create({
+        header: 'Success',
+        message: 'Photo added successfully!',
+        buttons: ['OK']
+      }).then(alert => alert.present());
+      this.router.navigate(['/manage-gallery']);
+    } else {
+      this.alertController.create({
+        header: 'Error',
+        message: parsedResponse.message,
+        buttons: ['OK']
+      }).then(alert => alert.present());
+    }
+  });
 }
 
   selectUser(user: any, checked: boolean) {
