@@ -72,20 +72,27 @@ export class MyPostsPage implements OnInit {
 
   }
 
-  getDaysAgo(postDate: string) {
+  getDaysAgo(postDate: string): string {
     const today = new Date();
     const post = new Date(postDate);
-    const timeDiff = Math.abs(today.getTime() - post.getTime());
-    const minutesDiff = Math.floor(timeDiff / (1000 * 60));
-    if (minutesDiff < 60) {
-      return `${minutesDiff}m ago`;
+    const yearDiff = today.getFullYear() - post.getFullYear();
+    const monthDiff = today.getMonth() - post.getMonth();
+    const dayDiff = today.getDate() - post.getDate();
+    if (yearDiff > 0) {
+      return `${yearDiff}y ago`;
+    } else if (monthDiff > 0) {
+      return `${monthDiff}mo ago`;
+    } else if (dayDiff > 0) {
+      return `${dayDiff}d ago`;
+    } else {
+      const hourDiff = today.getHours() - post.getHours();
+      const minuteDiff = today.getMinutes() - post.getMinutes();
+      if (hourDiff > 0) {
+        return `${hourDiff}h ago`;
+      } else {
+        return `${minuteDiff}m ago`;
+      }
     }
-    const hoursDiff = Math.floor(timeDiff / (1000 * 3600));
-    if (hoursDiff < 24) {
-      return `${hoursDiff}h ago`;
-    }
-    const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
-    return `${daysDiff}d ago`;
   }
 
   async showActionSheet(i: number) {
