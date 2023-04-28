@@ -98,6 +98,7 @@ Route::group(["prefix" => "v0.1",], function(){
             Route::post("delete_announcement", [AdminController::class, "deleteAnnouncement"]);
             Route::post("edit_announcement", [AdminController::class, "editAnnouncement"]);
             Route::post("add_event", [AdminController::class, "addEvent"]);
+            Route::post("add_event_photo", [AdminController::class, "addImageToEvent"]);
             Route::post("edit_event", [AdminController::class, "editEvent"]);
             Route::post("delete_event", [AdminController::class, "deleteEvent"]); 
             Route::post("set_yearly_goal", [AdminController::class, "setYearlyGoal"]);

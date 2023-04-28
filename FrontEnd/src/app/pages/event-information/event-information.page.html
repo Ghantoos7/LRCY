@@ -35,30 +35,25 @@
             
               <img class="custom-img" slot="start" alt="Silhouette of a person's head" src="assets\imgs\word.png" />
         <div class="label">
-            <ion-label>
-              {{event.proposal}}
-            </ion-label>
+          <img alt="Silhouette of mountains" src="http://127.0.0.1:8000/storage/images/{{event.proposal}}" onerror="this.src='assets/imgs/ext.jpg'"/>
           </div>
           </ion-item>
-  
-        </ion-list>
-    </ion-col>
-    <ion-col>
-
-      <ion-list lines="none">
-    
-
-      <ion-item>
+          <ion-item>
        
-          <img slot="start" class="custom-img"alt="Silhouette of a person's head" src="assets\imgs\sheet.png" />
+            <img slot="start" class="custom-img"alt="Silhouette of a person's head" src="assets\imgs\sheet.png" />
+            <div class="label">
+              <img alt="Silhouette of mountains" src="http://127.0.0.1:8000/storage/images/{{event.budget_sheet}}" onerror="this.src='assets/imgs/ext.jpg'"/>
+          </div>
+        </ion-item>
+        <ion-item>
+   
+          <img slot="start" class="custom-img"alt="Silhouette of a person's head" src="assets\imgs\word.png" />
           <div class="label">
-        <ion-label>
-        {{event.budget_sheet}}
-        </ion-label>
+            <img alt="Silhouette of mountains" src="http://127.0.0.1:8000/storage/images/{{event.meeting_minute}}" onerror="this.src='assets/imgs/ext.jpg'"/>
         </div>
       </ion-item>
-    </ion-list>
-</ion-col>
+        </ion-list>
+    </ion-col>
   
     </ion-row>
 
