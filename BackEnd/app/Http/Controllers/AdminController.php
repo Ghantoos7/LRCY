@@ -658,7 +658,7 @@ class AdminController extends Controller {
             $request->meeting_minute->store('public/images');
             $event->meeting_minute = $request->meeting_minute->hashName();
         }
-        
+
         $event->save();
 
         }catch (\Exception $e) {
@@ -1490,7 +1490,7 @@ class AdminController extends Controller {
         // Validate the request
         $validator = Validator::make($request->all(), [
             'event_id' => 'required|integer',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            'image' => 'required'
         ]);
 
         // Check if the validation fails

@@ -108,6 +108,13 @@ export class AdminService {
     return response;
   }
 
+  addEventPhoto(formData: FormData) {
+    const headers = this.getAuthHeaders();
+    const options = { headers: headers };
+    const response = this.http.post(this.base_url + 'add_event_photo', formData, options);
+    return response;
+  }
+
   deleteYearlyGoal(goal_id: string) {
     const headers = this.getAuthHeaders();
     const body = { goal_id: goal_id };

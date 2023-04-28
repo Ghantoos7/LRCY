@@ -34,6 +34,7 @@ export class EditGalleryPage implements OnInit {
   event_photos: Array<string> = [];
   responsibles : any [] = [];
   originalUsers: any[] = [];
+  event_photo:string="";
 new_event_main_picture:string='';
 
   constructor(private router:Router, private menuController: MenuController, private alertController: AlertController, private adminService : AdminService) { }
@@ -112,6 +113,12 @@ onChangeBudget(event: any) {
 
 }
 
+
+onChangePhoto(event: any) {
+  this.event_photo = event.target.files[0];
+
+}
+
 onChangeProp(event: any) {
   this.proposal = event.target.files[0];
 
@@ -122,7 +129,9 @@ onChangeMeet(event: any) {
 
 }
 
+addPhoto(){
 
+}
 
   selectUser(user: any, checked: boolean) {
     if (checked) {
