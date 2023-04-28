@@ -622,13 +622,14 @@ class AdminController extends Controller {
                 'program_id' => $request->input('program_id'),
                 'branch_id' => $request->input('branch_id'),
             ]);
-            if($request->hasFile('event_main_picture')){
-                $request->validate([
-                    'image' => 'mimes:jpeg,bmp,png,jpg'
-                ]);
+
+        if($request->hasFile('event_main_picture')){
+            $request->validate([
+                'image' => 'mimes:jpeg,bmp,png,jpg'
+            ]);
     
-                $request->event_main_picture->store('public/images');
-                $event->event_main_picture = $request->event_main_picture->hashName();
+            $request->event_main_picture->store('public/images');
+            $event->event_main_picture = $request->event_main_picture->hashName();
             }
 
             
@@ -1530,8 +1531,7 @@ class AdminController extends Controller {
 
         // Validate the request
         $validator = Validator::make($request->all(), [
-            'event_id' => 'required|integer',
-            'image_id' => 'required|integer'
+            'id' => 'required|integer'
         ]);
 
         // Check if the validation fails
@@ -1543,15 +1543,6 @@ class AdminController extends Controller {
             ]);
         }
         
-        // Get the event and check if it exists
-        $event = Event::find($request->input('event_id'));
-        if (!$event) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Event not found'
-            ]);
-        }
-
         // Get the image and check if it exists
         $image = event_image::find($request->input('image_id'));
         if (!$image) {
