@@ -5,6 +5,9 @@ import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AdminService } from 'src/app/services/admin.service';
 
+interface CustomEvent extends Event {
+  myBoolean: boolean;
+}
 
 @Component({
   selector: 'app-panel',
@@ -14,8 +17,22 @@ import { AdminService } from 'src/app/services/admin.service';
   imports: [IonicModule, CommonModule, FormsModule]
 })
 export class PanelPage implements OnInit {
+  myBoolean: boolean = false;
 
   constructor(private router:Router, private adminService : AdminService) { }
+
+  OnToggleColorTheme(event: Event): void {
+    const customEvent = event as CustomEvent;
+    customEvent.myBoolean = this.myBoolean = !this.myBoolean;
+    console.log(customEvent);
+
+    if(customEvent.myBoolean){
+      document.body.setAttribute('color-theme','dark');
+    }
+    else{
+      document.body.setAttribute('color-theme','light');
+    }
+  }
 
   ngOnInit() {
   }
