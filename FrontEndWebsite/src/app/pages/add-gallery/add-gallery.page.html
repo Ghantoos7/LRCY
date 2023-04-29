@@ -3,7 +3,7 @@
   <ion-menu menuId="menuAddGallery" contentId="main-content">
     <ion-header>
       <ion-toolbar class="toolbar-background">
-        <ion-title>Manage Gallery</ion-title>
+        <ion-title class="tit">Manage Gallery</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content class="ion-padding">
@@ -137,7 +137,8 @@
                 <ion-list class="list">
                   <ion-item *ngFor="let user of allUsers">
                     <ion-avatar slot="start">
-                      <img src="http://127.0.0.1:8000/storage/images/{{user.user_profile_pic}}"  onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'" />
+                      <img *ngIf="user.user_profile_pic !== null" src="http://127.0.0.1:8000/storage/images/{{user.user_profile_pic}}"  onerror="this.onerror=null; this.src='https://ionicframework.com/docs/img/demos/avatar.svg';" />
+                      <img *ngIf="user.user_profile_pic===null" src="https://ionicframework.com/docs/img/demos/avatar.svg"  />
                     </ion-avatar>
                     <ion-label>{{ user.first_name }} {{ user.last_name }}</ion-label>
                     <ion-button slot="end" (click)="selectUser(user, true)">Add</ion-button>
