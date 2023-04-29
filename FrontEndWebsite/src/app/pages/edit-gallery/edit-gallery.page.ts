@@ -89,7 +89,6 @@ new_event_main_picture:string='';
     
     this.adminService.editEvent(formData).subscribe((response: any) => {
       const parsedResponse = JSON.parse(JSON.stringify(response));
-      console.log(parsedResponse);
       if(parsedResponse.status == 'success') {
         this.alertController.create({
           header: 'Success',
@@ -116,7 +115,6 @@ new_event_main_picture:string='';
 deleteImage(image_id: number){
   this.adminService.removeEventPhoto(image_id).subscribe((response: any) => {
     const parsedResponse = JSON.parse(JSON.stringify(response));
-    console.log(response);
     if(parsedResponse.status == 'success') {
       this.alertController.create({
         header: 'Success',
@@ -142,7 +140,6 @@ onChangeBudget(event: any) {
 
 onChangePhoto(event: any) {
   this.event_photo = event.target.files[0];
-  console.log(this.event_photo);
 }
 
 onChangeProp(event: any) {
@@ -162,7 +159,6 @@ addPhoto(){
   
   this.adminService.addEventPhoto(formData).subscribe((response: any) => {
     const parsedResponse = JSON.parse(JSON.stringify(response));
-    console.log(parsedResponse);
     if(parsedResponse.status == 'success') {
       this.alertController.create({
         header: 'Success',
@@ -217,7 +213,6 @@ addPhoto(){
   
   addPhotoInput() {
     this.photoInputs.push(this.photoInputs.length);
-    console.log(this.event_photos)
   }
 
 

@@ -24,7 +24,7 @@ export class PanelPage implements OnInit {
   OnToggleColorTheme(event: Event): void {
     const customEvent = event as CustomEvent;
     customEvent.myBoolean = this.myBoolean = !this.myBoolean;
-    console.log(customEvent);
+
 
     if(customEvent.myBoolean){
       document.body.setAttribute('color-theme','dark');

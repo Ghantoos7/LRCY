@@ -63,7 +63,6 @@ export class AddGalleryPage implements OnInit {
     formData.append('responsibles', data);
     this.adminService.addEvent(formData).subscribe((response: any) => {
       const parsedResponse = JSON.parse(JSON.stringify(response));
-      console.log(parsedResponse);
       if(parsedResponse.status == 'success') {
         this.alertController.create({
           header: 'Success',
@@ -144,7 +143,6 @@ onChangeMeet(event: any) {
       };
       this.selectedUsers.push(selectedUser);
       this.allUsers = this.allUsers.filter(u => u.id !== user.id);
-      console.log(this.selectedUsers);
     } else {
       this.removeSelectedUser(user);
     }
@@ -155,7 +153,7 @@ onChangeMeet(event: any) {
     if (userToUpdate) {
       userToUpdate.role_name = newRole;
     }
-    console.log(this.selectedUsers);
+    
   }
 
   removeSelectedUser(selectedUser: any) {
@@ -164,7 +162,7 @@ onChangeMeet(event: any) {
     if (originalUser) {
       this.allUsers.push(originalUser);
     }
-    console.log(this.selectedUsers);
+    
   }
   
   addPhotoInput() {
