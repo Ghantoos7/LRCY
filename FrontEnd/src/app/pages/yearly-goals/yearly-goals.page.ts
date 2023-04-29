@@ -20,15 +20,28 @@ export class YearlyGoalsPage implements OnInit {
   username = localStorage.getItem('username') as string;
   user_profile_pic = localStorage.getItem('user_profile_pic') as string;
   branch_id = localStorage.getItem('branch_id') as string;
-
+  errorMessage: string = '';
   constructor(private router:Router, private menuCtrl: MenuController, private service:EventService, private userservice: UserService) { }
 
   ngOnInit() {
-    this.service.getYearlyGoals(this.branch_id).subscribe((response: any) => {
-      const allGoals = [].concat.apply([], Object.values(response['goals']));
-      this.yearlyGoals = allGoals;
+    this.service.getYearlyGoals(this.branch_id).subscribe({
+      next: response => {
+        const parsedResponse = JSON.parse(JSON.stringify(response));
+        const allGoals = [].concat.apply([], Object.values(parsedResponse['goals']));
+        this.yearlyGoals = allGoals;
+  
+        // Check if yearlyGoals array is empty
+        if (this.yearlyGoals.length === 0) {
+          this.errorMessage = 'No goals found';
+        }
+      },
+      error: error => {
+        console.error('An error occurred while fetching events:', error);
+        this.errorMessage = 'No goals found';
+      }
     });
-  }  
+  }
+  
 
 
   
@@ -109,13 +122,13 @@ export class YearlyGoalsPage implements OnInit {
       }
       logout() {
         this.userservice.logout().subscribe((data: any) => {
-          localStorage.removeItem('authToken');
-localStorage.removeItem('userId');
-localStorage.removeItem('username');
-localStorage.removeItem('user_profile_pic');
-localStorage.removeItem('branch_id');
-localStorage.removeItem('rememberMe');
-localStorage.removeItem('full_name');
+          localStorage.removeItem('auth_token');
+          localStorage.removeItem('user_id');
+          localStorage.removeItem('username');
+          localStorage.removeItem('user_profile_pic');
+          localStorage.removeItem('branch_id');
+          localStorage.removeItem('remember_me');
+          localStorage.removeItem('full_name');
           this.router.navigate(['/sign-in']);
         });
       }

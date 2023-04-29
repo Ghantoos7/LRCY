@@ -19,26 +19,51 @@ import { SharedService } from 'src/app/services/shared.service';
 export class EventPicturesPage implements OnInit {
   my_id: string = "";
   pictures: any = [];
-
+  errorMessage: string = '';
   constructor(private shared:SharedService, private route: ActivatedRoute, private navCtrl: NavController, private router:Router, private service:EventService, private alertController:AlertController) { }
 
   ngOnInit() {
     this.my_id = this.shared.getVariableValue();
-    
+  
     this.service.getEventPictures(this.my_id).subscribe(response => {
-     
-      this.pictures = response;
-   
+      if (response && response.hasOwnProperty('pictures')) {
+        this.pictures = response;
+      } else {
+        this.pictures = [];
+        this.errorMessage = "No pictures found";
+      }
     });
   }
+  
 
-  downloadPicture(pic_id: number) {
-    this.service.downloadPicture(pic_id).subscribe({
+  displayDownloadConfirmation(pictureUrl: string) {
+    this.alertController.create({
+      header: 'Download',
+      message: 'Do you want to download this picture?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        },
+        {
+          text: 'Download',
+          handler: () => {
+            this.downloadPic(pictureUrl);
+          }
+        }
+      ]
+    }).then(alert => alert.present());
+  }
+  
+
+  downloadPic(pictureUrl: string) {
+    this.service.downloadPic(pictureUrl).subscribe({
       next: (data: string) => {
-        const url = 'data:image/jpg;base64,' + data; // Replace 'image/jpeg' with the appropriate MIME type of your images
+        const url = 'data:image/jpg;base64,' + data;
         const link = document.createElement('a');
         link.href = url;
-        link.download = 'image.jpg';
+        const fileName = pictureUrl.split('/').pop() || 'image.jpg';
+        link.download = fileName;
         link.click();
         this.presentSuccessAlert();
       },

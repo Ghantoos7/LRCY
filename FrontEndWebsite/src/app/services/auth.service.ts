@@ -11,7 +11,7 @@ export class AuthService {
   private base_url = 'http://localhost:8000/api/v0.1/auth/';
 
   isLoggedIn() {
-    const authToken = localStorage.getItem('authToken');
+    const authToken = localStorage.getItem('auth_token');
     if (authToken) {
       return true;
     } else {

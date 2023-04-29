@@ -37,7 +37,9 @@
           <ng-container *ngFor="let user of letter.value">
             <ion-item (click)="goToProfile(user)">
               <ion-avatar slot="start">
-                <img alt="Profile picture" src="http://127.0.0.1:8000/storage/images/{{user.user_profile_pic}}" onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'" />
+                <img *ngIf="user.user_profile_pic !== null" src="http://127.0.0.1:8000/storage/images/{{user.user_profile_pic}}" onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'" />
+                <img *ngIf="user.user_profile_pic===null" src="https://ionicframework.com/docs/img/demos/avatar.svg"  />
+               
               </ion-avatar>
               <ion-label>
                 <h3> {{ user.first_name }} {{ user.last_name }}</h3>

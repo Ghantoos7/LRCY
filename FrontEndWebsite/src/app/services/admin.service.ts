@@ -13,7 +13,7 @@ export class AdminService {
   base_url_user = "http://localhost:8000/api/v0.1/user/";
 
   private getAuthHeaders(): HttpHeaders {
-    const token = localStorage.getItem('authToken');
+    const token = localStorage.getItem('auth_token');
   
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`

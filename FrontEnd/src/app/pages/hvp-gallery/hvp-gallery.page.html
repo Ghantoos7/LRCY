@@ -8,7 +8,8 @@
     <ion-content class="ion-padding">
       <div class="avatar-container">
         <ion-avatar size="large" class="custom-avatar">
-          <img alt="Avatar" src="http://127.0.0.1:8000/storage/images/{{user_profile_pic}}" onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'"/>
+          <img  *ngIf="user_profile_pic !== null" src="http://127.0.0.1:8000/storage/images/{{user_profile_pic}}"  onerror="this.onerror=null; this.src='https://ionicframework.com/docs/img/demos/avatar.svg';" />
+          <img  *ngIf="user_profile_pic===null" src="https://ionicframework.com/docs/img/demos/avatar.svg"  />
         </ion-avatar>
         <ion-label class="username-label">{{username}}</ion-label>
         <ion-button (click)="goProfile()" class="custom-button" expand="block"><ion-icon name="person" slot="start"></ion-icon>My Profile</ion-button>

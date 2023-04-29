@@ -5,6 +5,8 @@ import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { PostService } from 'src/app/services/post.service';
+import { DomSanitizer } from '@angular/platform-browser';
+import { SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-post',
@@ -21,15 +23,15 @@ export class PostPage implements OnInit {
   full_name:string = '';
   username = localStorage.getItem('username') as string;
   user_profile_pic :string = '';
-  user_id = localStorage.getItem('userId') as string;
+  user_id = localStorage.getItem('user_id') as string;
   branch_id = localStorage.getItem('branch_id') as string;
   post_caption:string='';
   post_src_img: any;
+  post_src_img_data: SafeUrl | null = null; 
 
-  constructor(private router:Router, private userService:UserService, private postService:PostService) { }
+  constructor(private router:Router, private userService:UserService, private postService:PostService, private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
-    console.log(this.user_id);
     this.userService.getUser(this.branch_id, this.user_id).subscribe(response => {
       this.user = response;
       this.last_name = (this.user['user'].last_name);
@@ -41,7 +43,7 @@ export class PostPage implements OnInit {
   }
 
   goBack(){
-this.router.navigate(['/feed']);
+    this.router.navigate(['/feed']);
   }
 
 
@@ -49,6 +51,14 @@ this.router.navigate(['/feed']);
   onChange(event: any) {
       this.post_src_img = event.target.files[0];
 
+      // Add this block to read and store the image data
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      this.post_src_img_data = this.sanitizer.bypassSecurityTrustUrl(
+        e.target?.result as string
+      );
+    };
+    reader.readAsDataURL(this.post_src_img);
   }
 
   post(){
@@ -62,10 +72,10 @@ this.router.navigate(['/feed']);
       }
       formData.append('post_caption', this.post_caption);
       formData.append('post_media', this.post_src_img);
-      
       this.postService.post(formData).subscribe((response) => {
         const parsedResponse = JSON.parse(JSON.stringify(response));
         if(parsedResponse.status == 'success'){
+          
 this.router.navigate(['/feed']);
         }
       });

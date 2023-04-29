@@ -7,15 +7,23 @@
   </div>
 
   <div class="user-info">
-    <img class="profile-picture" src="http://127.0.0.1:8000/storage/images/{{user_profile_pic}}" onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'">
+    <img  class="profile-picture" *ngIf="user_profile_pic !== null" src="http://127.0.0.1:8000/storage/images/{{user_profile_pic}}"  onerror="this.onerror=null; this.src='https://ionicframework.com/docs/img/demos/avatar.svg';" />
+    <img class="profile-picture"  *ngIf="user_profile_pic===null" src="https://ionicframework.com/docs/img/demos/avatar.svg"  />
     <ion-text class="username">{{username}}</ion-text>
     <ion-text class="name">{{full_name}}</ion-text>
   </div>
 
-  <ion-input [(ngModel)]="post_caption" class="input"  placeholder="What's happening..."></ion-input>
+  <div *ngIf="post_src_img_data" class="chosen-image-container">
+    <img [src]="post_src_img_data" class="chosen-image" />
+  </div>
+
+
+  <div class="textarea-container">
+    <textarea #captionTextarea [(ngModel)]="post_caption" class="textarea" placeholder="Add a caption..." rows="1"></textarea>
+  </div>
 
   <div class="upload-options">
-      <input [(ngModel)]="post_src_img"  (change)="onChange($event)" class="img" type="file" accept="image/png, image/jpeg, image/jpg" >
+      <input (change)="onChange($event)" class="img" type="file" accept="image/png, image/jpeg, image/jpg" >
   </div>  
 
   <ion-button class="post-button" shape="round" expand="block" size="large"  (click)="post()">Post</ion-button>

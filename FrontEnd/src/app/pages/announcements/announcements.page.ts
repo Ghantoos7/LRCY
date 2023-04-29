@@ -23,19 +23,33 @@ export class AnnouncementsPage implements OnInit {
   user_profile_pic = localStorage.getItem('user_profile_pic') as string;
   branch_id = localStorage.getItem('branch_id') as string;
   announcer_profile_pic: string ="";
-  
+  errorMessage: string = '';
   constructor(private router:Router, private menuCtrl: MenuController, private service:EventService, private userservice:UserService) { 
     this.showDescriptions = new Array(this.announcements.length).fill(false);
   }
 
   ngOnInit() {
-    this.service.getAnnouncements(this.branch_id).subscribe((response: any) => {
-      this.announcements = response['announcements'];
-      this.announcements = Array.from(this.announcements);
-
-    });
+    this.service.getAnnouncements(this.branch_id).subscribe({
+      next: response => {
+        if (response && response.hasOwnProperty('announcements')) {
+          const parsedResponse = JSON.parse(JSON.stringify(response));
+          const allAnnouncements = [].concat.apply([], Object.values(parsedResponse['announcements']));
+          this.announcements = allAnnouncements;
   
+          if (this.announcements.length === 0) {
+            this.errorMessage = 'No announcements found';
+          }
+        } else {
+          this.errorMessage = 'No announcements found';
+        }
+      },
+      error: error => {
+        console.error('An error occurred while fetching events:', error);
+        this.errorMessage = 'No announcements found';
+      }
+    });
   }
+  
 
   public getAnnouncerProfilePic(index: number) {
     let currentAnnouncement = this.announcements[index];
@@ -80,13 +94,13 @@ export class AnnouncementsPage implements OnInit {
       
       logout() {
         this.userservice.logout().subscribe((data: any) => {
-          localStorage.removeItem('authToken');
-localStorage.removeItem('userId');
-localStorage.removeItem('username');
-localStorage.removeItem('user_profile_pic');
-localStorage.removeItem('branch_id');
-localStorage.removeItem('rememberMe');
-localStorage.removeItem('full_name');
+          localStorage.removeItem('auth_token');
+          localStorage.removeItem('user_id');
+          localStorage.removeItem('username');
+          localStorage.removeItem('user_profile_pic');
+          localStorage.removeItem('branch_id');
+          localStorage.removeItem('remember_me');
+          localStorage.removeItem('full_name');
           this.router.navigate(['/sign-in']);
         });
       }

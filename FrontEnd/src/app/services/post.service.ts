@@ -7,12 +7,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class PostService {
   private base_url = 'http://localhost:8000/api/v0.1/post/';
 
-  user_id = localStorage.getItem('userId')
+  user_id = localStorage.getItem('user_id')
 
   constructor(private http:HttpClient) { }
 
   private getAuthHeaders(): HttpHeaders {
-    const token = localStorage.getItem('authToken');
+    const token = localStorage.getItem('auth_token');
   
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`

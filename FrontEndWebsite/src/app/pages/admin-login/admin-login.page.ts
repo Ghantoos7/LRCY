@@ -28,12 +28,12 @@ export class AdminLoginPage implements OnInit {
         const response = JSON.parse(JSON.stringify(data));
         if (response.status === 'Login successful') {
           // Store the token in local storage for future use
-          localStorage.setItem('authToken', response.token);
-          localStorage.setItem('adminId', response['user'].id);
+          localStorage.setItem('auth_token', response.token);
+          localStorage.setItem('admin_id', response['user'].id);
           localStorage.setItem('username', response['user'].username);
-          localStorage.setItem('userProfilePic', response['user'].user_profile_pic);
-          localStorage.setItem('branchId', response['user'].branch_id);
-          localStorage.setItem('fullName', response['user'].first_name+' '+response['user'].last_name);
+          localStorage.setItem('user_profile_pic', response['user'].user_profile_pic);
+          localStorage.setItem('branch_id', response['user'].branch_id);
+          localStorage.setItem('full_name', response['user'].first_name+' '+response['user'].last_name);
           localStorage.setItem('permission', response['user'].user_type_id);
           // Redirect the user to the dashboard or any other page
           this.router.navigate(['/panel']);
@@ -65,7 +65,7 @@ export class AdminLoginPage implements OnInit {
         }
       },
       error: (error) => {
-        console.log(error);
+
         this.alertCtrl.create({
           message: 'An error occurred. Please try again later.',
           buttons: ['OK']

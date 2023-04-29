@@ -60,7 +60,7 @@ export class SignupDetailsPage implements OnInit {
                     break;
                 case 'Organization ID found, user registered successfully':
                     // Store the token in local storage for future use
-                    localStorage.setItem('authToken', parsedResponse.token);
+                    localStorage.setItem('auth_token', parsedResponse.token);
                     // Redirect the user to the dashboard or any other page
                     this.router.navigate(['/sign-in']);
                     break;

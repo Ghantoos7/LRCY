@@ -579,7 +579,7 @@ class PostController extends Controller {
     }
 
 
-    function getComments($post_id, $sort_by = 'date') {
+    function getComments($post_id) {
 
         // Find the post
         $post = Post::find($post_id);
@@ -592,21 +592,13 @@ class PostController extends Controller {
         // Get the comments associated with the post
         $comments = Comment::where('post_id', $post_id);
 
-        // Sort by popularity
-        if ($sort_by === 'popularity') {
-            $comments->orderByRaw('(comment_like_count + comment_reply_count) DESC')->orderBy('created_at', 'desc');
-        }
-        // Sort by date
-        else {
-            $comments->orderBy('created_at', 'desc');
-        }
 
         // Get the comments as a collection of results
         $comments = $comments->get();
 
         // Remove the fields we don't want to return and get the user who made the comment
         $comments->transform(function ($comment) {
-            unset($comment->field1, $comment->field2, $comment->created_at, $comment->updated_at);
+            unset($comment->field1, $comment->field2, $comment->updated_at);
             $comment->user = volunteer_user::find($comment->user_id);
             unset($comment->user_id);
             return $comment;
@@ -631,7 +623,7 @@ class PostController extends Controller {
 
         // Transform the collection to remove unwanted fields and get user info
         $replies->transform(function ($reply) {
-            unset($reply->field1, $reply->field2, $reply->created_at, $reply->updated_at);
+            unset($reply->field1, $reply->field2, $reply->updated_at);
             $reply->user = volunteer_user::find($reply->user_id);
             unset($reply->user_id);
             return $reply;

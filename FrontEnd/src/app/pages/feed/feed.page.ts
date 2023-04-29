@@ -23,7 +23,7 @@ export class FeedPage implements OnInit {
 
   username = localStorage.getItem('username') as string;
   user_profile_pic = localStorage.getItem('user_profile_pic') as string;
-  user_id = localStorage.getItem('userId') as string;
+  user_id = localStorage.getItem('user_id') as string;
   posts: any;
   index: number=0;
   isLikedUser: { [key: number]: boolean } = {};
@@ -32,7 +32,8 @@ export class FeedPage implements OnInit {
   user: any;
   isLiked: { [key: number]: { postId: number, isLiked: boolean }[] } = {};
   likeCount: { [key: number]: number } = {};
-
+  commentCount: { [key: number]: number } = {};
+  errorMessage: string = '';
   constructor(private router:Router, private alertController: AlertController, private menuCtrl: MenuController, private service:PostService, private sharedService:SharedService, private userservice:UserService) { }
 
   ionViewWillLeave() {
@@ -66,6 +67,8 @@ export class FeedPage implements OnInit {
     event.target.src = '/assets/imgs/ext.jpg';
   }
 
+  
+
   ngOnInit() {
 
    this.router.events.subscribe((event: any) => {
@@ -77,14 +80,24 @@ export class FeedPage implements OnInit {
 
   fetchPosts() {
     this.service.getPosts().subscribe((data: any) => {
-      this.posts = data['posts'];
-      for (let i = 0; i < this.posts.length; i++) {
-        const postId = this.posts[i].id;
-        this.isLikedUser[postId] = localStorage.getItem(`user_${this.user_id}_post_${postId}`) === 'true'; // retrieve the like state from Local Storag
-        this.likeCount[postId] = this.posts[i].like_count;
+      if (data && data.hasOwnProperty('posts')) {
+        this.posts = data['posts'];
+        for (let i = 0; i < this.posts.length; i++) {
+          const postId = this.posts[i].id;
+          this.isLikedUser[postId] = localStorage.getItem(`user_${this.user_id}_post_${postId}`) === 'true'; // retrieve the like state from Local Storage
+          this.likeCount[postId] = this.posts[i].like_count;
+          this.commentCount[postId] = this.posts[i].comment_count;
+        }
+      } else {
+        this.posts = [];
+      }
+  
+      if (this.posts.length === 0) {
+        this.errorMessage = 'No posts found';
       }
     });
   }
+  
 
   getDaysAgo(postDate: string): string {
     const today = new Date();
@@ -152,13 +165,13 @@ export class FeedPage implements OnInit {
 
   logout() {
     this.userservice.logout().subscribe((data: any) => {
-      localStorage.removeItem('authToken');
-localStorage.removeItem('userId');
-localStorage.removeItem('username');
-localStorage.removeItem('user_profile_pic');
-localStorage.removeItem('branch_id');
-localStorage.removeItem('rememberMe');
-localStorage.removeItem('full_name');
+      localStorage.removeItem('auth_token');
+      localStorage.removeItem('user_id');
+      localStorage.removeItem('username');
+      localStorage.removeItem('user_profile_pic');
+      localStorage.removeItem('branch_id');
+      localStorage.removeItem('remember_me');
+      localStorage.removeItem('full_name');
       this.router.navigate(['/sign-in']);
     });
   }
@@ -173,7 +186,8 @@ localStorage.removeItem('full_name');
           message: 'Your comment was added!',
           buttons: ['OK']
         }).then(alert => alert.present());
-        window.location.reload();
+        this.commentCount[p_id]++;
+        this.comment_contents[i] = ''; // Clear the input field after successful submission
       }
     else if (status == "error"){
       this.alertController.create({
@@ -185,14 +199,26 @@ localStorage.removeItem('full_name');
     
    
   }
+
+  
+  public animateLikeButton(postId: number) {
+    const likeButton = document.getElementById(`like-button-${postId}`);
+    likeButton?.classList.add('like-animation');
+  
+    likeButton?.addEventListener('animationend', () => {
+      likeButton.classList.remove('like-animation');
+    });
+  }
+
   toggleLike(post_id: number) {
     if (this.isLikedUser[post_id]) {
-
-    this.unlikePost(post_id);
+      this.unlikePost(post_id);
     } else {
-    this.likePost(post_id);
+      this.likePost(post_id);
     }
+      this.animateLikeButton(post_id);
   }
+  
     
   likePost(post_id: number) {
     this.service.likePost(post_id).subscribe((data: any) => {

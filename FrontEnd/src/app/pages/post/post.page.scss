@@ -31,7 +31,7 @@
 
 .user-info{
     position: relative;
-    left: 20px;
+    left: 5%;
 }
 
 .user-info .profile-picture{
@@ -45,42 +45,75 @@
 
 .user-info .username{
     position: relative;
-    top: 0px;
-    left: 44px;
+    padding-left: 10%;
     font-size: 15px;
     color:black;
 }
 
 .user-info .name{
     position: relative;
-    left: -65px;
     font-size: 13px;
     color: black;
     top: 20px;
+    left: -35px;
 }
 
-.input {
+.chosen-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20%;
+    margin-top: 15%;
+    padding-bottom: 10%;
+    padding-top: 10%;
+  }
+  
+  .chosen-image {
+    max-width: 90%;
+    max-height: 200px;
+    object-fit: cover;
+  }
+  
+  .textarea-container {
     position: absolute;
     width: 300px;
-    height: 450px;
-    top: 415px;
+    top: 65%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  
+  .textarea {
+    position: absolute;
+    width: 300px;
+    height: 100px;
+    top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 10px;
-    --background: #E9E7E7;
-    --color: #8F8F8F;
-    --padding-end: 35px;
-    --padding-start: 10px;
-    --placeholder-color: #8F8F8F;
-    --placeholder-opacity: 0.8;
-}
+    background: #f4f0f0;
+    color: #7c7c7c;
+    padding: 10px 35px 10px 10px;
+    resize: none;
+    overflow: hidden;
+    font-family: inherit;
+    font-size: inherit;
+  }
+  
+  .textarea:focus {
+    outline: none;
+  }
+  
+  .post-button {
+    position: absolute; /* Add this line */
+    bottom: 20px; /* Add this line */
+    left: 50%; /* Add this line */
+    transform: translateX(-50%); /* Add this line */
+    --background: #45579A;
+    width: 80%;
+  }
+  
 
-.upload-options{
-    position: absolute;
-    top: 680px;
-    font-size: 25px;
-    color: #45579A;
-}
 
 .camera{
     position: relative;
@@ -92,12 +125,13 @@
     left: 60px;
 }
 
-.post-button{
-    position: relative;
-    top: 610px;
-    width: 80%; 
-    margin: 0 auto; 
-    --background: #45579A;
+
+.upload-options{
+    position: absolute;
+    top: 79%;
+    left: 20%;
+    font-size: 20px;
+    color: #45579A;
 }
 
 

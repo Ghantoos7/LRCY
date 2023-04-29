@@ -22,7 +22,7 @@ export class AnnouncementsPage implements OnInit {
   announcements: any = [];
   filteredAnnouncements: any = [];
   i: number = 0;
-  current_id = localStorage.getItem('adminId') as string;
+  current_id = localStorage.getItem('admin_id') as string;
   branch_id = localStorage.getItem('branch_id') as string;
   searchControl: FormControl = new FormControl('');
 

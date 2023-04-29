@@ -35,7 +35,6 @@ export class MemberProfilePage implements OnInit {
 
   ngOnInit() {
     const user = history.state.user;
-    console.log(user)
     this.user_id = user.id;
     this.first_name = user.first_name;
     this.last_name = user.last_name;
@@ -53,7 +52,6 @@ export class MemberProfilePage implements OnInit {
 
   editUser(){
     this.adminService.editUser(this.user_id, this.first_name,this.last_name,this.mapUserStatus(this.is_active), this.user_start_date,this.user_end_date,this.user_position, this.mapUserType(this.user_type_id), this.gender,this.user_dob).subscribe((response: any) => {
-      console.log(response)
       const parsedResponse = JSON.parse(JSON.stringify(response));
       if(parsedResponse.status == 'success') {
         this.alertController.create({

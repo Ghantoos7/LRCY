@@ -24,10 +24,10 @@ export class RequestsPage implements OnInit {
     this.adminService.getRequests(this.branch_id).subscribe((data)=>{
       const response=this.requests = data;
       const parsedResponse = JSON.parse(JSON.stringify(response));
-      console.log(parsedResponse);
+     
       if (parsedResponse.status == "success") {
         this.requests = parsedResponse.requests;
-        console.log(this.requests);
+      
       }
       else{
         this.requests = [];
@@ -47,7 +47,7 @@ export class RequestsPage implements OnInit {
             this.adminService.acceptRequest(request_id).subscribe((data)=>{
               const response = data;
               const parsedResponse = JSON.parse(JSON.stringify(response));
-              console.log(parsedResponse);
+             
               if (parsedResponse.status == "success") {
                 this.ngOnInit();
               }
@@ -74,7 +74,7 @@ export class RequestsPage implements OnInit {
             this.adminService.declineRequest(request_id).subscribe((data)=>{
               const response = data;
               const parsedResponse = JSON.parse(JSON.stringify(response));
-              console.log(parsedResponse);
+            
               if (parsedResponse.status == "success") {
                 this.ngOnInit();
               }

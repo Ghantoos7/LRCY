@@ -26,9 +26,9 @@
 
   <ion-content class="ion-padding">
     
-     <ion-searchbar animated="true" placeholder="Search up your event title"></ion-searchbar>
+    <ion-searchbar animated="true" placeholder="Search for an event..." [formControl]="searchControl"></ion-searchbar>
 
-  <ion-card>
+  <ion-card *ngIf="!searchPerformed || filtered_yah_events.length > 0">
     <ion-card-header>
       <ion-card-title>Youth & Health
       </ion-card-title>
@@ -36,12 +36,13 @@
     <ion-card-content>
       <div class="ion-grid">
         <ion-row>
-          <ion-col size="3" *ngFor="let yah_event of yah_events">
+          <ion-col size="3" *ngFor="let yah_event of filtered_yah_events">
             <ion-card (click)="goToEditGallery(yah_event)">
               <div class="badge-yah">
                 <ion-icon [name]="mapEventIcon(yah_event.event_type_id)" size="large"></ion-icon>
               </div>
-              <ion-img  src="http://127.0.0.1:8000/storage/images/{{yah_event.event_main_picture}}" onerror="this.src='assets/imgs/ext.jpg'" class="custom-image"></ion-img>
+              <img *ngIf="yah_event.event_main_picture !== null" src="http://127.0.0.1:8000/storage/images/{{yah_event.event_main_picture}}" onerror="this.src='assets/imgs/ext.jpg'"  />
+              <img *ngIf="yah_event.event_main_picture===null" src="assets/imgs/ext.jpg" />
               <ion-card-header class="custom-card-header-yah">
                 <ion-card-subtitle class="custom-subtitle">{{yah_event.event_title}}</ion-card-subtitle>
               </ion-card-header>
@@ -55,7 +56,7 @@
   </ion-card>
 
 
-  <ion-card>
+  <ion-card *ngIf="!searchPerformed || filtered_environment_events.length > 0">
     <ion-card-header>
       <ion-card-title>Environment
       </ion-card-title>
@@ -63,12 +64,15 @@
     <ion-card-content>
       <div class="ion-grid">
         <ion-row>
-          <ion-col size="3" *ngFor="let environment_event of environment_events">
+          <ion-col size="3" *ngFor="let environment_event of filtered_environment_events">
             <ion-card (click)="goToEditGallery(environment_event)">
               <div class="badge-env">
                 <ion-icon [name]="mapEventIcon(environment_event.event_type_id)" size="large"></ion-icon>
               </div>
-              <ion-img src="http://127.0.0.1:8000/storage/images/{{environment_event.event_main_picture}}" onerror="this.src='assets/imgs/ext.jpg'" class="custom-image"></ion-img>
+              <img *ngIf="environment_event.event_main_picture !== null" src="http://127.0.0.1:8000/storage/images/{{environment_event.event_main_picture}}" onerror="this.src='assets/imgs/ext.jpg'"  />
+              <img *ngIf="environment_event.event_main_picture===null" src="assets/imgs/ext.jpg" />
+              
+             
               <ion-card-header class="custom-card-header-env">
                 <ion-card-subtitle class="custom-subtitle">{{environment_event.event_title}}</ion-card-subtitle>
               </ion-card-header>
@@ -83,7 +87,7 @@
  
 
 
-  <ion-card>
+  <ion-card *ngIf="!searchPerformed || filtered_hvp_events.length > 0">
     <ion-card-header>
       <ion-card-title>HVP
       </ion-card-title>
@@ -91,12 +95,14 @@
     <ion-card-content>
       <div class="ion-grid">
         <ion-row>
-          <ion-col size="3" *ngFor="let hvp_event of hvp_events">
+          <ion-col size="3" *ngFor="let hvp_event of filtered_hvp_events">
             <ion-card (click)="goToEditGallery(hvp_event)">
               <div class="badge-hvp">
                 <ion-icon [name]="mapEventIcon(hvp_event.event_type_id)" size="large"></ion-icon>
               </div>
-              <ion-img src="http://127.0.0.1:8000/storage/images/{{hvp_event.event_main_picture}}" onerror="this.src='assets/imgs/ext.jpg'" class="custom-image"></ion-img>
+              <img *ngIf="hvp_event.event_main_picture !== null" src="http://127.0.0.1:8000/storage/images/{{hvp_event.event_main_picture}}" onerror="this.src='assets/imgs/ext.jpg'"  />
+              <img *ngIf="hvp_event.event_main_picture===null" src="assets/imgs/ext.jpg" />
+            
               <ion-card-header class="custom-card-header-hvp">
                 <ion-card-subtitle class="custom-subtitle">{{hvp_event.event_title}}</ion-card-subtitle>
               </ion-card-header>
@@ -113,7 +119,7 @@
 
 
 
-  <ion-card>
+  <ion-card *ngIf="!searchPerformed || filtered_other_events.length > 0">
     <ion-card-header>
       <ion-card-title>Other
       </ion-card-title>
@@ -121,12 +127,14 @@
     <ion-card-content>
       <div class="ion-grid">
         <ion-row>
-          <ion-col size="3" *ngFor="let other_event of other_events">
+          <ion-col size="3" *ngFor="let other_event of filtered_other_events">
             <ion-card (click)="goToEditGallery(other_event)">
               <div class="badge-other">
                 <ion-icon [name]="mapEventIcon(other_event.event_type_id)" size="large"></ion-icon>
               </div>
-              <ion-img src="http://127.0.0.1:8000/storage/images/{{other_event.event_main_picture}}" onerror="this.src='assets/imgs/ext.jpg'" class="custom-image"></ion-img>
+              <img *ngIf="other_event.event_main_picture !== null" src="http://127.0.0.1:8000/storage/images/{{other_event.event_main_picture}}" onerror="this.src='assets/imgs/ext.jpg'"  />
+              <img *ngIf="other_event.event_main_picture===null" src="assets/imgs/ext.jpg" />
+              
               <ion-card-header class="custom-card-header-other">
                 <ion-card-subtitle class="custom-subtitle">{{other_event.event_title}}</ion-card-subtitle>
               </ion-card-header>

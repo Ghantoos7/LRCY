@@ -14,7 +14,7 @@ export class AuthService {
 
   isLoggedIn(){
     // use local storage to see if the user is logged in
-    const token = localStorage.getItem('authToken');
+    const token = localStorage.getItem('auth_token');
     if (token) {
       return JSON.parse(JSON.stringify(token));
     } else {

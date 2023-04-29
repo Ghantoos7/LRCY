@@ -15,7 +15,9 @@
   <ion-list [inset]=true>
 
     <ion-item *ngFor="let request of requests">
-      <ion-img src="{{request['user'].user_profile_pic}}"></ion-img>
+      <img *ngIf="request['user'].user_profile_pic !== null" src="http://127.0.0.1:8000/storage/images/{{request['user'].user_profile_pic}}"  onerror="this.onerror=null; this.src='https://ionicframework.com/docs/img/demos/avatar.svg';" />
+      <img *ngIf="request['user'].user_profile_pic===null" src="https://ionicframework.com/docs/img/demos/avatar.svg"  />
+
       <ion-grid>
         <ion-row>
           <ion-col><ion-label>{{request['user'].first_name}} {{request['user'].last_name}}</ion-label></ion-col>
