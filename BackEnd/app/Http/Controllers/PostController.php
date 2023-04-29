@@ -606,7 +606,7 @@ class PostController extends Controller {
 
         // Remove the fields we don't want to return and get the user who made the comment
         $comments->transform(function ($comment) {
-            unset($comment->field1, $comment->field2, $comment->created_at, $comment->updated_at);
+            unset($comment->field1, $comment->field2, $comment->updated_at);
             $comment->user = volunteer_user::find($comment->user_id);
             unset($comment->user_id);
             return $comment;
