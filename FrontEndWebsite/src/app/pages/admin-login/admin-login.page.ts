@@ -65,7 +65,7 @@ export class AdminLoginPage implements OnInit {
         }
       },
       error: (error) => {
-        console.log(error);
+
         this.alertCtrl.create({
           message: 'An error occurred. Please try again later.',
           buttons: ['OK']
