@@ -32,7 +32,7 @@ export class AdminLoginPage implements OnInit {
           localStorage.setItem('adminId', response['user'].id);
           localStorage.setItem('username', response['user'].username);
           localStorage.setItem('userProfilePic', response['user'].user_profile_pic);
-          localStorage.setItem('branchId', response['user'].branch_id);
+          localStorage.setItem('branch_id', response['user'].branch_id);
           localStorage.setItem('fullName', response['user'].first_name+' '+response['user'].last_name);
           localStorage.setItem('permission', response['user'].user_type_id);
           // Redirect the user to the dashboard or any other page
