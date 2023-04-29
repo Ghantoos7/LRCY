@@ -68,7 +68,6 @@ export class CommentsPage implements OnInit {
 
     this.postService.getComments(this.post_id).subscribe((data: any) => {
       this.comments = data['comments'];
-      console.log(this.comments)
       if (this.comments && this.comments.length > 0) {
         for (let i = 0; i < this.comments.length; i++) {
           const commentId = this.comments[i].id;

@@ -32,7 +32,6 @@ export class PostPage implements OnInit {
   constructor(private router:Router, private userService:UserService, private postService:PostService, private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
-    console.log(this.user_id);
     this.userService.getUser(this.branch_id, this.user_id).subscribe(response => {
       this.user = response;
       this.last_name = (this.user['user'].last_name);
@@ -75,7 +74,6 @@ export class PostPage implements OnInit {
       formData.append('post_media', this.post_src_img);
       this.postService.post(formData).subscribe((response) => {
         const parsedResponse = JSON.parse(JSON.stringify(response));
-        console.log(parsedResponse);
         if(parsedResponse.status == 'success'){
           
 this.router.navigate(['/feed']);
