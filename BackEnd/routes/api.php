@@ -67,7 +67,7 @@ Route::group(["prefix" => "v0.1",], function(){
             Route::post("delete_reply", [PostController::class, "deleteReply"]);
             Route::post("edit_comment", [PostController::class, "editComment"]);
             Route::post("edit_reply",[PostController::class, "editReply"]);
-            Route::get("get_comments/{post_id}/{sort_by?}", [PostController::class, "getComments"]);
+            Route::get("get_comments/{post_id}", [PostController::class, "getComments"]);
             Route::get("get_replies/{comment_id}", [PostController::class, "getReplies"]);
             Route::get("get_post_likes/{post_id}", [PostController::class, "getPostLikes"]);
             Route::get("get_comment_likes/{comment_id}", [PostController::class, "getCommentLikes"]);

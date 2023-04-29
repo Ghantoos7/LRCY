@@ -2215,7 +2215,7 @@
                             </div>
                             <div class="card-body">
                                 <p>The createPost function creates a new post in the database with the specified user ID, post type, and caption.</p>
-                                <p>If the post type is "image" or "video", the function requires an uploaded file as "post_media".</p>
+                                <p>If the post type is "image", the function requires an uploaded file as "post_media".</p>
                             </div>
                         </div>
 
@@ -2241,7 +2241,7 @@
                                         <tr>
                                             <td>post_type</td>
                                             <td>string</td>
-                                            <td>The type of the post. Must be one of "text", "image", or "video".</td>
+                                            <td>The type of the post. Must be one of "text" or "image".</td>
                                         </tr>
                                         <tr>
                                             <td>post_caption</td>
@@ -2251,7 +2251,7 @@
                                         <tr>
                                             <td>post_media</td>
                                             <td>file</td>
-                                            <td>The file to upload for the post media. Required if the post type is "image" or "video".</td>
+                                            <td>The file to upload for the post media. Required if the post type is "image.</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -2300,7 +2300,7 @@
                                         </tr>
                                         <tr>
                                             <td>Invalid post type</td>
-                                            <td>The post_type field in the request must be one of: text, image, or video.</td>
+                                            <td>The post_type field in the request must be one of: text or image.</td>
                                         </tr>
                                         <tr>
                                             <td>Invalid file type</td>
@@ -2316,166 +2316,1858 @@
                         </div>
                     </div>
 
-
-
-
-
-
-
                         <!--------------------------------------------------------------------->
+                        <div class="api-card">
+                            <h2>3.2 editPost</h2>
+                            <h3>POST</h3>
+                            <h3>http://example.com/api/v0.1/post/edit_post</h3>
+                            <div class="card mb-3">
+                                <div class="card-header">
+                                    <h4>Parameters:</h4>
+                                </div>
+                                <div class="card-body">
+                                    <table class="parameter-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Type</th>
+                                                <th>Description</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Request</td>
+                                                <td>Request object</td>
+                                                <td>A Request object containing the following input parameters:</td>
+                                            </tr>
+                                            <tr>
+                                                <td>post_id</td>
+                                                <td>Integer</td>
+                                                <td>The ID of the post to be edited.</td>
+                                            </tr>
+                                            <tr>
+                                                <td>post_caption</td>
+                                                <td>String</td>
+                                                <td>The new caption for the post.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="card mb-3">
+                            <div class="card-header">
+                                <h4>Description:</h4>
+                            </div>
+                            <div class="card-body">
+                                <p>The <code>editPost(Request $request)</code> function takes a Request object as input, which includes the post ID and the new caption for the post. The function checks if the post exists in the database based on the post ID. If the post exists, the function updates the post's caption to the new value. If the update is successful, the function returns a JSON response with a "Post updated successfully" message. If the update fails, the function returns a JSON response with a "Post could not be updated" message.</p>
+                            </div>
+                        </div>
 
+                        <div class="card mb-3">
+                            <div class="card-header">
+                                <h4>Returns:</h4>
+                            </div>
+                            <div class="card-body">
+                                <table class="parameter-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>JSON</td>
+                                            <td>A JSON response containing a status message. The response has two key-value pairs, where the keys are 'status' and 'message', and the values are the status message.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
 
+                        <div class="card mb-3">
+                            <div class="card-header">
+                                <h4>Errors:</h4>
+                            </div>
+                            <div class="card-body">
+                                <table class="parameter-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Error</th>
+                                            <th>Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Post not found</td>
+                                            <td>If the post with the specified ID does not exist in the database.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Post could not be updated</td>
+                                            <td>If the post caption could not be updated in the database.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        </div>
 
+                         <!------------------------------------------------------------------>
 
+                         <div class="api-card">
+                        <h2>3.3 deletePost</h2>
+                        <h3>POST</h3>
+                        <h3>http://example.com/api/v0.1/post/delete_post</h3>
+                        <div class="card mb-3">
+                            <div class="card-header">
+                                <h4>Parameters:</h4>
+                            </div>
+                            <div class="card-body">
+                                <table class="parameter-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Request</td>
+                                            <td>Request object</td>
+                                            <td>A Request object containing the following input parameters:</td>
+                                        </tr>
+                                        <tr>
+                                            <td>post_id</td>
+                                            <td>Integer</td>
+                                            <td>The ID of the post to be deleted.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>user_id</td>
+                                            <td>Integer</td>
+                                            <td>The ID of the user who wants to delete the post.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Description:</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>The <code>deletePost(Request $request)</code> function takes a Request object as input, which includes the post ID and the ID of the user who wants to delete the post. The function checks if the post exists in the database based on the post ID. If the post exists, the function checks if the user ID from the request matches the user ID of the post. If the user ID matches, the function deletes the post, as well as all associated likes, comments, and replies from the database. If the delete is successful, the function returns a JSON response with a "Post deleted successfully" message. If the delete fails, the function returns a JSON response with a "Post could not be deleted" message.</p>
+                        </div>
+                    </div>
 
-                         <!-----------------------1 api here------------------------------------------->
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Returns:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>JSON</td>
+                                        <td>A JSON response containing a status message. The response has two key-value pairs, where the keys are 'status' and 'message', and the values are the status message.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
 
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Errors:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Error</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Post not found</td>
+                                        <td>If the post with the specified ID does not exist in the database.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>You are not authorized to delete this post</td>
+                                        <td>If the user ID from the request does not match the user ID of the post.</td>
+                                        </tr>
+                                    <tr>
+                                    <td>Post could not be deleted</td>
+                                <td>If the post could not be deleted from the database.</td>
+                                </tr>
+                            </tbody>
+                            </table>
+                        </div>
+                        </div>
+                    </div>
+                    <!--------------------------------------------------------------------->
+                    <div class="api-card">
+                    <h2>3.4 getPosts</h2>
+                    <h3>GET</h3>
+                    <h3>http://example.com/api/v0.1/post/get_posts/{user_id?}</h3>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Parameters:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>user_id</td>
+                                        <td>Integer</td>
+                                        <td>The ID of the user whose posts will be retrieved. If not provided, all posts will be retrieved.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                    <div class="card-header">
+                        <h4>Description:</h4>
+                    </div>
+                    <div class="card-body">
+                        <p>The <code>getPosts($user_id = null)</code> function retrieves posts from the database based on the user ID. If a user ID is provided, the function checks if the user exists in the database. If the user does not exist, the function returns an error response. If no user ID is provided, the function retrieves all posts from the database. The retrieved posts are sorted in descending order based on the post date. The function removes unwanted fields from each post and retrieves the name, profile picture, and username of the post owner based on the user ID. If no user is found for a post, the function returns null. The function returns a JSON response containing a status message, and an array of post objects, each containing the post details and the user details.</p>
+                    </div>
+                </div>
 
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h4>Returns:</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="parameter-table">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>JSON</td>
+                                    <td>A JSON response containing a status message, and an array of post objects, each containing the post details and the user details. The response has three key-value pairs, where the keys are 'status', 'message', and 'posts', and the values are the status message, the message explaining the result of the API request, and the array of post objects respectively.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h4>Errors:</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="parameter-table">
+                            <thead>
+                                <tr>
+                                    <th>Error</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>User not found</td>
+                                    <td>If the user with the specified ID does not exist in the database.</td>
+                                </tr>
+                                <tr>
+                                    <td>No posts found</td>
+                                    <td>If no posts were found in the database.</td>
+                                </tr>
+                            </div>
+                        </div>
+                        
+                    <div class="card mb-3">
+                        <div class="card-header">
+                        <h4>Errors:</h4>
+                            </div>
+                        <div class="card-body">
+                        <table class="parameter-table">
+                        <thead>
+                        <tr>
+                        <th>Error</th>
+                        <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>User not found</td>
+                                <td>If the user with the specified ID does not exist in the database.</td>
+                            </tr>
+                            <tr>
+                                <td>No posts found</td>
+                                <td>If no posts were found in the database.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
 
                     <!--------------------------------------------------------------------->
 
+                    <div class="api-card">
+                    <h2>3.5 getPost</h2>
+                    <h3>GET</h3>
+                    <h3>http://example.com/api/v0.1/post/get_post/{post_id}</h3>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Description:</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>The getPost() function retrieves a single post from the database based on the post ID provided in the
+                                URL parameter. If the post is found, the function returns the post data along with the name of the user who
+                                posted the post. If the post is not found, the function returns an error response.</p>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                    <div class="card-header">
+                        <h4>Parameters:</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="parameter-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>post_id</td>
+                                    <td>integer</td>
+                                    <td>The ID of the post to retrieve from the database.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h4>Returns:</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="parameter-table">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>JSON</td>
+                                    <td>A JSON response containing the post data and name of the user who posted the post. The
+                                        response has three key-value pairs:
+                                        <ul>
+                                            <li>'status': A string indicating the status of the response, either "success" or "error".</li>
+                                            <li>'message': A string containing a message describing the status of the response.</li>
+                                            <li>'post': An object containing the post data and name of the user who posted the post.</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h4>Errors:</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="parameter-table">
+                            <thead>
+                                <tr>
+                                    <th>Error</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Post not found</td>
+                                    <td>If the post with the specified ID does not exist in the database.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                    </div>
+                    <!--------------------------------------------------------------------->
+                    <div class="api-card">
+                        <h2>3.6 likePost</h2>
+                        <h3>POST</h3>
+                        <h3>http://example.com/api/v0.1/post/like_post</h3>
+                        <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Parameters:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>post_id</td>
+                                        <td>integer</td>
+                                        <td>The ID of the post to like</td>
+                                    </tr>
+                                    <tr>
+                                        <td>user_id</td>
+                                        <td>integer</td>
+                                        <td>The ID of the user liking the post</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
 
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Description:</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>The likePost() function is used to like a post. The function takes in the post ID and user ID as parameters and checks if both the post and the user exist in the database. If either the post or the user is not found, the function returns an error response. If the user has already liked the post, the function returns an error response. If the user has not liked the post yet, a new like instance is created with the post ID, user ID, and the current date, and is saved to the database. If the like is saved successfully, the function increments the post like count and returns a success response. If the like cannot be saved, the function returns an error response. If the post like count cannot be updated, the function returns an error response.</p>
+                        </div>
+                    </div>
 
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Returns:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>JSON</td>
+                                        <td>A JSON response indicating whether the like was successful or not. The response has two key-value pairs, where 'status' indicates the status of the operation and 'message' provides additional information about the operation.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
 
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Errors:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Error</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Post not found</td>
+                                        <td>If the post with the specified ID does not exist in the database.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>User not found</td>
+                                        <td>If the user with the specified ID does not exist in the database.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>You have already liked this post</td>
+                            <td>If the user has already liked the post.</td>
+                            </tr>
+                            <tr>
+                                <td>success</td>
+                                <td>If the post was liked successfully.</td>
+                            </tr>
+                            <tr>
+                                <td>error</td>
+                                td>If the post could not be liked or the like count could not be updated.</td>
+                                </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+                    <!--------------------------------------------------------------------->
+                    <div class="api-card">
+                    <h2>3.7 unlikePost</h2>
+                    <h3>POST</h3>
+                    <h3>http://example.com/api/v0.1/post/unlike_post</h3>
 
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Parameters:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>post_id</td>
+                                        <td>int</td>
+                                        <td>The ID of the post to unlike</td>
+                                    </tr>
+                                    <tr>
+                                        <td>user_id</td>
+                                        <td>int</td>
+                                        <td>The ID of the user unliking the post</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
 
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Description:</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>The unlikePost API function unlikes a post by a user. The function takes in two parameters: the post ID and the user ID. If the post and user exist in the database, the function checks if the user has already liked the post. If the user has not liked the post, the function returns an error response. If the user has liked the post, the function deletes the like from the database, decrements the post like count, and returns a success response. If the like could not be deleted or the post like count could not be updated, the function returns an error response.</p>
+                        </div>
+                    </div>
 
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Returns:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>JSON</td>
+                                        <td>A JSON response containing the status of the unlike operation and a message. The response has two key-value pairs: 'status' and 'message'.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
 
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Errors:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Error</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Post not found</td>
+                                        <td>If the post with the specified ID does not exist in the database.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>User not found</td>
+                                        <td>If the user with the specified ID does not exist in the database.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>You have not liked this post</td>
+                                        <td>If the user has not liked the post.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Post could not be unliked</td>
+                                        <td>If the like instance could not be deleted from the database.</td>
+                                        </tr>
+                                        <tr>
+                                    <td>Post like count could not be updated</td>
+                                    <td>If the like instance was successfully deleted from the database but the post like count could not be decremented.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+                    <!--------------------------------------------------------------------->
+                    <div class="api-card">
+                    <h2>3.8 commentPost</h2>
+                    <h3>POST</h3>
+                    <h3>http://example.com/api/v0.1/post/comment_post</h3>
+                    <div class="card mb-3">
+                    <div class="card-header">
+                        <h4>Parameters:</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="parameter-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>post_id</td>
+                                    <td>integer</td>
+                                    <td>The ID of the post to comment on</td>
+                                </tr>
+                                <tr>
+                                    <td>user_id</td>
+                                    <td>integer</td>
+                                    <td>The ID of the user making the comment</td>
+                                </tr>
+                                <tr>
+                                    <td>comment_content</td>
+                                    <td>string</td>
+                                    <td>The content of the comment</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h4>Description:</h4>
+                    </div>
+                    <div class="card-body">
+                        <p>The `commentPost()` function is used to create a new comment on a post. The function takes in the post ID, user ID, and comment content as parameters and validates them. If any of the parameters are missing, the function returns an error response. If both the post and the user exist in the database, the function creates a new comment instance with the post ID, user ID, comment content, current date, and default values for the comment like count and reply count. The comment is then saved to the database. If the comment is saved successfully, the function increments the post comment count and returns a success response. If the comment cannot be saved, the function returns an error response. If the post comment count cannot be updated, the function returns an error response.</p>
+                    </div>
+                </div>
 
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h4>Returns:</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="parameter-table">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>JSON</td>
+                                    <td>A JSON response indicating whether the comment was posted successfully or not. The response has two key-value pairs, where 'status' indicates the status of the operation and 'message' provides additional information about the operation.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h4>Errors:</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="parameter-table">
+                            <thead>
+                                <tr>
+                                    <th>Error</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Post not found</td>
+                                    <td>If the post with the specified ID does not exist in the database.</td>
+                              </tr>
+                                <tr>
+                                    <td>User not found</td>
+                                    <td>If the user with the specified ID does not exist in the database.</td>
+                                </tr>
+                                <tr>
+                                    <td>Comment could not be posted</td>
+                                    <td>If the comment instance could not be saved to the database.</td>
+                                </tr>
+                                <tr>
+                                    <td>Post comment count could not be updated</td>
+                                    <td>If the comment instance was successfully saved to the database but the post comment count could not be incremented.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+                    <!--------------------------------------------------------------------->
+                    <div class="api-card">
+                <h2>3.9 replyComment</h2>
+                <h3>POST</h3>
+                <h3>http://example.com/api/v0.1/post/reply_comment</h3>
+
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h4>Parameters:</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="parameter-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>comment_id</td>
+                                    <td>int</td>
+                                    <td>The ID of the comment to reply to</td>
+                                </tr>
+                                <tr>
+                                    <td>user_id</td>
+                                    <td>int</td>
+                                    <td>The ID of the user replying to the comment</td>
+                                </tr>
+                                <tr>
+                                    <td>reply_content</td>
+                                    <td>string</td>
+                                    <td>The content of the reply</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h4>Description:</h4>
+                    </div>
+                    <div class="card-body">
+                        <p>The replyComment API function is used to reply to a comment. The function takes in the comment ID, user ID, and reply content as parameters and checks if both the comment and the user exist in the database. If either the comment or the user is not found, the function returns an error response. If the user has not replied to the comment yet, a new reply instance is created with the comment ID, user ID, and the current date, and is saved to the database. If the reply is saved successfully, the function increments the comment reply count and returns a success response. If the reply cannot be saved, the function returns an error response. If the comment reply count cannot be updated, the function returns an error response.</p>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h4>Returns:</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="parameter-table">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>JSON</td>
+                                    <td>A JSON response indicating whether the reply was successful or not. The response has two key-value pairs, where 'status' indicates the status of the operation and 'message' provides additional information about the operation.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h4>Errors:</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="parameter-table">
+                            <thead>
+                                <tr>
+                                    <th>Error</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Comment not found</td>
+                                    <td>If the comment with the specified ID does not exist in the database.</td>
+                                    <td>User not found</td>
+                                    <td>If the user with the specified ID does not exist in the database.</td>
+                                </tr>
+                                <tr>
+                                    <td>success</td>
+                                    <td>If the reply was posted successfully.</td>
+                                </tr>
+                                <tr>
+                                    <td>error</td>
+                                    <td>If the reply could not be posted or the comment reply count could not be updated.</td>
+                                </tr>
+                                </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
 
                     <!--------------------------------------------------------------------->
+                    <div class="api-card">
+                    <h2>3.10 likeComment</h2>
+                    <h3>POST</h3>
+                    <h3>http://example.com/api/v0.1/post/like_comment</h3>
 
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Parameters:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>comment_id</td>
+                                        <td>integer</td>
+                                        <td>The ID of the comment to like</td>
+                                    </tr>
+                                    <tr>
+                                        <td>user_id</td>
+                                        <td>integer</td>
+                                        <td>The ID of the user liking the comment</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
 
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Description:</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>The likeComment() function is used to like a comment. The function takes in the comment ID and user ID as parameters and checks if both the comment and the user exist in the database. If either the comment or the user is not found, the function returns an error response. If the user has already liked the comment, the function returns an error response. If the user has not liked the comment yet, a new Comment_like instance is created with the comment ID, user ID, and the current date, and is saved to the database. If the like is saved successfully, the function increments the comment like count and returns a success response. If the like cannot be saved, the function returns an error response. If the comment like count cannot be updated, the function returns an error response.</p>
+                        </div>
+                    </div>
 
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Returns:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>JSON</td>
+                                        <td>A JSON response indicating whether the like was successful or not. The response has two key-value pairs, where 'status' indicates the status of the operation and 'message' provides additional information about the operation.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
 
-
-
-
-
-
-
-
-
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Errors:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Error</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Comment not found</td>
+                                        <td>If the comment with the specified ID does not exist in the database.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>User not found</td>
+                                        <td>If the user with the specified ID does not exist in the database.</td>
+                                        </tr>
+                                        <tr>
+                                        <td>You have already liked this comment</td>
+                                        <td>If the user has already liked the comment.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
                     <!--------------------------------------------------------------------->
+                    <div class="api-card">
+                <h2>3.11 unlikeComment</h2>
+                <h3>POST</h3>
+                <h3>http://example.com/api/v0.1/post/unlike_comment</h3>
+                <div class="card mb-3">
+                <div class="card-header">
+                    <h4>Parameters:</h4>
+                </div>
+                <div class="card-body">
+                    <table class="parameter-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>comment_id</td>
+                                <td>integer</td>
+                                <td>The ID of the comment to unlike</td>
+                            </tr>
+                            <tr>
+                                <td>user_id</td>
+                                <td>integer</td>
+                                <td>The ID of the user unliking the comment</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h4>Description:</h4>
+                </div>
+                <div class="card-body">
+                    <p>The unlikeComment() function is used to unlike a comment. The function takes in the comment ID and user ID as parameters and checks if both the comment and the user exist in the database. If either the comment or the user is not found, the function returns an error response. If the user has not already liked the comment, the function returns an error response. If the user has already liked the comment, the corresponding Comment_like instance is deleted from the database. If the like is deleted successfully, the function decrements the comment like count and returns a success response. If the like cannot be deleted, the function returns an error response. If the comment like count cannot be updated, the function returns an error response.</p>
+                </div>
+            </div>
 
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h4>Returns:</h4>
+                </div>
+                <div class="card-body">
+                    <table class="parameter-table">
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>JSON</td>
+                                <td>A JSON response indicating whether the unlike was successful or not. The response has two key-value pairs, where 'status' indicates the status of the operation and 'message' provides additional information about the operation.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
-
-
-
-
-
-
-
-
-
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h4>Errors:</h4>
+                </div>
+                <div class="card-body">
+                    <table class="parameter-table">
+                        <thead>
+                            <tr>
+                                <th>Error</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Comment not found</td>
+                                <td>If the comment with the specified ID does not exist in the database.</td>
+                            </tr>
+                            <tr>
+                                <td>User not found</td>
+                                <td>If the user with the specified ID does not exist in the database.</td>
+                            </tr>
+                            <tr>
+                                <td>You have not liked this comment</td>
+                            <td>If the user has not liked the comment yet and tries to unlike it.</td>
+                            </tr>
+                            <tr>
+                            <td>Comment not found</td>
+                            <td>If the comment with the specified ID does not exist in the database.</td>
+                            </tr>
+                            <tr>
+                            <td>User not found</td>
+                            <td>If the user with the specified ID does not exist in the database.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
                     <!--------------------------------------------------------------------->
+                    <div class="api-card">
+                    <h2>3.12 deleteComment</h2>
+                    <h3>POST</h3>
+                    <h3>http://example.com/api/v0.1/post/delete_comment</h3>
+                    <div class="card mb-3">
+                    <div class="card-header">
+                        <h4>Parameters:</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="parameter-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>comment_id</td>
+                                    <td>integer</td>
+                                    <td>The ID of the comment to delete</td>
+                                </tr>
+                                <tr>
+                                    <td>user_id</td>
+                                    <td>integer</td>
+                                    <td>The ID of the user deleting the comment</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card mb-3">
+                <div class="card-header">
+                    <h4>Description:</h4>
+                </div>
+                <div class="card-body">
+                    <p>The deleteComment() function is used to delete a comment. The function takes in the comment ID and user ID as parameters and checks if both the comment and the user exist in the database. If either the comment or the user is not found, the function returns an error response. If the user is not the owner of the comment, the function returns an error response. The function deletes the comment and all associated likes and replies from the database. If the comment is deleted successfully, the function decrements the comment count of the post associated with the comment and returns a success response. If the comment cannot be deleted, the function returns an error response. If the post comment count cannot be updated, the function returns an error response.</p>
+                </div>
+            </div>
 
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h4>Returns:</h4>
+                </div>
+                <div class="card-body">
+                    <table class="parameter-table">
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>JSON</td>
+                                <td>A JSON response indicating whether the comment was deleted successfully or not. The response has two key-value pairs, where 'status' indicates the status of the operation and 'message' provides additional information about the operation.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
-
-
-
-
-
-
-
-
-
-
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h4>Errors:</h4>
+                </div>
+                <div class="card-body">
+                    <table class="parameter-table">
+                        <thead>
+                            <tr>
+                                <th>Error</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Comment not found</td>
+                                <td>If the comment with the specified ID does not exist in the database.</td>
+                            </tr>
+                            <tr>
+                                <td>User not found</td>
+                                <td>If the user with the specified ID does not exist in the database.</td>
+                            </tr>
+                            <tr>
+                                <td>You are not the owner of this comment</td>
+                                <td>If the user trying to delete the comment is not the owner of the comment.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+            </div>
+         
                     <!--------------------------------------------------------------------->
+                    <div class="api-card">
+                    <h2>3.13 deleteReply</h2>
+                    <h3>POST</h3>
+                    <h3>http://example.com/api/v0.1/post/delete_reply</h3>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Parameters:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>reply_id</td>
+                                        <td>integer</td>
+                                        <td>The ID of the reply to delete</td>
+                                    </tr>
+                                    <tr>
+                                        <td>user_id</td>
+                                        <td>integer</td>
+                                        <td>The ID of the user deleting the reply</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
 
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Description:</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>The deleteReply() function is used to delete a reply. The function takes in the reply ID and user ID as parameters and checks if both the reply and the user exist in the database. If either the reply or the user is not found, the function returns an error response. If the user is not the owner of the reply, the function returns an error response. If the user is the owner of the reply, the corresponding Reply instance is deleted from the database. If the reply is deleted successfully, the function decrements the comment reply count and returns a success response. If the comment reply count cannot be updated, the function returns an error response.</p>
+                        </div>
+                    </div>
 
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Returns:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>JSON</td>
+                                        <td>A JSON response indicating whether the deletion was successful or not. The response has two key-value pairs, where 'status' indicates the status of the operation and 'message' provides additional information about the operation.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
 
-
-
-
-
-
-
-
-
-
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Errors:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Error</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Reply not found</td>
+                                        <td>If the reply with the specified ID does not exist in the database.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>User not found</td>
+                                        <td>If the user with the specified ID does not exist in the database.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>You are not the owner of this reply</td>
+                                        <td>If the user trying to delete the reply is not the owner of the reply.</td>
+                                        </tr>
+                                        <tr>
+                                        <td>Reply not found</td>
+                                        <td>If the reply with the specified ID does not exist in the database.</td>
+                                        </tr>
+                                        <tr>
+                                        <td>User not found</td>
+                                        <td>If the user with the specified ID does not exist in the database.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
                     <!--------------------------------------------------------------------->
+                    <div class="api-card">
+                    <h2>3.14 editComment</h2>
+                    <h3>POST</h3>
+                    <h3>http://example.com/api/v0.1/post/edit_comment</h3>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Parameters:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>comment_id</td>
+                                        <td>integer</td>
+                                        <td>The ID of the comment to edit</td>
+                                    </tr>
+                                    <tr>
+                                        <td>user_id</td>
+                                        <td>integer</td>
+                                        <td>The ID of the user editing the comment</td>
+                                    </tr>
+                                    <tr>
+                                        <td>comment_content</td>
+                                        <td>string</td>
+                                        <td>The new content of the comment</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
 
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Description:</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>The editComment() function is used to edit a comment. The function takes in the comment ID, user ID, and new comment content as parameters and checks if both the comment and the user exist in the database. If either the comment or the user is not found, the function returns an error response. If the user is not the owner of the comment, the function returns an error response. If the user is the owner of the comment, the corresponding Comment instance is updated with the new content. If the update is successful, the function returns a success response. If the update cannot be performed, the function returns an error response.</p>
+                        </div>
+                    </div>
 
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Returns:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>JSON</td>
+                                        <td>A JSON response indicating whether the edit was successful or not. The response has two key-value pairs, where 'status' indicates the status of the operation and 'message' provides additional information about the operation.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
 
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Errors:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Error</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Comment not found</td>
+                                        <td>If the comment with the specified ID does not exist in the database.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>User not found</td>
+                                        <td>If the user with the specified ID does not exist in the database.</td>
+                                    </tr>
+                                    <tr>
+                                    <td>You are not the owner of this comment</td>
+                                    <td>If the user trying to edit the comment is not the owner of the comment.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h4>Returns:</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="parameter-table">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>JSON</td>
+                                    <td>A JSON response indicating whether the update was successful or not. The response has two key-value pairs, where 'status' indicates the status of the operation and 'message' provides additional information about the operation.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
-
-
-
-
-
-
-
-
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h4>Errors:</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="parameter-table">
+                            <thead>
+                                <tr>
+                                    <th>Error</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Comment not found</td>
+                                    <td>If the comment with the specified ID does not exist in the database.</td>
+                                </tr>
+                                <tr>
+                                    <td>User not found</td>
+                                    <td>If the user with the specified ID does not exist in the database.</td>
+                                </tr>
+                                <tr>
+                                    <td>You are not the owner of this comment</td>
+                                    <td>If the user trying to edit the comment is not the owner of the comment.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
                     <!--------------------------------------------------------------------->
+                    <div class="api-card">
+                    <h2>3.15 editReply</h2>
+                    <h3>POST</h3>
+                    <h3>http://example.com/api/v0.1/post/edit_reply</h3>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Parameters:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>reply_id</td>
+                                        <td>integer</td>
+                                        <td>The ID of the reply to edit</td>
+                                    </tr>
+                                    <tr>
+                                        <td>user_id</td>
+                                        <td>integer</td>
+                                        <td>The ID of the user editing the reply</td>
+                                    </tr>
+                                    <tr>
+                                        <td>reply_content</td>
+                                        <td>string</td>
+                                        <td>The new content of the reply</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                    <div class="card-header">
+                        <h4>Description:</h4>
+                    </div>
+                    <div class="card-body">
+                        <p>The editReply() function is used to edit a reply. The function takes in the reply ID, user ID, and new content as parameters and checks if both the reply and the user exist in the database. If either the reply or the user is not found, the function returns an error response. If the user is not the owner of the reply, the function returns an error response. If the reply is found and the user is the owner, the reply content is updated with the new content and the function returns a success response. If the reply cannot be updated, the function returns an error response.</p>
+                    </div>
+                </div>
 
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h4>Returns:</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="parameter-table">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>JSON</td>
+                                    <td>A JSON response indicating whether the edit was successful or not. The response has two key-value pairs, where 'status' indicates the status of the operation and 'message' provides additional information about the operation.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h4>Errors:</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="parameter-table">
+                            <thead>
+                                <tr>
+                                    <th>Error</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Reply not found</td>
+                                    <td>If the reply with the specified ID does not exist in the database.</td>
+                                </tr>
+                                <tr>
+                                    <td>User not found</td>
+                                    <td>If the user with the specified ID does not exist in the database.</td>
+                                    </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h4>Description:</h4>
+                    </div>
+                    <div class="card-body">
+                        <p>The editReply() function is used to edit a reply. The function takes in the reply ID, user ID, and new reply content as parameters and checks if both the reply and the user exist in the database. If either the reply or the user is not found, the function returns an error response. If the user is not the owner of the reply, the function returns an error response. If the user is the owner of the reply, the corresponding reply is updated with the new content in the database. If the reply is updated successfully, the function returns a success response. If the reply cannot be updated, the function returns an error response.</p>
+                    </div>
+                </div>
 
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h4>Returns:</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="parameter-table">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>JSON</td>
+                                    <td>A JSON response indicating whether the reply was edited successfully or not. The response has two key-value pairs, where 'status' indicates the status of the operation and 'message' provides additional information about the operation.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
-
-
-
-
-
-
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h4>Errors:</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="parameter-table">
+                            <thead>
+                                <tr>
+                                    <th>Error</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Reply not found</td>
+                                    <td>If the reply with the specified ID does not exist in the database.</td>
+                                </tr>
+                                <tr>
+                                    <td>User not found</td>
+                                    <td>If the user with the specified ID does not exist in the database.</td>
+                                </tr>
+                                <tr>
+                                    <td>You are not the owner of this reply</td>
+                                    <td>If the user trying to edit the reply is not the owner of the reply.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
                     <!--------------------------------------------------------------------->
+                    <div class="api-card">
+                    <h2>3.16 getComments</h2>
+                    <h3>GET</h3>
+                    <h3>http://example.com/api/v0.1/post/get_comments/{post_id}</h3>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Parameters:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>post_id</td>
+                                        <td>integer</td>
+                                        <td>The ID of the post to retrieve comments for</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Description:</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>The getComments() function is used to retrieve all comments associated with a given post. The function takes in a post ID as a parameter and checks if the post exists in the database. If the post is found, the function retrieves all comments associated with the post, removes any unnecessary fields, and retrieves the user who made the comment. If no comments are found, the function returns an error response. Otherwise, the function returns a success response along with the comments.</p>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                    <div class="card-header">
+                        <h4>Returns:</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="parameter-table">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>JSON</td>
+                                    <td>A JSON response indicating whether the operation was successful or not. The response has two key-value pairs, where 'status' indicates the status of the operation and 'comments' provides the list of comments associated with the post.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
-
-
-
-
-
-
-
-
-
-
-
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h4>Errors:</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="parameter-table">
+                            <thead>
+                                <tr>
+                                    <th>Error</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Post not found</td>
+                                    <td>If the post with the specified ID does not exist in the database.</td>
+                                </tr>
+                                <tr>
+                                    <td>No comments found for this post</td>
+                                    <td>If no comments are associated with the post.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
                     <!--------------------------------------------------------------------->
+                    <div class="api-card">
+                    <h2>3.17 getReplies</h2>
+                    <h3>GET</h3>
+                    <h3>http://example.com/api/v0.1/post/get_replies/{comment_id}</h3>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Parameters:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>comment_id</td>
+                                        <td>integer</td>
+                                        <td>The ID of the comment to retrieve replies for</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Description:</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>The getReplies() function is used to retrieve all replies for a given comment. The function takes in the comment ID as a parameter and checks if the comment exists in the database. If the comment is found, the function retrieves all the replies associated with it, removes unwanted fields, and gets user information for each reply. The function then returns a JSON response containing the replies or an error message if no replies were found for the comment.</p>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                    <div class="card-header">
+                        <h4>Returns:</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="parameter-table">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>JSON</td>
+                                    <td>A JSON response indicating whether the operation was successful or not. The response has two key-value pairs, where 'status' indicates the status of the operation and 'replies' provides an array of replies if any are found.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
-
-
-
-
-
-
-
-
-
-
-
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h4>Errors:</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="parameter-table">
+                            <thead>
+                                <tr>
+                                    <th>Error</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Comment not found</td>
+                                    <td>If the comment with the specified ID does not exist in the database.</td>
+                                </tr>
+                                <tr>
+                                    <td>No replies found for this comment</td>
+                                    <td>If there are no replies associated with the comment in the database.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
                     <!--------------------------------------------------------------------->
+                    <div class="api-card">
+                    <h2>3.18 getPostLikes</h2>
+                    <h3>GET</h3>
+                    <h3>http://example.com/api/v0.1/post/get_post_likes/{post_id}</h3>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Parameters:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>post_id</td>
+                                        <td>integer</td>
+                                        <td>The ID of the post to retrieve likes for.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Description:</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>The getPostLikes() function is used to retrieve the likes associated with a post. The function takes in the post ID as a parameter and checks if the post exists in the database. If the post is found, the likes associated with the post are retrieved and returned. If no likes are found, the function returns an error response.</p>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                    <div class="card-header">
+                        <h4>Returns:</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="parameter-table">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>JSON</td>
+                                    <td>A JSON response indicating whether the likes were retrieved successfully or not. The response has three key-value pairs, where 'status' indicates the status of the operation, 'likes' provides the retrieved likes, and 'total_likes' provides the total number of likes. The 'likes' key contains an array of like objects with the 'field1', 'field2', 'created_at', 'updated_at', and 'like_date' fields removed.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
-
-
-
-
-
-
-
-
-
-
-
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h4>Errors:</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="parameter-table">
+                            <thead>
+                                <tr>
+                                    <th>Error</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Post not found</td>
+                                    <td>If the post with the specified ID does not exist in the database.</td>
+                                </tr>
+                                <tr>
+                                    <td>No likes found for this post</td>
+                                    <td>If no likes are found for the post.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
                     <!--------------------------------------------------------------------->
+                    <div class="api-card">
+                    <h2>3.19 getCommentLikes</h2>
+                    <h3>GET</h3>
+                    <h3>http://example.com/api/v0.1/post/get_comment_likes/{comment_id}</h3>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Parameters:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>comment_id</td>
+                                        <td>integer</td>
+                                        <td>The ID of the comment to get likes for</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Description:</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>The getCommentLikes() function is used to get the likes for a specific comment. The function takes in the comment ID as a parameter and checks if the comment exists in the database. If the comment is found, the function retrieves the likes associated with the comment and removes unwanted fields. The function then returns the likes and the total like count. If no likes are found for the comment, the function returns an error response.</p>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                    <div class="card-header">
+                        <h4>Returns:</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="parameter-table">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>JSON</td>
+                                    <td>A JSON response indicating whether the operation was successful or not. The response has two key-value pairs, where 'status' indicates the status of the operation and 'likes' provides an array of likes associated with the comment, and 'total_likes' gives the total number of likes for the comment.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                        <div class="card mb-3">
+                            <div class="card-header">
+                                <h4>Errors:</h4>
+                            </div>
+                            <div class="card-body">
+                                <table class="parameter-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Error</th>
+                                            <th>Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Comment not found</td>
+                                            <td>If the comment with the specified ID does not exist in the database.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>No likes found for this comment</td>
+                                            <td>If no likes are found for the comment.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
 
 
 
@@ -2483,44 +4175,6 @@
 
 
 
-
-
-
-
-
-                    <!--------------------------------------------------------------------->
-
-
-
-
-
-
-
-
-
-
-
-
-                    <!--------------------------------------------------------------------->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    
-
-
-                    <!--------------------------------------------------------------------->
                     <!--------------------------------------------------------------------->
 
 
@@ -2569,8 +4223,89 @@
                 <div class="tab-pane fade" id="controller5" role="tabpanel" aria-labelledby="controller5-tab">
                     <!-- Content for Controller 5 -->
                     <h1>Download Controller</h1>
-                </div>
+                    <div class="api-card">
+                        <h2>5.1 downloadPictureByURL</h2>
+                        <h3>GET</h3>
+                        <h3>http://example.com/api/v0.1/event/download_picture_url/{pictureUrl}</h3>
+                        <div class="card mb-3">
+                            <div class="card-header">
+                                <h4>Parameters:</h4>
+                            </div>
+                            <div class="card-body">
+                                <table class="parameter-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>pictureUrl</td>
+                                            <td>String</td>
+                                            <td>The URL of the picture to be downloaded.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Description:</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>The <code>downloadPictureByUrl($pictureUrl)</code> function takes a URL string as input, which includes the location of the picture to be downloaded. The function checks if the picture exists in the specified location on the server. If the picture exists, the function retrieves the picture, converts it to base64 format, and returns a JSON response containing the base64-encoded content. If the picture does not exist, the function returns a JSON response with a "Image not found" message.</p>
+                        </div>
+                    </div>
 
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Returns:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>JSON</td>
+                                        <td>A JSON response containing the base64-encoded content of the picture. The response has a single key-value pair, where the key is 'data' and the value is the base64-encoded content of the picture.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Errors:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Error</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Image not found</td>
+                                        <td>If the picture does not exist in the specified location on the server.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    </div>
+
+                </div>
+                <!--------------------------------------------------------------------->
           
 
 
