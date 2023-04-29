@@ -35,6 +35,8 @@ export class CommentsPage implements OnInit {
   isLiked: { [key: number]: { postId: number, isLiked: boolean }[] } = {};
   content: string = '';
   commentLikeCount: { [key: number]: number } = {};
+  
+
   constructor(private alrt:AlertController, private router:Router, private postService:PostService, private alertController:AlertController) { }
  
 
@@ -44,7 +46,6 @@ export class CommentsPage implements OnInit {
     const post_id = JSON.stringify(data);
     const id = JSON.parse(post_id)["p_id"];
     this.post_id = id;
-    
     this.router.events.subscribe((event: any) => {
       if (event instanceof NavigationEnd) {
         this.fetchData();
@@ -67,6 +68,7 @@ export class CommentsPage implements OnInit {
 
     this.postService.getComments(this.post_id).subscribe((data: any) => {
       this.comments = data['comments'];
+      console.log(this.comments)
       if (this.comments && this.comments.length > 0) {
         for (let i = 0; i < this.comments.length; i++) {
           const commentId = this.comments[i].id;
@@ -107,32 +109,21 @@ export class CommentsPage implements OnInit {
     await alert.present();
   
     
-    alert.onDidDismiss().then((data) => {
-      const selectedValue = data.data['values'];
-      if(selectedValue == 'likes'){
-        this.postService.getSortedComments(this.post_id, "popularity").subscribe((data: any) => {
-          this.comments = data['comments'];
-          for (let i = 0; i < this.comments.length; i++) {
-            const commentId = this.comments[i].id;
-            this.isLikedUser[commentId] = localStorage.getItem(`comment_${commentId}`) === 'true'; // retrieve the like state from Local Storage
-          
-          }
-          
-      
-        });
-      }else{
-        this.postService.getComments(this.post_id).subscribe((data: any) => {
-          this.comments = data['comments'];
-          for (let i = 0; i < this.comments.length; i++) {
-            const commentId = this.comments[i].id;
-            this.isLikedUser[commentId] = localStorage.getItem(`comment_${commentId}`) === 'true'; // retrieve the like state from Local Storage
-          
-          }
-      
-        });
-       
+    await alert.onDidDismiss().then((data) => {
+      if (data.data.values === 'date') {
+        this.sortComments('date');
+      } else if (data.data.values === 'likes') {
+        this.sortComments('popularity');
       }
     });
+  }
+
+  sortComments(type: string) {
+    if (type === 'popularity') {
+      this.comments.sort((a: { comment_like_count: number; }, b: { comment_like_count: number; }) => b.comment_like_count - a.comment_like_count);
+    } else if (type === 'date') {
+      this.comments.sort((a: { comment_date: string | number | Date; }, b: { comment_date: string | number | Date; }) => new Date(b.comment_date).getTime() - new Date(a.comment_date).getTime());
+    }
   }
 
   
@@ -233,8 +224,7 @@ export class CommentsPage implements OnInit {
     }).then(alert => alert.present());
   }
 
-  deleteReply(reply_id: number){
-    console.log(reply_id);
+  deleteReply(reply_id: number) {
     this.alertController.create({
       header: 'Confirm',
       message: 'Are you sure you want to delete this reply?',
@@ -246,13 +236,17 @@ export class CommentsPage implements OnInit {
         {
           text: 'Delete',
           handler: () => {
-            this.postService.deleteReply(reply_id).subscribe(response=>{
-              const str = JSON.stringify(response);
-              const result = JSON.parse(str);
-              const status = result['status'];
-              if(status == "success"){
-                window.location.reload();
-              } else if (status == "error"){
+            this.postService.deleteReply(reply_id).subscribe((response : any)=> {
+              const status = response['status'];
+              if (status == "success") {
+                for (const commentId in this.replies) {
+                  const index = this.replies[commentId].findIndex((r: any) => r.id === reply_id);
+                  if (index !== -1) {
+                    this.replies[commentId].splice(index, 1);
+                    break;
+                  }
+                }
+              } else if (status == "error") {
                 this.alrt.create({
                   message: 'Something went wrong. Please try again.',
                   buttons: ['OK']
@@ -264,7 +258,6 @@ export class CommentsPage implements OnInit {
       ]
     }).then(alert => alert.present());
   }
-
   goBack(){
     this.router.navigate(['/feed']);
   }

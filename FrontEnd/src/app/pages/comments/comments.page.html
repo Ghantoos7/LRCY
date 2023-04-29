@@ -51,7 +51,7 @@
           <ion-icon (click)="deleteReply(reply.id)" *ngIf="current_id == reply['user'].id" class="delete-reply" name="trash-outline"></ion-icon>
           <ion-icon (click)="editReply(reply.id)" *ngIf="current_id == reply['user'].id" class="edit-reply" name="pencil"></ion-icon>
           <ion-text class="reply-comment">{{reply.reply_content}}</ion-text>
-          <ion-text class="reply-date">{{getDaysAgo(reply.reply_date)}} d</ion-text>
+          <ion-text class="reply-date">{{getDaysAgo(reply.created_at)}}</ion-text>
         </div>          
       </ion-card-content>
     </ion-card>
