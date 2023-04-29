@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { MenuController } from '@ionic/angular';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { AdminService } from 'src/app/services/admin.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { debounceTime } from 'rxjs/operators';
 
 
 @Component({
@@ -23,19 +24,75 @@ export class ManageGalleryPage implements OnInit {
   environment_events: any=[];
   hvp_events: any=[];
   other_events: any=[];
+
+  searchControl: FormControl = new FormControl('');
+  filtered_events: any = [];
+  filtered_yah_events: any = [];
+  filtered_environment_events: any = [];
+  filtered_hvp_events: any = [];
+  filtered_other_events: any = [];
+  searchPerformed: boolean = false;
+
   constructor(private menuCtrl: MenuController, private router:Router, private menuController: MenuController, private service:AdminService) { }
 
   ngOnInit() {
+
+    this.fetchEvents();
+
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd && event.url === '/manage-gallery') {
         this.fetchEvents();
       }
     });
 
-   
+    this.searchControl.valueChanges.pipe(debounceTime(300)).subscribe(() => {
+      this.onSearchChange();
+    });
 
   }
 
+  onSearchChange() {
+    const query = this.searchControl.value;
+    this.searchPerformed = query.length > 0;
+    this.filtered_events = this.filterEvents(query, this.events);
+  }
+  
+  filterEvents(query: string, events: Record<string, any[]>) {
+    // Convert the query to lowercase for case-insensitive search
+    query = query.toLowerCase().trim();
+  
+    // Initialize the filtered events arrays
+    this.filtered_yah_events = [];
+    this.filtered_environment_events = [];
+    this.filtered_hvp_events = [];
+    this.filtered_other_events = [];
+  
+    // Iterate through the event categories
+    for (const category in events) {
+      // Iterate through the events in the current category
+      events[category].forEach((event: any) => {
+        // Check if the event title matches the query
+        if (event.event_title.toLowerCase().includes(query)) {
+          // Add the event to the corresponding filtered events array
+          switch (category) {
+            case 'Youth and Health':
+              this.filtered_yah_events.push(event);
+              break;
+            case 'Environment':
+              this.filtered_environment_events.push(event);
+              break;
+            case 'Human Values and Principles':
+              this.filtered_hvp_events.push(event);
+              break;
+            case 'Others':
+              this.filtered_other_events.push(event);
+              break;
+          }
+        }
+      });
+    }
+  }
+  
   fetchEvents(){
     this.service.getEvents(this.branch_id,"").subscribe((response: any)=>{
       const parsedResponse = JSON.parse(JSON.stringify(response));
@@ -44,6 +101,14 @@ export class ManageGalleryPage implements OnInit {
       this.environment_events=this.events['Environment'];
       this.hvp_events=this.events['Human Values and Principles'];
       this.other_events=this.events['Others'];
+      this.filtered_yah_events = this.yah_events;
+      this.filtered_environment_events = this.environment_events;
+      this.filtered_hvp_events = this.hvp_events;
+      this.filtered_other_events = this.other_events;
+
+      // Add console.log statements
+    console.log('Fetched events:', this.events);
+    console.log('Filtered events:', this.filtered_yah_events, this.filtered_environment_events, this.filtered_hvp_events, this.filtered_other_events);
     });
   }
 
