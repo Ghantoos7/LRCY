@@ -1,4 +1,4 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
     <html lang="en">
 
     <head>
@@ -140,6 +140,11 @@
                         <li class="nav-item">
                             <a class="nav-link" id="controller4-tab" data-toggle="tab" href="#controller4"
                                 role="tab" aria-controls="controller4" aria-selected="false">Admin
+                                Controller</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="controller5-tab" data-toggle="tab" href="#controller5"
+                                role="tab" aria-controls="controller5" aria-selected="false">Download
                                 Controller</a>
                         </li>
                     </ul>
@@ -2556,16 +2561,23 @@
 
                 <!-- Controller 4 -->
                 <div class="tab-pane fade" id="controller4" role="tabpanel" aria-labelledby="controller4-tab">
-                    <!-- Content for Controller 3 -->
+                    <!-- Content for Controller 4 -->
                 </div>
 
 
+                <!-- Controller 5 -->
+                <div class="tab-pane fade" id="controller5" role="tabpanel" aria-labelledby="controller5-tab">
+                    <!-- Content for Controller 5 -->
+                    <h1>Download Controller</h1>
+                </div>
 
           
+
+
         </div>
         
 
+    </div>
+    </body>
 
-
-
-    </html>
+</html>
