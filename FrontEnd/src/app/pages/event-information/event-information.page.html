@@ -35,31 +35,20 @@
             
               <img class="custom-img" slot="start" alt="Silhouette of a person's head" src="assets\imgs\word.png" />
         
-          <img alt="Silhouette of mountains" src="http://127.0.0.1:8000/storage/images/{{event.proposal}}" onerror="this.src='assets/imgs/ext.jpg'"/>
-          <ion-button class="download-button" (click)="downloadPic(event.proposal)">
-            <ion-icon name="download-outline"></ion-icon>
-          </ion-button>
-       
+          <img (click)="displayDownloadConfirmation(event.proposal)" alt="Silhouette of mountains" src="http://127.0.0.1:8000/storage/images/{{event.proposal}}" onerror="this.src='assets/imgs/ext.jpg'"/>
           </ion-item>
           <ion-item>
        
             <img slot="start" class="custom-img"alt="Silhouette of a person's head" src="assets\imgs\sheet.png" />
             
-              <img alt="Silhouette of mountains" src="http://127.0.0.1:8000/storage/images/{{event.budget_sheet}}" onerror="this.src='assets/imgs/ext.jpg'"/>
-              <ion-button class="download-button" (click)="downloadPic(event.budget_sheet)">
-                <ion-icon name="download-outline"></ion-icon>
-              </ion-button>
+              <img (click)="displayDownloadConfirmation(event.budget_sheet)" alt="Silhouette of mountains" src="http://127.0.0.1:8000/storage/images/{{event.budget_sheet}}" onerror="this.src='assets/imgs/ext.jpg'"/>
             
         </ion-item>
         <ion-item>
    
           <img slot="start" class="custom-img"alt="Silhouette of a person's head" src="assets\imgs\word.png" />
          
-            <img alt="Silhouette of mountains" src="http://127.0.0.1:8000/storage/images/{{event.meeting_minute}}" onerror="this.src='assets/imgs/ext.jpg'"/>
-            <ion-button class="download-button" (click)="downloadPic(event.meeting_minute)">
-              <ion-icon name="download-outline"></ion-icon>
-            </ion-button>
-
+            <img (click)="displayDownloadConfirmation(event.meeting_minute)" alt="Silhouette of mountains" src="http://127.0.0.1:8000/storage/images/{{event.meeting_minute}}" onerror="this.src='assets/imgs/ext.jpg'"/>
       </ion-item>
         </ion-list>
     </ion-col>

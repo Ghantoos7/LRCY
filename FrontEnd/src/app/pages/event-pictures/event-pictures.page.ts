@@ -32,6 +32,26 @@ export class EventPicturesPage implements OnInit {
     });
   }
 
+  displayDownloadConfirmation(pictureUrl: string) {
+    this.alertController.create({
+      header: 'Download',
+      message: 'Do you want to download this picture?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        },
+        {
+          text: 'Download',
+          handler: () => {
+            this.downloadPic(pictureUrl);
+          }
+        }
+      ]
+    }).then(alert => alert.present());
+  }
+  
+
   downloadPic(pictureUrl: string) {
     this.service.downloadPic(pictureUrl).subscribe({
       next: (data: string) => {
