@@ -37,6 +37,7 @@ export class MyPostsPage implements OnInit {
   isLiked: { [key: number]: { commentId: number, isLiked: boolean }[] } = {};
   comment_contents: any = [];
   likeCount: { [key: number]: number } = {};
+  commentCount: { [key: number]: number } = {};
 
   errorMessage: string = '';
   constructor(private post_service:PostService, private router: Router, private alertController: AlertController, private actionSheetController: ActionSheetController, private service: UserService, private sharedService:SharedService) { }
@@ -68,6 +69,7 @@ export class MyPostsPage implements OnInit {
           const postId = this.posts_array[i].id;
           this.isLikedUser[postId] = localStorage.getItem(`user_${this.user_id}_post_${postId}`) === 'true'; // retrieve the like state from Local Storage
           this.likeCount[postId] = this.posts_array[i].like_count;
+          this.commentCount[postId] = this.posts_array[i].comment_count;
         }
       } else {
         this.posts_array = [];
@@ -212,7 +214,7 @@ toggleLike(post_id: number) {
           message: 'Your comment was added!',
           buttons: ['OK']
         }).then(alert => alert.present());
-        window.location.reload();
+        this.commentCount[p_id]++;
       }
     else if (status == "error"){
       this.alertController.create({
