@@ -5,6 +5,8 @@ import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { PostService } from 'src/app/services/post.service';
+import { DomSanitizer } from '@angular/platform-browser';
+import { SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-post',
@@ -25,8 +27,9 @@ export class PostPage implements OnInit {
   branch_id = localStorage.getItem('branch_id') as string;
   post_caption:string='';
   post_src_img: any;
+  post_src_img_data: SafeUrl | null = null; 
 
-  constructor(private router:Router, private userService:UserService, private postService:PostService) { }
+  constructor(private router:Router, private userService:UserService, private postService:PostService, private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
     console.log(this.user_id);
@@ -49,6 +52,14 @@ this.router.navigate(['/feed']);
   onChange(event: any) {
       this.post_src_img = event.target.files[0];
 
+      // Add this block to read and store the image data
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      this.post_src_img_data = this.sanitizer.bypassSecurityTrustUrl(
+        e.target?.result as string
+      );
+    };
+    reader.readAsDataURL(this.post_src_img);
   }
 
   post(){

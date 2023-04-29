@@ -12,7 +12,14 @@
     <ion-text class="name">{{full_name}}</ion-text>
   </div>
 
-  <ion-input [(ngModel)]="post_caption" class="input"  placeholder="Add a caption..."></ion-input>
+  <div *ngIf="post_src_img_data" class="chosen-image-container">
+    <img [src]="post_src_img_data" class="chosen-image" />
+  </div>
+
+
+  <div class="textarea-container">
+    <textarea #captionTextarea [(ngModel)]="post_caption" class="textarea" placeholder="Add a caption..." rows="1"></textarea>
+  </div>
 
   <div class="upload-options">
       <input [(ngModel)]="post_src_img"  (change)="onChange($event)" class="img" type="file" accept="image/png, image/jpeg, image/jpg" >

@@ -58,22 +58,60 @@
     left: -35px;
 }
 
-.input {
+.chosen-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20%;
+    margin-top: 15%;
+    padding-bottom: 10%;
+  }
+  
+  .chosen-image {
+    max-width: 90%;
+    max-height: 200px;
+    object-fit: cover;
+  }
+  
+  .textarea-container {
     position: absolute;
     width: 300px;
-    height: 300px;
-    top: 50%;
+    top: 65%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  
+  .textarea {
+    position: absolute;
+    width: 300px;
+    height: 100px;
+    top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 10px;
-    --background: #f4f0f0;
-    --color: #7c7c7c;
-    --padding-end: 35px;
-    --padding-start: 10px;
-    --placeholder-color: #7c7c7c;
-    --placeholder-opacity: 0.8;
-}
-
+    background: #f4f0f0;
+    color: #7c7c7c;
+    padding: 10px 35px 10px 10px;
+    resize: none;
+    overflow: hidden;
+    font-family: inherit;
+    font-size: inherit;
+  }
+  
+  .textarea:focus {
+    outline: none;
+  }
+  
+  .post-button {
+    position: absolute; /* Add this line */
+    bottom: 20px; /* Add this line */
+    left: 50%; /* Add this line */
+    transform: translateX(-50%); /* Add this line */
+    --background: #45579A;
+    width: 80%;
+  }
+  
 
 
 .camera{
@@ -86,17 +124,10 @@
     left: 60px;
 }
 
-.post-button{
-    position: relative;
-    top: 610px;
-    width: 80%; 
-    margin: 0 auto; 
-    --background: #45579A;
-}
 
 .upload-options{
     position: absolute;
-    top: 80%;
+    top: 79%;
     left: 20%;
     font-size: 20px;
     color: #45579A;
