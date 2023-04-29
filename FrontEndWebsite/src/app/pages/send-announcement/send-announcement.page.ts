@@ -19,7 +19,7 @@ export class SendAnnouncementPage implements OnInit {
   announcement_content: string = "";
   importance_level: string = "";
 
-  admin_id = localStorage.getItem('adminId') as string;
+  admin_id = localStorage.getItem('admin_id') as string;
 
   constructor(private router:Router, private menuController: MenuController, private adminService:AdminService, private alertController:AlertController) { }
 
