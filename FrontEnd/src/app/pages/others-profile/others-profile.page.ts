@@ -25,6 +25,7 @@ export class ProfilePage implements OnInit {
 
   ngOnInit() {
     this.selectedUser = this.sharedService.getSelectedUser();
+    
   }
 
   ionViewWillLeave() {
