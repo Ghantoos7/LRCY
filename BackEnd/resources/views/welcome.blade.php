@@ -2199,7 +2199,8 @@
                             <h4>Description:</h4>
                         </div>
                         <div class="card-body">
-                            <p>The <code>getYearlyGoals</code> function returns the yearly goals for a given branch_id. The goals are grouped based on the program_id.</p>
+                            <p>The <code>getYearlyGoals</code> function returns the yearly goals for a given branch_id.
+                                The goals are grouped based on the program_id.</p>
                         </div>
                     </div>
                     <div class="card mb-3">
@@ -2261,7 +2262,8 @@
                                 <tbody>
                                     <tr>
                                         <td>No goals found</td>
-                                        <td>No goals were found in the database based on the provided branch_id parameter and the current year.</td>
+                                        <td>No goals were found in the database based on the provided branch_id
+                                            parameter and the current year.</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -2280,7 +2282,9 @@
                             <h4>Description:</h4>
                         </div>
                         <div class="card-body">
-                            <p>The <code>getEventInfo</code> function returns information about events in the given branch, grouped by program name. If an event_id is provided, only the information for that event is returned.</p>
+                            <p>The <code>getEventInfo</code> function returns information about events in the given
+                                branch, grouped by program name. If an event_id is provided, only the information for
+                                that event is returned.</p>
                         </div>
                     </div>
                     <div class="card mb-3">
@@ -2326,7 +2330,11 @@
                                 <tbody>
                                     <tr>
                                         <td>JSON</td>
-                                        <td>If event_id is provided, returns a JSON response containing the event information including program name and a list of users responsible for the event. If event_id is not provided, returns a JSON response containing an array of events information grouped by program name, including program name and a list of users responsible for each event.</td>
+                                        <td>If event_id is provided, returns a JSON response containing the event
+                                            information including program name and a list of users responsible for the
+                                            event. If event_id is not provided, returns a JSON response containing an
+                                            array of events information grouped by program name, including program name
+                                            and a list of users responsible for each event.</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -2347,7 +2355,8 @@
                                 <tbody>
                                     <tr>
                                         <td>Event not found</td>
-                                        <td>No event(s) were found in the database based on the provided branch_id and event_id parameters.</td>
+                                        <td>No event(s) were found in the database based on the provided branch_id and
+                                            event_id parameters.</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -2370,7 +2379,9 @@
                             <h4>Description:</h4>
                         </div>
                         <div class="card-body">
-                            <p>The <code>getAnnouncements</code> function returns a list of announcements for a given branch. The function includes information about the announcer's name, profile picture, and the importance level of the announcement.</p>
+                            <p>The <code>getAnnouncements</code> function returns a list of announcements for a given
+                                branch. The function includes information about the announcer's name, profile picture,
+                                and the importance level of the announcement.</p>
                         </div>
                     </div>
                     <div class="card mb-3">
@@ -2411,7 +2422,10 @@
                                 <tbody>
                                     <tr>
                                         <td>JSON</td>
-                                        <td>A JSON response containing an array of announcement objects for the given branch. Each announcement object contains the announcement's information, the announcer's name and profile picture, and the importance level of the announcement.</td>
+                                        <td>A JSON response containing an array of announcement objects for the given
+                                            branch. Each announcement object contains the announcement's information,
+                                            the announcer's name and profile picture, and the importance level of the
+                                            announcement.</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -2432,7 +2446,8 @@
                                 <tbody>
                                     <tr>
                                         <td>No announcements found</td>
-                                        <td>No announcements were found in the database based on the provided branch_id parameter.</td>
+                                        <td>No announcements were found in the database based on the provided branch_id
+                                            parameter.</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -2450,7 +2465,8 @@
                             <h4>Description:</h4>
                         </div>
                         <div class="card-body">
-                            <p>The <code>getEventPictures</code> function returns the pictures of a specific event. The pictures are ordered by date.</p>
+                            <p>The <code>getEventPictures</code> function returns the pictures of a specific event. The
+                                pictures are ordered by date.</p>
                         </div>
                     </div>
                     <div class="card mb-3">
@@ -2512,11 +2528,13 @@
                                 <tbody>
                                     <tr>
                                         <td>Event not found</td>
-                                        <td>No event was found in the database based on the provided event_id parameter.</td>
+                                        <td>No event was found in the database based on the provided event_id parameter.
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>Pictures not found</td>
-                                        <td>No pictures were found in the database based on the provided event_id parameter.</td>
+                                        <td>No pictures were found in the database based on the provided event_id
+                                            parameter.</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -2534,7 +2552,9 @@
                             <h4>Description:</h4>
                         </div>
                         <div class="card-body">
-                            <p>The <code>getTrainingInfo</code> function returns information about a specific training or all trainings. The function returns the training(s) information including the program name.</p>
+                            <p>The <code>getTrainingInfo</code> function returns information about a specific training
+                                or all trainings. The function returns the training(s) information including the program
+                                name.</p>
                         </div>
                     </div>
                     <div class="card mb-3">
@@ -2554,7 +2574,8 @@
                                     <tr>
                                         <td>training_id</td>
                                         <td>int (optional)</td>
-                                        <td>The ID of the training to retrieve. If not provided, all trainings will be returned.</td>
+                                        <td>The ID of the training to retrieve. If not provided, all trainings will be
+                                            returned.</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -2575,7 +2596,8 @@
                                 <tbody>
                                     <tr>
                                         <td>JSON</td>
-                                        <td>A JSON response containing the training(s) information including the program name.</td>
+                                        <td>A JSON response containing the training(s) information including the program
+                                            name.</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -2596,7 +2618,8 @@
                                 <tbody>
                                     <tr>
                                         <td>Training not found</td>
-                                        <td>No training was found in the database based on the provided training_id parameter.</td>
+                                        <td>No training was found in the database based on the provided training_id
+                                            parameter.</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -3007,7 +3030,7 @@
                             </table>
                         </div>
                     </div>
-                    
+
 
                     <div class="card mb-3">
                         <div class="card-header">
@@ -3073,7 +3096,8 @@
                             <h4>Description:</h4>
                         </div>
                         <div class="card-body">
-                            <p>The <code>getPost()</code> function retrieves a single post from the database based on the post ID
+                            <p>The <code>getPost()</code> function retrieves a single post from the database based on
+                                the post ID
                                 provided in the
                                 URL parameter. If the post is found, the function returns the post data along with the
                                 name of the user who
@@ -3171,7 +3195,8 @@
                             <h4>Description:</h4>
                         </div>
                         <div class="card-body">
-                            <p>The <code>likePost()</code> function is used to like a post. The function takes in the post ID and
+                            <p>The <code>likePost()</code> function is used to like a post. The function takes in the
+                                post ID and
                                 user ID as parameters and checks if both the post and the user exist in the database. If
                                 either the post or the user is not found, the function returns an error response. If the
                                 user has already liked the post, the function returns an error response. If the user has
@@ -3212,7 +3237,7 @@
                         </div>
                     </div>
 
-                
+
 
                     <div class="card mb-3">
                         <div class="card-header">
@@ -3266,7 +3291,7 @@
                                     </tr>
                                     <tr>
                                         <td>error</td>
-                                       <td>If the post could not be liked or the like count could not be updated.</td>
+                                        <td>If the post could not be liked or the like count could not be updated.</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -3274,241 +3299,242 @@
                     </div>
                 </div>
 
-                    <!--------------------------------------------------------------------->
-                    <div class="api-card">
-                        <h2>3.7 unlikePost</h2>
-                        <h3>POST</h3>
-                        <h3>http://example.com/api/v0.1/post/unlike_post</h3>
+                <!--------------------------------------------------------------------->
+                <div class="api-card">
+                    <h2>3.7 unlikePost</h2>
+                    <h3>POST</h3>
+                    <h3>http://example.com/api/v0.1/post/unlike_post</h3>
 
-                        <div class="card mb-3">
-                            <div class="card-header">
-                                <h4>Description:</h4>
-                            </div>
-                            <div class="card-body">
-                                <p>The unlikePost API function unlikes a post by a user. The function takes in two
-                                    parameters: the post ID and the user ID. If the post and user exist in the database,
-                                    the function checks if the user has already liked the post. If the user has not
-                                    liked the post, the function returns an error response. If the user has liked the
-                                    post, the function deletes the like from the database, decrements the post like
-                                    count, and returns a success response. If the like could not be deleted or the post
-                                    like count could not be updated, the function returns an error response.</p>
-                            </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Description:</h4>
                         </div>
-
-
-                        <div class="card mb-3">
-                            <div class="card-header">
-                                <h4>Parameters:</h4>
-                            </div>
-                            <div class="card-body">
-                                <table class="parameter-table">
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Type</th>
-                                            <th>Description</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>post_id</td>
-                                            <td>int</td>
-                                            <td>The ID of the post to unlike</td>
-                                        </tr>
-                                        <tr>
-                                            <td>user_id</td>
-                                            <td>int</td>
-                                            <td>The ID of the user unliking the post</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        
-                        <div class="card mb-3">
-                            <div class="card-header">
-                                <h4>Returns:</h4>
-                            </div>
-                            <div class="card-body">
-                                <table class="parameter-table">
-                                    <thead>
-                                        <tr>
-                                            <th>Type</th>
-                                            <th>Description</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>JSON</td>
-                                            <td>A JSON response containing the status of the unlike operation and a
-                                                message. The response has two key-value pairs: 'status' and 'message'.
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        <div class="card mb-3">
-                            <div class="card-header">
-                                <h4>Errors:</h4>
-                            </div>
-                            <div class="card-body">
-                                <table class="parameter-table">
-                                    <thead>
-                                        <tr>
-                                            <th>Error</th>
-                                            <th>Description</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Post not found</td>
-                                            <td>If the post with the specified ID does not exist in the database.</td>
-                                        </tr>
-                                        <tr>
-                                            <td>User not found</td>
-                                            <td>If the user with the specified ID does not exist in the database.</td>
-                                        </tr>
-                                        <tr>
-                                            <td>You have not liked this post</td>
-                                            <td>If the user has not liked the post.</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Post could not be unliked</td>
-                                            <td>If the like instance could not be deleted from the database.</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Post like count could not be updated</td>
-                                            <td>If the like instance was successfully deleted from the database but the
-                                                post like count could not be decremented.</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                        <div class="card-body">
+                            <p>The unlikePost API function unlikes a post by a user. The function takes in two
+                                parameters: the post ID and the user ID. If the post and user exist in the database,
+                                the function checks if the user has already liked the post. If the user has not
+                                liked the post, the function returns an error response. If the user has liked the
+                                post, the function deletes the like from the database, decrements the post like
+                                count, and returns a success response. If the like could not be deleted or the post
+                                like count could not be updated, the function returns an error response.</p>
                         </div>
                     </div>
 
-                    <!--------------------------------------------------------------------->
-                    <div class="api-card">
-                        <h2>3.8 commentPost</h2>
-                        <h3>POST</h3>
-                        <h3>http://example.com/api/v0.1/post/comment_post</h3>
 
-                        <div class="card mb-3">
-                            <div class="card-header">
-                                <h4>Description:</h4>
-                            </div>
-                            <div class="card-body">
-                                <p>The <code>commentPost()</code> function is used to create a new comment on a post. The function
-                                    takes in the post ID, user ID, and comment content as parameters and validates them.
-                                    If any of the parameters are missing, the function returns an error response. If
-                                    both the post and the user exist in the database, the function creates a new comment
-                                    instance with the post ID, user ID, comment content, current date, and default
-                                    values for the comment like count and reply count. The comment is then saved to the
-                                    database. If the comment is saved successfully, the function increments the post
-                                    comment count and returns a success response. If the comment cannot be saved, the
-                                    function returns an error response. If the post comment count cannot be updated, the
-                                    function returns an error response.</p>
-                            </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Parameters:</h4>
                         </div>
-                        <div class="card mb-3">
-                            <div class="card-header">
-                                <h4>Parameters:</h4>
-                            </div>
-                            <div class="card-body">
-                                <table class="parameter-table">
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Type</th>
-                                            <th>Description</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>post_id</td>
-                                            <td>integer</td>
-                                            <td>The ID of the post to comment on</td>
-                                        </tr>
-                                        <tr>
-                                            <td>user_id</td>
-                                            <td>integer</td>
-                                            <td>The ID of the user making the comment</td>
-                                        </tr>
-                                        <tr>
-                                            <td>comment_content</td>
-                                            <td>string</td>
-                                            <td>The content of the comment</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        
-
-                        <div class="card mb-3">
-                            <div class="card-header">
-                                <h4>Returns:</h4>
-                            </div>
-                            <div class="card-body">
-                                <table class="parameter-table">
-                                    <thead>
-                                        <tr>
-                                            <th>Type</th>
-                                            <th>Description</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>JSON</td>
-                                            <td>A JSON response indicating whether the comment was posted successfully
-                                                or not. The response has two key-value pairs, where 'status' indicates
-                                                the status of the operation and 'message' provides additional
-                                                information about the operation.</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        <div class="card mb-3">
-                            <div class="card-header">
-                                <h4>Errors:</h4>
-                            </div>
-                            <div class="card-body">
-                                <table class="parameter-table">
-                                    <thead>
-                                        <tr>
-                                            <th>Error</th>
-                                            <th>Description</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Post not found</td>
-                                            <td>If the post with the specified ID does not exist in the database.</td>
-                                        </tr>
-                                        <tr>
-                                            <td>User not found</td>
-                                            <td>If the user with the specified ID does not exist in the database.</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Comment could not be posted</td>
-                                            <td>If the comment instance could not be saved to the database.</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Post comment count could not be updated</td>
-                                            <td>If the comment instance was successfully saved to the database but the
-                                                post comment count could not be incremented.</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>post_id</td>
+                                        <td>int</td>
+                                        <td>The ID of the post to unlike</td>
+                                    </tr>
+                                    <tr>
+                                        <td>user_id</td>
+                                        <td>int</td>
+                                        <td>The ID of the user unliking the post</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
+
+
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Returns:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>JSON</td>
+                                        <td>A JSON response containing the status of the unlike operation and a
+                                            message. The response has two key-value pairs: 'status' and 'message'.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Errors:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Error</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Post not found</td>
+                                        <td>If the post with the specified ID does not exist in the database.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>User not found</td>
+                                        <td>If the user with the specified ID does not exist in the database.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>You have not liked this post</td>
+                                        <td>If the user has not liked the post.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Post could not be unliked</td>
+                                        <td>If the like instance could not be deleted from the database.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Post like count could not be updated</td>
+                                        <td>If the like instance was successfully deleted from the database but the
+                                            post like count could not be decremented.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!--------------------------------------------------------------------->
+                <div class="api-card">
+                    <h2>3.8 commentPost</h2>
+                    <h3>POST</h3>
+                    <h3>http://example.com/api/v0.1/post/comment_post</h3>
+
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Description:</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>The <code>commentPost()</code> function is used to create a new comment on a post. The
+                                function
+                                takes in the post ID, user ID, and comment content as parameters and validates them.
+                                If any of the parameters are missing, the function returns an error response. If
+                                both the post and the user exist in the database, the function creates a new comment
+                                instance with the post ID, user ID, comment content, current date, and default
+                                values for the comment like count and reply count. The comment is then saved to the
+                                database. If the comment is saved successfully, the function increments the post
+                                comment count and returns a success response. If the comment cannot be saved, the
+                                function returns an error response. If the post comment count cannot be updated, the
+                                function returns an error response.</p>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Parameters:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>post_id</td>
+                                        <td>integer</td>
+                                        <td>The ID of the post to comment on</td>
+                                    </tr>
+                                    <tr>
+                                        <td>user_id</td>
+                                        <td>integer</td>
+                                        <td>The ID of the user making the comment</td>
+                                    </tr>
+                                    <tr>
+                                        <td>comment_content</td>
+                                        <td>string</td>
+                                        <td>The content of the comment</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Returns:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>JSON</td>
+                                        <td>A JSON response indicating whether the comment was posted successfully
+                                            or not. The response has two key-value pairs, where 'status' indicates
+                                            the status of the operation and 'message' provides additional
+                                            information about the operation.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Errors:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Error</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Post not found</td>
+                                        <td>If the post with the specified ID does not exist in the database.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>User not found</td>
+                                        <td>If the user with the specified ID does not exist in the database.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Comment could not be posted</td>
+                                        <td>If the comment instance could not be saved to the database.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Post comment count could not be updated</td>
+                                        <td>If the comment instance was successfully saved to the database but the
+                                            post comment count could not be incremented.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
 
                 <!--------------------------------------------------------------------->
                 <div class="api-card">
@@ -3522,7 +3548,8 @@
                             <h4>Description:</h4>
                         </div>
                         <div class="card-body">
-                            <p>The <code>replyComment</code> API function is used to reply to a comment. The function takes in the
+                            <p>The <code>replyComment</code> API function is used to reply to a comment. The function
+                                takes in the
                                 comment ID, user ID, and reply content as parameters and checks if both the comment and
                                 the user exist in the database. If either the comment or the user is not found, the
                                 function returns an error response. If the user has not replied to the comment yet, a
@@ -3568,7 +3595,7 @@
                         </div>
                     </div>
 
-                   
+
 
                     <div class="card mb-3">
                         <div class="card-header">
@@ -3612,12 +3639,13 @@
                                         <td>Comment not found</td>
                                         <td>If the comment with the specified ID does not exist in the database.</td>
                                     </tr>
-                                        <td>User not found</td>
-                                        <td>If the user with the specified ID does not exist in the database.</td>
+                                    <td>User not found</td>
+                                    <td>If the user with the specified ID does not exist in the database.</td>
                                     </tr>
                                     <tr>
                                         <td>error</td>
-                                        <td>If the reply could not be posted or the comment reply count could not beupdated.</td>
+                                        <td>If the reply could not be posted or the comment reply count could not
+                                            beupdated.</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -3636,7 +3664,8 @@
                             <h4>Description:</h4>
                         </div>
                         <div class="card-body">
-                            <p>The <code>likeComment()</code> function is used to like a comment. The function takes in the comment
+                            <p>The <code>likeComment()</code> function is used to like a comment. The function takes in
+                                the comment
                                 ID and user ID as parameters and checks if both the comment and the user exist in the
                                 database. If either the comment or the user is not found, the function returns an error
                                 response. If the user has already liked the comment, the function returns an error
@@ -3678,7 +3707,7 @@
                         </div>
                     </div>
 
-                  
+
 
                     <div class="card mb-3">
                         <div class="card-header">
@@ -3747,7 +3776,8 @@
                             <h4>Description:</h4>
                         </div>
                         <div class="card-body">
-                            <p>The <code>unlikeComment()</code> function is used to unlike a comment. The function takes in the
+                            <p>The <code>unlikeComment()</code> function is used to unlike a comment. The function takes
+                                in the
                                 comment ID and user ID as parameters and checks if both the comment and the user exist
                                 in the database. If either the comment or the user is not found, the function returns an
                                 error response. If the user has not already liked the comment, the function returns an
@@ -3789,7 +3819,7 @@
                         </div>
                     </div>
 
-                   
+
                     <div class="card mb-3">
                         <div class="card-header">
                             <h4>Returns:</h4>
@@ -3857,7 +3887,8 @@
                             <h4>Description:</h4>
                         </div>
                         <div class="card-body">
-                            <p>The <code>deleteComment()</code> function is used to delete a comment. The function takes in the
+                            <p>The <code>deleteComment()</code> function is used to delete a comment. The function takes
+                                in the
                                 comment ID and user ID as parameters and checks if both the comment and the user exist
                                 in the database. If either the comment or the user is not found, the function returns an
                                 error response. If the user is not the owner of the comment, the function returns an
@@ -3897,7 +3928,7 @@
                             </table>
                         </div>
                     </div>
-                   
+
 
                     <div class="card mb-3">
                         <div class="card-header">
@@ -3967,7 +3998,8 @@
                             <h4>Description:</h4>
                         </div>
                         <div class="card-body">
-                            <p>The <code>deleteReply()</code> function is used to delete a reply. The function takes in the reply ID
+                            <p>The <code>deleteReply()</code> function is used to delete a reply. The function takes in
+                                the reply ID
                                 and user ID as parameters and checks if both the reply and the user exist in the
                                 database. If either the reply or the user is not found, the function returns an error
                                 response. If the user is not the owner of the reply, the function returns an error
@@ -4007,7 +4039,7 @@
                         </div>
                     </div>
 
-                    
+
 
                     <div class="card mb-3">
                         <div class="card-header">
@@ -4070,13 +4102,14 @@
                     <h3>POST</h3>
                     <h3>http://example.com/api/v0.1/post/edit_comment</h3>
 
-                    
+
                     <div class="card mb-3">
                         <div class="card-header">
                             <h4>Description:</h4>
                         </div>
                         <div class="card-body">
-                            <p>The <code>editComment()</code> function is used to edit a comment. The function takes in the comment
+                            <p>The <code>editComment()</code> function is used to edit a comment. The function takes in
+                                the comment
                                 ID, user ID, and new comment content as parameters and checks if both the comment and
                                 the user exist in the database. If either the comment or the user is not found, the
                                 function returns an error response. If the user is not the owner of the comment, the
@@ -4177,7 +4210,7 @@
                         </div>
                     </div>
                 </div>
-                    
+
                 <!--------------------------------------------------------------------->
                 <div class="api-card">
                     <h2>3.15 editReply</h2>
@@ -4189,7 +4222,8 @@
                             <h4>Description:</h4>
                         </div>
                         <div class="card-body">
-                            <p>The <code>editReply()</code> function is used to edit a reply. The function takes in the reply ID,
+                            <p>The <code>editReply()</code> function is used to edit a reply. The function takes in the
+                                reply ID,
                                 user ID, and new content as parameters and checks if both the reply and the user exist
                                 in the database. If either the reply or the user is not found, the function returns an
                                 error response. If the user is not the owner of the reply, the function returns an error
@@ -4232,7 +4266,7 @@
                             </table>
                         </div>
                     </div>
-                    
+
 
                     <div class="card mb-3">
                         <div class="card-header">
@@ -4259,7 +4293,7 @@
                         </div>
                     </div>
 
-                  
+
 
                     <div class="card mb-3">
                         <div class="card-header">
@@ -4302,7 +4336,8 @@
                             <h4>Description:</h4>
                         </div>
                         <div class="card-body">
-                            <p>The <code>getComments()</code> function is used to retrieve all comments associated with a given post.
+                            <p>The <code>getComments()</code> function is used to retrieve all comments associated with
+                                a given post.
                                 The function takes in a post ID as a parameter and checks if the post exists in the
                                 database. If the post is found, the function retrieves all comments associated with the
                                 post, removes any unnecessary fields, and retrieves the user who made the comment. If no
@@ -4334,7 +4369,7 @@
                             </table>
                         </div>
                     </div>
-                    
+
                     <div class="card mb-3">
                         <div class="card-header">
                             <h4>Returns:</h4>
@@ -4397,7 +4432,8 @@
                             <h4>Description:</h4>
                         </div>
                         <div class="card-body">
-                            <p>The <code>getReplies()</code> function is used to retrieve all replies for a given comment. The
+                            <p>The <code>getReplies()</code> function is used to retrieve all replies for a given
+                                comment. The
                                 function takes in the comment ID as a parameter and checks if the comment exists in the
                                 database. If the comment is found, the function retrieves all the replies associated
                                 with it, removes unwanted fields, and gets user information for each reply. The function
@@ -4428,7 +4464,7 @@
                             </table>
                         </div>
                     </div>
-                    
+
                     <div class="card mb-3">
                         <div class="card-header">
                             <h4>Returns:</h4>
@@ -4490,7 +4526,8 @@
                             <h4>Description:</h4>
                         </div>
                         <div class="card-body">
-                            <p>The <code>getPostLikes()</code> function is used to retrieve the likes associated with a post. The
+                            <p>The <code>getPostLikes()</code> function is used to retrieve the likes associated with a
+                                post. The
                                 function takes in the post ID as a parameter and checks if the post exists in the
                                 database. If the post is found, the likes associated with the post are retrieved and
                                 returned. If no likes are found, the function returns an error response.</p>
@@ -4519,7 +4556,7 @@
                             </table>
                         </div>
                     </div>
-                    
+
                     <div class="card mb-3">
                         <div class="card-header">
                             <h4>Returns:</h4>
@@ -4584,7 +4621,8 @@
                             <h4>Description:</h4>
                         </div>
                         <div class="card-body">
-                            <p>The <code>getCommentLikes()</code> function is used to get the likes for a specific comment. The
+                            <p>The <code>getCommentLikes()</code> function is used to get the likes for a specific
+                                comment. The
                                 function takes in the comment ID as a parameter and checks if the comment exists in the
                                 database. If the comment is found, the function retrieves the likes associated with the
                                 comment and removes unwanted fields. The function then returns the likes and the total
@@ -4616,7 +4654,7 @@
                             </table>
                         </div>
                     </div>
-                   
+
                     <div class="card mb-3">
                         <div class="card-header">
                             <h4>Returns:</h4>
@@ -4674,8 +4712,6 @@
 
 
 
-
-
                 <!--------------------------------------------------------------------->
 
 
@@ -4717,6 +4753,2257 @@
             <!-- Controller 4 -->
             <div class="tab-pane fade" id="controller4" role="tabpanel" aria-labelledby="controller4-tab">
                 <!-- Content for Controller 4 -->
+                <h1>Admin Controller</h1>
+
+
+                <div class="api-card">
+                    <h2>4.1 adminLogin</h2>
+                    <h3>POST</h3>
+                    <h3>http://example.com/api/v0.1/admin/admin_login</h3>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Description:</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>The <code>adminLogin</code> function allows an admin user to log in to the system and
+                                obtain a token for authentication.</p>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Parameters:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>organization_id</td>
+                                        <td>string</td>
+                                        <td>The ID of the admin user's organization.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>password</td>
+                                        <td>string</td>
+                                        <td>The admin user's password.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Returns:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>JSON</td>
+                                        <td>A JSON response containing the status of the login attempt, user
+                                            information, and a token for authentication.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Errors:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Error</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>User not found</td>
+                                        <td>The user with the provided organization_id was not found in the database.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Permission denied</td>
+                                        <td>The user with the provided organization_id is not an admin user and is not
+                                            authorized to log in as an admin.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Too many failed login attempts</td>
+                                        <td>The user with the provided organization_id has exceeded the maximum number
+                                            of login attempts and is temporarily locked out of the system.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Invalid credentials</td>
+                                        <td>The password provided does not match the password on file for the user with
+                                            the provided organization_id.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="api-card">
+                    <h2>4.2 logout</h2>
+                    <h3>POST</h3>
+                    <h3>http://example.com/api/v0.1/admin/logout</h3>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Description:</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>The <code>logout</code> function logs out the authenticated admin user by revoking all
+                                their personal access tokens.</p>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Returns:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>JSON</td>
+                                        <td>A JSON response confirming the user has been logged out.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Errors:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Error</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Unauthorized</td>
+                                        <td>The user is not authenticated and therefore cannot log out.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+                <div class="api-card">
+                    <h2>4.3 addUser</h2>
+                    <h3>POST</h3>
+                    <h3>http://example.com/api/v0.1/admin/add_user</h3>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Description:</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>The <code>addUser</code> function adds a new user to the system.</p>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Parameters:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>branch_id</td>
+                                        <td>int</td>
+                                        <td>The ID of the branch to which the user belongs.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>first_name</td>
+                                        <td>string</td>
+                                        <td>The first name of the user.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>last_name</td>
+                                        <td>string</td>
+                                        <td>The last name of the user.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>organization_id</td>
+                                        <td>int</td>
+                                        <td>The ID of the user in the organization's database.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>user_dob</td>
+                                        <td>date</td>
+                                        <td>The date of birth of the user.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>user_position</td>
+                                        <td>string</td>
+                                        <td>The position of the user in the organization.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>gender</td>
+                                        <td>int</td>
+                                        <td>The gender of the user. 0 for female, 1 for male, 2 for non-binary, and 3
+                                            for other.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>user_type_id</td>
+                                        <td>int</td>
+                                        <td>The ID of the user's type. 0 for volunteer and 1 for admin.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>is_active</td>
+                                        <td>int</td>
+                                        <td>Whether the user is active or not. 0 for inactive and 1 for active.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>user_start_date</td>
+                                        <td>date</td>
+                                        <td>The date when the user started working in the organization.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>user_end_date</td>
+                                        <td>date (optional)</td>
+                                        <td>The date when the user stopped working in the organization.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Returns:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>JSON</td>
+                                        <td>A JSON response containing the status, message, and the added user's
+                                            information.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Errors:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Error</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Validation failed</td>
+                                        <td>One or more input parameters failed validation. The specific error message
+                                            will be included in the response.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>User could not be added</td>
+                                        <td>The function was unable to add the new user to the database. The specific
+                                            error message will be included in the response.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="api-card">
+                    <h2>4.4 editUser</h2>
+                    <h3>POST</h3>
+                    <h3>http://example.com/api/v0.1/admin/edit_user</h3>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Description:</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>The <code>editUser</code> function updates the information of a specific user.</p>
+                        </div>
+                    </div>
+
+
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Parameters:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>user_id</td>
+                                        <td>int</td>
+                                        <td>The ID of the user to be edited.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>first_name</td>
+                                        <td>string</td>
+                                        <td>The user's first name.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>last_name</td>
+                                        <td>string</td>
+                                        <td>The user's last name.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>user_dob</td>
+                                        <td>date</td>
+                                        <td>The user's date of birth.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>user_position</td>
+                                        <td>string</td>
+                                        <td>The user's position.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>gender</td>
+                                        <td>int</td>
+                                        <td>The user's gender. (0 = Female, 1 = Male, 2 = Other)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>user_type_id</td>
+                                        <td>int</td>
+                                        <td>The user's type. (0 = Volunteer, 1 = Admin)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>is_active</td>
+                                        <td>int</td>
+                                        <td>Whether the user is currently active. (0 = Inactive, 1 = Active)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>user_start_date</td>
+                                        <td>date</td>
+                                        <td>The user's start date with the organization.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>user_end_date</td>
+                                        <td>date (optional)</td>
+                                        <td>The user's end date with the organization, if applicable.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Returns:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>JSON</td>
+                                        <td>A JSON response containing the status of the operation and a message.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Errors:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Error</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Validation failed</td>
+                                        <td>The request parameters failed validation.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>User not found</td>
+                                        <td>The specified user was not found in the database.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Error</td>
+                                        <td>An error occurred while updating the user information.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="api-card">
+                    <h2>4.5 deleteUser</h2>
+                    <h3>POST</h3>
+                    <h3>http://example.com/api/v0.1/admin/delete_user</h3>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Description:</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>The <code>deleteUser</code> function deletes the specified user from the database.</p>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Parameters:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>user_id</td>
+                                        <td>integer</td>
+                                        <td>The unique identifier of the user to be deleted.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Returns:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>JSON</td>
+                                        <td>A JSON response confirming the user has been deleted successfully.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Errors:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Error</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>User not found</td>
+                                        <td>The specified user could not be found in the database.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>General error</td>
+                                        <td>An error occurred while deleting the user from the database.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="api-card">
+                    <h2>4.6 getRequests</h2>
+                    <h3>GET</h3>
+                    <h3>http://example.com/api/v0.1/admin/get_requests/{branch_id}</h3>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Description:</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>The <code>getRequests</code> function retrieves all the recover requests made by users in
+                                the specified branch, if any.</p>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Parameters:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>branch_id</td>
+                                        <td>integer</td>
+                                        <td>The ID of the branch whose recover requests are being retrieved.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Returns:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>JSON</td>
+                                        <td>A JSON response containing the recover requests made by users in the
+                                            specified branch, if any.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Errors:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Error</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Not Found</td>
+                                        <td>The specified branch does not exist or has no recover requests made by its
+                                            users.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="api-card">
+                    <h2>4.7 acceptRequest</h2>
+                    <h3>POST</h3>
+                    <h3>http://example.com/api/v0.1/admin/accept_request</h3>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Description:</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>The <code>acceptRequest</code> function accepts a recover request by updating the request
+                                status to accepted.</p>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Parameters:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Parameter</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>request_id</td>
+                                        <td>The ID of the recover request to accept.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Returns:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>JSON</td>
+                                        <td>A JSON response confirming that the recover request has been accepted.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Errors:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Error</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Validation failed</td>
+                                        <td>The required parameter request_id was not provided or is not an integer.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Recover request not found</td>
+                                        <td>The provided request_iddoes not correspond to a recover request in the
+                                            database.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Recover request has already been accepted</td>
+                                        <td>The provided request_id corresponds to a recover request that has already
+                                            been accepted.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="api-card">
+                    <h2>4.9 declineRequest</h2>
+                    <h3>POST</h3>
+                    <h3>http://example.com/api/v0.1/admin/decline_request</h3>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Description:</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>The <code>declineRequest</code> function declines a recover request based on the provided
+                                request ID.</p>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Parameters:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>request_id</td>
+                                        <td>The ID of the recover request to decline.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Returns:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>JSON</td>
+                                        <td>A JSON response confirming the recover request has been declined.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Errors:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Error</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Validation failed</td>
+                                        <td>The request_id parameter is missing or not an integer.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Error</td>
+                                        <td>The recover request with the provided ID was not found.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="api-card">
+                    <h2>4.10 sendAnnouncement</h2>
+                    <h3>POST</h3>
+                    <h3>http://example.com/api/v0.1/admin/send_announcement</h3>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Description:</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>The <code>sendAnnouncement</code> function creates a new announcement.</p>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Parameters:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>announcement_title</td>
+                                        <td>string</td>
+                                        <td>The title of the announcement</td>
+                                    </tr>
+                                    <tr>
+                                        <td>announcement_content</td>
+                                        <td>string</td>
+                                        <td>The content of the announcement</td>
+                                    </tr>
+                                    <tr>
+                                        <td>admin_id</td>
+                                        <td>integer</td>
+                                        <td>The ID of the admin user sending the announcement</td>
+                                    </tr>
+                                    <tr>
+                                        <td>importance_level</td>
+                                        <td>integer</td>
+                                        <td>The level of importance of the announcement (0 = low, 1 = medium, 2 = high)
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Returns:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>JSON</td>
+                                        <td>A JSON response confirming the announcement has been sent.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Errors:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Error</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Invalid admin user</td>
+                                        <td>The admin user does not exist or is not an admin.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>The importance level field is required</td>
+                                        <td>The importance level field is missing or has an invalid value.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Validation error</td>
+                                        <td>The request parameters failed validation. The error message will contain
+                                            details about the validation failure.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div class="api-card">
+                    <h2>4.11 deleteAnnouncement</h2>
+                    <h3>POST</h3>
+                    <h3>http://example.com/api/v0.1/admin/delete_announcement</h3>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Description:</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>The <code>deleteAnnouncement</code> function deletes the announcement with the provided
+                                ID, but only if the admin user who created the announcement and the admin user who sent
+                                the delete request are the same.</p>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Parameters:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Parameter</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>announcement_id</td>
+                                        <td>The ID of the announcement to be deleted.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>admin_id</td>
+                                        <td>The ID of the admin user who sent the delete request.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Returns:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>JSON</td>
+                                        <td>A JSON response confirming whether the announcement was deleted successfully
+                                            or if an error occurred.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Errors:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Error</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Announcement not found</td>
+                                        <td>The announcement with the provided ID could not be found.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>User not found</td>
+                                        <td>The admin user with the provided ID could not be found.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>User is not an admin</td>
+                                        <td>The admin user with the provided ID is not an admin and does not have
+                                            permission to delete announcements.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>User is not the one who sent the announcement</td>
+                                        <td>The admin user with the provided ID did not send the announcement with the
+                                            provided ID and therefore cannot delete it.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="api-card">
+                    <h2>4.12 editAnnouncement</h2>
+                    <h3>POST</h3>
+                    <h3>http://example.com/api/v0.1/admin/edit_announcement</h3>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Description:</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>The <code>editAnnouncement</code> function edits an existing announcement sent by an
+                                admin user.</p>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Parameters:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Parameter</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>announcement_id</td>
+                                        <td>integer</td>
+                                        <td>The ID of the announcement to be edited</td>
+                                    </tr>
+                                    <tr>
+                                        <td>announcement_title</td>
+                                        <td>string</td>
+                                        <td>The new title of the announcement</td>
+                                    </tr>
+                                    <tr>
+                                        <td>announcement_content</td>
+                                        <td>string</td>
+                                        <td>The new content of the announcement</td>
+                                    </tr>
+                                    <tr>
+                                        <td>admin_id</td>
+                                        <td>integer</td>
+                                        <td>The ID of the admin user who sent the announcement</td>
+                                    </tr>
+                                    <tr>
+                                        <td>importance_level</td>
+                                        <td>integer</td>
+                                        <td>The new importance level of the announcement (0, 1, or 2)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Returns:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>JSON</td>
+                                        <td>A JSON response confirming the announcement has been edited.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Errors:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Error</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Unauthorized</td>
+                                        <td>The user is not authorized to access this resource.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Validation Error</td>
+                                        <td>The request did not pass validation rules. The error message will contain
+                                            the details.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Not Found</td>
+                                        <td>The requested resource was not found.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Internal Server Error</td>
+                                        <td>An unexpected error occurred while processing the request.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="api-card">
+                    <h2>4.13 addEvent</h2>
+                    <h3>POST</h3>
+                    <h3>http://example.com/api/v1/admin/add_event</h3>
+
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Description:</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>The <code>addEvent</code> function creates a new event and adds it to the database. It
+                                also adds responsible people for the event and increments the goals table for goals that
+                                have the same program ID and event type ID as the event</p>
+                        </div>
+                    </div>
+
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Parameters:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>program_id</td>
+                                        <td>integer</td>
+                                        <td>The ID of the program associated with the event.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>event_main_picture</td>
+                                        <td>file</td>
+                                        <td>An image file to be associated with the event. (optional)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>event_description</td>
+                                        <td>string</td>
+                                        <td>A description of the event.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>event_location</td>
+                                        <td>string</td>
+                                        <td>The location of the event.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>event_date</td>
+                                        <td>date</td>
+                                        <td>The date of the event.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>event_title</td>
+                                        <td>string</td>
+                                        <td>The title of the event.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>event_type_id</td>
+                                        <td>integer</td>
+                                        <td>The ID of the type of event.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>budget_sheet</td>
+                                        <td>file</td>
+                                        <td>An image file of the event's budget sheet. (optional)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>proposal</td>
+                                        <td>file</td>
+                                        <td>An image file of the event's proposal. (optional)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>meeting_minute</td>
+                                        <td>file</td>
+                                        <td>An image file of the event's meeting minute. (optional)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>branch_id</td>
+                                        <td>integer</td>
+                                        <td>The ID of the branch associated with the event.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>responsibles</td>
+                                        <td>array</td>
+                                        <td>An array of objects representing the people responsible for the event. Each
+                                            object must contain a user ID and role name.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Returns:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>JSON</td>
+                                        <td>A JSON response indicating whether the event was created successfully or
+                                            not.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Errors:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Error</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Invalid request parameters</td>
+                                        <td>The request parameters failed validation. The error message will contain
+                                            details about the validation failure.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Error creating event</td>
+                                        <td>An error occurred while creating the event. The error message will contain
+                                            details about the error.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Error adding responsibilities</td>
+                                        <td>An error occurred while adding responsibilities for the event. The error
+                                            message will contain details about the error.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="api-card">
+                    <h2>4.14 editEvent</h2>
+                    <h3>POST</h3>
+                    <h3>http://example.com/api/v0.1/admin/edit_event</h3>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Description:</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>The <code>editEvent</code> function updates an existing event with new information.</p>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Parameters:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>event_id</td>
+                                        <td>integer</td>
+                                        <td>The ID of the event to be updated</td>
+                                    </tr>
+                                    <tr>
+                                        <td>program_id</td>
+                                        <td>integer</td>
+                                        <td>The ID of the program the event is associated with</td>
+                                    </tr>
+                                    <tr>
+                                        <td>event_main_picture</td>
+                                        <td>file</td>
+                                        <td>The main picture for the event</td>
+                                    </tr>
+                                    <tr>
+                                        <td>event_description</td>
+                                        <td>string</td>
+                                        <td>The description of the event</td>
+                                    </tr>
+                                    <tr>
+                                        <td>event_location</td>
+                                        <td>string</td>
+                                        <td>The location of the event</td>
+                                    </tr>
+                                    <tr>
+                                        <td>event_date</td>
+                                        <td>date</td>
+                                        <td>The date of the event</td>
+                                    </tr>
+                                    <tr>
+                                        <td>event_title</td>
+                                        <td>string</td>
+                                        <td>The title of the event</td>
+                                    </tr>
+                                    <tr>
+                                        <td>event_type_id</td>
+                                        <td>integer</td>
+                                        <td>The ID of the event type</td>
+                                    </tr>
+                                    <tr>
+                                        <td>budget_sheet</td>
+                                        <td>file</td>
+                                        <td>The budget sheet for the event</td>
+                                    </tr>
+                                    <tr>
+                                        <td>proposal</td>
+                                        <td>file</td>
+                                        <td>The proposal for the event</td>
+                                    </tr>
+                                    <tr>
+                                        <td>meeting_minute</td>
+                                        <td>file</td>
+                                        <td>The meeting minutes for the event (optional)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>responsibles</td>
+                                        <td>array</td>
+                                        <td>An array of responsible people, each with a user_id and role_name</td>
+                                    </tr>
+                                    <tr>
+                                        <td>event_images</td>
+                                        <td>array</td>
+                                        <td>An array of event images to be added to the event</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Returns:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>JSON</td>
+                                        <td>A JSON response confirming the event has been updated.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Errors:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Error</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Event not found</td>
+                                        <td>The event with the specified event_id does not exist.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Validation error</td>
+                                        <td>The request parameters failed validation. The error message will contain
+                                            details about the validation failure.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>File type error</td>
+                                        <td>One or more of the uploaded files are not in the supported file formats
+                                            (jpeg, bmp, png, jpg).</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+                <div class="api-card">
+                    <h2>4.15 deleteEvent</h2>
+                    <h3>POST</h3>
+                    <h3>http://example.com/api/v0.1/admin/delete_event</h3>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Description:</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>The <code>deleteEvent</code> function deletes an existing event.</p>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Parameters:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>event_id</td>
+                                        <td>integer</td>
+                                        <td>The ID of the event to be deleted</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Returns:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>JSON</td>
+                                        <td>A JSON response confirming the event has been deleted.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Errors:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Error</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Event not found</td>
+                                        <td>The event with the specified event_id does not exist.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>An error occurred while deleting the event</td>
+                                        <td>An unexpected error occurred during the event deletion process.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="api-card">
+                    <h2>4.16 addImageToEvent</h2>
+                    <h3>POST</h3>
+                    <h3>http://example.com/api/v0.1/admin/add_event_photo</h3>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Description:</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>The <code>addImageToEvent</code> function adds an image to an existing event.</p>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Parameters:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>event_id</td>
+                                        <td>integer</td>
+                                        <td>The ID of the event to which the image will be added</td>
+                                    </tr>
+                                    <tr>
+                                        <td>image</td>
+                                        <td>file</td>
+                                        <td>The image file to be added to the event (JPEG, BMP, PNG, or JPG format)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Returns:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>JSON</td>
+                                        <td>A JSON response confirming the image has been added to the event.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Errors:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Error</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Validation failed</td>
+                                        <td>The request parameters failed validation. The error message will contain
+                                            details about the validation failure.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Event not found</td>
+                                        <td>The event with the specified event_id does not exist.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="api-card">
+                    <h2>4.17 removeImageFromEvent</h2>
+                    <h3>POST</h3>
+                    <h3>http://example.com/api/v0.1/admin/remove_image</h3>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Description:</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>The <code>removeImageFromEvent</code> function removes an image from an existing event.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Parameters:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>id</td>
+                                        <td>integer</td>
+                                        <td>The ID of the image to be removed</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Returns:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>JSON</td>
+                                        <td>A JSON response confirming the image has been removed from the event.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Errors:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Error</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Validation failed</td>
+                                        <td>The request parameters failed validation. The error message will contain
+                                            details about the validation failure.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Image not found</td>
+                                        <td>The image with the specified ID does not exist.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Failed to delete the image</td>
+                                        <td>An error occurred while attempting to delete the image.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="api-card">
+                    <h2>4.18 setYearlyGoal</h2>
+                    <h3>POST</h3>
+                    <h3>http://example.com/api/v0.1/admin/set_yearly_goal</h3>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Description:</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>The <code>setYearlyGoal</code> function sets a yearly goal for a specific program and
+                                event type.</p>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Parameters:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>goal_name</td>
+                                        <td>string</td>
+                                        <td>The name of the goal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>goal_description</td>
+                                        <td>string</td>
+                                        <td>The description of the goal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>program_id</td>
+                                        <td>integer</td>
+                                        <td>The ID of the program for which the goal is being set</td>
+                                    </tr>
+                                    <tr>
+                                        <td>number_to_complete</td>
+                                        <td>integer</td>
+                                        <td>The number of events to complete the goal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>goal_year</td>
+                                        <td>integer</td>
+                                        <td>The year for which the goal is being set</td>
+                                    </tr>
+                                    <tr>
+                                        <td>event_type_id</td>
+                                        <td>integer</td>
+                                        <td>The ID of the event type associated with the goal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>goal_deadline</td>
+                                        <td>date</td>
+                                        <td>The deadline for completing the goal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>start_date</td>
+                                        <td>date</td>
+                                        <td>The start date for the goal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>branch_id</td>
+                                        <td>integer</td>
+                                        <td>The ID of the branch associated with the goal</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Returns:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>JSON</td>
+                                        <td>A JSON response indicating the success of the goal creation.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Errors:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Error</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Validation failed</td>
+                                        <td>The request parameters failed validation. The error message will contain
+                                            details about the validation failure.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Error creating goal</td>
+                                        <td>There was an issue creating the goal in the database. The error message will
+                                            provide more details on the specific issue.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+              
+
+
+                <div class="api-card">
+                    <h2>4.19 editYearlyGoal</h2>
+                    <h3>POST</h3>
+                    <h3>http://example.com/api/v0.1/admin/edit_yearly_goal</h3>
+
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Description:</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>The <code>editYearlyGoal</code> function allows you to edit an existing yearly goal by providing its ID and the updated details. The goal will be updated with the new information provided in the request. If the number of completed goals is greater than or equal to the number to complete, the goal status will be marked as completed (1). Otherwise, the goal status will be marked as incomplete (0). The API will also update the goal counter for events in the same year as the goal.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Parameters:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Parameter</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>goal_id</td>
+                                        <td>integer</td>
+                                        <td>The ID of the goal to be edited.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>goal_name</td>
+                                        <td>string</td>
+                                        <td>The new name of the goal.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>goal_description</td>
+                                        <td>string</td>
+                                        <td>The new description of the goal.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>program_id</td>
+                                        <td>integer</td>
+                                        <td>The ID of the program the goal is associated with.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>number_to_complete</td>
+                                        <td>integer</td>
+                                        <td>The new number of events required to complete the goal.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>goal_year</td>
+                                        <td>integer</td>
+                                        <td>The new year the goal is set for.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>event_type_id</td>
+                                        <td>integer</td>
+                                        <td>The ID of the event type associated with the goal.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>goal_deadline</td>
+                                        <td>date</td>
+                                        <td>The new deadline for the goal.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>start_date</td>
+                                        <td>date</td>
+                                        <td>The new start date for the goal.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>branch_id</td>
+                                        <td>integer</td>
+                                        <td>The ID of the branch the goal is associated with.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>number_completed</td>
+                                        <td>integer</td>
+                                        <td>The updated number of events completed for the goal.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Return:</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>Returns a JSON object with status and message properties, indicating the success or failure of the operation.</p>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Errors:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Error</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Validation failed</td>
+                                        <td>The request parameters failed validation. The error message will contain details about the validation failure.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Goal not found</td>
+                                        <td>The goal with the specified ID does not exist.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>An error occurred while updating the goal</td>
+                                        <td>An error occurred while attempting to update the goal. The error message will contain more information.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="api-card">
+                    <h2>4.20 deleteYearlyGoal</h2>
+                    <h3>POST</h3>
+                    <h3>http://example.com/api/v0.1/admin/delete_yearly_goal</h3>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Description:</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>The <code>deleteYearlyGoal</code> function deletes an existing yearly goal by providing its ID.</p>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Parameters:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>goal_id</td>
+                                        <td>integer</td>
+                                        <td>The ID of the yearly goal to be deleted</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Returns:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>JSON</td>
+                                        <td>A JSON response confirming the yearly goal has been deleted.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Errors:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Error</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Goal not found</td>
+                                        <td>The yearly goal with the specified goal_id does not exist.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>An error occurred while deleting the yearly goal</td>
+                                        <td>An unexpected error occurred during the yearly goal deletion process.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="api-card">
+                    <h2>4.21 addTrainingForUser</h2>
+                    <h3>POST</h3>
+                    <h3>http://example.com/api/v0.1/admin/add_training_for_user</h3>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Description:</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>The <code>addTrainingForUser</code> function adds one or more trainings to one or more users by providing the training and user IDs.</p>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Parameters:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>training_ids</td>
+                                        <td>array</td>
+                                        <td>An array of training IDs to be added</td>
+                                    </tr>
+                                    <tr>
+                                        <td>user_ids</td>
+                                        <td>array</td>
+                                        <td>An array of user IDs to receive the trainings</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Returns:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>JSON</td>
+                                        <td>A JSON response confirming the trainings have been added to the users successfully or an error message if an error occurs.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Errors:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Error</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Validation failed</td>
+                                        <td>The request parameters failed validation. The error message will contain details about the validation failure.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>One or more trainings do not exist</td>
+                                        <td>The trainings with the specified training_ids do not exist or are incorrect.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>One or more users do not exist</td>
+                                        <td>The users with the specified user_ids do not exist or are incorrect.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Error adding trainings</td>
+                                        <td>An unexpected error occurred during the process of adding trainings to the users.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="api-card">
+                    <h2>4.22 deleteTrainingForUser</h2>
+                    <h3>POST</h3>
+                    <h3>http://example.com/api/v0.1/admin/delete_training_for_user</h3>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Description:</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>The <code>deleteTrainingForUser</code> function removes one or more trainings from one or more users by providing the training and user IDs.</p>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Parameters:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>training_ids</td>
+                                        <td>array</td>
+                                        <td>An array of training IDs to be removed</td>
+                                    </tr>
+                                    <tr>
+                                        <td>user_ids</td>
+                                        <td>array</td>
+                                        <td>An array of user IDs to remove the trainings from</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Returns:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>JSON</td>
+                                        <td>A JSON response confirming the trainings have been removed from the users successfully or an error message if an error occurs.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Errors:</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Error</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Validation failed</td>
+                                        <td>The request parameters failed validation. The error message will contain details about the validation failure.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>One or more trainings do not exist</td>
+                                        <td>The trainings with the specified training_ids do not exist or are incorrect.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>One or more users do not exist</td>
+                                        <td>The users with the specified user_ids do not exist or are incorrect.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Error removing trainings</td>
+                                        <td>An unexpected error occurred during the process of removing trainings from the users.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             </div>
 
 
