@@ -32,6 +32,7 @@ export class FeedPage implements OnInit {
   user: any;
   isLiked: { [key: number]: { postId: number, isLiked: boolean }[] } = {};
   likeCount: { [key: number]: number } = {};
+  commentCount: { [key: number]: number } = {};
   errorMessage: string = '';
   constructor(private router:Router, private alertController: AlertController, private menuCtrl: MenuController, private service:PostService, private sharedService:SharedService, private userservice:UserService) { }
 
@@ -85,6 +86,7 @@ export class FeedPage implements OnInit {
           const postId = this.posts[i].id;
           this.isLikedUser[postId] = localStorage.getItem(`user_${this.user_id}_post_${postId}`) === 'true'; // retrieve the like state from Local Storage
           this.likeCount[postId] = this.posts[i].like_count;
+          this.commentCount[postId] = this.posts[i].comment_count;
         }
       } else {
         this.posts = [];
@@ -184,7 +186,7 @@ export class FeedPage implements OnInit {
           message: 'Your comment was added!',
           buttons: ['OK']
         }).then(alert => alert.present());
-        window.location.reload();
+        this.commentCount[p_id]++;
       }
     else if (status == "error"){
       this.alertController.create({
