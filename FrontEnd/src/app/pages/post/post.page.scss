@@ -31,7 +31,7 @@
 
 .user-info{
     position: relative;
-    left: 20px;
+    left: 5%;
 }
 
 .user-info .profile-picture{
@@ -45,42 +45,36 @@
 
 .user-info .username{
     position: relative;
-    top: 0px;
-    left: 44px;
+    padding-left: 10%;
     font-size: 15px;
     color:black;
 }
 
 .user-info .name{
     position: relative;
-    left: -65px;
     font-size: 13px;
     color: black;
     top: 20px;
+    left: -35px;
 }
 
 .input {
     position: absolute;
     width: 300px;
-    height: 450px;
-    top: 415px;
+    height: 300px;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 10px;
-    --background: #E9E7E7;
-    --color: #8F8F8F;
+    --background: #f4f0f0;
+    --color: #7c7c7c;
     --padding-end: 35px;
     --padding-start: 10px;
-    --placeholder-color: #8F8F8F;
+    --placeholder-color: #7c7c7c;
     --placeholder-opacity: 0.8;
 }
 
-.upload-options{
-    position: absolute;
-    top: 680px;
-    font-size: 25px;
-    color: #45579A;
-}
+
 
 .camera{
     position: relative;
@@ -98,6 +92,14 @@
     width: 80%; 
     margin: 0 auto; 
     --background: #45579A;
+}
+
+.upload-options{
+    position: absolute;
+    top: 80%;
+    left: 20%;
+    font-size: 20px;
+    color: #45579A;
 }
 
 
