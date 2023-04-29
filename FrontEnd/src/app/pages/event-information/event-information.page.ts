@@ -48,8 +48,8 @@ export class EventInformationPage implements OnInit {
     this.router.navigate(['/gallery']);
   }
 
-  downloadDoc(pictureUrl: string) {
-    this.service.downloadDoc(pictureUrl).subscribe({
+  downloadPic(pictureUrl: string) {
+    this.service.downloadPic(pictureUrl).subscribe({
       next: (data: string) => {
         const url = 'data:image/jpg;base64,' + data;
         const link = document.createElement('a');

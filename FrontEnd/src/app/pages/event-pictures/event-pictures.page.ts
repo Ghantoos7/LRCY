@@ -32,13 +32,14 @@ export class EventPicturesPage implements OnInit {
     });
   }
 
-  downloadPicture(pic_id: number) {
-    this.service.downloadPicture(pic_id).subscribe({
+  downloadPic(pictureUrl: string) {
+    this.service.downloadPic(pictureUrl).subscribe({
       next: (data: string) => {
-        const url = 'data:image/jpg;base64,' + data; // Replace 'image/jpeg' with the appropriate MIME type of your images
+        const url = 'data:image/jpg;base64,' + data;
         const link = document.createElement('a');
         link.href = url;
-        link.download = 'image.jpg';
+        const fileName = pictureUrl.split('/').pop() || 'image.jpg';
+        link.download = fileName;
         link.click();
         this.presentSuccessAlert();
       },
