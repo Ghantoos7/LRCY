@@ -23,7 +23,7 @@ export class PostPage implements OnInit {
   full_name:string = '';
   username = localStorage.getItem('username') as string;
   user_profile_pic :string = '';
-  user_id = localStorage.getItem('userId') as string;
+  user_id = localStorage.getItem('user_id') as string;
   branch_id = localStorage.getItem('branch_id') as string;
   post_caption:string='';
   post_src_img: any;

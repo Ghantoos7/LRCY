@@ -17,7 +17,7 @@ export class AddGoalPage implements OnInit {
 
 
   goal_id: number = 0;
-  branch_id = parseInt(localStorage.getItem('branchId') as string, 10);  
+  branch_id = parseInt(localStorage.getItem('branch_id') as string, 10);  
   goal_name: string = '';
   goal_description: string = '';
   number_to_complete: number = 0;

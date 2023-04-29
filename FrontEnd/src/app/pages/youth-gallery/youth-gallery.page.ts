@@ -117,12 +117,12 @@ this.router.navigate(['/profile']);
   }
   logout() {
     this.userservice.logout().subscribe((data: any) => {
-      localStorage.removeItem('authToken');
-      localStorage.removeItem('userId');
+      localStorage.removeItem('auth_token');
+      localStorage.removeItem('user_id');
       localStorage.removeItem('username');
       localStorage.removeItem('user_profile_pic');
       localStorage.removeItem('branch_id');
-      localStorage.removeItem('rememberMe');
+      localStorage.removeItem('remember_me');
       localStorage.removeItem('full_name');
       this.router.navigate(['/sign-in']);
     });

@@ -49,7 +49,7 @@ export class MyPostsPage implements OnInit {
     this.user_id = this.selectedUser['id'];
     if (!this.user_id) {
       // If user ID is not passed through URL, use logged-in user's ID and info
-      this.user_id = localStorage.getItem('userId') as string;
+      this.user_id = localStorage.getItem('user_id') as string;
       this.username = localStorage.getItem('username') as string;
       this.user_profile_pic = localStorage.getItem('user_profile_pic') as string;
       this.full_name = localStorage.getItem('full_name') as string;

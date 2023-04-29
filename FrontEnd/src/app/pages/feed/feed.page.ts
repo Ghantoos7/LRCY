@@ -23,7 +23,7 @@ export class FeedPage implements OnInit {
 
   username = localStorage.getItem('username') as string;
   user_profile_pic = localStorage.getItem('user_profile_pic') as string;
-  user_id = localStorage.getItem('userId') as string;
+  user_id = localStorage.getItem('user_id') as string;
   posts: any;
   index: number=0;
   isLikedUser: { [key: number]: boolean } = {};
@@ -165,12 +165,12 @@ export class FeedPage implements OnInit {
 
   logout() {
     this.userservice.logout().subscribe((data: any) => {
-      localStorage.removeItem('authToken');
-      localStorage.removeItem('userId');
+      localStorage.removeItem('auth_token');
+      localStorage.removeItem('user_id');
       localStorage.removeItem('username');
       localStorage.removeItem('user_profile_pic');
       localStorage.removeItem('branch_id');
-      localStorage.removeItem('rememberMe');
+      localStorage.removeItem('remember_me');
       localStorage.removeItem('full_name');
       this.router.navigate(['/sign-in']);
     });

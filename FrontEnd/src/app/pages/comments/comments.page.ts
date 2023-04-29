@@ -25,7 +25,7 @@ export class CommentsPage implements OnInit {
   post_date: string = '';
   user_profile_pic = localStorage.getItem('user_profile_pic') as string;
   comments: any = [];
-  current_id = localStorage.getItem('userId') as string;
+  current_id = localStorage.getItem('user_id') as string;
   comment_content: string ='';
   post_id: number = 0;
   isLikedUser: {[key: number]: boolean} = {};

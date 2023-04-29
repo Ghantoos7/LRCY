@@ -35,18 +35,18 @@ export class SignInPage implements OnInit {
       next: (data) => {
         const response = JSON.parse(JSON.stringify(data));
         if (response.status === 'Login successful') {
-          // Store the token in local storage for future use
-          localStorage.setItem('authToken', response.token);
-          localStorage.setItem('userId', response.user_id);
-          localStorage.setItem('username', response.username);
-          localStorage.setItem('user_profile_pic', response.user_profile_pic);
-          localStorage.setItem('branch_id', response.branch_id);
-          localStorage.setItem('rememberMe', this.rememberMe.toString());
-          localStorage.setItem('full_name', response.full_name);
-          // Redirect the user to the dashboard or any other page
-          this.router.navigate(['/feed']);
-          this.organization_id = '';
-          this.password = '';
+            // Store the token in local storage for future use
+            localStorage.setItem('auth_token', response.token);
+            localStorage.setItem('user_id', response.user_id);
+            localStorage.setItem('username', response.username);
+            localStorage.setItem('user_profile_pic', response.user_profile_pic);
+            localStorage.setItem('branch_id', response.branch_id);
+            localStorage.setItem('remember_me', this.rememberMe.toString());
+            localStorage.setItem('full_name', response.full_name);
+            // Redirect the user to the dashboard or any other page
+            this.router.navigate(['/feed']);
+            this.organization_id = '';
+            this.password = '';
           
         } else {
           // Display an error message to the user

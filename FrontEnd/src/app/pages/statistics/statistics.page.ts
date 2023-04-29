@@ -51,7 +51,7 @@ export class StatisticsPage implements OnInit {
     this.user_id = this.selectedUser['id'];
     if (!this.user_id) {
       // If user ID is not passed through URL, use logged-in user's ID
-      this.user_id = localStorage.getItem('userId') as string;
+      this.user_id = localStorage.getItem('user_id') as string;
     }
 
     this.service.getCompletedTrainingsCount(this.user_id).subscribe((response) => {

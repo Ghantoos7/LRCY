@@ -24,7 +24,7 @@ export class YearlyGoalsPage implements OnInit {
 
   yearlyGoals: any;
   username = localStorage.getItem('username') as string;
-  user_profile_pic = localStorage.getItem('user_profile_pic') as string;
+  user_profile_pic = localStorage.getItem('userProfilePic') as string;
   branch_id = localStorage.getItem('branch_id') as string;
   filteredGoals: any;
   searchControl: FormControl = new FormControl('');

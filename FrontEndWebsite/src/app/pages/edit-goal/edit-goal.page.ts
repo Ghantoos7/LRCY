@@ -17,7 +17,7 @@
 
 
     goal_id: number = 0;
-    branch_id = localStorage.getItem('branchId') as unknown as number;
+    branch_id = localStorage.getItem('branch_id') as unknown as number;
     goal_name: string = '';
     goal_description: string = '';
     number_completed: number = 0;
