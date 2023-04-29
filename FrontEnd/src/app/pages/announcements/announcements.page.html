@@ -4,6 +4,7 @@
       <ion-toolbar class="menu-tool">
       </ion-toolbar>
     </ion-header>
+
     <ion-content class="ion-padding">
       <div class="avatar-container">
         <ion-avatar size="large" class="custom-avatar">
@@ -29,6 +30,9 @@
         <ion-title>Announcements</ion-title>
       </ion-toolbar>
     </ion-header>
+    <div *ngIf="errorMessage" class="error-message" style="text-align: center; color: grey; padding-top: 20px;">
+      {{ errorMessage }}
+    </div>
     <ion-content class="ion-padding">
     <ion-card *ngFor="let announcement of announcements; let i = index">
       <ion-card-header>

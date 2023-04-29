@@ -38,6 +38,7 @@ export class MyPostsPage implements OnInit {
   comment_contents: any = [];
   likeCount: { [key: number]: number } = {};
 
+  errorMessage: string = '';
   constructor(private post_service:PostService, private router: Router, private alertController: AlertController, private actionSheetController: ActionSheetController, private service: UserService, private sharedService:SharedService) { }
 
   ngOnInit() {
@@ -60,15 +61,23 @@ export class MyPostsPage implements OnInit {
     }
 
     this.service.getOwnPosts(this.user_id).subscribe(response => {
-      this.posts = response;
-      this.posts_array = Array.from(this.posts['posts']);
-      for (let i = 0; i < this.posts_array.length; i++) {
-        const postId = this.posts_array[i].id;
-        this.isLikedUser[postId] = localStorage.getItem(`user_${this.user_id}_post_${postId}`) === 'true'; // retrieve the like state from Local Storage
-        this.likeCount[postId] = this.posts_array[i].like_count;
+      if (response && response.hasOwnProperty('posts')) {
+        this.posts = response;
+        this.posts_array = Array.from(this.posts['posts']);
+        for (let i = 0; i < this.posts_array.length; i++) {
+          const postId = this.posts_array[i].id;
+          this.isLikedUser[postId] = localStorage.getItem(`user_${this.user_id}_post_${postId}`) === 'true'; // retrieve the like state from Local Storage
+          this.likeCount[postId] = this.posts_array[i].like_count;
+        }
+      } else {
+        this.posts_array = [];
+      }
+  
+      // check if there are no posts
+      if (this.posts_array.length === 0) {
+        this.errorMessage = "No posts found";
       }
     });
-
 
   }
 

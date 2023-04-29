@@ -6,7 +6,9 @@
 
 <ion-content fullscreen>
   <div class="container">
-   
+    <div *ngIf="errorMessage" class="error-message" style="text-align: center; color: grey; padding-top: 20px;">
+      {{ errorMessage }}
+    </div>
     <ion-card class="card" *ngFor="let post of posts_array; let i = index">
       <div class="header-container">
         <img  class="card-profile-picture" src="http://127.0.0.1:8000/storage/images/{{user_profile_pic}}" onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'">

@@ -5,9 +5,14 @@
 </ion-header>
 
 <ion-content>
+  
   <div class="container ion-justify-content-center">
+    
     <ion-grid>
-      <ion-row *ngFor="let event of events_organized.events" class="ion-align-items-center ion-justify-content-center">
+      <div *ngIf="errorMessage" class="error-message" style="text-align: center; color: grey; padding-top: 20px;">
+        {{ errorMessage }}
+      </div>
+      <ion-row *ngFor="let event of events_organized" class="ion-align-items-center ion-justify-content-center">
         <ion-col size="1">
           <ion-icon size="medium" [name]="getProgramIcon(event.program_id)"></ion-icon>
         </ion-col>

@@ -19,18 +19,22 @@ import { SharedService } from 'src/app/services/shared.service';
 export class EventPicturesPage implements OnInit {
   my_id: string = "";
   pictures: any = [];
-
+  errorMessage: string = '';
   constructor(private shared:SharedService, private route: ActivatedRoute, private navCtrl: NavController, private router:Router, private service:EventService, private alertController:AlertController) { }
 
   ngOnInit() {
     this.my_id = this.shared.getVariableValue();
-    
+  
     this.service.getEventPictures(this.my_id).subscribe(response => {
-     
-      this.pictures = response;
-   
+      if (response && response.hasOwnProperty('pictures')) {
+        this.pictures = response;
+      } else {
+        this.pictures = [];
+        this.errorMessage = "No pictures found";
+      }
     });
   }
+  
 
   displayDownloadConfirmation(pictureUrl: string) {
     this.alertController.create({

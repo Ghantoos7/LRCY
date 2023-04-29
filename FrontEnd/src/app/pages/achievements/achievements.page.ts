@@ -20,7 +20,7 @@ export class AchievementsPage implements OnInit {
   selectedUser: any;
   user_id: string= '';
   events_organized:any = [];
-
+  errorMessage: string = '';
 
   constructor(private router:Router, private service:UserService, private sharedService:SharedService) { }
 
@@ -33,8 +33,24 @@ export class AchievementsPage implements OnInit {
       this.user_id = localStorage.getItem('userId') as string;
     }
 
-    this.service.getEventsOrganized(this.user_id).subscribe(response => {
-      this.events_organized = response;
+    this.service.getEventsOrganized(this.user_id).subscribe({
+      next: response => {
+        if (response && response.hasOwnProperty('events')) {
+          const parsedResponse = JSON.parse(JSON.stringify(response));
+          const allEventsOrganized = [].concat.apply([], Object.values(parsedResponse['events']));
+          this.events_organized = allEventsOrganized;
+
+          if (this.events_organized.length === 0) {
+            this.errorMessage = 'No achievements found';
+          }
+        } else {
+          this.errorMessage = 'No achievements found';
+        }
+      },
+      error: error => {
+        console.error('An error occurred while fetching events organized:', error);
+        this.errorMessage = 'No achievements found';
+      }
 
     });
     

@@ -32,7 +32,7 @@ export class FeedPage implements OnInit {
   user: any;
   isLiked: { [key: number]: { postId: number, isLiked: boolean }[] } = {};
   likeCount: { [key: number]: number } = {};
-
+  errorMessage: string = '';
   constructor(private router:Router, private alertController: AlertController, private menuCtrl: MenuController, private service:PostService, private sharedService:SharedService, private userservice:UserService) { }
 
   ionViewWillLeave() {
@@ -79,14 +79,23 @@ export class FeedPage implements OnInit {
 
   fetchPosts() {
     this.service.getPosts().subscribe((data: any) => {
-      this.posts = data['posts'];
-      for (let i = 0; i < this.posts.length; i++) {
-        const postId = this.posts[i].id;
-        this.isLikedUser[postId] = localStorage.getItem(`user_${this.user_id}_post_${postId}`) === 'true'; // retrieve the like state from Local Storag
-        this.likeCount[postId] = this.posts[i].like_count;
+      if (data && data.hasOwnProperty('posts')) {
+        this.posts = data['posts'];
+        for (let i = 0; i < this.posts.length; i++) {
+          const postId = this.posts[i].id;
+          this.isLikedUser[postId] = localStorage.getItem(`user_${this.user_id}_post_${postId}`) === 'true'; // retrieve the like state from Local Storage
+          this.likeCount[postId] = this.posts[i].like_count;
+        }
+      } else {
+        this.posts = [];
+      }
+  
+      if (this.posts.length === 0) {
+        this.errorMessage = 'No posts found';
       }
     });
   }
+  
 
   getDaysAgo(postDate: string): string {
     const today = new Date();
