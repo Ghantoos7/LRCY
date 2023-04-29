@@ -73,7 +73,6 @@ export class MyPostsPage implements OnInit {
   fetchData() {
 
     this.service.getOwnPosts(this.user_id).subscribe(response => {
-      console.log(response)
       if (response && response.hasOwnProperty('posts')) {
         this.posts = response;
         this.posts_array = Array.from(this.posts['posts']);
