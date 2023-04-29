@@ -3,15 +3,17 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { PostService } from 'src/app/services/post.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'app-comments',
   templateUrl: './comments.page.html',
   styleUrls: ['./comments.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule, FormsModule, ReactiveFormsModule]
 })
 export class CommentsPage implements OnInit {
 
@@ -43,16 +45,27 @@ export class CommentsPage implements OnInit {
     const id = JSON.parse(post_id)["p_id"];
     this.post_id = id;
     
+    this.router.events.subscribe((event: any) => {
+      if (event instanceof NavigationEnd) {
+        this.fetchData();
+      }
+    });
 
-    this.postService.getPost(id).subscribe((data: any) => {
+   
+  }
+
+  fetchData(){
+
+    this.postService.getPost(this.post_id).subscribe((data: any) => {
       this.user_name = data['post'].user_name;
       this.post_media = data['post'].post_media;
       this.post_caption = data['post'].post_caption;
       this.comment_count = data['post'].comment_count;
       this.post_date = data['post'].post_date;
     });
+    
 
-    this.postService.getComments(id).subscribe((data: any) => {
+    this.postService.getComments(this.post_id).subscribe((data: any) => {
       this.comments = data['comments'];
       if (this.comments && this.comments.length > 0) {
         for (let i = 0; i < this.comments.length; i++) {
@@ -62,7 +75,6 @@ export class CommentsPage implements OnInit {
         }
       }
     });
-   
   }
 
   async openAlert() {
@@ -173,31 +185,26 @@ export class CommentsPage implements OnInit {
   }
 
   
-  async sendComment(){
-  
-    this.postService.commentPost(this.post_id, this.current_id, this.comment_content).subscribe(response=>{
-      const str = JSON.stringify(response);
-      const result = JSON.parse(str);
-      const status = result['status'];
-       if(status == "success"){
+  async sendComment() {
+    this.postService.commentPost(this.post_id, this.current_id, this.comment_content).subscribe((response : any)=> {
+      const status = response['status'];
+      if (status == "success") {
         this.alrt.create({
           message: 'Your comment was added!',
           buttons: ['OK']
         }).then(alrt => alrt.present());
-        window.location.reload();
-      }
-    else if (status == "error"){
-      this.alrt.create({
-        message: 'Something went wrong.',
-        buttons: ['OK']
-      }).then(alrt => alrt.present());
+        this.comment_content = ''; // Reset the input field
+        this.fetchData(); // Update the comments list
+      } else if (status == "error") {
+        this.alrt.create({
+          message: 'Something went wrong.',
+          buttons: ['OK']
+        }).then(alrt => alrt.present());
       }
     });
-    
-   
   }
-
-  deleteComment(comm_id: number){
+  
+  deleteComment(comm_id: number) {
     this.alertController.create({
       header: 'Confirm',
       message: 'Are you sure you want to delete this comment?',
@@ -209,13 +216,11 @@ export class CommentsPage implements OnInit {
         {
           text: 'Delete',
           handler: () => {
-            this.postService.deleteComment(comm_id).subscribe(response=>{
-              const str = JSON.stringify(response);
-              const result = JSON.parse(str);
-              const status = result['status'];
-              if(status == "success"){
-                window.location.reload();
-              } else if (status == "error"){
+            this.postService.deleteComment(comm_id).subscribe((response : any) => {
+              const status = response['status'];
+              if (status == "success") {
+                this.fetchData(); // Update the comments list
+              } else if (status == "error") {
                 this.alrt.create({
                   message: 'Something went wrong. Please try again.',
                   buttons: ['OK']
@@ -264,42 +269,40 @@ export class CommentsPage implements OnInit {
     this.router.navigate(['/feed']);
   }
 
- editComment(comm_id: number, currentContent: string) {
-  this.alertController.create({
-    header: 'Edit Comment',
-    inputs: [
-      {
-        name: 'content',
-        type: 'text',
-        value: currentContent
-      }
-    ],
-    buttons: [
-      {
-        text: 'Cancel',
-        role: 'cancel'
-      },
-      {
-        text: 'Edit',
-        handler: (data) => {
-          this.postService.editComment(comm_id, data.content).subscribe(response => {
-            const str = JSON.stringify(response);
-            const result = JSON.parse(str);
-            const status = result['status'];
-            if (status == "success") {
-              window.location.reload();
-            } else if (status == "error") {
-              this.alrt.create({
-                message: 'Something went wrong. Please try again.',
-                buttons: ['OK']
-              }).then(alrt => alrt.present());
-            }
-          });
+  editComment(comm_id: number, currentContent: string) {
+    this.alertController.create({
+      header: 'Edit Comment',
+      inputs: [
+        {
+          name: 'content',
+          type: 'text',
+          value: currentContent
         }
-      }
-    ]
-  }).then(alert => alert.present());
-}
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        },
+        {
+          text: 'Edit',
+          handler: (data) => {
+            this.postService.editComment(comm_id, data.content).subscribe((response : any )=> {
+              const status = response['status'];
+              if (status == "success") {
+                this.fetchData(); // Update the comments list
+              } else if (status == "error") {
+                this.alrt.create({
+                  message: 'Something went wrong. Please try again.',
+                  buttons: ['OK']
+                }).then(alrt => alrt.present());
+              }
+            });
+          }
+        }
+      ]
+    }).then(alert => alert.present());
+  }
 
   editReply(reply_id: number){
     this.alertController.create({
