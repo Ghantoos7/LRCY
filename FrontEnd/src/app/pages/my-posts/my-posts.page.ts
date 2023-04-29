@@ -72,20 +72,27 @@ export class MyPostsPage implements OnInit {
 
   }
 
-  getDaysAgo(postDate: string) {
+  getDaysAgo(postDate: string): string {
     const today = new Date();
     const post = new Date(postDate);
-    const timeDiff = Math.abs(today.getTime() - post.getTime());
-    const minutesDiff = Math.floor(timeDiff / (1000 * 60));
-    if (minutesDiff < 60) {
-      return `${minutesDiff}m ago`;
+    const yearDiff = today.getFullYear() - post.getFullYear();
+    const monthDiff = today.getMonth() - post.getMonth();
+    const dayDiff = today.getDate() - post.getDate();
+    if (yearDiff > 0) {
+      return `${yearDiff}y ago`;
+    } else if (monthDiff > 0) {
+      return `${monthDiff}mo ago`;
+    } else if (dayDiff > 0) {
+      return `${dayDiff}d ago`;
+    } else {
+      const hourDiff = today.getHours() - post.getHours();
+      const minuteDiff = today.getMinutes() - post.getMinutes();
+      if (hourDiff > 0) {
+        return `${hourDiff}h ago`;
+      } else {
+        return `${minuteDiff}m ago`;
+      }
     }
-    const hoursDiff = Math.floor(timeDiff / (1000 * 3600));
-    if (hoursDiff < 24) {
-      return `${hoursDiff}h ago`;
-    }
-    const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
-    return `${daysDiff}d ago`;
   }
 
   async showActionSheet(i: number) {
@@ -136,15 +143,26 @@ export class MyPostsPage implements OnInit {
     await actionSheet.present();
 }
 
+public animateLikeButton(postId: number) {
+  const likeButton = document.getElementById(`like-button-${postId}`);
+  likeButton?.classList.add('like-animation');
 
-  toggleLike(post_id: number) {
-    if (this.isLikedUser[post_id]) {
+  likeButton?.addEventListener('animationend', () => {
+    likeButton.classList.remove('like-animation');
+  });
+}
+
+
+
+toggleLike(post_id: number) {
+  if (this.isLikedUser[post_id]) {
     this.unlikePost(post_id);
-    } else {
+  } else {
     this.likePost(post_id);
-    }
   }
-    
+    this.animateLikeButton(post_id);
+}
+
   likePost(post_id: number) {
     this.post_service.likePost(post_id).subscribe((data: any) => {
       localStorage.setItem(`user_${this.user_id}_post_${post_id}`, 'true'); // store the like state in Local Storage

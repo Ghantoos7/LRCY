@@ -123,17 +123,26 @@ export class CommentsPage implements OnInit {
     });
   }
 
- 
   
+
+  public animateLikeButton(postId: number) {
+    const likeButton = document.getElementById(`like-button-${postId}`);
+    likeButton?.classList.add('like-animation');
   
+    likeButton?.addEventListener('animationend', () => {
+      likeButton.classList.remove('like-animation');
+    });
+  }
 
   toggleLike(comment_id: number) {
     if (this.isLikedUser[comment_id]) {
-    this.unlikeComment(comment_id);
+      this.unlikeComment(comment_id);
     } else {
-    this.likeComment(comment_id);
+      this.likeComment(comment_id);
     }
+      this.animateLikeButton(comment_id);
   }
+  
     
   likeComment(comment_id: number) {
     this.postService.likeComment(comment_id, this.current_id).subscribe((data: any) => {
@@ -367,12 +376,27 @@ export class CommentsPage implements OnInit {
     }).then(alert => alert.present());
   }
 
-  getDaysAgo(date: string) {
+  getDaysAgo(commentDate: string): string {
     const today = new Date();
-    const post = new Date(date);
-    const timeDiff = Math.abs(today.getTime() - post.getTime());
-    const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
-    return daysDiff;
+    const comment = new Date(commentDate);
+    const yearDiff = today.getFullYear() - comment.getFullYear();
+    const monthDiff = today.getMonth() - comment.getMonth();
+    const dayDiff = today.getDate() - comment.getDate();
+    if (yearDiff > 0) {
+      return `${yearDiff}y ago`;
+    } else if (monthDiff > 0) {
+      return `${monthDiff}mo ago`;
+    } else if (dayDiff > 0) {
+      return `${dayDiff}d ago`;
+    } else {
+      const hourDiff = today.getHours() - comment.getHours();
+      const minuteDiff = today.getMinutes() - comment.getMinutes();
+      if (hourDiff > 0) {
+        return `${hourDiff}h ago`;
+      } else {
+        return `${minuteDiff}m ago`;
+      }
+    }
   }
 
 

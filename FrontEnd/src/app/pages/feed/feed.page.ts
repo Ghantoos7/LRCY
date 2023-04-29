@@ -66,6 +66,8 @@ export class FeedPage implements OnInit {
     event.target.src = '/assets/imgs/ext.jpg';
   }
 
+  
+
   ngOnInit() {
 
    this.router.events.subscribe((event: any) => {
@@ -185,14 +187,26 @@ localStorage.removeItem('full_name');
     
    
   }
+
+  
+  public animateLikeButton(postId: number) {
+    const likeButton = document.getElementById(`like-button-${postId}`);
+    likeButton?.classList.add('like-animation');
+  
+    likeButton?.addEventListener('animationend', () => {
+      likeButton.classList.remove('like-animation');
+    });
+  }
+
   toggleLike(post_id: number) {
     if (this.isLikedUser[post_id]) {
-
-    this.unlikePost(post_id);
+      this.unlikePost(post_id);
     } else {
-    this.likePost(post_id);
+      this.likePost(post_id);
     }
+      this.animateLikeButton(post_id);
   }
+  
     
   likePost(post_id: number) {
     this.service.likePost(post_id).subscribe((data: any) => {

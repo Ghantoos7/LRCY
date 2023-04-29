@@ -51,14 +51,13 @@
       </ion-card-content>
 
       <ion-footer>
-        <ion-icon class="likes" [class.active]="isLikedUser[post.id]" name="{{isLikedUser[post.id] ? 'heart' : 'heart-outline' }}" (click)="toggleLike(post.id)"></ion-icon>
+        <ion-icon id="like-button-{{post.id}}" class="likes" [class.active]="isLikedUser[post.id]" name="{{isLikedUser[post.id] ? 'heart' : 'heart-outline' }}" (click)="toggleLike(post.id)"></ion-icon>
         <ion-text class="like-count" color="danger">{{this.likeCount[post.id]}}</ion-text>
         <ion-img (click) ="goToComments(post.id)" class="comments" src="assets/icon/comments.png"></ion-img>
         <ion-text class="comment-count">{{post.comment_count}}</ion-text>
         <ion-input class="input"  [(ngModel)]="comment_contents[i]" placeholder="Comment on this post..."></ion-input>
         <ion-icon (click)="sendComment(post.id, i)" class="send-icon" name="send"></ion-icon>
-
-      </ion-footer>  
+      </ion-footer>
     </ion-card>
 
     <ion-fab>
