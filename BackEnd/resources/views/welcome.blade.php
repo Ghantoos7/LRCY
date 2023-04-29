@@ -182,7 +182,7 @@
 
 
             <div class="tab-pane fade show active" id="main" role="tabpanel" aria-labelledby="main-tab">
-                <h1>Welcome to the Project API Documentation</h1>
+                <h1>Welcome to the LRCY Project API Documentation</h1>
                 <div class="tab-pane fade show active" id="main" role="tabpanel" aria-labelledby="main-tab">
                     <p>This documentation provides you with information about the various APIs available in our system.
                         We have organized the APIs into five main categories:</p>
@@ -2677,7 +2677,7 @@
                             <h4>Description:</h4>
                         </div>
                         <div class="card-body">
-                            <p>The createPost function creates a new post in the database with the specified user ID,
+                            <p>The <code>createPost()</code> function creates a new post in the database with the specified user ID,
                                 post type, and caption.</p>
                             <p>If the post type is "image", the function requires an uploaded file as "post_media".</p>
                         </div>
