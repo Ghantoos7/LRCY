@@ -187,6 +187,7 @@ export class FeedPage implements OnInit {
           buttons: ['OK']
         }).then(alert => alert.present());
         this.commentCount[p_id]++;
+        this.comment_contents[i] = ''; // Clear the input field after successful submission
       }
     else if (status == "error"){
       this.alertController.create({

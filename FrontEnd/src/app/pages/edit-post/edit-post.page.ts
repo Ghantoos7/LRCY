@@ -5,6 +5,8 @@ import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { PostService } from 'src/app/services/post.service';
 import { AlertController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
+
 @Component({
   selector: 'app-edit-post',
   templateUrl: './edit-post.page.html',

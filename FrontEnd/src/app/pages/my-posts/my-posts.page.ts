@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { Route, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { PopoverController } from '@ionic/angular';
 import { ActionSheetController } from '@ionic/angular';
@@ -10,13 +10,14 @@ import { UserService } from '../../services/user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { PostService } from 'src/app/services/post.service';
 import { SharedService } from 'src/app/services/shared.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-my-posts',
   templateUrl: './my-posts.page.html',
   styleUrls: ['./my-posts.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, HttpClientModule]
+  imports: [IonicModule, CommonModule, FormsModule, HttpClientModule,ReactiveFormsModule]
 })
 export class MyPostsPage implements OnInit {
 
@@ -37,6 +38,7 @@ export class MyPostsPage implements OnInit {
   isLiked: { [key: number]: { commentId: number, isLiked: boolean }[] } = {};
   comment_contents: any = [];
   likeCount: { [key: number]: number } = {};
+  commentCount: { [key: number]: number } = {};
 
   errorMessage: string = '';
   constructor(private post_service:PostService, private router: Router, private alertController: AlertController, private actionSheetController: ActionSheetController, private service: UserService, private sharedService:SharedService) { }
@@ -60,7 +62,18 @@ export class MyPostsPage implements OnInit {
       this.othersPage = true;
     }
 
+    this.router.events.subscribe((event: any) => {
+      if (event instanceof NavigationEnd) {
+        this.fetchData();
+      }
+    });
+
+  }
+
+  fetchData() {
+
     this.service.getOwnPosts(this.user_id).subscribe(response => {
+      console.log(response)
       if (response && response.hasOwnProperty('posts')) {
         this.posts = response;
         this.posts_array = Array.from(this.posts['posts']);
@@ -68,6 +81,8 @@ export class MyPostsPage implements OnInit {
           const postId = this.posts_array[i].id;
           this.isLikedUser[postId] = localStorage.getItem(`user_${this.user_id}_post_${postId}`) === 'true'; // retrieve the like state from Local Storage
           this.likeCount[postId] = this.posts_array[i].like_count;
+          this.commentCount[postId] = this.posts_array[i].comment_count; // Update the comment count from the API response
+
         }
       } else {
         this.posts_array = [];
@@ -78,7 +93,6 @@ export class MyPostsPage implements OnInit {
         this.errorMessage = "No posts found";
       }
     });
-
   }
 
   getDaysAgo(postDate: string): string {
@@ -131,7 +145,7 @@ export class MyPostsPage implements OnInit {
                   text: 'Delete',
                   handler: () => {
                     this.post_service.deletePost(i).subscribe((data: any) => {
-                      window.location.reload();
+                      this.fetchData(); // Update the posts list instead of reloading the page
                     });
                   }
                 }
@@ -190,10 +204,22 @@ toggleLike(post_id: number) {
    
   }
 
+  fetchComments(post_id: number) {
+    this.post_service.getComments(post_id).subscribe((response : any) => {
+      if (response && response.hasOwnProperty('comments')) {
+        // Assuming the response object has a 'comments' property containing the list of comments for the post
+        this.comment_contents[post_id] = response['comments'];
+        this.comment_contents[post_id] = [];
+      }
+    });
+  }
 
+  
 
   goToComments(post_id: string){
+    
     this.router.navigate(["/comments"], {state: { p_id : post_id }});
+
     setTimeout(() => {
       
       window.location.reload();
@@ -202,27 +228,26 @@ toggleLike(post_id: number) {
   }
 
 
-  async sendComment(p_id: number, i: number){
-    this.post_service.commentPost(p_id, this.user_id, this.comment_contents[i]).subscribe(response=>{
+  
+  async sendComment(p_id: number, i: number) {
+    this.post_service.commentPost(p_id, this.user_id, this.comment_contents[i]).subscribe(response => {
       const str = JSON.stringify(response);
       const result = JSON.parse(str);
       const status = result['status'];
-       if(status == "success"){
+      if (status == "success") {
         this.alertController.create({
           message: 'Your comment was added!',
           buttons: ['OK']
         }).then(alert => alert.present());
-        window.location.reload();
-      }
-    else if (status == "error"){
-      this.alertController.create({
-        message: 'Something went wrong.',
-        buttons: ['OK']
-      }).then(alert => alert.present());
+        this.commentCount[p_id]++;
+        this.comment_contents[i] = ''; // Clear the input field after successful submission
+      } else if (status == "error") {
+        this.alertController.create({
+          message: 'Something went wrong.',
+          buttons: ['OK']
+        }).then(alert => alert.present());
       }
     });
 
   }
-
-
 }
