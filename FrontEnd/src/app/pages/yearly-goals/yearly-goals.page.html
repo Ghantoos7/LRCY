@@ -30,6 +30,9 @@
         <ion-title>Our Goals This Year</ion-title>
       </ion-toolbar>
     </ion-header>
+    <div *ngIf="errorMessage" class="error-message" style="text-align: center; color: grey; padding-top: 20px;">
+      {{ errorMessage }}
+    </div>
     <ion-content class="ion-padding">
     <ion-card *ngFor="let goal of yearlyGoals" [ngClass]="{
       'youth-health': goal.program_name === 'youth&health',
