@@ -106,9 +106,6 @@ export class ManageGalleryPage implements OnInit {
       this.filtered_hvp_events = this.hvp_events;
       this.filtered_other_events = this.other_events;
 
-      // Add console.log statements
-    console.log('Fetched events:', this.events);
-    console.log('Filtered events:', this.filtered_yah_events, this.filtered_environment_events, this.filtered_hvp_events, this.filtered_other_events);
     });
   }
 
