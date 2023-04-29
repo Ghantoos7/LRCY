@@ -44,7 +44,7 @@ export class PostPage implements OnInit {
   }
 
   goBack(){
-this.router.navigate(['/feed']);
+    this.router.navigate(['/feed']);
   }
 
 

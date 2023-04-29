@@ -122,7 +122,7 @@ export class CommentsPage implements OnInit {
     if (type === 'popularity') {
       this.comments.sort((a: { comment_like_count: number; }, b: { comment_like_count: number; }) => b.comment_like_count - a.comment_like_count);
     } else if (type === 'date') {
-      this.comments.sort((a: { comment_date: string | number | Date; }, b: { comment_date: string | number | Date; }) => new Date(b.comment_date).getTime() - new Date(a.comment_date).getTime());
+      this.comments.sort((a: { created_at: string | number | Date; }, b: { created_at: string | number | Date; }) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
     }
   }
 
