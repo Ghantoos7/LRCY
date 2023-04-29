@@ -7,9 +7,11 @@
     <title>API Documentation</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <style>
         body {
-            font-family: 'Nunito', sans-serif;
+            font-family: 'Roboto', sans-serif;
             background-color: #f5f5f5;
             margin: 0;
             padding: 0;
@@ -105,16 +107,19 @@
             border-color: #45579A #45579A #fff;
         }
     </style>
+
 </head>
 
 
 
-
-
-
 <body>
+
+
+
+
     <div class="container mt-5">
-        <h1 class="text-center mb-4">API Documentation</h1>
+        <h1 class="text-center mb-4 animate__animated animate__fadeIn">API Documentation</h1>
+
         <nav class="navbar navbar-expand-lg">
             <div class="centered-tabs">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -177,7 +182,29 @@
 
 
             <div class="tab-pane fade show active" id="main" role="tabpanel" aria-labelledby="main-tab">
-                <h1>MAIN page</h1>
+                <h1>Welcome to the Project API Documentation</h1>
+                <div class="tab-pane fade show active" id="main" role="tabpanel" aria-labelledby="main-tab">
+                    <p>This documentation provides you with information about the various APIs available in our system.
+                        We have organized the APIs into five main categories:</p>
+                    <ul>
+                        <li><strong>User API (19):</strong> These APIs handle user-related tasks such as registration,
+                            login, updating profiles, and stats about the user.</li>
+                        <li><strong>Event API (5):</strong> These APIs deal with event-related tasks like creating,
+                            updating, deleting, and retrieving event details.</li>
+                        <li><strong>Post API (19):</strong> These APIs handle post-related tasks such as creating,
+                            updating, deleting, and fetching posts, comments, and more.</li>
+                        <li><strong>Admin API (22):</strong> These APIs are responsible for administrative tasks such as
+                            managing users, events, and posts, as well as handling system settings.</li>
+                        <li><strong>Download API (1):</strong> This API allows users to download files or resources from
+                            the system.</li>
+                    </ul>
+                    <p>Please click on the respective tabs above to explore the available APIs and their respective
+                        documentation. The documentation includes information about each API's functionality,
+                        parameters, return values, and possible errors.</p>
+                </div>
+
+
+
             </div>
 
             <!-- Controller 1 -->
@@ -6566,7 +6593,7 @@
                     </div>
                 </div>
 
-              
+
 
 
                 <div class="api-card">
@@ -6579,7 +6606,12 @@
                             <h4>Description:</h4>
                         </div>
                         <div class="card-body">
-                            <p>The <code>editYearlyGoal</code> function allows you to edit an existing yearly goal by providing its ID and the updated details. The goal will be updated with the new information provided in the request. If the number of completed goals is greater than or equal to the number to complete, the goal status will be marked as completed (1). Otherwise, the goal status will be marked as incomplete (0). The API will also update the goal counter for events in the same year as the goal.
+                            <p>The <code>editYearlyGoal</code> function allows you to edit an existing yearly goal by
+                                providing its ID and the updated details. The goal will be updated with the new
+                                information provided in the request. If the number of completed goals is greater than or
+                                equal to the number to complete, the goal status will be marked as completed (1).
+                                Otherwise, the goal status will be marked as incomplete (0). The API will also update
+                                the goal counter for events in the same year as the goal.
                             </p>
                         </div>
                     </div>
@@ -6662,7 +6694,8 @@
                             <h4>Return:</h4>
                         </div>
                         <div class="card-body">
-                            <p>Returns a JSON object with status and message properties, indicating the success or failure of the operation.</p>
+                            <p>Returns a JSON object with status and message properties, indicating the success or
+                                failure of the operation.</p>
                         </div>
                     </div>
                     <div class="card mb-3">
@@ -6680,7 +6713,8 @@
                                 <tbody>
                                     <tr>
                                         <td>Validation failed</td>
-                                        <td>The request parameters failed validation. The error message will contain details about the validation failure.</td>
+                                        <td>The request parameters failed validation. The error message will contain
+                                            details about the validation failure.</td>
                                     </tr>
                                     <tr>
                                         <td>Goal not found</td>
@@ -6688,7 +6722,8 @@
                                     </tr>
                                     <tr>
                                         <td>An error occurred while updating the goal</td>
-                                        <td>An error occurred while attempting to update the goal. The error message will contain more information.</td>
+                                        <td>An error occurred while attempting to update the goal. The error message
+                                            will contain more information.</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -6706,7 +6741,8 @@
                             <h4>Description:</h4>
                         </div>
                         <div class="card-body">
-                            <p>The <code>deleteYearlyGoal</code> function deletes an existing yearly goal by providing its ID.</p>
+                            <p>The <code>deleteYearlyGoal</code> function deletes an existing yearly goal by providing
+                                its ID.</p>
                         </div>
                     </div>
                     <div class="card mb-3">
@@ -6790,7 +6826,8 @@
                             <h4>Description:</h4>
                         </div>
                         <div class="card-body">
-                            <p>The <code>addTrainingForUser</code> function adds one or more trainings to one or more users by providing the training and user IDs.</p>
+                            <p>The <code>addTrainingForUser</code> function adds one or more trainings to one or more
+                                users by providing the training and user IDs.</p>
                         </div>
                     </div>
                     <div class="card mb-3">
@@ -6836,7 +6873,8 @@
                                 <tbody>
                                     <tr>
                                         <td>JSON</td>
-                                        <td>A JSON response confirming the trainings have been added to the users successfully or an error message if an error occurs.</td>
+                                        <td>A JSON response confirming the trainings have been added to the users
+                                            successfully or an error message if an error occurs.</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -6857,11 +6895,13 @@
                                 <tbody>
                                     <tr>
                                         <td>Validation failed</td>
-                                        <td>The request parameters failed validation. The error message will contain details about the validation failure.</td>
+                                        <td>The request parameters failed validation. The error message will contain
+                                            details about the validation failure.</td>
                                     </tr>
                                     <tr>
                                         <td>One or more trainings do not exist</td>
-                                        <td>The trainings with the specified training_ids do not exist or are incorrect.</td>
+                                        <td>The trainings with the specified training_ids do not exist or are incorrect.
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>One or more users do not exist</td>
@@ -6869,7 +6909,8 @@
                                     </tr>
                                     <tr>
                                         <td>Error adding trainings</td>
-                                        <td>An unexpected error occurred during the process of adding trainings to the users.</td>
+                                        <td>An unexpected error occurred during the process of adding trainings to the
+                                            users.</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -6886,7 +6927,8 @@
                             <h4>Description:</h4>
                         </div>
                         <div class="card-body">
-                            <p>The <code>deleteTrainingForUser</code> function removes one or more trainings from one or more users by providing the training and user IDs.</p>
+                            <p>The <code>deleteTrainingForUser</code> function removes one or more trainings from one or
+                                more users by providing the training and user IDs.</p>
                         </div>
                     </div>
                     <div class="card mb-3">
@@ -6932,7 +6974,8 @@
                                 <tbody>
                                     <tr>
                                         <td>JSON</td>
-                                        <td>A JSON response confirming the trainings have been removed from the users successfully or an error message if an error occurs.</td>
+                                        <td>A JSON response confirming the trainings have been removed from the users
+                                            successfully or an error message if an error occurs.</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -6953,11 +6996,13 @@
                                 <tbody>
                                     <tr>
                                         <td>Validation failed</td>
-                                        <td>The request parameters failed validation. The error message will contain details about the validation failure.</td>
+                                        <td>The request parameters failed validation. The error message will contain
+                                            details about the validation failure.</td>
                                     </tr>
                                     <tr>
                                         <td>One or more trainings do not exist</td>
-                                        <td>The trainings with the specified training_ids do not exist or are incorrect.</td>
+                                        <td>The trainings with the specified training_ids do not exist or are incorrect.
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>One or more users do not exist</td>
@@ -6965,45 +7010,14 @@
                                     </tr>
                                     <tr>
                                         <td>Error removing trainings</td>
-                                        <td>An unexpected error occurred during the process of removing trainings from the users.</td>
+                                        <td>An unexpected error occurred during the process of removing trainings from
+                                            the users.</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             </div>
 
 
@@ -7015,6 +7029,21 @@
                     <h2>5.1 downloadPictureByURL</h2>
                     <h3>GET</h3>
                     <h3>http://example.com/api/v0.1/event/download_picture_url/{pictureUrl}</h3>
+
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4>Description:</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>The <code>downloadPictureByUrl($pictureUrl)</code> function takes a URL string as input,
+                                which includes the location of the picture to be downloaded. The function checks if the
+                                picture exists in the specified location on the server. If the picture exists, the
+                                function retrieves the picture, converts it to base64 format, and returns a JSON
+                                response containing the base64-encoded content. If the picture does not exist, the
+                                function returns a JSON response with a "Image not found" message.</p>
+                        </div>
+                    </div>
+
                     <div class="card mb-3">
                         <div class="card-header">
                             <h4>Parameters:</h4>
@@ -7038,19 +7067,7 @@
                             </table>
                         </div>
                     </div>
-                    <div class="card mb-3">
-                        <div class="card-header">
-                            <h4>Description:</h4>
-                        </div>
-                        <div class="card-body">
-                            <p>The <code>downloadPictureByUrl($pictureUrl)</code> function takes a URL string as input,
-                                which includes the location of the picture to be downloaded. The function checks if the
-                                picture exists in the specified location on the server. If the picture exists, the
-                                function retrieves the picture, converts it to base64 format, and returns a JSON
-                                response containing the base64-encoded content. If the picture does not exist, the
-                                function returns a JSON response with a "Image not found" message.</p>
-                        </div>
-                    </div>
+
 
                     <div class="card mb-3">
                         <div class="card-header">
@@ -7102,10 +7119,7 @@
             </div>
             <!--------------------------------------------------------------------->
 
-
-
         </div>
-
 
     </div>
 </body>
