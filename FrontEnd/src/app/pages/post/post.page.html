@@ -22,7 +22,7 @@
   </div>
 
   <div class="upload-options">
-      <input [(ngModel)]="post_src_img"  (change)="onChange($event)" class="img" type="file" accept="image/png, image/jpeg, image/jpg" >
+      <input (change)="onChange($event)" class="img" type="file" accept="image/png, image/jpeg, image/jpg" >
   </div>  
 
   <ion-button class="post-button" shape="round" expand="block" size="large"  (click)="post()">Post</ion-button>
