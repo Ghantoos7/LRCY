@@ -13,6 +13,7 @@ import { MenuController } from '@ionic/angular';
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule]
 })
+
 export class EditAnnouncementPage implements OnInit {
 
   announcement_id: string = "";
@@ -20,7 +21,14 @@ export class EditAnnouncementPage implements OnInit {
   announcement_content: string="";
   importance_level: string="";
   admin_id = localStorage.getItem('admin_id') as string;
-  constructor(private ctrl:MenuController, private router:Router, private adminService:AdminService, private alertController:AlertController) { }
+  darkMode: boolean;
+
+  constructor(private ctrl:MenuController, private router:Router, private adminService:AdminService, private alertController:AlertController) {
+    this.darkMode = localStorage.getItem('darkModeEnabled') === 'true';
+    if (this.darkMode) {
+      document.body.setAttribute('color-theme', 'dark');
+    }
+   }
 
   ngOnInit() {
     const announcement = history.state.announcement;
