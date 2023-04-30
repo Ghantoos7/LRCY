@@ -564,25 +564,27 @@ class UserControllerTest extends TestCase
         ]);
     }
 
-
     function testGetPostsCountApi()
     {
         $user = volunteer_user::factory()->create();
-        $posts = Post::factory()->count(5)->create(['user_id' => $user->id]);
+        $posts = Post::factory()
+            ->count(5)
+            ->create(['user_id' => $user->id]);
 
         $response = $this->getJson('/api/v0.1/user/get_posts_count/' . $user->id);
 
         $response->assertStatus(200)->assertJson([
-            'total_posts' => 5
+            'total_posts' => 5,
         ]);
     }
-
 
     function testGetCommentsCountApi()
     {
         // Create a user and comments
         $user = volunteer_user::factory()->create();
-        $comments = Comment::factory()->count(5)->create(['user_id' => $user->id]);
+        $comments = Comment::factory()
+            ->count(5)
+            ->create(['user_id' => $user->id]);
 
         // Call the API
         $response = $this->getJson('/api/v0.1/user/get_comments_count/' . $user->id);
@@ -597,8 +599,12 @@ class UserControllerTest extends TestCase
     {
         // Create a user, posts, and comments
         $user = volunteer_user::factory()->create();
-        $posts = Post::factory()->count(3)->create(['user_id' => $user->id, 'like_count' => 2]);
-        $comments = Comment::factory()->count(2)->create(['user_id' => $user->id, 'comment_like_count' => 1]);
+        $posts = Post::factory()
+            ->count(3)
+            ->create(['user_id' => $user->id, 'like_count' => 2]);
+        $comments = Comment::factory()
+            ->count(2)
+            ->create(['user_id' => $user->id, 'comment_like_count' => 1]);
 
         // Call the API
         $response = $this->getJson('/api/v0.1/user/get_total_likes_received/' . $user->id);
@@ -609,11 +615,13 @@ class UserControllerTest extends TestCase
         ]);
     }
 
-    public function testGetOwnPostsApi()
+    function testGetOwnPostsApi()
     {
         // Create a user and posts
         $user = volunteer_user::factory()->create();
-        $posts = Post::factory()->count(3)->create(['user_id' => $user->id]);
+        $posts = Post::factory()
+            ->count(3)
+            ->create(['user_id' => $user->id]);
 
         // Call the API
         $response = $this->getJson('/api/v0.1/user/get_own_posts/' . $user->id);
@@ -622,5 +630,19 @@ class UserControllerTest extends TestCase
         $response->assertStatus(200)->assertJsonCount(3, 'posts');
     }
 
+    function testGetBranchInfoApi()
+    {
+        // Create a user and a branch
+        $branch = branch::factory()->create();
+        $user = volunteer_user::factory()->create(['branch_id' => $branch->id]);
 
+        // Call the API
+        $response = $this->getJson('/api/v0.1/user/get_branch_info/' . $user->id);
+
+        // Check the response
+        $response->assertStatus(200)->assertJson([
+            'branch_name' => $branch->branch_name,
+            'branch_location' => $branch->branch_location,
+        ]);
+    }
 }
