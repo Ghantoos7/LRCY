@@ -56,5 +56,49 @@ class UserControllerTest extends TestCase
                  'status' => 'Organization ID found, user already registered',
              ]);
     }
-    
+
+    public function test_register_api()
+    {
+        // Test case: Missing required fields
+        $response = $this->postJson('/api/v0.1/auth/register');
+        $response->assertJson(['status' => 'Invalid input']);
+        $response->assertStatus(200);
+
+        // Test case: Invalid password
+        $response = $this->postJson('/api/v0.1/auth/register', [
+            'organization_id' => '1',
+            'username' => 'testuser',
+            'password' => 'short',
+            'confirm_password' => 'short'
+        ]);
+        $response->assertJson(['status' => 'Invalid password']);
+        $response->assertStatus(200);
+
+        // Create an unregistered VolunteerUser
+        Volunteer_user::factory()->create([
+            'organization_id' => '1',
+            'is_registered' => 0,
+        ]);
+
+        // Test case: Successful registration
+        $response = $this->postJson('/api/v0.1/auth/register', [
+            'organization_id' => '1',
+            'username' => 'testuser',
+            'password' => 'ValidPassword123',
+            'confirm_password' => 'ValidPassword123'
+        ]);
+        $response->assertJson(['status' => 'Organization ID found, user registered successfully']);
+        $response->assertStatus(200);
+
+        // Test case: User already registered
+        $response = $this->postJson('/api/v0.1/auth/register', [
+            'organization_id' => '1',
+            'username' => 'testuser',
+            'password' => 'ValidPassword123',
+            'confirm_password' => 'ValidPassword123'
+        ]);
+        $response->assertJson(['status' => 'Organization ID found, user already registered']);
+        $response->assertStatus(200);
+    }
+
 }
