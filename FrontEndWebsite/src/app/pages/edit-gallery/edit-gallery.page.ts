@@ -36,9 +36,15 @@ export class EditGalleryPage implements OnInit {
   originalUsers: any[] = [];
   images: any[] = [];
   event_photo:string="";
-new_event_main_picture:string='';
+  new_event_main_picture:string='';
+  darkMode: boolean;
 
-  constructor(private router:Router, private menuController: MenuController, private alertController: AlertController, private adminService : AdminService) { }
+  constructor(private router:Router, private menuController: MenuController, private alertController: AlertController, private adminService : AdminService) {
+    this.darkMode = localStorage.getItem('darkModeEnabled') === 'true';
+    if (this.darkMode) {
+      document.body.setAttribute('color-theme', 'dark');
+    }
+   }
 
   ngOnInit() {
     const event = history.state.event;
