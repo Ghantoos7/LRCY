@@ -25,7 +25,7 @@ class UserControllerTest extends TestCase
     use RefreshDatabase, WithoutMiddleware;
     use WithFaker;
 
-    public function test_signup_api()
+    public function testSignupApi()
     {
         // Test Organization ID not found
         $response = $this->postJson('/api/v0.1/auth/signup', [
@@ -62,7 +62,7 @@ class UserControllerTest extends TestCase
         ]);
     }
 
-    public function test_register_api()
+    public function testRegisterApi()
     {
         // Test case: Missing required fields
         $response = $this->postJson('/api/v0.1/auth/register');
@@ -161,7 +161,7 @@ class UserControllerTest extends TestCase
         ]);
     }
 
-    public function test_recover_request_api()
+    public function testRecoverRequestApi()
     {
         // Test case: Organization ID not found
         $response = $this->postJson('/api/v0.1/auth/recover_request', [
@@ -198,7 +198,7 @@ class UserControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_change_password_api()
+    public function testChangePasswordApi()
     {
         // Test case: Organization ID not found
         $response = $this->postJson('/api/v0.1/auth/change_password', [
@@ -283,7 +283,7 @@ class UserControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_check_request_status_api()
+    public function testCheckRequestStatusApi()
     {
         // Test case: Organization ID not found
         $response = $this->postJson('/api/v0.1/auth/check_request_status', [
@@ -330,4 +330,45 @@ class UserControllerTest extends TestCase
         $response->assertJson(['status' => 'Request accepted']);
         $response->assertStatus(200);
     }
+
+    public function testGetUserInfo()
+    {
+        // Create a user
+        $user = Volunteer_user::factory()->create(['branch_id' => 1]);
+
+        // Test the getUserInfo API when user_id is provided
+        $response = $this->get("/api/v0.1/user/get_user_info/{$user->branch_id}/{$user->id}");
+        $response->assertJson([
+            'status' => 'success',
+            'user' => [
+                'id' => $user->id,
+                'user_type' => $user->user_type_id === 1 ? 'admin' : 'volunteer',
+            ],
+        ]);
+        $response->assertStatus(200);
+
+        // Test the getUserInfo API when user_id is not provided (get all users in branch 1)
+        $response = $this->get("/api/v0.1/user/get_user_info/{$user->branch_id}/null");
+        $responseStatus = json_decode($response->getContent(), true)['status'];
+        if ($responseStatus === 'error') {
+            $response->assertJsonStructure(['status', 'message']);
+        } else {
+            $response->assertJsonStructure([
+                'status',
+                'users' => [
+                    '*' => ['id', 'user_type'],
+                ],
+            ]);
+        }
+        $response->assertStatus(200);
+
+        // Test the getUserInfo API when no users are found
+        $response = $this->get('/api/v0.1/user/get_user_info/999/null');
+        $response->assertJson([
+            'status' => 'error',
+            'message' => 'No user(s) found',
+        ]);
+        $response->assertStatus(200);
+    }
+    
 }
