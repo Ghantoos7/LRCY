@@ -7,8 +7,7 @@
   </div>
 
   <div class="user-info">
-    <img  class="profile-picture" *ngIf="user_profile_pic !== null" src="http://127.0.0.1:8000/storage/images/{{user_profile_pic}}"  onerror="this.onerror=null; this.src='https://ionicframework.com/docs/img/demos/avatar.svg';" />
-    <img class="profile-picture"  *ngIf="user_profile_pic===null" src="https://ionicframework.com/docs/img/demos/avatar.svg"  />
+    <img  class="profile-picture"  alt="Avatar" [src]="(user_profile_pic && user_profile_pic !== 'null') ? 'http://127.0.0.1:8000/storage/images/' + user_profile_pic : 'https://ionicframework.com/docs/img/demos/avatar.svg'" onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'"/>
     <ion-text class="username">{{username}}</ion-text>
     <ion-text class="name">{{full_name}}</ion-text>
   </div>
