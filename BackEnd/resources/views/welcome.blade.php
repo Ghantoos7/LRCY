@@ -106,6 +106,28 @@
             background-color: #fff;
             border-color: #45579A #45579A #fff;
         }
+        ul {
+                list-style: none;
+                margin: 0 0 2rem;
+                padding: 0 0 0 1rem;
+                text-indent: -1rem;
+            }
+
+            .success:before {
+                color: #4e9a06;
+                content: '✓';
+                padding-right: 0.5rem;
+            }
+
+            .defect {
+                color: #a40000;
+            }
+
+            .defect:before {
+                color: #a40000;
+                content: '✗';
+                padding-right: 0.5rem;
+            }
     </style>
 
 </head>
@@ -202,6 +224,57 @@
                         documentation. The documentation includes information about each API's functionality,
                         parameters, return values, and possible errors.</p>
                 </div>
+
+            <h1>Unit Testing For Each Controller</h1>
+            <div class="api-card">
+                <div class="card-body">
+                    <h2 class="card-header" >User Controller (Tests\Unit\UserController)</h2>
+                    <ul>
+                        <li class="success">Signup api</li>
+                        <li class="success">Register api</li>
+                        <li class="success">Login api</li>
+                        <li class="success">Recover request api</li>
+                        <li class="success">Change password api</li>
+                        <li class="success">Check request status api</li>
+                        <li class="success">Get user info api</li>
+                        <li class="success">Logout api</li>
+                        <li class="success">Edit profile api</li>
+                        <li class="success">Get trainings info api</li>
+                        <li class="success">Get events organized api</li>
+                        <li class="success">Get events organized count api</li>
+                        <li class="success">Get total volunteering time api</li>
+                        <li class="success">Get completed trainings count api</li>
+                        <li class="success">Get posts count api</li>
+                        <li class="success">Get comments count api</li>
+                        <li class="success">Get total likes received api</li>
+                        <li class="success">Get own posts api</li>
+                        <li class="success">Get branch info api</li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <h2 class="card-header" >Event Controller (Tests\Unit\EventController)</h2>
+                    <ul>
+                        <li class="success">Get yearly goals api</li>
+                        <li class="success">Get event info api</li>
+                        <li class="success">Get announcements api</li>
+                        <li class="success">Get event pictures api</li>
+                        <li class="success">Get training info api</li>
+                    </ul>
+                </div>
+
+
+
+
+             </div>
+
+
+
+
+
+
+
+
+
 
 
 
