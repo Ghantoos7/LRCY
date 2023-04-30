@@ -12,18 +12,16 @@
 
   <ion-text class="container">
 
-    <div class="input-field">  
-        <img class="id-icon" src="assets/icon/ID.png" alt="ID icon">
+    <div class="input-field">
         <ion-item>
-          <ion-label class="label" position="floating" >Volunteer ID </ion-label>
+          <ion-label position="floating" style="color: white"> <ion-icon class="mail-icon" size="large" name="mail" slot="start"></ion-icon>Volunteer ID</ion-label>
           <ion-input class="email" type="email" [(ngModel)]="organization_id" name="email"></ion-input>
         </ion-item> 
     </div>
 
     <div class="input-field">
-      <img class="pass-icon" src="assets/icon/Password.png"  alt="ID icon">
       <ion-item>
-        <ion-label class="label" position="floating">Password</ion-label>
+        <ion-label position="floating" style="color: white"><ion-icon size="large" name="lock-closed" slot="start"></ion-icon>Password</ion-label>
         <ion-input class="password" type="password" [(ngModel)]="password" name="password"></ion-input>
       </ion-item>
     </div>
