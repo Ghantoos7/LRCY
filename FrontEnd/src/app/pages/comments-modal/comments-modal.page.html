@@ -29,17 +29,26 @@
   <div class="comment-container" >
     
     <ion-card class="comment-card" *ngFor="let comment of comments; let i = index">
+      <ion-item-sliding>
       <img class="profile-picture" *ngIf="comment['user'].user_profile_pic !== null" src="http://127.0.0.1:8000/storage/images/{{comment['user'].user_profile_pic}}"  onerror="this.onerror=null; this.src='https://ionicframework.com/docs/img/demos/avatar.svg';" />
       <img class="profile-picture" *ngIf="comment['user'].user_profile_pic === null" src="https://ionicframework.com/docs/img/demos/avatar.svg"  />
       <ion-text class="username">{{comment['user'].username}}</ion-text>
       <ion-text class="comment-date">{{getDaysAgo(comment.created_at)}}</ion-text>
-      <ion-icon (click)="editComment(comment.id, comment.comment_content)" *ngIf="current_id == comment['user'].id" class="edit-comment" name="pencil"></ion-icon>
-      <ion-icon (click)="deleteComment(comment.id)" *ngIf="current_id == comment['user'].id" class="delete-comment" name="trash-outline"></ion-icon>
       <ion-text class="comment">{{comment.comment_content}}</ion-text>
       <ion-icon id="like-button-{{comment.id}}" [class.active]="isLikedUser[comment.id]" name="{{ isLikedUser[comment.id] ? 'heart' : 'heart-outline' }}" (click)="toggleLike(comment.id)" class="likes"></ion-icon>
       <ion-text class="like-count">{{this.commentLikeCount[comment.id]}}</ion-text>
       <ion-icon (click)="replyComment(comment.id)" class="add-reply" name="chatbubble-ellipses-outline"></ion-icon>
       <ion-text class="reply-word">Reply...</ion-text>
+
+        <ion-item-options>
+          <ion-item-option>
+          <ion-icon (click)="editComment(comment.id, comment.comment_content)" *ngIf="current_id == comment['user'].id" class="edit-comment" name="pencil"></ion-icon>
+          </ion-item-option>
+        <ion-item-option>
+          <ion-icon (click)="deleteComment(comment.id)" *ngIf="current_id == comment['user'].id" class="delete-comment" name="trash-outline"></ion-icon>
+        </ion-item-option>
+        </ion-item-options>
+
       <ion-item class="accordion-header" (click)="openReplies(comment.id)">
         <ion-icon slot="end" [name]="repliesOpen[comment.id] ? 'chevron-down-outline' : 'chevron-forward-outline'"></ion-icon>
         <ion-label *ngIf="!repliesOpen[comment.id]">View Replies</ion-label>
@@ -58,6 +67,7 @@
           <ion-text class="reply-date">{{getDaysAgo(reply.created_at)}}</ion-text>
         </div>          
       </ion-card-content>
+    </ion-item-sliding>
     </ion-card>
 
   </div>
