@@ -26,7 +26,7 @@ export class EditProfilePage implements OnInit {
   branch_id = localStorage.getItem('branch_id') as string;
   user_profile_pic = localStorage.getItem('user_profile_pic');
   user_src_img: any;
-
+  user_src_img_display: any;
   constructor(private service:UserService, private alertController:AlertController, private router:Router) { }
 
   ngOnInit() {
@@ -52,7 +52,7 @@ export class EditProfilePage implements OnInit {
     if (file) {
       const reader = new FileReader();
       reader.onload = (e: any) => {
-        this.user_src_img = e.target.result;
+        this.user_src_img_display = e.target.result;
       };
       reader.readAsDataURL(file);
     }
