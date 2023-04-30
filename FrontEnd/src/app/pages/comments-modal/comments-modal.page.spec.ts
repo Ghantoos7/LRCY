@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { CommentsPage } from './comments.page';
+import { CommentsModalPage } from './comments-modal.page';
 
-describe('CommentsPage', () => {
-  let component: CommentsPage;
-  let fixture: ComponentFixture<CommentsPage>;
+describe('CommentsModalPage', () => {
+  let component: CommentsModalPage;
+  let fixture: ComponentFixture<CommentsModalPage>;
 
   beforeEach(async(() => {
-    fixture = TestBed.createComponent(CommentsPage);
+    fixture = TestBed.createComponent(CommentsModalPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

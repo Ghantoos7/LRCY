@@ -6,8 +6,7 @@
   <ion-content class="ion-padding">
     <div class="avatar-container">
       <ion-avatar size="large" class="custom-avatar">
-        <img  *ngIf="user_profile_pic===null" src="https://ionicframework.com/docs/img/demos/avatar.svg"  />
-        <img  *ngIf="user_profile_pic !== null" src="http://127.0.0.1:8000/storage/images/{{user_profile_pic}}" (error)="handleImageError($event)" />
+        <img src="{{user_profile_pic && user_profile_pic !== 'null' ? 'http://127.0.0.1:8000/storage/images/' + user_profile_pic : 'https://ionicframework.com/docs/img/demos/avatar.svg'}}" />
       
        
       </ion-avatar>
@@ -41,12 +40,11 @@
 
     <ion-card class="card" *ngFor="let post of posts; let i = index">
       <div class="header-container">
-        <img  (click)="showProfile(i)" class="card-profile-picture"  *ngIf="post['user'].user_profile_pic !== null" src="http://127.0.0.1:8000/storage/images/{{post['user'].user_profile_pic}}"  onerror="this.onerror=null; this.src='https://ionicframework.com/docs/img/demos/avatar.svg';" />
-        <img  (click)="showProfile(i)" class="card-profile-picture"  *ngIf="post['user'].user_profile_pic===null" src="https://ionicframework.com/docs/img/demos/avatar.svg"  />  
+        <img (click)="showProfile(i)" class="card-profile-picture" src="{{post['user'].user_profile_pic && post['user'].user_profile_pic !== 'null' ? 'http://127.0.0.1:8000/storage/images/' + post['user'].user_profile_pic : 'https://ionicframework.com/docs/img/demos/avatar.svg'}}" onerror="this.onerror=null; this.src='https://ionicframework.com/docs/img/demos/avatar.svg';" />
        
         <ion-text (click)="showProfile(i)" class="username">{{post['user'].username}}</ion-text>
         <ion-text (click)="showProfile(i)" class="name">{{post['user'].name}}</ion-text>
-        <ion-text class="post-date">{{getDaysAgo(post.post_date)}}</ion-text>
+        <ion-text class="post-date">{{getDaysAgo(post.created_at)}}</ion-text>
         
       </div>
 
@@ -65,7 +63,7 @@
       <ion-footer>
         <ion-icon id="like-button-{{post.id}}" class="likes" [class.active]="isLikedUser[post.id]" name="{{isLikedUser[post.id] ? 'heart' : 'heart-outline' }}" (click)="toggleLike(post.id)"></ion-icon>
         <ion-text class="like-count" color="danger">{{this.likeCount[post.id]}}</ion-text>
-        <ion-img (click) ="goToComments(post.id)" class="comments" src="assets/icon/comments.png"></ion-img>
+        <ion-img (click)="openCommentsModal(post.id)" class="comments" src="assets/icon/comments.png"></ion-img>
         <ion-text class="comment-count">{{this.commentCount[post.id]}}</ion-text>
         <ion-input class="input"  [(ngModel)]="comment_contents[i]" placeholder="Comment on this post..."></ion-input>
         <ion-icon (click)="sendComment(post.id, i)" class="send-icon" name="send"></ion-icon>

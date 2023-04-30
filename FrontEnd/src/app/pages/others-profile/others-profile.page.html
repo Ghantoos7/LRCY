@@ -2,14 +2,12 @@
 </ion-router-outlet>
 
 <ion-menu menuId="menuOtherProf" contentId="main-content" class="menu">
-  <ion-header>
-    <ion-toolbar>
-    </ion-toolbar>
-  </ion-header>
   <ion-content class="ion-padding">
     <div class="avatar-container">
       <ion-avatar size="large" class="custom-avatar2">
-        <img alt="Avatar" src="http://127.0.0.1:8000/storage/images/{{selectedUser.user_profile_pic}}"  onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'" />
+        <img  *ngIf="selectedUser.user_profile_pic !== null" src="http://127.0.0.1:8000/storage/images/{{selectedUser.user_profile_pic}}"  onerror="this.onerror=null; this.src='https://ionicframework.com/docs/img/demos/avatar.svg';" />
+        <img  *ngIf="selectedUser.user_profile_pic===null" src="https://ionicframework.com/docs/img/demos/avatar.svg"  />
+        
       </ion-avatar>
       <ion-label class="username-label">{{username}}</ion-label>
       <ion-button (click)="goProfile()" class="custom-button" expand="block"><ion-icon name="person" slot="start"></ion-icon>My Profile</ion-button>
@@ -33,7 +31,8 @@
     <ion-row class="ion-align-items-center ion-justify-content-center custom-row">
       <ion-col size="2">
         <ion-avatar class="custom-avatar">
-          <img alt="Silhouette of a person's head" src="http://127.0.0.1:8000/storage/images/{{selectedUser.user_profile_pic}}"  onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'"  />
+          <img  *ngIf="selectedUser.user_profile_pic !== null" src="http://127.0.0.1:8000/storage/images/{{selectedUser.user_profile_pic}}"  onerror="this.onerror=null; this.src='https://ionicframework.com/docs/img/demos/avatar.svg';" />
+          <img  *ngIf="selectedUser.user_profile_pic===null" src="https://ionicframework.com/docs/img/demos/avatar.svg"  />
         </ion-avatar>
       </ion-col>
     </ion-row>
@@ -56,8 +55,8 @@
       
         </ion-card-header>
         <ion-card-content>
-          <p>{{selectedUser.username}}</p>
-          <p class="p1">{{selectedUser.user_bio}}</p>
+          <p *ngIf="selectedUser.username">{{selectedUser.username}}</p>
+          <p *ngIf="selectedUser.user_bio" class="p1">{{selectedUser.user_bio}}</p>
           <p class="bio-space"></p>
         </ion-card-content>
         

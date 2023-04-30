@@ -6,8 +6,7 @@
           <div class="badge">
             <ion-icon name="camera" ></ion-icon>
           </div>
-          <img  *ngIf="user_profile_pic !== null" src="http://127.0.0.1:8000/storage/images/{{user_profile_pic}}"  onerror="this.onerror=null; this.src='https://ionicframework.com/docs/img/demos/avatar.svg';" />
-          <img  *ngIf="user_profile_pic===null" src="https://ionicframework.com/docs/img/demos/avatar.svg"  />
+          <img alt="Avatar" [src]="(user_profile_pic && user_profile_pic !== 'null') ? 'http://127.0.0.1:8000/storage/images/' + user_profile_pic : 'https://ionicframework.com/docs/img/demos/avatar.svg'" onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'"/>
         
         </ion-avatar>
       </ion-col>
@@ -53,12 +52,12 @@
 
   <ion-item lines="none">
     <ion-label position="stacked">Username</ion-label>
-    <input type="text" class="custom-input" [(ngModel)]="username" placeholder="{{username}}" maxlength="15">
+    <input maxlength="12" type="text" class="custom-input" [(ngModel)]="username" placeholder="{{username}}" maxlength="15">
   </ion-item>
   
   <ion-item lines="none">
     <ion-label position="stacked">Bio</ion-label>
-    <textarea class="custom-input box" [(ngModel)]="user_bio" placeholder="{{user_bio}}" maxlength="50"></textarea>
+    <textarea maxlength="50" class="custom-input box" [(ngModel)]="user_bio" placeholder="{{user_bio}}" maxlength="50"></textarea>
   </ion-item>    
 
   

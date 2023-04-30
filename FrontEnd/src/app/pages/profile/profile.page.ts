@@ -40,8 +40,8 @@ export class ProfilePage implements OnInit {
       this.username = (this.user['user'].username);
       this.bio = (this.user['user'].user_bio);
       this.user_position = (this.user['user'].user_position);
+      this.user_profile_pic = (this.user['user'].user_profile_pic);
     });
-
 
   }
 

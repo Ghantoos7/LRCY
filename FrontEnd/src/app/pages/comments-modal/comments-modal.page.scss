@@ -1,0 +1,218 @@
+.back{
+    font-size: 30px;
+    color: white;
+}
+
+.sort{
+    font-size: 30px;
+    color: white;
+}
+
+.post-image{
+    width: 100%;
+    object-fit: cover;
+    padding-top: 0%;
+}
+
+.post-video{
+    width: 100%;
+    object-fit: cover;
+    padding-top: 0%;
+}
+
+.comment-input {
+    border-radius: 20px;
+    background: #ffffff;
+    border: 0.5px solid #7b0d23;
+    width: 95%;
+    height: 85%;
+  }  
+
+ion-avatar{
+    width: 50px;
+    height: 50px;
+}
+
+.post-caption{
+    font-size: 20px;
+    font-weight: bold;
+}
+  
+@keyframes grow-shrink {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.85);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+.like-animation {
+    animation: grow-shrink 0.35s linear, sparkle 0.5s linear;
+}
+
+.comment-container{
+    position:relative;
+    left: 1px;
+    width: 98%;
+
+}
+
+.comment-card {
+    border-radius: 10px;
+    border: 1px solid #E6E6E6;
+    margin-bottom: 10px;
+    padding: 30px;
+    display: flex;          
+    flex-direction: column;
+}
+
+.profile-picture{
+    left: 10px;
+    top: 10px;
+}
+
+.username{
+    position:relative;
+    font-weight: bold;
+    font-size: 15px;
+    color:black;
+    left: 16%;
+    bottom: 10%;
+}
+
+.delete-comment{
+    position: absolute;
+    left: 230px;
+    top: 20px;
+    font-size: 24px;
+    color: #AAA7AE;
+}
+
+.comment {
+    position: relative;
+    left: 16%;
+    font-size: 15px;
+    color:black;
+}
+
+.reply-word{
+    position:relative;
+    top: -27px;
+    left: 91%;
+    color: black;
+}
+
+.comment-date{
+    position:relative;
+    top: 30px;
+    left: 240px;
+    color: #AAA7AE;
+    font-size: 15px;
+}
+
+.reply-date{
+    position:absolute;
+    top: 10px;
+    left: 190px;
+    color: #AAA7AE;
+    font-size: 15px;
+}
+
+.edit-comment{
+    position: absolute;
+    left: 200px;
+    top: 20px;
+    font-size: 24px;
+    color: #AAA7AE;
+}
+
+.edit-reply{
+    position: absolute;
+    left: 190px;
+    top: 35px;
+    font-size: 24px;
+    color: #AAA7AE;
+}
+
+.add-reply{
+    position: absolute;
+    left: 267px;
+    top: 50px;
+    font-size: 24px;
+    color: #AAA7AE;
+}
+
+.likes{
+    font-size: 28px;
+    position: absolute;
+    left: 265px;
+    top: 19px;
+    color: #AAA7AE;
+}
+
+.like-count{
+    font-size: 22px;
+    position: absolute;
+    left: 300px;
+    top: 20px;
+    color: #AAA7AE;
+}
+
+.reply-profile-picture{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    bottom: 40px;
+}
+
+.reply-username{
+    position:relative;
+    left: 4px;
+    bottom: 15px;
+    font-size: 15px;
+    color:black;
+    font-weight: bold;
+}
+
+.reply-comment {
+    position: relative;
+    left: -40px;
+    top: 15px;
+    font-size: 16px;
+    width: 250px;
+    color:black;
+}
+
+.reply-container .reply-comment {
+    margin-bottom: 10px; /* Add margin between each comment for spacing */
+}
+
+.replies-container {
+    margin-top: 10px;
+    padding-left: 10px;
+}
+
+.delete-reply{
+    position: absolute;
+    left: 220px;
+    top: 35px;
+    font-size: 24px;
+    color: #AAA7AE;
+}
+
+.reply-container {
+    position: relative;
+    height: 90px;
+    max-height: 500px;
+    overflow-y: auto;
+    padding-bottom: 10px; /* Add padding at the bottom for spacing */
+}
+
+.likes.active {
+    color: #B11433;
+}
+  
