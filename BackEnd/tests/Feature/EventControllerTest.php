@@ -148,4 +148,28 @@ class EventControllerTest extends TestCase
             ],
         ]);
     }
+
+    function testGetTrainingInfoApi()
+    {
+        // Create programs and trainings
+        $program = Program::factory()->create();
+        $trainings = Training::factory()
+            ->count(3)
+            ->create(['program_id' => $program->id]);
+
+        // Test getting all trainings
+        $responseAll = $this->getJson('/api/v0.1/event/get_training_info');
+        $responseAll->assertStatus(200)->assertJsonStructure([
+            'trainings' => [
+                '*' => ['id', 'program_id', 'program_name'],
+            ],
+        ]);
+
+        // Test getting a single training
+        $trainingId = $trainings->first()->id;
+        $responseSingle = $this->getJson('/api/v0.1/event/get_training_info/' . $trainingId);
+        $responseSingle->assertStatus(200)->assertJsonStructure([
+            'training' => ['id', 'program_id', 'program_name'],
+        ]);
+    }
 }
