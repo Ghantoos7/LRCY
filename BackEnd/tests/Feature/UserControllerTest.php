@@ -394,29 +394,33 @@ class UserControllerTest extends TestCase
     {
         // Create a user
         $user = Volunteer_user::factory()->create();
-    
+
         // Test case: Edit the user's profile
         $newData = [
             'user_id' => $user->id,
             'username' => 'new_username',
             'user_bio' => 'This is a new user bio.',
         ];
-    
-        $response = $this->actingAs($user)->postJson("/api/v0.1/user/edit_profile", $newData);
-    
-        $response->assertJson([
-            'status' => 'success',
-            'message' => 'Profile updated successfully',
-        ])->assertStatus(200);
+
+        $response = $this->actingAs($user)->postJson('/api/v0.1/user/edit_profile', $newData);
+
+        $response
+            ->assertJson([
+                'status' => 'success',
+                'message' => 'Profile updated successfully',
+            ])
+            ->assertStatus(200);
     }
 
     function testGetTrainingsInfoApi()
     {
         // Create volunteer_user, takes, trainings, and programs
         $volunteer_user = Volunteer_user::factory()->create();
-        $trainings = Training::factory()->count(5)->create();
+        $trainings = Training::factory()
+            ->count(5)
+            ->create();
         $takes = [];
-    
+
         foreach ($trainings as $key => $training) {
             if ($key % 2 === 0) {
                 $takes[] = Take::factory()->create([
@@ -425,37 +429,27 @@ class UserControllerTest extends TestCase
                 ]);
             }
         }
-    
+
         // Test case: User not found
         $response = $this->getJson('/api/v0.1/user/get_trainings_info/999');
         $response->assertStatus(200)->assertJson([
             'status' => 'error',
             'message' => 'User not found',
         ]);
-    
+
         // Test case: Successful request
         $response = $this->getJson('/api/v0.1/user/get_trainings_info/' . $volunteer_user->id);
         $response->assertStatus(200);
-    
+
         // Assert trainings and program_counts in the response
-        $response->assertJsonStructure([
-            'trainings',
-            'trainings_not_taken',
-            'trainings not taken count',
-            'program_counts' => [
-                '1',
-                '2',
-                '3',
-                '4',
-            ],
-        ]);
-    
+        $response->assertJsonStructure(['trainings', 'trainings_not_taken', 'trainings not taken count', 'program_counts' => ['1', '2', '3', '4']]);
+
         // Assert trainings not taken count
         $trainingsNotTakenCount = count($trainings) - count($takes);
         $response->assertJson([
             'trainings not taken count' => $trainingsNotTakenCount,
         ]);
-    
+
         // Assert trainings and trainings_not_taken by program
         foreach ($response['trainings'] as $program_id => $trainingsArray) {
             foreach ($trainingsArray as $training) {
@@ -465,7 +459,7 @@ class UserControllerTest extends TestCase
                 $this->assertArrayHasKey('program_id', $training);
             }
         }
-    
+
         foreach ($response['trainings_not_taken'] as $program_id => $trainingsArray) {
             foreach ($trainingsArray as $training) {
                 $this->assertArrayHasKey('id', $training);
@@ -476,76 +470,83 @@ class UserControllerTest extends TestCase
         }
     }
 
-
     function testGetEventsOrganizedApi()
-{
-    // Create a volunteer_user
-    $volunteer_user = Volunteer_user::factory()->create();
+    {
+        // Create a volunteer_user
+        $volunteer_user = Volunteer_user::factory()->create();
 
-    // Test case: User not found
-    $response = $this->getJson('/api/v0.1/user/get_events_organized/999');
-    $response->assertStatus(200)->assertJson([
-        'status' => 'error',
-        'message' => 'User not found',
-    ]);
-
-    // Create events and is_responsible records
-    $events = Event::factory()->count(5)->create();
-    $is_responsible_records = [];
-
-    foreach ($events as $key => $event) {
-        $is_responsible_records[] = is_responsible::factory()->create([
-            'user_id' => $volunteer_user->id,
-            'event_id' => $event->id,
-            'role_name' => 'Organizer',
+        // Test case: User not found
+        $response = $this->getJson('/api/v0.1/user/get_events_organized/999');
+        $response->assertStatus(200)->assertJson([
+            'status' => 'error',
+            'message' => 'User not found',
         ]);
-    }
 
-    // Test case: Successful request
-    $response = $this->getJson('/api/v0.1/user/get_events_organized/' . $volunteer_user->id);
-    $response->assertStatus(200);
+        // Create events and is_responsible records
+        $events = Event::factory()
+            ->count(5)
+            ->create();
+        $is_responsible_records = [];
 
-    // Assert events in the response
-    $response->assertJsonStructure([
-        'events' => [
-            '*' => [
-                'id',
-                'event_date',
-                'event_title',
-                'program_id',
-                'event_type_id',
-                'role_name',
+        foreach ($events as $key => $event) {
+            $is_responsible_records[] = is_responsible::factory()->create([
+                'user_id' => $volunteer_user->id,
+                'event_id' => $event->id,
+                'role_name' => 'Organizer',
+            ]);
+        }
+
+        // Test case: Successful request
+        $response = $this->getJson('/api/v0.1/user/get_events_organized/' . $volunteer_user->id);
+        $response->assertStatus(200);
+
+        // Assert events in the response
+        $response->assertJsonStructure([
+            'events' => [
+                '*' => ['id', 'event_date', 'event_title', 'program_id', 'event_type_id', 'role_name'],
             ],
-        ],
-    ]);
+        ]);
 
-    // Test case: No events found for the user
-    $another_volunteer_user = Volunteer_user::factory()->create();
-    $response = $this->getJson('/api/v0.1/user/get_events_organized/' . $another_volunteer_user->id);
-    $response->assertStatus(200)->assertJson([
-        'message' => 'No events found for this user',
-    ]);
-}
-
-
-public function testGetEventsOrganizedCountApi()
-{
-    $user = volunteer_user::factory()->create();
-    $events = Event::factory()->count(3)->create();
-    foreach ($events as $event) {
-        is_responsible::factory()->create([
-            'user_id' => $user->id,
-            'event_id' => $event->id
+        // Test case: No events found for the user
+        $another_volunteer_user = Volunteer_user::factory()->create();
+        $response = $this->getJson('/api/v0.1/user/get_events_organized/' . $another_volunteer_user->id);
+        $response->assertStatus(200)->assertJson([
+            'message' => 'No events found for this user',
         ]);
     }
 
-    $response = $this->getJson('/api/v0.1/user/get_events_organized_count/' . $user->id);
+    public function testGetEventsOrganizedCountApi()
+    {
+        $user = volunteer_user::factory()->create();
+        $events = Event::factory()
+            ->count(3)
+            ->create();
+        foreach ($events as $event) {
+            is_responsible::factory()->create([
+                'user_id' => $user->id,
+                'event_id' => $event->id,
+            ]);
+        }
 
-    $response->assertStatus(200)->assertJson([
-        'total_events' => 3
-    ]);
-}
+        $response = $this->getJson('/api/v0.1/user/get_events_organized_count/' . $user->id);
 
+        $response->assertStatus(200)->assertJson([
+            'total_events' => 3,
+        ]);
+    }
 
+    public function test_getTotalVolunteeringTime()
+    {
+        $user = volunteer_user::factory()->create([
+            'user_start_date' => '2020-01-01',
+            'user_end_date' => '2023-01-01',
+        ]);
 
+        $response = $this->getJson('/api/v0.1/user/get_total_volunteering_time/' . $user->id);
+
+        $response->assertStatus(200)->assertJson([
+            'status' => 'success',
+            'total_time' => '3 Y 0 M',
+        ]);
+    }
 }
