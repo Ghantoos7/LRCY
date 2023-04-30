@@ -273,6 +273,15 @@ class UserController extends Controller {
             'password' => 'required',
             'confirm_password' => 'required|same:password'
         ]);
+
+         // check if the user exists
+         $user = volunteer_user::where('organization_id', '=', $request->input('organization_id'))->first();
+         if (!$user) {
+             return response()->json([
+                 'status' => 'error',
+                 'message' => 'User does not exist'
+             ]);
+         } 
     
         // Get the user ID from the organization ID of the request
         $user_id = volunteer_user::where('organization_id', '=', $request->input('organization_id'))->first()->id;
