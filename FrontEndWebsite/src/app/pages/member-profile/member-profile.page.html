@@ -132,8 +132,8 @@
       </ion-row>  
     </ion-grid>
 
-    <ion-button (click)="editUser()" class="save">Save Changes</ion-button>
-    <ion-button (click)="confirm(user_id)"class="delete">Delete Profile</ion-button>
+    <ion-button (click)="editUser()" class="save" [ngClass]="{'save-dark': darkMode}">Save Changes</ion-button>
+    <ion-button (click)="confirm(user_id)"class="delete" [ngClass]="{'delete-dark': darkMode}">Delete Profile</ion-button>
 
   </div>
 </ion-content>

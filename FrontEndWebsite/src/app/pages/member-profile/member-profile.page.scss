@@ -113,6 +113,17 @@ ion-label{
   height: 60px;
 }
 
+.save-dark{
+  position: relative;
+  margin: 0 auto;
+  margin-left: 35%;
+  margin-top: 10px;
+  --background: #45579A !important;
+  --color:white !important;
+  width: 30%;
+  height: 60px;
+}
+
 ion-menu-button{
   color: #45579A;
 }
@@ -272,6 +283,18 @@ ion-title{
   margin-top: 10px;
   margin-bottom: 50px;
   --background: white !important;
+  --color:red !important;
+  width: 30%;
+  height: 60px;
+}
+
+.delete-dark{
+  position: relative;
+  margin: 0 auto;
+  margin-left: 35%;
+  margin-top: 10px;
+  margin-bottom: 50px;
+  --background: #45579A !important;
   --color:red !important;
   width: 30%;
   height: 60px;
