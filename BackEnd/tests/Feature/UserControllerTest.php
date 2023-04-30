@@ -6,7 +6,9 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 use Tests\TestCase;
 use App\Models\volunteer_user;
@@ -25,7 +27,7 @@ class UserControllerTest extends TestCase
     use RefreshDatabase, WithoutMiddleware;
     use WithFaker;
 
-    public function testSignupApi()
+    function testSignupApi()
     {
         // Test Organization ID not found
         $response = $this->postJson('/api/v0.1/auth/signup', [
@@ -62,7 +64,7 @@ class UserControllerTest extends TestCase
         ]);
     }
 
-    public function testRegisterApi()
+    function testRegisterApi()
     {
         // Test case: Missing required fields
         $response = $this->postJson('/api/v0.1/auth/register');
@@ -106,7 +108,7 @@ class UserControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_login_api()
+    function test_login_api()
     {
         // Test case: Invalid credentials (user does not exist)
         $response = $this->postJson('/api/v0.1/auth/login', [
@@ -161,7 +163,7 @@ class UserControllerTest extends TestCase
         ]);
     }
 
-    public function testRecoverRequestApi()
+    function testRecoverRequestApi()
     {
         // Test case: Organization ID not found
         $response = $this->postJson('/api/v0.1/auth/recover_request', [
@@ -198,7 +200,7 @@ class UserControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function testChangePasswordApi()
+    function testChangePasswordApi()
     {
         // Test case: Organization ID not found
         $response = $this->postJson('/api/v0.1/auth/change_password', [
@@ -283,7 +285,7 @@ class UserControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function testCheckRequestStatusApi()
+    function testCheckRequestStatusApi()
     {
         // Test case: Organization ID not found
         $response = $this->postJson('/api/v0.1/auth/check_request_status', [
@@ -331,7 +333,7 @@ class UserControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function testGetUserInfo()
+    function testGetUserInfo()
     {
         // Create a user
         $user = Volunteer_user::factory()->create(['branch_id' => 1]);
@@ -370,5 +372,23 @@ class UserControllerTest extends TestCase
         ]);
         $response->assertStatus(200);
     }
-    
+
+    function testLogoutApi()
+    {
+        // Create a user
+        $user = Volunteer_user::factory()->create();
+
+        // Test case: Logout a user
+        $response = $this->actingAs($user)->postJson('/api/v0.1/user/logout');
+
+        $response->assertJsonFragment([
+            'status' => 'Logged out',
+        ]);
+        $response->assertStatus(200);
+
+        // Test case: Logout a non-existent user
+        // Not needed, as the API will require authentication
+    }
+
+
 }
