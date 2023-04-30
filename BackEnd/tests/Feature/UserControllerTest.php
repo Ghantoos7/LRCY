@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Database\Eloquent\Factories\Factory;
 use Carbon\Carbon;
 use Tests\TestCase;
 use App\Models\volunteer_user;
@@ -476,6 +475,57 @@ class UserControllerTest extends TestCase
             }
         }
     }
+
+
+    function testGetEventsOrganizedApi()
+{
+    // Create a volunteer_user
+    $volunteer_user = Volunteer_user::factory()->create();
+
+    // Test case: User not found
+    $response = $this->getJson('/api/v0.1/user/get_events_organized/999');
+    $response->assertStatus(200)->assertJson([
+        'status' => 'error',
+        'message' => 'User not found',
+    ]);
+
+    // Create events and is_responsible records
+    $events = Event::factory()->count(5)->create();
+    $is_responsible_records = [];
+
+    foreach ($events as $key => $event) {
+        $is_responsible_records[] = is_responsible::factory()->create([
+            'user_id' => $volunteer_user->id,
+            'event_id' => $event->id,
+            'role_name' => 'Organizer',
+        ]);
+    }
+
+    // Test case: Successful request
+    $response = $this->getJson('/api/v0.1/user/get_events_organized/' . $volunteer_user->id);
+    $response->assertStatus(200);
+
+    // Assert events in the response
+    $response->assertJsonStructure([
+        'events' => [
+            '*' => [
+                'id',
+                'event_date',
+                'event_title',
+                'program_id',
+                'event_type_id',
+                'role_name',
+            ],
+        ],
+    ]);
+
+    // Test case: No events found for the user
+    $another_volunteer_user = Volunteer_user::factory()->create();
+    $response = $this->getJson('/api/v0.1/user/get_events_organized/' . $another_volunteer_user->id);
+    $response->assertStatus(200)->assertJson([
+        'message' => 'No events found for this user',
+    ]);
+}
 
 
 
