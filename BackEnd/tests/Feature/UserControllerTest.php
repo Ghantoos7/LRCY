@@ -6,7 +6,9 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 use Tests\TestCase;
 use App\Models\volunteer_user;
@@ -25,7 +27,7 @@ class UserControllerTest extends TestCase
     use RefreshDatabase, WithoutMiddleware;
     use WithFaker;
 
-    public function testSignupApi()
+    function testSignupApi()
     {
         // Test Organization ID not found
         $response = $this->postJson('/api/v0.1/auth/signup', [
@@ -62,7 +64,7 @@ class UserControllerTest extends TestCase
         ]);
     }
 
-    public function testRegisterApi()
+    function testRegisterApi()
     {
         // Test case: Missing required fields
         $response = $this->postJson('/api/v0.1/auth/register');
@@ -106,7 +108,7 @@ class UserControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_login_api()
+    function testLoginApi()
     {
         // Test case: Invalid credentials (user does not exist)
         $response = $this->postJson('/api/v0.1/auth/login', [
@@ -161,7 +163,7 @@ class UserControllerTest extends TestCase
         ]);
     }
 
-    public function testRecoverRequestApi()
+    function testRecoverRequestApi()
     {
         // Test case: Organization ID not found
         $response = $this->postJson('/api/v0.1/auth/recover_request', [
@@ -198,7 +200,7 @@ class UserControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function testChangePasswordApi()
+    function testChangePasswordApi()
     {
         // Test case: Organization ID not found
         $response = $this->postJson('/api/v0.1/auth/change_password', [
@@ -283,7 +285,7 @@ class UserControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function testCheckRequestStatusApi()
+    function testCheckRequestStatusApi()
     {
         // Test case: Organization ID not found
         $response = $this->postJson('/api/v0.1/auth/check_request_status', [
@@ -331,7 +333,7 @@ class UserControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function testGetUserInfo()
+    function testGetUserInfoApi()
     {
         // Create a user
         $user = Volunteer_user::factory()->create(['branch_id' => 1]);
@@ -370,5 +372,277 @@ class UserControllerTest extends TestCase
         ]);
         $response->assertStatus(200);
     }
-    
+
+    function testLogoutApi()
+    {
+        // Create a user
+        $user = Volunteer_user::factory()->create();
+
+        // Test case: Logout a user
+        $response = $this->actingAs($user)->postJson('/api/v0.1/user/logout');
+
+        $response->assertJsonFragment([
+            'status' => 'Logged out',
+        ]);
+        $response->assertStatus(200);
+
+        // Test case: Logout a non-existent user
+        // Not needed, as the API will require authentication
+    }
+
+    public function testEditProfileApi()
+    {
+        // Create a user
+        $user = Volunteer_user::factory()->create();
+
+        // Test case: Edit the user's profile
+        $newData = [
+            'user_id' => $user->id,
+            'username' => 'new_username',
+            'user_bio' => 'This is a new user bio.',
+        ];
+
+        $response = $this->actingAs($user)->postJson('/api/v0.1/user/edit_profile', $newData);
+
+        $response
+            ->assertJson([
+                'status' => 'success',
+                'message' => 'Profile updated successfully',
+            ])
+            ->assertStatus(200);
+    }
+
+    function testGetTrainingsInfoApi()
+    {
+        // Create volunteer_user, takes, trainings, and programs
+        $volunteer_user = Volunteer_user::factory()->create();
+        $trainings = Training::factory()
+            ->count(5)
+            ->create();
+        $takes = [];
+
+        foreach ($trainings as $key => $training) {
+            if ($key % 2 === 0) {
+                $takes[] = Take::factory()->create([
+                    'user_id' => $volunteer_user->id,
+                    'training_id' => $training->id,
+                ]);
+            }
+        }
+
+        // Test case: User not found
+        $response = $this->getJson('/api/v0.1/user/get_trainings_info/999');
+        $response->assertStatus(200)->assertJson([
+            'status' => 'error',
+            'message' => 'User not found',
+        ]);
+
+        // Test case: Successful request
+        $response = $this->getJson('/api/v0.1/user/get_trainings_info/' . $volunteer_user->id);
+        $response->assertStatus(200);
+
+        // Assert trainings and program_counts in the response
+        $response->assertJsonStructure(['trainings', 'trainings_not_taken', 'trainings not taken count', 'program_counts' => ['1', '2', '3', '4']]);
+
+        // Assert trainings not taken count
+        $trainingsNotTakenCount = count($trainings) - count($takes);
+        $response->assertJson([
+            'trainings not taken count' => $trainingsNotTakenCount,
+        ]);
+
+        // Assert trainings and trainings_not_taken by program
+        foreach ($response['trainings'] as $program_id => $trainingsArray) {
+            foreach ($trainingsArray as $training) {
+                $this->assertArrayHasKey('id', $training);
+                $this->assertArrayHasKey('training_name', $training);
+                $this->assertArrayHasKey('training_description', $training);
+                $this->assertArrayHasKey('program_id', $training);
+            }
+        }
+
+        foreach ($response['trainings_not_taken'] as $program_id => $trainingsArray) {
+            foreach ($trainingsArray as $training) {
+                $this->assertArrayHasKey('id', $training);
+                $this->assertArrayHasKey('training_name', $training);
+                $this->assertArrayHasKey('training_description', $training);
+                $this->assertArrayHasKey('program_id', $training);
+            }
+        }
+    }
+
+    function testGetEventsOrganizedApi()
+    {
+        // Create a volunteer_user
+        $volunteer_user = Volunteer_user::factory()->create();
+
+        // Test case: User not found
+        $response = $this->getJson('/api/v0.1/user/get_events_organized/999');
+        $response->assertStatus(200)->assertJson([
+            'status' => 'error',
+            'message' => 'User not found',
+        ]);
+
+        // Create events and is_responsible records
+        $events = Event::factory()
+            ->count(5)
+            ->create();
+        $is_responsible_records = [];
+
+        foreach ($events as $key => $event) {
+            $is_responsible_records[] = is_responsible::factory()->create([
+                'user_id' => $volunteer_user->id,
+                'event_id' => $event->id,
+                'role_name' => 'Organizer',
+            ]);
+        }
+
+        // Test case: Successful request
+        $response = $this->getJson('/api/v0.1/user/get_events_organized/' . $volunteer_user->id);
+        $response->assertStatus(200);
+
+        // Assert events in the response
+        $response->assertJsonStructure([
+            'events' => [
+                '*' => ['id', 'event_date', 'event_title', 'program_id', 'event_type_id', 'role_name'],
+            ],
+        ]);
+
+        // Test case: No events found for the user
+        $another_volunteer_user = Volunteer_user::factory()->create();
+        $response = $this->getJson('/api/v0.1/user/get_events_organized/' . $another_volunteer_user->id);
+        $response->assertStatus(200)->assertJson([
+            'message' => 'No events found for this user',
+        ]);
+    }
+
+    function testGetEventsOrganizedCountApi()
+    {
+        $user = volunteer_user::factory()->create();
+        $events = Event::factory()
+            ->count(3)
+            ->create();
+        foreach ($events as $event) {
+            is_responsible::factory()->create([
+                'user_id' => $user->id,
+                'event_id' => $event->id,
+            ]);
+        }
+
+        $response = $this->getJson('/api/v0.1/user/get_events_organized_count/' . $user->id);
+
+        $response->assertStatus(200)->assertJson([
+            'total_events' => 3,
+        ]);
+    }
+
+    function testGetTotalVolunteeringTimeApi()
+    {
+        $user = volunteer_user::factory()->create([
+            'user_start_date' => '2020-01-01',
+            'user_end_date' => '2023-01-01',
+        ]);
+
+        $response = $this->getJson('/api/v0.1/user/get_total_volunteering_time/' . $user->id);
+
+        $response->assertStatus(200)->assertJson([
+            'status' => 'success',
+            'total_time' => '3 Y 0 M',
+        ]);
+    }
+
+    function testGetCompletedTrainingsCountApi()
+    {
+        $user = volunteer_user::factory()->create();
+        $trainings_taken = take::factory()
+            ->count(4)
+            ->create(['user_id' => $user->id]);
+
+        $response = $this->getJson('/api/v0.1/user/get_completed_trainings_count/' . $user->id);
+
+        $response->assertStatus(200)->assertJson([
+            'total_trainings' => 4,
+        ]);
+    }
+
+    function testGetPostsCountApi()
+    {
+        $user = volunteer_user::factory()->create();
+        $posts = Post::factory()
+            ->count(5)
+            ->create(['user_id' => $user->id]);
+
+        $response = $this->getJson('/api/v0.1/user/get_posts_count/' . $user->id);
+
+        $response->assertStatus(200)->assertJson([
+            'total_posts' => 5,
+        ]);
+    }
+
+    function testGetCommentsCountApi()
+    {
+        // Create a user and comments
+        $user = volunteer_user::factory()->create();
+        $comments = Comment::factory()
+            ->count(5)
+            ->create(['user_id' => $user->id]);
+
+        // Call the API
+        $response = $this->getJson('/api/v0.1/user/get_comments_count/' . $user->id);
+
+        // Check the response
+        $response->assertStatus(200)->assertJson([
+            'total_comments' => 5,
+        ]);
+    }
+
+    function testGetTotalLikesReceivedApi()
+    {
+        // Create a user, posts, and comments
+        $user = volunteer_user::factory()->create();
+        $posts = Post::factory()
+            ->count(3)
+            ->create(['user_id' => $user->id, 'like_count' => 2]);
+        $comments = Comment::factory()
+            ->count(2)
+            ->create(['user_id' => $user->id, 'comment_like_count' => 1]);
+
+        // Call the API
+        $response = $this->getJson('/api/v0.1/user/get_total_likes_received/' . $user->id);
+
+        // Check the response
+        $response->assertStatus(200)->assertJson([
+            'total_likes_received' => 8,
+        ]);
+    }
+
+    function testGetOwnPostsApi()
+    {
+        // Create a user and posts
+        $user = volunteer_user::factory()->create();
+        $posts = Post::factory()
+            ->count(3)
+            ->create(['user_id' => $user->id]);
+
+        // Call the API
+        $response = $this->getJson('/api/v0.1/user/get_own_posts/' . $user->id);
+
+        // Check the response
+        $response->assertStatus(200)->assertJsonCount(3, 'posts');
+    }
+
+    function testGetBranchInfoApi()
+    {
+        // Create a user and a branch
+        $branch = branch::factory()->create();
+        $user = volunteer_user::factory()->create(['branch_id' => $branch->id]);
+
+        // Call the API
+        $response = $this->getJson('/api/v0.1/user/get_branch_info/' . $user->id);
+
+        // Check the response
+        $response->assertStatus(200)->assertJson([
+            'branch_name' => $branch->branch_name,
+            'branch_location' => $branch->branch_location,
+        ]);
+    }
 }
