@@ -67,6 +67,9 @@ export class AddMemberPage implements OnInit {
     else if(gender == "Other"){
       return 2;
     }
+    else{
+      return 3;
+    }
   }
 
   mapUserType(user_type_id: string) : number{
