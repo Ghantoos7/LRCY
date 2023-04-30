@@ -108,7 +108,7 @@ class UserControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-    function test_login_api()
+    function testLoginApi()
     {
         // Test case: Invalid credentials (user does not exist)
         $response = $this->postJson('/api/v0.1/auth/login', [
@@ -333,7 +333,7 @@ class UserControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-    function testGetUserInfo()
+    function testGetUserInfoApi()
     {
         // Create a user
         $user = Volunteer_user::factory()->create(['branch_id' => 1]);
@@ -524,6 +524,25 @@ class UserControllerTest extends TestCase
     $response = $this->getJson('/api/v0.1/user/get_events_organized/' . $another_volunteer_user->id);
     $response->assertStatus(200)->assertJson([
         'message' => 'No events found for this user',
+    ]);
+}
+
+
+public function testGetEventsOrganizedCountApi()
+{
+    $user = volunteer_user::factory()->create();
+    $events = Event::factory()->count(3)->create();
+    foreach ($events as $event) {
+        is_responsible::factory()->create([
+            'user_id' => $user->id,
+            'event_id' => $event->id
+        ]);
+    }
+
+    $response = $this->getJson('/api/v0.1/user/get_events_organized_count/' . $user->id);
+
+    $response->assertStatus(200)->assertJson([
+        'total_events' => 3
     ]);
 }
 
