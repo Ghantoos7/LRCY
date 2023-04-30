@@ -1,5 +1,5 @@
-<ion-content [fullscreen]="true">
-  <h1>Admin Panel</h1>
+<ion-content [fullscreen]="true" class="light-content" [ngClass]="{'dark-content': myBoolean}">
+  <h1 class="title" [ngClass]="{'title-dark': myBoolean}" >Admin Panel</h1>
   <ion-fab class="buttons" vertical="bottom" horizontal="end" [edge]="true">
     <ion-fab-button>
       <ion-icon (click)="OnToggleColorTheme($event)" class="dark-mode" name="{{ myBoolean ? 'sunny' : 'moon' }}"></ion-icon>
@@ -11,7 +11,7 @@
   </ion-fab>
 
   <div class="card-container">
-    <ion-card (click) ="goToProfiles()" class="top-card">
+    <ion-card (click) ="goToProfiles()" class="top-card" [ngClass]="{'top-card-dark': myBoolean}">
       <ion-card-content>
         <div class="icon-container">
           <ion-icon name="people-circle-outline"></ion-icon>
@@ -20,7 +20,7 @@
       </ion-card-content>
     </ion-card>
 
-    <ion-card (click) ="goToGallery()" class="top-card">
+    <ion-card (click) ="goToGallery()" class="top-card" [ngClass]="{'top-card-dark': myBoolean}">
       <ion-card-content>
         <div class="icon-container">
           <ion-icon name="images"></ion-icon>
@@ -29,7 +29,7 @@
       </ion-card-content>
     </ion-card>
 
-    <ion-card (click) ="goToYearlyGoals()" class="top-card">
+    <ion-card (click) ="goToYearlyGoals()" class="top-card" [ngClass]="{'top-card-dark': myBoolean}">
       <ion-card-content>
         <div class="icon-container">
           <ion-icon name="golf"></ion-icon>
@@ -38,7 +38,7 @@
       </ion-card-content>
     </ion-card>
 
-    <ion-card (click) ="goToRequests()" class="bottom-card">
+    <ion-card (click) ="goToRequests()" class="bottom-card" [ngClass]="{'bottom-card-dark': myBoolean}">
       <ion-card-content>
         <div class="icon-container">
           <ion-icon name="chatbubbles"></ion-icon>
@@ -47,7 +47,7 @@
       </ion-card-content>
     </ion-card>
 
-    <ion-card (click) ="goToAnnouncements()" class="bottom-card">
+    <ion-card (click) ="goToAnnouncements()" class="bottom-card" [ngClass]="{'bottom-card-dark': myBoolean}">
       <ion-card-content>
         <div class="icon-container">
           <ion-icon name="document-text"></ion-icon>
