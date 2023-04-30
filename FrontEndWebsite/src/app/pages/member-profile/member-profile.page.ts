@@ -30,8 +30,14 @@ export class MemberProfilePage implements OnInit {
   user_id: string = '';
   gender_id: number = 0;
   gender_name: string = '';
+  darkMode: boolean;
 
-  constructor(private router:Router, private menuCtrl: MenuController, private alertController: AlertController, private adminService : AdminService) { }
+  constructor(private router:Router, private menuCtrl: MenuController, private alertController: AlertController, private adminService : AdminService) {  
+    this.darkMode = localStorage.getItem('darkModeEnabled') === 'true';
+    if (this.darkMode) {
+      document.body.setAttribute('color-theme', 'dark');
+    }
+  }
 
   ngOnInit() {
     const user = history.state.user;
