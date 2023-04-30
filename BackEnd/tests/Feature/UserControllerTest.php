@@ -576,4 +576,20 @@ class UserControllerTest extends TestCase
             'total_posts' => 5
         ]);
     }
+
+
+    public function testGetCommentsCountApi()
+    {
+        // Create a user and comments
+        $user = volunteer_user::factory()->create();
+        $comments = Comment::factory()->count(5)->create(['user_id' => $user->id]);
+
+        // Call the API
+        $response = $this->getJson('/api/v0.1/user/get_comments_count/' . $user->id);
+
+        // Check the response
+        $response->assertStatus(200)->assertJson([
+            'total_comments' => 5,
+        ]);
+    }
 }
