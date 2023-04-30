@@ -241,7 +241,7 @@ class UserControllerTest extends TestCase
             'status' => 'error',
             'message' => 'Password recovery request has not been accepted',
         ]);
-        
+
         $response->assertStatus(200);
 
         // Update the recovery request status to true
@@ -280,6 +280,54 @@ class UserControllerTest extends TestCase
             'status' => 'success',
             'message' => 'Password changed successfully',
         ]);
+        $response->assertStatus(200);
+    }
+
+    public function test_check_request_status_api()
+    {
+        // Test case: Organization ID not found
+        $response = $this->postJson('/api/v0.1/auth/check_request_status', [
+            'organization_id' => '999',
+        ]);
+        $response->assertJson(['status' => 'User has not submitted a request.']);
+        $response->assertStatus(200);
+
+        // Create a registered VolunteerUser
+        $registeredUser = Volunteer_user::factory()->create([
+            'organization_id' => '1',
+            'is_registered' => 1,
+        ]);
+
+        // Test case: User has not submitted a request
+        $response = $this->postJson('/api/v0.1/auth/check_request_status', [
+            'organization_id' => '1',
+        ]);
+        $response->assertJson(['status' => 'User has not submitted a request.']);
+        $response->assertStatus(200);
+
+        // Create a recovery request for the registered user
+        $recoverRequest = Recover_request::create([
+            'user_id' => $registeredUser->id,
+            'request_status' => false,
+            'request_date' => date('Y-m-d'),
+        ]);
+
+        // Test case: Request not yet accepted
+        $response = $this->postJson('/api/v0.1/auth/check_request_status', [
+            'organization_id' => '1',
+        ]);
+        $response->assertJson(['status' => 'Request not yet accepted']);
+        $response->assertStatus(200);
+
+        // Update the recovery request status to true
+        $recoverRequest->request_status = true;
+        $recoverRequest->save();
+
+        // Test case: Request accepted
+        $response = $this->postJson('/api/v0.1/auth/check_request_status', [
+            'organization_id' => '1',
+        ]);
+        $response->assertJson(['status' => 'Request accepted']);
         $response->assertStatus(200);
     }
 }
