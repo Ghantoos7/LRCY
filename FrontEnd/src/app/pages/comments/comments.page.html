@@ -6,8 +6,11 @@
 
   <ion-icon class="back" name="arrow-back-outline" (click)="goBack()"></ion-icon>
   <div class="post-and-content-wrapper">
-  <img *ngIf="post_media" class="post-image" src="http://127.0.0.1:8000/storage/images/{{post_media}}" onerror="this.src='assets/imgs/ext.jpg'">
-
+  <img *ngIf="post_type_id == 2" class="post-image" src="http://127.0.0.1:8000/storage/images/{{post_media}}" onerror="this.src='assets/imgs/ext.jpg'">
+  <video *ngIf="post_type_id == 3" controls class="post-video">
+    <source src="http://127.0.0.1:8000/storage/videos/{{post_media}}" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
   <div class="content-wrapper">
   <ion-card class="caption-container">
     <ion-card-content>
@@ -30,8 +33,8 @@
   <div class="comment-container" >
     
     <ion-card class="comment-card" *ngFor="let comment of comments; let i = index">
-      <img class="profile-picture" *ngIf="user_profile_pic !== null" src="http://127.0.0.1:8000/storage/images/{{user_profile_pic}}"  onerror="this.onerror=null; this.src='https://ionicframework.com/docs/img/demos/avatar.svg';" />
-      <img  class="profile-picture" *ngIf="user_profile_pic===null" src="https://ionicframework.com/docs/img/demos/avatar.svg"  />
+      <img class="profile-picture" *ngIf="comment['user'].user_profile_pic !== null" src="http://127.0.0.1:8000/storage/images/{{comment['user'].user_profile_pic}}"  onerror="this.onerror=null; this.src='https://ionicframework.com/docs/img/demos/avatar.svg';" />
+      <img  class="profile-picture" *ngIf="comment['user'].user_profile_pic === null" src="https://ionicframework.com/docs/img/demos/avatar.svg"  />
 
       <ion-text class="username">{{comment['user'].first_name}} {{comment['user'].last_name}}</ion-text>
       <ion-text class="comment-date">{{getDaysAgo(comment.created_at)}}</ion-text>
