@@ -390,5 +390,24 @@ class UserControllerTest extends TestCase
         // Not needed, as the API will require authentication
     }
 
+    public function testEditProfileApi()
+    {
+        // Create a user
+        $user = Volunteer_user::factory()->create();
+    
+        // Test case: Edit the user's profile
+        $newData = [
+            'user_id' => $user->id,
+            'username' => 'new_username',
+            'user_bio' => 'This is a new user bio.',
+        ];
+    
+        $response = $this->actingAs($user)->postJson("/api/v0.1/user/edit_profile", $newData);
+    
+        $response->assertJson([
+            'status' => 'success',
+            'message' => 'Profile updated successfully',
+        ])->assertStatus(200);
+    }
 
 }
