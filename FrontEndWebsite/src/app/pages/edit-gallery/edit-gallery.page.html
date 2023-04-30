@@ -124,87 +124,90 @@
       </ion-row>
     </ion-grid>
   
-
+    <div class="divider">
+      <ion-grid>
+        <ion-card class="members">
+          <ion-grid>
+            <ion-row>
+              <ion-col size="6">
+                <ion-card>
+                  <ion-card-title>All Users</ion-card-title>
+                  <ion-list class="list">
+                    <ion-item *ngFor="let user of allUsers">
+                      <ion-avatar slot="start">
+                        <img *ngIf="user.user_profile_pic !== null" src="http://127.0.0.1:8000/storage/images/{{user.user_profile_pic}}"  onerror="this.onerror=null; this.src='https://ionicframework.com/docs/img/demos/avatar.svg';" />
+                        <img *ngIf="user.user_profile_pic===null" src="https://ionicframework.com/docs/img/demos/avatar.svg"  />
+                       
+                      </ion-avatar>
+                      <ion-label>{{ user.first_name }} {{ user.last_name }}</ion-label>
+                      <ion-button slot="end" (click)="selectUser(user, true)">Add</ion-button>
+                    </ion-item>
+                  </ion-list>
+                </ion-card>
+              </ion-col>
+              <ion-col size="6">
+                <ion-card>
+                  <ion-card-title>Selected Users</ion-card-title>
+                  <ion-list class="list">
+                    <ion-item *ngFor="let user of selectedUsers">
+                      <ion-avatar slot="start">
+                        <img src="http://127.0.0.1:8000/storage/images/{{user.user_profile_pic}}"  onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'" alt="User avatar" />
+                      </ion-avatar>
+                      <ion-label>{{ user.first_name }} {{ user.last_name }}</ion-label>
+                      <ion-input slot="end" class="add-member" type="text" [(ngModel)]="user.role_name" (ngModelChange)="updateUserRole(user, user.role_name)" placeholder="Role..."></ion-input>
+                      <ion-icon
+                        slot="end"
+                        name="trash"
+                        (click)="removeSelectedUser(user)"
+                      ></ion-icon>
+                    </ion-item>
+                  </ion-list>
+                </ion-card>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card>
+      </ion-grid>
+  
     <ion-grid>
-      <ion-card class="members">
-        <ion-grid>
-          <ion-row>
-            <ion-col size="6">
-              <ion-card>
-                <ion-card-title>All Users</ion-card-title>
-                <ion-list class="list">
-                  <ion-item *ngFor="let user of allUsers">
-                    <ion-avatar slot="start">
-                      <img *ngIf="user.user_profile_pic !== null" src="http://127.0.0.1:8000/storage/images/{{user.user_profile_pic}}"  onerror="this.onerror=null; this.src='https://ionicframework.com/docs/img/demos/avatar.svg';" />
-                      <img *ngIf="user.user_profile_pic===null" src="https://ionicframework.com/docs/img/demos/avatar.svg"  />
-                     
-                    </ion-avatar>
-                    <ion-label>{{ user.first_name }} {{ user.last_name }}</ion-label>
-                    <ion-button slot="end" (click)="selectUser(user, true)">Add</ion-button>
-                  </ion-item>
-                </ion-list>
-              </ion-card>
-            </ion-col>
-            <ion-col size="6">
-              <ion-card>
-                <ion-card-title>Selected Users</ion-card-title>
-                <ion-list class="list">
-                  <ion-item *ngFor="let user of selectedUsers">
-                    <ion-avatar slot="start">
-                      <img src="http://127.0.0.1:8000/storage/images/{{user.user_profile_pic}}"  onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'" alt="User avatar" />
-                    </ion-avatar>
-                    <ion-label>{{ user.first_name }} {{ user.last_name }}</ion-label>
-                    <ion-input slot="end" class="add-member" type="text" [(ngModel)]="user.role_name" (ngModelChange)="updateUserRole(user, user.role_name)" placeholder="Role..."></ion-input>
-                    <ion-icon
-                      slot="end"
-                      name="trash"
-                      (click)="removeSelectedUser(user)"
-                    ></ion-icon>
-                  </ion-item>
-                </ion-list>
-              </ion-card>
+      <ion-row>
+        <ion-col size-md="10" size-lg="9" size-xl="8" offset-md="1" offset-lg="2" offset-xl="2">
+          <ion-row *ngFor="let photoInput of photoInputs; let i = index">
+            <ion-col size="12">
+              <ion-item>
+                <ion-label>Add an image</ion-label>
+                <ion-input class="first-card-input" type="file" (change)="onChangePhoto($event)" [(ngModel)]="event_photo"></ion-input>
+              </ion-item>
             </ion-col>
           </ion-row>
-        </ion-grid>
-      </ion-card>
+  
+          <div class="ion-grid">
+            <ion-row>
+              <ion-col size="3" *ngFor="let image of images">
+                <ion-card>
+                  <div class="badge">
+                    <ion-icon (click)="deleteImage(image.id)" name="trash" size="large"></ion-icon>
+                  </div>
+                  <ion-img src="http://127.0.0.1:8000/storage/images/{{image.event_image_source}}" onerror="this.src='assets/imgs/ext.jpg'" class="custom-image"></ion-img>
+                </ion-card>
+              </ion-col>
+            </ion-row>
+          </div>
+  
+          <ion-row>
+            <ion-col size="12" class="ion-text-center">
+              <ion-button (click)="addPhoto()">Add</ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
     </ion-grid>
+  
+      <ion-button (click)="editGalleryEvent()" class="save">Save Changes</ion-button>
+      <ion-button (click)="confirm()" class="delete">Delete Event</ion-button>
 
-  <ion-grid>
-    <ion-row>
-      <ion-col size-md="10" size-lg="9" size-xl="8" offset-md="1" offset-lg="2" offset-xl="2">
-        <ion-row *ngFor="let photoInput of photoInputs; let i = index">
-          <ion-col size="12">
-            <ion-item>
-              <ion-label>Add an image</ion-label>
-              <ion-input class="first-card-input" type="file" (change)="onChangePhoto($event)" [(ngModel)]="event_photo"></ion-input>
-            </ion-item>
-          </ion-col>
-        </ion-row>
+    </div>
 
-        <div class="ion-grid">
-          <ion-row>
-            <ion-col size="3" *ngFor="let image of images">
-              <ion-card>
-                <div class="badge">
-                  <ion-icon (click)="deleteImage(image.id)" name="trash" size="large"></ion-icon>
-                </div>
-                <ion-img src="http://127.0.0.1:8000/storage/images/{{image.event_image_source}}" onerror="this.src='assets/imgs/ext.jpg'" class="custom-image"></ion-img>
-              </ion-card>
-            </ion-col>
-          </ion-row>
-        </div>
-
-        <ion-row>
-          <ion-col size="12" class="ion-text-center">
-            <ion-button (click)="addPhoto()">Add</ion-button>
-          </ion-col>
-        </ion-row>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-
-    <ion-button (click)="editGalleryEvent()" class="save">Save Changes</ion-button>
-    <ion-button (click)="confirm()" class="delete">Delete Event</ion-button>
   </div>
 
 
