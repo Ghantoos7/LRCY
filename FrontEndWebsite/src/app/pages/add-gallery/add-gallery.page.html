@@ -33,7 +33,7 @@
           <div class="custom-div">
             <ion-text class="form-title">Add Event</ion-text>
   
-            <ion-button class="edit-btn" size="small" ><input [(ngModel)]="event_main_picture" (change)="onChange($event)"   onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'"type="file" accept="image/png, image/jpeg, image/jpg"></ion-button>
+            <ion-button class="edit-btn" size="small" ><input (change)="onChange($event)"   onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'"type="file" accept="image/png, image/jpeg, image/jpg"></ion-button>
             <div class="text-div"></div>
             <div class="inner-div" [ngClass]="{'inner-div-dark': darkMode}">
               <ion-grid>
@@ -88,7 +88,7 @@
                   <ion-col size="6">
                     <ion-item>
                       <ion-label>Budget Sheet</ion-label>
-                      <ion-input (change)="onChangeBudget($event)"  [(ngModel)] = "budget_sheet" class="first-card-input" type="file"></ion-input>
+                      <ion-input (change)="onChangeBudget($event)" class="first-card-input" type="file"></ion-input>
                     </ion-item>
                   </ion-col>
                   
@@ -97,13 +97,13 @@
                   <ion-col size="6">
                     <ion-item>
                       <ion-label>Proposal</ion-label>
-                      <ion-input (change)="onChangeProp($event)"  [(ngModel)] = "proposal" class="first-card-input" type="file" ></ion-input>
+                      <ion-input (change)="onChangeProp($event)" class="first-card-input" type="file" ></ion-input>
                     </ion-item>
                   </ion-col>
                   <ion-col size="6">
                     <ion-item>
                       <ion-label>Meeting minute</ion-label>
-                      <ion-input (change)="onChangeMeet($event)"  [(ngModel)] = "meeting_minute" class="first-card-input" type="file"></ion-input>
+                      <ion-input (change)="onChangeMeet($event)" class="first-card-input" type="file"></ion-input>
                     </ion-item>
                   </ion-col>
                   
