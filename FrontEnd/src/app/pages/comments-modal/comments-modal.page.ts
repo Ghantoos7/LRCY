@@ -189,13 +189,23 @@ export class CommentsModalPage implements OnInit {
   }
 
   editReply(reply_id: number){
+    let reply_content: string ='';
+  
+    Object.values(this.replies).forEach((commentReplies: any) => {
+      commentReplies.forEach((reply: any) => {
+        if (reply.id === reply_id) {
+          reply_content = reply.reply_content;
+        }
+      });
+    });
+  
     this.alrt.create({
       header: 'Edit Reply',
       inputs: [
         {
           name: 'content',
           type: 'text',
-          value: this.content
+          value: reply_content
         }
       ],
       buttons: [
@@ -206,13 +216,20 @@ export class CommentsModalPage implements OnInit {
         {
           text: 'Edit',
           handler: (data) => {
-            this.postService.editReply(reply_id, data.content).subscribe(response=>{
+            this.postService.editReply(reply_id, data.content).subscribe(response => {
               const str = JSON.stringify(response);
               const result = JSON.parse(str);
               const status = result['status'];
-              if(status == "success"){
-                window.location.reload();
-              } else if (status == "error"){
+              if (status == "success") {
+                // Update the reply content without reloading the page
+                Object.values(this.replies).forEach((commentReplies: any) => {
+                  commentReplies.forEach((reply: any) => {
+                    if (reply.id === reply_id) {
+                      reply.reply_content = data.content;
+                    }
+                  });
+                });
+              } else if (status == "error") {
                 this.alrt.create({
                   message: 'Something went wrong. Please try again.',
                   buttons: ['OK']
@@ -249,7 +266,12 @@ export class CommentsModalPage implements OnInit {
               const result = JSON.parse(str);
               const status = result['status'];
               if(status == "success"){
-                window.location.reload();
+                this.alrt.create({
+                  message: 'Your reply was added!',
+                  buttons: ['OK']
+                }).then(alrt => alrt.present());
+                this.content = ''; // Reset the input field
+                this.fetchData(); // Update the comments and replies
               } else if (status == "error"){
                 this.alrt.create({
                   message: 'Something went wrong. Please try again.',
