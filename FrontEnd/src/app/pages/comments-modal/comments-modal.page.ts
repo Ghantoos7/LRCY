@@ -322,10 +322,12 @@ export class CommentsModalPage implements OnInit {
     await alert.present();
     
     await alert.onDidDismiss().then((data) => {
-      if (data.data.values === 'date') {
-        this.sortComments('date');
-      } else if (data.data.values === 'likes') {
-        this.sortComments('popularity');
+      if(data.data != undefined){
+        if (data.data.values === 'date') {
+          this.sortComments('date');
+        } else if (data.data.values === 'likes') {
+          this.sortComments('popularity');
+        }
       }
     });
   }
