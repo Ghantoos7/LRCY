@@ -211,7 +211,12 @@ export class CommentsModalPage implements OnInit {
               const result = JSON.parse(str);
               const status = result['status'];
               if(status == "success"){
-                window.location.reload();
+                this.alrt.create({
+                  message: 'Your reply was edited!',
+                  buttons: ['OK']
+                }).then(alrt => alrt.present());
+                this.new_comment = ''; // Reset the input field
+                this.fetchData(); // Update the comments list
               } else if (status == "error"){
                 this.alrt.create({
                   message: 'Something went wrong. Please try again.',
@@ -249,7 +254,11 @@ export class CommentsModalPage implements OnInit {
               const result = JSON.parse(str);
               const status = result['status'];
               if(status == "success"){
-                window.location.reload();
+                this.alrt.create({
+                  message: 'Your reply was added!',
+                  buttons: ['OK']
+                }).then(alrt => alrt.present());
+                this.fetchData(); // Update the comments list
               } else if (status == "error"){
                 this.alrt.create({
                   message: 'Something went wrong. Please try again.',
