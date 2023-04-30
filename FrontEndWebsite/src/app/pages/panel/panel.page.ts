@@ -4,9 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AdminService } from 'src/app/services/admin.service';
+import { NavController } from '@ionic/angular';
 
 interface CustomEvent extends Event {
-  myBoolean: boolean;
+  darkMode: boolean;
 }
 
 @Component({
@@ -17,15 +18,15 @@ interface CustomEvent extends Event {
   imports: [IonicModule, CommonModule, FormsModule]
 })
 export class PanelPage implements OnInit {
-  myBoolean: boolean = false;
+  darkMode: boolean = false;
 
   constructor(private router:Router, private adminService : AdminService) { }
 
   OnToggleColorTheme(event: Event): void {
     const customEvent = event as CustomEvent;
-    customEvent.myBoolean = this.myBoolean = !this.myBoolean;
+    customEvent.darkMode = this.darkMode = !this.darkMode;
 
-    if(customEvent.myBoolean){
+    if(customEvent.darkMode){
       document.body.setAttribute('color-theme','dark');
     }
     else{
@@ -37,7 +38,7 @@ export class PanelPage implements OnInit {
   }
 
   goToProfiles(){
-    this.router.navigate(['/manage-profiles']);
+    this.router.navigate(['/manage-profiles'], { state: { data: this.darkMode } });
   }
 
   goToGallery(){
