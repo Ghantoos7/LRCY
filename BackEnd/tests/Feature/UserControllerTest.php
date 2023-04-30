@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Carbon\Carbon;
 use Tests\TestCase;
 use App\Models\volunteer_user;
@@ -409,5 +410,73 @@ class UserControllerTest extends TestCase
             'message' => 'Profile updated successfully',
         ])->assertStatus(200);
     }
+
+    function testGetTrainingsInfoApi()
+    {
+        // Create volunteer_user, takes, trainings, and programs
+        $volunteer_user = Volunteer_user::factory()->create();
+        $trainings = Training::factory()->count(5)->create();
+        $takes = [];
+    
+        foreach ($trainings as $key => $training) {
+            if ($key % 2 === 0) {
+                $takes[] = Take::factory()->create([
+                    'user_id' => $volunteer_user->id,
+                    'training_id' => $training->id,
+                ]);
+            }
+        }
+    
+        // Test case: User not found
+        $response = $this->getJson('/api/v0.1/user/get_trainings_info/999');
+        $response->assertStatus(200)->assertJson([
+            'status' => 'error',
+            'message' => 'User not found',
+        ]);
+    
+        // Test case: Successful request
+        $response = $this->getJson('/api/v0.1/user/get_trainings_info/' . $volunteer_user->id);
+        $response->assertStatus(200);
+    
+        // Assert trainings and program_counts in the response
+        $response->assertJsonStructure([
+            'trainings',
+            'trainings_not_taken',
+            'trainings not taken count',
+            'program_counts' => [
+                '1',
+                '2',
+                '3',
+                '4',
+            ],
+        ]);
+    
+        // Assert trainings not taken count
+        $trainingsNotTakenCount = count($trainings) - count($takes);
+        $response->assertJson([
+            'trainings not taken count' => $trainingsNotTakenCount,
+        ]);
+    
+        // Assert trainings and trainings_not_taken by program
+        foreach ($response['trainings'] as $program_id => $trainingsArray) {
+            foreach ($trainingsArray as $training) {
+                $this->assertArrayHasKey('id', $training);
+                $this->assertArrayHasKey('training_name', $training);
+                $this->assertArrayHasKey('training_description', $training);
+                $this->assertArrayHasKey('program_id', $training);
+            }
+        }
+    
+        foreach ($response['trainings_not_taken'] as $program_id => $trainingsArray) {
+            foreach ($trainingsArray as $training) {
+                $this->assertArrayHasKey('id', $training);
+                $this->assertArrayHasKey('training_name', $training);
+                $this->assertArrayHasKey('training_description', $training);
+                $this->assertArrayHasKey('program_id', $training);
+            }
+        }
+    }
+
+
 
 }
