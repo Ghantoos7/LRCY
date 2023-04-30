@@ -1,34 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { AlertController, IonicModule, ModalController } from '@ionic/angular';
+import { NavParams } from '@ionic/angular';
 import { PostService } from 'src/app/services/post.service';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { AlertController } from '@ionic/angular';
-import { ReactiveFormsModule } from '@angular/forms';
-
 
 @Component({
-  selector: 'app-comments',
-  templateUrl: './comments.page.html',
-  styleUrls: ['./comments.page.scss'],
+  selector: 'app-comments-modal',
+  templateUrl: './comments-modal.page.html',
+  styleUrls: ['./comments-modal.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, ReactiveFormsModule]
+  imports: [IonicModule, CommonModule, FormsModule]
 })
-export class CommentsPage implements OnInit {
+export class CommentsModalPage implements OnInit {
 
-  
-  user_name: string = '';
-  post_media: string = '';
-  post_type_id: number = 0;
-  post_caption: string = '';
-  comment_count: number = 0;
-  post_date: string = '';
+  post_id: number=0;
+  username: string='';
+  post_media: string='';
+  post_caption: string='';
+  comment_count: number=0;
+  post_date: string='';
+  post_type_id: number=0;
   user_profile_pic = localStorage.getItem('user_profile_pic') as string;
   comments: any = [];
+  new_comment: string=''; //comment_content
   current_id = localStorage.getItem('user_id') as string;
-  comment_content: string ='';
-  post_id: number = 0;
+
   isLikedUser: {[key: number]: boolean} = {};
   comment_likes: any;
   repliesOpen: { [comment_id: number]: boolean } = {};
@@ -36,30 +33,19 @@ export class CommentsPage implements OnInit {
   isLiked: { [key: number]: { postId: number, isLiked: boolean }[] } = {};
   content: string = '';
   commentLikeCount: { [key: number]: number } = {};
-  
 
-  constructor(private alrt:AlertController, private router:Router, private postService:PostService, private alertController:AlertController) { }
- 
-
+  constructor(private modalController: ModalController, private navParams: NavParams, private postService: PostService, private alrt: AlertController) { 
+    this.post_id = navParams.get('post_id');
+  }
 
   ngOnInit() {
-    const data = this.router.getCurrentNavigation()?.extras.state;
-    const post_id = JSON.stringify(data);
-    const id = JSON.parse(post_id)["p_id"];
-    this.post_id = id;
-    this.router.events.subscribe((event: any) => {
-      if (event instanceof NavigationEnd) {
-        this.fetchData();
-      }
-    });
-
-   
+    this.fetchData();
   }
 
   fetchData(){
 
     this.postService.getPost(this.post_id).subscribe((data: any) => {
-      this.user_name = data['post'].user_name;
+      this.username = data['post'].user_name;
       this.post_media = data['post'].post_media;
       this.post_caption = data['post'].post_caption;
       this.comment_count = data['post'].comment_count;
@@ -81,112 +67,18 @@ export class CommentsPage implements OnInit {
     });
   }
 
-  async openAlert() {
-    const alert = await this.alrt.create({
-      header: 'Sort Comments By',
-      buttons: [
-        {
-          text: 'Sort',
-          role: 'cancel'
-        }
-      ],
-      inputs: [
-        {
-          name: 'radio-option',
-          type: 'radio',
-          label: 'Date',
-          value: 'date',
-          checked: false
-        },
-        {
-          name: 'radio-option',
-          type: 'radio',
-          label: 'Popularity',
-          value: 'likes',
-          checked: false
-        }
-      ]
-    });
-  
-    await alert.present();
-  
-    
-    await alert.onDidDismiss().then((data) => {
-      if (data.data.values === 'date') {
-        this.sortComments('date');
-      } else if (data.data.values === 'likes') {
-        this.sortComments('popularity');
-      }
-    });
-  }
-
-  sortComments(type: string) {
-    if (type === 'popularity') {
-      this.comments.sort((a: { comment_like_count: number; }, b: { comment_like_count: number; }) => b.comment_like_count - a.comment_like_count);
-    } else if (type === 'date') {
-      this.comments.sort((a: { created_at: string | number | Date; }, b: { created_at: string | number | Date; }) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
-    }
-  }
 
   
 
-  public animateLikeButton(postId: number) {
-    const likeButton = document.getElementById(`like-button-${postId}`);
-    likeButton?.classList.add('like-animation');
-  
-    likeButton?.addEventListener('animationend', () => {
-      likeButton.classList.remove('like-animation');
-    });
-  }
-
-  toggleLike(comment_id: number) {
-    if (this.isLikedUser[comment_id]) {
-      this.unlikeComment(comment_id);
-    } else {
-      this.likeComment(comment_id);
-    }
-      this.animateLikeButton(comment_id);
-  }
-  
-    
-  likeComment(comment_id: number) {
-    this.postService.likeComment(comment_id, this.current_id).subscribe((data: any) => {
-      localStorage.setItem(`user_${this.current_id}_comment_${comment_id}`, 'true'); // store the like state in Local Storage
-      this.isLikedUser[comment_id] = true;
-      this.commentLikeCount[comment_id]++;
-    });
-    
-   
-  }
-
-  openReplies(comment_id: number){
-    this.postService.getReplies(comment_id).subscribe((data: any) => {
-      this.replies[comment_id] = data['replies'];
-      this.repliesOpen[comment_id] = !this.repliesOpen[comment_id];
-    });
-  }
-   
-
-  unlikeComment(comment_id: number) {
-    this.postService.unlikeComment(comment_id, this.current_id).subscribe((data: any) => {
-      localStorage.setItem(`user_${this.current_id}_comment_${comment_id}`, 'false'); // store the like state in Local Storage
-      this.isLikedUser[comment_id] = false;
-      this.commentLikeCount[comment_id]--;
-    });
-   
-   
-  }
-
-  
-  async sendComment() {
-    this.postService.commentPost(this.post_id, this.current_id, this.comment_content).subscribe((response : any)=> {
+  sendComment() {
+    this.postService.commentPost(this.post_id, this.current_id, this.new_comment).subscribe((response : any)=> {
       const status = response['status'];
       if (status == "success") {
         this.alrt.create({
           message: 'Your comment was added!',
           buttons: ['OK']
         }).then(alrt => alrt.present());
-        this.comment_content = ''; // Reset the input field
+        this.new_comment = ''; // Reset the input field
         this.fetchData(); // Update the comments list
       } else if (status == "error") {
         this.alrt.create({
@@ -196,9 +88,9 @@ export class CommentsPage implements OnInit {
       }
     });
   }
-  
+
   deleteComment(comm_id: number) {
-    this.alertController.create({
+    this.alrt.create({
       header: 'Confirm',
       message: 'Are you sure you want to delete this comment?',
       buttons: [
@@ -227,7 +119,7 @@ export class CommentsPage implements OnInit {
   }
 
   deleteReply(reply_id: number) {
-    this.alertController.create({
+    this.alrt.create({
       header: 'Confirm',
       message: 'Are you sure you want to delete this reply?',
       buttons: [
@@ -260,12 +152,9 @@ export class CommentsPage implements OnInit {
       ]
     }).then(alert => alert.present());
   }
-  goBack(){
-    this.router.navigate(['/feed']);
-  }
 
   editComment(comm_id: number, currentContent: string) {
-    this.alertController.create({
+    this.alrt.create({
       header: 'Edit Comment',
       inputs: [
         {
@@ -300,7 +189,7 @@ export class CommentsPage implements OnInit {
   }
 
   editReply(reply_id: number){
-    this.alertController.create({
+    this.alrt.create({
       header: 'Edit Reply',
       inputs: [
         {
@@ -338,7 +227,7 @@ export class CommentsPage implements OnInit {
 
   replyComment(comm_id: number){
     //use alert controller to get reply content
-    this.alertController.create({
+    this.alrt.create({
       header: 'Reply to Comment',
       inputs: [
         {
@@ -374,6 +263,94 @@ export class CommentsPage implements OnInit {
     }).then(alert => alert.present());
   }
 
+  openReplies(comment_id: number){
+    this.postService.getReplies(comment_id).subscribe((data: any) => {
+      this.replies[comment_id] = data['replies'];
+      this.repliesOpen[comment_id] = !this.repliesOpen[comment_id];
+    });
+  }
+
+  async openAlert() {
+    const alert = await this.alrt.create({
+      header: 'Sort Comments By',
+      buttons: [
+        {
+          text: 'Sort',
+          role: 'cancel'
+        }
+      ],
+      inputs: [
+        {
+          name: 'radio-option',
+          type: 'radio',
+          label: 'Date',
+          value: 'date',
+          checked: false
+        },
+        {
+          name: 'radio-option',
+          type: 'radio',
+          label: 'Popularity',
+          value: 'likes',
+          checked: false
+        }
+      ]
+    });
+  
+    await alert.present();
+    
+    await alert.onDidDismiss().then((data) => {
+      if (data.data.values === 'date') {
+        this.sortComments('date');
+      } else if (data.data.values === 'likes') {
+        this.sortComments('popularity');
+      }
+    });
+  }
+
+  sortComments(type: string) {
+    if (type === 'popularity') {
+      this.comments.sort((a: { comment_like_count: number; }, b: { comment_like_count: number; }) => b.comment_like_count - a.comment_like_count);
+    } else if (type === 'date') {
+      this.comments.sort((a: { created_at: string | number | Date; }, b: { created_at: string | number | Date; }) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+    }
+  }
+
+  public animateLikeButton(postId: number) {
+    const likeButton = document.getElementById(`like-button-${postId}`);
+    likeButton?.classList.add('like-animation');
+  
+    likeButton?.addEventListener('animationend', () => {
+      likeButton.classList.remove('like-animation');
+    });
+  }
+
+  toggleLike(comment_id: number) {
+    if (this.isLikedUser[comment_id]) {
+      this.unlikeComment(comment_id);
+    } else {
+      this.likeComment(comment_id);
+    }
+      this.animateLikeButton(comment_id);
+  }
+  
+    
+  likeComment(comment_id: number) {
+    this.postService.likeComment(comment_id, this.current_id).subscribe((data: any) => {
+      localStorage.setItem(`user_${this.current_id}_comment_${comment_id}`, 'true'); // store the like state in Local Storage
+      this.isLikedUser[comment_id] = true;
+      this.commentLikeCount[comment_id]++;
+    });
+  }
+
+  unlikeComment(comment_id: number) {
+    this.postService.unlikeComment(comment_id, this.current_id).subscribe((data: any) => {
+      localStorage.setItem(`user_${this.current_id}_comment_${comment_id}`, 'false'); // store the like state in Local Storage
+      this.isLikedUser[comment_id] = false;
+      this.commentLikeCount[comment_id]--;
+    });
+  }
+
   getDaysAgo(commentDate: string): string {
     const today = new Date();
     const comment = new Date(commentDate);
@@ -397,5 +374,8 @@ export class CommentsPage implements OnInit {
     }
   }
 
+  dismissModal() {
+    this.modalController.dismiss();
+  }
 
 }

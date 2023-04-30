@@ -76,9 +76,9 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/feed/feed.page').then( m => m.FeedPage)
   },
   {
-    path: 'comments',
+    path: 'comments-modal',
     canActivate: [AuthGuard],
-    loadComponent: () => import('./pages/comments/comments.page').then( m => m.CommentsPage)
+    loadComponent: () => import('./pages/comments-modal/comments-modal.page').then( m => m.CommentsModalPage)
   },
   {
     path: 'edit-profile',
@@ -95,6 +95,11 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     loadComponent: () => import('./pages/edit-post/edit-post.page').then( m => m.EditPostPage)
   },
+  {
+    path: 'comments-modal',
+    loadComponent: () => import('./pages/comments-modal/comments-modal.page').then( m => m.CommentsModalPage)
+  },
+
 
 
 

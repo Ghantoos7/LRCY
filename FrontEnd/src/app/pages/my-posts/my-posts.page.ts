@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, ModalController } from '@ionic/angular';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { PopoverController } from '@ionic/angular';
@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { PostService } from 'src/app/services/post.service';
 import { SharedService } from 'src/app/services/shared.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CommentsModalPage } from '../comments-modal/comments-modal.page';
 
 @Component({
   selector: 'app-my-posts',
@@ -41,7 +42,7 @@ export class MyPostsPage implements OnInit {
   commentCount: { [key: number]: number } = {};
 
   errorMessage: string = '';
-  constructor(private post_service:PostService, private router: Router, private alertController: AlertController, private actionSheetController: ActionSheetController, private service: UserService, private sharedService:SharedService) { }
+  constructor(private post_service:PostService, private router: Router, private alertController: AlertController, private actionSheetController: ActionSheetController, private service: UserService, private sharedService:SharedService, private modalController:ModalController) { }
 
   ngOnInit() {
 
@@ -215,15 +216,14 @@ toggleLike(post_id: number) {
 
   
 
-  goToComments(post_id: string){
-    
-    this.router.navigate(["/comments"], {state: { p_id : post_id }});
-
-    setTimeout(() => {
-      
-      window.location.reload();
-
-    }, 50);
+  async openCommentsModal(post_id: number) {
+    const modal = await this.modalController.create({
+      component: CommentsModalPage,
+      componentProps: {
+        post_id: post_id
+      }
+    });
+    return await modal.present();
   }
 
 

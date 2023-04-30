@@ -9,6 +9,8 @@ import { PostService } from 'src/app/services/post.service';
 import { SharedService } from 'src/app/services/shared.service';
 import { UserService } from 'src/app/services/user.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ModalController } from '@ionic/angular';
+import { CommentsModalPage } from '../comments-modal/comments-modal.page';
 
 @Component({
   selector: 'app-feed',
@@ -34,7 +36,7 @@ export class FeedPage implements OnInit {
   likeCount: { [key: number]: number } = {};
   commentCount: { [key: number]: number } = {};
   errorMessage: string = '';
-  constructor(private router:Router, private alertController: AlertController, private menuCtrl: MenuController, private service:PostService, private sharedService:SharedService, private userservice:UserService) { }
+  constructor(private modalController: ModalController, private router:Router, private alertController: AlertController, private menuCtrl: MenuController, private service:PostService, private sharedService:SharedService, private userservice:UserService) { }
 
   ionViewWillLeave() {
     this.menuCtrl.enable(false, 'menuFeed');
@@ -123,16 +125,16 @@ export class FeedPage implements OnInit {
   }
 
 
-  goToComments(post_id: string){
-    
-    this.router.navigate(["/comments"], {state: { p_id : post_id }});
-
-    setTimeout(() => {
-      
-      window.location.reload();
-
-    }, 50);
+  async openCommentsModal(post_id: number) {
+    const modal = await this.modalController.create({
+      component: CommentsModalPage,
+      componentProps: {
+        post_id: post_id
+      }
+    });
+    return await modal.present();
   }
+  
 
   goToPostForm(){
     this.router.navigate(['/post'])
