@@ -64,4 +64,56 @@ class EventControllerTest extends TestCase
             ],
         ]);
     }
+
+
+
+    public function testGetEventInfoApi()
+    {
+        // Create branch, program, events, and volunteers
+        $branch = Branch::factory()->create();
+        $program = Program::factory()->create();
+        $events = Event::factory()->count(3)->create(['branch_id' => $branch->id, 'program_id' => $program->id]);
+        $volunteers = Volunteer_user::factory()->count(3)->create();
+    
+        // Assign volunteers to events
+        foreach ($events as $event) {
+            foreach ($volunteers as $volunteer) {
+                Is_responsible::factory()->create([
+                    'event_id' => $event->id,
+                    'user_id' => $volunteer->id,
+                ]);
+            }
+        }
+    
+        // Send a request to the API
+        $response = $this->getJson('/api/v0.1/event/get_event_info/' . $branch->id);
+    
+        // Assert that the response has the correct structure and status code
+        $response->assertStatus(200)->assertJsonStructure([
+            'events' => [
+                $program->program_name => [
+                    '*' => [
+                        'id',
+                        'event_title',
+                        'event_description',
+                        'program_id',
+                        'branch_id',
+                        'event_date',
+                        'event_type_id',
+                        'responsibles' => [
+                            '*' => [
+                                'first_name',
+                                'last_name',
+                                'role_name',
+                                'profile_picture',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ]);
+    }
 }
+
+
+
