@@ -31,7 +31,7 @@
     <ion-card class="comment-card" *ngFor="let comment of comments; let i = index">
       <img class="profile-picture" *ngIf="comment['user'].user_profile_pic !== null" src="http://127.0.0.1:8000/storage/images/{{comment['user'].user_profile_pic}}"  onerror="this.onerror=null; this.src='https://ionicframework.com/docs/img/demos/avatar.svg';" />
       <img class="profile-picture" *ngIf="comment['user'].user_profile_pic === null" src="https://ionicframework.com/docs/img/demos/avatar.svg"  />
-      <ion-text class="username">{{comment['user'].first_name}} {{comment['user'].last_name}}</ion-text>
+      <ion-text class="username">{{comment['user'].username}}</ion-text>
       <ion-text class="comment-date">{{getDaysAgo(comment.created_at)}}</ion-text>
       <ion-icon (click)="editComment(comment.id, comment.comment_content)" *ngIf="current_id == comment['user'].id" class="edit-comment" name="pencil"></ion-icon>
       <ion-icon (click)="deleteComment(comment.id)" *ngIf="current_id == comment['user'].id" class="delete-comment" name="trash-outline"></ion-icon>
@@ -51,7 +51,7 @@
           <img class="reply-profile-picture" *ngIf="reply['user'].user_profile_pic !== null" src="http://127.0.0.1:8000/storage/images/{{reply['user'].user_profile_pic}}"  onerror="this.onerror=null; this.src='https://ionicframework.com/docs/img/demos/avatar.svg';" />
           <img  class="reply-profile-picture" *ngIf="reply['user'].user_profile_pic===null" src="https://ionicframework.com/docs/img/demos/avatar.svg"  />
           
-          <ion-text class="reply-username">{{reply['user'].first_name}} {{reply['user'].last_name}}</ion-text>
+          <ion-text class="reply-username">{{reply['user'].username}}</ion-text>
           <ion-icon (click)="deleteReply(reply.id)" *ngIf="current_id == reply['user'].id" class="delete-reply" name="trash-outline"></ion-icon>
           <ion-icon (click)="editReply(reply.id)" *ngIf="current_id == reply['user'].id" class="edit-reply" name="pencil"></ion-icon>
           <ion-text class="reply-comment">{{reply.reply_content}}</ion-text>
