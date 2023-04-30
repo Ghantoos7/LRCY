@@ -129,4 +129,23 @@ class EventControllerTest extends TestCase
             ],
         ]);
     }
+
+    function testGetEventPicturesApi()
+    {
+        // Create event and event images
+        $event = Event::factory()->create();
+        $eventImages = Event_image::factory()
+            ->count(3)
+            ->create(['event_id' => $event->id]);
+
+        // Send a request to the API
+        $response = $this->getJson('/api/v0.1/event/get_event_pictures/' . $event->id);
+
+        // Assert that the response has the correct structure and status code
+        $response->assertStatus(200)->assertJsonStructure([
+            'pictures' => [
+                '*' => ['id', 'event_id'],
+            ],
+        ]);
+    }
 }
