@@ -986,6 +986,7 @@ class AdminController extends Controller {
                 'goal_deadline' => 'required|date',
                 'start_date' => 'required|date',
                 'branch_id' => 'required|integer',
+                'number_completed' => 'required|integer',
             ]);
 
             // Check if the validation fails
@@ -1018,26 +1019,12 @@ class AdminController extends Controller {
                 'goal_deadline',
                 'start_date',
                 'branch_id',
+                'number_completed',
             ];
             $goal->fill($request->only($fillableFields));
             $goal->save();
-
-            // Reset number completed 
-            $goal->number_completed = 0;
+           
             
-            $validator = Validator::make($request->all(), [
-                'number_completed' => 'required|integer',
-            ]);
-
-            // Check if the validation fails
-
-            if ($validator->fails()) {
-                return response()->json([
-                    'status' => 'error',
-                    'message' => $validator->errors()->first()
-                ]);
-            }  
-
             if ($goal->number_completed >= $goal->number_to_complete) {
                 $goal->goal_status = 1;
             }

@@ -20,6 +20,7 @@ export class CommentsPage implements OnInit {
   
   user_name: string = '';
   post_media: string = '';
+  post_type_id: number = 0;
   post_caption: string = '';
   comment_count: number = 0;
   post_date: string = '';
@@ -63,6 +64,8 @@ export class CommentsPage implements OnInit {
       this.post_caption = data['post'].post_caption;
       this.comment_count = data['post'].comment_count;
       this.post_date = data['post'].post_date;
+      this.post_type_id = data['post'].post_type_id;
+
     });
     
 

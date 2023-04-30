@@ -21,8 +21,8 @@ class PostController extends Controller {
             'user_id' => 'required',
             'post_type' => 'required|in:text,image,video',
             'post_caption' => $request->input('post_type') === 'text' ? 'required' : 'nullable',
-            'post_media' => 'required_if:post_type,image'
-        ]);
+            'post_media' => $request->input('post_type') !== 'text' ? 'required_if:post_type,image,video|mimes:jpeg,bmp,png,jpg,gif,mp4,webm,ogg' : 'nullable'
+        ]);        
 
         // Get the user ID from the request.
         $user_id = $request->input('user_id');
@@ -53,36 +53,40 @@ class PostController extends Controller {
         }
 
          // Create a new post instance.
-    $post = new Post([
-        'user_id' => $user_id,
-        'post_type_id' => $post_type_id,
-        'comment_count' => 0,
-        'like_count' => 0,
-        'post_date' => date('Y-m-d H:i:s'),
-        'post_caption' => $request->input('post_caption') ?? null
-    ]);
+        $post = new Post([
+            'user_id' => $user_id,
+            'post_type_id' => $post_type_id,
+            'comment_count' => 0,
+            'like_count' => 0,
+            'post_date' => date('Y-m-d H:i:s'),
+            'post_caption' => $request->input('post_caption') ?? null
+        ]);
 
-    // If the post type is not text, upload the post media file.
-    if ($post_type !== 'text') {
-        if($request->hasFile('post_media')){
-            $request->validate([
-                'image' => 'mimes:jpeg,bmp,png,jpg'
-            ]);
+        // If the post type is not text, upload the post media file.
+        if ($post_type !== 'text') {
+            if ($request->hasFile('post_media')) {
+                $request->validate([
+                    'post_media' => 'mimes:jpeg,bmp,png,jpg,gif,mp4,webm,ogg'
+                ]);
 
-            $request->post_media->store('public/images');
-            $post->post_media = $request->post_media->hashName();
+                // Change the storage path based on the media type
+                $storage_path = $post_type === 'image' ? 'public/images' : 'public/videos';
+
+                $request->post_media->store($storage_path);
+                $post->post_media = $request->post_media->hashName();
+            }
         }
-    }
 
-    // Save the post to the database.
-    $post->save();
 
-    // Return a success response with the post ID.
-    return response()->json([
-        'status' => 'success',
-        'message' => 'Post created successfully',
-        'post_id' => $post->id
-    ]);
+        // Save the post to the database.
+        $post->save();
+
+        // Return a success response with the post ID.
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Post created successfully',
+            'post_id' => $post->id
+        ]);
 
     }
     
@@ -230,7 +234,7 @@ class PostController extends Controller {
         }
         
         // Retrieve the posts for the specified user, or all posts if no user ID was provided (order by post date in descending order)
-        $posts = Post::where('user_id', $user_id ?? '!=', null)->orderBy('post_date', 'desc')->get();
+        $posts = Post::where('user_id', $user_id ?? '!=', null)->orderBy('created_at', 'desc')->get();
         
         // If no posts were found, return an error response
         if ($posts->isEmpty()) {

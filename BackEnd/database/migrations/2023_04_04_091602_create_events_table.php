@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
-            $table->string('event_main_picture');
+            $table->string('event_main_picture')->nullable();
             $table->string('event_description');
             $table->string('event_location');
             $table->string('branch_id');
@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('event_title');
             $table->integer('event_type_id');
             $table->integer('program_id');
-            $table->string('budget_sheet');
-            $table->string('proposal');
+            $table->string('budget_sheet')->nullable();
+            $table->string('proposal')->nullable();
             $table->string('meeting_minute')->nullable();
             $table->string('field1')->nullable();
             $table->string('field2')->nullable();

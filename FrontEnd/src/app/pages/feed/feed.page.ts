@@ -44,6 +44,16 @@ export class FeedPage implements OnInit {
     this.menuCtrl.enable(true, 'menuFeed');
   }
 
+  
+  handleImageError(event: ErrorEvent) {
+    
+    const target = event.target as HTMLImageElement | null;
+     
+    if (target && target instanceof HTMLImageElement) {
+      target.src = "https://ionicframework.com/docs/img/demos/avatar.svg";
+    }
+  }
+
   async showProfile(index: number) {
     const user = this.posts[index]['user'];
     const alert = await this.alertController.create({
@@ -62,10 +72,6 @@ export class FeedPage implements OnInit {
     await alert.present();
   }  
 
-  handleImageError(event: any) {
-    // Set a default image source when the image fails to load
-    event.target.src = '/assets/imgs/ext.jpg';
-  }
 
   
 

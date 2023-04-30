@@ -45,7 +45,7 @@
 
 .user-info .username{
     position: relative;
-    padding-left: 10%;
+    padding-left: 13%;
     font-size: 15px;
     color:black;
 }
@@ -73,11 +73,29 @@
     max-height: 200px;
     object-fit: cover;
   }
+
+  .chosen-video-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20%;
+    margin-top: 15%;
+    padding-bottom: 10%;
+    padding-top: 10%;
+    width: 100%;
+  }
+  
+  .chosen-video {
+    max-width: 90%;
+    max-height: 200px;
+    object-fit: cover;
+  }
+  
   
   .textarea-container {
     position: absolute;
     width: 300px;
-    top: 65%;
+    top: 67%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
@@ -128,13 +146,19 @@
 
 .upload-options{
     position: absolute;
-    top: 79%;
+    top: 80%;
     left: 20%;
     font-size: 20px;
     color: #45579A;
 }
 
-
+.error-message{
+    position: absolute;
+    top: 52%;
+    font-size: 20px;
+    text-align: center;
+    color: #B11433;
+}
 
 
   

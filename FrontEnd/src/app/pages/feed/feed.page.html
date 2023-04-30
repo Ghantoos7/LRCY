@@ -6,8 +6,9 @@
   <ion-content class="ion-padding">
     <div class="avatar-container">
       <ion-avatar size="large" class="custom-avatar">
-        <img  *ngIf="user_profile_pic !== null" src="http://127.0.0.1:8000/storage/images/{{user_profile_pic}}"  onerror="this.onerror=null; this.src='https://ionicframework.com/docs/img/demos/avatar.svg';" />
         <img  *ngIf="user_profile_pic===null" src="https://ionicframework.com/docs/img/demos/avatar.svg"  />
+        <img  *ngIf="user_profile_pic !== null" src="http://127.0.0.1:8000/storage/images/{{user_profile_pic}}" (error)="handleImageError($event)" />
+      
        
       </ion-avatar>
       <ion-label class="username-label">{{username}}</ion-label>
@@ -55,7 +56,10 @@
           </ion-text>
         </div>  
         <img *ngIf="post.post_type_id == 2" class="post-image" src="http://127.0.0.1:8000/storage/images/{{post.post_media}}"  onerror="this.src='assets/imgs/ext.jpg'"/>
-
+        <video *ngIf="post.post_type_id == 3" controls class="post-video">
+          <source src="http://127.0.0.1:8000/storage/videos/{{post.post_media}}" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
       </ion-card-content>
 
       <ion-footer>

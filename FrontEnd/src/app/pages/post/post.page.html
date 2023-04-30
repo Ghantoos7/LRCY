@@ -17,13 +17,20 @@
     <img [src]="post_src_img_data" class="chosen-image" />
   </div>
 
+  <div *ngIf="post_src_video_data" class="chosen-video-container">
+    <video [src]="post_src_video_data" class="chosen-video" controls></video>
+  </div>
+  
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
 
   <div class="textarea-container">
     <textarea #captionTextarea [(ngModel)]="post_caption" class="textarea" placeholder="Add a caption..." rows="1"></textarea>
   </div>
 
   <div class="upload-options">
-      <input (change)="onChange($event)" class="img" type="file" accept="image/png, image/jpeg, image/jpg" >
+      <input (change)="onChange($event)" class="img" type="file" accept="image/png, image/jpeg, image/jpg, image/gif, video/mp4, video/webm, video/ogg">
   </div>  
 
   <ion-button class="post-button" shape="round" expand="block" size="large"  (click)="post()">Post</ion-button>
