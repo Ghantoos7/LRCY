@@ -1,12 +1,12 @@
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" [ngClass]="{'dark-content': darkMode}">
 
   <ion-menu menuId="editGallery" contentId="main-content">
     <ion-header>
       <ion-toolbar class="toolbar-background">
-        <ion-title class="menu-title">Manage Gallery</ion-title>
+        <ion-title [ngClass]="{'ion-title-dark': darkMode}" class="menu-title">Manage Gallery</ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content  class="menu-list" class="ion-padding"> 
+    <ion-content  class="menu-list" class="ion-padding" [ngClass]="{'ion-menu-dark': darkMode}"> 
         <ion-button (click)="goToGallery()"class="menu-button">View Gallery</ion-button>
         <ion-button (click)="goToAddGallery()" class="menu-button">Add an Event</ion-button>
     </ion-content>
@@ -14,13 +14,13 @@
 
   <div id="main-content">
     <ion-header>
-      <ion-toolbar>
+      <ion-toolbar [ngClass]="{'ion-toolbar-dark': darkMode}">
         <ion-buttons slot="start">
-          <ion-menu-button></ion-menu-button>
+          <ion-menu-button [ngClass]="{'ion-menu-button-dark': darkMode}"></ion-menu-button>
         </ion-buttons>
-        <ion-title><ion-text class="ann">Gallery</ion-text>
-          <ion-button (click)="goToPanel()" class="header-button"><ion-label>Panel</ion-label></ion-button>
-          <ion-button (click)="goToHome()" class="header-button"><ion-label>Log out</ion-label></ion-button>
+        <ion-title><ion-text class="ann"  [ngClass]="{'ann-dark': darkMode}">Gallery</ion-text>
+          <ion-button (click)="goToPanel()" class="header-button"><ion-label [ngClass]="{'ion-label-dark': darkMode}">Panel</ion-label></ion-button>
+          <ion-button (click)="goToHome()" class="header-button"><ion-label [ngClass]="{'ion-label-dark': darkMode}">Log out</ion-label></ion-button>
         </ion-title>
       </ion-toolbar>
     </ion-header>
@@ -34,7 +34,7 @@
   
             <ion-button class="edit-btn" size="small" ><input [(ngModel)]="new_event_main_picture" (change)="onChange($event)"  type="file" accept="image/png, image/jpeg, image/jpg"></ion-button>
             <div class="text-div"></div>
-            <div class="inner-div">
+            <div class="inner-div" [ngClass]="{'inner-div-dark': darkMode}">
               <ion-grid>
                 <ion-card-title> &nbsp; Edit Event Information</ion-card-title>
                 <ion-row>
@@ -126,7 +126,7 @@
   
     <div class="divider">
       <ion-grid>
-        <ion-card class="members">
+        <ion-card class="members" [ngClass]="{'members-dark': darkMode}">
           <ion-grid>
             <ion-row>
               <ion-col size="6">

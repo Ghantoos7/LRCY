@@ -7,6 +7,15 @@ ion-content{
   padding-bottom: 0;
 }
 
+.dark-content{
+  --background-size: cover;
+  --background:#1A1A1A;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
 ion-button.menu-button{
   color:white;
  --background:#45579A;
