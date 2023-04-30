@@ -34,6 +34,11 @@ export class PostPage implements OnInit {
   constructor(private router:Router, private userService:UserService, private postService:PostService, private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
+    this.errorMessage = '';
+    this.post_caption = '';
+    this.post_src_img = null;
+    this.post_src_img_data = null;
+    this.post_src_video_data = null;
     this.userService.getUser(this.branch_id, this.user_id).subscribe(response => {
       this.user = response;
       this.last_name = (this.user['user'].last_name);
@@ -42,14 +47,14 @@ export class PostPage implements OnInit {
       this.username = (this.user['user'].username);
       this.user_profile_pic = (this.user['user'].user_profile_pic);
     });
+  }
+
+  goBack(){
     this.errorMessage = '';
     this.post_caption = '';
     this.post_src_img = null;
     this.post_src_img_data = null;
     this.post_src_video_data = null;
-  }
-
-  goBack(){
     this.router.navigate(['/feed']);
   }
 
