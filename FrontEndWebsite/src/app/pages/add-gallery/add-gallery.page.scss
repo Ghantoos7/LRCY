@@ -16,6 +16,10 @@ ion-content{
   padding-bottom: 0;
 }
 
+.ion-content-dark{
+  --background: #1A1A1A;
+}
+
 .form-title{
   font-size: 30px;
   position: relative;
@@ -158,10 +162,16 @@ ion-menu-button{
   --background: #45579A !important;
 }
 
-ion-menu{
-  ion-content{
-    --background: white;
-  }
+.ion-menu{
+  --background: white;
+  padding-top: 15px;
+  
+}
+
+.ion-menu-dark{
+  --background: #1A1A1A;
+  padding-top: 20px;
+
 }
 
 .inner-div {
@@ -267,7 +277,7 @@ ion-card{
 .ann{
   position: relative;
   top: 7px;
-  color: white;
+  color: #45579A;
 }
 
 .header-button{
@@ -301,6 +311,10 @@ ion-toolbar{
 
 ion-title{
   color: #45579A;
+}
+
+ion-title-dark{
+  color: #fff;
 }
 
 .drop-down{
