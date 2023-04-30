@@ -56,7 +56,7 @@ export class MemberProfilePage implements OnInit {
       if(parsedResponse.status == 'success') {
         this.alertController.create({
           header: 'Success',
-          message: 'Goal updated successfully!',
+          message: 'User information updated successfully!',
           buttons: ['OK']
         }).then(alert => alert.present());
         this.router.navigate(['/manage-profiles']);
