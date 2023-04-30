@@ -44,10 +44,20 @@ ion-content{
   margin: 0 auto;
   position: relative;
   bottom: 10px;
-  background-color: black;
 }
+
+.members-dark{
+  width: 881px;
+  margin: 0 auto;
+  position: relative;
+  bottom: 10px;
+  background-color: #212121;
+}
+
 .tit{
-  color : white;}
+  color : white;
+}
+
 .add-member{
   width: 110%;
   margin: 10px;
@@ -87,6 +97,11 @@ h1{
   color:#ffffff;
 }
 
+.inner-card-dark{
+  --background: #212121;
+  background-color: #212121;
+}
+
 .first-card-input {
   --background: #bcb9b9; 
   --padding-end: 10px; 
@@ -101,6 +116,12 @@ ion-label{
   color: #45579A;
 }
 
+.ion-label-dark{
+  margin-right: 5px;
+  color: white;
+}
+
+
 .save{
   position: relative;
   margin: 0 auto;
@@ -113,8 +134,24 @@ ion-label{
   height: 60px;
 }
 
+.save-dark{
+  position: relative;
+  margin: 0 auto;
+  margin-left: 35%;
+  margin-top: 20px;
+  margin-bottom: 50px;
+  --background: #45579A !important;
+  --color: white !important;
+  width: 30%;
+  height: 60px;
+}
+
 ion-menu-button{
   color: #45579A;
+}
+
+.ion-menu-button-dark{
+  color: #fff;
 }
 
 .toolbar-background{
@@ -255,6 +292,11 @@ ion-button.menu-button{
 ion-toolbar{
   position: relative;
   --background: white;
+}
+
+.ion-toolbar-dark{
+  position: relative;
+  --background: #45579A;
 }
 
 ion-title{
