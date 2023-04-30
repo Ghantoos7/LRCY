@@ -66,12 +66,13 @@ ion-item-sliding > ion-item {
 }
 
 .username{
-    font-weight: 500;
+    font-weight: bold;
     font-size: 14px;
     margin-top: 10px;
     margin-left: 70px;
     position: relative;
     top: 15px;
+    color: black;
 }
 
 .delete-comment{
@@ -90,19 +91,12 @@ ion-item-sliding > ion-item {
     left: -35px;
 }
 
-.reply-word{
-    position:relative;
-    top: -27px;
-    left: 91%;
-    color: black;
-}
-
 .comment-date{
-    font-size: 12px;
+    font-size: 14px;
     color: #999;
-    top: 17px;
+    top: 15px;
     position: absolute;
-    left: 170px;
+    left: 200px;
 }
 
 .reply-date{
@@ -110,7 +104,7 @@ ion-item-sliding > ion-item {
     top: 10px;
     left: 190px;
     color: #AAA7AE;
-    font-size: 15px;
+    font-size: 14px;
 }
 
 .edit-comment{
@@ -123,9 +117,9 @@ ion-item-sliding > ion-item {
 
 .edit-reply{
     position: absolute;
-    left: 190px;
-    top: 35px;
-    font-size: 24px;
+    left: 250px;
+    top: 10px;
+    font-size: 20px;
     color: #AAA7AE;
 }
 
@@ -162,9 +156,9 @@ ion-item-sliding > ion-item {
 
 .reply-username{
     position:relative;
-    left: 4px;
+    left: 10px;
     bottom: 15px;
-    font-size: 15px;
+    font-size: 13px;
     color:black;
     font-weight: bold;
 }
@@ -189,9 +183,9 @@ ion-item-sliding > ion-item {
 
 .delete-reply{
     position: absolute;
-    left: 220px;
-    top: 35px;
-    font-size: 24px;
+    left: 285px;
+    top: 10px;
+    font-size: 20px;
     color: #AAA7AE;
 }
 
