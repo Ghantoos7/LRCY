@@ -64,8 +64,11 @@ export class AddMemberPage implements OnInit {
     else if(gender == 'Female'){
       return 1;
     }
-    else{
+    else if(gender == "Other"){
       return 2;
+    }
+    else{
+      return 3;
     }
   }
 
