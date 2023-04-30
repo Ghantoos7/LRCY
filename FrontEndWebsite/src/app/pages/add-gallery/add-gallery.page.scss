@@ -1,7 +1,15 @@
 ion-content{
-  
   --background-size: cover;
   --background:#8794c6;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.dark-content{
+  --background-size: cover;
+  --background:#1A1A1A;
   margin-top: 0;
   margin-bottom: 0;
   padding-top: 0;
@@ -36,6 +44,7 @@ ion-content{
   margin: 0 auto;
   position: relative;
   bottom: 10px;
+  background-color: black;
 }
 .tit{
   color : white;}
@@ -127,6 +136,20 @@ ion-menu{
   width: 100%;
   height: 100%;
   background-color: white;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  padding-top: 50px;
+}
+
+.inner-div-dark {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+  top: 20%;
+  width: 100%;
+  height: 100%;
+  background-color: #212121;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
   padding-top: 50px;

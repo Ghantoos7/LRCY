@@ -1,4 +1,4 @@
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" [ngClass]="{'dark-content': darkMode}">
 
   <ion-menu menuId="menuAddGallery" contentId="main-content">
     <ion-header>
@@ -35,7 +35,7 @@
   
             <ion-button class="edit-btn" size="small" ><input [(ngModel)]="event_main_picture" (change)="onChange($event)"   onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'"type="file" accept="image/png, image/jpeg, image/jpg"></ion-button>
             <div class="text-div"></div>
-            <div class="inner-div">
+            <div class="inner-div" [ngClass]="{'inner-div-dark': darkMode}">
               <ion-grid>
                 <ion-card-title> &nbsp; Add Event Information</ion-card-title>
                 <ion-row>
@@ -113,7 +113,7 @@
                   <ion-col size="12">
                     <ion-item>
                       <ion-label position="stacked">Description</ion-label>
-                      <ion-textarea [(ngModel)]="event_description" rows="4"></ion-textarea>
+                        <ion-textarea [(ngModel)]="event_description" rows="4"></ion-textarea>
                     </ion-item>
                   </ion-col>
                 </ion-row> 
