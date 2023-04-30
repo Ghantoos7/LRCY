@@ -56,7 +56,7 @@ export class MemberProfilePage implements OnInit {
       if(parsedResponse.status == 'success') {
         this.alertController.create({
           header: 'Success',
-          message: 'Goal updated successfully!',
+          message: 'User information updated successfully!',
           buttons: ['OK']
         }).then(alert => alert.present());
         this.router.navigate(['/manage-profiles']);
@@ -73,31 +73,31 @@ export class MemberProfilePage implements OnInit {
 
   mapGender(gender : number) : string{
     if(gender == 0){
-      return "Male"
+      return 'Male'
     }
     else if (gender == 1){
-      return "Female"
+      return 'Female'
     }
     else{
-      return "Other"
+      return 'Other'
     }
   }
 
   mapUserTypeName(user_type_id: number) : string{
     if(user_type_id == 1){
-      return "Admin"
+      return 'Admin'
     }
     else{
-      return "User"
+      return 'User'
     }
   }
 
   mapUserStatusName(is_active: number): string{
     if(is_active == 1){
-      return "Active"
+      return 'Active'
     }
     else{
-      return "Inactive"
+      return 'Inactive'
     }
   }
 
