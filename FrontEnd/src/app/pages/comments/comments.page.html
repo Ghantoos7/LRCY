@@ -6,8 +6,11 @@
 
   <ion-icon class="back" name="arrow-back-outline" (click)="goBack()"></ion-icon>
   <div class="post-and-content-wrapper">
-  <img *ngIf="post_media" class="post-image" src="http://127.0.0.1:8000/storage/images/{{post_media}}" onerror="this.src='assets/imgs/ext.jpg'">
-
+  <img *ngIf="post_type_id == 2" class="post-image" src="http://127.0.0.1:8000/storage/images/{{post_media}}" onerror="this.src='assets/imgs/ext.jpg'">
+  <video *ngIf="post_type_id == 3" controls class="post-video">
+    <source src="http://127.0.0.1:8000/storage/videos/{{post_media}}" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
   <div class="content-wrapper">
   <ion-card class="caption-container">
     <ion-card-content>
