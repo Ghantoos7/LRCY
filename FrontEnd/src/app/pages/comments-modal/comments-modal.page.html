@@ -76,7 +76,7 @@
       <ion-avatar slot="start">
         <img src="{{user_profile_pic && user_profile_pic !== 'null' ? 'http://127.0.0.1:8000/storage/images/' + user_profile_pic : 'https://ionicframework.com/docs/img/demos/avatar.svg'}}" />
       </ion-avatar>
-      <input class="comment-input" [(ngModel)]="new_comment" type="text" placeholder="Add a comment...">
+      <input maxlength="50" class="comment-input" [(ngModel)]="new_comment" type="text" placeholder="Add a comment...">
       <ion-icon slot="end" expand="block" fill="clear" name="send" (click)="sendComment()" style="color: #B11433;"></ion-icon>
     </ion-item>
 </ion-footer>

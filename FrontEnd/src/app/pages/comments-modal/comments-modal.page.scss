@@ -61,16 +61,16 @@ ion-item-sliding > ion-item {
 .profile-picture{
     left: 10px;
     top: 5px;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
 }
 
 .username{
     font-weight: bold;
     font-size: 14px;
     margin-top: 10px;
-    margin-left: 70px;
-    position: relative;
+    margin-left: 60px;
+    position: absolute;
     top: 15px;
     color: black;
 }
@@ -86,9 +86,9 @@ ion-item-sliding > ion-item {
 .comment {
     font-size: 14px;
     margin-top: 10px;
-    top: 40px;
-    position: relative;
-    left: -35px;
+    top: 60px;
+    position: absolute;
+    left: 15px;
 }
 
 .comment-date{
@@ -148,8 +148,8 @@ ion-item-sliding > ion-item {
 }
 
 .reply-profile-picture{
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     bottom: 40px;
 }
@@ -157,19 +157,18 @@ ion-item-sliding > ion-item {
 .reply-username{
     position:relative;
     left: 10px;
-    bottom: 15px;
-    font-size: 13px;
+    bottom: 10px;
+    font-size: 12px;
     color:black;
     font-weight: bold;
 }
 
 .reply-comment {
-    position: relative;
-    left: -40px;
-    top: 15px;
-    font-size: 16px;
+    position: absolute;
+    left: 5px;
+    top: 40px;
+    font-size: 15px;
     width: 250px;
-    color:black;
 }
 
 .reply-container .reply-comment {
