@@ -193,7 +193,7 @@ export class CommentsModalPage implements OnInit {
   
     Object.values(this.replies).forEach((commentReplies: any) => {
       // Check if commentReplies is not undefined before calling forEach
-      if (commentReplies) {
+      if (commentReplies && commentReplies.length > 0) {
           commentReplies.forEach((reply: any) => {
               if (reply.id === reply_id) {
                   reply_content = reply.reply_content;
@@ -226,11 +226,13 @@ export class CommentsModalPage implements OnInit {
               if (status == "success") {
                 // Update the reply content without reloading the page
                 Object.values(this.replies).forEach((commentReplies: any) => {
-                  commentReplies.forEach((reply: any) => {
-                    if (reply.id === reply_id) {
-                      reply.reply_content = data.content;
-                    }
-                  });
+                  if (commentReplies && commentReplies.length > 0) { 
+                    commentReplies.forEach((reply: any) => {
+                      if (reply.id === reply_id) {
+                        reply.reply_content = data.content;
+                      }
+                    });
+                  }
                 });
               } else if (status == "error") {
                 this.alrt.create({
