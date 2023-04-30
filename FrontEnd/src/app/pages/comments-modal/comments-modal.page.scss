@@ -39,11 +39,17 @@ ion-avatar{
     font-weight: bold;
 }
 
+ion-item-sliding{
+    height: 100px;
+    width: 100%;
+    position: relative;
+    display: block;
+}
 
 ion-item-sliding > ion-item {
     border-radius: 10px;
-    margin-bottom: 10px;
-    padding: 30px;
+    margin-bottom: -15px;
+    padding: 40px;
 
   }
 
@@ -53,16 +59,19 @@ ion-item-sliding > ion-item {
 }
 
 .profile-picture{
-    left: 0px;
-    top: 0px;
+    left: 10px;
+    top: 5px;
     width: 50px;
     height: 50px;
 }
 
 .username{
+    font-weight: 500;
     font-size: 14px;
     margin-top: 10px;
-    margin-left: 60px;
+    margin-left: 70px;
+    position: relative;
+    top: 15px;
 }
 
 .delete-comment{
@@ -76,7 +85,7 @@ ion-item-sliding > ion-item {
 .comment {
     font-size: 14px;
     margin-top: 10px;
-    top: 20px;
+    top: 40px;
     position: relative;
     left: -35px;
 }
@@ -122,24 +131,26 @@ ion-item-sliding > ion-item {
 
 .add-reply{
     position: absolute;
-    left: 267px;
-    top: 50px;
+    left: 260px;
+    top: 10px;
     font-size: 24px;
     color: #AAA7AE;
 }
 
 .likes{
     font-size: 28px;
-    top: 10%;
-    left: 45%;
+    top: 8px;
+    left: 80%;
     color: #AAA7AE;
+    position: absolute;
 }
 
 .like-count{
     font-size: 22px;
-    top: 10%;
-    left: 35%;
+    top: 7%;
+    left: 89%;
     color: #AAA7AE;
+    position: absolute;
 }
 
 .reply-profile-picture{
