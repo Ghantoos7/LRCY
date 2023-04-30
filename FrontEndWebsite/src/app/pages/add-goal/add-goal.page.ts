@@ -23,7 +23,7 @@ export class AddGoalPage implements OnInit {
   number_to_complete: any;
   program_id: string = '';
   event_type_id: string = '';
-  goal_year: number = 0;
+  goal_year: any;
   start_date: string = '';
   goal_deadline: string = '';
 
