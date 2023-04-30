@@ -51,26 +51,62 @@ class PostControllerTest extends TestCase
         $responseImage->assertStatus(200);
     }
 
-
     function testEditPostApi()
-{
-    // Create a new post
-    $post = Post::factory()->create();
+    {
+        // Create a new post
+        $post = Post::factory()->create();
 
-    // Edit the post caption
-    $newCaption = 'New post caption';
-    $postData = [
-        'post_id' => $post->id,
-        'post_caption' => $newCaption,
-    ];
-    $response = $this->postJson('/api/v0.1/post/edit_post', $postData);
+        // Edit the post caption
+        $newCaption = 'New post caption';
+        $postData = [
+            'post_id' => $post->id,
+            'post_caption' => $newCaption,
+        ];
+        $response = $this->postJson('/api/v0.1/post/edit_post', $postData);
 
-    // Check if the response is successful
-    $response->assertStatus(200);
+        // Check if the response is successful
+        $response->assertStatus(200);
 
-    // Check if the post caption is updated in the database
-    $updatedPost = Post::find($post->id);
-    $this->assertEquals($newCaption, $updatedPost->post_caption);
-}
+        // Check if the post caption is updated in the database
+        $updatedPost = Post::find($post->id);
+        $this->assertEquals($newCaption, $updatedPost->post_caption);
+    }
 
+    public function testDeletePostApi()
+    {
+        // Create a post
+        $user = Volunteer_user::factory()->create();
+        $post = Post::factory()->create(['user_id' => $user->id]);
+
+
+         // Test deleting a post with a different user ID
+         $response = $this->postJson('/api/v0.1/post/delete_post', [
+            'post_id' => $post->id,
+            'user_id' => $user->id + 1,
+        ]);
+        $response->assertStatus(200)->assertJson([
+            'status' => 'error',
+            'message' => 'You are not authorized to delete this post',
+        ]);
+
+        // Test deleting a post
+        $response = $this->postJson('/api/v0.1/post/delete_post', [
+            'post_id' => $post->id,
+            'user_id' => $user->id,
+        ]);
+        $response->assertStatus(200)->assertJson([
+            'status' => 'success',
+            'message' => 'Post deleted successfully',
+        ]);
+
+        // Test deleting a post that doesn't exist
+        $response = $this->postJson('/api/v0.1/post/delete_post', [
+            'post_id' => 999,
+            'user_id' => $user->id,
+        ]);
+        $response->assertStatus(200)->assertJson([
+            'status' => 'error',
+            'message' => 'Post not found',
+        ]);
+    }
 }
