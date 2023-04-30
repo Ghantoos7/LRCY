@@ -29,35 +29,41 @@
   <div class="comment-container" >
     
     <ion-card class="comment-card" *ngFor="let comment of comments; let i = index">
+      <ion-item-sliding>
       <img class="profile-picture" *ngIf="comment['user'].user_profile_pic !== null" src="http://127.0.0.1:8000/storage/images/{{comment['user'].user_profile_pic}}"  onerror="this.onerror=null; this.src='https://ionicframework.com/docs/img/demos/avatar.svg';" />
       <img class="profile-picture" *ngIf="comment['user'].user_profile_pic === null" src="https://ionicframework.com/docs/img/demos/avatar.svg"  />
       <ion-text class="username">{{comment['user'].username}}</ion-text>
       <ion-text class="comment-date">{{getDaysAgo(comment.created_at)}}</ion-text>
-      <ion-icon (click)="editComment(comment.id, comment.comment_content)" *ngIf="current_id == comment['user'].id" class="edit-comment" name="pencil"></ion-icon>
-      <ion-icon (click)="deleteComment(comment.id)" *ngIf="current_id == comment['user'].id" class="delete-comment" name="trash-outline"></ion-icon>
       <ion-text class="comment">{{comment.comment_content}}</ion-text>
       <ion-icon id="like-button-{{comment.id}}" [class.active]="isLikedUser[comment.id]" name="{{ isLikedUser[comment.id] ? 'heart' : 'heart-outline' }}" (click)="toggleLike(comment.id)" class="likes"></ion-icon>
       <ion-text class="like-count">{{this.commentLikeCount[comment.id]}}</ion-text>
       <ion-icon (click)="replyComment(comment.id)" class="add-reply" name="chatbubble-ellipses-outline"></ion-icon>
-      <ion-text class="reply-word">Reply...</ion-text>
-      <ion-item class="accordion-header" (click)="openReplies(comment.id)">
-        <ion-icon slot="end" [name]="repliesOpen[comment.id] ? 'chevron-down-outline' : 'chevron-forward-outline'"></ion-icon>
-        <ion-label *ngIf="!repliesOpen[comment.id]">View Replies</ion-label>
-        <ion-label *ngIf="repliesOpen[comment.id]">Hide Replies</ion-label>
-      </ion-item>
 
-      <ion-card-content class="replies-container" *ngIf="repliesOpen[comment.id]">
-        <div class="reply-container" *ngFor="let reply of replies[comment.id]">
-          <img class="reply-profile-picture" *ngIf="reply['user'].user_profile_pic !== null" src="http://127.0.0.1:8000/storage/images/{{reply['user'].user_profile_pic}}"  onerror="this.onerror=null; this.src='https://ionicframework.com/docs/img/demos/avatar.svg';" />
-          <img  class="reply-profile-picture" *ngIf="reply['user'].user_profile_pic===null" src="https://ionicframework.com/docs/img/demos/avatar.svg"  />
-          
-          <ion-text class="reply-username">{{reply['user'].username}}</ion-text>
-          <ion-icon (click)="deleteReply(reply.id)" *ngIf="current_id == reply['user'].id" class="delete-reply" name="trash-outline"></ion-icon>
-          <ion-icon (click)="editReply(reply.id)" *ngIf="current_id == reply['user'].id" class="edit-reply" name="pencil"></ion-icon>
-          <ion-text class="reply-comment">{{reply.reply_content}}</ion-text>
-          <ion-text class="reply-date">{{getDaysAgo(reply.created_at)}}</ion-text>
-        </div>          
-      </ion-card-content>
+
+          <ion-icon (click)="editComment(comment.id, comment.comment_content)" *ngIf="current_id == comment['user'].id" class="edit-comment" name="pencil"></ion-icon>
+
+          <ion-icon (click)="deleteComment(comment.id)" *ngIf="current_id == comment['user'].id" class="delete-comment" name="trash-outline"></ion-icon>
+
+      
+    </ion-item-sliding>
+    <ion-item class="accordion-header" (click)="openReplies(comment.id)">
+      <ion-icon slot="end" [name]="repliesOpen[comment.id] ? 'chevron-down-outline' : 'chevron-forward-outline'"></ion-icon>
+      <ion-label *ngIf="!repliesOpen[comment.id]">View Replies</ion-label>
+      <ion-label *ngIf="repliesOpen[comment.id]">Hide Replies</ion-label>
+    </ion-item>
+
+    <ion-card-content class="replies-container" *ngIf="repliesOpen[comment.id]">
+      <div class="reply-container" *ngFor="let reply of replies[comment.id]">
+        <img class="reply-profile-picture" *ngIf="reply['user'].user_profile_pic !== null" src="http://127.0.0.1:8000/storage/images/{{reply['user'].user_profile_pic}}"  onerror="this.onerror=null; this.src='https://ionicframework.com/docs/img/demos/avatar.svg';" />
+        <img  class="reply-profile-picture" *ngIf="reply['user'].user_profile_pic===null" src="https://ionicframework.com/docs/img/demos/avatar.svg"  />
+        
+        <ion-text class="reply-username">{{reply['user'].username}}</ion-text>
+        <ion-icon (click)="deleteReply(reply.id)" *ngIf="current_id == reply['user'].id" class="delete-reply" name="trash-outline"></ion-icon>
+        <ion-icon (click)="editReply(reply.id)" *ngIf="current_id == reply['user'].id" class="edit-reply" name="pencil"></ion-icon>
+        <ion-text class="reply-comment">{{reply.reply_content}}</ion-text>
+        <ion-text class="reply-date">{{getDaysAgo(reply.created_at)}}</ion-text>
+      </div>          
+    </ion-card-content>
     </ion-card>
 
   </div>
@@ -70,7 +76,7 @@
       <ion-avatar slot="start">
         <img src="{{user_profile_pic && user_profile_pic !== 'null' ? 'http://127.0.0.1:8000/storage/images/' + user_profile_pic : 'https://ionicframework.com/docs/img/demos/avatar.svg'}}" />
       </ion-avatar>
-      <input class="comment-input" [(ngModel)]="new_comment" type="text" placeholder="Add a comment...">
+      <input maxlength="50" class="comment-input" [(ngModel)]="new_comment" type="text" placeholder="Add a comment...">
       <ion-icon slot="end" expand="block" fill="clear" name="send" (click)="sendComment()" style="color: #B11433;"></ion-icon>
     </ion-item>
 </ion-footer>

@@ -23,8 +23,10 @@
       
         </ion-card-header>
         <ion-card-content>
-         <input [(ngModel)]="user_src_img" (change)="onChange($event)" type="file" accept="image/png, image/jpeg, image/jpg" size="small" style="margin-top: 10px;">Edit Photo
-
+        <div class="upload-options">
+         <input [(ngModel)]="user_src_img" (change)="onChange($event)" type="file" accept="image/png, image/jpeg, image/jpg" size="small" style="margin-top: 10px;">
+        </div>
+         Edit Photo
         </ion-card-content>
 
         
@@ -57,7 +59,7 @@
   
   <ion-item lines="none">
     <ion-label position="stacked">Bio</ion-label>
-    <textarea maxlength="50" class="custom-input box" [(ngModel)]="user_bio" placeholder="{{user_bio}}" maxlength="50"></textarea>
+    <textarea maxlength="50" class="custom-input" [(ngModel)]="user_bio" placeholder="{{user_bio}}" maxlength="50"></textarea>
   </ion-item>    
 
   
