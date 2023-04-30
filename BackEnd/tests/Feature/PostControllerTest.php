@@ -50,5 +50,27 @@ class PostControllerTest extends TestCase
         $responseImage = $this->postJson('/api/v0.1/post/create_post', $imagePostData);
         $responseImage->assertStatus(200);
     }
-    
+
+
+    function testEditPostApi()
+{
+    // Create a new post
+    $post = Post::factory()->create();
+
+    // Edit the post caption
+    $newCaption = 'New post caption';
+    $postData = [
+        'post_id' => $post->id,
+        'post_caption' => $newCaption,
+    ];
+    $response = $this->postJson('/api/v0.1/post/edit_post', $postData);
+
+    // Check if the response is successful
+    $response->assertStatus(200);
+
+    // Check if the post caption is updated in the database
+    $updatedPost = Post::find($post->id);
+    $this->assertEquals($newCaption, $updatedPost->post_caption);
+}
+
 }
