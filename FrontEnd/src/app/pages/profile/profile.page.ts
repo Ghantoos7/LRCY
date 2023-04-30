@@ -22,7 +22,7 @@ export class ProfilePage implements OnInit {
   last_name:string = '';
   full_name:string = '';
   username = localStorage.getItem('username') as string;
-  bio:string = '';
+  bio=  localStorage.getItem('bio') as string;
   user_position:string = '';
   user_profile_pic = localStorage.getItem('user_profile_pic') as string;
   user_id = localStorage.getItem('user_id') as string;
@@ -41,7 +41,6 @@ export class ProfilePage implements OnInit {
       this.bio = (this.user['user'].user_bio);
       this.user_position = (this.user['user'].user_position);
     });
-
 
   }
 

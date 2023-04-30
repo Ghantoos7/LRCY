@@ -190,6 +190,7 @@ class UserController extends Controller {
                 "user_profile_pic" => $check_user->user_profile_pic,
                 'branch_id' => $check_user->branch_id,
                 "full_name" => $check_user->first_name . " " . $check_user->last_name,
+                "bio" => $check_user->bio
             ]);
         } else {
             // Adds a failed login attempt to the database if the user has inputted the wrong password
