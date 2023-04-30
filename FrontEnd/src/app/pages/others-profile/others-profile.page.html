@@ -55,8 +55,8 @@
       
         </ion-card-header>
         <ion-card-content>
-          <p>{{selectedUser.username}}</p>
-          <p class="p1">{{selectedUser.user_bio}}</p>
+          <p *ngIf="selectedUser.username">{{selectedUser.username}}</p>
+          <p *ngIf="selectedUser.user_bio" class="p1">{{selectedUser.user_bio}}</p>
           <p class="bio-space"></p>
         </ion-card-content>
         

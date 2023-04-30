@@ -274,6 +274,15 @@ class UserController extends Controller {
             'password' => 'required',
             'confirm_password' => 'required|same:password'
         ]);
+
+         // check if the user exists
+         $user = volunteer_user::where('organization_id', '=', $request->input('organization_id'))->first();
+         if (!$user) {
+             return response()->json([
+                 'status' => 'error',
+                 'message' => 'User does not exist'
+             ]);
+         } 
     
         // Get the user ID from the organization ID of the request
         $user_id = volunteer_user::where('organization_id', '=', $request->input('organization_id'))->first()->id;
@@ -689,7 +698,7 @@ class UserController extends Controller {
     
         // Remove the fields we don't want to return
         foreach ($posts as $post) {
-            unset($post->field1, $post->field2, $post->created_at, $post->updated_at);
+            unset($post->field1, $post->field2, $post->updated_at);
         }
 
         foreach ($posts as $post) {
