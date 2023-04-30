@@ -1,5 +1,14 @@
-ion-content{
+.background{
   --background:#8794c6;
+  --background-size: cover;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.background-dark{
+  --background: #1A1A1A;
   --background-size: cover;
   margin-top: 0;
   margin-bottom: 0;
@@ -88,6 +97,11 @@ ion-label{
   color: #45579A;
 }
 
+.ion-label-dark{
+  margin-right: 5px;
+  color: #fff;
+}
+
 .save{
   position: relative;
   margin: 0 auto;
@@ -103,6 +117,10 @@ ion-menu-button{
   color: #45579A;
 }
 
+.ion-menu-button-dark{
+  color: white;
+}
+
 .inner-div {
   bottom: 0;
   left: 0;
@@ -112,6 +130,20 @@ ion-menu-button{
   width: 100%;
   height: 80%;
   background-color: white;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  padding-top: 50px;
+}
+
+.inner-div-dark {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 80%;
+  background-color: #212121;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
   padding-top: 50px;
@@ -195,6 +227,12 @@ ion-card{
   color: #45579A;
 }
 
+.ann-dark{
+  position: relative;
+  top: 7px;
+  color: #fff;
+}
+
 .header-button{
   --background: none;
   --box-shadow: none;
@@ -205,7 +243,8 @@ ion-card{
 .menu-button{
   position: relative;
   width: 98%;
-  --background: white;
+  --background: #45579A;
+  color: white
 }
 
 ion-toolbar{
@@ -213,8 +252,17 @@ ion-toolbar{
   --background: white;
 }
 
+.ion-toolbar-dark{
+  position: relative;
+  --background: #45579A;
+}
+
 ion-title{
   color: #45579A;
+}
+
+.ion-title-dark{
+  color: #fff;
 }
 
 .delete{
