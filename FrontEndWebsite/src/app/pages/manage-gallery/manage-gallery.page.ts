@@ -32,8 +32,14 @@ export class ManageGalleryPage implements OnInit {
   filtered_hvp_events: any = [];
   filtered_other_events: any = [];
   searchPerformed: boolean = false;
+  darkMode: boolean;
 
-  constructor(private menuCtrl: MenuController, private router:Router, private menuController: MenuController, private service:AdminService) { }
+  constructor(private menuCtrl: MenuController, private router:Router, private menuController: MenuController, private service:AdminService) {
+    this.darkMode = localStorage.getItem('darkModeEnabled') === 'true';
+    if (this.darkMode) {
+      document.body.setAttribute('color-theme', 'dark');
+    }
+   }
 
   ngOnInit() {
 
