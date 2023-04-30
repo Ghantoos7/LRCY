@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('post_caption')->nullable();
-            $table->string('post_media')->nullable();
+            $table->longText('post_media')->nullable();
             $table->integer('comment_count');
             $table->integer('like_count');
             $table->date('post_date');

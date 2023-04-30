@@ -109,6 +109,13 @@
       object-fit: cover;
 
     }
+
+    .post-video {
+      width: 100%;
+      height: auto;
+      max-height: 80vh;
+      object-fit: cover;
+    }
     
     .likes {
     font-size: 2em;
