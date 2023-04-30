@@ -33,8 +33,14 @@ export class AddGalleryPage implements OnInit {
   event_photos: Array<string> = [];
   responsibles : any [] = [];
   originalUsers: any[] = [];
+  darkMode: boolean;
 
-  constructor(private router:Router, private menuController: MenuController, private alertController: AlertController, private adminService : AdminService) { }
+  constructor(private router:Router, private menuController: MenuController, private alertController: AlertController, private adminService : AdminService) {
+    this.darkMode = localStorage.getItem('darkModeEnabled') === 'true';
+    if (this.darkMode) {
+      document.body.setAttribute('color-theme', 'dark');
+    }
+   }
 
   ngOnInit() {
     this.adminService.getUserInfo(this.branch_id,"").subscribe((response: any) => {

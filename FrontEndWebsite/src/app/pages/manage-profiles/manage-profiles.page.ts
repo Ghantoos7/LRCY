@@ -24,15 +24,21 @@ export class ManageProfilesPage implements OnInit {
   usersByLetter: { [letter: string]: any[] } = {};
   filteredUsersByLetter: { [letter: string]: any[] } = {};
 
-  darkMode: boolean = false;
+  darkMode: boolean;
 
-  constructor(private router: Router, private menuCtrl: MenuController, private adminService: AdminService, private route: ActivatedRoute) {}
+  constructor(
+    private router: Router, 
+    private menuCtrl: MenuController, 
+    private adminService: AdminService, 
+    private route: ActivatedRoute) {
+
+      this.darkMode = localStorage.getItem('darkModeEnabled') === 'true';
+      if (this.darkMode) {
+        document.body.setAttribute('color-theme', 'dark');
+      }
+    }
 
   ngOnInit() {   
-
-    const data = history.state.data;
-    this.darkMode = data;
-    console.log(data);
 
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd && event.url === '/manage-profiles') {

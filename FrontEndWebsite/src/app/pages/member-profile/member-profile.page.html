@@ -1,9 +1,9 @@
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="background" [ngClass]="{'background-dark': darkMode}">
 
   <ion-menu menuId="menuGoals" contentId="main-content">
     <ion-header>
-      <ion-toolbar>
-        <ion-title>Manage Gallery</ion-title>
+      <ion-toolbar [ngClass]="{'ion-toolbar-dark': darkMode}">
+        <ion-title [ngClass]="{'ion-title-dark': darkMode}">Manage Gallery</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content class="ion-padding"> 
@@ -16,13 +16,13 @@
 
   <div id="main-content">
     <ion-header>
-      <ion-toolbar>
+      <ion-toolbar [ngClass]="{'ion-toolbar-dark': darkMode}">
         <ion-buttons slot="start">
-          <ion-menu-button></ion-menu-button>
+          <ion-menu-button [ngClass]="{'ion-menu-button-dark': darkMode}"></ion-menu-button>
         </ion-buttons>
-        <ion-title><ion-text class="ann">Members</ion-text>
-          <ion-button (click)="goToPanel()" class="header-button"><ion-label>Panel</ion-label></ion-button>
-          <ion-button (click)="goToHome()" class="header-button"><ion-label>Log out</ion-label></ion-button>
+        <ion-title><ion-text class="ann" [ngClass]="{'ann-dark': darkMode}">Members</ion-text>
+          <ion-button (click)="goToPanel()" class="header-button" ><ion-label [ngClass]="{'ion-label-dark': darkMode}">Panel</ion-label></ion-button>
+          <ion-button (click)="goToHome()" class="header-button"><ion-label [ngClass]="{'ion-label-dark': darkMode}">Log out</ion-label></ion-button>
         </ion-title>
       </ion-toolbar>
     </ion-header>
@@ -33,7 +33,7 @@
         <ion-col size-md="10" size-lg="9" size-xl="8" class="ion-padding"  offset-md="1" offset-lg="2" offset-xl="2">
           <div class="custom-div">
             <div class="text-div"></div>
-            <div class="inner-div">
+            <div class="inner-div" [ngClass]="{'inner-div-dark': darkMode}">
               <ion-grid>
                 <ion-card-title> &nbsp; Edit Member Information</ion-card-title>
                 <ion-row>
@@ -133,8 +133,8 @@
       </ion-row>  
     </ion-grid>
 
-    <ion-button (click)="editUser()" class="save">Save Changes</ion-button>
-    <ion-button (click)="confirm(user_id)"class="delete">Delete Profile</ion-button>
+    <ion-button (click)="editUser()" class="save" [ngClass]="{'save-dark': darkMode}">Save Changes</ion-button>
+    <ion-button (click)="confirm(user_id)"class="delete" [ngClass]="{'delete-dark': darkMode}">Delete Profile</ion-button>
 
   </div>
 </ion-content>

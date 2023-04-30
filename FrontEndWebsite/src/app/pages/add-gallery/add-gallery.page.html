@@ -1,12 +1,12 @@
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" [ngClass]="{'dark-content': darkMode}">
 
   <ion-menu menuId="menuAddGallery" contentId="main-content">
     <ion-header>
       <ion-toolbar class="toolbar-background">
-        <ion-title class="tit">Manage Gallery</ion-title>
+        <ion-title [ngClass]="{'ion-title-dark': darkMode}" class="tit">Manage Gallery</ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content class="ion-padding">
+    <ion-content class="ion-menu" [ngClass]="{'ion-menu-dark': darkMode}">
       <ion-button (click)="goToGallery()" class="menu-button">View Gallery</ion-button>
       <ion-button (click)="closeMenu()" class="menu-button">Add an Event</ion-button>
     </ion-content>
@@ -15,13 +15,13 @@
   
   <div id="main-content">
     <ion-header>
-      <ion-toolbar>
+      <ion-toolbar [ngClass]="{'ion-toolbar-dark': darkMode}">
         <ion-buttons slot="start">
-          <ion-menu-button></ion-menu-button>
+          <ion-menu-button [ngClass]="{'ion-menu-button-dark': darkMode}"></ion-menu-button>
         </ion-buttons>
-        <ion-title><ion-text class="ann">Gallery</ion-text>
-          <ion-button (click)="goToPanel()" class="header-button"><ion-label>Panel</ion-label></ion-button>
-          <ion-button (click)="goToHome()" class="header-button"><ion-label>Log out</ion-label></ion-button>
+        <ion-title><ion-text class="ann" [ngClass]="{'ann-dark': darkMode}">Gallery</ion-text>
+          <ion-button (click)="goToPanel()" class="header-button"><ion-label [ngClass]="{'ion-label-dark': darkMode}">Panel</ion-label></ion-button>
+          <ion-button (click)="goToHome()" class="header-button"><ion-label [ngClass]="{'ion-label-dark': darkMode}">Log out</ion-label></ion-button>
         </ion-title>
       </ion-toolbar>
     </ion-header>
@@ -33,9 +33,9 @@
           <div class="custom-div">
             <ion-text class="form-title">Add Event</ion-text>
   
-            <ion-button class="edit-btn" size="small" ><input [(ngModel)]="event_main_picture" (change)="onChange($event)"   onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'"type="file" accept="image/png, image/jpeg, image/jpg"></ion-button>
+            <ion-button class="edit-btn" size="small" ><input (change)="onChange($event)"   onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'"type="file" accept="image/png, image/jpeg, image/jpg"></ion-button>
             <div class="text-div"></div>
-            <div class="inner-div">
+            <div class="inner-div" [ngClass]="{'inner-div-dark': darkMode}">
               <ion-grid>
                 <ion-card-title> &nbsp; Add Event Information</ion-card-title>
                 <ion-row>
@@ -88,7 +88,7 @@
                   <ion-col size="6">
                     <ion-item>
                       <ion-label>Budget Sheet</ion-label>
-                      <ion-input (change)="onChangeBudget($event)"  [(ngModel)] = "budget_sheet" class="first-card-input" type="file"></ion-input>
+                      <ion-input (change)="onChangeBudget($event)" class="first-card-input" type="file"></ion-input>
                     </ion-item>
                   </ion-col>
                   
@@ -97,13 +97,13 @@
                   <ion-col size="6">
                     <ion-item>
                       <ion-label>Proposal</ion-label>
-                      <ion-input (change)="onChangeProp($event)"  [(ngModel)] = "proposal" class="first-card-input" type="file" ></ion-input>
+                      <ion-input (change)="onChangeProp($event)" class="first-card-input" type="file" ></ion-input>
                     </ion-item>
                   </ion-col>
                   <ion-col size="6">
                     <ion-item>
                       <ion-label>Meeting minute</ion-label>
-                      <ion-input (change)="onChangeMeet($event)"  [(ngModel)] = "meeting_minute" class="first-card-input" type="file"></ion-input>
+                      <ion-input (change)="onChangeMeet($event)" class="first-card-input" type="file"></ion-input>
                     </ion-item>
                   </ion-col>
                   
@@ -113,7 +113,7 @@
                   <ion-col size="12">
                     <ion-item>
                       <ion-label position="stacked">Description</ion-label>
-                      <ion-textarea [(ngModel)]="event_description" rows="4"></ion-textarea>
+                        <ion-textarea [(ngModel)]="event_description" rows="4"></ion-textarea>
                     </ion-item>
                   </ion-col>
                 </ion-row> 
@@ -128,9 +128,9 @@
     <div class="divider"></div>
 
     <ion-grid>
-      <ion-card class="members">
-        <ion-grid>
-          <ion-row>
+      <ion-card class="members" [ngClass]="{'members-dark': darkMode}">
+        <ion-grid >
+          <ion-row >
             <ion-col size="6">
               <ion-card>
                 <ion-card-title>All Users</ion-card-title>
@@ -148,9 +148,9 @@
             </ion-col>
             <ion-col size="6">
               <ion-card>
-                <ion-card-title>Selected Users</ion-card-title>
+                <ion-card-title >Selected Users</ion-card-title>
                 <ion-list class="list">
-                  <ion-item *ngFor="let user of selectedUsers">
+                  <ion-item *ngFor="let user of selectedUsers" >
                     <ion-avatar slot="start">
                       <img src="http://127.0.0.1:8000/storage/images/{{user.user_profile_pic}}"  onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'" alt="User avatar" />
                     </ion-avatar>
@@ -178,7 +178,7 @@
     </ion-grid>
  
 
-    <ion-button (click)="addEvent()" class="save">Add Event</ion-button>
+    <ion-button (click)="addEvent()" class="save" [ngClass]="{'save-dark': darkMode}">Add Event</ion-button>
   </div>
 
 

@@ -27,14 +27,18 @@ export class AddMemberPage implements OnInit {
   user_start_date: string = '';
   user_end_date: string = '';
 
-  darkMode: boolean = false;
+  darkMode: boolean;
 
-  constructor(private router:Router, private menuCtrl: MenuController, private adminService: AdminService, private alertController: AlertController) { }
+  constructor(private router:Router, private menuCtrl: MenuController, private adminService: AdminService, private alertController: AlertController) {
+
+    this.darkMode = localStorage.getItem('darkModeEnabled') === 'true';
+    if (this.darkMode) {
+      document.body.setAttribute('color-theme', 'dark');
+    }
+   }
 
   ngOnInit() {
-    const data = history.state.data;
-    this.darkMode = data;
-    console.log(data);
+
   }
 
   addUser(){

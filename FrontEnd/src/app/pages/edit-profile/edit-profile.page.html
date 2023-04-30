@@ -9,7 +9,7 @@
           <img alt="Avatar" [src]="(user_profile_pic && user_profile_pic !== 'null') ? 'http://127.0.0.1:8000/storage/images/' + user_profile_pic : 'https://ionicframework.com/docs/img/demos/avatar.svg'" onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'"/>
         </ion-avatar>
         <ion-avatar class="custom-avatar" *ngIf="user_src_img">
-          <img [src]="user_src_img" alt="Selected Profile Picture">
+          <img [src]="user_src_img_display" alt="Selected Profile Picture">
         </ion-avatar>
       </ion-col>
     </ion-row>
@@ -26,7 +26,7 @@
         </ion-card-header>
         <ion-card-content>
         <div class="upload-options">
-         <input [(ngModel)]="user_src_img" (change)="onChange($event)" type="file" accept="image/png, image/jpeg, image/jpg" size="small" style="margin-top: 10px;">
+         <input (change)="onChange($event)" type="file" accept="image/png, image/jpeg, image/jpg" size="small" style="margin-top: 10px;">
         </div>
          Edit Photo
         </ion-card-content>
