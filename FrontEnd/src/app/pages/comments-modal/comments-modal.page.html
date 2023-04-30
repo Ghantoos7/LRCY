@@ -68,8 +68,7 @@
     <!-- Comment input form -->
     <ion-item lines="none">
       <ion-avatar slot="start">
-        <img *ngIf="user_profile_pic !== null" src="http://127.0.0.1:8000/storage/images/{{user_profile_pic}}"  onerror="this.onerror=null; this.src='https://ionicframework.com/docs/img/demos/avatar.svg';"/>
-        <img *ngIf="user_profile_pic===null" src="https://ionicframework.com/docs/img/demos/avatar.svg"  />
+        <img src="{{user_profile_pic && user_profile_pic !== 'null' ? 'http://127.0.0.1:8000/storage/images/' + user_profile_pic : 'https://ionicframework.com/docs/img/demos/avatar.svg'}}" />
       </ion-avatar>
       <input class="comment-input" [(ngModel)]="new_comment" type="text" placeholder="Add a comment...">
       <ion-icon slot="end" expand="block" fill="clear" name="send" (click)="sendComment()" style="color: #B11433;"></ion-icon>
