@@ -609,4 +609,18 @@ class UserControllerTest extends TestCase
         ]);
     }
 
+    public function testGetOwnPostsApi()
+    {
+        // Create a user and posts
+        $user = volunteer_user::factory()->create();
+        $posts = Post::factory()->count(3)->create(['user_id' => $user->id]);
+
+        // Call the API
+        $response = $this->getJson('/api/v0.1/user/get_own_posts/' . $user->id);
+
+        // Check the response
+        $response->assertStatus(200)->assertJsonCount(3, 'posts');
+    }
+
+
 }
