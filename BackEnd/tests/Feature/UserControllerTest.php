@@ -535,7 +535,7 @@ class UserControllerTest extends TestCase
         ]);
     }
 
-    public function test_getTotalVolunteeringTime()
+    public function testGetTotalVolunteeringTime()
     {
         $user = volunteer_user::factory()->create([
             'user_start_date' => '2020-01-01',
@@ -549,4 +549,16 @@ class UserControllerTest extends TestCase
             'total_time' => '3 Y 0 M',
         ]);
     }
+
+    public function testGetCompletedTrainingsCount()
+    {
+        $user = volunteer_user::factory()->create();
+        $trainings_taken = take::factory()->count(4)->create(['user_id' => $user->id]);
+
+        $response = $this->getJson('/api/v0.1/user/get_completed_trainings_count/' . $user->id);
+
+        $response->assertStatus(200)->assertJson([
+            'total_trainings' => 4
+        ]);
+}
 }
