@@ -698,7 +698,7 @@ class UserController extends Controller {
     
         // Remove the fields we don't want to return
         foreach ($posts as $post) {
-            unset($post->field1, $post->field2, $post->created_at, $post->updated_at);
+            unset($post->field1, $post->field2, $post->updated_at);
         }
 
         foreach ($posts as $post) {

@@ -46,7 +46,7 @@
        
         <ion-text (click)="showProfile(i)" class="username">{{post['user'].username}}</ion-text>
         <ion-text (click)="showProfile(i)" class="name">{{post['user'].name}}</ion-text>
-        <ion-text class="post-date">{{getDaysAgo(post.post_date)}}</ion-text>
+        <ion-text class="post-date">{{getDaysAgo(post.created_at)}}</ion-text>
         
       </div>
 

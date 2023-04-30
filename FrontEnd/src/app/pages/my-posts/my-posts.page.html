@@ -15,7 +15,7 @@
         <img  class="card-profile-picture" *ngIf="user_profile_pic===null" src="https://ionicframework.com/docs/img/demos/avatar.svg"  />
        
         <ion-text class="name">{{full_name}}</ion-text>
-        <ion-text class="post-date">{{getDaysAgo(post.post_date)}}</ion-text>
+        <ion-text class="post-date">{{getDaysAgo(post.created_at)}}</ion-text>
         <ion-icon *ngIf="!othersPage" size="large"class="edit" name="ellipsis-vertical-outline" (click)="showActionSheet(post.id)"></ion-icon>
       
       </div>
