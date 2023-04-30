@@ -84,8 +84,10 @@ export class MemberProfilePage implements OnInit {
     else if (gender == 1){
       return 'Female'
     }
-    else{
+    else if(gender == 2){
       return 'Other'
+    }else{
+      return 'Private'
     }
   }
 

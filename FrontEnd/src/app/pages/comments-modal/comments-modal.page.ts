@@ -192,12 +192,15 @@ export class CommentsModalPage implements OnInit {
     let reply_content: string ='';
   
     Object.values(this.replies).forEach((commentReplies: any) => {
-      commentReplies.forEach((reply: any) => {
-        if (reply.id === reply_id) {
-          reply_content = reply.reply_content;
-        }
-      });
-    });
+      // Check if commentReplies is not undefined before calling forEach
+      if (commentReplies) {
+          commentReplies.forEach((reply: any) => {
+              if (reply.id === reply_id) {
+                  reply_content = reply.reply_content;
+              }
+          });
+      }
+  });
   
     this.alrt.create({
       header: 'Edit Reply',
@@ -322,10 +325,12 @@ export class CommentsModalPage implements OnInit {
     await alert.present();
     
     await alert.onDidDismiss().then((data) => {
-      if (data.data.values === 'date') {
-        this.sortComments('date');
-      } else if (data.data.values === 'likes') {
-        this.sortComments('popularity');
+      if(data.data != undefined){
+        if (data.data.values === 'date') {
+          this.sortComments('date');
+        } else if (data.data.values === 'likes') {
+          this.sortComments('popularity');
+        }
       }
     });
   }
