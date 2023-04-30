@@ -43,8 +43,21 @@ export class EditProfilePage implements OnInit {
 
   onChange(event: any) {
     this.user_src_img = event.target.files[0];
+    this.previewImage(event);
+  }
+  
 
-}
+  previewImage(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.user_src_img = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+  
 
   editProfile(){
 
