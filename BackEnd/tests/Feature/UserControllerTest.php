@@ -515,7 +515,7 @@ class UserControllerTest extends TestCase
         ]);
     }
 
-    public function testGetEventsOrganizedCountApi()
+    function testGetEventsOrganizedCountApi()
     {
         $user = volunteer_user::factory()->create();
         $events = Event::factory()
@@ -535,7 +535,7 @@ class UserControllerTest extends TestCase
         ]);
     }
 
-    public function testGetTotalVolunteeringTimeApi()
+    function testGetTotalVolunteeringTimeApi()
     {
         $user = volunteer_user::factory()->create([
             'user_start_date' => '2020-01-01',
@@ -550,7 +550,7 @@ class UserControllerTest extends TestCase
         ]);
     }
 
-    public function testGetCompletedTrainingsCountApi()
+    function testGetCompletedTrainingsCountApi()
     {
         $user = volunteer_user::factory()->create();
         $trainings_taken = take::factory()
@@ -565,7 +565,7 @@ class UserControllerTest extends TestCase
     }
 
 
-    public function testGetPostsCountApi()
+    function testGetPostsCountApi()
     {
         $user = volunteer_user::factory()->create();
         $posts = Post::factory()->count(5)->create(['user_id' => $user->id]);
@@ -578,7 +578,7 @@ class UserControllerTest extends TestCase
     }
 
 
-    public function testGetCommentsCountApi()
+    function testGetCommentsCountApi()
     {
         // Create a user and comments
         $user = volunteer_user::factory()->create();
@@ -592,4 +592,21 @@ class UserControllerTest extends TestCase
             'total_comments' => 5,
         ]);
     }
+
+    function testGetTotalLikesReceivedApi()
+    {
+        // Create a user, posts, and comments
+        $user = volunteer_user::factory()->create();
+        $posts = Post::factory()->count(3)->create(['user_id' => $user->id, 'like_count' => 2]);
+        $comments = Comment::factory()->count(2)->create(['user_id' => $user->id, 'comment_like_count' => 1]);
+
+        // Call the API
+        $response = $this->getJson('/api/v0.1/user/get_total_likes_received/' . $user->id);
+
+        // Check the response
+        $response->assertStatus(200)->assertJson([
+            'total_likes_received' => 8,
+        ]);
+    }
+
 }
