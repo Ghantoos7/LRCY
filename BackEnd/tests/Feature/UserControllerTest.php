@@ -9,8 +9,17 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
 use Tests\TestCase;
-use App\Models\Volunteer_user;
-use App\Models\Login_attempt;
+use App\Models\volunteer_user;
+use App\Models\recover_request;
+use App\Models\take;
+use App\Models\training;
+use App\Models\login_attempt;
+use App\Models\post;
+use App\Models\comment;
+use App\Models\is_responsible;
+use App\Models\event;
+use App\Models\branch;
+
 
 class UserControllerTest extends TestCase
 {
@@ -158,6 +167,44 @@ class UserControllerTest extends TestCase
             'login_attempt_time' => Carbon::now(),
         ]);
     }
+
+    public function test_recover_request_api()
+    {
+        // Test case: Organization ID not found
+        $response = $this->postJson('/api/v0.1/auth/recover_request', [
+            'organization_id' => '999',
+        ]);
+        $response->assertJson(['status' => 'Organization ID not found']);
+        $response->assertStatus(200);
+
+        // Create a registered VolunteerUser
+        $registeredUser = Volunteer_user::factory()->create([
+            'organization_id' => '1',
+            'is_registered' => 1,
+        ]);
+
+        // Test case: Recovery request sent successfully
+        $response = $this->postJson('/api/v0.1/auth/recover_request', [
+            'organization_id' => '1',
+        ]);
+        $response->assertJson(['status' => 'Recovery request sent successfully!']);
+        $response->assertStatus(200);
+
+        // Create a recovery request for the registered user
+        Recover_request::create([
+            'user_id' => $registeredUser->id,
+            'request_status' => false,
+            'request_date' => date('Y-m-d'),
+        ]);
+
+        // Test case: User has already submitted a request
+        $response = $this->postJson('/api/v0.1/auth/recover_request', [
+            'organization_id' => '1',
+        ]);
+        $response->assertJson(['status' => 'User has already submitted a request.']);
+        $response->assertStatus(200);
+    }
+
 
 
 }
