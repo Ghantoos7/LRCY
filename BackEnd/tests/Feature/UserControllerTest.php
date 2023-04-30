@@ -101,4 +101,63 @@ class UserControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
+
+
+    
+    public function test_login_api()
+    {
+        // Test case: Invalid credentials (user does not exist)
+        $response = $this->postJson('/api/v0.1/auth/login', [
+            'organization_id' => '999',
+            'password' => 'ValidPassword123',
+        ]);
+        $response->assertJson(['status' => 'Invalid credentials']);
+        $response->assertStatus(200);
+
+        // Create a registered and active VolunteerUser
+        $activeUser = Volunteer_user::factory()->create([
+            'organization_id' => '1',
+            'is_registered' => 1,
+            'is_active' => 1,
+            'password' => Hash::make('ValidPassword123'),
+        ]);
+
+        // Test case: Successful login
+        $response = $this->postJson('/api/v0.1/auth/login', [
+            'organization_id' => '1',
+            'password' => 'ValidPassword123',
+        ]);
+        $response->assertJson(['status' => 'Login successful']);
+        $response->assertStatus(200);
+
+        // Test case: Invalid credentials (incorrect password)
+        $response = $this->postJson('/api/v0.1/auth/login', [
+            'organization_id' => '1',
+            'password' => 'WrongPassword123',
+        ]);
+        $response->assertJson(['status' => 'Invalid credentials']);
+        $response->assertStatus(200);
+
+        // Test case: Too many failed login attempts
+        for ($i = 0; $i < 5; $i++) {
+            $this->addFailedLoginAttempt(1);
+        }
+        $response = $this->postJson('/api/v0.1/auth/login', [
+            'organization_id' => '1',
+            'password' => 'WrongPassword123',
+        ]);
+        $response->assertJson(['status' => 'Too many failed login attempts']);
+        $response->assertStatus(200);
+    }
+
+    private function addFailedLoginAttempt($organization_id)
+    {
+        Login_attempt::create([
+            'organization_id' => $organization_id,
+            'login_attempt_date' => Carbon::now(),
+            'login_attempt_time' => Carbon::now(),
+        ]);
+    }
+
+
 }
