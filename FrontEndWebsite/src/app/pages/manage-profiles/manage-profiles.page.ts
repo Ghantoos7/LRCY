@@ -87,7 +87,7 @@ export class ManageProfilesPage implements OnInit {
   }
 
   goToAddForm(){
-    this.router.navigate(['/add-member'])
+    this.router.navigate(['/add-member'], { state: { data: this.darkMode } })
   }
 
   goToAddTraining(){
