@@ -21,8 +21,8 @@ class PostController extends Controller {
             'user_id' => 'required',
             'post_type' => 'required|in:text,image,video',
             'post_caption' => $request->input('post_type') === 'text' ? 'required' : 'nullable',
-            'post_media' => 'required_if:post_type,image,video|mimes:jpeg,bmp,png,jpg,gif,mp4,webm,ogg'
-        ]);
+            'post_media' => $request->input('post_type') !== 'text' ? 'required_if:post_type,image,video|mimes:jpeg,bmp,png,jpg,gif,mp4,webm,ogg' : 'nullable'
+        ]);        
 
         // Get the user ID from the request.
         $user_id = $request->input('user_id');

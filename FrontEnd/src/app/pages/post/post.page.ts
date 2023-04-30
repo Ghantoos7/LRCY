@@ -42,6 +42,11 @@ export class PostPage implements OnInit {
       this.username = (this.user['user'].username);
       this.user_profile_pic = (this.user['user'].user_profile_pic);
     });
+    this.errorMessage = '';
+    this.post_caption = '';
+    this.post_src_img = null;
+    this.post_src_img_data = null;
+    this.post_src_video_data = null;
   }
 
   goBack(){
