@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AdminService } from 'src/app/services/admin.service';
-import { NavController } from '@ionic/angular';
 
 interface CustomEvent extends Event {
   darkMode: boolean;
@@ -18,23 +17,33 @@ interface CustomEvent extends Event {
   imports: [IonicModule, CommonModule, FormsModule]
 })
 export class PanelPage implements OnInit {
-  darkMode: boolean = false;
 
-  constructor(private router:Router, private adminService : AdminService) { }
+  darkMode: boolean;
 
+  constructor(private router:Router, private adminService : AdminService) {
+    this.darkMode = localStorage.getItem('darkModeEnabled') === 'true';
+    if (this.darkMode) {
+      document.body.setAttribute('color-theme', 'dark');
+    }
+  }
+  
   OnToggleColorTheme(event: Event): void {
     const customEvent = event as CustomEvent;
-    customEvent.darkMode = this.darkMode = !this.darkMode;
-
-    if(customEvent.darkMode){
+    this.darkMode = !this.darkMode;
+    customEvent.darkMode = this.darkMode;
+    
+    if(this.darkMode){
       document.body.setAttribute('color-theme','dark');
+      localStorage.setItem('darkModeEnabled', 'true');
     }
     else{
       document.body.setAttribute('color-theme','light');
+      localStorage.setItem('darkModeEnabled', 'false');
     }
   }
 
   ngOnInit() {
+    console.log(localStorage.getItem('darkModeEnabled'));
   }
 
   goToProfiles(){
