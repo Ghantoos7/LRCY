@@ -1,12 +1,12 @@
-<ion-content [fullscreen]="true">
+<ion-content class="background" [ngClass]="{'background-dark': darkMode}"[fullscreen]="true">
 
   <ion-menu menuId="menuAddMember" contentId="main-content">
     <ion-header>
-      <ion-toolbar>
-        <ion-title>Manage Profiles</ion-title>
+      <ion-toolbar [ngClass]="{'ion-toolbar-dark': darkMode}">
+        <ion-title [ngClass]="{'ion-title-dark': darkMode}">Manage Profiles</ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content class="ion-padding"> 
+    <ion-content class="ion-padding" [ngClass]="{'background-dark': darkMode}"> 
       <ion-button class="menu-button"(click) = "goToManageProfiles()">View Members</ion-button>
       <ion-button class="menu-button"(click) = "closeMenu()">Add Member</ion-button>
       <ion-button class="menu-button"(click) = "goToAddTraining()">Add Training</ion-button>
@@ -16,13 +16,13 @@
 
   <div id="main-content">
     <ion-header>
-      <ion-toolbar>
+      <ion-toolbar [ngClass]="{'ion-toolbar-dark': darkMode}">
         <ion-buttons slot="start">
-          <ion-menu-button></ion-menu-button>
+          <ion-menu-button [ngClass]="{'ion-menu-button-dark': darkMode}"></ion-menu-button>
         </ion-buttons>
-        <ion-title><ion-text class="ann">Add Member</ion-text>
-          <ion-button (click)="goToPanel()" class="header-button"><ion-label>Panel</ion-label></ion-button>
-          <ion-button (click)="goToHome()" class="header-button"><ion-label>Log out</ion-label></ion-button>
+        <ion-title><ion-text class="ann" [ngClass]="{'ann-dark': darkMode}">Add Member</ion-text>
+          <ion-button (click)="goToPanel()" class="header-button"><ion-label [ngClass]="{'ann-dark': darkMode}">Panel</ion-label></ion-button>
+          <ion-button (click)="goToHome()" class="header-button"><ion-label [ngClass]="{'ann-dark': darkMode}">Log out</ion-label></ion-button>
         </ion-title>
       </ion-toolbar>
     </ion-header>
@@ -35,7 +35,7 @@
             <ion-text class="form-title">Add Member</ion-text>
   
             <div class="text-div"></div>
-            <div class="inner-div">
+            <div class="inner-div" [ngClass]="{'inner-div-dark': darkMode}">
               <ion-grid>
                 <ion-card-title> &nbsp; Member Information</ion-card-title>
                 <ion-row>
@@ -47,7 +47,7 @@
                   </ion-col>
                   <ion-col size="6">
                     <ion-item class="custom-input">
-                      <ion-label class="custom-label">Last Name</ion-label>
+                      <ion-label>Last Name</ion-label>
                       <ion-input [(ngModel)] = "last_name" class="first-card-input"></ion-input>
                     </ion-item>
                   </ion-col>
@@ -131,6 +131,6 @@
       </ion-row>  
     </ion-grid>
 
-    <ion-button (click)= "addUser()" class="save">Add Member</ion-button>
+    <ion-button (click)= "addUser()" class="save" [ngClass]="{'save-dark': darkMode}">Add Member</ion-button>
   </div>
 </ion-content>

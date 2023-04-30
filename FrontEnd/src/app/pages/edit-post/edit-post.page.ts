@@ -35,6 +35,12 @@ post_id: string ='';
       const parsedResponse = JSON.parse(JSON.stringify(data));
       const status = parsedResponse.status;
       if(status == "success"){
+        this.alrt.create({
+          header: 'Your post has been edited!',
+          message: status,
+          buttons: ['OK']
+        }).then((alert) => alert.present())
+        .catch((err) => console.log(err));
 this.router.navigate(['/profile/My-Posts'])
       }else{
         this.alrt.create({

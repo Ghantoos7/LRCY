@@ -42,7 +42,7 @@
                
               </ion-avatar>
               <ion-label>
-                <h3>{{ user.first_name }} {{ user.last_name }}</h3>
+                <h3 class="user-name" [ngClass]="{'user-name-white': darkMode}"> {{ user.first_name }} {{ user.last_name }}</h3>
                 <p>{{ user.user_position}}</p>
               </ion-label>
             </ion-item>

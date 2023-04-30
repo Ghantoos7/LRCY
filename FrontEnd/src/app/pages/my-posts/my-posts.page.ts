@@ -145,7 +145,17 @@ export class MyPostsPage implements OnInit {
                   text: 'Delete',
                   handler: () => {
                     this.post_service.deletePost(i).subscribe((data: any) => {
+                      const parsedResponse = JSON.parse(JSON.stringify(data));
+                      const status = parsedResponse.status;
+                      if(status == "success"){
+                        this.alertController.create({
+                          header: 'Your post has been deleted!',
+                          message: status,
+                          buttons: ['OK']
+                        }).then((alert) => alert.present())
+                        .catch((err) => console.log(err));
                       this.fetchData(); // Update the posts list instead of reloading the page
+                      }
                     });
                   }
                 }

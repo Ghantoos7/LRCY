@@ -18,30 +18,33 @@ import { ReactiveFormsModule } from '@angular/forms';
 })
 export class ManageProfilesPage implements OnInit {
 
-
   searchControl: FormControl = new FormControl('');
   branch_id = localStorage.getItem('branch_id') as string;
   searchQuery = '';
   usersByLetter: { [letter: string]: any[] } = {};
   filteredUsersByLetter: { [letter: string]: any[] } = {};
 
-  constructor(private router: Router, private menuCtrl: MenuController, private adminService: AdminService, private activatedRoute: ActivatedRoute) { }
+  darkMode: boolean = false;
 
-  
+  constructor(private router: Router, private menuCtrl: MenuController, private adminService: AdminService, private route: ActivatedRoute) {}
 
-  ngOnInit() {
+  ngOnInit() {   
 
-  this.router.events.subscribe((event) => {
-    if (event instanceof NavigationEnd && event.url === '/manage-profiles') {
-      this.fetchUsers();
-    }
-  });
+    const data = history.state.data;
+    this.darkMode = data;
+    console.log(data);
 
-  this.searchControl.valueChanges.pipe(debounceTime(300)).subscribe((searchQuery: string) => {
-    this.searchQuery = searchQuery;
-    this.filterUsers();
-  });
-}
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd && event.url === '/manage-profiles') {
+        this.fetchUsers();
+      }
+    });
+
+    this.searchControl.valueChanges.pipe(debounceTime(300)).subscribe((searchQuery: string) => {
+      this.searchQuery = searchQuery;
+      this.filterUsers();
+    });
+  }
 
   processUsers(users: any[]) {
     users.forEach(user => {
@@ -84,7 +87,7 @@ export class ManageProfilesPage implements OnInit {
   }
 
   goToAddForm(){
-    this.router.navigate(['/add-member'])
+    this.router.navigate(['/add-member'], { state: { data: this.darkMode } })
   }
 
   goToAddTraining(){
