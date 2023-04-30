@@ -234,7 +234,7 @@ class PostController extends Controller {
         }
         
         // Retrieve the posts for the specified user, or all posts if no user ID was provided (order by post date in descending order)
-        $posts = Post::where('user_id', $user_id ?? '!=', null)->orderBy('post_date', 'desc')->get();
+        $posts = Post::where('user_id', $user_id ?? '!=', null)->orderBy('created_at', 'desc')->get();
         
         // If no posts were found, return an error response
         if ($posts->isEmpty()) {
