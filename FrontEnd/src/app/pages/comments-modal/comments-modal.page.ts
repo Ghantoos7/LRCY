@@ -382,10 +382,22 @@ export class CommentsModalPage implements OnInit {
 
   getDaysAgo(commentDate: string): string {
     const today = new Date();
-    const comment = new Date(commentDate);
-    const yearDiff = today.getFullYear() - comment.getFullYear();
-    const monthDiff = today.getMonth() - comment.getMonth();
-    const dayDiff = today.getDate() - comment.getDate();
+    const post = new Date(commentDate);
+    let yearDiff = today.getFullYear() - post.getFullYear();
+    let monthDiff = today.getMonth() - post.getMonth();
+    let dayDiff = today.getDate() - post.getDate();
+  
+    if (dayDiff < 0) {
+      monthDiff -= 1;
+      const daysInPreviousMonth = new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+      dayDiff += daysInPreviousMonth;
+    }
+  
+    if (monthDiff < 0) {
+      yearDiff -= 1;
+      monthDiff += 12;
+    }
+  
     if (yearDiff > 0) {
       return `${yearDiff}y ago`;
     } else if (monthDiff > 0) {
@@ -393,12 +405,14 @@ export class CommentsModalPage implements OnInit {
     } else if (dayDiff > 0) {
       return `${dayDiff}d ago`;
     } else {
-      const hourDiff = today.getHours() - comment.getHours();
-      const minuteDiff = today.getMinutes() - comment.getMinutes();
+      const hourDiff = today.getHours() - post.getHours();
+      const minuteDiff = today.getMinutes() - post.getMinutes();
       if (hourDiff > 0) {
         return `${hourDiff}h ago`;
-      } else {
+      } else if (minuteDiff > 0) {
         return `${minuteDiff}m ago`;
+      } else {
+        return `just now`;
       }
     }
   }
