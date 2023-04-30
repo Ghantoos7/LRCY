@@ -72,15 +72,14 @@ class PostControllerTest extends TestCase
         $this->assertEquals($newCaption, $updatedPost->post_caption);
     }
 
-    public function testDeletePostApi()
+    function testDeletePostApi()
     {
         // Create a post
         $user = Volunteer_user::factory()->create();
         $post = Post::factory()->create(['user_id' => $user->id]);
 
-
-         // Test deleting a post with a different user ID
-         $response = $this->postJson('/api/v0.1/post/delete_post', [
+        // Test deleting a post with a different user ID
+        $response = $this->postJson('/api/v0.1/post/delete_post', [
             'post_id' => $post->id,
             'user_id' => $user->id + 1,
         ]);
@@ -109,4 +108,31 @@ class PostControllerTest extends TestCase
             'message' => 'Post not found',
         ]);
     }
+
+    function testGetPostApi()
+    {
+        // Create a user
+        $user = Volunteer_user::factory()->create();
+
+        // Create a post by the user
+        $post = Post::factory()->create(['user_id' => $user->id]);
+
+        // Test getting the post
+        $response = $this->getJson('/api/v0.1/post/get_post/' . $post->id);
+        $response->assertStatus(200)->assertJson([
+            'status' => 'success',
+            'message' => 'Post found successfully',
+            'post' => [
+                'id' => $post->id,
+                'user_id' => $user->id,
+                'post_caption' => $post->post_caption,
+                'user_name' => $user->first_name,
+                'comment_count' => $post->comment_count,
+                'like_count' => $post->like_count,
+                'post_date' => $post->post_date
+            ],
+        ]);
+    }
+
+    
 }
