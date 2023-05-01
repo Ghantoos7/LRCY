@@ -162,12 +162,17 @@ ion-label{
 .header-button{
   --background: none;
   --box-shadow: none;
-  position: relative;
-  left: 75%;
+  margin-left: 75%;
+  z-index: 1 !important;
+}
+
+
+.header-button1{
+  --background: none;
+  --box-shadow: none;
   z-index: 1 !important;
 }
 
 .ann{
-  position: relative;
   top: 7px;
 }
