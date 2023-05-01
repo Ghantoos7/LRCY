@@ -191,4 +191,34 @@ class PostControllerTest extends TestCase
         // Assert that the post like count has not been incremented
         $this->assertEquals(1, $post->fresh()->like_count);
     }
+
+    function testUnlikePostApi()
+{
+     // Create a user
+     $user = Volunteer_user::factory()->create();
+
+     // Create a post
+     $post = Post::factory()->create(['user_id' => $user->id]);
+
+    // Like the post
+    $like = Like::factory()->create(['post_id' => $post->id, 'user_id' => $user->id]);
+
+
+    // Send unlike post request
+    $response = $this->postJson('/api/v0.1/post/unlike_post', [
+        'post_id' => $post->id,
+        'user_id' => $user->id
+    ]);
+
+    // Check response
+    $response->assertStatus(200);
+    $response->assertJson([
+        'status' => 'success',
+        'message' => 'Post unliked successfully'
+    ]);
+
+
+    // Check if post like count has been decremented
+    $this->assertEquals(-1, $post->fresh()->like_count);
+}
 }
