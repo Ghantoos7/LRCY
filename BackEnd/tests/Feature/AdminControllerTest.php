@@ -101,4 +101,45 @@ class AdminControllerTest extends TestCase
         // Test case: Logout a non-existent user
         // Not needed, as the API will require authentication
     }
+
+    public function testAddUser()
+    {
+        // Create an admin user
+        $adminUser = Volunteer_user::factory()->create([
+            'user_type_id' => 1,
+            'password' => Hash::make('adminPassword'),
+        ]);
+
+        // Successful user creation
+        $response = $this->actingAs($adminUser)->postJson('/api/v0.1/admin/add_user', [
+            'branch_id' => 1,
+            'first_name' => 'John',
+            'last_name' => 'Doe',
+            'organization_id' => 1,
+            'user_dob' => '1990-01-01',
+            'user_position' => 'Manager',
+            'gender' => 1,
+            'user_type_id' => 0,
+            'is_active' => 1,
+            'user_start_date' => '2023-01-01',
+            'user_end_date' => null,
+        ]);
+        $response->assertJson(['status' => 'success', 'message' => 'User added successfully']);
+
+        // Validation failed
+        $response = $this->actingAs($adminUser)->postJson('/api/v0.1/admin/add_user', [
+            'branch_id' => '',
+            'first_name' => '',
+            'last_name' => '',
+            'organization_id' => '',
+            'user_dob' => '',
+            'user_position' => '',
+            'gender' => '',
+            'user_type_id' => '',
+            'is_active' => '',
+            'user_start_date' => '',
+            'user_end_date' => '',
+        ]);
+        $response->assertJson(['status' => 'Validation failed']);
+    }
 }
