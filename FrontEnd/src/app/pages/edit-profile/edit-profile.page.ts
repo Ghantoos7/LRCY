@@ -104,6 +104,25 @@ export class EditProfilePage implements OnInit {
     
 }
 
+goBack() {
+  this.alertController.create({
+    header: 'Confirm',
+    message: 'If you leave this page, your changes will be discarded. Are you sure you want to leave?',
+    buttons: [
+      {
+        text: 'Cancel',
+        role: 'cancel',
+      },
+      {
+        text: 'Leave',
+        handler: () => {
+          this.router.navigate(['/profile']);
+        },
+      },
+    ],
+  }).then((alert) => alert.present())
+  .catch((err) => console.log(err));
+}
 
 
 }
