@@ -38,6 +38,7 @@ export class EditGalleryPage implements OnInit {
   event_photo:string="";
   new_event_main_picture:string='';
   new_main_preview_picture:string='';
+  change_main_picture:boolean=false;
   darkMode: boolean;
 
   constructor(private router:Router, private menuController: MenuController, private alertController: AlertController, private adminService : AdminService) {
@@ -100,7 +101,7 @@ export class EditGalleryPage implements OnInit {
     formData.append('program_id',  this.mapProgramName(this.program_id).toString());
     formData.append('event_main_picture',  this.event_main_picture);
     formData.append('event_location',  this.event_location);
-    formData.append('event_main_picture',  this.new_event_main_picture);
+    formData.append('event_main_picture', this.change_main_picture ? this.new_event_main_picture : this.event_main_picture);
     formData.append('budget_sheet',  this.budget_sheet);
     formData.append('proposal',  this.proposal);
     formData.append('meeting_minute', this.meeting_minute);
@@ -131,7 +132,7 @@ export class EditGalleryPage implements OnInit {
 
   onChange(event: any) {
     this.new_event_main_picture = event.target.files[0];
-
+    this.change_main_picture = true;
     const file = event.target.files[0];
     const reader = new FileReader();
     reader.onload = () => {

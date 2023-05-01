@@ -44,15 +44,20 @@ Databases <br>
 </p>
 
 # Useful Links :link:
-<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Travel%20and%20places/Star.png" alt="Star" width="25" height="25" /> APIs: <a href="">Link to postman</a><br>
+<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Travel%20and%20places/Star.png" alt="Star" width="25" height="25" /><a href="https://ghantoos7.github.io/LRCY/BackEnd/">API Documentation</a><br>
 <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Travel%20and%20places/Fire.png" alt="Fire" width="25" height="25" /> Tutorial Videos: <a href="">Link to the videos</a> <br>
 <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Activities/Crystal%20Ball.png" alt="Crystal Ball" width="25" height="25" /> Software Requirement Specification: <a href="">Link to the documents</a> <br>
-<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Travel%20and%20places/Glowing%20Star.png" alt="Glowing Star" width="25" height="25" /> Entity Relationship Diagram: <a href="">Link to the ER</a>
+<a href="#entity-relationship-diagram"><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Travel%20and%20places/Glowing%20Star.png" alt="Glowing Star" width="25" height="25" /> Entity Relationship Diagram</a>
 
 # Contributors <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Hand%20gestures/Handshake.png" alt="Handshake" width="40" height="40" />
 
-| Frontend Developers | Backend Developers |
-| ------------------- | -------------------|
-| <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/People/Man%20Raising%20Hand.png" alt="Man Raising Hand" width="30" height="30" /><a href="https://github.com/Joe-Wehbe">&nbsp;Joe Wehbe</a> <br> <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/People/Woman%20Raising%20Hand.png" alt="Woman Raising Hand" width="30" height="30" /><a href="https://github.com/TheresaRoukaibe">&nbsp;Theresa Roukaibe</a> | <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/People/Man%20Raising%20Hand.png" alt="Man Raising Hand" width="30" height="30" /> <a href="https://github.com/Ghantoos7">Georgio Ghnatos</a> <br> <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/People/Woman%20Raising%20Hand.png" alt="Woman Raising Hand" width="30" height="30" /><a href="https://github.com/NajatN">&nbsp;Najat Nehme</a> | 
+<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/People/Man%20Raising%20Hand.png" alt="Man Raising Hand" width="30" height="30" /> <a href="https://github.com/Ghantoos7">Georgio Ghnatos</a> <br>
+<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/People/Woman%20Raising%20Hand.png" alt="Woman Raising Hand" width="30" height="30" /><a href="https://github.com/TheresaRoukaibe">&nbsp;Theresa Roukaibe</a> <br>
+<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/People/Woman%20Raising%20Hand.png" alt="Woman Raising Hand" width="30" height="30" /><a href="https://github.com/NajatN">&nbsp;Najat Nehme</a> <br>
+<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/People/Man%20Raising%20Hand.png" alt="Man Raising Hand" width="30" height="30" /><a href="https://github.com/Joe-Wehbe">&nbsp;Joe Wehbe</a> <br> 
 
-# License
+<h1 id="entity-relationship-diagram">ER Diagram :chart_with_upwards_trend:</h1>
+
+# Application Tutorial :iphone:
+
+# Admin Panel Tutoral :computer:
