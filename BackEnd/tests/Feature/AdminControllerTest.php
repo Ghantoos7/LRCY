@@ -246,4 +246,41 @@ class AdminControllerTest extends TestCase
         $response = $this->actingAs($adminUser)->postJson('/api/v0.1/admin/decline_request', ['request_id' => 99999]);
         $response->assertJson(['status' => 'error', 'message' => 'Recover request not found']);
     }
+
+    function testSendAnnouncementApi()
+    {
+        // Create an admin user
+        $adminUser = Volunteer_user::factory()->create([
+            'user_type_id' => 1,
+            'password' => Hash::make('adminPassword'),
+        ]);
+
+        // Successful sending of an announcement
+        $response = $this->actingAs($adminUser)->postJson('/api/v0.1/admin/send_announcement', [
+            'announcement_title' => 'Test Announcement',
+            'announcement_content' => 'This is a test announcement.',
+            'admin_id' => $adminUser->id,
+            'importance_level' => 1,
+        ]);
+        $response->assertJson(['status' => 'success', 'message' => 'Announcement sent successfully']);
+
+        // Invalid importance level
+        $response = $this->actingAs($adminUser)->postJson('/api/v0.1/admin/send_announcement', [
+            'announcement_title' => 'Test Announcement',
+            'announcement_content' => 'This is a test announcement.',
+            'admin_id' => $adminUser->id,
+            'importance_level' => 3,
+        ]);
+        $response->assertJson(['status' => 'error', 'message' => 'The importance level field is required']);
+
+        // Invalid admin user
+        $invalidAdmin = Volunteer_user::factory()->create(['user_type_id' => 0]);
+        $response = $this->actingAs($invalidAdmin)->postJson('/api/v0.1/admin/send_announcement', [
+            'announcement_title' => 'Test Announcement',
+            'announcement_content' => 'This is a test announcement.',
+            'admin_id' => $invalidAdmin->id,
+            'importance_level' => 1,
+        ]);
+        $response->assertJson(['status' => 'error', 'message' => 'Invalid admin user']);
+    }
 }
