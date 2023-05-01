@@ -431,7 +431,7 @@ class AdminControllerTest extends TestCase
         $response->assertJson(['status' => 'error', 'message' => 'User is not an admin']);
     }
 
-    public function testAddEventApi()
+     function testAddEventApi()
     {
         // Create a test program
         $program = Program::factory()->create();
@@ -497,6 +497,72 @@ class AdminControllerTest extends TestCase
             ]);
         }
     }
+
+
+    function testEditEventApi()
+    {
+
+        // Create a volunteer user
+        $user = volunteer_user::factory()->create();
+
+        // Create an event
+        $event = Event::factory()->create();
+
+        // Create a responsible for the event
+        is_responsible::factory()->create([
+            'event_id' => $event->id,
+            'user_id' => $user->id,
+            'role_name' => 'Role 1',
+            'organization_id' => $user->organization_id,
+        ]);
+
+        $imagePath = __DIR__ . '/test-image.jpg';
+        $image = new UploadedFile($imagePath, 'test-image.jpg', 'image/jpeg', null, true);
+
+        // Prepare event data to update
+        $eventData = [
+            'event_id' => $event->id,
+            'program_id' => 1,
+            'event_main_picture' => $image,
+            'budget_sheet' => $image,
+            'proposal' => $image,
+            'event_description' => 'Updated event description',
+            'event_location' => 'Updated event location',
+            'event_date' => '2023-06-01',
+            'event_title' => 'Updated event title',
+            'event_type_id' => 1,
+            'responsibles' => json_encode([
+                [
+                    'user_id' => $user->id,
+                    'role_name' => 'Updated Role 1',
+                ],
+            ]),
+            'event_images' => json_encode(['image1.jpg', 'image2.jpg']),
+        ];
+
+        // Send a request to edit the event
+        $response = $this->actingAs($user)->postJson('/api/v0.1/admin/edit_event', $eventData);
+
+        // Assert that the response has the status "success"
+        $response->assertJson([
+            'status' => 'success',
+        ]);
+
+        // Assert the event has been updated
+        $updatedEvent = Event::find($event->id);
+        $this->assertEquals($eventData['event_description'], $updatedEvent->event_description);
+        $this->assertEquals($eventData['event_location'], $updatedEvent->event_location);
+        $this->assertEquals($eventData['event_date'], $updatedEvent->event_date);
+        $this->assertEquals($eventData['event_title'], $updatedEvent->event_title);
+
+        // Assert the is_responsible has been updated
+        $updatedResponsible = is_responsible::where('event_id', $event->id)->first();
+        $this->assertEquals($user->id, $updatedResponsible->user_id);
+        $this->assertEquals('Updated Role 1', $updatedResponsible->role_name);
+
+    }
+
+
 
     function testDeleteEventApi()
     {
