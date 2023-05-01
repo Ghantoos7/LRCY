@@ -721,4 +721,35 @@ class PostControllerTest extends TestCase
             'message' => 'Post not found',
         ]);
     }
+
+    function testGetCommentLikesApi()
+    {
+        // Create a comment and a like
+        $comment = Comment::factory()->create();
+        $like = Comment_like::factory()->create(['comment_id' => $comment->id]);
+
+        // Test getting the comment likes API
+        $response = $this->get("/api/v0.1/post/get_comment_likes/{$comment->id}");
+        $response->assertStatus(200);
+        $response->assertJson([
+            'status' => 'success',
+        ]);
+
+        // Test getting the comment likes for a non-existent comment
+        $response = $this->get('/api/v0.1/post/get_comment_likes/999');
+        $response->assertStatus(200);
+        $response->assertJson([
+            'status' => 'error',
+            'message' => 'Comment not found',
+        ]);
+
+        // Test getting the comment likes for a comment with no likes
+        $comment2 = Comment::factory()->create();
+        $response = $this->get("/api/v0.1/post/get_comment_likes/{$comment2->id}");
+        $response->assertStatus(200);
+        $response->assertJson([
+            'status' => 'error',
+            'message' => 'No likes found for this comment',
+        ]);
+    }
 }
