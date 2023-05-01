@@ -41,13 +41,13 @@
                 <ion-row>
                   <ion-col size="6">
                     <ion-item>
-                      <ion-label>Title</ion-label>
+                      <ion-label class="lab">Title</ion-label>
                       <ion-input [(ngModel)]="event_title" class="first-card-input"></ion-input>
                     </ion-item>
                   </ion-col>
                   <ion-col size="6">
-                    <ion-item class="custom-input">
-                      <ion-label class="custom-label">Date of Event</ion-label>
+                    <ion-item  class="custom-input">
+                      <ion-label class="custom-label" class="lab">Date of Event</ion-label>
                       <ion-input [(ngModel)]="event_date" class="first-card-input" type="date"></ion-input>
                     </ion-item>
                   </ion-col>
@@ -56,7 +56,7 @@
                 <ion-row>
                   <ion-col size="6">
                     <ion-item>
-                      <ion-select [(ngModel)]="program_id" class="input" placeholder="Program">
+                      <ion-select [(ngModel)]="program_id" class="input" placeholder="Program"  class="lab">
                         <ion-select-option value="Youth and Health">Youth and Health</ion-select-option>
                         <ion-select-option value="Human values and principles">Human values and principles</ion-select-option>
                         <ion-select-option value="Environment">Environment</ion-select-option>
@@ -67,7 +67,7 @@
                   <ion-col size="6">
                     
                     <ion-item>
-                      <ion-select [(ngModel)]="event_type_id" class="input" placeholder="Event Type">
+                      <ion-select  [(ngModel)]="event_type_id" class="input" placeholder="Event Type" class="lab">
                         <ion-select-option value="Activity">Activity</ion-select-option>
                         <ion-select-option value="Training">Training</ion-select-option>
                         <ion-select-option value="Other">Other</ion-select-option>
@@ -81,13 +81,13 @@
                 <ion-row>
                   <ion-col size="6">
                     <ion-item>
-                      <ion-label>Location</ion-label>
+                      <ion-label class="lab">Location</ion-label>
                       <ion-input [(ngModel)] = "event_location" class="first-card-input"></ion-input>
                     </ion-item>
                   </ion-col>
                   <ion-col size="6">
                     <ion-item>
-                      <ion-label>Budget Sheet</ion-label>
+                      <ion-label class="lab">Budget Sheet</ion-label>
                       <ion-input (change)="onChangeBudget($event)" class="first-card-input" type="file" accept="image/png, image/jpeg, image/jpg"></ion-input>
                     </ion-item>
                   </ion-col>
@@ -96,13 +96,13 @@
                 <ion-row>
                   <ion-col size="6">
                     <ion-item>
-                      <ion-label>Proposal</ion-label>
+                      <ion-label class="lab">Proposal</ion-label>
                       <ion-input (change)="onChangeProp($event)" class="first-card-input" type="file" accept="image/png, image/jpeg, image/jpg"></ion-input>
                     </ion-item>
                   </ion-col>
                   <ion-col size="6">
                     <ion-item>
-                      <ion-label>Meeting minute</ion-label>
+                      <ion-label class="lab">Meeting minute</ion-label>
                       <ion-input  (change)="onChangeMeet($event)" class="first-card-input" type="file" accept="image/png, image/jpeg, image/jpg"></ion-input>
                     </ion-item>
                   </ion-col>
@@ -112,8 +112,8 @@
                 <ion-row>
                   <ion-col size="12">
                     <ion-item>
-                      <ion-label position="stacked">Description</ion-label>
-                      <ion-textarea [(ngModel)]="event_description" rows="4"></ion-textarea>
+                      <ion-label class="lab" position="stacked">Description</ion-label>
+                      <ion-textarea [(ngModel)]="event_description" rows="4" class="desc"></ion-textarea>
                     </ion-item>
                   </ion-col>
                 </ion-row> 
@@ -141,7 +141,7 @@
                         <img *ngIf="user.user_profile_pic===null" src="https://ionicframework.com/docs/img/demos/avatar.svg"  />
                        
                       </ion-avatar>
-                      <ion-label>{{ user.first_name }} {{ user.last_name }}</ion-label>
+                      <ion-label class="lab"> {{ user.first_name }} {{ user.last_name }}</ion-label>
                       <ion-button slot="end" (click)="selectUser(user, true)">Add</ion-button>
                     </ion-item>
                   </ion-list>
@@ -155,7 +155,7 @@
                       <ion-avatar slot="start">
                         <img src="http://127.0.0.1:8000/storage/images/{{user.profile_picture}}"  onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'" alt="User avatar" />
                       </ion-avatar>
-                      <ion-label>{{ user.first_name }} {{ user.last_name }}</ion-label>
+                      <ion-label class="lab">{{ user.first_name }} {{ user.last_name }}</ion-label>
                       <ion-input slot="end" class="add-member" type="text" [(ngModel)]="user.role_name" (ngModelChange)="updateUserRole(user, user.role_name)" placeholder="Role..."></ion-input>
                       <ion-icon
                         slot="end"
@@ -179,7 +179,7 @@
             <ion-row *ngFor="let photoInput of photoInputs; let i = index">
               <ion-col size="12">
                 <ion-item>
-                  <ion-label>Add an image</ion-label>
+                  <ion-label class="lab">Add an image</ion-label>
                   <ion-input class="add-img-input" type="file" (change)="onChangePhoto($event)" [(ngModel)]="event_photo"></ion-input>
                   <ion-button slot="end" (click)="addPhoto()">Add</ion-button>
                 </ion-item>
