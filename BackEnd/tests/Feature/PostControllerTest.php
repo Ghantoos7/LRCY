@@ -193,32 +193,73 @@ class PostControllerTest extends TestCase
     }
 
     function testUnlikePostApi()
-{
-     // Create a user
-     $user = Volunteer_user::factory()->create();
+    {
+        // Create a user
+        $user = Volunteer_user::factory()->create();
 
-     // Create a post
-     $post = Post::factory()->create(['user_id' => $user->id]);
+        // Create a post
+        $post = Post::factory()->create(['user_id' => $user->id]);
 
-    // Like the post
-    $like = Like::factory()->create(['post_id' => $post->id, 'user_id' => $user->id]);
+        // Like the post
+        $like = Like::factory()->create(['post_id' => $post->id, 'user_id' => $user->id]);
 
+        // Send unlike post request
+        $response = $this->postJson('/api/v0.1/post/unlike_post', [
+            'post_id' => $post->id,
+            'user_id' => $user->id,
+        ]);
 
-    // Send unlike post request
-    $response = $this->postJson('/api/v0.1/post/unlike_post', [
-        'post_id' => $post->id,
-        'user_id' => $user->id
-    ]);
+        // Check response
+        $response->assertStatus(200);
+        $response->assertJson([
+            'status' => 'success',
+            'message' => 'Post unliked successfully',
+        ]);
 
-    // Check response
-    $response->assertStatus(200);
-    $response->assertJson([
-        'status' => 'success',
-        'message' => 'Post unliked successfully'
-    ]);
+        // Check if post like count has been decremented
+        $this->assertEquals(-1, $post->fresh()->like_count);
+    }
 
+    function testCommentPostApi()
+    {
+        // Create a user
+        $user = Volunteer_user::factory()->create();
 
-    // Check if post like count has been decremented
-    $this->assertEquals(-1, $post->fresh()->like_count);
-}
+        // Create a post
+        $post = Post::factory()->create(['user_id' => $user->id]);
+
+        // Send a comment request with valid inputs
+        $response = $this->post('/api/v0.1/post/comment_post', [
+            'post_id' => $post->id,
+            'user_id' => $user->id,
+            'comment_content' => 'This is a test comment',
+        ]);
+
+        // Assert that the response has a success status code
+        $response->assertStatus(200);
+
+        // Assert that the post's comment count has been incremented
+        $this->assertEquals(1, $post->fresh()->comment_count);
+
+        // Send a comment request with an invalid post ID
+        $response = $this->post('/api/v0.1/post/comment_post', [
+            'post_id' => 'invalid_postdd_id',
+            'user_id' => $user->id + 31,
+            'comment_content' => 'This is a test comment',
+        ]);
+
+        // Assert that the response has an error status code
+        $response->assertJson(['status' => 'error']);
+
+        // Send a comment request with an invalid user ID
+        $response = $this->post('/api/v0.1/post/comment_post', [
+            'post_id' => $post->id,
+            'user_id' => 'invalid_user_id',
+            'comment_content' => 'This is a test comment',
+        ]);
+
+        // Assert that the response has an error status code
+        $response->assertJson(['status' => 'error']);
+
+    }
 }
