@@ -1,6 +1,6 @@
 # Lebanese Red Cross Youth :hospital:
 
-The Lebanese Red Cross Youth (LRCY) is a private organization that is dedicated to promoting social awareness and community service among Lebanese citizens of various age groups. The LRCY's mission is anchored in three distinct programs: Youth & Health, Human Values & Principles, and Environment. These programs are designed to equip young people with the skills and knowledge they need to make a meaningful impact on their communities and society as a whole.
+The Lebanese Red Cross Youth (LRCY) is a private organization that is dedicated to promoting social awareness and community service among Lebanese citizens of various age groups. LRCY's mission is anchored in three distinct programs: Youth & Health, Human Values & Principles, and Environment. These programs are designed to equip young people with the skills and knowledge they need to make a meaningful impact on their communities and society as a whole.
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/102875229/234422622-4b144bc3-9934-4c24-90c7-b7d560c17c3e.png" width="150">
@@ -10,7 +10,7 @@ The Lebanese Red Cross Youth (LRCY) is a private organization that is dedicated 
 
 <div align="center">
 
-> Hello world! This is our project’s for the software engineering at LAU the project was made for the Lebanese Red Cross Youth Sector in Jbeil.
+Hello world! This is our project for the software engineering course at LAU, the project was made for the Lebanese Red Cross Youth Sector in Jbeil.
 
 **[PROJECT DESCRIPTION](#project-description) • [WIREFRAMES](#wireframe) • [TECH STACK](#tech-stack)  • [HOW TO RUN?](#how-to-run?)**
 
@@ -22,19 +22,19 @@ The Lebanese Red Cross Youth (LRCY) is a private organization that is dedicated 
 
 
 ### Purpose of the Project :dart:
-> This project aims to further enhance LRCY's outreach efforts through developing a mobile application and a websie that will streamline and optimize the daily tasks of its  volunteers. This new application will enable volunteers to access a wide range of features, including yearly goals tracking, activity history, and training progress  tracking. With the help of this innovative technology, LRCY will be better equipped to achieve its goals and empower more young people to make a positive  difference in their communities.
+> This project aims to further enhance LRCY's outreach efforts through developing a mobile application and a websie that will streamline and optimize the daily tasks of its volunteers. This new application will enable volunteers to access a wide range of features, including yearly goals tracking, activity history, and training progress tracking. With the help of this innovative technology, LRCY will be better equipped to achieve its goals and empower more young people to make a positive difference in their communities.
 
 ### User Stories
 
-- As a volunteer, I want to find connect with other volunteers and express my self freely.
-- As a volunteer, I want to check previous activities that I and others have been .responsible of.
+- As a volunteer, I want to connect with other volunteers and express my self freely.
+- As a volunteer, I want to check previous activities that I and others have been responsible of.
 - As a volunteer, I want to check my yearly goals and track my progress.
-- As a Volunteer, I want to check my training progress and track my progress.
+- As a Volunteer, I want to check my training and track my progress.
 - As a Volunteer, I want to check my statistics in the organizations.
 - As a Volunteer, I want to check the announcements sent by my superiors in the organization.
 - As an admin, I want to add new volunteers to the organization.
 - As an admin, I want to manage the volunteers in the organization.
-- As an admin, I want to add activities to the to the gallery so other volunteers can check them.
+- As an admin, I want to add activities to the gallery so other volunteers can check them.
 - As an admin, I want to set yearly goals for the volunteers.
 - As an admin, I want to send announcements to the volunteers.
   <br><br>
@@ -48,28 +48,52 @@ The Lebanese Red Cross Youth (LRCY) is a private organization that is dedicated 
 
 ### Client App
 
-| Splash Screen                          | Sign In                              | Sign Up                      | Recover Request                          |
-| -------------------------------- | --------------------------------- | ------------------------ | -------------------------------- |
+| Splash Screen                          | Sign In                              | Sign Up         | 
+| -------------------------------- | --------------------------------- | ------------------------ | 
 | ![Splash Screen](https://user-images.githubusercontent.com/102875229/235320061-bce754f0-afec-4896-845e-098dc25f3c75.png) | ![Sign In](https://user-images.githubusercontent.com/102875229/235320259-2da42712-93de-4517-81ab-bb92c60a9ffc.png)| ![Sign Up](https://user-images.githubusercontent.com/102875229/235320171-0b970919-c358-4b65-910a-df710356448f.png)
- | ![Recover](./readme/Profile.png) |
 
-| Service Page                                | Favorites                           | Notifications                                | Chat                       |
-| ------------------------------------------- | ----------------------------------- | -------------------------------------------- | -------------------------- |
-| ![Service Page](./readme/Seller%20Page.png) | ![Favorites](./readme/Favorite.png) | ![Notifications](./readme/Notifications.png) | ![Chat](./readme/Chat.png) |
+| Register                                | Recover Request                            | Password Reset                            |                        
+| ------------------------------------------- | ----------------------------------- | -------------------------------------------- | 
+|  <img src="./README/register.jpeg" height = 450 width= 200> | <img src="./README/requestp.png" height = 450 width= 200> | <img src="./README/recover.png" height = 450 width= 200>| 
+
+
+
+| Waiting                                  | Profile Accomplishments                          | Profile Training Stats                               |
+| --------------------------------------------------- | -------------------------------- | -------------------------------------------- |
+<img src="./README/waiting.png" height = 450 width= 200> | <img src="./README/accomplishments.png" height = 450 width= 200> | <img src="./README/trainings.jpeg"  height = 450 width= 200/> |
+
+
+|  Profile Stats                                  | Profile Post                         | Announcements                              |
+| --------------------------------------------------- | -------------------------------- | -------------------------------------------- |
+<img src="./README/stats.jpeg" height = 450 width= 200> | <img src="./README/my-posts.png" height = 450 width= 200> | <img src="./README/announcements.png"  height = 450 width= 200 /> |
+
+
+| Yearly Goals                                  | Gallery                        | Gallery Info                              |
+| --------------------------------------------------- | -------------------------------- | -------------------------------------------- |
+<img src="./README/goals.png" height = 450 width= 200> | <img src="./README/gallerye.png" height = 450 width= 200> | <img src="./README/galleryi.jpeg"  height = 450 width= 200 /> |
+
+
 
 ### Admin Panel
 
-| Service Providers                                   | Clients                          | Add new seller                               |
-| --------------------------------------------------- | -------------------------------- | -------------------------------------------- |
-| ![Service Providers](./readme/ServiceProviders.png) | ![Clients](./readme/Clients.png) | ![Add new seller](./readme/Addnewseller.png) |
+| Home Screen                                 | Admin Login                              |
+| --------------------------------------------------- | -------------------------------- | 
+<img src="./README/home.jpg" height=125 width=400> |  <img src="./README/admminlogin.jpg" height=125 width=400>|
 
-### Service Provider Website
+| View Members                                 | Edit Member                              |
+| --------------------------------------------------- | -------------------------------- | 
+<img src="./README/members.jpg" height=125 width=400> |  <img src="./README/edm.jpg" height=125 width=400>|
 
-| Followers                            | About                        | Send Notification                                 |
-| ------------------------------------ | ---------------------------- | ------------------------------------------------- |
-| ![Followers](./readme/followers.png) | ![About](./readme/About.png) | ![New Notification](./readme/NewNotification.png) |
+| Add Trainings                                | Announcements                              |
+| --------------------------------------------------- | -------------------------------- | 
+<img src="./README/add-trainings.png" height=125 width=400> |  <img src="./README/announcements%20(1).png" height=125 width=400>|
 
-<br><br>
+| Set yearly Goals                                | Requests                              |
+| --------------------------------------------------- | -------------------------------- | 
+<img src="./README/goa.jpg" height=125 width=400> |  <img src="./README/req.jpg" height=125 width=400>|
+
+
+
 
 # Stacks <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Travel%20and%20places/High%20Voltage.png" alt="High Voltage" width="45" height="45" />
 <p align="left">
