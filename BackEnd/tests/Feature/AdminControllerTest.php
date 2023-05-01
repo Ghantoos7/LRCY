@@ -169,7 +169,7 @@ class AdminControllerTest extends TestCase
         $response->assertJson(['status' => 'error', 'message' => 'User not found']);
     }
 
-    public function testGetRequests()
+    function testGetRequestsApi()
     {
         // Create an admin user
         $adminUser = Volunteer_user::factory()->create([
@@ -200,5 +200,30 @@ class AdminControllerTest extends TestCase
 
         $response = $this->actingAs($adminUser)->getJson('/api/v0.1/admin/get_requests/' . $branch1->id);
         $response->assertJson(['status' => 'error', 'message' => 'No requests found']);
+    }
+    
+    function testAcceptRequestApi()
+    {
+        // Create an admin user
+        $adminUser = Volunteer_user::factory()->create([
+            'user_type_id' => 1,
+            'password' => Hash::make('adminPassword'),
+        ]);
+
+        // Create recover requests
+        $recoverRequest1 = Recover_request::factory()->create(['request_status' => 0]);
+        $recoverRequest2 = Recover_request::factory()->create(['request_status' => 1]);
+
+        // Successful acceptance of a recover request
+        $response = $this->actingAs($adminUser)->postJson('/api/v0.1/admin/accept_request', ['request_id' => $recoverRequest1->id]);
+        $response->assertJson(['status' => 'success', 'message' => 'Recover request accepted successfully']);
+
+        // Recover request not found
+        $response = $this->actingAs($adminUser)->postJson('/api/v0.1/admin/accept_request', ['request_id' => 99999]);
+        $response->assertJson(['status' => 'error', 'message' => 'Recover request not found']);
+
+        // Recover request has already been accepted
+        $response = $this->actingAs($adminUser)->postJson('/api/v0.1/admin/accept_request', ['request_id' => $recoverRequest2->id]);
+        $response->assertJson(['status' => 'error', 'message' => 'Recover request has already been accepted']);
     }
 }

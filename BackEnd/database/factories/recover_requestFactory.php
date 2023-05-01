@@ -20,6 +20,7 @@ class recover_requestFactory extends Factory
             // boolean
             "request_status" => $this->faker->boolean,
             'request_date' => $this->faker->date(),
+            'user_id' => $this->faker->numberBetween(1, 100),
         ];
     }
 }
