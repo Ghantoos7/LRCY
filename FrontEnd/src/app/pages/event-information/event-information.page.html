@@ -35,21 +35,23 @@
             
               <img class="custom-img" slot="start" alt="Silhouette of a person's head" src="assets\imgs\word.png" />
         
-          <img (click)="displayDownloadConfirmation(event.proposal)" alt="Silhouette of mountains" src="http://127.0.0.1:8000/storage/images/{{event.proposal}}" onerror="this.src='assets/imgs/ext.jpg'"/>
-          </ion-item>
+          <img *ngIf="event.proposal" (click)="displayDownloadConfirmation(event.proposal)" alt="Silhouette of mountains" src="http://127.0.0.1:8000/storage/images/{{event.proposal}}" onerror="this.src='assets/imgs/ext.jpg'"/>
+         <ion-text *ngIf="!event.proposal">No proposal</ion-text> 
+        </ion-item>
           <ion-item>
        
             <img slot="start" class="custom-img"alt="Silhouette of a person's head" src="assets\imgs\sheet.png" />
             
-              <img (click)="displayDownloadConfirmation(event.budget_sheet)" alt="Silhouette of mountains" src="http://127.0.0.1:8000/storage/images/{{event.budget_sheet}}" onerror="this.src='assets/imgs/ext.jpg'"/>
-            
+              <img *ngIf="event.budget_sheet" (click)="displayDownloadConfirmation(event.budget_sheet)" alt="Silhouette of mountains" src="http://127.0.0.1:8000/storage/images/{{event.budget_sheet}}" onerror="this.src='assets/imgs/ext.jpg'"/>
+              <ion-text *ngIf="!event.budget_sheet">No budget sheet</ion-text> 
         </ion-item>
         <ion-item>
    
           <img slot="start" class="custom-img"alt="Silhouette of a person's head" src="assets\imgs\word.png" />
          
-            <img (click)="displayDownloadConfirmation(event.meeting_minute)" alt="Silhouette of mountains" src="http://127.0.0.1:8000/storage/images/{{event.meeting_minute}}" onerror="this.src='assets/imgs/ext.jpg'"/>
-      </ion-item>
+            <img *ngIf="event.meeting_minute" (click)="displayDownloadConfirmation(event.meeting_minute)" alt="Silhouette of mountains" src="http://127.0.0.1:8000/storage/images/{{event.meeting_minute}}" onerror="this.src='assets/imgs/ext.jpg'"/>
+            <ion-text *ngIf="!event.meeting_minute">No meeting minute log</ion-text> 
+          </ion-item>
         </ion-list>
     </ion-col>
   
