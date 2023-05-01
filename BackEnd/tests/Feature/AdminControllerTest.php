@@ -388,7 +388,6 @@ class AdminControllerTest extends TestCase
         $response->assertJson(['status' => 'error', 'message' => 'User is not an admin']);
     }
 
-
     function testDeleteEventApo()
     {
         // Create a new event
@@ -410,7 +409,7 @@ class AdminControllerTest extends TestCase
         $this->assertDatabaseMissing('events', [
             'id' => $event->id,
         ]);
-    
+
         // Send a request to delete an event that does not exist
         $response = $this->postJson('api/v0.1/admin/delete_event', [
             'event_id' => -1,
@@ -422,9 +421,7 @@ class AdminControllerTest extends TestCase
             'status' => 'error',
             'message' => 'Event not found',
         ]);
-
     }
-
 
     public function testSetYearlyGoal()
     {
@@ -441,13 +438,12 @@ class AdminControllerTest extends TestCase
         ];
 
         $response = $this->json('POST', '/api/v0.1/admin/set_yearly_goal', $data);
-        
-        $response->assertStatus(200)
-            ->assertJson([
-                'status' => 'success',
-                'message' => 'Goal created successfully',
-            ]);
-        
+
+        $response->assertStatus(200)->assertJson([
+            'status' => 'success',
+            'message' => 'Goal created successfully',
+        ]);
+
         $this->assertDatabaseHas('goals', [
             'goal_name' => 'Test Goal',
             'goal_description' => 'This is a test goal',
@@ -460,9 +456,36 @@ class AdminControllerTest extends TestCase
             'branch_id' => 1,
         ]);
     }
+
+    function testEditYearlyGoalApi()
+    {
+        // Create a new goal
+        $goal = Goal::factory()->create();
+
+        // Make the request to edit the goal
+        $response = $this->postJson('/api/v0.1/admin/edit_yearly_goal', [
+            'goal_id' => $goal->id,
+            'goal_name' => 'New goal name',
+            'goal_description' => 'New goal description',
+            'program_id' => $goal->program_id,
+            'number_to_complete' => $goal->number_to_complete + 1,
+            'goal_year' => $goal->goal_year,
+            'event_type_id' => $goal->event_type_id,
+            'goal_deadline' => $goal->goal_deadline,
+            'start_date' => $goal->start_date,
+            'branch_id' => $goal->branch_id,
+            'number_completed' => $goal->number_completed + 1,
+        ]);
+
+        // Assert that the response has a success status
+        $response->assertStatus(200);
+        $response->assertJson(['status' => 'success', 'message' => 'Goal updated successfully']);
+
+        // Reload the goal from the database to get the updated version
+        $goal = $goal->fresh();
+
+        // Assert that the goal was updated with the new values
+        $this->assertEquals('New goal name', $goal->goal_name);
+        $this->assertEquals('New goal description', $goal->goal_description);
+    }
 }
-    
-
-
-
-
