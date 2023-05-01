@@ -102,7 +102,7 @@ class AdminControllerTest extends TestCase
         // Not needed, as the API will require authentication
     }
 
-    public function testAddUser()
+    function testAddUserApi()
     {
         // Create an admin user
         $adminUser = Volunteer_user::factory()->create([
@@ -141,5 +141,30 @@ class AdminControllerTest extends TestCase
             'user_end_date' => '',
         ]);
         $response->assertJson(['status' => 'Validation failed']);
+    }
+
+    function testDeleteUserApi()
+    {
+        // Create an admin user
+        $adminUser = Volunteer_user::factory()->create([
+            'user_type_id' => 1,
+            'password' => Hash::make('adminPassword'),
+        ]);
+
+        // Create a volunteer user to delete
+        $volunteerUser = Volunteer_user::factory()->create();
+
+        // Successful user deletion
+        $response = $this->actingAs($adminUser)->postJson('/api/v0.1/admin/delete_user', [
+            'user_id' => $volunteerUser->id,
+        ]);
+        $response->assertJson(['status' => 'success', 'message' => 'User deleted successfully']);
+        $this->assertDatabaseMissing('volunteer_users', ['id' => $volunteerUser->id]);
+
+        // User not found
+        $response = $this->actingAs($adminUser)->postJson('/api/v0.1/admin/delete_user', [
+            'user_id' => -1,
+        ]);
+        $response->assertJson(['status' => 'error', 'message' => 'User not found']);
     }
 }
