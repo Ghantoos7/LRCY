@@ -26,9 +26,14 @@ export class AddGoalPage implements OnInit {
   goal_year: any;
   start_date: string = '';
   goal_deadline: string = '';
+  darkMode: boolean;
 
-
-  constructor(private router:Router, private menuController: MenuController, private adminService: AdminService, private alertController: AlertController) { }
+  constructor(private router:Router, private menuController: MenuController, private adminService: AdminService, private alertController: AlertController) {
+    this.darkMode = localStorage.getItem('darkModeEnabled') === 'true';
+    if (this.darkMode) {
+       document.body.setAttribute('color-theme', 'dark');
+    }
+   }
 
   ngOnInit() {
   }
