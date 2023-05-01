@@ -6,21 +6,70 @@ The Lebanese Red Cross Youth (LRCY) is a private organization that is dedicated 
   <img src="https://user-images.githubusercontent.com/102875229/234422622-4b144bc3-9934-4c24-90c7-b7d560c17c3e.png" width="150">
 </p>
 
-# Project Description <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Newspaper.png" alt="Newspaper" width="40" height="40" />
+<img src="./README/title1.svg"/>
+
+<div align="center">
+
+> Hello world! This is our project’s for the software engineering at LAU the project was made for the Lebanese Red Cross Youth Sector in Jbeil.
+
+**[PROJECT DESCRIPTION](#project-description) • [WIREFRAMES](#wireframe) • [TECH STACK](#tech-stack)  • [HOW TO RUN?](#how-to-run?)**
+
+</div>
+
+<br><br>
+<br><br>
+<img src="./README/projectdescription.svg"/>
+
+
 ### Purpose of the Project :dart:
 > This project aims to further enhance LRCY's outreach efforts through developing a mobile application and a websie that will streamline and optimize the daily tasks of its  volunteers. This new application will enable volunteers to access a wide range of features, including yearly goals tracking, activity history, and training progress  tracking. With the help of this innovative technology, LRCY will be better equipped to achieve its goals and empower more young people to make a positive  difference in their communities.
 
-### Mobile Application :iphone: 
-> The application is built on the Ionic framework, using Angular for its frontend architecture and Laravel for its backend. Its access is limited to registered members of the organization, with authentication and authorization functionalities in place to ensure secure access to the app's features. Beside from social media and communication, the application includes powerful tools for tracking goals, organizing events, maintaining volunteers' records and statistics such as training completed and key performance indicators. 
+### User Stories
 
-### Website :computer: 
-> The website is also developed on Ionic with Angular and Laravel, and is designed exclusively for administrators of the organization who have many elevated privileges such as managing users' profile and statistics, sending announcements, setting and managing  yearly organizational goals, and posting event details and images. <br>
-<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Hand%20gestures/Backhand%20Index%20Pointing%20Right.png" alt="Backhand Index Pointing Right" width="25" height="25" /> <a href="">View website</a><br>
+- As a volunteer, I want to find connect with other volunteers and express my self freely.
+- As a volunteer, I want to check previous activities that I and others have been .responsible of.
+- As a volunteer, I want to check my yearly goals and track my progress.
+- As a Volunteer, I want to check my training progress and track my progress.
+- As a Volunteer, I want to check my statistics in the organizations.
+- As a Volunteer, I want to check the announcements sent by my superiors in the organization.
+- As an admin, I want to add new volunteers to the organization.
+- As an admin, I want to manage the volunteers in the organization.
+- As an admin, I want to add activities to the to the gallery so other volunteers can check them.
+- As an admin, I want to set yearly goals for the volunteers.
+- As an admin, I want to send announcements to the volunteers.
+  <br><br>
+  <br><br>
 
-# Application Preview <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Hand%20gestures/Eye.png" alt="Eye" width="40" height="40" />
-![image](https://user-images.githubusercontent.com/102875229/235320061-bce754f0-afec-4896-845e-098dc25f3c75.png)
-![image](https://user-images.githubusercontent.com/102875229/235320259-2da42712-93de-4517-81ab-bb92c60a9ffc.png)
-![image](https://user-images.githubusercontent.com/102875229/235320171-0b970919-c358-4b65-910a-df710356448f.png)
+<img src="./README/wireframes.svg"/>
+> This design was planned before on paper, then moved to Figma for the fine details.
+> Note that we didn't use any already made template everything was made from scratch.
+
+
+
+### Client App
+
+| Splash Screen                          | Sign In                              | Sign Up                      | Recover Request                          |
+| -------------------------------- | --------------------------------- | ------------------------ | -------------------------------- |
+| ![Splash Screen](https://user-images.githubusercontent.com/102875229/235320061-bce754f0-afec-4896-845e-098dc25f3c75.png) | ![Sign In](https://user-images.githubusercontent.com/102875229/235320259-2da42712-93de-4517-81ab-bb92c60a9ffc.png)| ![Sign Up](https://user-images.githubusercontent.com/102875229/235320171-0b970919-c358-4b65-910a-df710356448f.png)
+ | ![Recover](./readme/Profile.png) |
+
+| Service Page                                | Favorites                           | Notifications                                | Chat                       |
+| ------------------------------------------- | ----------------------------------- | -------------------------------------------- | -------------------------- |
+| ![Service Page](./readme/Seller%20Page.png) | ![Favorites](./readme/Favorite.png) | ![Notifications](./readme/Notifications.png) | ![Chat](./readme/Chat.png) |
+
+### Admin Panel
+
+| Service Providers                                   | Clients                          | Add new seller                               |
+| --------------------------------------------------- | -------------------------------- | -------------------------------------------- |
+| ![Service Providers](./readme/ServiceProviders.png) | ![Clients](./readme/Clients.png) | ![Add new seller](./readme/Addnewseller.png) |
+
+### Service Provider Website
+
+| Followers                            | About                        | Send Notification                                 |
+| ------------------------------------ | ---------------------------- | ------------------------------------------------- |
+| ![Followers](./readme/followers.png) | ![About](./readme/About.png) | ![New Notification](./readme/NewNotification.png) |
+
+<br><br>
 
 # Stacks <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Travel%20and%20places/High%20Voltage.png" alt="High Voltage" width="45" height="45" />
 <p align="left">
