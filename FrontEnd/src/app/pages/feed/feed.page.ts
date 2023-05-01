@@ -106,6 +106,12 @@ export class FeedPage implements OnInit {
     });
   }
   
+  handleRefresh(event:any) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      event.target.complete();
+    }, 1000);
+  };
 
   getDaysAgo(postDate: string): string {
     const today = new Date();

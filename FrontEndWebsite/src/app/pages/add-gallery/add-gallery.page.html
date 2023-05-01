@@ -116,7 +116,7 @@
                   <ion-col size="12">
                     <ion-item>
                       <ion-label class="label" position="stacked">Description</ion-label>
-                        <ion-textarea [(ngModel)]="event_description" rows="4"></ion-textarea>
+                        <ion-textarea [(ngModel)]="event_description" rows="4" class="desc"></ion-textarea>
                     </ion-item>
                   </ion-col>
                 </ion-row> 
@@ -144,7 +144,7 @@
                         <img *ngIf="user.user_profile_pic !== null" src="http://127.0.0.1:8000/storage/images/{{user.user_profile_pic}}"  onerror="this.onerror=null; this.src='https://ionicframework.com/docs/img/demos/avatar.svg';" />
                         <img *ngIf="user.user_profile_pic===null" src="https://ionicframework.com/docs/img/demos/avatar.svg"  />
                       </ion-avatar>
-                      <ion-label>{{ user.first_name }} {{ user.last_name }}</ion-label>
+                      <ion-label class="label">{{ user.first_name }} {{ user.last_name }}</ion-label>
                       <ion-button slot="end" (click)="selectUser(user, true)">Add</ion-button>
                     </ion-item>
                   </ion-list>
@@ -158,7 +158,7 @@
                       <ion-avatar slot="start">
                         <img src="http://127.0.0.1:8000/storage/images/{{user.user_profile_pic}}"  onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'" alt="User avatar" />
                       </ion-avatar>
-                      <ion-label>{{ user.first_name }} {{ user.last_name }}</ion-label>
+                      <ion-label class="label">{{ user.first_name }} {{ user.last_name }}</ion-label>
                       <ion-input slot="end" class="add-member" type="text" [(ngModel)]="user.role_name" (ngModelChange)="updateUserRole(user, user.role_name)" placeholder="Role..."></ion-input>
                       <ion-icon
                         slot="end"

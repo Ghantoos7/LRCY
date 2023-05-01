@@ -44,6 +44,7 @@ export class AddMemberPage implements OnInit {
   addUser(){
     this.adminService.addUser(this.branch_id,this.first_name,this.last_name,this.organization_id,this.user_dob,this.user_position,this.mapGender(this.gender),this.mapUserType(this.user_type_id),this.mapUserStatus(this.is_active),this.user_start_date,this.user_end_date).subscribe((response: any) => {
       const parsedResponse = JSON.parse(JSON.stringify(response));
+      console.log(parsedResponse);
       if(parsedResponse.status == 'success') {
         this.alertController.create({
           header: 'Success',

@@ -44,6 +44,7 @@ ion-button.menu-button{
   position: relative;
   top: 40px;
   left: 40px;
+  color: white;
 }
 
 .toolbar-background{
@@ -152,6 +153,14 @@ h1{
   position: absolute;
   width: 270px;
   left: 115px;
+}
+
+.desc{
+  color: lightgray;
+}
+
+.lab{
+  color: white;
 }
 
 .add-img-input {
