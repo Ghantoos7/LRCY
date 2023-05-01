@@ -6,7 +6,7 @@
         <ion-title [ngClass]="{'ion-title-dark': darkMode}" class="menu-title">Manage Gallery</ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content  class="menu-list" class="ion-padding" [ngClass]="{'ion-menu-dark': darkMode}"> 
+    <ion-content  class="ion-menu" class="ion-padding" [ngClass]="{'ion-menu-dark': darkMode}"> 
         <ion-button (click)="goToGallery()"class="menu-button">View Gallery</ion-button>
         <ion-button (click)="goToAddGallery()" class="menu-button">Add an Event</ion-button>
     </ion-content>
@@ -203,8 +203,8 @@
 
     </ion-grid>
   
-      <ion-button (click)="editGalleryEvent()" class="save">Save Changes</ion-button>
-      <ion-button (click)="confirm()" class="delete">Delete Event</ion-button>
+      <ion-button (click)="editGalleryEvent()" class="save" [ngClass]="{'save-dark': darkMode}">Save Changes</ion-button>
+      <ion-button (click)="confirm()" class="delete" [ngClass]="{'delete-dark': darkMode}">Delete Event</ion-button>
 
     </div>
 
