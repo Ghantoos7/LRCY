@@ -44,7 +44,7 @@
                 <ion-row>
                   <ion-col size="6">
                     <ion-item>
-                      <ion-label>Title</ion-label>
+                      <ion-label class="label">Title</ion-label>
                       <ion-input [(ngModel)]="event_title" class="first-card-input"></ion-input>
                     </ion-item>
                   </ion-col>
@@ -59,7 +59,7 @@
                 <ion-row>
                   <ion-col size="6">
                     <ion-item>
-                      <ion-select [(ngModel)]="program_id" class="input" placeholder="Program">
+                      <ion-select [(ngModel)]="program_id" class="custom-input" placeholder="Program">
                         <ion-select-option value="Youth and Health">Youth and Health</ion-select-option>
                         <ion-select-option value="Human values and principles">Human values and principles</ion-select-option>
                         <ion-select-option value="Environment">Environment</ion-select-option>
@@ -70,7 +70,7 @@
                   <ion-col size="6">
                     
                     <ion-item>
-                      <ion-select [(ngModel)]="event_type_id" class="input" placeholder="Event Type">
+                      <ion-select [(ngModel)]="event_type_id" class="custom-input" placeholder="Event Type">
                         <ion-select-option value="Activity">Activity</ion-select-option>
                         <ion-select-option value="Training">Training</ion-select-option>
                         <ion-select-option value="Other">Other</ion-select-option>
@@ -84,13 +84,13 @@
                 <ion-row>
                   <ion-col size="6">
                     <ion-item>
-                      <ion-label>Location</ion-label>
+                      <ion-label class="label">Location</ion-label>
                       <ion-input [(ngModel)] = "event_location" class="first-card-input"></ion-input>
                     </ion-item>
                   </ion-col>
                   <ion-col size="6">
                     <ion-item>
-                      <ion-label>Budget Sheet</ion-label>
+                      <ion-label class="label">Budget Sheet</ion-label>
                       <ion-input (change)="onChangeBudget($event)" class="first-card-input" type="file"></ion-input>
                     </ion-item>
                   </ion-col>
@@ -99,13 +99,13 @@
                 <ion-row>
                   <ion-col size="6">
                     <ion-item>
-                      <ion-label>Proposal</ion-label>
+                      <ion-label class="label">Proposal</ion-label>
                       <ion-input (change)="onChangeProp($event)" class="first-card-input" type="file" ></ion-input>
                     </ion-item>
                   </ion-col>
                   <ion-col size="6">
                     <ion-item>
-                      <ion-label>Meeting minute</ion-label>
+                      <ion-label class="label">Meeting minute</ion-label>
                       <ion-input (change)="onChangeMeet($event)" class="first-card-input" type="file"></ion-input>
                     </ion-item>
                   </ion-col>
@@ -115,7 +115,7 @@
                 <ion-row>
                   <ion-col size="12">
                     <ion-item>
-                      <ion-label position="stacked">Description</ion-label>
+                      <ion-label class="label" position="stacked">Description</ion-label>
                         <ion-textarea [(ngModel)]="event_description" rows="4"></ion-textarea>
                     </ion-item>
                   </ion-col>
