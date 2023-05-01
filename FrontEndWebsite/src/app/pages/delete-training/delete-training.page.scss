@@ -67,15 +67,18 @@ ion-menu-button{
   }
 
   .ann{
-    position: relative;
-    top: 7px;
+padding-top: 7px;
   }
   
   .header-button{
     --background: none;
     --box-shadow: none;
-    position: relative;
-    left: 80%;
+    margin-left: 80%;
+  }
+
+  .header-button1{
+    --background: none;
+    --box-shadow: none;
   }
   
   .menu-button{
