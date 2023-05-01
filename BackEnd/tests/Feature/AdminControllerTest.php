@@ -145,6 +145,55 @@ class AdminControllerTest extends TestCase
         $response->assertJson(['status' => 'Validation failed']);
     }
 
+    public function testEditUserApi()
+    {
+        // Create a test user
+        $user = Volunteer_user::factory()->create();
+    
+        // Prepare data for editing the user
+        $updatedUserData = [
+            'user_id' => $user->id,
+            'first_name' => 'UpdatedFirstName',
+            'last_name' => 'UpdatedLastName',
+            'user_dob' => '1990-01-01',
+            'user_position' => 'UpdatedPosition',
+            'gender' => 1,
+            'user_type_id' => 1,
+            'is_active' => 1,
+            'user_start_date' => '2023-01-01',
+            'user_end_date' => '2024-01-01',
+        ];
+    
+        // Send a request to edit the user
+        $response = $this->postJson('/api/v0.1/admin/edit_user', $updatedUserData);
+    
+        // Assert that the response is successful
+        $response->assertStatus(200)->assertJson([
+            'status' => 'success',
+            'message' => 'User updated successfully',
+        ]);
+    
+        // Assert that the user was updated in the database
+        $this->assertDatabaseHas('volunteer_users', [
+            'id' => $user->id,
+            'first_name' => $updatedUserData['first_name'],
+            'last_name' => $updatedUserData['last_name'],
+            'user_dob' => $updatedUserData['user_dob'],
+            'user_position' => $updatedUserData['user_position'],
+            'gender' => $updatedUserData['gender'],
+            'user_type_id' => $updatedUserData['user_type_id'],
+            'is_active' => $updatedUserData['is_active'],
+            'user_start_date' => $updatedUserData['user_start_date'],
+            'user_end_date' => $updatedUserData['user_end_date'],
+        ]);
+    }
+
+
+
+
+
+
+
     function testDeleteUserApi()
     {
         // Create an admin user
