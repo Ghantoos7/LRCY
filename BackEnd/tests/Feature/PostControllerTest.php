@@ -482,4 +482,90 @@ class PostControllerTest extends TestCase
         // Check that the response has the correct status and message
         $response->assertJson(['status' => 'success', 'message' => 'Reply deleted successfully']);
     }
+
+    public function testEditComment()
+    {
+        // Create a user
+        $user = Volunteer_user::factory()->create();
+
+        // Create a comment by the user
+        $comment = Comment::factory()->create([
+            'user_id' => $user->id,
+        ]);
+
+        // Test editing the comment by the owner user
+        $response = $this->postJson('/api/v0.1/post/edit_comment', [
+            'comment_id' => $comment->id,
+            'user_id' => $user->id,
+            'comment_content' => 'Updated comment content',
+        ]);
+        $response->assertJson([
+            'status' => 'success',
+            'message' => 'Comment updated successfully',
+        ]);
+        $response->assertStatus(200);
+
+        // Create another user
+        $otherUser = Volunteer_user::factory()->create();
+
+        // Test editing the comment by a non-owner user
+        $response = $this->postJson('/api/v0.1/post/edit_comment', [
+            'comment_id' => $comment->id,
+            'user_id' => $otherUser->id,
+            'comment_content' => 'Updated comment content',
+        ]);
+        $response->assertJson([
+            'status' => 'error',
+            'message' => 'You are not the owner of this comment',
+        ]);
+        $response->assertStatus(200);
+
+        // Test editing a non-existing comment
+        $response = $this->postJson('/api/v0.1/post/edit_comment', [
+            'comment_id' => '999',
+            'user_id' => $user->id,
+            'comment_content' => 'Updated comment content',
+        ]);
+        $response->assertJson([
+            'status' => 'error',
+            'message' => 'Comment not found',
+        ]);
+        $response->assertStatus(200);
+
+        // Test editing a comment by a non-existing user
+        $response = $this->postJson('/api/v0.1/post/edit_comment', [
+            'comment_id' => $comment->id,
+            'user_id' => '999',
+            'comment_content' => 'Updated comment content',
+        ]);
+        $response->assertJson([
+            'status' => 'error',
+            'message' => 'User not found',
+        ]);
+        $response->assertStatus(200);
+
+        // Test editing a comment without providing the comment_id input
+        $response = $this->postJson('/api/v0.1/post/edit_comment', [
+            'user_id' => $user->id,
+            'comment_content' => 'Updated comment content',
+        ]);
+        $response->assertJsonValidationErrors('comment_id');
+        $response->assertStatus(422);
+
+        // Test editing a comment without providing the user_id input
+        $response = $this->postJson('/api/v0.1/post/edit_comment', [
+            'comment_id' => $comment->id,
+            'comment_content' => 'Updated comment content',
+        ]);
+        $response->assertJsonValidationErrors('user_id');
+        $response->assertStatus(422);
+
+        // Test editing a comment without providing the comment_content input
+        $response = $this->postJson('/api/v0.1/post/edit_comment', [
+            'comment_id' => $comment->id,
+            'user_id' => $user->id,
+        ]);
+        $response->assertJsonValidationErrors('comment_content');
+        $response->assertStatus(422);
+    }
 }
