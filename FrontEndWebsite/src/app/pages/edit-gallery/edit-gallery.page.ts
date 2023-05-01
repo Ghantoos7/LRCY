@@ -69,7 +69,6 @@ export class EditGalleryPage implements OnInit {
       this.originalUsers = response['users'];
       this.selectedUsers = this.responsibles;
       this.checkSelectedUsers();
-  
     });
 
   

@@ -52,12 +52,13 @@ export class MemberProfilePage implements OnInit {
     this.user_start_date = user.user_start_date;
     this.user_end_date = user.user_end_date;
     this.user_profile_pic = user.user_profile_pic;
-    this.gender_name = this.mapGender(user.gender);
+    this.gender_name = user.gender;
     this.gender = user.gender;
+    
   }
 
   editUser(){
-    this.adminService.editUser(this.user_id, this.first_name,this.last_name,this.mapUserStatus(this.is_active), this.user_start_date,this.user_end_date,this.user_position, this.mapUserType(this.user_type_id), this.gender,this.user_dob).subscribe((response: any) => {
+    this.adminService.editUser(this.user_id, this.first_name,this.last_name,this.mapUserStatus(this.is_active), this.user_start_date,this.user_end_date,this.user_position, this.mapUserType(this.user_type_id), this.mapGender(this.gender_name),this.user_dob).subscribe((response: any) => {
       const parsedResponse = JSON.parse(JSON.stringify(response));
       if(parsedResponse.status == 'success') {
         this.alertController.create({
@@ -77,17 +78,18 @@ export class MemberProfilePage implements OnInit {
   
   }
 
-  mapGender(gender : number) : string{
-    if(gender == 0){
-      return 'Male'
+  mapGender(gender:string){
+    if(gender == 'Male'){
+      return 0;
     }
-    else if (gender == 1){
-      return 'Female'
+    else if(gender == 'Female'){
+      return 1;
     }
-    else if(gender == 2){
-      return 'Other'
-    }else{
-      return 'Private'
+    else if(gender == 'Other'){
+      return 2;
+    }
+    else{
+      return 3;
     }
   }
 
