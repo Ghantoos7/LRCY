@@ -88,7 +88,7 @@
                   <ion-col size="6">
                     <ion-item>
                       <ion-label>Budget Sheet</ion-label>
-                      <ion-input [(ngModel)] = "budget_sheet"  (change)="onChangeBudget($event)" class="first-card-input" type="file" accept="image/png, image/jpeg, image/jpg"></ion-input>
+                      <ion-input (change)="onChangeBudget($event)" class="first-card-input" type="file" accept="image/png, image/jpeg, image/jpg"></ion-input>
                     </ion-item>
                   </ion-col>
                   
@@ -97,13 +97,13 @@
                   <ion-col size="6">
                     <ion-item>
                       <ion-label>Proposal</ion-label>
-                      <ion-input [(ngModel)] = "proposal"  (change)="onChangeProp($event)" class="first-card-input" type="file" accept="image/png, image/jpeg, image/jpg"></ion-input>
+                      <ion-input (change)="onChangeProp($event)" class="first-card-input" type="file" accept="image/png, image/jpeg, image/jpg"></ion-input>
                     </ion-item>
                   </ion-col>
                   <ion-col size="6">
                     <ion-item>
                       <ion-label>Meeting minute</ion-label>
-                      <ion-input [(ngModel)] = "meeting_minute"  (change)="onChangeMeet($event)" class="first-card-input" type="file" accept="image/png, image/jpeg, image/jpg"></ion-input>
+                      <ion-input  (change)="onChangeMeet($event)" class="first-card-input" type="file" accept="image/png, image/jpeg, image/jpg"></ion-input>
                     </ion-item>
                   </ion-col>
                   
@@ -178,7 +178,7 @@
           <ion-col size="12">
             <ion-item>
               <ion-label>Add an image</ion-label>
-              <ion-input class="first-card-input" type="file" (change)="onChangePhoto($event)" [(ngModel)]="event_photo"></ion-input>
+              <ion-input class="first-card-input" type="file" (change)="onChangePhoto($event)"></ion-input>
             </ion-item>
           </ion-col>
         </ion-row>
