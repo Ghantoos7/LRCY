@@ -568,4 +568,70 @@ class PostControllerTest extends TestCase
         $response->assertJsonValidationErrors('comment_content');
         $response->assertStatus(422);
     }
+
+    public function testEditReply()
+    {
+        // Create a user
+        $user = Volunteer_user::factory()->create();
+
+        // Create a comment
+        $comment = Comment::factory()->create([
+            'user_id' => $user->id,
+        ]);
+
+        // Create a reply
+        $reply = Reply::factory()->create([
+            'comment_id' => $comment->id,
+            'user_id' => $user->id,
+        ]);
+
+        // Test updating the reply
+        $response = $this->postJson('/api/v0.1/post/edit_reply', [
+            'reply_id' => $reply->id,
+            'user_id' => $user->id,
+            'reply_content' => 'Updated reply content',
+        ]);
+        $response->assertJson([
+            'status' => 'success',
+            'message' => 'Reply updated successfully',
+        ]);
+        $response->assertStatus(200);
+
+        // Test updating the reply with invalid reply_id
+        $response = $this->postJson('/api/v0.1/post/edit_reply', [
+            'reply_id' => 999,
+            'user_id' => $user->id,
+            'reply_content' => 'Updated reply content',
+        ]);
+        $response->assertJson([
+            'status' => 'error',
+            'message' => 'Reply not found',
+        ]);
+        $response->assertStatus(200);
+
+        // Test updating the reply with invalid user_id
+        $response = $this->postJson('/api/v0.1/post/edit_reply', [
+            'reply_id' => $reply->id,
+            'user_id' => 999,
+            'reply_content' => 'Updated reply content',
+        ]);
+        $response->assertJson([
+            'status' => 'error',
+            'message' => 'User not found',
+        ]);
+        $response->assertStatus(200);
+
+        // Test updating the reply by a user who is not the owner
+        $otherUser = Volunteer_user::factory()->create();
+        $response = $this->postJson('/api/v0.1/post/edit_reply', [
+            'reply_id' => $reply->id,
+            'user_id' => $otherUser->id,
+            'reply_content' => 'Updated reply content',
+        ]);
+        $response->assertJson([
+            'status' => 'error',
+            'message' => 'You are not the owner of this reply',
+        ]);
+        $response->assertStatus(200);
+    }
 }
