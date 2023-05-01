@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { AlertController, IonicModule } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-pending-request',
@@ -14,9 +15,7 @@ import { Router } from '@angular/router';
 })
 export class PendingRequestPage implements OnInit {
 
-
-
-  constructor(private authService:AuthService, private alertController:AlertController, private router:Router) { }
+  constructor(private authService:AuthService, private alertController:AlertController, private router:Router, private navCtrl: NavController) { }
 
   ngOnInit() {
   }
@@ -44,6 +43,7 @@ export class PendingRequestPage implements OnInit {
                 next: (response: any) => {
                   const parsedResponse = JSON.parse(JSON.stringify(response));
                   if (parsedResponse.status === 'Request accepted') {
+                    localStorage.removeItem('last_page');
                     this.router.navigate(['/new-password']);
                   } else {
                     this.alertController.create({
@@ -63,8 +63,14 @@ export class PendingRequestPage implements OnInit {
     }).then(alert => alert.present());
   }
   
-  
-  
+  ionViewWillLeave() {
+    this.navCtrl.setDirection('root');
+    return false;
+  }
+
+  ionViewDidEnter() {
+    localStorage.setItem('last_page', '/pending-request');
+  }
   
 
 }
