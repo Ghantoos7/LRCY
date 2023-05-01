@@ -488,4 +488,23 @@ class AdminControllerTest extends TestCase
         $this->assertEquals('New goal name', $goal->goal_name);
         $this->assertEquals('New goal description', $goal->goal_description);
     }
+
+    public function testDeleteYearlyGoal()
+    {
+        // Create a new goal
+        $goal = Goal::factory()->create();
+
+        // Make a request to delete the goal
+        $response = $this->postJson('/api/v0.1/admin/delete_yearly_goal', [
+            'goal_id' => $goal->id,
+        ]);
+
+        // Assert that the response is successful
+        $response->assertStatus(200);
+
+        // Assert that the goal was deleted from the database
+        $this->assertDatabaseMissing('goals', [
+            'id' => $goal->id,
+        ]);
+    }
 }
