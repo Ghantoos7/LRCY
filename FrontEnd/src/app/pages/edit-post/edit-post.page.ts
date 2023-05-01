@@ -15,8 +15,11 @@ import { NavController } from '@ionic/angular';
   imports: [IonicModule, CommonModule, FormsModule]
 })
 export class EditPostPage implements OnInit {
-user_bio: string = '';
-post_id: string ='';
+  
+  post_caption: string = '';
+  
+  post_id: string ='';
+  
   constructor(private alrt:AlertController, private postService:PostService, private router:Router) { }
 
   ngOnInit() {
@@ -25,13 +28,13 @@ post_id: string ='';
     const id = JSON.parse(post_id)["p_id"];
     this.post_id = id;
     this.postService.getPost(id).subscribe((data: any) => {
-      this.user_bio = data['post'].post_caption;
+      this.post_caption = data['post'].post_caption;
     });
 
   }
 
   editPost(){
-    this.postService.editPost(this.post_id, this.user_bio).subscribe((data: any) => {
+    this.postService.editPost(this.post_id, this.post_caption).subscribe((data: any) => {
       const parsedResponse = JSON.parse(JSON.stringify(data));
       const status = parsedResponse.status;
       if(status == "success"){

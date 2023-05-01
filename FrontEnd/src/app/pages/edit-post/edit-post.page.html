@@ -6,9 +6,10 @@
     <ion-text class="header-txt">Edit Post</ion-text>
   </div>
 
-  <ion-input [(ngModel)] = "user_bio" class="input"  value="{{user_bio}}"></ion-input>
+  <div class="textarea-container">
+    <textarea #captionTextarea [(ngModel)]="post_caption" class="textarea" placeholder="{{post_caption}}" rows="1"></textarea>
+  </div>
 
   <ion-button class="post-button" shape="round" expand="block" size="large" (click)="editPost()">Save Changes</ion-button>
-
 
 </ion-content>
