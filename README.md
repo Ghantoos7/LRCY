@@ -48,22 +48,33 @@ The Lebanese Red Cross Youth (LRCY) is a private organization that is dedicated 
 
 ### Client App
 
-| Splash Screen                          | Sign In                              | Sign Up                      | Recover Request                          |
+| Splash Screen                          | Sign In                              | Sign Up                      | |
 | -------------------------------- | --------------------------------- | ------------------------ | -------------------------------- |
 | ![Splash Screen](https://user-images.githubusercontent.com/102875229/235320061-bce754f0-afec-4896-845e-098dc25f3c75.png) | ![Sign In](https://user-images.githubusercontent.com/102875229/235320259-2da42712-93de-4517-81ab-bb92c60a9ffc.png)| ![Sign Up](https://user-images.githubusercontent.com/102875229/235320171-0b970919-c358-4b65-910a-df710356448f.png)
- | ![Recover](./readme/Profile.png) |
 
-| Service Page                                | Favorites                           | Notifications                                | Chat                       |
+| Register                                | Recover Request                            | Password Reset                                |                        |
 | ------------------------------------------- | ----------------------------------- | -------------------------------------------- | -------------------------- |
-| ![Service Page](./readme/Seller%20Page.png) | ![Favorites](./readme/Favorite.png) | ![Notifications](./readme/Notifications.png) | ![Chat](./readme/Chat.png) |
+|  <img src="./README/register.jpeg" height = 450 width= 200> | <img src="./README/requestp.png" height = 450 width= 200> | <img src="./README/recover.png" height = 450 width= 200>| 
+
+
+
+| Waiting                                  | Profile Accomplishments                          | Profile Training Stats                               |
+| --------------------------------------------------- | -------------------------------- | -------------------------------------------- |
+<img src="./README/waiting.png" height = 450 width= 200> | <img src="./README/accomplishments.png" height = 450 width= 200> | <img src="./README/trainings.jpeg"  height = 450 width= 200/> |
+
+
+|  Profile Stats                                  | Profile Post                         | Announcements                              |
+| --------------------------------------------------- | -------------------------------- | -------------------------------------------- |
+<img src="./README/stats.jpeg" height = 450 width= 200> | <img src="./README/my-posts.png" height = 450 width= 200> | <img src="./README/announcements.png"  height = 450 width= 200> /> |
+
+
+| Yearly Goals                                  | Gallery                        | Gallery Info                              |
+| --------------------------------------------------- | -------------------------------- | -------------------------------------------- |
+<img src="./README/goals.png" height = 450 width= 200> | <img src="./README/gallerye.png" height = 450 width= 200> | <img src="./README/galleryi.jpeg"  height = 450 width= 200> /> |
+
+
 
 ### Admin Panel
-
-| Service Providers                                   | Clients                          | Add new seller                               |
-| --------------------------------------------------- | -------------------------------- | -------------------------------------------- |
-| ![Service Providers](./readme/ServiceProviders.png) | ![Clients](./readme/Clients.png) | ![Add new seller](./readme/Addnewseller.png) |
-
-### Service Provider Website
 
 | Followers                            | About                        | Send Notification                                 |
 | ------------------------------------ | ---------------------------- | ------------------------------------------------- |
