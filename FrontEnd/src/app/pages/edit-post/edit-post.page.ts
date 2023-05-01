@@ -35,8 +35,6 @@ export class EditPostPage implements OnInit {
     const id = JSON.parse(post_id)["p_id"];
     this.post_id = id;
     this.postService.getPost(id).subscribe((data: any) => {
-      console.log(post_id);
-      console.log(data['post']);
       this.post_caption = data['post'].post_caption;
       this.media_type = data['post'].post_type_id;
   
