@@ -180,9 +180,12 @@
               <ion-col size="12">
                 <ion-item>
                   <ion-label class="lab">Add an image</ion-label>
-                  <ion-input class="add-img-input" type="file" (change)="onChangePhoto($event)" [(ngModel)]="event_photo"></ion-input>
+                  <ion-input class="add-img-input" type="file" (change)="onChangePhoto($event)"></ion-input>
                   <ion-button slot="end" (click)="addPhoto()">Add</ion-button>
+                  <!-- Add the image preview here -->
+                  <img *ngIf="event_photo_preview" [src]="event_photo_preview" alt="Photo Preview" class="photo-preview">
                 </ion-item>
+                
               </ion-col>
             </ion-row>
     
@@ -197,9 +200,6 @@
                   </ion-card>
                 </ion-col>
               </ion-row>
-                <ion-card class="img-preview-card">
-                  <img *ngIf="event_photo_preview" [src]="event_photo_preview" style="width: 30%;height: 30%;"/>
-                </ion-card>
            </div>
     
           </ion-col>

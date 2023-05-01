@@ -376,11 +376,15 @@ ion-title-dark{
   object-fit: cover;
 }
 
-.img-preview-card{
-  height: 59%;
-  width:  62%;
+.photo-preview{
+  position: relative;
+  top: 50%;
+  left: 70%;
+  transform: translate(-50%, -50%);
+  width: 90px; 
+  height: 90px; 
+  border: none;
   object-fit: cover;
-  margin-left: 30%;
 }
 
 .container{
