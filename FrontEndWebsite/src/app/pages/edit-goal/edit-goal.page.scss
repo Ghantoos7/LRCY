@@ -3,8 +3,9 @@
 }
 
 ion-toolbar{
-    position: relative;
+    position: fixed;
     --background: #45579A;
+
 }
 
 ion-menu-button{
@@ -137,19 +138,23 @@ ion-range::part(pin) {
 }
 
 .ann{
-    position: relative;
-    top: 7px;
+    margin-left:5px;
+    margin-top: 7px;
 }
 
 .header-button{
     --background: none;
     --box-shadow: none;
-    position: relative;
-    left: 75%;
+    margin-left: 75%;
 }
 
+.header-button1{
+    --background: none;
+    --box-shadow: none;
+}
+
+
 .menu-button{
-    position: relative;
     width: 100%;
     --background: #45579A;
 }
