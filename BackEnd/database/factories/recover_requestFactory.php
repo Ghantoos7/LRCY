@@ -17,7 +17,9 @@ class recover_requestFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            // boolean
+            "request_status" => $this->faker->boolean,
+            'request_date' => $this->faker->date(),
         ];
     }
 }

@@ -23,6 +23,7 @@ use App\Models\training;
 use App\Models\take;
 use App\Models\program;
 use App\Models\event_image;
+use App\Models\branch;
 
 class AdminControllerTest extends TestCase
 {
@@ -166,5 +167,38 @@ class AdminControllerTest extends TestCase
             'user_id' => -1,
         ]);
         $response->assertJson(['status' => 'error', 'message' => 'User not found']);
+    }
+
+    public function testGetRequests()
+    {
+        // Create an admin user
+        $adminUser = Volunteer_user::factory()->create([
+            'user_type_id' => 1,
+            'password' => Hash::make('adminPassword'),
+        ]);
+
+        // Create branches
+        $branch1 = Branch::factory()->create();
+        $branch2 = Branch::factory()->create();
+
+        // Create users in different branches
+        $user1 = Volunteer_user::factory()->create(['branch_id' => $branch1->id]);
+        $user2 = Volunteer_user::factory()->create(['branch_id' => $branch2->id]);
+
+        // Create recover requests for users in different branches
+        $request1 = Recover_request::factory()->create(['user_id' => $user1->id]);
+        $request2 = Recover_request::factory()->create(['user_id' => $user2->id]);
+
+        // Successful retrieval of requests for a given branch
+        $response = $this->actingAs($adminUser)->getJson('/api/v0.1/admin/get_requests/' . $branch1->id);
+        $response->assertJson(['status' => 'success']);
+        $response->assertJsonFragment(['user_id' => $user1->id]);
+        $response->assertJsonMissing(['user_id' => $user2->id]);
+
+        // No requests found
+        Recover_request::query()->delete(); // Delete all requests
+
+        $response = $this->actingAs($adminUser)->getJson('/api/v0.1/admin/get_requests/' . $branch1->id);
+        $response->assertJson(['status' => 'error', 'message' => 'No requests found']);
     }
 }
