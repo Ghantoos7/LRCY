@@ -21,15 +21,15 @@ export class AddTrainingPage implements OnInit {
   selectedTrainings: number[] = [];
   selectedUsers: number[] = [];
 
- // darkMode: Boolean;
+  darkMode: Boolean;
 
   constructor(private router:Router, private menuCtrl: MenuController, private adminService: AdminService, private alertController: AlertController) {
 
-    // this.darkMode = localStorage.getItem('darkModeEnabled') === 'true';
-    // if (this.darkMode) {
-    //   document.body.setAttribute('color-theme', 'dark');
-    // }
-   }
+    this.darkMode = localStorage.getItem('darkModeEnabled') === 'true';
+    if (this.darkMode) {
+       document.body.setAttribute('color-theme', 'dark');
+    }
+  }
 
   ngOnInit() {
     this.adminService.getTrainingInfo("").subscribe((data: any) => {

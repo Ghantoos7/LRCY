@@ -20,7 +20,14 @@ import { debounceTime } from 'rxjs/operators';
 })
 export class YearlyGoalsPage implements OnInit {
 
-  constructor(private alertController: AlertController, private router:Router, private menuController: MenuController, private service:AdminService) { }
+  darkMode: boolean;
+
+  constructor(private alertController: AlertController, private router:Router, private menuController: MenuController, private service:AdminService) {
+    this.darkMode = localStorage.getItem('darkModeEnabled') === 'true';
+    if (this.darkMode) {
+       document.body.setAttribute('color-theme', 'dark');
+    }
+   }
 
   yearlyGoals: any;
   username = localStorage.getItem('username') as string;
