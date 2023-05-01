@@ -90,6 +90,7 @@ ion-button.menu-button{
   width: 881px;
   margin: 0 auto;
   position: relative;
+  height: auto;
 }
 
 .members-dark{
@@ -361,8 +362,9 @@ ion-title-dark{
 }
 
 .img-card{
-  height: 50px;
-  width:  90%;
+  height: 80%;
+  width:  80%;
+  object-fit: cover;
 }
 
 .container{

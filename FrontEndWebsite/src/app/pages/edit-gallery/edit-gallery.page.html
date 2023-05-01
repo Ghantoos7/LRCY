@@ -187,13 +187,13 @@
             </ion-row>
     
             <div class="ion-grid">
-              <ion-row>
+              <ion-row style="height: 250px;overflow-y: auto;">
                 <ion-col size="3" *ngFor="let image of images">
                   <ion-card class="img-card">
                     <div class="badge">
                       <ion-icon (click)="deleteImage(image.id)" name="trash" size="large"></ion-icon>
                     </div>
-                    <ion-img src="http://127.0.0.1:8000/storage/images/{{image.event_image_source}}" onerror="this.src='assets/imgs/ext.jpg'" class="custom-image"></ion-img>
+                    <img src="http://127.0.0.1:8000/storage/images/{{image.event_image_source}}" onerror="this.src='assets/imgs/ext.jpg'" class="custom-image">
                   </ion-card>
                 </ion-col>
               </ion-row>
