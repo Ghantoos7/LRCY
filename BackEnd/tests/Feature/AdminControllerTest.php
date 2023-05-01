@@ -283,4 +283,55 @@ class AdminControllerTest extends TestCase
         ]);
         $response->assertJson(['status' => 'error', 'message' => 'Invalid admin user']);
     }
+
+
+
+    function testDeleteAnnouncementApi()
+    {
+        // Create an admin user
+        $adminUser = Volunteer_user::factory()->create([
+            'user_type_id' => 1
+        ]);
+
+        // Create an announcement by the admin user
+        $announcement = Announcement::factory()->create([
+            'admin_id' => $adminUser->id
+        ]);
+
+        $announcement1 = Announcement::factory()->create([
+            'admin_id' => $adminUser->id
+        ]);
+
+        // Successful deletion of the announcement
+        $response = $this->actingAs($adminUser)->postJson('/api/v0.1/admin/delete_announcement', [
+            'announcement_id' => $announcement->id,
+            'admin_id' => $adminUser->id
+        ]);
+
+        $response->assertJson(['status' => 'success', 'message' => 'Announcement deleted successfully']);
+        $this->assertDatabaseMissing('announcements', ['id' => $announcement->id]);
+
+        // Validation error due to missing required fields
+        $response = $this->actingAs($adminUser)->postJson('/api/v0.1/admin/delete_announcement', []);
+        $response->assertStatus(422);
+        $response->assertJsonValidationErrors(['announcement_id', 'admin_id']);
+
+        // Invalid announcement ID
+        $response = $this->actingAs($adminUser)->postJson('/api/v0.1/admin/delete_announcement', [
+            'announcement_id' => -1,
+            'admin_id' => $adminUser->id
+        ]);
+
+        $response->assertJson(['status' => 'error', 'message' => 'Announcement not found']);
+
+        // Invalid admin user
+        $nonAdminUser = Volunteer_user::factory()->create(['user_type_id' => 0]);
+
+        $response = $this->actingAs($nonAdminUser)->postJson('/api/v0.1/admin/delete_announcement', [
+            'announcement_id' => $announcement1->id,
+            'admin_id' => $nonAdminUser->id
+        ]);
+
+        $response->assertJson(['status' => 'error', 'message' => 'User is not an admin']);
+    }
 }
