@@ -388,7 +388,7 @@ class AdminControllerTest extends TestCase
         $response->assertJson(['status' => 'error', 'message' => 'User is not an admin']);
     }
 
-    function testDeleteEventApo()
+    function testDeleteEventApi()
     {
         // Create a new event
         $event = Event::factory()->create();
@@ -537,5 +537,75 @@ class AdminControllerTest extends TestCase
                 'training_id' => $training->id,
             ]);
         }
+    }
+
+    function testDeleteTrainingForUserApi()
+    {
+        // Create a test training
+        $training = Training::factory()->create();
+
+        // Create test users
+        $users = Volunteer_user::factory()
+            ->count(3)
+            ->create();
+
+        // Assign the training to the users
+        foreach ($users as $user) {
+            Take::create([
+                'user_id' => $user->id,
+                'training_id' => $training->id,
+                'takes_on_date' => \Carbon\Carbon::now(),
+            ]);
+        }
+
+        // Send a request to remove the training from the users
+        $response = $this->postJson('/api/v0.1/admin/delete_training_for_user', [
+            'training_ids' => [$training->id],
+            'user_ids' => $users->pluck('id')->toArray(),
+        ]);
+
+        // Assert that the response is successful
+        $response->assertStatus(200)->assertJson([
+            'status' => 'success',
+            'message' => 'Trainings removed from users successfully',
+        ]);
+
+        // Assert that the training was removed from the users
+        foreach ($users as $user) {
+            $this->assertDatabaseMissing('takes', [
+                'user_id' => $user->id,
+                'training_id' => $training->id,
+            ]);
+        }
+    }
+
+    function testAddImageToEventApi()
+    {
+        // Create a test event
+        $event = Event::factory()->create();
+
+        // Create a test image
+
+        $imagePath = __DIR__ . '/test-image.jpg';
+        $testImage = new UploadedFile($imagePath, 'test-image.jpg', 'image/jpeg', null, true);
+
+        // Send a request to add the image to the event
+        $response = $this->postJson('/api/v0.1/admin/add_event_photo', [
+            'event_id' => $event->id,
+            'image' => $testImage,
+        ]);
+
+        // Assert that the response is successful
+        $response->assertStatus(200)->assertJson([
+            'status' => 'success',
+            'message' => 'Image created successfully',
+        ]);
+
+
+        // Assert that the image was added to the event
+        $this->assertDatabaseHas('event_images', [
+            'event_id' => $event->id,
+            'event_image_source' => $testImage->hashName(),
+        ]);
     }
 }
