@@ -134,5 +134,21 @@ class PostControllerTest extends TestCase
         ]);
     }
 
+    function testGetPosts()
+{
     
+    // Test getting all posts
+    $responseAll = $this->get('/api/v0.1/post/get_posts');
+    $responseAll->assertStatus(200);
+
+    
+    $user = Volunteer_user::factory()->create();
+
+    // Test getting posts for a specific user
+    $responseUser = $this->get('/api/v0.1/post/get_posts/' . $user->id);
+    $responseUser->assertStatus(200);
+    
+}
+
+
 }
