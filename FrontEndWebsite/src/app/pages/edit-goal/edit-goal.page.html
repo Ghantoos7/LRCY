@@ -20,7 +20,7 @@
         </ion-buttons>
         <ion-title><ion-text class="ann">Yearly Goals</ion-text>
           <ion-button (click)="goToPanel()" class="header-button"><ion-label>Panel</ion-label></ion-button>
-          <ion-button (click)="goToHome()" class="header-button"><ion-label>Log out</ion-label></ion-button>
+          <ion-button (click)="goToHome()" class="header-button1"><ion-label>Log out</ion-label></ion-button>
         </ion-title>
       </ion-toolbar>
     </ion-header>
@@ -34,23 +34,29 @@
     </ion-card-header>
 
     <ion-card-content>
+      <ion-label>Goal Title</ion-label>
       <ion-input [(ngModel)]="goal_name" class="input" placeholder="Goal Name..." maxlength="48"></ion-input>
     </ion-card-content>
     
     <ion-card-content>
+      <ion-label>Goal Description</ion-label>
       <ion-input [(ngModel)]="goal_description" class="input" placeholder="Goal Description..."maxlength="255"></ion-input>
     </ion-card-content>
     
     <ion-card-content>
+      <ion-label>Number Completed</ion-label>
       <ion-input [(ngModel)]="number_completed" class="input" type="number" placeholder="Number Completed..."></ion-input>
     </ion-card-content>
     
     <ion-card-content>
+      <ion-label>Total Number To Complete</ion-label>
       <ion-input [(ngModel)]="number_to_complete" class="input" type="number" placeholder="Number to Complete..."></ion-input>
     </ion-card-content>
     
     <ion-card-content>
+      <ion-label>Program</ion-label>
       <div class="select-wrapper">
+        
         <ion-select [(ngModel)]="program_id" class="input" placeholder="Program">
           <ion-select-option value="Youth and Health">Youth and Health</ion-select-option>
           <ion-select-option value="Human values and principles">Human values and principles</ion-select-option>
@@ -61,6 +67,7 @@
     </ion-card-content>
     
     <ion-card-content>
+      <ion-label>Event Type</ion-label>
       <div class="select-wrapper">
         <ion-select [(ngModel)]="event_type_id" class="input" placeholder="Event Type">
           <ion-select-option value="Activity">Activity</ion-select-option>
@@ -71,6 +78,7 @@
     </ion-card-content>
     
     <ion-card-content>
+      <ion-label>Goal Year</ion-label>
       <ion-input [(ngModel)]="goal_year" class="input" type="number" placeholder="Goal Year..."></ion-input>
     </ion-card-content>
     
