@@ -42,7 +42,7 @@ Hello world! This is our project for the software engineering course at LAU, the
 
 <img src="./README/wireframes.svg"/>
 
-> This design was planned before on paper, then moved to Figma for the fine details.
+> This design was planned before on paper, then moved to Figma for the fine details. <br> 
 > Note that we didn't use any already made template everything was made from scratch.
 
 
