@@ -648,7 +648,6 @@ class PostControllerTest extends TestCase
         $response = $this->get("/api/v0.1/post/get_comments/{$post->id}");
         $response->assertJson([
             'status' => 'success',
-         
         ]);
         $response->assertStatus(200);
 
@@ -664,5 +663,36 @@ class PostControllerTest extends TestCase
         $comment1->delete();
         $comment2->delete();
         $post->delete();
+    }
+
+    public function testGetReplies()
+    {
+        // Create a comment and a reply for that comment
+        $comment = Comment::factory()->create();
+        $reply = Reply::factory()->create(['comment_id' => $comment->id]);
+
+        // Test the getReplies API with valid comment ID
+        $response = $this->get("/api/v0.1/post/get_replies/{$comment->id}");
+        $response->assertStatus(200);
+        $response->assertJson([
+            'status' => 'success',
+        ]);
+
+        // Test the getReplies API with invalid comment ID
+        $response = $this->get('/api/v0.1/post/get_replies/999');
+        $response->assertStatus(200);
+        $response->assertJson([
+            'status' => 'error',
+            'message' => 'Comment not found',
+        ]);
+
+        // Test the getReplies API with comment ID with no replies
+        $commentWithoutReplies = Comment::factory()->create();
+        $response = $this->get("/api/v0.1/post/get_replies/{$commentWithoutReplies->id}");
+        $response->assertStatus(200);
+        $response->assertJson([
+            'status' => 'error',
+            'message' => 'No replies found for this comment',
+        ]);
     }
 }

@@ -19,6 +19,7 @@ class replyFactory extends Factory
         return [
             'reply_content' => $this->faker->text,
             'reply_date' => $this->faker->dateTime,
+            'user_id' => $this->faker->numberBetween(1, 10),
             //
         ];
     }
