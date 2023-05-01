@@ -366,4 +366,58 @@ class PostControllerTest extends TestCase
             'message' => 'User not found',
         ]);
     }
+
+    public function testUnlikeComment()
+
+
+    {   // Create a user and a comment for testing
+        $user = volunteer_user::factory()->create();
+
+        $comment = Comment::factory()->create();
+        // Create a test post
+        $post = Post::factory()->create(['user_id' => $user->id]);
+
+      
+    
+
+        // Create a test comment like
+        $comment_like = Comment_like::factory()->create([
+            'comment_id' => $comment->id,
+            'user_id' => $user->id,
+        ]);
+
+        // Send a request to unlike the comment
+        $response = $this->post('/api/v0.1/post/unlike_comment', [
+            'comment_id' => $comment->id,
+            'user_id' => $user->id,
+        ]);
+
+        // Check if the response has a success status code
+        $response->assertStatus(200);
+
+        // Check if the response message indicates that the comment was unliked successfully
+        $response->assertJson([
+            'status' => 'success',
+            'message' => 'Comment unliked successfully',
+        ]);
+
+        // Check if the comment like was deleted from the database
+        $this->assertDatabaseMissing('comment_likes', [
+            'comment_id' => $comment->id,
+            'user_id' => $user->id,
+        ]);
+
+        // Check if the comment like count was decremented
+        $comment = Comment::find($comment->id);
+        $this->assertEquals(-1, $comment->comment_like_count);
+
+        // Send another request to unlike the comment (should fail since the user has already unliked the comment)
+        $response = $this->post('/api/v0.1/post/unlike_comment', [
+            'comment_id' => $comment->id,
+            'user_id' => $user->id, 
+        ]);
+
+    }
+
+    
 }
