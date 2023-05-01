@@ -29,7 +29,7 @@ ion-button.menu-button{
   position: absolute;
   top: 0;
   right: 0;
-  color: red;
+  color: gray;
   width: 50px;
   height:50px;
   border-radius: 20%;
@@ -149,6 +149,15 @@ h1{
   position: absolute;
   width: 270px;
   left: 115px;
+}
+
+.add-img-input {
+  --background: #bcb9b9; 
+  --padding-end: 10px; 
+  border-radius: 15px;
+  position: absolute;
+  width: 320px;
+  left: 15%;
 }
 
 ion-label{
@@ -338,6 +347,11 @@ ion-title-dark{
 
 .img-card{
   height: 50px;
+  width:  90%;
+}
+
+.container{
+  width: 100%;
 }
 
 .delete{
