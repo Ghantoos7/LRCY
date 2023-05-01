@@ -107,27 +107,27 @@
             border-color: #45579A #45579A #fff;
         }
         ul {
-                list-style: none;
-                margin: 0 0 2rem;
-                padding: 0 0 0 1rem;
-                text-indent: -1rem;
-            }
+            list-style: none;
+            margin: 0 0 2rem;
+            padding: 0 0 0 1rem;
+            text-indent: -1rem;
+        }
 
-            .success:before {
-                color: #4e9a06;
-                content: '✓';
-                padding-right: 0.5rem;
-            }
+        .success:before {
+            color: #4e9a06;
+            content: '✓';
+            padding-right: 0.5rem;
+        }
 
-            .defect {
-                color: #a40000;
-            }
+        .defect {
+            color: #a40000;
+        }
 
-            .defect:before {
-                color: #a40000;
-                content: '✗';
-                padding-right: 0.5rem;
-            }
+        .defect:before {
+            color: #a40000;
+            content: '✗';
+            padding-right: 0.5rem;
+        }
     </style>
 
 </head>
@@ -225,47 +225,70 @@
                         parameters, return values, and possible errors.</p>
                 </div>
 
-            <h1>Unit Testing For Each Controller</h1>
-            <div class="api-card">
-                <div class="card-body">
-                    <h2 class="card-header" >User Controller (Tests\Unit\UserController)</h2>
-                    <ul>
-                        <li class="success">Signup api</li>
-                        <li class="success">Register api</li>
-                        <li class="success">Login api</li>
-                        <li class="success">Recover request api</li>
-                        <li class="success">Change password api</li>
-                        <li class="success">Check request status api</li>
-                        <li class="success">Get user info api</li>
-                        <li class="success">Logout api</li>
-                        <li class="success">Edit profile api</li>
-                        <li class="success">Get trainings info api</li>
-                        <li class="success">Get events organized api</li>
-                        <li class="success">Get events organized count api</li>
-                        <li class="success">Get total volunteering time api</li>
-                        <li class="success">Get completed trainings count api</li>
-                        <li class="success">Get posts count api</li>
-                        <li class="success">Get comments count api</li>
-                        <li class="success">Get total likes received api</li>
-                        <li class="success">Get own posts api</li>
-                        <li class="success">Get branch info api</li>
-                    </ul>
+                <h1>Unit Testing For Each Controller</h1>
+                <div>
+                    <div class="api-card">
+                        <h2>User Controller (Tests\Unit\UserController)</h2>
+                        <ul>
+                            <li class="success">Signup api</li>
+                            <li class="success">Register api</li>
+                            <li class="success">Login api</li>
+                            <li class="success">Recover request api</li>
+                            <li class="success">Change password api</li>
+                            <li class="success">Check request status api</li>
+                            <li class="success">Get user info api</li>
+                            <li class="success">Logout api</li>
+                            <li class="success">Edit profile api</li>
+                            <li class="success">Get trainings info api</li>
+                            <li class="success">Get events organized api</li>
+                            <li class="success">Get events organized count api</li>
+                            <li class="success">Get total volunteering time api</li>
+                            <li class="success">Get completed trainings count api</li>
+                            <li class="success">Get posts count api</li>
+                            <li class="success">Get comments count api</li>
+                            <li class="success">Get total likes received api</li>
+                            <li class="success">Get own posts api</li>
+                            <li class="success">Get branch info api</li>
+                        </ul>
+                    </div>
+                    <div class="api-card">
+                        <h2>Event Controller (Tests\Unit\EventController)</h2>
+                        <ul>
+                            <li class="success">Get yearly goals api</li>
+                            <li class="success">Get event info api</li>
+                            <li class="success">Get announcements api</li>
+                            <li class="success">Get event pictures api</li>
+                            <li class="success">Get training info api</li>
+                        </ul>
+                    </div>
+
+                    <div class="api-card">
+                        <h2  > Post Controller (Tests\Unit\PostController)</h2>
+                        <ul>
+                            <li class="success">Create post api</li>
+                            <li class="success">Edit post api</li>
+                            <li class="success">Delete post api</li>
+                            <li class="success">Get post api</li>
+                            <li class="success">Get posts api</li>
+                            <li class="success">Like post api</li>
+                            <li class="success">Unlike post api</li>
+                            <li class="success">Comment post api</li>
+                            <li class="success">Reply comment api</li>
+                            <li class="success">Like comment api</li>
+                            <li class="success">Unlike comment api</li>
+                            <li class="success">Delete comment api</li>
+                            <li class="success">Delete reply api</li>
+                            <li class="success">Edit comment api</li>
+                            <li class="success">Edit reply api</li>
+                            <li class="success">Get comments api</li>
+                            <li class="success">Get replies api</li>
+                            <li class="success">Get post likes api</li>
+                            <li class="success">Get comment likes api</li>
+                        </ul>
+                    </div>
+
+
                 </div>
-                <div class="card-body">
-                    <h2 class="card-header" >Event Controller (Tests\Unit\EventController)</h2>
-                    <ul>
-                        <li class="success">Get yearly goals api</li>
-                        <li class="success">Get event info api</li>
-                        <li class="success">Get announcements api</li>
-                        <li class="success">Get event pictures api</li>
-                        <li class="success">Get training info api</li>
-                    </ul>
-                </div>
-
-
-
-
-             </div>
 
 
 
@@ -2750,7 +2773,8 @@
                             <h4>Description:</h4>
                         </div>
                         <div class="card-body">
-                            <p>The <code>createPost()</code> function creates a new post in the database with the specified user ID,
+                            <p>The <code>createPost()</code> function creates a new post in the database with the
+                                specified user ID,
                                 post type, and caption.</p>
                             <p>If the post type is "image", the function requires an uploaded file as "post_media".</p>
                         </div>
