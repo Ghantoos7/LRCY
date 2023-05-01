@@ -233,9 +233,7 @@ addPhoto(){
 
   removeSelectedUser(selectedUser: any) {
     this.selectedUsers = this.selectedUsers.filter(u => u.id !== selectedUser.id);
-  
-
-      this.allUsers.push(selectedUser);
+    this.allUsers.push(selectedUser);
     
   }
   
