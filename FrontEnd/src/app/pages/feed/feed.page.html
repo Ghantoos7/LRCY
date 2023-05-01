@@ -33,6 +33,9 @@
   </ion-header>
 
   <ion-content class="whitebackground">
+    <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
 
     <div *ngIf="errorMessage" class="error-message" style="text-align: center; color: grey; padding-top: 20px;">
       {{ errorMessage }}

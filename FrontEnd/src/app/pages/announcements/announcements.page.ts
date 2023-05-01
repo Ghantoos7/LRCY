@@ -50,6 +50,13 @@ export class AnnouncementsPage implements OnInit {
     });
   }
   
+  handleRefresh(event:any) {
+    setTimeout(() => {
+      this.ngOnInit();
+      event.target.complete();
+    }, 1000);
+  };
+
 
   public getAnnouncerProfilePic(index: number) {
     let currentAnnouncement = this.announcements[index];
