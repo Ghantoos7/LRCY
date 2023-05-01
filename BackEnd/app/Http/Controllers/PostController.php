@@ -594,8 +594,7 @@ class PostController extends Controller {
         }
         
         // Get the comments associated with the post
-        $comments = Comment::where('post_id', $post_id);
-
+        $comments = Comment::where('post_id', $post_id)->orderBy('created_at', 'desc');
 
         // Get the comments as a collection of results
         $comments = $comments->get();

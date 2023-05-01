@@ -110,9 +110,22 @@ export class FeedPage implements OnInit {
   getDaysAgo(postDate: string): string {
     const today = new Date();
     const post = new Date(postDate);
-    const yearDiff = today.getFullYear() - post.getFullYear();
-    const monthDiff = today.getMonth() - post.getMonth();
-    const dayDiff = today.getDate() - post.getDate();
+  
+    let yearDiff = today.getFullYear() - post.getFullYear();
+    let monthDiff = today.getMonth() - post.getMonth();
+    let dayDiff = today.getDate() - post.getDate();
+  
+    if (dayDiff < 0) {
+      monthDiff -= 1;
+      const daysInPreviousMonth = new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+      dayDiff += daysInPreviousMonth;
+    }
+  
+    if (monthDiff < 0) {
+      yearDiff -= 1;
+      monthDiff += 12;
+    }
+  
     if (yearDiff > 0) {
       return `${yearDiff}y ago`;
     } else if (monthDiff > 0) {
@@ -124,12 +137,14 @@ export class FeedPage implements OnInit {
       const minuteDiff = today.getMinutes() - post.getMinutes();
       if (hourDiff > 0) {
         return `${hourDiff}h ago`;
-      } else {
+      } else if (minuteDiff > 0) {
         return `${minuteDiff}m ago`;
+      } else {
+        return `just now`;
       }
     }
   }
-
+  
 
   async openCommentsModal(post_id: number) {
     const modal = await this.modalController.create({
