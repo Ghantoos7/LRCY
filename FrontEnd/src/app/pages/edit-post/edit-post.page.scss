@@ -132,7 +132,21 @@
     outline: none;
   }
 
-
+  .chosen-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20%;
+    margin-top: 15%;
+    padding-bottom: 10%;
+    padding-top: 10%;
+  }
+  
+  .chosen-image {
+    max-width: 90%;
+    max-height: 200px;
+    object-fit: cover;
+  }
   
   
   

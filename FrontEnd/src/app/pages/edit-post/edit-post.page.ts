@@ -20,6 +20,8 @@ export class EditPostPage implements OnInit {
   
   post_id: string ='';
   
+  post_src_img: any;
+
   constructor(private alrt:AlertController, private postService:PostService, private router:Router) { }
 
   ngOnInit() {
@@ -29,6 +31,7 @@ export class EditPostPage implements OnInit {
     this.post_id = id;
     this.postService.getPost(id).subscribe((data: any) => {
       this.post_caption = data['post'].post_caption;
+      this.post_src_img = data['post'].post_media;
     });
 
   }
@@ -44,7 +47,7 @@ export class EditPostPage implements OnInit {
           buttons: ['OK']
         }).then((alert) => alert.present())
         .catch((err) => console.log(err));
-this.router.navigate(['/profile/My-Posts'])
+      this.router.navigate(['/profile/My-Posts'])
       }else{
         this.alrt.create({
           header: 'Error',
@@ -56,5 +59,27 @@ this.router.navigate(['/profile/My-Posts'])
     });
 
   }
+
+  async goBack() {
+    const alert = await this.alrt.create({
+      header: 'Confirm',
+      message: 'If you leave this page, your changes will be discarded. Are you sure you want to leave?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+        {
+          text: 'Leave',
+          handler: () => {
+            this.router.navigate(['/profile/My-Posts']);
+          },
+        },
+      ],
+    });
+  
+    await alert.present();
+  }
+  
 
 }
