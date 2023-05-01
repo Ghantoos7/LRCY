@@ -1,0 +1,45 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Statistics</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <div class="container">
+    <div *ngIf="errorMessage" class="error-message" style="text-align: center; color: grey; padding-top: 20px;">
+      {{ errorMessage }}
+    </div>
+    <ion-card class="card" *ngFor="let post of posts_array; let i = index">
+      <div class="header-container">
+        <img alt="Avatar" [src]="(user_profile_pic && user_profile_pic !== 'null') ? 'http://127.0.0.1:8000/storage/images/' + user_profile_pic : 'https://ionicframework.com/docs/img/demos/avatar.svg'" onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'"/>
+       
+        <ion-text class="name">{{full_name}}</ion-text>
+        <ion-text class="post-date">{{getDaysAgo(post.created_at)}}</ion-text>
+        <ion-icon *ngIf="!othersPage" size="large"class="edit" name="ellipsis-vertical-outline" (click)="showActionSheet(post.id)"></ion-icon>
+      
+      </div>
+
+      <ion-card-content>
+        <div class="caption-container">
+          <ion-text>{{post.post_caption}} 
+          </ion-text>
+        </div>  
+        <img *ngIf="post.post_type_id == 2" class="post-image" src="http://127.0.0.1:8000/storage/images/{{post.post_media}}" onerror="this.src='assets/imgs/ext.jpg'"/>
+        <video *ngIf="post.post_type_id == 3" controls class="post-video">
+          <source src="http://127.0.0.1:8000/storage/videos/{{post.post_media}}" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </ion-card-content>
+
+      <ion-footer>
+        <ion-icon id="like-button-{{post.id}}" class="likes" [class.active]="isLikedUser[post.id]" name="{{isLikedUser[post.id] ? 'heart' : 'heart-outline' }}" (click)="toggleLike(post.id)"></ion-icon>
+        <ion-text class="like-count" color="danger">{{this.likeCount[post.id]}}</ion-text>
+        <ion-img (click)="openCommentsModal(post.id)" class="comments" src="assets/icon/comments.png"></ion-img>
+        <ion-text class="comment-count">{{this.commentCount[post.id]}}</ion-text>
+        <ion-input class="input"  [(ngModel)]="comment_contents[i]" placeholder="Comment on this post..."></ion-input>
+        <ion-icon (click)="sendComment(post.id,i)" class="send-icon" name="send"></ion-icon>
+
+      </ion-footer>  
+    </ion-card>
+  </div>
+  

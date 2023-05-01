@@ -1,0 +1,80 @@
+<ion-content>
+
+  <ion-menu menuId="menuHvp" contentId="main-content" class="menu">
+    <ion-header>
+      <ion-toolbar class="menu-tool">
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <div class="avatar-container">
+        <ion-avatar size="large" class="custom-avatar">
+          <img alt="Avatar" [src]="(user_profile_pic && user_profile_pic !== 'null') ? 'http://127.0.0.1:8000/storage/images/' + user_profile_pic : 'https://ionicframework.com/docs/img/demos/avatar.svg'" onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'"/>
+        </ion-avatar>
+        <ion-label class="username-label">{{username}}</ion-label>
+        <ion-button (click)="goProfile()" class="custom-button" expand="block"><ion-icon name="person" slot="start"></ion-icon>My Profile</ion-button>
+        <ion-button (click)="goFeed()" class="custom-button" expand="block"><ion-icon name="receipt" slot="start"></ion-icon>Feed</ion-button>
+        <ion-button (click)="goGallery()" class="custom-button" expand="block"><ion-icon name="images" slot="start"></ion-icon>Gallery</ion-button>
+        <ion-button (click)="goAnnouncements()" class="custom-button" expand="block"><ion-icon name="document-text" slot="start"></ion-icon>Announcements</ion-button>
+        <ion-button (click)="goGoals()" class="custom-button" expand="block"><ion-icon name="calendar" slot="start"></ion-icon>Yearly Goals</ion-button>
+        <ion-button (click)="logout()" class="custom-button" expand="block"><ion-icon name="log-out" slot="start"></ion-icon>Log Out</ion-button>
+      </div>
+    </ion-content>
+  </ion-menu>
+  <div class="ion-page" id="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Human Values</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <div *ngIf="errorMessage" class="error-message" style="text-align: center; color: grey; padding-top: 20px;">
+      {{ errorMessage }}
+    </div>
+
+    <ion-content class="ion-padding">
+      <ion-row>
+        <ion-col size='6' *ngFor="let event of hvp_events;">
+          <ion-card  (click)="seeDetails(event.id)" *ngIf="showActivities && event.event_type_id == 1 || showTrainings && event.event_type_id == 2 || showOthersEvents && event.event_type_id == 3">
+            <div class="badge">
+              <ion-icon *ngIf="event.event_type_id ==1" name="calendar-number-outline" size="large"></ion-icon>
+              <ion-icon *ngIf="event.event_type_id == 2" name="barbell-outline" size="large"></ion-icon>
+              <ion-icon *ngIf="event.event_type_id ==3" name="ellipsis-horizontal-outline" size="large"></ion-icon>
+            </div>
+            <ion-img src="http://127.0.0.1:8000/storage/images/{{event.event_main_picture}}" class="custom-image"></ion-img>
+            <ion-card-header >
+              <ion-card-subtitle class="custom-subtitle">{{event.event_title}}</ion-card-subtitle>
+            </ion-card-header>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+   
+      
+      
+
+    </ion-content>
+  </div>
+
+  
+  <ion-fab class="custom-fab" vertical="bottom" horizontal="end">
+    <ion-fab-button class="custom-fab-button">
+      <ion-icon name="options-outline"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button (click)="showActivity()">
+        <ion-icon name="today-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="showTraining()">
+        <ion-icon name="barbell-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="showOthers()">
+        <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="reset()">
+        <ion-icon name="close"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+</ion-content>

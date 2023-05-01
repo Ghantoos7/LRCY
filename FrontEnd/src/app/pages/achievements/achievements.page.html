@@ -1,0 +1,38 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Statistics</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+  <div class="container ion-justify-content-center">
+    
+    <ion-grid>
+      <div *ngIf="errorMessage" class="error-message" style="text-align: center; color: grey; padding-top: 20px;">
+        {{ errorMessage }}
+      </div>
+      <ion-row *ngFor="let event of events_organized" class="ion-align-items-center ion-justify-content-center">
+        <ion-col size="1">
+          <ion-icon size="medium" [name]="getProgramIcon(event.program_id)"></ion-icon>
+        </ion-col>
+        <ion-col size="10">
+          <ion-card>
+            <ion-card-header>
+              <ion-item lines="none">
+                <ion-label class="ion-text-center">
+                  <h1>{{ event.event_title }}</h1>
+                  <p>{{ event.role_name }}</p>
+                  <p>{{ event.event_date }}</p>
+                </ion-label>
+              </ion-item>
+            </ion-card-header>
+          </ion-card>
+        </ion-col>
+        <ion-col size="1" style="right:3%;">
+          <ion-icon class="event-icon" size="medium" [name]="getEventIcon(event.event_type_id)"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

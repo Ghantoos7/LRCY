@@ -1,0 +1,100 @@
+.whitebackground {
+  --background: #fff;
+}
+
+.signin-circles{
+  width: 385px;
+}
+
+.greeting{
+  font-size: 40px;
+  position: fixed;
+  top: 25%;
+  left: 25%;
+  transform: translate(-20%, -50%);
+  color: white;
+}
+
+.signin{
+  font-size: 40px;
+  position: fixed;
+  top: 40%;
+  left: 13%;
+  transform: translate(-20%, -50%);
+  color: white;
+}
+
+.container{
+  font-size: 10px; 
+  position: fixed; 
+  top: 42%; 
+  left: 6%;
+  color: white;
+}
+
+.label {
+  --color: white;
+}
+
+.email{
+  border-bottom: 1px solid #ccc;
+  color: white;
+}
+
+
+.password{
+  border-bottom: 1px solid #ccc;
+  color: white;
+}
+
+ion-checkbox {
+  font-size: 20px;
+  --size: 32px;
+  --checkbox-background-checked: #45579A;
+  --checkbox-background: white;
+  color: white;
+  top: 30px;
+}
+  
+ion-checkbox::part(container) {
+  border-radius: 6px;
+  border: 1px solid #45579A;
+  color: white;
+}
+
+.signin-button{
+  width: 80%; 
+  margin: 0 auto; 
+  --background: #B11433
+}
+
+.new-here{
+  color: #B11433; 
+  padding-left: 50px;
+}
+
+.forgot-pass{
+  color: #B11433; 
+  padding-left: 80px;
+}
+
+ion-item{
+  --background: transparent;
+  --inner-padding-end: 0;
+}
+
+.input-field {
+  display: flex;
+  align-items: center;
+}
+  
+ion-icon{
+  color: white;
+  padding-right: 5px;
+}
+
+.mail-icon{
+  position: relative;
+  top: 6px;
+}
+

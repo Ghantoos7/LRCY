@@ -1,0 +1,28 @@
+<ion-content class="whitebackground">
+  <ion-icon size="large" name="arrow-back" (click)="goBack()"></ion-icon>
+  <ion-img src="assets/imgs/signup-design.png" class="signup-design"></ion-img>
+
+  <ion-text class="title">
+    <b>Sign Up</b>
+  </ion-text>
+
+  <ion-text class="subtitle">
+    <h6>So happy to see you here!</h6>
+  </ion-text>
+
+  <ion-text class="note">
+    <h6>Make sure an admin registered you before signing up!</h6>
+  </ion-text>
+
+  <ion-text color=white class="input-container">
+    <div class="input-field">  
+      <img src="assets/icon/ID.png" class="id-icon" alt="ID icon">
+      <ion-item>
+        <ion-label class="label" position="floating" >Volunteer ID </ion-label>
+        <ion-input type="email" [(ngModel)]="organization_id" name="organization_id" required class="email-input"></ion-input>
+      </ion-item> 
+    </div>
+  </ion-text>
+
+  <ion-button class="submit-button" shape="round" expand="block" size="large" (click)="signUp(organization_id)"><b>Submit</b></ion-button>
+</ion-content>

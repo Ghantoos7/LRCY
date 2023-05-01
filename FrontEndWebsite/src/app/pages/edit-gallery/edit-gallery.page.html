@@ -1,0 +1,221 @@
+<ion-content [fullscreen]="true" [ngClass]="{'dark-content': darkMode}">
+
+  <ion-menu menuId="editGallery" contentId="main-content">
+    <ion-header>
+      <ion-toolbar class="toolbar-background">
+        <ion-title [ngClass]="{'ion-title-dark': darkMode}" class="menu-title">Manage Gallery</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content  class="ion-menu" class="ion-padding" [ngClass]="{'ion-menu-dark': darkMode}"> 
+        <ion-button (click)="goToGallery()"class="menu-button">View Gallery</ion-button>
+        <ion-button (click)="goToAddGallery()" class="menu-button">Add an Event</ion-button>
+    </ion-content>
+  </ion-menu>
+
+  <div id="main-content">
+    <ion-header>
+      <ion-toolbar class="toolbar-background">
+        <ion-buttons slot="start">
+          <ion-menu-button [ngClass]="{'ion-menu-button-dark': darkMode}"></ion-menu-button>
+        </ion-buttons>
+        <ion-title><ion-text class="ann"  [ngClass]="{'ann-dark': darkMode}">Gallery</ion-text>
+          <ion-button (click)="goToPanel()" class="header-button"><ion-label  class ="label" [ngClass]="{'ion-label-dark': darkMode}">Panel</ion-label></ion-button>
+          <ion-button (click)="goToHome()" class="header-button1"><ion-label class ="label" [ngClass]="{'ion-label-dark': darkMode}">Log out</ion-label></ion-button>
+        </ion-title>
+      </ion-toolbar>
+    </ion-header>
+  
+    <ion-grid class="ion-no-padding ion-align-items-center ion-justify-content-center">
+  
+      <ion-row>
+        <ion-col size-md="10" size-lg="9" size-xl="8" class="ion-padding"  offset-md="1" offset-lg="2" offset-xl="2">
+          <div class="custom-div">
+            <ion-text class="form-title">Edit Event</ion-text>
+  
+            <ion-button class="edit-btn" size="small" ><input
+              (change)="onChange($event)"  type="file" accept="image/png, image/jpeg, image/jpg"></ion-button>
+            <div class="text-div"></div>
+            <div class="inner-div" [ngClass]="{'inner-div-dark': darkMode}">
+              <ion-grid>
+                <ion-card-title> &nbsp; Edit Event Information</ion-card-title>
+                <ion-row>
+                  <ion-col size="6">
+                    <ion-item>
+                      <ion-label class="lab">Title</ion-label>
+                      <ion-input [(ngModel)]="event_title" class="first-card-input"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size="6">
+                    <ion-item  class="custom-input">
+                      <ion-label class="custom-label" class="lab">Date of Event</ion-label>
+                      <ion-input [(ngModel)]="event_date" class="first-card-input" type="date"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                  
+                </ion-row>
+                <ion-row>
+                  <ion-col size="6">
+                    <ion-item>
+                      <ion-select [(ngModel)]="program_id" class="input" placeholder="Program"  class="lab">
+                        <ion-select-option value="Youth and Health">Youth and Health</ion-select-option>
+                        <ion-select-option value="Human values and principles">Human values and principles</ion-select-option>
+                        <ion-select-option value="Environment">Environment</ion-select-option>
+                        <ion-select-option value="Other">Other</ion-select-option>
+                      </ion-select>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size="6">
+                    
+                    <ion-item>
+                      <ion-select  [(ngModel)]="event_type_id" class="input" placeholder="Event Type" class="lab">
+                        <ion-select-option value="Activity">Activity</ion-select-option>
+                        <ion-select-option value="Training">Training</ion-select-option>
+                        <ion-select-option value="Other">Other</ion-select-option>
+                      </ion-select>
+                    </ion-item>
+                 
+                  </ion-col>
+                  
+                </ion-row>
+  
+                <ion-row>
+                  <ion-col size="6">
+                    <ion-item>
+                      <ion-label class="lab">Location</ion-label>
+                      <ion-input [(ngModel)] = "event_location" class="first-card-input"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size="6">
+                    <ion-item>
+                      <ion-label class="lab">Budget Sheet</ion-label>
+                      <ion-input (change)="onChangeBudget($event)" class="first-card-input" type="file" accept="image/png, image/jpeg, image/jpg"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                  
+                </ion-row>
+                <ion-row>
+                  <ion-col size="6">
+                    <ion-item>
+                      <ion-label class="lab">Proposal</ion-label>
+                      <ion-input (change)="onChangeProp($event)" class="first-card-input" type="file" accept="image/png, image/jpeg, image/jpg"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size="6">
+                    <ion-item>
+                      <ion-label class="lab">Meeting minute</ion-label>
+                      <ion-input  (change)="onChangeMeet($event)" class="first-card-input" type="file" accept="image/png, image/jpeg, image/jpg"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                  
+                </ion-row>
+
+                <ion-row>
+                  <ion-col size="12">
+                    <ion-item>
+                      <ion-label class="lab" position="stacked">Description</ion-label>
+                      <ion-textarea [(ngModel)]="event_description" rows="4" class="desc"></ion-textarea>
+                    </ion-item>
+                  </ion-col>
+                </ion-row> 
+              </ion-grid>
+            </div>
+            <img *ngIf="!new_main_preview_picture" class="img" alt="Silhouette of mountains" src="http://127.0.0.1:8000/storage/images/{{event_main_picture}}" onerror="this.src='assets/imgs/ext.jpg'"/>
+            <img *ngIf="new_main_preview_picture" class="img" [src]="new_main_preview_picture" alt="Preview Image">
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  
+    <div class="divider">
+      <ion-grid>
+        <ion-card class="members" [ngClass]="{'members-dark': darkMode}">
+          <ion-grid>
+            <ion-row>
+              <ion-col size="6">
+                <ion-card>
+                  <ion-card-title>All Users</ion-card-title>
+                  <ion-list class="list">
+                    <ion-item *ngFor="let user of allUsers">
+                      <ion-avatar slot="start">
+                        <img *ngIf="user.user_profile_pic !== null" src="http://127.0.0.1:8000/storage/images/{{user.user_profile_pic}}"  onerror="this.onerror=null; this.src='https://ionicframework.com/docs/img/demos/avatar.svg';" />
+                        <img *ngIf="user.user_profile_pic===null" src="https://ionicframework.com/docs/img/demos/avatar.svg"  />
+                       
+                      </ion-avatar>
+                      <ion-label class="lab"> {{ user.first_name }} {{ user.last_name }}</ion-label>
+                      <ion-button slot="end" (click)="selectUser(user, true)">Add</ion-button>
+                    </ion-item>
+                  </ion-list>
+                </ion-card>
+              </ion-col>
+              <ion-col size="6">
+                <ion-card>
+                  <ion-card-title>Selected Users</ion-card-title>
+                  <ion-list class="list">
+                    <ion-item *ngFor="let user of selectedUsers">
+                      <ion-avatar slot="start">
+                        <img src="http://127.0.0.1:8000/storage/images/{{user.profile_picture}}"  onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'" alt="User avatar" />
+                      </ion-avatar>
+                      <ion-label class="lab">{{ user.first_name }} {{ user.last_name }}</ion-label>
+                      <ion-input slot="end" class="add-member" type="text" [(ngModel)]="user.role_name" (ngModelChange)="updateUserRole(user, user.role_name)" placeholder="Role..."></ion-input>
+                      <ion-icon
+                        slot="end"
+                        name="trash"
+                        (click)="removeSelectedUser(user)"
+                      ></ion-icon>
+                    </ion-item>
+                  </ion-list>
+                </ion-card>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card>
+      </ion-grid>
+  
+    <ion-grid>
+        <ion-row>
+          <ion-card class="members" [ngClass]="{'members-dark': darkMode}">
+
+          <ion-col size-md="10" size-lg="9" size-xl="8" offset-md="1" offset-lg="2" offset-xl="2">
+            <ion-row *ngFor="let photoInput of photoInputs; let i = index">
+              <ion-col size="12">
+                <ion-item>
+                  <ion-label class="lab">Add an image</ion-label>
+                  <ion-input class="add-img-input" type="file" (change)="onChangePhoto($event)"></ion-input>
+                  <ion-button slot="end" (click)="addPhoto()">Add</ion-button>
+                  <!-- Add the image preview here -->
+                  <img *ngIf="event_photo_preview" [src]="event_photo_preview" alt="Photo Preview" class="photo-preview">
+                </ion-item>
+                
+              </ion-col>
+            </ion-row>
+    
+            <div class="ion-grid">
+              <ion-row style="height: 250px;overflow-y: auto;">
+                <ion-col size="3" *ngFor="let image of images">
+                  <ion-card class="img-card">
+                    <div class="badge">
+                      <ion-icon (click)="deleteImage(image.id)" name="trash" size="large"></ion-icon>
+                    </div>
+                    <img src="http://127.0.0.1:8000/storage/images/{{image.event_image_source}}" onerror="this.src='assets/imgs/ext.jpg'" class="custom-image">
+                  </ion-card>
+                </ion-col>
+              </ion-row>
+           </div>
+    
+          </ion-col>
+        </ion-card>
+      </ion-row>
+
+    </ion-grid>
+  
+      <ion-button (click)="editGalleryEvent()" class="save" [ngClass]="{'save-dark': darkMode}">Save Changes</ion-button>
+      <ion-button (click)="confirm()" class="delete" [ngClass]="{'delete-dark': darkMode}">Delete Event</ion-button>
+
+    </div>
+
+  </div>
+
+
+
+</ion-content>
+

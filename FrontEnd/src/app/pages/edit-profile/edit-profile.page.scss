@@ -1,0 +1,136 @@
+
+ion-card{
+    width:100% !important; 
+    margin: 0;
+    padding: 0;
+    margin-top: 15% !important;
+    border-top-left-radius: 10%;
+    border-top-right-radius: 10%;
+    box-shadow: none;
+}
+  .custom-avatar{
+    z-index: 1;
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    border: 3px solid white;
+    margin-top: -40px;
+  
+  }
+
+  input{
+    font-size: 12px;
+  }
+
+  ion-button{
+    --color: white;
+    --background: #45579A;
+    border-radius: 50px;
+    width: 40%;
+    margin: 0 auto;
+    display: block;
+  }
+
+  ion-item{
+    padding-top: 35px;
+  }
+
+
+
+  ion-label{
+    color: black;
+  }
+
+  .bio{
+    height: 500px;
+  }
+
+  .custom-input:focus {
+  outline: none;
+  border-bottom: 2px solid #45579A; /* Change border color on focus */
+  }
+
+  .custom-input.box:focus {
+    outline: none;
+    border-bottom: 2px solid #45579A;
+  }
+
+  .custom-input {
+    border: none;
+    border-bottom: 1px solid #ccc;
+    background-color: transparent;
+    color: #000;
+    font-size: 15px;
+    padding: 2px;
+    width: 100%;
+    resize: vertical;
+  }
+
+  .custom-input.readonly {
+    background-color: #dddddd5b; /* Change background color */
+    color: black;
+  }
+
+  .bio{
+
+  --height: 500px !important;
+  }
+
+  ion-col{
+    flex: 1;
+  }
+
+
+  .custom-row{
+    margin-left: 50%;
+    position: absolute;
+    top: 50px;
+
+    
+  }
+  ion-card-header{
+    margin-top: 10%;
+    display:flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    
+  }
+
+ion-header{
+    background-color: #3b4775 !important;
+    height: 20%;
+}
+
+ion-content{
+    padding: 3;
+}
+
+ion-card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: -17px;
+}
+
+.upload-options{
+  position: relative;
+  left: 10%;
+  padding-bottom: 1px;
+  font-size: 20px;
+  color: #45579A;
+}
+
+
+.back{
+  position: absolute;
+  font-size: 2em;
+  color: white;
+  top: 15px;
+  left: 15px;
+}
+
+  

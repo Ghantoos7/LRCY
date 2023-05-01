@@ -1,0 +1,57 @@
+<ion-menu menuId="menuProfiles" contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Manage Profiles</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding"> 
+    <ion-button class="menu-button"(click) = "closeMenu()">View Members</ion-button>
+    <ion-button class="menu-button"(click) = "goToAddForm()">Add Member</ion-button>
+    <ion-button class="menu-button"(click) = "goToAddTraining()">Add Training</ion-button>
+    <ion-button class="menu-button"(click) = "goToDeleteTraining()">Remove Training</ion-button>
+ </ion-content>
+</ion-menu>
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title><ion-text class="ann">Members</ion-text>
+        <ion-button (click)="goToPanel()" class="header-button1"><ion-label>Panel</ion-label></ion-button>
+        <ion-button (click)="goToHome()" class="header-button"><ion-label>Log out</ion-label></ion-button>
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding">
+    <ion-searchbar animated="true" placeholder="Search up your member's name" [formControl]="searchControl"></ion-searchbar>
+
+    <ng-container *ngFor="let letter of (filteredUsersByLetter | keyvalue)">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>{{ letter.key }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list>
+          <ng-container *ngFor="let user of letter.value">
+            <ion-item (click)="goToProfile(user)">
+              <ion-avatar slot="start">
+                <img *ngIf="user.user_profile_pic !== null" src="http://127.0.0.1:8000/storage/images/{{user.user_profile_pic}}" onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'" />
+                <img *ngIf="user.user_profile_pic===null" src="https://ionicframework.com/docs/img/demos/avatar.svg"  />
+               
+              </ion-avatar>
+              <ion-label>
+                <h3 class="user-name" [ngClass]="{'user-name-white': darkMode}"> {{ user.first_name }} {{ user.last_name }}</h3>
+                <p>{{ user.user_position}}</p>
+              </ion-label>
+            </ion-item>
+          </ng-container>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+</ion-content>
+ 
+
+

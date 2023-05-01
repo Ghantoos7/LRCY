@@ -1,0 +1,68 @@
+<ion-content class="background" [ngClass]="{'background-dark': darkMode}">
+
+  <ion-menu menuId="menuSendAnnouncements" contentId="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Manage Announcements</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding"> 
+
+        <ion-button class="menu-button" (click)="goToAnnouncements()">View Announcements</ion-button>
+      <ion-button class="menu-button" (click)="closeMenu()">Add an announcement</ion-button>
+
+    </ion-content>
+  </ion-menu>
+
+  <div class="ion-page" id="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title><ion-text class="ann">Announcements</ion-text>
+          <ion-button (click)="goToPanel()" class="header-button"><ion-label>Panel</ion-label></ion-button>
+          <ion-button (click)="goToHome()" class="header-button1"><ion-label>Log out</ion-label></ion-button>
+        </ion-title>
+      </ion-toolbar>
+    </ion-header>
+  </div>
+
+  <div class="text">
+    <ion-text>Send an announcement to the members</ion-text>
+  </div>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title class="sub">Fill in the fields below</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <ion-input class="input"  placeholder="Announcement Title..." [(ngModel)]="announcement_title"></ion-input>
+    </ion-card-content>
+
+    <ion-card-content>
+      <ion-input class="input"  placeholder="Announcement Content..." [(ngModel)]="announcement_content"></ion-input>
+    </ion-card-content>
+
+    <ion-card-header>
+      <ion-card-title class="sub">Choose the importance level of the announcement</ion-card-title>
+    </ion-card-header>
+
+    <ion-segment value="default" [(ngModel)]="importance_level">
+      <ion-segment-button value="Optional">
+        <ion-label class="importance">Optional</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="Important">
+        <ion-label class="importance">Important</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="Urgent">
+        <ion-label class="importance">Urgent</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-card>
+
+  <ion-button class="send" shape="round" expand="block" size="large" (click)="sendAnnouncement(announcement_title, announcement_content, mapImportanceLevel(importance_level).toString())">Send Announcement</ion-button>
+  <ion-img src="assets/imgs/ann-design.png"></ion-img>
+
+</ion-content>

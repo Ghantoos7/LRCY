@@ -1,0 +1,83 @@
+<ion-menu menuId="menuFeed" contentId="main-content" class="menu">
+  <ion-header>
+    <ion-toolbar class="menu-tool">
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <div class="avatar-container">
+      <ion-avatar size="large" class="custom-avatar">
+        <img src="{{user_profile_pic && user_profile_pic !== 'null' ? 'http://127.0.0.1:8000/storage/images/' + user_profile_pic : 'https://ionicframework.com/docs/img/demos/avatar.svg'}}" />
+      
+       
+      </ion-avatar>
+      <ion-label class="username-label">{{username}}</ion-label>
+      <ion-button (click)="goProfile()" class="custom-button" expand="block"><ion-icon name="person" slot="start"></ion-icon>My Profile</ion-button>
+      <ion-button (click)="goFeed()" class="custom-button" expand="block"><ion-icon name="receipt" slot="start"></ion-icon>Feed</ion-button>
+      <ion-button (click)="goGallery()" class="custom-button" expand="block"><ion-icon name="images" slot="start"></ion-icon>Gallery</ion-button>
+      <ion-button (click)="goAnnouncements()" class="custom-button" expand="block"><ion-icon name="document-text" slot="start"></ion-icon>Announcements</ion-button>
+      <ion-button (click)="goGoals()" class="custom-button" expand="block"><ion-icon name="calendar" slot="start"></ion-icon>Yearly Goals</ion-button>
+      <ion-button (click)="logout()" class="custom-button" expand="block"><ion-icon name="log-out" slot="start"></ion-icon>Log Out</ion-button>
+    </div>
+  </ion-content>
+</ion-menu>
+
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Your Feed</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="whitebackground">
+    <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <div *ngIf="errorMessage" class="error-message" style="text-align: center; color: grey; padding-top: 20px;">
+      {{ errorMessage }}
+    </div>
+
+    <ion-card class="card" *ngFor="let post of posts; let i = index">
+      <div class="header-container">
+        <img (click)="showProfile(i)" class="card-profile-picture" src="{{post['user'].user_profile_pic && post['user'].user_profile_pic !== 'null' ? 'http://127.0.0.1:8000/storage/images/' + post['user'].user_profile_pic : 'https://ionicframework.com/docs/img/demos/avatar.svg'}}" onerror="this.onerror=null; this.src='https://ionicframework.com/docs/img/demos/avatar.svg';" />
+       
+        <ion-text (click)="showProfile(i)" class="username">{{post['user'].username}}</ion-text>
+        <ion-text (click)="showProfile(i)" class="name">{{post['user'].name}}</ion-text>
+        <ion-text class="post-date">{{getDaysAgo(post.created_at)}}</ion-text>
+        
+      </div>
+
+      <ion-card-content>
+        <div class="caption-container">
+          <ion-text>{{post.post_caption}} 
+          </ion-text>
+        </div>  
+        <img *ngIf="post.post_type_id == 2" class="post-image" src="http://127.0.0.1:8000/storage/images/{{post.post_media}}"  onerror="this.src='assets/imgs/ext.jpg'"/>
+        <video *ngIf="post.post_type_id == 3" controls class="post-video">
+          <source src="http://127.0.0.1:8000/storage/videos/{{post.post_media}}" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </ion-card-content>
+
+      <ion-footer>
+        <ion-icon id="like-button-{{post.id}}" class="likes" [class.active]="isLikedUser[post.id]" name="{{isLikedUser[post.id] ? 'heart' : 'heart-outline' }}" (click)="toggleLike(post.id)"></ion-icon>
+        <ion-text class="like-count" color="danger">{{this.likeCount[post.id]}}</ion-text>
+        <ion-img (click)="openCommentsModal(post.id)" class="comments" src="assets/icon/comments.png"></ion-img>
+        <ion-text class="comment-count">{{this.commentCount[post.id]}}</ion-text>
+        <ion-input class="input"  [(ngModel)]="comment_contents[i]" placeholder="Comment on this post..."></ion-input>
+        <ion-icon (click)="sendComment(post.id, i)" class="send-icon" name="send"></ion-icon>
+      </ion-footer>
+    </ion-card>
+
+    <ion-fab>
+      <ion-fab-button (click)="goToPostForm()" class="fab">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
+  </ion-content>
+</div>
+

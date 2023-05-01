@@ -1,0 +1,137 @@
+<ion-content class="background" [ngClass]="{'background-dark': darkMode}"[fullscreen]="true">
+
+  <ion-menu menuId="menuAddMember" contentId="main-content">
+    <ion-header>
+      <ion-toolbar [ngClass]="{'ion-toolbar-dark': darkMode}">
+        <ion-title [ngClass]="{'ion-title-dark': darkMode}">Manage Profiles</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding" [ngClass]="{'background-dark': darkMode}"> 
+      <ion-button class="menu-button"(click) = "goToManageProfiles()">View Members</ion-button>
+      <ion-button class="menu-button"(click) = "closeMenu()">Add Member</ion-button>
+      <ion-button class="menu-button"(click) = "goToAddTraining()">Add Training</ion-button>
+      <ion-button class="menu-button"(click) = "goToDeleteTraining()">Remove Training</ion-button>
+    </ion-content>
+  </ion-menu>
+
+  <div id="main-content">
+    <ion-header>
+      <ion-toolbar class="toolbar-background" [ngClass]="{'ion-toolbar-dark': darkMode}">
+        <ion-buttons slot="start">
+          <ion-menu-button [ngClass]="{'ion-menu-button-dark': darkMode}"></ion-menu-button>
+        </ion-buttons>
+        <ion-title><ion-text class="ann" [ngClass]="{'ann-dark': darkMode}">Add Member</ion-text>
+          <ion-button (click)="goToPanel()" class="header-button"><ion-label class="label" [ngClass]="{'ann-dark': darkMode}">Panel</ion-label></ion-button>
+          <ion-button (click)="goToHome()" class="header-button1"><ion-label class="label" [ngClass]="{'ann-dark': darkMode}">Log out</ion-label></ion-button>
+        </ion-title>
+      </ion-toolbar>
+    </ion-header>
+  
+    <ion-grid class="ion-no-padding ion-align-items-center ion-justify-content-center">
+  
+      <ion-row>
+        <ion-col size-md="10" size-lg="9" size-xl="8" class="ion-padding"  offset-md="1" offset-lg="2" offset-xl="2">
+          <div class="custom-div">
+            <ion-text class="form-title">Add Member</ion-text>
+  
+            <div class="text-div"></div>
+            <div class="inner-div" [ngClass]="{'inner-div-dark': darkMode}">
+              <ion-grid>
+                <ion-card-title> &nbsp; Member Information</ion-card-title>
+                <ion-row>
+                  <ion-col size="6">
+                    <ion-item>
+                      <ion-label class="label">First Name</ion-label>
+                      <ion-input  [(ngModel)] = "first_name" class="first-card-input"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size="6">
+                    <ion-item class="custom-input">
+                      <ion-label class="label">Last Name</ion-label>
+                      <ion-input [(ngModel)] = "last_name" class="first-card-input"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                  
+                </ion-row>
+                <ion-row>
+                  <ion-col size="6">
+                    <ion-item>
+                      <ion-label class="label">Volunteer ID</ion-label>
+                      <ion-input [(ngModel)] = "organization_id" type="number" class="first-card-input"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size="6">
+                    
+                    <ion-item>
+                      <ion-select class="label" [(ngModel)] = "user_type_id" placeholder="Privilege Type">
+                        <ion-select-option value="User">User</ion-select-option>
+                        <ion-select-option value="Admin">Admin</ion-select-option>
+                      </ion-select>
+                    </ion-item>
+                 
+                  </ion-col>
+                  
+                </ion-row>
+  
+                <ion-row>
+                  <ion-col size="6">
+                    <ion-item>
+                      <ion-label class="label">User Position</ion-label>
+                      <ion-input [(ngModel)] = "user_position" class="first-card-input"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size="6">
+                    <ion-item>
+                      <ion-select class="label" [(ngModel)] = "is_active" placeholder="Status">
+                        <ion-select-option value="Active">Active</ion-select-option>
+                        <ion-select-option value="Inactive">Inactive</ion-select-option>
+                      </ion-select>
+                    </ion-item>
+                  </ion-col>
+                  
+                </ion-row>
+                <ion-row>
+                  <ion-col size="6">
+                    <ion-item>
+                      <ion-label class="label">Date of Birth</ion-label>
+                      <ion-input [(ngModel)] = "user_dob" class="first-card-input" type="date" ></ion-input>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size="6">
+                    <ion-item>
+                      <ion-select class="label" [(ngModel)] = "gender" placeholder="Gender">
+                        <ion-select-option value="Male">Male</ion-select-option>
+                        <ion-select-option value="Female">Female</ion-select-option>
+                        <ion-select-option value="Other">Other</ion-select-option>
+                        <ion-select-option value="Private">Rather Not Say</ion-select-option>
+                      </ion-select>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size="6">
+                    <ion-item>
+                      <ion-label class="label">Start Date</ion-label>
+                      <ion-input [(ngModel)]  = "user_start_date" class="first-card-input" type="date"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size="6">
+                    <ion-item>
+                      <ion-label class="label">End Date</ion-label>
+                      <ion-input [(ngModel)] = "user_end_date" class="first-card-input" type="date"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                  
+                </ion-row>
+                
+                
+              </ion-grid>
+            
+            </div>
+                      
+          </div>
+        </ion-col>
+      </ion-row>  
+    </ion-grid>
+
+    <ion-button (click)= "addUser()" class="save" [ngClass]="{'save-dark': darkMode}">Add Member</ion-button>
+  </div>
+</ion-content>

@@ -1,0 +1,19 @@
+<ion-content class="ion-padding">
+  <div class="welcome-title">
+    <h1 class="ion-text-center welcome-text">Welcome Back <br> Admin!</h1>
+    <h5 class="ion-text-center sub">Good to see you again</h5>
+  </div>
+  <div class="login-form" style="--background: transparent;">
+    <ion-item class="no-padding">
+      <h1 class="text">Sign In</h1>
+      <ion-label position="floating"> <ion-icon class="mail-icon" size="large" name="mail" slot="start"></ion-icon>Volunteer ID</ion-label>
+      <ion-input class="input" type="email" [(ngModel)]="organization_id"></ion-input>
+    </ion-item>
+    <ion-item class="no-padding">
+      <ion-label position="floating"><ion-icon size="large" name="lock-closed" slot="start"></ion-icon>Password</ion-label>
+      <ion-input class="input" type="password" [(ngModel)]="password"></ion-input>
+    </ion-item>
+    <ion-button size="large"class="button" expand="block" (click)="adminLogin(organization_id,password)">Sign me in</ion-button>
+  </div>
+
+</ion-content>

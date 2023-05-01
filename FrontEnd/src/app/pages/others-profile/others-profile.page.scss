@@ -1,0 +1,184 @@
+ion-tab-button.tab-selected ion-icon{
+  color: #45579A;
+}
+
+ion-menu-button {
+  --color: #f0f0f0; 
+
+
+}
+
+ion-toolbar {
+  --background: #45579A;
+}
+
+ion-button {
+  --color: #45579A;
+  --background:white;
+  --background-activated: #45579A;
+
+}
+
+
+
+ion-page{
+  --background-color: #45579A;
+}
+
+.bio-space {
+  margin-bottom: 10px; 
+}
+
+.custom-avatar{
+  z-index: 1;
+  width: 100px;
+  height: 100px;
+  position: absolute;
+left: 50%;
+transform: translate(-50%);
+border: 3px solid white;
+
+}
+
+.badge {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  top: 60%;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: white;
+  width: 30px;
+  height:30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+ion-col{
+  flex: 1;
+}
+
+ion-label{
+  font-size: larger;
+  font-weight:bold;
+  color: black;
+}
+
+
+ion-card-header{
+  margin-top: 10%;
+  display:flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+ion-icon{
+  color: #45579A;
+
+}
+
+.custom-row{
+  margin-left: 50%;
+  position: absolute;
+  top: 50px;
+
+  
+}
+.custom-card{
+  position: relative;
+  width:100% !important; 
+  height: 80%;
+  margin: 0;
+  padding: 0;
+  margin-top: 10% !important;
+  border-top-left-radius: 10%;
+  border-top-right-radius: 10%;
+  box-shadow: none;
+
+
+}
+
+
+ion-header{
+  background-color: #45579A;
+  height: 25%;
+  margin-bottom: 10px;
+}
+
+ion-content{
+  padding: 0;
+}
+
+.details{
+  width: 100%;
+ 
+}
+.special-col{
+  margin-left: 40px;
+}
+
+ion-label{
+  font-size: 15px;
+  font-family: 'Cairo', sans-serif;
+  
+}
+
+p.p1{
+  color: black;
+  text-align: center;
+}
+
+ion-card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: -15px;
+}
+
+ion-tab-button {
+  position: relative;
+  overflow: hidden;
+}
+
+
+
+ion-tab-button.tab-selected::after {
+  transform: translateX(0);
+}
+
+
+
+.avatar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh; /* Set the height of the avatar container to fill the viewport */
+}
+
+ion-avatar{
+  height: 100px;
+  width: 100px;
+}
+
+.menu{
+  --ion-background-color: #45579A;
+}
+
+ion-label{
+  color: white;
+}
+
+.custom-button{
+  --background: white;
+  --color: black;
+}
+
+
+
+

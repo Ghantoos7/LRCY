@@ -1,0 +1,91 @@
+.whitebackground {
+  --background: #fff;
+}
+
+ion-icon{
+  color: #B11433;
+}
+
+.signup-design {
+  width: 395px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.title {
+  color: #45579A;
+  font-size: 40px;
+  position: absolute;
+  top: 12%;
+  left: 12%;
+  transform: translate(-20%, -50%);
+}
+
+.subtitle {
+  color: #45579A;
+  font-size: 40px;
+  position: absolute;
+  top: 16%;
+  left: 14%;
+  transform: translate(-20%, -50%);
+}
+
+.note {
+  color: #45579A;
+  font-size: 40px;
+  position: absolute;
+  top: 25%;
+  left: 20%;
+  transform: translate(-20%, -50%);
+}
+
+.input-container {
+  font-size: 10px;
+  position: absolute;
+  top: 43%;
+  left: 15%;
+}
+
+.input-field {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 25px;
+}
+
+.id-icon {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+  margin-top: 25px;
+}
+
+.label {
+  font-size: 16px;
+  color: white;
+}
+
+.email-input {
+  border-bottom: 1px solid #ccc;
+  color: white;
+}
+
+.submit-button {
+  --background: white;
+  color: #45579A;
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 550px;
+}
+
+ion-item{
+  --background: transparent;
+  --inner-padding-end: 0;
+}
+
+.input-field {
+  display: flex;
+  align-items: center;
+}

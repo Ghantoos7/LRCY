@@ -1,0 +1,89 @@
+.container {
+  margin-top: 52%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 130vh;
+}
+ion-card {
+  width: 90%;
+  height: 100%;
+  margin: 10px 0;
+  padding-bottom: 20px;
+}
+
+ion-row{
+  padding-top: 15px;
+}
+
+
+
+.large-card {
+  height: 100%;
+  width: 90%;
+  margin: 0;
+  padding-bottom: 50px;
+  margin-top: 2%;
+  overflow-y: auto;
+}
+
+//change the card content of only the ion cards implementing large-card class
+.large-card .card-content-ios{
+  font-size: 15px;
+  height: 40%;
+}
+
+
+
+
+
+
+
+
+
+
+ion-label{
+  color:black;
+  font-weight: bold;
+  font-family: 'Cairo', sans-serif;
+}
+
+ion-checkbox {
+  pointer-events: none;
+}
+
+
+h1{
+  color: black;
+  font-weight: bolder;
+}
+
+p{
+  font-weight: bold;
+}
+
+.env{
+color: #348137;
+}
+
+ion-checkbox{
+  --checkbox-background-checked: #348137;
+
+}
+
+.hvp{
+  color: #45579A;
+}
+
+.yh{
+  color:#b11433;
+}
+
+.others{
+  color: #8c8c8c;
+}
+
+ion-item{
+  height: 35px;
+}

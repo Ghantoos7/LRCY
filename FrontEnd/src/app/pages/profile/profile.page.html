@@ -1,0 +1,84 @@
+<ion-router-outlet>
+</ion-router-outlet>
+
+
+<ion-menu menuId="menuProfile" contentId="main-content" class="menu">
+
+  <ion-content class="ion-padding">
+    <div class="avatar-container">
+      <ion-avatar size="large" class="custom-avatar2">
+        <img alt="Avatar" [src]="(user_profile_pic && user_profile_pic !== 'null') ? 'http://127.0.0.1:8000/storage/images/' + user_profile_pic : 'https://ionicframework.com/docs/img/demos/avatar.svg'" onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'"/>
+      </ion-avatar>
+      <ion-label class="username-label">{{username}}</ion-label>
+      <ion-button (click)="goProfile()" class="custom-button" expand="block"><ion-icon name="person" slot="start"></ion-icon>My Profile</ion-button>
+      <ion-button (click)="goFeed()" class="custom-button" expand="block"><ion-icon name="receipt" slot="start"></ion-icon>Feed</ion-button>
+      <ion-button (click)="goGallery()" class="custom-button" expand="block"><ion-icon name="images" slot="start"></ion-icon>Gallery</ion-button>
+      <ion-button (click)="goAnnouncements()" class="custom-button" expand="block"><ion-icon name="document-text" slot="start"></ion-icon>Announcements</ion-button>
+      <ion-button (click)="goGoals()" class="custom-button" expand="block"><ion-icon name="calendar" slot="start"></ion-icon>Yearly Goals</ion-button>
+      <ion-button (click)="logout()" class="custom-button" expand="block"><ion-icon name="log-out" slot="start"></ion-icon>Log Out</ion-button>
+    </div>
+  </ion-content>
+</ion-menu>
+<div class="ion-page" id="main-content">
+  
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-button (click)="goToEditForm()" fill="outline" size="small" slot="end">
+       Edit My Profile
+      </ion-button>
+    </ion-toolbar>
+    <ion-row class="ion-align-items-center ion-justify-content-center custom-row">
+      <ion-col size="2">
+        <ion-avatar class="custom-avatar">
+          <img alt="Avatar" [src]="(user_profile_pic && user_profile_pic !== 'null') ? 'http://127.0.0.1:8000/storage/images/' + user_profile_pic : 'https://ionicframework.com/docs/img/demos/avatar.svg'" onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'"/>
+        </ion-avatar>
+      </ion-col>
+    </ion-row>
+    
+      <ion-card class="custom-card ion-padding">
+
+        <ion-card-header>
+         
+          <ion-row class="details">
+            <ion-col class="special-col">
+              <ion-label>{{full_name}}</ion-label>
+        </ion-col>
+       
+        <ion-col class="special-col">
+          <ion-label>{{user_position}}</ion-label>
+        </ion-col>
+        </ion-row>
+      
+        </ion-card-header>
+        <ion-card-content>
+          <p *ngIf="username"> {{username}}</p>
+          <p *ngIf="bio" class="p1">{{bio}}</p>
+          <p class="bio-space"></p>
+        </ion-card-content>
+
+        
+    
+      </ion-card>
+
+  </ion-header>
+
+
+<ion-tabs>
+ <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="Statistics">
+      <ion-icon name="analytics-outline"></ion-icon>
+    </ion-tab-button>
+    <ion-tab-button tab="Achievements">
+      <ion-icon name="trophy-outline"></ion-icon>
+    </ion-tab-button>
+    <ion-tab-button tab="Trainings">
+      <ion-icon name="bicycle-outline"></ion-icon>
+    </ion-tab-button>
+    <ion-tab-button tab="My-Posts">
+      <ion-icon name="id-card-outline"></ion-icon>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

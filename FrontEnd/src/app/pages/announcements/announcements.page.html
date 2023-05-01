@@ -1,0 +1,79 @@
+<ion-content>
+  <ion-menu menuId="menuAnnouncements" contentId="main-content" class="menu">
+    <ion-header>
+      <ion-toolbar class="menu-tool">
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content class="ion-padding">
+      <div class="avatar-container">
+        <ion-avatar size="large" class="custom-avatar">
+          <img src="{{user_profile_pic && user_profile_pic !== 'null' ? 'http://127.0.0.1:8000/storage/images/' + user_profile_pic : 'https://ionicframework.com/docs/img/demos/avatar.svg'}}" />         
+        </ion-avatar>
+        <ion-label class="username-label">{{username}}</ion-label>
+        <ion-button (click)="goProfile()" class="custom-button" expand="block"><ion-icon name="person" slot="start"></ion-icon>My Profile</ion-button>
+        <ion-button (click)="goFeed()" class="custom-button" expand="block"><ion-icon name="receipt" slot="start"></ion-icon>Feed</ion-button>
+        <ion-button (click)="goGallery()" class="custom-button" expand="block"><ion-icon name="images" slot="start"></ion-icon>Gallery</ion-button>
+        <ion-button (click)="goAnnouncements()" class="custom-button" expand="block"><ion-icon name="document-text" slot="start"></ion-icon>Announcements</ion-button>
+        <ion-button (click)="goGoals()" class="custom-button" expand="block"><ion-icon name="calendar" slot="start"></ion-icon>Yearly Goals</ion-button>
+        <ion-button (click)="logout()" class="custom-button" expand="block"><ion-icon name="log-out" slot="start"></ion-icon>Log Out</ion-button>
+      </div>
+    </ion-content>
+  </ion-menu>
+  <div class="ion-page" id="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Announcements</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <div *ngIf="errorMessage" class="error-message" style="text-align: center; color: grey; padding-top: 20px;">
+      {{ errorMessage }}
+    </div>
+    <ion-content class="ion-padding">
+      <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
+    <ion-card *ngFor="let announcement of announcements; let i = index">
+      <ion-card-header>
+        <ion-item lines="none">
+          <ion-avatar class="avatar" slot="start">
+            <img *ngIf="announcement.announcer_profile_picture !== null" src="http://127.0.0.1:8000/storage/images/{{announcement.announcer_profile_picture}}"  onerror="this.onerror=null; this.src='https://ionicframework.com/docs/img/demos/avatar.svg';" />
+            <img *ngIf="announcement.announcer_profile_picture===null" src="https://ionicframework.com/docs/img/demos/avatar.svg"  />
+          
+          </ion-avatar>
+          <ion-label>
+            <h1>{{announcement.announcement_title}}</h1>
+            <p [ngClass]="{
+              'optional': announcement.importance_level === 'optional',
+              'important': announcement.importance_level === 'important',
+              'urgent': announcement.importance_level === 'urgent'
+            }">
+              {{announcement.importance_level}}
+            </p>
+          </ion-label>
+        </ion-item>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-label class="ion-text-end">
+          <p>{{announcement.announcer_name}}</p>
+          <p>{{announcement.announcement_date}}</p>
+        </ion-label>
+        <ion-text *ngIf="showDescriptions[i]" class="description">
+          {{announcement.announcement_content}}
+        </ion-text>
+        <ion-footer class="ion-text-center">
+          <ion-button class="ion-align-items-center" slot="footer" (click)="toggleDescription(i)" fill="clear">
+          <ion-icon  [name]="showDescriptions[i] ? 'chevron-up-outline' : 'chevron-down-outline'"></ion-icon>
+        </ion-button>
+      </ion-footer>
+      </ion-card-content>
+    </ion-card>
+
+  </ion-content>
+  </div>
+
+  
+</ion-content>

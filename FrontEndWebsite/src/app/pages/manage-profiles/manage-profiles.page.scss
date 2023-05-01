@@ -1,0 +1,72 @@
+ion-title, ion-item{
+  color:white;
+  font-size: large;
+}
+
+ion-item{
+  cursor: pointer;
+}
+
+ion-menu-button{
+  color:white;
+}
+
+.custom-header {
+  height:-600px; 
+} 
+
+ion-searchbar{
+  --background: #505D8F;
+  --border-radius: 10px;
+  --color: white;
+  --icon-color: #fff;
+}
+
+ion-card-title{
+  color:#45579A;
+  font-weight: bolder;
+  font-size: 50px;
+  font-family: 'Cairo', sans-serif;
+}
+
+
+
+.user-name{
+  color: black;
+}
+
+.user-name-white{
+  color: white;
+}
+
+.ann{
+
+  margin-bottom: -10px;
+}
+
+.header-button1{
+  --background: none;
+  --box-shadow: none;
+ 
+  margin-left: 80%;
+}
+
+.header-button{
+  --background: none;
+  --box-shadow: none;
+}
+
+
+.menu-button{
+  position: relative;
+  width: 100%;
+  --background: #45579A;
+}
+
+ion-label{
+  color: white;
+}
+
+ion-toolbar{
+  --background: #45579A;
+}

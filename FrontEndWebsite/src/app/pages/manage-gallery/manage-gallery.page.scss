@@ -1,0 +1,162 @@
+ion-title, ion-item{
+  color:white;
+  font-size: large;
+}
+
+ion-toolbar{
+  --background: #45579A;
+}
+
+ion-item{
+  cursor: pointer;
+}
+
+ion-menu-button{
+  color:white;
+}
+
+.custom-header {
+  height:-600px; 
+}
+
+
+ion-card{
+  margin-bottom: 25px;
+  cursor: pointer;
+}
+  
+.custom-image {
+  height: 100%; 
+  object-fit: cover; 
+}
+.custom-card-header-yah{
+  --background: #B11433;
+}
+
+.custom-card-header-env{
+  --background: #348137;
+}
+
+.custom-card-header-hvp{
+  --background: #45579A;
+}
+
+.custom-card-header-other{
+  --background: #bebebe;
+}
+
+.custom-subtitle {
+  margin-bottom: 0; 
+  text-align: center;
+  color: white;
+  font-size: 12px;
+  font-family: 'Cairo', sans-serif;
+}
+.badge-yah {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #B11433;
+  color: white;
+  width: 50px;
+  height:50px;
+  border-radius: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.badge-env {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #348137;
+  color: white;
+  width: 50px;
+  height:50px;
+  border-radius: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.badge-hvp {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #45579A;
+  color: white;
+  width: 50px;
+  height:50px;
+  border-radius: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.badge-other {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #bebebe;
+  color: white;
+  width: 50px;
+  height:50px;
+  border-radius: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+ion-searchbar{
+  --background: #505D8F;
+  --border-radius: 10px;
+  --color: white;
+  --icon-color: #fff;
+}
+
+ion-card-title{
+  color:#45579A;
+  font-weight: bolder;
+  font-size: 35px;
+  font-family: 'Cairo', sans-serif;
+}
+
+ion-label{
+  margin-bottom: -10px;
+}
+
+h3{
+  color: black;
+}
+
+.ann{
+ 
+  top: 7px;
+}
+
+.header-button{
+  --background: none;
+  --box-shadow: none;
+  margin-left: 80%;
+}
+
+.header-button1{
+  --background: none;
+  --box-shadow: none;
+}
+
+
+.menu-button{
+  position: relative;
+  width: 100%;
+  --background: #45579A;
+}
+
+ion-label{
+  color: white;
+}

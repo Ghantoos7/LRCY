@@ -1,0 +1,169 @@
+.background {
+    --background: white;
+  }
+  
+  ion-toolbar {
+    position: relative;
+    --background: #45579A;
+  }
+  
+  ion-menu-button {
+    color: white;
+  }
+  
+  ion-title {
+    color: white;
+  }
+  
+  ion-item {
+    color: white;
+  }
+
+  .card-background-dark{
+    background-color: #1A1A1A;
+  }
+  
+  ion-card {
+    position: relative;
+    top: 10%;
+    width: 80%;
+    background-color: #45579A;
+    margin: 0 auto;
+    border-radius: 10px;
+  }
+  
+  .delete {
+    position: absolute;
+    font-size: 25px;
+    color: white;
+    right: 0;
+    // finger poiting 
+    cursor: pointer;
+  }
+  
+  .edit {
+    position: absolute;
+    font-size: 25px;
+    color: white;
+    right: 35px;
+    // finger poiting
+    cursor: pointer;
+    
+  }
+  
+  .delete:hover, .edit:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+
+    padding: 5px;
+  }
+  
+  .list {
+    position: relative;
+    background-color: white;
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+  }
+  
+
+  ion-card-title {
+    font-size: large;
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    position: relative;
+  }
+  
+  ion-footer {
+    display: flex;
+    justify-content: space-evenly;
+  }
+  
+  .date {
+    font-size: small;
+    font-weight: lighter;
+    color: lightgray;
+    font-family: 'Cairo', sans-serif;
+  }
+  
+  ion-card-subtitle {
+    font-size: small;
+    font-weight: bold;
+    color: white;
+    font-family: 'Cairo', sans-serif;
+  }
+
+  ion-searchbar{
+    --background: #505D8F;
+    --border-radius: 10px;
+    --color: white;
+    --icon-color: #fff;
+  }
+
+  .container{
+    padding-top: 40px;
+  }
+  
+  ion-progress-bar {
+    --background: darkgray;
+    --progress-background : rgb(96, 129, 240); 
+    height: 10px;
+    border-radius: 15px;
+  }
+  
+  .content {
+    --background: white;
+  }
+
+  .content-dark{
+    --background: #1A1A1A;
+  }
+  
+
+  .ann {
+    
+    top: 7px;
+  }
+  
+  .header-button {
+    --background: none;
+    --box-shadow: none;
+    
+    margin-left: 75%;
+  }
+
+  .header-button1 {
+    --background: none;
+    --box-shadow: none;
+
+  }
+  
+  .menu-button {
+    position: relative;
+    width: 100%;
+    --background: #45579A;
+  }
+  
+  ion-label {
+    color: white;
+  }
+
+  .icons-and-count {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+  }
+  
+  .program-icon,
+  .event-icon,
+  .is-complete-icon {
+    font-size: 25px;
+    color: white;
+  }
+  
+  .completed-count {
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+  }

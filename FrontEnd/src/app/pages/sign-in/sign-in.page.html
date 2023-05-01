@@ -1,0 +1,44 @@
+<ion-content class = "whitebackground">
+
+  <ion-img class="sigin-circles" src="assets/imgs/signin-circles.png"></ion-img>
+  <ion-text class="greeting">
+    WELCOME <br>
+      BACK!
+    <h6>GOOD TO SEE YOU AGAIN</h6>
+    <br><br>
+  </ion-text>  
+
+  <ion-text class="signin"><b>Sign In</b></ion-text>
+
+  <ion-text class="container">
+
+    <div class="input-field">
+        <ion-item>
+          <ion-label position="floating" style="color: white"> <ion-icon class="mail-icon" size="large" name="mail" slot="start"></ion-icon>Volunteer ID</ion-label>
+          <ion-input class="email" type="email" [(ngModel)]="organization_id" name="email"></ion-input>
+        </ion-item> 
+    </div>
+
+    <div class="input-field">
+      <ion-item>
+        <ion-label position="floating" style="color: white"><ion-icon size="large" name="lock-closed" slot="start"></ion-icon>Password</ion-label>
+        <ion-input class="password" type="password" [(ngModel)]="password" name="password"></ion-input>
+      </ion-item>
+    </div>
+
+    <ion-checkbox [(ngModel)]="rememberMe">Remember me</ion-checkbox>
+
+
+  </ion-text>
+
+  <br>
+  <ion-button class="signin-button" shape="round" expand="block" size="large" (click)="login(organization_id, password)">Sign me in</ion-button>
+
+  <br>
+  <ion-label (click)="goToSignUp()" class="new-here">New here?</ion-label>
+  <ion-label (click)="goToRequest()" class="forgot-pass">Forgot Password?</ion-label>
+  
+</ion-content>
+
+
+
