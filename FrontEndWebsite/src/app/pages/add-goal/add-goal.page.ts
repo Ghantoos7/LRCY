@@ -15,7 +15,6 @@ import { AdminService } from 'src/app/services/admin.service';
 })
 export class AddGoalPage implements OnInit {
 
-
   goal_id: number = 0;
   branch_id = parseInt(localStorage.getItem('branch_id') as string, 10);  
   goal_name: string = '';
