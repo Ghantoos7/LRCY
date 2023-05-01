@@ -62,18 +62,33 @@ export class EditGalleryPage implements OnInit {
     this.meeting_minute = event.meeting_minute;
     this.responsibles = event.responsibles;
 
-    
+  
     this.adminService.getUserInfo(this.branch_id,"").subscribe((response: any) => {
       this.allUsers = response['users'];
       this.originalUsers = response['users'];
+      this.selectedUsers = this.responsibles;
+      this.checkSelectedUsers();
+  
     });
+
+  
 
     this.adminService.getEventPictures(this.event_id).subscribe((response: any) => {
       this.images = response.pictures;
     });
+    
+   
   }
 
-  
+  checkSelectedUsers() {
+    for(let i=0; i<this.selectedUsers.length; i++) {
+      const userIndex = this.allUsers.findIndex(u => u.id === this.selectedUsers[i].id);
+      if(userIndex > -1) {
+        this.allUsers.splice(userIndex, 1);
+      }
+    }
+  }
+
 
   editGalleryEvent() {
     const formData = new FormData();
@@ -218,10 +233,10 @@ addPhoto(){
 
   removeSelectedUser(selectedUser: any) {
     this.selectedUsers = this.selectedUsers.filter(u => u.id !== selectedUser.id);
-    const originalUser = this.originalUsers.find(u => u.id === selectedUser.id);
-    if (originalUser) {
-      this.allUsers.push(originalUser);
-    }
+  
+
+      this.allUsers.push(selectedUser);
+    
   }
   
   addPhotoInput() {

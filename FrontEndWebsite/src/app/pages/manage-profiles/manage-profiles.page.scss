@@ -42,16 +42,22 @@ ion-label{
 }
 
 .ann{
-  position: relative;
-  top: 7px;
+
+  margin-bottom: -10px;
+}
+
+.header-button1{
+  --background: none;
+  --box-shadow: none;
+ 
+  margin-left: 80%;
 }
 
 .header-button{
   --background: none;
   --box-shadow: none;
-  position: relative;
-  left: 80%;
 }
+
 
 .menu-button{
   position: relative;
