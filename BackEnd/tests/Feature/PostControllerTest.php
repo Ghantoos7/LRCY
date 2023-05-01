@@ -447,9 +447,39 @@ class PostControllerTest extends TestCase
 
         // Create another volunteer user and send a delete comment request for the comment by the other user
         $otherUser = Volunteer_user::factory()->create();
-        $response = $this->actingAs($otherUser)->postJson('/api/v0.1/post/delete_comment', ['comment_id' => $comment->id, 'user_id' => $otherUser->id+1]);
+        $response = $this->actingAs($otherUser)->postJson('/api/v0.1/post/delete_comment', ['comment_id' => $comment->id, 'user_id' => $otherUser->id + 1]);
 
         // Assert that the response status is 200 and the message is correct
         $response->assertStatus(200)->assertExactJson(['status' => 'error', 'message' => 'Comment not found']);
+    }
+
+    public function testDeleteReplyApi()
+    {
+        // Create a volunteer user
+        $user = Volunteer_user::factory()->create();
+
+        // Create a post by the volunteer user
+        $post = Post::factory()->create(['user_id' => $user->id]);
+
+        // Create a comment on the post by the volunteer user
+        $comment = Comment::factory()->create(['post_id' => $post->id, 'user_id' => $user->id]);
+
+        // Create a new reply on the comment
+        $reply = reply::factory()->create(['comment_id' => $comment->id, 'user_id' => $user->id]);
+
+        // Set up the request payload
+        $payload = ['reply_id' => $reply->id, 'user_id' => $user->id];
+
+        // Send the request to delete the reply
+        $response = $this->json('POST', '/api/v0.1/post/delete_reply', $payload);
+
+        // Check that the reply was deleted
+        $this->assertDatabaseMissing('replies', ['id' => $reply->id]);
+
+        // Check that the comment reply count was decremented
+        $this->assertEquals(0, $comment->comment_reply_count);
+
+        // Check that the response has the correct status and message
+        $response->assertJson(['status' => 'success', 'message' => 'Reply deleted successfully']);
     }
 }
