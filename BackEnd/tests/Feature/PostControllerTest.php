@@ -453,7 +453,7 @@ class PostControllerTest extends TestCase
         $response->assertStatus(200)->assertExactJson(['status' => 'error', 'message' => 'Comment not found']);
     }
 
-    public function testDeleteReplyApi()
+    function testDeleteReplyApi()
     {
         // Create a volunteer user
         $user = Volunteer_user::factory()->create();
@@ -483,7 +483,7 @@ class PostControllerTest extends TestCase
         $response->assertJson(['status' => 'success', 'message' => 'Reply deleted successfully']);
     }
 
-    public function testEditComment()
+    function testEditCommentApi()
     {
         // Create a user
         $user = Volunteer_user::factory()->create();
@@ -569,7 +569,7 @@ class PostControllerTest extends TestCase
         $response->assertStatus(422);
     }
 
-    public function testEditReply()
+    function testEditReplyApi()
     {
         // Create a user
         $user = Volunteer_user::factory()->create();
@@ -633,5 +633,36 @@ class PostControllerTest extends TestCase
             'message' => 'You are not the owner of this reply',
         ]);
         $response->assertStatus(200);
+    }
+
+    function testGetCommentsApi()
+    {
+        // Create a post
+        $post = Post::factory()->create();
+
+        // Create comments associated with the post
+        $comment1 = Comment::factory()->create(['post_id' => $post->id]);
+        $comment2 = Comment::factory()->create(['post_id' => $post->id]);
+
+        // Test getComments API with valid post_id
+        $response = $this->get("/api/v0.1/post/get_comments/{$post->id}");
+        $response->assertJson([
+            'status' => 'success',
+         
+        ]);
+        $response->assertStatus(200);
+
+        // Test getComments API with invalid post_id
+        $response = $this->get('/api/v0.1/post/get_comments/999');
+        $response->assertJson([
+            'status' => 'error',
+            'message' => 'Post not found',
+        ]);
+        $response->assertStatus(200);
+
+        // Delete the comments and the post
+        $comment1->delete();
+        $comment2->delete();
+        $post->delete();
     }
 }
