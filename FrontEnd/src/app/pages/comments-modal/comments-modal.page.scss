@@ -3,10 +3,19 @@
     color: white;
 }
 
+ion-toolbar{
+    --background: #B11433;
+}
+
 .sort{
     font-size: 30px;
     color: white;
 }
+
+.title{
+    color:white;
+}
+
 
 .post-image{
     width: 100%;
@@ -63,13 +72,18 @@ ion-item-sliding > ion-item {
     top: 5px;
     width: 40px;
     height: 40px;
+    border-radius: 50%;
+    margin: 5px;
+    border: 2px solid #7b0d23;
 }
 
 .username{
     font-weight: bold;
     font-size: 14px;
     margin-top: 10px;
-    margin-left: 60px;
+    margin-left: 50px;
+    margin-right: 20px;
+    left: 10px !important;
     position: absolute;
     top: 10px;
     color: black;

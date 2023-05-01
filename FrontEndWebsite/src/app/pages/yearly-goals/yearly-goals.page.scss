@@ -18,6 +18,10 @@
   ion-item {
     color: white;
   }
+
+  .card-background-dark{
+    background-color: #1A1A1A;
+  }
   
   ion-card {
     position: relative;
@@ -95,7 +99,10 @@
     --color: white;
     --icon-color: #fff;
   }
-  
+
+  .container{
+    padding-top: 40px;
+  }
   
   ion-progress-bar {
     --background: darkgray;
@@ -104,30 +111,31 @@
     border-radius: 15px;
   }
   
-  ion-item-divider {
-    font-size: 40px;
-    color: gray;
-    --background: white;
-    border-bottom: none;
-    position: relative;
-    left: 45%;
-  }
-  
   .content {
     --background: white;
+  }
+
+  .content-dark{
+    --background: #1A1A1A;
   }
   
 
   .ann {
-    position: relative;
+    
     top: 7px;
   }
   
   .header-button {
     --background: none;
     --box-shadow: none;
-    position: relative;
-    left: 75%;
+    
+    margin-left: 75%;
+  }
+
+  .header-button1 {
+    --background: none;
+    --box-shadow: none;
+
   }
   
   .menu-button {
