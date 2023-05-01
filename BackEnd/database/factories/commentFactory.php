@@ -21,8 +21,8 @@ class commentFactory extends Factory
             'user_id' => fake()->numberBetween(1, 70),
             'post_id' => fake()->numberBetween(1, 70),
             'comment_date' => fake()->date(),
-            'comment_like_count' => fake()->numberBetween(1, 30),
-            'comment_reply_count' => fake()->numberBetween(1, 20)
+            'comment_like_count' => fake()->numberBetween(0,0),
+            'comment_reply_count' => fake()->numberBetween(0,0),
         ];
     }
 }

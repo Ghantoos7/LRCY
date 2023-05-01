@@ -19,6 +19,7 @@ class likeFactory extends Factory
         return [
             //
             "like_date" => $this->faker->dateTime(),
+            'user_id' => $this->faker->numberBetween(1, 10),
         ];
     }
 }

@@ -27,10 +27,14 @@
     goal_year: number = 0;
     start_date: string = '';
     goal_deadline: string = '';
+    darkMode: boolean;
 
-
-
-    constructor(private ctrl:MenuController, private router:Router,private route: ActivatedRoute, private adminService: AdminService, private alertController: AlertController) { }
+    constructor(private ctrl:MenuController, private router:Router,private route: ActivatedRoute, private adminService: AdminService, private alertController: AlertController) {
+      this.darkMode = localStorage.getItem('darkModeEnabled') === 'true';
+      if (this.darkMode) {
+        document.body.setAttribute('color-theme', 'dark');
+      }
+     }
 
     ngOnInit() {
       const goal = history.state.goal;

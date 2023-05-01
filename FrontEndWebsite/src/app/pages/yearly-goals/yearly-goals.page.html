@@ -27,12 +27,9 @@
 
     <ion-content class="ion-padding">
       <ion-searchbar animated="true" placeholder="Search for an goal..." [formControl]="searchControl"></ion-searchbar>
-      <ion-item-group>
-        <ion-item-divider>
-        </ion-item-divider>
-
-        <ion-item *ngFor="let goal of filteredGoals" class="content" lines="none">
-          <ion-label>
+      <ion-item-group class="container">
+        <ion-item *ngFor="let goal of filteredGoals" class="content" [ngClass]="{'content-dark': darkMode}" lines="none">
+          <ion-label [ngClass]="{'card-background-dark': darkMode}" class="card-background">
             <ion-card>
               <ion-card-header>
                 <ion-card-title class="title">{{goal.goal_name}}

@@ -17,6 +17,10 @@ class comment_likeFactory extends Factory
     public function definition(): array
     {
         return [
+
+            "user_id" => $this->faker->numberBetween(1, 70),
+            "comment_id" => $this->faker->numberBetween(1, 70),
+            'like_date' => $this->faker->date(),
             //
         ];
     }
