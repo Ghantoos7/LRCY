@@ -601,9 +601,43 @@ class AdminControllerTest extends TestCase
             'message' => 'Image created successfully',
         ]);
 
-
         // Assert that the image was added to the event
         $this->assertDatabaseHas('event_images', [
+            'event_id' => $event->id,
+            'event_image_source' => $testImage->hashName(),
+        ]);
+    }
+
+    function testRemoveImageFromEventApi()
+    {
+        // Create a test event
+        $event = Event::factory()->create();
+
+        // Create a test image
+        $imagePath = __DIR__ . '/test-image.jpg';
+        $testImage = new UploadedFile($imagePath, 'test-image.jpg', 'image/jpeg', null, true);
+
+
+        // Add the test image to the event
+        $eventImage = event_image::create([
+            'event_id' => $event->id,
+            'event_image_source' => $testImage->hashName(),
+        ]);
+
+        // Send a request to remove the image from the event
+        $response = $this->postJson('/api/v0.1/admin/remove_image', [
+            'id' => $eventImage->id,
+        ]);
+
+        // Assert that the response is successful
+        $response->assertStatus(200)->assertJson([
+            'status' => 'success',
+            'message' => 'Image deleted successfully',
+        ]);
+
+        // Assert that the image was removed from the event
+        $this->assertDatabaseMissing('event_images', [
+            'id' => $eventImage->id,
             'event_id' => $event->id,
             'event_image_source' => $testImage->hashName(),
         ]);
