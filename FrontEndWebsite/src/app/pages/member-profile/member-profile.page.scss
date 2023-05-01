@@ -233,7 +233,6 @@ ion-card{
 }
 
 .ann{
-  position: relative;
   top: 7px;
   color: #45579A;
 }
@@ -247,8 +246,12 @@ ion-card{
 .header-button{
   --background: none;
   --box-shadow: none;
-  position: relative;
-  left: 75%;
+  margin-left: 75%;
+}
+
+.header-button1{
+  --background: none;
+  --box-shadow: none;
 }
 
 .menu-button{
