@@ -262,4 +262,47 @@ class PostControllerTest extends TestCase
         $response->assertJson(['status' => 'error']);
 
     }
+
+
+    function testReplyCommentApi()
+{
+    // Create a user
+    $user = Volunteer_user::factory()->create();
+
+    // Create a post
+    $post = Post::factory()->create(['user_id' => $user->id]);
+
+
+    // Create a comment on the post by the user
+    $comment = Comment::factory()->create([
+        'post_id' => $post->id,
+        'user_id' => $user->id,
+    ]);
+
+    // Create a reply content
+    $reply_content = 'Test reply content';
+
+    // Call the API to reply to the comment
+    $response = $this->post('/api/v0.1/post/reply_comment', [
+        'comment_id' => $comment->id,
+        'user_id' => $user->id,
+        'reply_content' => $reply_content,
+    ]);
+
+    // Assert that the response has a success status code
+    $response->assertStatus(200);
+
+    // Assert that the response message indicates success
+    $response->assertJson(['status' => 'success', 'message' => 'Reply posted successfully']);
+
+    // Assert that the reply was saved to the database
+    $this->assertDatabaseHas('replies', [
+        'comment_id' => $comment->id,
+        'user_id' => $user->id,
+        'reply_content' => $reply_content,
+    ]);
+
+    // Assert that the comment's reply count was incremented
+    $this->assertEquals(1, $comment->fresh()->comment_reply_count);
+}
 }
