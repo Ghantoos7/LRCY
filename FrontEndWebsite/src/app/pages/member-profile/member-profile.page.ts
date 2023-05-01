@@ -29,7 +29,7 @@ export class MemberProfilePage implements OnInit {
   user_profile_pic : string = '';
   user_id: string = '';
   gender_id: number = 0;
-  gender_name: number = 0;
+  gender_name: string = '';
   darkMode: boolean;
 
   constructor(private router:Router, private menuCtrl: MenuController, private alertController: AlertController, private adminService : AdminService) {  
@@ -52,12 +52,13 @@ export class MemberProfilePage implements OnInit {
     this.user_start_date = user.user_start_date;
     this.user_end_date = user.user_end_date;
     this.user_profile_pic = user.user_profile_pic;
-    this.gender_name = this.mapGender(user.gender);
+    this.gender_name = user.gender;
     this.gender = user.gender;
+    
   }
 
   editUser(){
-    this.adminService.editUser(this.user_id, this.first_name,this.last_name,this.mapUserStatus(this.is_active), this.user_start_date,this.user_end_date,this.user_position, this.mapUserType(this.user_type_id), this.gender,this.user_dob).subscribe((response: any) => {
+    this.adminService.editUser(this.user_id, this.first_name,this.last_name,this.mapUserStatus(this.is_active), this.user_start_date,this.user_end_date,this.user_position, this.mapUserType(this.user_type_id), this.mapGender(this.gender_name),this.user_dob).subscribe((response: any) => {
       const parsedResponse = JSON.parse(JSON.stringify(response));
       if(parsedResponse.status == 'success') {
         this.alertController.create({
