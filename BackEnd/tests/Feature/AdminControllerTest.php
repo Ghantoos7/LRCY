@@ -149,7 +149,7 @@ class AdminControllerTest extends TestCase
     {
         // Create a test user
         $user = Volunteer_user::factory()->create();
-    
+
         // Prepare data for editing the user
         $updatedUserData = [
             'user_id' => $user->id,
@@ -163,16 +163,16 @@ class AdminControllerTest extends TestCase
             'user_start_date' => '2023-01-01',
             'user_end_date' => '2024-01-01',
         ];
-    
+
         // Send a request to edit the user
         $response = $this->postJson('/api/v0.1/admin/edit_user', $updatedUserData);
-    
+
         // Assert that the response is successful
         $response->assertStatus(200)->assertJson([
             'status' => 'success',
             'message' => 'User updated successfully',
         ]);
-    
+
         // Assert that the user was updated in the database
         $this->assertDatabaseHas('volunteer_users', [
             'id' => $user->id,
@@ -187,12 +187,6 @@ class AdminControllerTest extends TestCase
             'user_end_date' => $updatedUserData['user_end_date'],
         ]);
     }
-
-
-
-
-
-
 
     function testDeleteUserApi()
     {
@@ -277,7 +271,7 @@ class AdminControllerTest extends TestCase
         $response->assertJson(['status' => 'error', 'message' => 'Recover request has already been accepted']);
     }
 
-    function testDeclineRequestA()
+    function testDeclineRequestApi()
     {
         // Create an admin user
         $adminUser = Volunteer_user::factory()->create([
@@ -437,6 +431,73 @@ class AdminControllerTest extends TestCase
         $response->assertJson(['status' => 'error', 'message' => 'User is not an admin']);
     }
 
+    public function testAddEventApi()
+    {
+        // Create a test program
+        $program = Program::factory()->create();
+
+        // Create a test branch
+        $branch = Branch::factory()->create();
+
+        // Create test users
+        $users = Volunteer_user::factory()
+            ->count(2)
+            ->create();
+
+        // Prepare data for adding the event
+        $eventData = [
+            'program_id' => $program->id,
+            'event_description' => 'Sample Event Description',
+            'event_location' => 'Sample Event Location',
+            'event_date' => '2023-06-01',
+            'event_title' => 'Sample Event Title',
+            'event_type_id' => 1,
+            'branch_id' => $branch->id,
+            'responsibles' => json_encode([
+                [
+                    'user_id' => $users[0]->id,
+                    'role_name' => 'Role 1',
+                ],
+                [
+                    'user_id' => $users[1]->id,
+                    'role_name' => 'Role 2',
+                ],
+            ]),
+        ];
+
+        // Send a request to add the event
+        $response = $this->postJson('/api/v0.1/admin/add_event', $eventData);
+
+        // Assert that the response is successful
+        $response->assertStatus(200)->assertJson([
+            'status' => 'success',
+            'message' => 'Event created successfully',
+        ]);
+
+        // Assert that the event was created in the database
+        $this->assertDatabaseHas('events', [
+            'event_description' => $eventData['event_description'],
+            'event_location' => $eventData['event_location'],
+            'event_date' => $eventData['event_date'],
+            'event_title' => $eventData['event_title'],
+            'event_type_id' => $eventData['event_type_id'],
+            'program_id' => $eventData['program_id'],
+            'branch_id' => $eventData['branch_id'],
+        ]);
+
+        // Retrieve the created event
+        $event = Event::where('event_title', $eventData['event_title'])->first();
+
+        // Assert that the responsibles were created in the database
+        foreach (json_decode($eventData['responsibles'], true) as $responsible) {
+            $this->assertDatabaseHas('is_responsibles', [
+                'user_id' => $responsible['user_id'],
+                'role_name' => $responsible['role_name'],
+                'event_id' => $event->id,
+            ]);
+        }
+    }
+
     function testDeleteEventApi()
     {
         // Create a new event
@@ -472,7 +533,7 @@ class AdminControllerTest extends TestCase
         ]);
     }
 
-    public function testSetYearlyGoal()
+    function testSetYearlyGoalApi()
     {
         $data = [
             'goal_name' => 'Test Goal',
@@ -665,7 +726,6 @@ class AdminControllerTest extends TestCase
         // Create a test image
         $imagePath = __DIR__ . '/test-image.jpg';
         $testImage = new UploadedFile($imagePath, 'test-image.jpg', 'image/jpeg', null, true);
-
 
         // Add the test image to the event
         $eventImage = event_image::create([
