@@ -34,7 +34,7 @@ export class AddGalleryPage implements OnInit {
   responsibles : any [] = [];
   originalUsers: any[] = [];
   darkMode: boolean;
-
+  main_picture: any;
   constructor(private router:Router, private menuController: MenuController, private alertController: AlertController, private adminService : AdminService) {
     this.darkMode = localStorage.getItem('darkModeEnabled') === 'true';
     if (this.darkMode) {
@@ -88,7 +88,12 @@ export class AddGalleryPage implements OnInit {
 
   onChange(event: any) {
     this.event_main_picture = event.target.files[0];
-
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.main_picture = reader.result as string;
+    };
+    reader.readAsDataURL(file);
 }
 
 onChangeBudget(event: any) {

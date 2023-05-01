@@ -179,7 +179,8 @@ class EventController extends Controller {
             
             if($training_id){
                 // Get training information
-                $trainings = training::where('id', $training_id)->toArray();
+                $training = training::where('id', $training_id)->first();
+                $trainings = $training ? [$training->toArray()] : [];
             }
             else{
                 // Get all trainings

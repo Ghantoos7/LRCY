@@ -687,7 +687,7 @@ class UserController extends Controller {
         }
     
         // Get the user's posts 
-        $posts = Post::where('user_id', $user_id)->orderBy('post_date', 'desc')->get();
+        $posts = Post::where('user_id', $user_id)->orderBy('created_at', 'desc')->get();
     
         // If the user did not post anything
         if ($posts->isEmpty()) {
