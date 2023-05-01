@@ -99,5 +99,6 @@ export class EditPostPage implements OnInit {
       ],
     }).then((alert) => alert.present())
     .catch((err) => console.log(err));
-  };
+  }
+
 }

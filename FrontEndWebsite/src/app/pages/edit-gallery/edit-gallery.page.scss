@@ -21,8 +21,8 @@ ion-content{
 }
 
 ion-button.menu-button{
-  color:white;
- --background:#45579A;
+  color:white !important;
+ --background:#45579A !important;
 }
 
 .badge {
@@ -45,9 +45,12 @@ ion-button.menu-button{
   top: 40px;
   left: 40px;
 }
+
 .toolbar-background{
   --background: #45579A !important;
 }
+
+
 
 .ion-menu{
   --background: white;
@@ -62,7 +65,7 @@ ion-button.menu-button{
 }
 
 .menu-title{
-  color: white;
+  color: white !important;
 }
 
 .divider{
@@ -192,7 +195,7 @@ ion-label{
 }
 
 ion-menu-button{
-  color: #45579A;
+  color: white;
 }
 
 .ion-menu-button-dark{
@@ -303,7 +306,7 @@ ion-card{
 .ann{
   position: relative;
   top: 7px;
-  color: #45579A;
+  color: white;
 }
 
 .ann-dark{
@@ -313,21 +316,26 @@ ion-card{
 }
 
 .header-button{
+
   --background: none;
   --box-shadow: none;
   position: relative;
   left: 75%;
+  
 }
 
+.label{
+  color: white;
+}
 .menu-button{
   position: relative;
   width: 98%;
-  --background: white;
+  --background: white !important;
 }
 
 ion-toolbar{
   position: relative;
-  --background: white;
+  --background: #45579A !important;
 }
 
 .ion-toolbar-dark{
@@ -337,7 +345,7 @@ ion-toolbar{
 
 
 ion-title{
-  color: #45579A;
+  color: white !important;
 }
 
 ion-title-dark{

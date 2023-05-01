@@ -153,7 +153,7 @@ ion-label{
 }
 
 ion-menu-button{
-  color: #45579A;
+  color: white;
 }
 
 .ion-menu-button-dark{
@@ -277,10 +277,14 @@ ion-card{
   margin-bottom: 30px;
 }
 
+.label{
+  color: white;
+}
+
 .ann{
   position: relative;
   top: 7px;
-  color: #45579A;
+  color: white;
 }
 
 .ann-dark{
@@ -310,7 +314,7 @@ ion-button.menu-button{
 
 ion-toolbar{
   position: relative;
-  --background: white;
+  --background:#45579A;
 }
 
 .ion-toolbar-dark{

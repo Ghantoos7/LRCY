@@ -78,22 +78,6 @@ ion-card{
   --height: 500px !important;
   }
 
-  .badge {
-    position: absolute;
-    bottom: -2px;
-    right: -2px;
-    top: 60%;
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    background-color: white;
-    width: 30px;
-    height:30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  
-  }
   ion-col{
     flex: 1;
   }
@@ -139,4 +123,14 @@ ion-card-content {
   font-size: 20px;
   color: #45579A;
 }
+
+
+.back{
+  position: absolute;
+  font-size: 2em;
+  color: white;
+  top: 15px;
+  left: 15px;
+}
+
   
