@@ -665,7 +665,7 @@ class PostControllerTest extends TestCase
         $post->delete();
     }
 
-    public function testGetReplies()
+    function testGetRepliesApi()
     {
         // Create a comment and a reply for that comment
         $comment = Comment::factory()->create();
@@ -693,6 +693,32 @@ class PostControllerTest extends TestCase
         $response->assertJson([
             'status' => 'error',
             'message' => 'No replies found for this comment',
+        ]);
+    }
+
+    function testGetPostLikesApi()
+    {
+        // Create a post
+        $post = Post::factory()->create();
+
+        // Create 15 likes for the post
+        $likes = Like::factory()
+            ->count(15)
+            ->create(['post_id' => $post->id]);
+
+        // Test getting post likes with valid post ID
+        $response = $this->get("/api/v0.1/post/get_post_likes/{$post->id}");
+        $response->assertStatus(200);
+        $response->assertJson([
+            'status' => 'success',
+        ]);
+
+        // Test getting post likes with invalid post ID
+        $response = $this->get('/api/v0.1/post/get_post_likes/1000');
+        $response->assertStatus(200);
+        $response->assertJson([
+            'status' => 'error',
+            'message' => 'Post not found',
         ]);
     }
 }
