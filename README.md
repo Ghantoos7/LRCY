@@ -47,7 +47,7 @@ Hello world! This is our project for the software engineering course at LAU, the
 
 
 
-### Client App
+### **Volunteer App**
 
 | Splash Screen                          | Sign In                              | Sign Up         | 
 | -------------------------------- | --------------------------------- | ------------------------ | 
@@ -75,7 +75,7 @@ Hello world! This is our project for the software engineering course at LAU, the
 
 
 
-### Admin Panel
+### **Admin Panel**
 
 | Home Screen                                 | Admin Login                              |
 | --------------------------------------------------- | -------------------------------- | 
@@ -92,7 +92,6 @@ Hello world! This is our project for the software engineering course at LAU, the
 | Set yearly Goals                                | Requests                              |
 | --------------------------------------------------- | -------------------------------- | 
 <img src="./README/goa.jpg" height=200 width=400> |  <img src="./README/req.jpg" height=200 width=400>|
-
 
 
 <br><br>
