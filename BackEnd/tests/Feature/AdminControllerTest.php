@@ -424,8 +424,45 @@ class AdminControllerTest extends TestCase
         ]);
 
     }
-    
+
+
+    public function testSetYearlyGoal()
+    {
+        $data = [
+            'goal_name' => 'Test Goal',
+            'goal_description' => 'This is a test goal',
+            'program_id' => 1,
+            'number_to_complete' => 10,
+            'goal_year' => 2023,
+            'event_type_id' => 2,
+            'goal_deadline' => '2023-12-31',
+            'start_date' => '2023-01-01',
+            'branch_id' => 1,
+        ];
+
+        $response = $this->json('POST', '/api/v0.1/admin/set_yearly_goal', $data);
+        
+        $response->assertStatus(200)
+            ->assertJson([
+                'status' => 'success',
+                'message' => 'Goal created successfully',
+            ]);
+        
+        $this->assertDatabaseHas('goals', [
+            'goal_name' => 'Test Goal',
+            'goal_description' => 'This is a test goal',
+            'program_id' => 1,
+            'number_to_complete' => 10,
+            'goal_year' => 2023,
+            'event_type_id' => 2,
+            'goal_deadline' => '2023-12-31',
+            'start_date' => '2023-01-01',
+            'branch_id' => 1,
+        ]);
+    }
 }
+    
+
 
 
 
