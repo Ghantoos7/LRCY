@@ -334,4 +334,62 @@ class AdminControllerTest extends TestCase
 
         $response->assertJson(['status' => 'error', 'message' => 'User is not an admin']);
     }
+
+
+
+
+
+    function testEditAnnouncementApi()
+    {
+        // Create an admin user
+        $adminUser = Volunteer_user::factory()->create([
+            'user_type_id' => 1
+        ]);
+
+        // Create an announcement by the admin user
+        $announcement = Announcement::factory()->create([
+            'admin_id' => $adminUser->id
+        ]);
+
+        // Successful edit of the announcement
+        $response = $this->actingAs($adminUser)->postJson('/api/v0.1/admin/edit_announcement', [
+            'announcement_id' => $announcement->id,
+            'announcement_title' => 'Updated Title',
+            'announcement_content' => 'Updated Content',
+            'admin_id' => $adminUser->id,
+            'importance_level' => 1
+        ]);
+
+        $response->assertJson(['status' => 'success', 'message' => 'Announcement edited successfully']);
+        $this->assertDatabaseHas('announcements', [
+            'id' => $announcement->id,
+            'announcement_title' => 'Updated Title',
+            'announcement_content' => 'Updated Content',
+            'importance_level' => 1
+        ]);
+
+        // Invalid announcement ID
+        $response = $this->actingAs($adminUser)->postJson('/api/v0.1/admin/edit_announcement', [
+            'announcement_id' => -1,
+            'announcement_title' => 'Updated Title',
+            'announcement_content' => 'Updated Content',
+            'admin_id' => $adminUser->id,
+            'importance_level' => 1
+        ]);
+
+        $response->assertJson(['status' => 'error', 'message' => 'Announcement not found']);
+
+        // Invalid admin user
+        $nonAdminUser = Volunteer_user::factory()->create(['user_type_id' => 0]);
+
+        $response = $this->actingAs($nonAdminUser)->postJson('/api/v0.1/admin/edit_announcement', [
+            'announcement_id' => $announcement->id,
+            'announcement_title' => 'Updated Title',
+            'announcement_content' => 'Updated Content',
+            'admin_id' => $nonAdminUser->id,
+            'importance_level' => 1
+        ]);
+
+        $response->assertJson(['status' => 'error', 'message' => 'User is not an admin']);
+    }
 }
