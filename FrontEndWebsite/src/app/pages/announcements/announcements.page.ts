@@ -25,8 +25,13 @@ export class AnnouncementsPage implements OnInit {
   current_id = localStorage.getItem('admin_id') as string;
   branch_id = localStorage.getItem('branch_id') as string;
   searchControl: FormControl = new FormControl('');
+  darkMode: boolean;
 
   constructor(private alertController: AlertController, private router:Router, private menuController: MenuController, private adminService:AdminService) { 
+    this.darkMode = localStorage.getItem('darkModeEnabled') === 'true';
+    if (this.darkMode) {
+      document.body.setAttribute('color-theme', 'dark');
+    } 
     this.showDescriptions = new Array(this.announcements.length).fill(false);
   }
 

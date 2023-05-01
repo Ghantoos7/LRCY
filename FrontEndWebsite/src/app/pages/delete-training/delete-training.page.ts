@@ -20,8 +20,14 @@ export class DeleteTrainingPage implements OnInit {
   users: any = [];
   selectedTrainings: number[] = [];
   selectedUsers: number[] = [];
-
-  constructor(private router: Router, private menuCtrl: MenuController, private adminService: AdminService, private alertController: AlertController) { }
+  darkMode: boolean;
+  
+  constructor(private router: Router, private menuCtrl: MenuController, private adminService: AdminService, private alertController: AlertController) {
+    this.darkMode = localStorage.getItem('darkModeEnabled') === 'true';
+    if (this.darkMode) {
+       document.body.setAttribute('color-theme', 'dark');
+    }
+   }
 
   ngOnInit() {
     this.adminService.getTrainingInfo("").subscribe((data: any) => {

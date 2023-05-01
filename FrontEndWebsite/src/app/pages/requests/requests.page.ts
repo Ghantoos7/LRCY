@@ -17,8 +17,14 @@ export class RequestsPage implements OnInit {
 
   branch_id = localStorage.getItem('branch_id') as string;
   requests: any=[];
+  darkMode: boolean;
 
-  constructor(private alertController: AlertController, private router:Router, private adminService:AdminService) { }
+  constructor(private alertController: AlertController, private router:Router, private adminService:AdminService) {
+    this.darkMode = localStorage.getItem('darkModeEnabled') === 'true';
+    if (this.darkMode) {
+      document.body.setAttribute('color-theme', 'dark');
+    }
+   }
 
   ngOnInit() {
     this.adminService.getRequests(this.branch_id).subscribe((data)=>{

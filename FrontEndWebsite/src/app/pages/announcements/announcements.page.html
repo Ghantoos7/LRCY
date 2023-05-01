@@ -49,8 +49,8 @@
       </ion-card-header>
       <ion-card-content>
         <ion-label class="ion-text-end">
-          <ion-icon *ngIf="current_id == announcement.admin_id" (click)="goToEditAnnouncement(announcement)" class="edit" name="create-outline"></ion-icon>
-          <ion-icon *ngIf="current_id == announcement.admin_id" (click)="confirm(announcement.id)" class="delete" name="trash-outline"></ion-icon>
+          <ion-icon *ngIf="current_id == announcement.admin_id" (click)="goToEditAnnouncement(announcement)" class="edit" [ngClass]="{'edit-dark': darkMode}" name="create-outline"></ion-icon>
+          <ion-icon *ngIf="current_id == announcement.admin_id" (click)="confirm(announcement.id)" class="delete" [ngClass]="{'delete-dark': darkMode}" name="trash-outline"></ion-icon>
           <p>{{announcement.announcer_name}}</p>
           <p>{{announcement.announcement_date}}</p>
         </ion-label>

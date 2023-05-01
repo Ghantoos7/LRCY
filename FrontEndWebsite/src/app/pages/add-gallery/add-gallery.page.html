@@ -6,7 +6,7 @@
         <ion-title [ngClass]="{'ion-title-dark': darkMode}" class="tit">Manage Gallery</ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content class="ion-menu" [ngClass]="{'ion-menu-dark': darkMode}">
+    <ion-content class="ion-menu" class="ion-padding" [ngClass]="{'ion-menu-dark': darkMode}">
       <ion-button (click)="goToGallery()" class="menu-button">View Gallery</ion-button>
       <ion-button (click)="closeMenu()" class="menu-button">Add an Event</ion-button>
     </ion-content>
@@ -131,58 +131,58 @@
 
     <div class="divider"></div>
 
-    <ion-grid>
-      <ion-card class="members" [ngClass]="{'members-dark': darkMode}">
-        <ion-grid >
-          <ion-row >
-            <ion-col size="6">
-              <ion-card>
-                <ion-card-title>All Users</ion-card-title>
-                <ion-list class="list">
-                  <ion-item *ngFor="let user of allUsers">
-                    <ion-avatar slot="start">
-                      <img *ngIf="user.user_profile_pic !== null" src="http://127.0.0.1:8000/storage/images/{{user.user_profile_pic}}"  onerror="this.onerror=null; this.src='https://ionicframework.com/docs/img/demos/avatar.svg';" />
-                      <img *ngIf="user.user_profile_pic===null" src="https://ionicframework.com/docs/img/demos/avatar.svg"  />
-                    </ion-avatar>
-                    <ion-label>{{ user.first_name }} {{ user.last_name }}</ion-label>
-                    <ion-button slot="end" (click)="selectUser(user, true)">Add</ion-button>
-                  </ion-item>
-                </ion-list>
-              </ion-card>
-            </ion-col>
-            <ion-col size="6">
-              <ion-card>
-                <ion-card-title >Selected Users</ion-card-title>
-                <ion-list class="list">
-                  <ion-item *ngFor="let user of selectedUsers" >
-                    <ion-avatar slot="start">
-                      <img src="http://127.0.0.1:8000/storage/images/{{user.user_profile_pic}}"  onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'" alt="User avatar" />
-                    </ion-avatar>
-                    <ion-label>{{ user.first_name }} {{ user.last_name }}</ion-label>
-                    <ion-input slot="end" class="add-member" type="text" [(ngModel)]="user.role_name" (ngModelChange)="updateUserRole(user, user.role_name)" placeholder="Role..."></ion-input>
-                    <ion-icon
-                      slot="end"
-                      name="trash"
-                      (click)="removeSelectedUser(user)"
-                    ></ion-icon>
-                  </ion-item>
-                </ion-list>
-              </ion-card>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card>
-    </ion-grid>
-    <ion-grid>
-      <ion-row>
-        <ion-col size-md="10" size-lg="9" size-xl="8" offset-md="1" offset-lg="2" offset-xl="2">
-         
-        </ion-col>
-      </ion-row>
-    </ion-grid>
- 
+      <ion-grid>
+        <ion-card class="members" [ngClass]="{'members-dark': darkMode}">
+          <ion-grid >
+            <ion-row >
+              <ion-col size="6">
+                <ion-card>
+                  <ion-card-title>All Users</ion-card-title>
+                  <ion-list class="list">
+                    <ion-item *ngFor="let user of allUsers">
+                      <ion-avatar slot="start">
+                        <img *ngIf="user.user_profile_pic !== null" src="http://127.0.0.1:8000/storage/images/{{user.user_profile_pic}}"  onerror="this.onerror=null; this.src='https://ionicframework.com/docs/img/demos/avatar.svg';" />
+                        <img *ngIf="user.user_profile_pic===null" src="https://ionicframework.com/docs/img/demos/avatar.svg"  />
+                      </ion-avatar>
+                      <ion-label>{{ user.first_name }} {{ user.last_name }}</ion-label>
+                      <ion-button slot="end" (click)="selectUser(user, true)">Add</ion-button>
+                    </ion-item>
+                  </ion-list>
+                </ion-card>
+              </ion-col>
+              <ion-col size="6">
+                <ion-card>
+                  <ion-card-title >Selected Users</ion-card-title>
+                  <ion-list class="list">
+                    <ion-item *ngFor="let user of selectedUsers" >
+                      <ion-avatar slot="start">
+                        <img src="http://127.0.0.1:8000/storage/images/{{user.user_profile_pic}}"  onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'" alt="User avatar" />
+                      </ion-avatar>
+                      <ion-label>{{ user.first_name }} {{ user.last_name }}</ion-label>
+                      <ion-input slot="end" class="add-member" type="text" [(ngModel)]="user.role_name" (ngModelChange)="updateUserRole(user, user.role_name)" placeholder="Role..."></ion-input>
+                      <ion-icon
+                        slot="end"
+                        name="trash"
+                        (click)="removeSelectedUser(user)"
+                      ></ion-icon>
+                    </ion-item>
+                  </ion-list>
+                </ion-card>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card>
+      </ion-grid>
+      <ion-grid>
+        <ion-row>
+          <ion-col size-md="10" size-lg="9" size-xl="8" offset-md="1" offset-lg="2" offset-xl="2">
+            
+          </ion-col>
+        </ion-row>
+      </ion-grid>
 
-    <ion-button (click)="addEvent()" class="save" [ngClass]="{'save-dark': darkMode}">Add Event</ion-button>
+
+      <ion-button (click)="addEvent()" class="save" [ngClass]="{'save-dark': darkMode}">Add Event</ion-button>
   </div>
 
 

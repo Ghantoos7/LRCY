@@ -40,10 +40,28 @@ ion-searchbar{
   cursor: pointer;
 }
 
+.delete-dark{
+  position: relative;
+  font-size: 25px;
+  color: white;
+  top: 20px;
+  left: 30px;
+  cursor: pointer;
+}
+
 .edit{
   position: relative;
   font-size: 25px;
   color: black;
+  top: 20px;
+  left: 20px;
+  cursor: pointer;
+}
+
+.edit-dark{
+  position: relative;
+  font-size: 25px;
+  color: white;
   top: 20px;
   left: 20px;
   cursor: pointer;

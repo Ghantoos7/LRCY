@@ -15,7 +15,6 @@ import { AdminService } from 'src/app/services/admin.service';
 })
 export class AddGoalPage implements OnInit {
 
-
   goal_id: number = 0;
   branch_id = parseInt(localStorage.getItem('branch_id') as string, 10);  
   goal_name: string = '';
@@ -26,9 +25,14 @@ export class AddGoalPage implements OnInit {
   goal_year: any;
   start_date: string = '';
   goal_deadline: string = '';
+  darkMode: boolean;
 
-
-  constructor(private router:Router, private menuController: MenuController, private adminService: AdminService, private alertController: AlertController) { }
+  constructor(private router:Router, private menuController: MenuController, private adminService: AdminService, private alertController: AlertController) {
+    this.darkMode = localStorage.getItem('darkModeEnabled') === 'true';
+    if (this.darkMode) {
+       document.body.setAttribute('color-theme', 'dark');
+    }
+   }
 
   ngOnInit() {
   }

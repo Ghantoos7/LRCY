@@ -18,10 +18,16 @@ export class SendAnnouncementPage implements OnInit {
   announcement_title: string = "";
   announcement_content: string = "";
   importance_level: string = "";
+  darkMode: boolean;
 
   admin_id = localStorage.getItem('admin_id') as string;
 
-  constructor(private router:Router, private menuController: MenuController, private adminService:AdminService, private alertController:AlertController) { }
+  constructor(private router:Router, private menuController: MenuController, private adminService:AdminService, private alertController:AlertController) {
+    this.darkMode = localStorage.getItem('darkModeEnabled') === 'true';
+    if (this.darkMode) {
+      document.body.setAttribute('color-theme', 'dark');
+    }
+   }
 
   ngOnInit() {
   }
