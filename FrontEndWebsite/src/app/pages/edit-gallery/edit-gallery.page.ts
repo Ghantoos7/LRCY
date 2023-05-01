@@ -40,6 +40,7 @@ export class EditGalleryPage implements OnInit {
   new_main_preview_picture:string='';
   change_main_picture:boolean=false;
   darkMode: boolean;
+  event_photo_preview: string = "";
 
   constructor(private router:Router, private menuController: MenuController, private alertController: AlertController, private adminService : AdminService) {
     this.darkMode = localStorage.getItem('darkModeEnabled') === 'true';
@@ -168,6 +169,13 @@ onChangeBudget(event: any) {
 
 onChangePhoto(event: any) {
   this.event_photo = event.target.files[0];
+
+  const file = event.target.files[0];
+  const reader = new FileReader();
+  reader.onload = () => {
+    this.event_photo_preview = reader.result as string;
+  };
+  reader.readAsDataURL(file);
 }
 
 onChangeProp(event: any) {
