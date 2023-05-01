@@ -19,7 +19,7 @@ class volunteer_userFactory extends Factory
         return [
             'first_name'=>fake()->firstName(),
             'last_name'=>fake()->lastName(),
-            "organization_id"=>random_int(1000,9999),
+            "organization_id"=>random_int(0,9999),
             "gender"=>random_int(0,3),
             "user_type_id"=>random_int(0,1),
             'user_age'=>random_int(18,60),

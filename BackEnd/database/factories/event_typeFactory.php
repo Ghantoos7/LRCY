@@ -17,7 +17,7 @@ class event_typeFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'event_type_name' => fake()->text(),
         ];
     }
 }

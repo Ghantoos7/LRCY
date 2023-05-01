@@ -13,7 +13,8 @@ class is_responsible extends Model
     protected $fillable = [
         'user_id',
         'event_id',
-        'role_name'
+        'role_name',
+        'organization_id'
     ];
 
 }
