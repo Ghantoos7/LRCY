@@ -29,9 +29,9 @@ Hello world! This is our project for the software engineering course at LAU, the
 - As a volunteer, I want to connect with other volunteers and express my self freely.
 - As a volunteer, I want to check previous activities that I and others have been responsible of.
 - As a volunteer, I want to check my yearly goals and track my progress.
-- As a Volunteer, I want to check my training and track my progress.
-- As a Volunteer, I want to check my statistics in the organizations.
-- As a Volunteer, I want to check the announcements sent by my superiors in the organization.
+- As a volunteer, I want to check my training and track my progress.
+- As a volunteer, I want to check my statistics in the organizations.
+- As a volunteer, I want to check the announcements sent by my superiors in the organization.
 - As an admin, I want to add new volunteers to the organization.
 - As an admin, I want to manage the volunteers in the organization.
 - As an admin, I want to add activities to the gallery so other volunteers can check them.
