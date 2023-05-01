@@ -65,12 +65,12 @@ The Lebanese Red Cross Youth (LRCY) is a private organization that is dedicated 
 
 |  Profile Stats                                  | Profile Post                         | Announcements                              |
 | --------------------------------------------------- | -------------------------------- | -------------------------------------------- |
-<img src="./README/stats.jpeg" height = 450 width= 200> | <img src="./README/my-posts.png" height = 450 width= 200> | <img src="./README/announcements.png"  height = 450 width= 200> /> |
+<img src="./README/stats.jpeg" height = 450 width= 200> | <img src="./README/my-posts.png" height = 450 width= 200> | <img src="./README/announcements.png"  height = 450 width= 200 /> |
 
 
 | Yearly Goals                                  | Gallery                        | Gallery Info                              |
 | --------------------------------------------------- | -------------------------------- | -------------------------------------------- |
-<img src="./README/goals.png" height = 450 width= 200> | <img src="./README/gallerye.png" height = 450 width= 200> | <img src="./README/galleryi.jpeg"  height = 450 width= 200> /> |
+<img src="./README/goals.png" height = 450 width= 200> | <img src="./README/gallerye.png" height = 450 width= 200> | <img src="./README/galleryi.jpeg"  height = 450 width= 200 /> |
 
 
 
