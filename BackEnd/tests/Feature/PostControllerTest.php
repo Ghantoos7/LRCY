@@ -367,18 +367,14 @@ class PostControllerTest extends TestCase
         ]);
     }
 
-    public function testUnlikeComment()
-
-
-    {   // Create a user and a comment for testing
+    function testUnlikeCommentApi()
+    {
+        // Create a user and a comment for testing
         $user = volunteer_user::factory()->create();
 
         $comment = Comment::factory()->create();
         // Create a test post
         $post = Post::factory()->create(['user_id' => $user->id]);
-
-      
-    
 
         // Create a test comment like
         $comment_like = Comment_like::factory()->create([
@@ -414,10 +410,46 @@ class PostControllerTest extends TestCase
         // Send another request to unlike the comment (should fail since the user has already unliked the comment)
         $response = $this->post('/api/v0.1/post/unlike_comment', [
             'comment_id' => $comment->id,
-            'user_id' => $user->id, 
+            'user_id' => $user->id,
         ]);
-
     }
 
-    
+    function testDeleteCommentApi()
+    {
+        // Create a volunteer user
+        $user = Volunteer_user::factory()->create();
+
+        // Create a post by the volunteer user
+        $post = Post::factory()->create(['user_id' => $user->id]);
+
+        // Create a comment on the post by the volunteer user
+        $comment = Comment::factory()->create(['post_id' => $post->id, 'user_id' => $user->id]);
+
+        // Send a delete comment request for the comment by the volunteer user
+        $response = $this->actingAs($user)->postJson('/api/v0.1/post/delete_comment', ['comment_id' => $comment->id, 'user_id' => $user->id]);
+
+        // Assert that the response status is 200 and the message is correct
+        $response->assertStatus(200)->assertExactJson(['status' => 'success', 'message' => 'Comment deleted successfully']);
+
+        // Assert that the comment and associated likes and replies are deleted
+        $this->assertDatabaseMissing('comments', ['id' => $comment->id]);
+        $this->assertDatabaseMissing('comment_likes', ['comment_id' => $comment->id]);
+        $this->assertDatabaseMissing('replies', ['comment_id' => $comment->id]);
+
+        // Assert that the post comment count is decremented
+        $this->assertDatabaseHas('posts', ['id' => $post->id, 'comment_count' => -1]);
+
+        // Send a delete comment request for a non-existent comment by the volunteer user
+        $response = $this->actingAs($user)->postJson('/api/v0.1/post/delete_comment', ['comment_id' => 999, 'user_id' => $user->id]);
+
+        // Assert that the response status is 200 and the message is correct
+        $response->assertStatus(200)->assertExactJson(['status' => 'error', 'message' => 'Comment not found']);
+
+        // Create another volunteer user and send a delete comment request for the comment by the other user
+        $otherUser = Volunteer_user::factory()->create();
+        $response = $this->actingAs($otherUser)->postJson('/api/v0.1/post/delete_comment', ['comment_id' => $comment->id, 'user_id' => $otherUser->id+1]);
+
+        // Assert that the response status is 200 and the message is correct
+        $response->assertStatus(200)->assertExactJson(['status' => 'error', 'message' => 'Comment not found']);
+    }
 }
