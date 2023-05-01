@@ -2,10 +2,17 @@
 
   <div class = "header-container">
     <ion-img class="top" src="assets/imgs/post-top.png"></ion-img>
-    <ion-icon (click)="goBack()" class="back" name="arrow-back-outline"></ion-icon>
+    <ion-icon click="goBack()" class="back" name="arrow-back-outline"></ion-icon>
     <ion-text class="header-txt">Edit Post</ion-text>
   </div>
 
+  <div *ngIf="post_src_img" class="chosen-image-container">
+    <img [src]="post_src_img" class="chosen-image" />
+  </div>
+
+  <div *ngIf="post_src_video" class="chosen-video-container">
+    <video [src]="post_src_video" class="chosen-video" controls></video>
+  </div>
 
   <div class="textarea-container">
     <textarea #captionTextarea [(ngModel)]="post_caption" class="textarea" placeholder="{{post_caption}}" rows="1"></textarea>
