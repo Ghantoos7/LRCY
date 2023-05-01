@@ -76,11 +76,24 @@ The Lebanese Red Cross Youth (LRCY) is a private organization that is dedicated 
 
 ### Admin Panel
 
-| Followers                            | About                        | Send Notification                                 |
-| ------------------------------------ | ---------------------------- | ------------------------------------------------- |
-| ![Followers](./readme/followers.png) | ![About](./readme/About.png) | ![New Notification](./readme/NewNotification.png) |
+| Home Screen                                 | Admin Login                              |
+| --------------------------------------------------- | -------------------------------- | 
+<img src="./README/home.jpg" height=125 width=400> |  <img src="./README/admminlogin.jpg" height=125 width=400>|
 
-<br><br>
+| View Members                                 | Edit Member                              |
+| --------------------------------------------------- | -------------------------------- | 
+<img src="./README/members.jpg" height=125 width=400> |  <img src="./README/edm.jpg" height=125 width=400>|
+
+| Add Trainings                                | Announcements                              |
+| --------------------------------------------------- | -------------------------------- | 
+<img src="./README/add-trainings.png" height=125 width=400> |  <img src="./README/announcements%20(1).png" height=125 width=400>|
+
+| Set yearly Goals                                | Requests                              |
+| --------------------------------------------------- | -------------------------------- | 
+<img src="./README/goa.jpg" height=125 width=400> |  <img src="./README/req.jpg" height=125 width=400>|
+
+
+
 
 # Stacks <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Travel%20and%20places/High%20Voltage.png" alt="High Voltage" width="45" height="45" />
 <p align="left">
