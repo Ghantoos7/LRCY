@@ -10,7 +10,7 @@ The Lebanese Red Cross Youth (LRCY) is a private organization that is dedicated 
 
 <div align="center">
 
-Hello world! This is our project for the software engineering at LAU, the project was made for the Lebanese Red Cross Youth Sector in Jbeil.
+Hello world! This is our project for the software engineering course at LAU, the project was made for the Lebanese Red Cross Youth Sector in Jbeil.
 
 **[PROJECT DESCRIPTION](#project-description) • [WIREFRAMES](#wireframe) • [TECH STACK](#tech-stack)  • [HOW TO RUN?](#how-to-run?)**
 
@@ -22,19 +22,19 @@ Hello world! This is our project for the software engineering at LAU, the projec
 
 
 ### Purpose of the Project :dart:
-> This project aims to further enhance LRCY's outreach efforts through developing a mobile application and a websie that will streamline and optimize the daily tasks of its  volunteers. This new application will enable volunteers to access a wide range of features, including yearly goals tracking, activity history, and training progress  tracking. With the help of this innovative technology, LRCY will be better equipped to achieve its goals and empower more young people to make a positive  difference in their communities.
+> This project aims to further enhance LRCY's outreach efforts through developing a mobile application and a websie that will streamline and optimize the daily tasks of its volunteers. This new application will enable volunteers to access a wide range of features, including yearly goals tracking, activity history, and training progress tracking. With the help of this innovative technology, LRCY will be better equipped to achieve its goals and empower more young people to make a positive difference in their communities.
 
 ### User Stories
 
-- As a volunteer, I want to find connect with other volunteers and express my self freely.
-- As a volunteer, I want to check previous activities that I and others have been .responsible of.
+- As a volunteer, I want to connect with other volunteers and express my self freely.
+- As a volunteer, I want to check previous activities that I and others have been responsible of.
 - As a volunteer, I want to check my yearly goals and track my progress.
-- As a Volunteer, I want to check my training progress and track my progress.
+- As a Volunteer, I want to check my training and track my progress.
 - As a Volunteer, I want to check my statistics in the organizations.
 - As a Volunteer, I want to check the announcements sent by my superiors in the organization.
 - As an admin, I want to add new volunteers to the organization.
 - As an admin, I want to manage the volunteers in the organization.
-- As an admin, I want to add activities to the to the gallery so other volunteers can check them.
+- As an admin, I want to add activities to the gallery so other volunteers can check them.
 - As an admin, I want to set yearly goals for the volunteers.
 - As an admin, I want to send announcements to the volunteers.
   <br><br>
