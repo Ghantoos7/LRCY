@@ -29,7 +29,7 @@ export class MemberProfilePage implements OnInit {
   user_profile_pic : string = '';
   user_id: string = '';
   gender_id: number = 0;
-  gender_name: string = '';
+  gender_name: number = 0;
   darkMode: boolean;
 
   constructor(private router:Router, private menuCtrl: MenuController, private alertController: AlertController, private adminService : AdminService) {  
@@ -77,17 +77,18 @@ export class MemberProfilePage implements OnInit {
   
   }
 
-  mapGender(gender : number) : string{
-    if(gender == 0){
-      return 'Male'
+  mapGender(gender:string){
+    if(gender == 'Male'){
+      return 0;
     }
-    else if (gender == 1){
-      return 'Female'
+    else if(gender == 'Female'){
+      return 1;
     }
-    else if(gender == 2){
-      return 'Other'
-    }else{
-      return 'Private'
+    else if(gender == 'Other'){
+      return 2;
+    }
+    else{
+      return 3;
     }
   }
 
