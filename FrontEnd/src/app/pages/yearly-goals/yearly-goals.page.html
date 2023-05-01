@@ -35,6 +35,10 @@
       {{ errorMessage }}
     </div>
     <ion-content class="ion-padding">
+      <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
+      
     <ion-card *ngFor="let goal of yearlyGoals" [ngClass]="{
       'youth-health': goal.program_name === 'youth&health',
       'hvp': goal.program_name === 'hvp',

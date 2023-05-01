@@ -78,6 +78,13 @@ export class YearlyGoalsPage implements OnInit {
   }
 
 
+  handleRefresh(event:any) {
+    setTimeout(() => {
+      this.ngOnInit();
+      event.target.complete();
+    }, 1000);
+  };
+
   
 
   isGoalComplete(goal_status : boolean): string {
