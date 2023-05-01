@@ -21,8 +21,8 @@ ion-content{
 }
 
 ion-button.menu-button{
-  color:white;
- --background:#45579A;
+  color:white !important;
+ --background:#45579A !important;
 }
 
 .badge {
@@ -316,12 +316,17 @@ ion-card{
 }
 
 .header-button{
+
   --background: none;
   --box-shadow: none;
   position: relative;
   left: 75%;
+  
 }
 
+.label{
+  color: white;
+}
 .menu-button{
   position: relative;
   width: 98%;
