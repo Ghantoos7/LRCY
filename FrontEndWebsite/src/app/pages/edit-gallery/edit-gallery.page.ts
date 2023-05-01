@@ -36,7 +36,8 @@ export class EditGalleryPage implements OnInit {
   originalUsers: any[] = [];
   images: any[] = [];
   event_photo:string="";
-new_event_main_picture:string='';
+  new_event_main_picture:string='';
+  new_main_preview_picture:string='';
 
   constructor(private router:Router, private menuController: MenuController, private alertController: AlertController, private adminService : AdminService) { }
 
@@ -78,7 +79,7 @@ new_event_main_picture:string='';
     formData.append('program_id',  this.mapProgramName(this.program_id).toString());
     formData.append('event_main_picture',  this.event_main_picture);
     formData.append('event_location',  this.event_location);
-    formData.append('event_main_picture',  this.event_main_picture);
+    formData.append('event_main_picture',  this.new_event_main_picture);
     formData.append('budget_sheet',  this.budget_sheet);
     formData.append('proposal',  this.proposal);
     formData.append('meeting_minute', this.meeting_minute);
@@ -110,6 +111,12 @@ new_event_main_picture:string='';
   onChange(event: any) {
     this.new_event_main_picture = event.target.files[0];
 
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.new_main_preview_picture = reader.result as string;
+    };
+    reader.readAsDataURL(file);
 }
 
 deleteImage(image_id: number){

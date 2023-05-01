@@ -32,7 +32,8 @@
           <div class="custom-div">
             <ion-text class="form-title">Edit Event</ion-text>
   
-            <ion-button class="edit-btn" size="small" ><input [(ngModel)]="new_event_main_picture" (change)="onChange($event)"  type="file" accept="image/png, image/jpeg, image/jpg"></ion-button>
+            <ion-button class="edit-btn" size="small" ><input
+              (change)="onChange($event)"  type="file" accept="image/png, image/jpeg, image/jpg"></ion-button>
             <div class="text-div"></div>
             <div class="inner-div">
               <ion-grid>
@@ -118,7 +119,8 @@
                 </ion-row> 
               </ion-grid>
             </div>
-            <img class="img" alt="Silhouette of mountains" src="http://127.0.0.1:8000/storage/images/{{event_main_picture}}" onerror="this.src='assets/imgs/ext.jpg'" />
+            <img *ngIf="!new_main_preview_picture" class="img" alt="Silhouette of mountains" src="http://127.0.0.1:8000/storage/images/{{event_main_picture}}" onerror="this.src='assets/imgs/ext.jpg'"/>
+            <img *ngIf="new_main_preview_picture" class="img" [src]="new_main_preview_picture" alt="Preview Image">
           </div>
         </ion-col>
       </ion-row>
