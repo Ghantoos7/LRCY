@@ -1,6 +1,6 @@
 # Lebanese Red Cross Youth :hospital:
 
-The Lebanese Red Cross Youth (LRCY) is a private organization that is dedicated to promoting social awareness and community service among Lebanese citizens of various age groups. The LRCY's mission is anchored in three distinct programs: Youth & Health, Human Values & Principles, and Environment. These programs are designed to equip young people with the skills and knowledge they need to make a meaningful impact on their communities and society as a whole.
+The Lebanese Red Cross Youth (LRCY) is a private organization that is dedicated to promoting social awareness and community service among Lebanese citizens of various age groups. LRCY's mission is anchored in three distinct programs: Youth & Health, Human Values & Principles, and Environment. These programs are designed to equip young people with the skills and knowledge they need to make a meaningful impact on their communities and society as a whole.
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/102875229/234422622-4b144bc3-9934-4c24-90c7-b7d560c17c3e.png" width="150">
@@ -10,7 +10,7 @@ The Lebanese Red Cross Youth (LRCY) is a private organization that is dedicated 
 
 <div align="center">
 
-> Hello world! This is our project’s for the software engineering at LAU the project was made for the Lebanese Red Cross Youth Sector in Jbeil.
+Hello world! This is our project for the software engineering at LAU, the project was made for the Lebanese Red Cross Youth Sector in Jbeil.
 
 **[PROJECT DESCRIPTION](#project-description) • [WIREFRAMES](#wireframe) • [TECH STACK](#tech-stack)  • [HOW TO RUN?](#how-to-run?)**
 
