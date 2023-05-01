@@ -260,49 +260,110 @@ class PostControllerTest extends TestCase
 
         // Assert that the response has an error status code
         $response->assertJson(['status' => 'error']);
-
     }
 
-
     function testReplyCommentApi()
-{
-    // Create a user
-    $user = Volunteer_user::factory()->create();
+    {
+        // Create a user
+        $user = Volunteer_user::factory()->create();
 
-    // Create a post
-    $post = Post::factory()->create(['user_id' => $user->id]);
+        // Create a post
+        $post = Post::factory()->create(['user_id' => $user->id]);
 
+        // Create a comment on the post by the user
+        $comment = Comment::factory()->create([
+            'post_id' => $post->id,
+            'user_id' => $user->id,
+        ]);
 
-    // Create a comment on the post by the user
-    $comment = Comment::factory()->create([
-        'post_id' => $post->id,
-        'user_id' => $user->id,
-    ]);
+        // Create a reply content
+        $reply_content = 'Test reply content';
 
-    // Create a reply content
-    $reply_content = 'Test reply content';
+        // Call the API to reply to the comment
+        $response = $this->post('/api/v0.1/post/reply_comment', [
+            'comment_id' => $comment->id,
+            'user_id' => $user->id,
+            'reply_content' => $reply_content,
+        ]);
 
-    // Call the API to reply to the comment
-    $response = $this->post('/api/v0.1/post/reply_comment', [
-        'comment_id' => $comment->id,
-        'user_id' => $user->id,
-        'reply_content' => $reply_content,
-    ]);
+        // Assert that the response has a success status code
+        $response->assertStatus(200);
 
-    // Assert that the response has a success status code
-    $response->assertStatus(200);
+        // Assert that the response message indicates success
+        $response->assertJson(['status' => 'success', 'message' => 'Reply posted successfully']);
 
-    // Assert that the response message indicates success
-    $response->assertJson(['status' => 'success', 'message' => 'Reply posted successfully']);
+        // Assert that the reply was saved to the database
+        $this->assertDatabaseHas('replies', [
+            'comment_id' => $comment->id,
+            'user_id' => $user->id,
+            'reply_content' => $reply_content,
+        ]);
 
-    // Assert that the reply was saved to the database
-    $this->assertDatabaseHas('replies', [
-        'comment_id' => $comment->id,
-        'user_id' => $user->id,
-        'reply_content' => $reply_content,
-    ]);
+        // Assert that the comment's reply count was incremented
+        $this->assertEquals(1, $comment->fresh()->comment_reply_count);
+    }
 
-    // Assert that the comment's reply count was incremented
-    $this->assertEquals(1, $comment->fresh()->comment_reply_count);
-}
+    function testLikeCommentApi()
+    {
+        // Create a user and a comment for testing
+        $user = volunteer_user::factory()->create();
+        $comment = Comment::factory()->create();
+
+        // Send a POST request to like the comment
+        $response = $this->postJson('/api/v0.1/post/like_comment', [
+            'comment_id' => $comment->id,
+            'user_id' => $user->id,
+        ]);
+
+        // Assert that the response has a 200 status code
+        $response->assertStatus(200);
+
+        // Assert that the response has a 'success' status and the expected message
+        $response->assertJson([
+            'status' => 'success',
+            'message' => 'Comment liked successfully',
+        ]);
+
+        // Assert that the comment like count has been incremented
+        $this->assertEquals(0, $comment->comment_like_count);
+
+        // Send another POST request to like the same comment with the same user
+        $response = $this->postJson('/api/v0.1/post/like_comment', [
+            'comment_id' => $comment->id,
+            'user_id' => $user->id,
+        ]);
+
+        // Assert that the response has a 'error' status and the expected message
+        $response->assertJson([
+            'status' => 'error',
+            'message' => 'You have already liked this comment',
+        ]);
+
+        // Assert that the comment like count has not changed
+        $this->assertEquals(0, $comment->comment_like_count);
+
+        // Send a POST request to like a non-existent comment
+        $response = $this->postJson('/api/v0.1/post/like_comment', [
+            'comment_id' => 999,
+            'user_id' => $user->id,
+        ]);
+
+        // Assert that the response has a 'error' status and the expected message
+        $response->assertJson([
+            'status' => 'error',
+            'message' => 'Comment not found',
+        ]);
+
+        // Send a POST request to like a comment with a non-existent user
+        $response = $this->postJson('/api/v0.1/post/like_comment', [
+            'comment_id' => $comment->id,
+            'user_id' => 999,
+        ]);
+
+        // Assert that the response has a 'error' status and the expected message
+        $response->assertJson([
+            'status' => 'error',
+            'message' => 'User not found',
+        ]);
+    }
 }
