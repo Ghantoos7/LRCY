@@ -24,6 +24,7 @@ use App\Models\take;
 use App\Models\program;
 use App\Models\event_image;
 use App\Models\branch;
+use App\Models\event_type;
 
 class AdminControllerTest extends TestCase
 {
@@ -284,28 +285,26 @@ class AdminControllerTest extends TestCase
         $response->assertJson(['status' => 'error', 'message' => 'Invalid admin user']);
     }
 
-
-
     function testDeleteAnnouncementApi()
     {
         // Create an admin user
         $adminUser = Volunteer_user::factory()->create([
-            'user_type_id' => 1
+            'user_type_id' => 1,
         ]);
 
         // Create an announcement by the admin user
         $announcement = Announcement::factory()->create([
-            'admin_id' => $adminUser->id
+            'admin_id' => $adminUser->id,
         ]);
 
         $announcement1 = Announcement::factory()->create([
-            'admin_id' => $adminUser->id
+            'admin_id' => $adminUser->id,
         ]);
 
         // Successful deletion of the announcement
         $response = $this->actingAs($adminUser)->postJson('/api/v0.1/admin/delete_announcement', [
             'announcement_id' => $announcement->id,
-            'admin_id' => $adminUser->id
+            'admin_id' => $adminUser->id,
         ]);
 
         $response->assertJson(['status' => 'success', 'message' => 'Announcement deleted successfully']);
@@ -319,7 +318,7 @@ class AdminControllerTest extends TestCase
         // Invalid announcement ID
         $response = $this->actingAs($adminUser)->postJson('/api/v0.1/admin/delete_announcement', [
             'announcement_id' => -1,
-            'admin_id' => $adminUser->id
+            'admin_id' => $adminUser->id,
         ]);
 
         $response->assertJson(['status' => 'error', 'message' => 'Announcement not found']);
@@ -329,26 +328,22 @@ class AdminControllerTest extends TestCase
 
         $response = $this->actingAs($nonAdminUser)->postJson('/api/v0.1/admin/delete_announcement', [
             'announcement_id' => $announcement1->id,
-            'admin_id' => $nonAdminUser->id
+            'admin_id' => $nonAdminUser->id,
         ]);
 
         $response->assertJson(['status' => 'error', 'message' => 'User is not an admin']);
     }
 
-
-
-
-
     function testEditAnnouncementApi()
     {
         // Create an admin user
         $adminUser = Volunteer_user::factory()->create([
-            'user_type_id' => 1
+            'user_type_id' => 1,
         ]);
 
         // Create an announcement by the admin user
         $announcement = Announcement::factory()->create([
-            'admin_id' => $adminUser->id
+            'admin_id' => $adminUser->id,
         ]);
 
         // Successful edit of the announcement
@@ -357,7 +352,7 @@ class AdminControllerTest extends TestCase
             'announcement_title' => 'Updated Title',
             'announcement_content' => 'Updated Content',
             'admin_id' => $adminUser->id,
-            'importance_level' => 1
+            'importance_level' => 1,
         ]);
 
         $response->assertJson(['status' => 'success', 'message' => 'Announcement edited successfully']);
@@ -365,7 +360,7 @@ class AdminControllerTest extends TestCase
             'id' => $announcement->id,
             'announcement_title' => 'Updated Title',
             'announcement_content' => 'Updated Content',
-            'importance_level' => 1
+            'importance_level' => 1,
         ]);
 
         // Invalid announcement ID
@@ -374,7 +369,7 @@ class AdminControllerTest extends TestCase
             'announcement_title' => 'Updated Title',
             'announcement_content' => 'Updated Content',
             'admin_id' => $adminUser->id,
-            'importance_level' => 1
+            'importance_level' => 1,
         ]);
 
         $response->assertJson(['status' => 'error', 'message' => 'Announcement not found']);
@@ -387,9 +382,50 @@ class AdminControllerTest extends TestCase
             'announcement_title' => 'Updated Title',
             'announcement_content' => 'Updated Content',
             'admin_id' => $nonAdminUser->id,
-            'importance_level' => 1
+            'importance_level' => 1,
         ]);
 
         $response->assertJson(['status' => 'error', 'message' => 'User is not an admin']);
     }
+
+
+    function testDeleteEventApo()
+    {
+        // Create a new event
+        $event = Event::factory()->create();
+
+        // Send a request to delete the event
+        $response = $this->postJson('api/v0.1/admin/delete_event', [
+            'event_id' => $event->id,
+        ]);
+
+        // Check that the response indicates success
+        $response->assertStatus(200);
+        $response->assertJson([
+            'status' => 'success',
+            'message' => 'Event deleted successfully',
+        ]);
+
+        // Check that the event was deleted from the database
+        $this->assertDatabaseMissing('events', [
+            'id' => $event->id,
+        ]);
+    
+        // Send a request to delete an event that does not exist
+        $response = $this->postJson('api/v0.1/admin/delete_event', [
+            'event_id' => -1,
+        ]);
+
+        // Check that the response indicates failure
+        $response->assertStatus(200);
+        $response->assertJson([
+            'status' => 'error',
+            'message' => 'Event not found',
+        ]);
+
+    }
+    
 }
+
+
+
