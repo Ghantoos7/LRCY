@@ -129,26 +129,66 @@ class PostControllerTest extends TestCase
                 'user_name' => $user->first_name,
                 'comment_count' => $post->comment_count,
                 'like_count' => $post->like_count,
-                'post_date' => $post->post_date
+                'post_date' => $post->post_date,
             ],
         ]);
     }
 
-    function testGetPosts()
-{
-    
-    // Test getting all posts
-    $responseAll = $this->get('/api/v0.1/post/get_posts');
-    $responseAll->assertStatus(200);
+    function testGetPostsApi()
+    {
+        // Test getting all posts
+        $responseAll = $this->get('/api/v0.1/post/get_posts');
+        $responseAll->assertStatus(200);
 
-    
-    $user = Volunteer_user::factory()->create();
+        $user = Volunteer_user::factory()->create();
 
-    // Test getting posts for a specific user
-    $responseUser = $this->get('/api/v0.1/post/get_posts/' . $user->id);
-    $responseUser->assertStatus(200);
-    
-}
+        // Test getting posts for a specific user
+        $responseUser = $this->get('/api/v0.1/post/get_posts/' . $user->id);
+        $responseUser->assertStatus(200);
+    }
 
+    function testLikePostApi()
+    {
+        // Create a user
+        $user = Volunteer_user::factory()->create();
 
+        // Create a post
+        $post = Post::factory()->create(['user_id' => $user->id]);
+
+        // Send a POST request to like the post
+        $response = $this->postJson('/api/v0.1/post/like_post', [
+            'post_id' => $post->id,
+            'user_id' => $user->id,
+        ]);
+
+        // Assert that the response status is 200
+        $response->assertStatus(200);
+
+        // Assert that the response message is 'Post liked successfully'
+        $response->assertJson([
+            'status' => 'success',
+            'message' => 'Post liked successfully',
+        ]);
+
+        // Assert that the post like count has been incremented
+        $this->assertEquals(1, $post->fresh()->like_count);
+
+        // Send another POST request to like the same post
+        $response = $this->postJson('/api/v0.1/post/like_post', [
+            'post_id' => $post->id,
+            'user_id' => $user->id,
+        ]);
+
+        // Assert that the response status is 200
+        $response->assertStatus(200);
+
+        // Assert that the response message is 'You have already liked this post'
+        $response->assertJson([
+            'status' => 'error',
+            'message' => 'You have already liked this post',
+        ]);
+
+        // Assert that the post like count has not been incremented
+        $this->assertEquals(1, $post->fresh()->like_count);
+    }
 }
