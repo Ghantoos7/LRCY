@@ -489,7 +489,7 @@ class AdminControllerTest extends TestCase
         $this->assertEquals('New goal description', $goal->goal_description);
     }
 
-    public function testDeleteYearlyGoal()
+    function testDeleteYearlyGoalApi()
     {
         // Create a new goal
         $goal = Goal::factory()->create();
@@ -506,5 +506,36 @@ class AdminControllerTest extends TestCase
         $this->assertDatabaseMissing('goals', [
             'id' => $goal->id,
         ]);
+    }
+
+    function testAddTrainingForUserApi()
+    {
+        // Create a test training
+        $training = Training::factory()->create();
+
+        // Create test users
+        $users = Volunteer_user::factory()
+            ->count(3)
+            ->create();
+
+        // Send a request to add the training for the users
+        $response = $this->postJson('/api/v0.1/admin/add_training_for_user', [
+            'training_ids' => [$training->id],
+            'user_ids' => $users->pluck('id')->toArray(),
+        ]);
+
+        // Assert that the response is successful
+        $response->assertStatus(200)->assertJson([
+            'status' => 'success',
+            'message' => 'Trainings added to users successfully',
+        ]);
+
+        // Assert that the training was added to the users
+        foreach ($users as $user) {
+            $this->assertDatabaseHas('takes', [
+                'user_id' => $user->id,
+                'training_id' => $training->id,
+            ]);
+        }
     }
 }
