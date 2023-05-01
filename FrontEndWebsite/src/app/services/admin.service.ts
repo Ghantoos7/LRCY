@@ -186,7 +186,7 @@ export class AdminService {
 
 
   
-  editUser(user_id:  string, first_name: string, last_name: string, is_active : number , user_start_date : string, user_end_date : string, user_position : string, user_type_id : number , gender: string, user_dob : string) {
+  editUser(user_id:  string, first_name: string, last_name: string, is_active : number , user_start_date : string, user_end_date : string, user_position : string, user_type_id : number , gender: number, user_dob : string) {
     const headers = this.getAuthHeaders().set('Content-Type', 'application/json');
     const options = { headers: headers };
 

@@ -3,7 +3,7 @@
   }
 
 .header-container{
-    position: relative;
+    position: fixed;
     margin-top: 0;
 }
 
@@ -33,6 +33,7 @@
 .user-info{
     position: relative;
     left: 5%;
+    margin-top:40px;
 }
 
 .user-info .profile-picture{

@@ -24,6 +24,7 @@
   position: relative;
   top: 40px;
   left: 40%;
+  color: #fff;
 }
 
 .custom-div{
@@ -85,12 +86,13 @@ h1{
 }
 
 .first-card-input {
-  --background: #bcb9b9; 
+  --background: #d9d9d9; 
   --padding-end: 10px; 
   border-radius: 15px;
   position: absolute;
   width: 270px;
-  left: 115px;
+  left: 105px;
+  height: 80%;
 }
 
 ion-label{
@@ -285,4 +287,8 @@ ion-title{
 
  .ion-title-dark{
    color: white;
+ }
+
+ .label{
+    color: white;
  }

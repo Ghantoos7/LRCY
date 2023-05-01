@@ -8,26 +8,30 @@
 }
 ion-card {
   width: 90%;
-  height: 120%;
+  height: 100%;
   margin: 10px 0;
   padding-bottom: 20px;
 }
 
+ion-row{
+  padding-top: 15px;
+}
 
 
 
 .large-card {
-  height: 150%;
+  height: 100%;
   width: 90%;
   margin: 0;
   padding-bottom: 50px;
   margin-top: 2%;
+  overflow-y: auto;
 }
 
 //change the card content of only the ion cards implementing large-card class
 .large-card .card-content-ios{
   font-size: 15px;
-  height: 600vh;
+  height: 40%;
 }
 
 

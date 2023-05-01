@@ -68,6 +68,10 @@ ion-label{
     top: 8%;
 }
 
+.sub{
+    color: white;
+}
+
 .send{
     width: 80%; 
     margin: 0 auto; 
@@ -93,12 +97,14 @@ ion-label{
 .start{
     position: relative;
     right: 25%;
+    color:white;
 }
 
 .end{
     position: absolute;
     left: 550px;
     bottom: 15px;
+    color:white;
 }
 
 .end-date{

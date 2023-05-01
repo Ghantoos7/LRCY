@@ -25,6 +25,7 @@ ion-content{
   position: relative;
   top: 40px;
   left: 40px;
+  color: white;
 }
 
 .custom-div{
@@ -212,6 +213,7 @@ ion-item{
 
 .custom-input{
   margin-top: 15px;
+  color: white;
 }
 
 .custom{
@@ -295,6 +297,10 @@ ion-card{
   color: white;
 }
 
+.desc{
+  color: lightgray;
+}
+
 .header-button{
   --background: none;
   --box-shadow: none;
@@ -343,4 +349,8 @@ ion-title-dark{
   position: absolute;
   width: 270px;
   left: 115px;
+}
+
+.label{
+  color: white;
 }
