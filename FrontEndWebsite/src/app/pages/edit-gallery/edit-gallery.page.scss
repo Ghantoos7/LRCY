@@ -362,9 +362,16 @@ ion-title-dark{
 }
 
 .img-card{
-  height: 80%;
-  width:  80%;
+  height: 60%;
+  width:  62%;
   object-fit: cover;
+}
+
+.img-preview-card{
+  height: 59%;
+  width:  62%;
+  object-fit: cover;
+  margin-left: 30%;
 }
 
 .container{
