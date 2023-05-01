@@ -40,12 +40,12 @@ ion-toolbar{
     top: 25px;
 }
 
-// ion-item{
-//     position: relative;
-//     height: 60px;
-//     --background: white;
-//     color: black;
-// }
+ion-item{
+     position: relative;
+     height: 60px;
+     --background: white;
+     color: black;
+}
 
 .accept{
     position: relative;
@@ -73,6 +73,3 @@ ion-list{
     top: 20px;
     background-color: transparent;
 }
-
-
-  
