@@ -54,8 +54,9 @@
     </ion-card-content>
     
     <ion-card-content>
+      <ion-label>Program</ion-label>
       <div class="select-wrapper">
-        <ion-label>Program</ion-label>
+        
         <ion-select [(ngModel)]="program_id" class="input" placeholder="Program">
           <ion-select-option value="Youth and Health">Youth and Health</ion-select-option>
           <ion-select-option value="Human values and principles">Human values and principles</ion-select-option>
@@ -67,6 +68,7 @@
     
     <ion-card-content>
       <div class="select-wrapper">
+        <ion-label>Event Type</ion-label>
         <ion-select [(ngModel)]="event_type_id" class="input" placeholder="Event Type">
           <ion-select-option value="Activity">Activity</ion-select-option>
           <ion-select-option value="Training">Training</ion-select-option>
