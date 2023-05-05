@@ -47,7 +47,7 @@ Hello world! This is our project for the software engineering course at LAU, the
 
 
 
-### Client App
+### **Volunteer App**
 
 | Splash Screen                          | Sign In                              | Sign Up         | 
 | -------------------------------- | --------------------------------- | ------------------------ | 
@@ -75,28 +75,31 @@ Hello world! This is our project for the software engineering course at LAU, the
 
 
 
-### Admin Panel
+### **Admin Panel**
 
 | Home Screen                                 | Admin Login                              |
 | --------------------------------------------------- | -------------------------------- | 
-<img src="./README/home.jpg" height=125 width=400> |  <img src="./README/admminlogin.jpg" height=125 width=400>|
+<img src="./README/home.jpg" height=200 width=400> |  <img src="./README/admminlogin.jpg" height=200 width=400>|
 
 | View Members                                 | Edit Member                              |
 | --------------------------------------------------- | -------------------------------- | 
-<img src="./README/members.jpg" height=125 width=400> |  <img src="./README/edm.jpg" height=125 width=400>|
+<img src="./README/members.jpg" height=200 width=400> |  <img src="./README/edm.jpg" height=200 width=400>|
 
 | Add Trainings                                | Announcements                              |
 | --------------------------------------------------- | -------------------------------- | 
-<img src="./README/add-trainings.png" height=125 width=400> |  <img src="./README/announcements%20(1).png" height=125 width=400>|
+<img src="./README/add-trainings.png" height=200 width=400> |  <img src="./README/announcements%20(1).png" height=200 width=400>|
 
 | Set yearly Goals                                | Requests                              |
 | --------------------------------------------------- | -------------------------------- | 
-<img src="./README/goa.jpg" height=125 width=400> |  <img src="./README/req.jpg" height=125 width=400>|
+<img src="./README/goa.jpg" height=200 width=400> |  <img src="./README/req.jpg" height=200 width=400>|
 
 
+https://user-images.githubusercontent.com/94653514/235527437-fe73cd24-8c4e-4ab9-9124-9061e166fa47.mp4
 
 
-# Stacks <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Travel%20and%20places/High%20Voltage.png" alt="High Voltage" width="45" height="45" />
+<br><br>
+
+<img src="./README/stack.svg"/>
 <p align="left">
 Languages <br>
 <a target="_blank" rel="noreferrer"> <img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white" alt=""/> </a>
@@ -117,11 +120,71 @@ Databases <br>
 <a target="_blank" rel="noreferrer"> <img src="https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white" alt="mysql"/> </a>  
 </p>
 
-# Useful Links :link:
+Here's a brief high-level overview of the tech stack the Well app uses:
+
+- This project uses Ionic Framework with Angular for building the mobile app. Ionic is a popular open-source framework for building cross-platform mobile apps using web technologies such as HTML, CSS, and JavaScript. Angular is a widely-used JavaScript framework for building web applications. It provides a powerful set of tools for building complex and scalable applications.
+- For the backend and APIs, the app uses [Laravel]("https://laravel.com"), a PHP web application framework. Laravel is known for its elegant syntax and its ability to simplify complex tasks. It provides a wide range of features, including a robust ORM (Object Relational Mapper) for working with databases, a powerful routing system, and built-in authentication.
+- For persistent storage (database), the app uses MySQL, a popular open-source relational database management system. MySQL is widely used for web applications and offers good performance and scalability.
+
+
+  <br><br>
+
+
+
 <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Travel%20and%20places/Star.png" alt="Star" width="25" height="25" /><a href="https://ghantoos7.github.io/LRCY/BackEnd/">API Documentation</a><br>
-<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Travel%20and%20places/Fire.png" alt="Fire" width="25" height="25" /> Tutorial Videos: <a href="">Link to the videos</a> <br>
-<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Activities/Crystal%20Ball.png" alt="Crystal Ball" width="25" height="25" /> Software Requirement Specification: <a href="">Link to the documents</a> <br>
-<a href="#entity-relationship-diagram"><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Travel%20and%20places/Glowing%20Star.png" alt="Glowing Star" width="25" height="25" /> Entity Relationship Diagram</a>
+
+
+
+<img src="./README/howto.svg"/>
+
+<br><br>
+
+1. Clone the repository to your local machine by running the following command in your terminal:
+  
+```bash
+  git clone https://github.com/Ghantoos7/LRCY>
+```
+
+2. Navigate to the frontend folder and install the frontend dependencies by running the following command:
+
+```bash
+  cd FrontEnd
+  npm install
+```
+
+3. Navigate to the backend folder and install the backend dependencies by running the following command:
+
+  ```bash
+  cd BackEnd
+  composer install
+  ```
+4. Run the database migrations to create the necessary tables by running the following command:
+
+``` bash
+  php artisan migrate
+```
+
+5. Run the following command to start the backend server:
+
+``` bash
+  php artisan serve
+```
+
+6. Run the following command to start the frontend server:
+
+``` bash
+  ionic serve
+```
+
+7. Run the following command to start the frontend for the website server:
+   
+```bash
+  cd FrontEndWebsite
+  ionic serve
+```
+   
+
+
 
 # Contributors <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Hand%20gestures/Handshake.png" alt="Handshake" width="40" height="40" />
 
@@ -130,8 +193,7 @@ Databases <br>
 <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/People/Woman%20Raising%20Hand.png" alt="Woman Raising Hand" width="30" height="30" /><a href="https://github.com/NajatN">&nbsp;Najat Nehme</a> <br>
 <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/People/Man%20Raising%20Hand.png" alt="Man Raising Hand" width="30" height="30" /><a href="https://github.com/Joe-Wehbe">&nbsp;Joe Wehbe</a> <br> 
 
-<h1 id="entity-relationship-diagram">ER Diagram :chart_with_upwards_trend:</h1>
+<h1 id="entity-relationship-diagram">ER Diagram:</h1>
 
-# Application Tutorial :iphone:
+<img src="./README/db.drawio.png" alt="ERD" width="100%" height="100%" />
 
-# Admin Panel Tutoral :computer:
